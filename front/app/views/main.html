@@ -1,0 +1,29 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>件名</th>
+                <th>本文</th>
+                <th>引用元URL</th>
+                <th>引用元名</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in results">
+                <td>{{result.title}}</td>
+                <td>{{result.content}}</td>
+                <td>{{result.quotation_url}}</td>
+                <td>{{result.quotation_name}}</td>
+                <td align="right"><button class="btn btn-danger" ng-click="doDelete($index)">削除</button></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control" ng-model="new_title"></td>
+                <td><input type="text" class="form-control" ng-model="new_content"></td>
+                <td><input type="text" class="form-control" ng-model="new_quotation_url"></td>
+                <td><input type="text" class="form-control" ng-model="new_quotation_name"></td>
+                <td align="right"><button class="btn btn-primary" ng-click="doPost()">追加</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
