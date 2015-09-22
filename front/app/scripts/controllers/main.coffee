@@ -7,14 +7,16 @@
  # # MainCtrl
  # Controller of the frontApp
 ###
-angular.module("frontApp")
-  .controller "MainCtrl", ["$scope", "Api", ($scope, Api) ->
+angular.module "frontApp"
+  .controller "MainCtrl", ["$scope","$ionicSideMenuDelegate", "Api", ($scope, $ionicSideMenuDelegate, Api) ->
 
     clearInput = ->
-      $scope.new_title = ""
-      $scope.new_content = ""
-      $scope.new_quotation_url = ""
-      $scope.new_quotation_name = ""
+      input =
+        title: ""
+        content: ""
+        quotation_url: ""
+        quotation_name: ""
+      $scope.input = input
 
     clearInput()
 
@@ -24,10 +26,10 @@ angular.module("frontApp")
     $scope.doPost = ->
 
       obj =
-        "post[title]": $scope.new_title
-        "post[content]": $scope.new_content
-        "post[quotation_url]": $scope.new_quotation_url
-        "post[quotation_name]": $scope.new_quotation_name
+        "post[title]": $scope.input.title
+        "post[content]": $scope.input.content
+        "post[quotation_url]": $scope.input.quotation_url
+        "post[quotation_name]": $scope.input.quotation_name
 
       Api.postPeople(obj).then (res) ->
         $scope.results.push res.data
@@ -36,4 +38,5 @@ angular.module("frontApp")
     $scope.doDelete = (index) ->
       Api.deletePeople($scope.results[index].id).then (res) ->
         $scope.results.splice index, 1
+
 ]

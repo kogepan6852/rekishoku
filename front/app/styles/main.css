@@ -9,6 +9,11 @@ body {
   padding: 0;
 }
 
+.big-modal {
+  top: 10%;
+  bottom: 10%;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -22,6 +27,19 @@ body {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
+.top {
+  z-index: 10;
+}
+
+.has-subheader {
+  top: 102px;
+}
+.bar-subheader .button {
+  max-width: 240px;
+  position: static !important;
+  width: 49%;
+}
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -62,7 +80,7 @@ body {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 730px;
+    max-width: 100%;
   }
 
   /* Remove the padding we set earlier */
@@ -72,12 +90,205 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
 }
+
+
+
+
+
+
+
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-o-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.item-list li {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    letter-spacing: normal;
+    line-height: 1.25;
+}
+.item-list {
+  padding: 0;
+  letter-spacing: -.4em;
+  margin: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.sysCartButton {
+    display: block;
+    width: 100%;
+    background: #666;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+}
+.main{
+  width:70%;
+  float: right;
+}
+.aside{
+  width: 30%;
+  float: left;
+  z-index: 100;
+  height: 500px;
+}
+
+.grid-menu a {
+    width: 33%;
+    letter-spacing: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid rgb(212,212,212);
+    border-right: 1px solid rgb(212,212,212);
+    padding: 5px;
+  font-size: small;
+  color: #444;
+}
+.fix-nav a:hover,
+.list-menu a:hover,
+.grid-menu a:hover,
+.fix-nav span:hover {
+  background: rgb(212,212,212);
+}
+.grid-menu i{
+  font-size: 40px;
+  display: block;
+  margin: 10px auto 15px;
+}
+.grid-menu {
+    letter-spacing: -.4em;
+}
+.header{
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  height: 44px;
+  background: rgba(255,255,255,0.7);
+  background-image: none;
+  z-index: 10;
+}
+.container{
+  margin-top: 50px;
+}
+.list-menu a {
+    line-height: 2;
+    text-decoration: none;
+    border-bottom: 1px solid rgb(212,212,212);
+    width: 100%;
+    display: block;
+    padding: 10px;
+}
+.list-menu ul {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+}
+.fix-nav a,
+.fix-nav span{
+    cursor: pointer;
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #eee;
+    padding: 5px;
+    text-align: center;
+}
+.fix-nav {
+  position: fixed;
+  display: table;
+  bottom: 0;
+  right: 0;
+  top: auto;
+  background: #111;
+  width: 100%;
+  z-index: 100;
+}
+.fix-nav img {
+    display: block;
+    margin: 0 auto;
+  height: 44px;
+}
+.fix-nav i {
+  display: block;
+  font-size: 32px;
+  height: 44px;
+  line-height: 1.5;
+}
+.sp-show{ display: none!important;}
+
+
+/* ionic&bootstrapの競合対策 */
+.modal-backdrop {
+  background-color: transparent;
+}
+
+@media screen and (max-width:480px){
+  html{ font-size: 0.75rem;}
+.main,.aside{width: 100%;float: none;}
+  .aside{
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  .fix-nav,
+  .header{z-index:5;}
+  .aside.active{display: block;}
+  .sp-show{ display: block!important;}
+}
+@media screen and (min-width:481px) and (max-width:800px){
+  .grid-menu a{
+    width: 50%;
+  }
+}
+@media screen and (min-width:801px){
+  .item-list li{
+    width: 33%;
+  }
+  .fix-nav {
+    width: 70%;
+    height: 44px;
+    top: 0;
+    background: transparent;
+  }
+  .fix-nav a{
+    padding-bottom: 18px;
+    font-size: 0.8rem;
+    vertical-align: bottom;
+  }
+  .fix-nav i {
+    font-size: 24px;
+    max-height: 30px;
+    vertical-align: middle;
+    margin-right: 15px;
+    margin-bottom: -7.5px;
+    display: inline-block;
+  }
+  .fix-nav a {
+    color: #444;
+  }
+  .top .title {
+    right: auto!important;
+  }
+
+}
+

@@ -1,0 +1,29 @@
+<ion-view title="">
+  <div class="bar bar-subheader bar-clear" align="right">
+    <button class="button button-assertive" ng-click="edit()">編集</button>
+    <button class="button button-dark" ng-click="openModal()">新規投稿</button>
+  </div>
+  
+  <ion-content class="has-subheader">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>件名</th>
+            <th>本文</th>
+            <th>引用元URL</th>
+            <th>引用元名</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="result in results">
+          <td>{{result.title}}</td>
+          <td>{{result.content}}</td>
+          <td>{{result.quotation_url}}</td>
+          <td>{{result.quotation_name}}</td>
+          <td align="right"><button class="btn btn-danger" ng-click="doDelete($index)" ng-show="editting">削除</button></td>
+        </tr>
+      </tbody>
+    </table>
+ </ion-content>
+</ion-view>
