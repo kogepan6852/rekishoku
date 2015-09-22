@@ -15,20 +15,30 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ionic',
+    'ui.router'
   ]
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/',
+  .config ($stateProvider, $urlRouterProvider) ->
+    $stateProvider
+      .state 'home',
+        url: '/home'
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
-        controllerAs: 'main'
-      .when '/about',
+      .state 'about',
+        url: '/about'
         templateUrl: 'views/about.html'
         controller: 'AboutCtrl'
-        controllerAs: 'about'
-      .otherwise
-        redirectTo: '/'
+      .state 'list',
+        url: '/list'
+        templateUrl: 'views/post-list.html'
+        controller: 'PostListCtrl'
+      .state 'post',
+        url: '/post'
+        templateUrl: 'views/post.html'
+        controller: 'PostCtrl'
+    $urlRouterProvider.otherwise ('/home')
+
   .config(["$httpProvider", ($httpProvider) ->
 
     $httpProvider.defaults.transformRequest = (data) ->
@@ -37,3 +47,5 @@ angular
 
     $httpProvider.defaults.headers.post = "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
   ])
+  .config ($ionicConfigProvider) ->
+    $ionicConfigProvider.views.transition('none')
