@@ -1,6 +1,6 @@
 <ion-modal-view class="big-modal">
   <ion-header-bar class="">
-    <h1 class="title">記事を投稿する</h1>
+    <h1 class="title">新規投稿</h1>
   </ion-header-bar>
 
   <ion-content>
@@ -8,31 +8,29 @@
 
         <label class="item item-input">
           <span class="input-label">タイトル</span>
-          <input type="text">
+          <input type="text" ng-model="input.title">
         </label>
 
-        <div class="item item-thumbnail-left" href="#">
+        <div class="item item-input item-thumbnail-right" href="#">
           <img class="thumbnail" src="http://placehold.jp/440x440.png">
-          <h2>Pretty Hate Machine</h2>
-          <p>Nine Inch Nails</p>
-          <button class="button button-small">
-            Submit
-          </button>
+          <span class="input-label">メイン画像</span>
+          <input class="no-bg" type="text" readonly="readonly" value="xxxxxx.jpg">
+          <button class="button button-small">ファイルを選択</button>
         </div>
 
         <label class="item item-input">
           <span class="input-label">本文</span>
-          <textarea rows="8"></textarea>
+          <textarea rows="8" ng-model="input.content"></textarea>
         </label>
 
         <label class="item item-input">
           <span class="input-label">引用元名</span>
-          <input type="text">
+          <input type="text" ng-model="input.quotation_name">
         </label>
 
         <label class="item item-input">
           <span class="input-label">引用元URL</span>
-          <input type="text">
+          <input type="text" ng-model="input.quotation_url">
         </label>
 
         <label class="item item-input item-select">
@@ -40,13 +38,23 @@
             カテゴリー
           </div>
           <select>
-            <option selected>歴食エピソード</option>
-            <option>歴食体験</option>
-            <option>歴食ニュース</option>
+            <option selected value="episode">歴食エピソード</option>
+            <option value="experience">歴食体験</option>
+            <option value="information">歴食ニュース</option>
           </select>
         </label>
 
     </div>
 
   </ion-content>
+
+  <ion-footer-bar align-title="left" class="bar-stable">
+    <div class="buttons">
+      <button class="button">キャンセル</button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons" ng-click="doPost()">
+      <button class="button">投稿する</button>
+    </div>
+  </ion-footer-bar>
 </ion-modal-view>

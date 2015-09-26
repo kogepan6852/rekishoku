@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostCtrl", ["$scope", "$ionicHistory", "Api", ($scope, $ionicHistory, Api) ->
+  .controller "PostCtrl", ($scope, $ionicHistory, Api) ->
 
     clearInput = ->
       input =
@@ -44,5 +44,3 @@ angular.module "frontApp"
         $ionicHistory.goBack()
       else
         location.href = '#/home'
-
-]

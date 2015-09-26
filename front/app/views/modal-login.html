@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar class="">
+    <h1 class="title">ログイン</h1>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">メールアドレス</span>
+        <input type="text" ng-model="input.email">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">パスワード</span>
+        <input type="password" ng-model="input.password">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">パスワード再入力</span>
+        <input type="password" ng-model="input.password_confirmation">
+      </label>
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="doLogin()">ログイン</button>
+      <button class="button button-block button-positive" ng-click="doSignUp()">アカウント作成</button>
+    </div>
+
+  </ion-content>
+</ion-modal-view>

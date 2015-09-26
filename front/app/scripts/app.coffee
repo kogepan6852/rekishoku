@@ -17,7 +17,9 @@ angular
     'ngSanitize',
     'ngTouch',
     'ionic',
-    'ui.router'
+    'ui.router',
+    'ngStorage',
+    'toaster'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
@@ -33,10 +35,6 @@ angular
         url: '/list'
         templateUrl: 'views/post-list.html'
         controller: 'PostListCtrl'
-      .state 'post',
-        url: '/post'
-        templateUrl: 'views/post.html'
-        controller: 'PostCtrl'
     $urlRouterProvider.otherwise ('/home')
 
   .config(["$httpProvider", ($httpProvider) ->
