@@ -6,14 +6,34 @@ angular.module("frontApp")
     #host = "http://127.0.0.1:3000"
     host = "http://localhost:3000"
 
-    getPeople: ->
-      $http.get(host + "/posts")
-        .success (data, status, headers, config) ->
+    getPostList: (obj) ->
+      $http(
+        method: 'GET'
+        url: host + "/posts"
+        params: obj
+        ).success (data, status, headers, config) ->
 
-    postPeople: (obj) ->
-      $http.post(host + "/posts.json", obj)
-        .success (data, status, headers, config) ->
+    postPostList: (obj) ->
+      $http(
+        method: 'POST'
+        url: host + "/posts.json"
+        data: obj
+        ).success (data, status, headers, config) ->
 
-    deletePeople: (id) ->
+    deletePostList: (id) ->
       $http.delete(host + "/posts/" + id + ".json")
         .success (data, status, headers, config) ->
+
+    getAccessToken: (obj) ->
+      $http(
+        method: 'POST'
+        url: host + "/users/sign_in.json"
+        data: obj
+        ).success (data, status, headers, config) ->
+
+    postUser: (obj) ->
+      $http(
+        method: 'POST'
+        url: host + "/users.json"
+        data: obj
+      ).success (data, status, headers, config) ->

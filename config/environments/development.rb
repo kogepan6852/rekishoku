@@ -39,6 +39,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  #devise
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  
   # rack-cors
   config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
     allow do

@@ -3,13 +3,9 @@
   <ion-side-menu side="right" ng-controller="HeaderCtrl">
 
     <div class="list">
-      <div class="item item-divider">
-        My Menu
-      </div>
-      <a class="item" href="#/post" ng-click="toggleRight()" >
-        記事を投稿する
-      </a>
-
+      <div class="item item-divider">My Menu</div>
+      <a class="item" ng-click="openModal()" ng-show="!isLogin">ログイン</a>
+      <a class="item" ng-click="doLogout()" ng-show="isLogin">ログアウト</a>
     </div>
 
   </ion-side-menu>
@@ -29,8 +25,6 @@
       </nav>
       <!-- <div ng-include="'views/aside.html'"></div> -->
     </ion-nav-bar>
-
-    
 
     <ion-nav-view></ion-nav-view>
 

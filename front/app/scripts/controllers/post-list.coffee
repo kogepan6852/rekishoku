@@ -8,46 +8,56 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ["$scope","$ionicSideMenuDelegate", "$ionicModal", "Api", ($scope, $ionicSideMenuDelegate, $ionicModal, Api) ->
+  .controller "PostListCtrl", ($scope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api) ->
 
-
+    # 変数設定
     $ionicModal.fromTemplateUrl('views/modal-post.html',
       scope: $scope
       animation: 'slide-in-up').then (modal) ->
       $scope.modal = modal
       return
 
-    $scope.openModal = ->
-      $scope.modal.show()
-
-    $scope.editting = false
+    # 初期処理
     clearInput = ->
       input =
         title: ""
         content: ""
         quotation_url: ""
         quotation_name: ""
+        authentication_token: $sessionStorage['token']
       $scope.input = input
 
     clearInput()
 
-    Api.getPeople().then (res) ->
-      $scope.results = res.data
+    accessKey =
+      email: $sessionStorage['email']
+      token: $sessionStorage['token']
+
+    if ($sessionStorage['token'])
+      Api.getPostList(accessKey).then (res) ->
+        $scope.results = res.data
+
+    # Function
+    $scope.openModal = ->
+      $scope.modal.show()
+
+    $scope.editting = false
 
     $scope.doPost = ->
-
       obj =
         "post[title]": $scope.input.title
         "post[content]": $scope.input.content
         "post[quotation_url]": $scope.input.quotation_url
         "post[quotation_name]": $scope.input.quotation_name
+        "email": $sessionStorage['email']
+        "token": $sessionStorage['token']
 
-      Api.postPeople(obj).then (res) ->
+      Api.postPostList(obj).then (res) ->
         $scope.results.push res.data
         clearInput()
 
     $scope.doDelete = (index) ->
-      Api.deletePeople($scope.results[index].id).then (res) ->
+      Api.deletePostList($scope.results[index].id).then (res) ->
         $scope.results.splice index, 1
 
     $scope.new = ->
@@ -55,5 +65,3 @@ angular.module "frontApp"
 
     $scope.edit = ->
       $scope.editting = !$scope.editting
-
-]
