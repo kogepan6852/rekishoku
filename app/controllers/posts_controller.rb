@@ -26,7 +26,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params.merge(user_id: current_user.id))
+    history = PostCategory.find_by(slug: params[:slug])
+    @post = Post.new(post_params.merge(user_id: current_user.id, category_id: history.id))
 
     respond_to do |format|
       if @post.save

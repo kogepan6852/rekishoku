@@ -17,6 +17,12 @@ angular.module "frontApp"
       $scope.modal = modal
       return
 
+    $scope.categories = [
+      {slug:'episode', name:'歴食エピソード'},
+      {slug:'experience', name:'歴食体験'},
+      {slug:'information', name:'歴食ニュース'}
+    ]
+
     # 初期処理
     clearInput = ->
       input =
@@ -24,6 +30,7 @@ angular.module "frontApp"
         content: ""
         quotation_url: ""
         quotation_name: ""
+        category: ""
         authentication_token: $sessionStorage['token']
       $scope.input = input
 
@@ -49,6 +56,7 @@ angular.module "frontApp"
         "post[content]": $scope.input.content
         "post[quotation_url]": $scope.input.quotation_url
         "post[quotation_name]": $scope.input.quotation_name
+        "slug": $scope.input.category.slug
         "email": $sessionStorage['email']
         "token": $sessionStorage['token']
 
