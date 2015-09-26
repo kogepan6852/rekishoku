@@ -1,0 +1,2 @@
+class PostCategory < Category
+end

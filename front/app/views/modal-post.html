@@ -8,7 +8,7 @@
 
         <label class="item item-input">
           <span class="input-label">タイトル</span>
-          <input type="text" ng-model="input.title">
+          <input type="text" ng-model="input.title" ng-required="true">
         </label>
 
         <div class="item item-input item-thumbnail-right" href="#">
@@ -37,10 +37,7 @@
           <div class="input-label">
             カテゴリー
           </div>
-          <select>
-            <option selected value="episode">歴食エピソード</option>
-            <option value="experience">歴食体験</option>
-            <option value="information">歴食ニュース</option>
+          <select ng-model="input.category" ng-options="category.name for category in categories" ng-required="true">
           </select>
         </label>
 
