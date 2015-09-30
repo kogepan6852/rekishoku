@@ -12,10 +12,9 @@
         </label>
 
         <div class="item item-input item-thumbnail-right" href="#">
-          <img class="thumbnail" src="http://placehold.jp/440x440.png">
+          <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
           <span class="input-label">メイン画像</span>
-          <input class="no-bg" type="text" readonly="readonly" value="xxxxxx.jpg">
-          <button class="button button-small">ファイルを選択</button>
+          <input type="file" file-model="input.file">
         </div>
 
         <label class="item item-input">

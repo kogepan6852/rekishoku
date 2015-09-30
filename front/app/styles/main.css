@@ -1,40 +1,26 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-body {
-  padding: 0;
-}
-
+/**********************
+ * Common
+ **********************/
 .big-modal {
   top: 10%;
   bottom: 10%;
 }
 
-input[readonly].no-bg{
-    background-color: #ffffff;
+/* modal-post*/
+.uploaded-img {
+  top: 0;
+	bottom: 0;
+	margin: auto;
+  height: auto!important;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-}
-.top {
-  z-index: 10;
-}
-
+/**********************
+ * Header
+ **********************/
+ .top {
+   z-index: 10;
+   width: 54px
+ }
 .has-subheader {
   top: 102px;
 }
@@ -44,69 +30,9 @@ input[readonly].no-bg{
   width: 49%;
 }
 
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 100%;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
-
-
-
-
-
-
-
+/**********************
+ * Main page
+ **********************/
 * {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
@@ -119,7 +45,7 @@ box-sizing: border-box;
     width: 50%;
     display: inline-block;
     vertical-align: top;
-    padding: 10px;
+    padding: 5px;
     letter-spacing: normal;
     line-height: 1.25;
 }
@@ -129,8 +55,8 @@ box-sizing: border-box;
   margin: 0;
 }
 img {
-    max-width: 100%;
-    height: auto;
+  height: auto;
+  width: 100%;
 }
 .sysCartButton {
     display: block;
@@ -142,9 +68,15 @@ img {
     border-radius: 3px;
 }
 .main{
-  width:70%;
-  float: right;
+  width:100%;
 }
+.item-name {
+  padding: 5px;
+}
+
+/**********************
+ * Side bar
+ **********************/
 .aside{
   width: 30%;
   float: left;
@@ -241,6 +173,9 @@ img {
   background-color: transparent;
 }
 
+/**********************
+ * Responsive Design
+ **********************/
 @media screen and (max-width:480px){
   html{ font-size: 0.75rem;}
 .main,.aside{width: 100%;float: none;}
@@ -266,7 +201,7 @@ img {
 }
 @media screen and (min-width:801px){
   .item-list li{
-    width: 33%;
+    width: 25%;
   }
   .fix-nav {
     width: 70%;

@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module("frontApp")
-  .factory "Api", ($http) ->
+  .factory "Api", ($http, toaster) ->
 
     #host = "http://127.0.0.1:3000"
     host = "http://localhost:3000"
@@ -13,16 +13,36 @@ angular.module("frontApp")
         params: obj
         ).success (data, status, headers, config) ->
 
-    postPostList: (obj) ->
+    getPostListAll: () ->
+      $http(
+        method: 'GET'
+        url: host + "/posts"
+        ).success (data, status, headers, config) ->
+
+    postPostList: (fd) ->
       $http(
         method: 'POST'
         url: host + "/posts.json"
-        data: obj
+        transformRequest: null
+        headers: 'Content-type': undefined
+        data: fd
         ).success (data, status, headers, config) ->
+          toaster.pop
+            type: 'success',
+            title: '投稿しました',
+            showCloseButton: true
 
-    deletePostList: (id) ->
-      $http.delete(host + "/posts/" + id + ".json")
-        .success (data, status, headers, config) ->
+
+    deletePostList: (id, obj) ->
+      $http(
+        method: 'DELETE'
+        url: host + "/posts/" + id + ".json"
+        params: obj
+        ).success (data, status, headers, config) ->
+          toaster.pop
+            type: 'success',
+            title: '削除しました',
+            showCloseButton: true
 
     getAccessToken: (obj) ->
       $http(

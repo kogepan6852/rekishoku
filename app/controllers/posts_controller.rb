@@ -5,7 +5,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.accessible_by(current_ability)
+    @posts = Post.accessible_by(current_ability).order(created_at: :desc)
+    if current_user
+        @posts = @posts.where(user_id: current_user.id)
+    end
+
     render json: @posts
   end
 
