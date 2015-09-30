@@ -9,3 +9,11 @@
 ###
 angular.module "frontApp"
   .controller "MainCtrl", ($scope, $ionicSideMenuDelegate, Api) ->
+
+    # setting
+
+    # initialize
+    Api.getPostListAll().then (res) ->
+      $scope.results = res.data
+
+    # Function
