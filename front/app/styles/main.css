@@ -19,8 +19,10 @@
  **********************/
  .top {
    z-index: 10;
-   width: 54px
  }
+ .has-header {
+    top: 49px;
+}
 .has-subheader {
   top: 102px;
 }
@@ -29,7 +31,24 @@
   position: static !important;
   width: 49%;
 }
+.header .bar.top {
+  background-color: transparent;
+  border: none;
+}
 
+.header{
+  position: fixed;
+  height: 49px;
+  background: transparent;
+  background-image: none;
+  z-index: 10;
+  background-image: none;
+  width: 100%;
+  border-bottom: 1px solid rgb(212,212,212);
+}
+.bar-subheader {
+    top: 49px;
+}
 /**********************
  * Main page
  **********************/
@@ -69,6 +88,7 @@ img {
 }
 .main{
   width:100%;
+  margin-top: 0;
 }
 .item-name {
   padding: 5px;
@@ -85,22 +105,16 @@ img {
 }
 
 .grid-menu a {
-    width: 33%;
-    letter-spacing: normal;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    border-bottom: 1px solid rgb(212,212,212);
-    border-right: 1px solid rgb(212,212,212);
-    padding: 5px;
+  width: 33%;
+  letter-spacing: normal;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  border-bottom: 1px solid rgb(212,212,212);
+  border-right: 1px solid rgb(212,212,212);
+  padding: 5px;
   font-size: small;
   color: #444;
-}
-.fix-nav a:hover,
-.list-menu a:hover,
-.grid-menu a:hover,
-.fix-nav span:hover {
-  background: rgb(212,212,212);
 }
 .grid-menu i{
   font-size: 40px;
@@ -109,14 +123,6 @@ img {
 }
 .grid-menu {
     letter-spacing: -.4em;
-}
-.header{
-  border-bottom: 1px solid #ddd;
-  position: fixed;
-  height: 44px;
-  background: rgba(255,255,255,0.7);
-  background-image: none;
-  z-index: 10;
 }
 .container{
   margin-top: 50px;
@@ -146,26 +152,26 @@ img {
 }
 .fix-nav {
   position: fixed;
-  display: table;
   bottom: 0;
   right: 0;
-  top: auto;
-  background: #111;
-  width: 100%;
   z-index: 100;
-}
-.fix-nav img {
-    display: block;
-    margin: 0 auto;
   height: 44px;
+  top: 0;
+  background: transparent;
+  float: right;
 }
 .fix-nav i {
-  display: block;
-  font-size: 32px;
-  height: 44px;
-  line-height: 1.5;
+  font-size: 24px;
+  max-height: 30px;
+  vertical-align: middle;
+  margin-right: 15px;
+  margin-bottom: -7.5px;
+  display: inline-block;
 }
-.sp-show{ display: none!important;}
+.fix-nav a {
+  color: #444;
+}
+
 
 
 /* ionic&bootstrapの競合対策 */
@@ -192,7 +198,6 @@ img {
   .fix-nav,
   .header{z-index:5;}
   .aside.active{display: block;}
-  .sp-show{ display: block!important;}
 }
 @media screen and (min-width:481px) and (max-width:800px){
   .grid-menu a{
@@ -203,30 +208,25 @@ img {
   .item-list li{
     width: 25%;
   }
-  .fix-nav {
-    width: 70%;
-    height: 44px;
-    top: 0;
-    background: transparent;
-  }
-  .fix-nav a{
-    padding-bottom: 18px;
-    font-size: 0.8rem;
-    vertical-align: bottom;
-  }
-  .fix-nav i {
-    font-size: 24px;
-    max-height: 30px;
-    vertical-align: middle;
-    margin-right: 15px;
-    margin-bottom: -7.5px;
-    display: inline-block;
-  }
-  .fix-nav a {
-    color: #444;
-  }
   .top .title {
     right: auto!important;
   }
 
+  /* tab position */
+  .tab-nav.tabs {
+      background-position: center bottom;
+      border-bottom-width: 1px;
+      border-top-width: 0;
+      padding-top: 0;
+      top: 0px;
+  }
+
+  .header{
+    width: 20%;
+    border: none;
+  }
+
+  .has-header {
+      bottom: 0px;
+  }
 }
