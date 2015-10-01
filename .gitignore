@@ -16,3 +16,9 @@
 /front/node_modules
 /front/.tmp
 /front/app/bower_components
+
+/public/uploads
+/public/styles
+/public/scripts
+/public/images
+

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'AboutCtrl', ->
+  .controller 'MapCtrl', ->
     @awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'

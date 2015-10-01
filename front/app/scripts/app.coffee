@@ -23,19 +23,29 @@ angular
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
-      .state 'home',
+      .state 'tabs',
+        url: "/tab",
+        abstract: true,
+        templateUrl: "views/tabs.html"
+      .state 'tabs.home',
         url: '/home'
-        templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
-      .state 'about',
-        url: '/about'
-        templateUrl: 'views/about.html'
-        controller: 'AboutCtrl'
-      .state 'list',
+        views:
+          'home-tab':
+            templateUrl: 'views/main.html'
+            controller: 'MainCtrl'
+      .state 'tabs.map',
+        url: '/map'
+        views:
+          'map-tab':
+            templateUrl: 'views/map.html'
+            controller: 'MapCtrl'
+      .state 'tabs.list',
         url: '/list'
-        templateUrl: 'views/post-list.html'
-        controller: 'PostListCtrl'
-    $urlRouterProvider.otherwise ('/home')
+        views:
+          'list-tab':
+            templateUrl: 'views/post-list.html'
+            controller: 'PostListCtrl'
+    $urlRouterProvider.otherwise ('/tab/home')
 
   .config(["$httpProvider", ($httpProvider) ->
 
