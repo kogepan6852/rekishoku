@@ -1,0 +1,2 @@
+class PersonCategory < Category
+end

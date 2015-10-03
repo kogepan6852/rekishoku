@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :people_periods
+
+  resources :periods
+
+  resources :categories_people
+
+  resources :categories_shops
+
+  resources :people
+
+  resources :shops
+
+  resources :post_details
+
   resources :categories
 
   # devise_for :users

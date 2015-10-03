@@ -8,4 +8,5 @@ CarrierWave.configure do |config|
       # config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/stg.example.com'
     when 'development'
       config.asset_host = 'http://localhost:3000'
+  end
 end

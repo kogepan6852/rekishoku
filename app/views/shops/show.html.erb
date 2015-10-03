@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shop.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @shop.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @shop.image %>
+</p>
+
+<p>
+  <strong>Subimage:</strong>
+  <%= @shop.subimage %>
+</p>
+
+<p>
+  <strong>Image quotation url:</strong>
+  <%= @shop.image_quotation_url %>
+</p>
+
+<p>
+  <strong>Image quotation name:</strong>
+  <%= @shop.image_quotation_name %>
+</p>
+
+<p>
+  <strong>Post quotation url:</strong>
+  <%= @shop.post_quotation_url %>
+</p>
+
+<p>
+  <strong>Post quotation name:</strong>
+  <%= @shop.post_quotation_name %>
+</p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @shop.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @shop.address2 %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @shop.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @shop.longitude %>
+</p>
+
+<p>
+  <strong>Menu:</strong>
+  <%= @shop.menu %>
+</p>
+
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>

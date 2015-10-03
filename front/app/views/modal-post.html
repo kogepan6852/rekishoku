@@ -1,56 +1,58 @@
 <ion-modal-view class="big-modal">
-  <ion-header-bar class="">
-    <h1 class="title">新規投稿</h1>
-  </ion-header-bar>
+  <form name="postForm">
+    <ion-header-bar class="">
+      <h1 class="title">新規投稿</h1>
+    </ion-header-bar>
 
-  <ion-content>
-    <div class="list">
+    <ion-content>
+      <div class="list">
 
-        <label class="item item-input">
-          <span class="input-label">タイトル</span>
-          <input type="text" ng-model="input.title" ng-required="true">
-        </label>
+          <label class="item item-input">
+            <span class="input-label">タイトル</span>
+            <input type="text" ng-model="input.title" ng-required="true">
+          </label>
 
-        <div class="item item-input item-thumbnail-right" href="#">
-          <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
-          <span class="input-label">メイン画像</span>
-          <input type="file" file-model="input.file">
-        </div>
-
-        <label class="item item-input">
-          <span class="input-label">本文</span>
-          <textarea rows="8" ng-model="input.content"></textarea>
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label">引用元名</span>
-          <input type="text" ng-model="input.quotation_name">
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label">引用元URL</span>
-          <input type="text" ng-model="input.quotation_url">
-        </label>
-
-        <label class="item item-input item-select">
-          <div class="input-label">
-            カテゴリー
+          <div class="item item-input item-thumbnail-right" href="#">
+            <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
+            <span class="input-label">メイン画像</span>
+            <input type="file" file-model="input.file">
           </div>
-          <select ng-model="input.category" ng-options="category.name for category in categories" ng-required="true">
-          </select>
-        </label>
 
-    </div>
+          <label class="item item-input">
+            <span class="input-label">本文</span>
+            <textarea rows="8" ng-model="input.content"></textarea>
+          </label>
 
-  </ion-content>
+          <label class="item item-input">
+            <span class="input-label">引用元名</span>
+            <input type="text" ng-model="input.quotation_name">
+          </label>
 
-  <ion-footer-bar align-title="left" class="bar-stable">
-    <div class="buttons">
-      <button class="button">キャンセル</button>
-    </div>
-    <h1 class="title"></h1>
-    <div class="buttons" ng-click="doPost()">
-      <button class="button">投稿する</button>
-    </div>
-  </ion-footer-bar>
+          <label class="item item-input">
+            <span class="input-label">引用元URL</span>
+            <input type="text" ng-model="input.quotation_url">
+          </label>
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+              カテゴリー
+            </div>
+            <select ng-model="input.category" ng-options="category.name for category in categories" ng-required="true">
+            </select>
+          </label>
+
+      </div>
+
+    </ion-content>
+
+    <ion-footer-bar align-title="left" class="bar-stable">
+      <div class="buttons">
+        <button class="button">キャンセル</button>
+      </div>
+      <h1 class="title"></h1>
+      <div class="buttons" ng-click="doPost(postForm)">
+        <button class="button">投稿する</button>
+      </div>
+    </ion-footer-bar>
+  </form>
 </ion-modal-view>

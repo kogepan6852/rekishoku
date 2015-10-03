@@ -27,7 +27,7 @@ angular.module "frontApp"
     clearInput = ->
       input =
         title: ""
-        image: ""
+        file: ""
         content: ""
         quotation_url: ""
         quotation_name: ""
@@ -51,7 +51,7 @@ angular.module "frontApp"
 
     $scope.editting = false
 
-    $scope.doPost = ->
+    $scope.doPost = (postForm) ->
       #formdata
       fd = new FormData
       fd.append 'token', $sessionStorage['token']
@@ -65,6 +65,7 @@ angular.module "frontApp"
       Api.postPostList(fd).then (res) ->
         $scope.results.push res.data
         clearInput()
+        postForm.$setPristine()
         $scope.modal.hide()
 
 
