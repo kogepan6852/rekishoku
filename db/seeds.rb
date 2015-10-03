@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# coding: utf-8
+
+Category.create(:name => '歴食エピソード', :slug =>'episode', :type =>'PostCategory')
+Category.create(:name => '歴食体験', :slug =>'experience', :type =>'PostCategory')
+Category.create(:name => '歴食ニュース', :slug =>'information', :type =>'PostCategory')

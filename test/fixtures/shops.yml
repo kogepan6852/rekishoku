@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  image: MyString
+  subimage: MyString
+  image_quotation_url: MyString
+  image_quotation_name: MyString
+  post_quotation_url: MyString
+  post_quotation_name: MyString
+  address1: MyString
+  address2: MyString
+  latitude: 1
+  longitude: 1
+  menu: MyText
+
+two:
+  name: MyString
+  description: MyText
+  image: MyString
+  subimage: MyString
+  image_quotation_url: MyString
+  image_quotation_name: MyString
+  post_quotation_url: MyString
+  post_quotation_name: MyString
+  address1: MyString
+  address2: MyString
+  latitude: 1
+  longitude: 1
+  menu: MyText

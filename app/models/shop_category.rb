@@ -1,0 +1,2 @@
+class ShopCategory < Category
+end

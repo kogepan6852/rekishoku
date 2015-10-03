@@ -1,0 +1,1 @@
+json.extract! @shop, :id, :name, :description, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu, :created_at, :updated_at

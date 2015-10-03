@@ -1,0 +1,69 @@
+<%= form_for(@shop) do |f| %>
+  <% if @shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% @shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.text_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :subimage %><br>
+    <%= f.text_field :subimage %>
+  </div>
+  <div class="field">
+    <%= f.label :image_quotation_url %><br>
+    <%= f.text_field :image_quotation_url %>
+  </div>
+  <div class="field">
+    <%= f.label :image_quotation_name %><br>
+    <%= f.text_field :image_quotation_name %>
+  </div>
+  <div class="field">
+    <%= f.label :post_quotation_url %><br>
+    <%= f.text_field :post_quotation_url %>
+  </div>
+  <div class="field">
+    <%= f.label :post_quotation_name %><br>
+    <%= f.text_field :post_quotation_name %>
+  </div>
+  <div class="field">
+    <%= f.label :address1 %><br>
+    <%= f.text_field :address1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address2 %><br>
+    <%= f.text_field :address2 %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.number_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.number_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :menu %><br>
+    <%= f.text_area :menu %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
