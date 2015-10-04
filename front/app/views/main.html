@@ -4,9 +4,12 @@
       <ul class="item-list">
         <li ng-repeat="result in results">
           <div class="thumbnail-image">
-            <img src="{{result.image.thumb.url}}">
+            <a ui-sref="tabs.postDetail({id:result.id})" nav-transition="ios">
+              <img src="{{result.image.thumb.url}}">
+            </a>
           </div>
-          <div>
+          <div class="main-content">
+            <div class="category-name">{{result.category_name}}</div>
             <div class="h4 item-name">{{result.title}}</div>
           </div>
         </li>

@@ -26,7 +26,7 @@
 .has-subheader {
   top: 102px;
 }
-.bar-subheader .button {
+.bar-subheader.edit-menu .button {
   max-width: 240px;
   position: static !important;
   width: 49%;
@@ -93,7 +93,20 @@ img {
 .item-name {
   padding: 5px;
 }
-
+.item-list .category-name{
+  float: right;
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: -47px;
+  z-index: 100;
+  background-color: rgba(210, 83, 127, 0.75);
+  color: #ffffff;
+  padding: 5px 10px;
+}
+.item-list .main-content {
+  position: relative;
+}
 /**********************
  * Side bar
  **********************/
@@ -172,12 +185,12 @@ img {
   color: #444;
 }
 
-
-
 /* ionic&bootstrapの競合対策 */
-.modal-backdrop {
-  background-color: transparent;
-}
+.modal-backdrop { background-color: transparent; }
+.modal-open .modal { overflow-y: hidden; }
+label { max-width: initial;}
+.row { margin-left: initial; margin-right: initial;}
+
 
 /**********************
  * Responsive Design
@@ -196,7 +209,7 @@ img {
     z-index: 2;
   }
   .fix-nav,
-  .header{z-index:5;}
+  .header{z-index:100;}
   .aside.active{display: block;}
 }
 @media screen and (min-width:481px) and (max-width:800px){

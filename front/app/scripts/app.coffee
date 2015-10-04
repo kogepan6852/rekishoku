@@ -45,6 +45,12 @@ angular
           'list-tab':
             templateUrl: 'views/post-list.html'
             controller: 'PostListCtrl'
+      .state 'tabs.postDetail',
+        url: '/post/:id'
+        views:
+          'home-tab':
+            templateUrl: 'views/post-detail.html'
+            controller: 'PostDetailCtrl'
     $urlRouterProvider.otherwise ('/tab/home')
 
   .config(["$httpProvider", ($httpProvider) ->

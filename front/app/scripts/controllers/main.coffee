@@ -8,12 +8,12 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $ionicSideMenuDelegate, Api) ->
+  .controller "MainCtrl", ($scope, $ionicSideMenuDelegate, Api, Const) ->
 
     # setting
 
     # initialize
-    Api.getPostListAll().then (res) ->
+    Api.getJson("", Const.API.POST).then (res) ->
       $scope.results = res.data
 
     # Function

@@ -1,59 +1,85 @@
 "use strict"
 
-angular.module("frontApp")
-  .factory "Api", ($http, toaster) ->
+angular.module "frontApp"
+  .factory "Api", ($http, $ionicPopup, toaster, Const) ->
 
     #host = "http://127.0.0.1:3000"
     host = "http://localhost:3000"
 
-    getPostList: (obj) ->
+    # エラー発生時処理
+    errorHandring = (data) ->
+      if data.error
+        alertPopup = $ionicPopup.alert(
+          title: data.error
+          type: 'button-dark')
+        alertPopup.then (res) ->
+      else
+        alertPopup = $ionicPopup.alert(
+          title: '通信エラーが発生しました'
+          type: 'button-dark')
+        alertPopup.then (res) ->
+
+    # data取得(GET)
+    getJson: (obj, path) ->
       $http(
         method: 'GET'
-        url: host + "/posts"
+        url: host + path
         params: obj
-        ).success (data, status, headers, config) ->
+      ).success((data, status, headers, config) ->
+      ).error (data, status, headers, config) ->
+        errorHandring(data)
 
-    getPostListAll: () ->
-      $http(
-        method: 'GET'
-        url: host + "/posts"
-        ).success (data, status, headers, config) ->
-
-    postPostList: (fd) ->
+    # data取得(POST)
+    postJson: (obj, path) ->
       $http(
         method: 'POST'
-        url: host + "/posts.json"
+        url: host + path
+        data: obj
+      ).success((data, status, headers, config) ->
+      ).error (data, status, headers, config) ->
+        errorHandring(data)
+
+
+    # data登録(POST, JSON)
+    saveJson: (obj, path, msg) ->
+      $http(
+        method: 'POST'
+        url: host + path + ".json"
+        data: obj
+      ).success((data, status, headers, config) ->
+        toaster.pop
+          type: 'success',
+          title: msg,
+          showCloseButton: true
+      ).error (data, status, headers, config) ->
+        errorHandring(data)
+
+    # data登録(POST, FORM DATA)
+    saveFormData:(fd, path, msg) ->
+      $http(
+        method: 'POST'
+        url: host + path + ".json"
         transformRequest: null
         headers: 'Content-type': undefined
         data: fd
-        ).success (data, status, headers, config) ->
-          toaster.pop
-            type: 'success',
-            title: '投稿しました',
-            showCloseButton: true
+      ).success((data, status, headers, config) ->
+        toaster.pop
+          type: 'success',
+          title: msg,
+          showCloseButton: true
+      ).error (data, status, headers, config) ->
+        errorHandring(data)
 
-
-    deletePostList: (id, obj) ->
+    # data削除(DELETE)
+    deleteJson: (obj, id, path) ->
       $http(
         method: 'DELETE'
-        url: host + "/posts/" + id + ".json"
+        url: host + path + "/" + id + ".json"
         params: obj
-        ).success (data, status, headers, config) ->
-          toaster.pop
-            type: 'success',
-            title: '削除しました',
-            showCloseButton: true
-
-    getAccessToken: (obj) ->
-      $http(
-        method: 'POST'
-        url: host + "/users/sign_in.json"
-        data: obj
-        ).success (data, status, headers, config) ->
-
-    postUser: (obj) ->
-      $http(
-        method: 'POST'
-        url: host + "/users.json"
-        data: obj
-      ).success (data, status, headers, config) ->
+      ).success((data, status, headers, config) ->
+        toaster.pop
+          type: 'success',
+          title: Const.MSG.DELETED,
+          showCloseButton: true
+      ).error (data, status, headers, config) ->
+        errorHandring(data)

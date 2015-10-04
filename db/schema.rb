@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20151001160849) do
   end
 
   create_table "categories_people", id: false, force: :cascade do |t|
-    t.integer "category", null: false
-    t.integer "person",   null: false
+    t.integer "category_id", null: false
+    t.integer "person_id",   null: false
   end
 
-  add_index "categories_people", ["category"], name: "index_categories_people_on_category", using: :btree
-  add_index "categories_people", ["person"], name: "index_categories_people_on_person", using: :btree
+  add_index "categories_people", ["category_id"], name: "index_categories_people_on_category_id", using: :btree
+  add_index "categories_people", ["person_id"], name: "index_categories_people_on_person_id", using: :btree
 
   create_table "categories_shops", id: false, force: :cascade do |t|
     t.integer "category_id", null: false

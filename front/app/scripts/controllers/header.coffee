@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, toaster) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, toaster, Const) ->
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/modal-login.html',
@@ -32,6 +32,9 @@ angular.module "frontApp"
       $scope.modal.show()
       $ionicSideMenuDelegate.toggleRight();
 
+    $scope.hideModal = ->
+      $scope.modal.hide()
+
     $scope.toggleRight = ->
       $ionicSideMenuDelegate.toggleRight();
 
@@ -41,7 +44,7 @@ angular.module "frontApp"
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
 
-      Api.getAccessToken(obj).then (res) ->
+      Api.postJson(obj, Const.API.LOGIN).then (res) ->
         $scope.modal.hide()
         clearInput()
         $sessionStorage['email'] = res.data.email
@@ -49,9 +52,8 @@ angular.module "frontApp"
         $rootScope.isLogin = true
         toaster.pop
           type: 'success',
-          title: 'ログインしました',
+          title: Const.MSG.LOGED_IN,
           showCloseButton: true
-
 
     $scope.doLogout = ->
       $ionicSideMenuDelegate.toggleRight();
@@ -70,6 +72,7 @@ angular.module "frontApp"
         "user[password]": $scope.input.password
         "user[password_confirmation]": $scope.input.password_confirmation
 
-      Api.postUser(obj).then (res) ->
+      Api.saveJson(obj, Const.API.USER, Const.MSG.SINGED_UP).then (res) ->
+        $scope.doLogin()
         $scope.modal.hide()
         clearInput()

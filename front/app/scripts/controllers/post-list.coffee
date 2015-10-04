@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, $http) ->
+  .controller "PostListCtrl", ($scope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, Const) ->
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/modal-post.html',
@@ -42,7 +42,7 @@ angular.module "frontApp"
       token: $sessionStorage['token']
 
     if ($sessionStorage['token'])
-      Api.getPostList(accessKey).then (res) ->
+      Api.getJson(accessKey, Const.API.POST).then (res) ->
         $scope.results = res.data
 
     # Function
@@ -62,7 +62,7 @@ angular.module "frontApp"
       fd.append 'post[content]', $scope.input.content
       fd.append 'post[quotation_url]', $scope.input.quotation_url
       fd.append 'post[quotation_name]', $scope.input.quotation_name
-      Api.postPostList(fd).then (res) ->
+      Api.saveFormData(fd, Const.API.POST, Const.MSG.SAVED).then (res) ->
         $scope.results.push res.data
         clearInput()
         postForm.$setPristine()
@@ -74,7 +74,7 @@ angular.module "frontApp"
         email: $sessionStorage['email']
         token: $sessionStorage['token']
 
-      Api.deletePostList($scope.results[index].id, accessKey).then (res) ->
+      Api.deleteJson(accessKey, $scope.results[index].id,  Const.API.POST).then (res) ->
         $scope.results.splice index, 1
 
     $scope.new = ->
