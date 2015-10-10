@@ -4,7 +4,9 @@ angular.module("frontApp")
   .factory 'Const', ->
     API:
       POST: '/posts'
+      POST_DETSIL: '/post_details'
       LOGIN: '/users/sign_in.json'
+      LOGOUT: '/authentication_token.json'
       USER: '/users'
     MSG:
       SAVED: '投稿しました'

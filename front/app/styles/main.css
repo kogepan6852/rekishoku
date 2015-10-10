@@ -12,21 +12,28 @@
 	bottom: 0;
 	margin: auto;
   height: auto!important;
+  width: auto !important;
+}
+.slider-pager {
+  z-index: 10;
+  width: 50%;
+  margin-left: 25%;
 }
 
 /**********************
  * Header
  **********************/
- .top {
+.top {
    z-index: 10;
- }
- .has-header {
+}
+ion-view .has-header {
     top: 49px;
 }
-.has-subheader {
-  top: 102px;
+ion-view .has-subheader {
+  top: 94px;
+  /*padding-top: 30px;*/
 }
-.bar-subheader.edit-menu .button {
+.bar-subheader.edit-menu .button, .bar-subheader.edit-menu .button::after {
   max-width: 240px;
   position: static !important;
   width: 49%;
@@ -48,17 +55,19 @@
 }
 .bar-subheader {
     top: 49px;
+    background-color: transparent;
 }
+
 /**********************
  * Main page
  **********************/
-* {
+/** {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 -ms-box-sizing: border-box;
 -o-box-sizing: border-box;
 box-sizing: border-box;
-}
+}*/
 
 .item-list li {
     width: 50%;
@@ -107,6 +116,38 @@ img {
 .item-list .main-content {
   position: relative;
 }
+.overlay-image {
+  position: relative;
+  line-height: 100%;
+}
+.overlay-image .link {
+  background: #000 url("../images/icons/link.png") no-repeat scroll center center;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.overlay-image .link:hover {
+  opacity: 0.5;
+  transition-property: opacity;
+  transition-duration:0.3s;
+  transition-timing-function:ease-in-out;
+}
+/**********************
+ * Post detail
+ **********************/
+.post-title{
+  padding: 5px
+}
+.post-content{
+  padding: 5px
+}
+form.post-modal, .post-modal .slider {
+  height: 100%;
+}
+
 /**********************
  * Side bar
  **********************/
@@ -185,11 +226,27 @@ img {
   color: #444;
 }
 
-/* ionic&bootstrapの競合対策 */
+/**********************
+ * Toast
+ **********************/
+.toast-top-full-width {
+  top: 10px;
+}
+#toast-container > div {
+  padding: 30px 15px 30px 50px;
+}
+
+/**********************
+ * ionic&bootstrapの競合対策
+ **********************/
 .modal-backdrop { background-color: transparent; }
 .modal-open .modal { overflow-y: hidden; }
 label { max-width: initial;}
 .row { margin-left: initial; margin-right: initial;}
+.row > div {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 
 /**********************
@@ -217,29 +274,45 @@ label { max-width: initial;}
     width: 50%;
   }
 }
+@media screen and (max-width:800px){
+  /* modal */
+  .big-modal {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%
+  }
+  /* form */
+  .item-stacked-label-xs {
+    background-color: transparent;
+    box-shadow: none;
+    display: block;
+  }
+  .item-stacked-label-xs .input-label, .item-stacked-label-xs .icon {
+    display: inline-block;
+    padding: 4px 0 0;
+    vertical-align: middle;
+  }
+}
 @media screen and (min-width:801px){
-  .item-list li{
-    width: 25%;
-  }
-  .top .title {
-    right: auto!important;
-  }
+  .item-list li{ width: 25%; }
+  .top .title { right: auto!important; }
+  .header{ width: 20%; border: none; }
+  .has-header { bottom: 0px; }
 
   /* tab position */
   .tab-nav.tabs {
-      background-position: center bottom;
-      border-bottom-width: 1px;
-      border-top-width: 0;
-      padding-top: 0;
-      top: 0px;
+    background-position: center bottom;
+    border-bottom-width: 1px;
+    border-top-width: 0;
+    padding-top: 0;
+    top: 0px;
   }
 
-  .header{
-    width: 20%;
-    border: none;
+  /* post image */
+  .post-image{
+    padding: 0 90px;
   }
 
-  .has-header {
-      bottom: 0px;
-  }
 }

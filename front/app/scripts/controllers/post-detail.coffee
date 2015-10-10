@@ -8,11 +8,13 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $stateParams, $sessionStorage, Api) ->
+  .controller "PostDetailCtrl", ($scope, $stateParams, $sessionStorage, Api, Const) ->
 
     # 変数設定
     $scope.targetId = $stateParams.id
 
     # 初期処理
+    Api.getJson("", Const.API.POST + '/' + $stateParams.id).then (res) ->
+      $scope.post = res.data
 
     # Function

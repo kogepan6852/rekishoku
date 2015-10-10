@@ -17,6 +17,11 @@ angular.module "frontApp"
       $scope.modal = modal
       return
 
+    if !$sessionStorage['token']
+      $rootScope.isLogin = false
+    else
+      $rootScope.isLogin = true
+
     # 初期処理
     clearInput = ->
       input =
@@ -39,7 +44,6 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight();
 
     $scope.doLogin = ->
-
       obj =
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
@@ -50,20 +54,26 @@ angular.module "frontApp"
         $sessionStorage['email'] = res.data.email
         $sessionStorage['token'] = res.data.authentication_token
         $rootScope.isLogin = true
+        # post list初期化
+        $rootScope.postListInit()
+        # toast表示
         toaster.pop
           type: 'success',
           title: Const.MSG.LOGED_IN,
           showCloseButton: true
 
     $scope.doLogout = ->
-      $ionicSideMenuDelegate.toggleRight();
-      clearInput()
-      delete $sessionStorage['token']
-      $rootScope.isLogin = false
-      toaster.pop
-        type: 'success',
-        title: 'ログアウトしました',
-        showCloseButton: true
+      accessKey =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
+
+      Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
+        $ionicSideMenuDelegate.toggleRight();
+        clearInput()
+        delete $sessionStorage['token']
+        $rootScope.isLogin = false
+        # post list初期化
+        $rootScope.postListInit()
 
 
     $scope.doSignUp = ->

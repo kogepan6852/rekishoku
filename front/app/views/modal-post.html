@@ -1,52 +1,92 @@
 <ion-modal-view class="big-modal">
-  <form name="postForm">
-    <ion-header-bar class="">
+    <!-- ヘッダー -->
+    <ion-header-bar>
+      <a class="button button-icon icon ion-backspace-outline" ng-click="backSlide()" ng-show="isShowBackSlide"></a>
       <h1 class="title">新規投稿</h1>
+      <button class="button icon-right ion-chevron-right" ng-click="prevSlide()" ng-show="isShowAddPostDetail">追加項目</button>
     </ion-header-bar>
 
-    <ion-content>
-      <div class="list">
+    <form name="postForm" class="post-modal">
+      <ion-slide-box>
+        <!-- メイン投稿 -->
+        <ion-slide>
+          <ion-content>
+            <div class="list">
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">タイトル</span>
+                  <input type="text" ng-model="input.title" ng-required="true">
+                </label>
 
-          <label class="item item-input">
-            <span class="input-label">タイトル</span>
-            <input type="text" ng-model="input.title" ng-required="true">
-          </label>
+                <div class="item item-input item-thumbnail-right" href="#">
+                  <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
+                  <span class="input-label">メイン画像</span>
+                  <input type="file" file-model="input.file">
+                </div>
 
-          <div class="item item-input item-thumbnail-right" href="#">
-            <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
-            <span class="input-label">メイン画像</span>
-            <input type="file" file-model="input.file">
-          </div>
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">本文</span>
+                  <textarea rows="8" ng-model="input.content"></textarea>
+                </label>
 
-          <label class="item item-input">
-            <span class="input-label">本文</span>
-            <textarea rows="8" ng-model="input.content"></textarea>
-          </label>
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">引用元名</span>
+                  <input type="text" ng-model="input.quotationName">
+                </label>
 
-          <label class="item item-input">
-            <span class="input-label">引用元名</span>
-            <input type="text" ng-model="input.quotation_name">
-          </label>
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">引用元URL</span>
+                  <input type="text" ng-model="input.quotationUrl">
+                </label>
 
-          <label class="item item-input">
-            <span class="input-label">引用元URL</span>
-            <input type="text" ng-model="input.quotation_url">
-          </label>
-
-          <label class="item item-input item-select">
-            <div class="input-label">
-              カテゴリー
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    カテゴリー
+                  </div>
+                  <select ng-model="input.category" ng-options="category.name for category in categories" ng-required="true">
+                  </select>
+                </label>
             </div>
-            <select ng-model="input.category" ng-options="category.name for category in categories" ng-required="true">
-            </select>
-          </label>
+          </ion-content>
+        </ion-slide>
 
-      </div>
+        <ion-slide ng-repeat="detail in input.details">
+          <ion-content>
+            <div class="list">
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">サブタイトル{{detail.id}}</span>
+                  <input type="text" ng-model="detail.subTitle" ng-required="true">
+                </label>
 
-    </ion-content>
+                <div class="item item-input item-thumbnail-right" href="#">
+                  <img class="uploaded-img" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}">
+                  <span class="input-label">サブ画像{{detail.id}}</span>
+                  <input type="file" file-model="detail.subFile">
+                </div>
 
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">サブ本文{{detail.id}}</span>
+                  <textarea rows="8" ng-model="detail.subContent"></textarea>
+                </label>
+
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">引用元名</span>
+                  <input type="text" ng-model="detail.subQuotationName">
+                </label>
+
+                <label class="item item-input item-stacked-label-xs">
+                  <span class="input-label">引用元URL</span>
+                  <input type="text" ng-model="detail.subQuotationUrl">
+                </label>
+
+            </div>
+          </ion-content>
+        </ion-slide>
+
+      </ion-slide-box>
+    </form>
+    <!-- フッター -->
     <ion-footer-bar align-title="left" class="bar-stable">
-      <div class="buttons">
+      <div class="buttons" ng-click="closeModal(postForm)">
         <button class="button">キャンセル</button>
       </div>
       <h1 class="title"></h1>
@@ -54,5 +94,5 @@
         <button class="button">投稿する</button>
       </div>
     </ion-footer-bar>
-  </form>
+
 </ion-modal-view>

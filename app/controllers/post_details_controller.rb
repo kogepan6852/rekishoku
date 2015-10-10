@@ -1,5 +1,5 @@
 class PostDetailsController < ApplicationController
-  before_action :set_post_detail, only: [:show, :edit, :update, :destroy]
+  before_action :set_post_detail, only: [:show, :edit, :update]
 
   # GET /post_details
   # GET /post_details.json
@@ -24,10 +24,23 @@ class PostDetailsController < ApplicationController
   # POST /post_details
   # POST /post_details.json
   def create
-    @post_detail = PostDetail.new(post_detail_params)
+    isSuccess = true
+    params[:post_details].each do |post_detail|
+      @post_detail = PostDetail.new
+      @post_detail.post_id = post_detail['post_id']
+      @post_detail.title = post_detail['title']
+      @post_detail.image = post_detail['image']
+      @post_detail.content = post_detail['content']
+      @post_detail.content = post_detail['quotation_url']
+      @post_detail.content = post_detail['quotation_name']
+
+      if !@post_detail.save
+        isSuccess = false
+      end
+    end
 
     respond_to do |format|
-      if @post_detail.save
+      if isSuccess
         format.html { redirect_to @post_detail, notice: 'Post detail was successfully created.' }
         format.json { render :show, status: :created, location: @post_detail }
       else
@@ -54,7 +67,8 @@ class PostDetailsController < ApplicationController
   # DELETE /post_details/1
   # DELETE /post_details/1.json
   def destroy
-    @post_detail.destroy
+    id = params[:id]
+    PostDetail.accessible_by(current_ability).destroy_all(['post_id = ?', id])
     respond_to do |format|
       format.html { redirect_to post_details_url, notice: 'Post detail was successfully destroyed.' }
       format.json { head :no_content }

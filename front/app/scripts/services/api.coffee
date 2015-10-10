@@ -63,10 +63,11 @@ angular.module "frontApp"
         headers: 'Content-type': undefined
         data: fd
       ).success((data, status, headers, config) ->
-        toaster.pop
-          type: 'success',
-          title: msg,
-          showCloseButton: true
+        if msg
+          toaster.pop
+            type: 'success',
+            title: msg,
+            showCloseButton: true
       ).error (data, status, headers, config) ->
         errorHandring(data)
 
@@ -77,9 +78,19 @@ angular.module "frontApp"
         url: host + path + "/" + id + ".json"
         params: obj
       ).success((data, status, headers, config) ->
+      ).error (data, status, headers, config) ->
+        errorHandring(data)
+
+    # data削除(DELETE)
+    logOut: (obj, path) ->
+      $http(
+        method: 'DELETE'
+        url: host + path
+        params: obj
+      ).success((data, status, headers, config) ->
         toaster.pop
           type: 'success',
-          title: Const.MSG.DELETED,
+          title: 'ログアウトしました',
           showCloseButton: true
       ).error (data, status, headers, config) ->
         errorHandring(data)
