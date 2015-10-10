@@ -3,10 +3,10 @@
     <div class="main">
       <ul class="item-list">
         <li ng-repeat="result in results">
-          <div class="thumbnail-image">
-            <a ui-sref="tabs.postDetail({id:result.id})" nav-transition="ios">
-              <img src="{{result.image.thumb.url}}">
-            </a>
+          <div class="thumbnail-image overlay-image">
+
+            <img ng-src="{{result.image.thumb.url}}">
+            <a class="link" ui-sref="tabs.postDetail({id:result.id})" nav-transition="ios"></a>
           </div>
           <div class="main-content">
             <div class="category-name">{{result.category_name}}</div>

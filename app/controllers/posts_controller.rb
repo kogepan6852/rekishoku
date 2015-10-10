@@ -15,8 +15,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
-  # def show
-  # end
+  def show
+    render json: @post
+  end
 
   # GET /posts/new
   # def new
@@ -35,10 +36,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -49,10 +48,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
-        format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
