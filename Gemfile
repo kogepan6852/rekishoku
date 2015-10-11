@@ -47,6 +47,9 @@ gem 'fog'
 # admin
 gem 'rails_admin'
 
+# 位置情報取得
+gem 'geocoder'
+
 group :development do
   gem 'annotate', '2.6.5'
 end
@@ -65,4 +68,3 @@ group :development, :test do
   gem 'rack-cors'
 
 end
-
