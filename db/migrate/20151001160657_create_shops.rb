@@ -11,8 +11,8 @@ class CreateShops < ActiveRecord::Migration
       t.string :post_quotation_name
       t.string :address1
       t.string :address2
-      t.integer :latitude
-      t.integer :longitude
+      t.float :latitude
+      t.float :longitude
       t.text :menu
 
       t.timestamps null: false

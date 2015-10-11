@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 20151001160849) do
     t.string   "post_quotation_name"
     t.string   "address1"
     t.string   "address2"
-    t.integer  "latitude"
-    t.integer  "longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.text     "menu"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
