@@ -10,6 +10,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
+    # render json: @post
   end
 
   # GET /shops/new
@@ -24,7 +25,11 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    @shop = Shop.new(shop_params)
+    # 住所から緯度経度を求める
+    Geocoder.configure(:language  => :ja,  :units => :km )
+    addressPlace = Geocoder.coordinates(shop_params[:address1]);
+    # 緯度経度を代入する
+    @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
 
     respond_to do |format|
       if @shop.save
@@ -69,6 +74,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
+       params.require(:shop).permit(:name, :description, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
     end
 end
