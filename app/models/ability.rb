@@ -32,5 +32,8 @@ class Ability
     can :manage, Post, user_id: user.id if user
     can :read, Post
 
+    can :manage, PostDetail, user_id: user.id if user
+    can :read, PostDetail
+
   end
 end

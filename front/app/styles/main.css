@@ -19,6 +19,34 @@
   width: 50%;
   margin-left: 25%;
 }
+.item-table tr{
+  height: 65px;
+}
+.button {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.button.ion-checkmark-round.checkbox, .button.ion-checkmark-round.checkbox.activated {
+  border: 1px solid #007bbb;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #fff;
+  color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: none!important;
+}
+.button.ion-checkmark-round.checkbox.active {
+  background-color: #007bbb;
+  box-shadow: none!important;
+  color: #fff;
+}
+
+.vertical-align {
+  vertical-align: middle!important;
+}
 
 /**********************
  * Header
@@ -34,7 +62,7 @@ ion-view .has-subheader {
   /*padding-top: 30px;*/
 }
 .bar-subheader.edit-menu .button, .bar-subheader.edit-menu .button::after {
-  max-width: 240px;
+  max-width: 150px;
   position: static !important;
   width: 49%;
 }
@@ -135,6 +163,19 @@ img {
   transition-duration:0.3s;
   transition-timing-function:ease-in-out;
 }
+/**********************
+ * Post list
+ **********************/
+.item-table .post-title{
+  min-width: 150px;
+}
+.item-table .post-category{
+  min-width: 120px;
+}
+.item-table .delete-button{
+  min-width: 120px;
+}
+
 /**********************
  * Post detail
  **********************/

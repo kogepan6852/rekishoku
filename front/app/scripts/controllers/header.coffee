@@ -32,6 +32,9 @@ angular.module "frontApp"
 
     clearInput()
 
+    if $sessionStorage['email']
+      $scope.input.email = $sessionStorage['email']
+
     # Function
     $scope.openModal = ->
       $scope.modal.show()
@@ -70,7 +73,9 @@ angular.module "frontApp"
       Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
         $ionicSideMenuDelegate.toggleRight();
         clearInput()
+        # login情報の削除
         delete $sessionStorage['token']
+        delete $sessionStorage['email']
         $rootScope.isLogin = false
         # post list初期化
         $rootScope.postListInit()

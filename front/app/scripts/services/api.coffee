@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "Api", ($http, $ionicPopup, toaster, Const) ->
+  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const) ->
 
     #host = "http://127.0.0.1:3000"
     host = "http://localhost:3000"
@@ -42,20 +42,24 @@ angular.module "frontApp"
 
     # data登録(POST, JSON)
     saveJson: (obj, path, msg) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'POST'
         url: host + path + ".json"
         data: obj
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
         toaster.pop
           type: 'success',
           title: msg,
           showCloseButton: true
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data登録(POST, FORM DATA)
     saveFormData:(fd, path, msg) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'POST'
         url: host + path + ".json"
@@ -63,22 +67,27 @@ angular.module "frontApp"
         headers: 'Content-type': undefined
         data: fd
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
         if msg
           toaster.pop
             type: 'success',
             title: msg,
             showCloseButton: true
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data削除(DELETE)
     deleteJson: (obj, id, path) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'DELETE'
         url: host + path + "/" + id + ".json"
         params: obj
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data削除(DELETE)
