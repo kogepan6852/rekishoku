@@ -11,7 +11,7 @@ angular.module "frontApp"
   .controller "HeaderCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, toaster, Const) ->
 
     # 変数設定
-    $ionicModal.fromTemplateUrl('views/modal-login.html',
+    $ionicModal.fromTemplateUrl('views/parts/modal-login.html',
       scope: $scope
       animation: 'slide-in-up').then (modal) ->
       $scope.modal = modal

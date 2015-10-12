@@ -1,7 +1,7 @@
 <ion-view title="" ng-init="postListInit()">
   <div class="bar bar-subheader bar-clear edit-menu" align="right">
     <button class="button button-assertive icon-left ion-trash-a" ng-click="doDelete()" ng-if="showDeleteButton">削除</button>
-    <button class="button button-dark icon-left ion-plus-round" ng-click="openModal()" ng-if="!showDeleteButton" ng-show="isLogin">新規投稿</button>
+    <button class="button button-dark icon-left ion-plus-round" ng-click="openModalPost()" ng-if="!showDeleteButton" ng-show="isLogin">新規投稿</button>
   </div>
 
   <ion-content class="has-subheader">
@@ -10,7 +10,7 @@
         <tr>
           <th class=""></th>
           <th class="post-title">タイトル</th>
-          <th class="hidden-xs">本文</th>
+          <th class="post-content hidden-xs">本文</th>
           <th class="post-category hidden-xs">カテゴリー</th>
           <th class="delete-button"></th>
         </tr>
@@ -24,7 +24,7 @@
           <td class="hidden-xs">{{result.content | limitTo:100}}...</td>
           <td class="hidden-xs">{{result.category_name}}</td>
           <td align="right">
-            <button class="button button-dark" ng-click="onEditButton($index)">編集</button>
+            <button class="button button-dark" ng-click="openPopoverPostMenu($event, $index)"><i class="icon ion-android-more-vertical"></i></button>
           </td>
         </tr>
       </tbody>

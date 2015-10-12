@@ -1,12 +1,16 @@
 <ion-modal-view class="big-modal">
     <!-- ヘッダー -->
-    <ion-header-bar>
-      <a class="button button-icon icon ion-backspace-outline" ng-click="backSlide()" ng-show="isShowBackSlide"></a>
+    <ion-header-bar class="bar-dark">
+      <div class="buttons" ng-click="closeModalPost(postForm)">
+        <button class="button icon ion-close-round"></button>
+      </div>
       <h1 class="title">
         <span ng-if="!isEditing">新規投稿</span>
         <span ng-if="isEditing">投稿編集</span>
       </h1>
-      <button class="button icon-right ion-chevron-right" ng-click="prevSlide()" ng-show="isShowAddPostDetail">追加項目</button>
+      <div class="buttons" ng-click="doPost(postForm)">
+        <button class="button">保存する</button>
+      </div>
     </ion-header-bar>
 
     <form name="postForm" class="post-modal">
@@ -88,14 +92,9 @@
     </form>
     <!-- フッター -->
     <ion-footer-bar align-title="left" class="bar-stable">
-      <div class="buttons" ng-click="closeModal(postForm)">
-        <button class="button">キャンセル</button>
-      </div>
+      <button class="button icon-left ion-chevron-left" ng-click="backSlide()" ng-show="isShowBackSlide">戻る</button>
       <h1 class="title"></h1>
-      <div class="buttons" ng-click="doPost(postForm)">
-        <button class="button" ng-if="!isEditing">投稿する</button>
-        <button class="button" ng-if="isEditing">保存する</button>
-      </div>
+      <button class="button icon-right ion-chevron-right" ng-click="prevSlide()" ng-show="isShowAddPostDetail">追加項目</button>
     </ion-footer-bar>
 
 </ion-modal-view>

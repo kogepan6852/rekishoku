@@ -8,15 +8,30 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $sessionStorage, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicSlideBoxDelegate, $sessionStorage, Api, Const, toaster) ->
 
     # 変数設定
-    $ionicModal.fromTemplateUrl('views/modal-post.html',
+    $ionicModal.fromTemplateUrl('views/parts/modal-post.html',
       scope: $scope
       animation: 'slide-in-up'
-      backdropClickToClose: false).then (modal) ->
-        $scope.modal = modal
-        return
+      backdropClickToClose: false).then (modalPost) ->
+        $scope.modalPost = modalPost
+
+    $ionicModal.fromTemplateUrl('views/parts/modal-shops.html',
+      scope: $scope
+      animation: 'slide-in-up'
+      backdropClickToClose: false).then (modalShops) ->
+        $scope.modalShops = modalShops
+
+    $ionicModal.fromTemplateUrl('views/parts/modal-shops.html',
+      scope: $scope
+      animation: 'slide-in-up'
+      backdropClickToClose: false).then (modalShops) ->
+        $scope.modalShops = modalShops
+
+    $ionicPopover.fromTemplateUrl('views/parts/popover-post-menu.html',
+      scope: $scope).then (popoverPostMenu) ->
+        $scope.popoverPostMenu = popoverPostMenu
 
     $scope.categories = [{}]
     Api.getJson(accessKey, Const.API.CATEGORY).then (res) ->
@@ -82,16 +97,36 @@ angular.module "frontApp"
           $scope.results = res.data
 
     # Function
-    $scope.openModal = () ->
+    $scope.openModalPost = () ->
       clearInput()
       $scope.isEditing = false
-      $scope.modal.show()
+      $scope.modalPost.show()
 
-    $scope.closeModal = (targetForm) ->
+    $scope.closeModalPost = (targetForm) ->
       targetForm.$setPristine()
-      $scope.modal.hide()
+      $scope.modalPost.hide()
 
-    $scope.editting = false
+    $scope.openModalShops = () ->
+      # 店舗一覧を取得する
+      Api.getJson("", Const.API.SHOP + '.json').then (res) ->
+        $scope.shops = res.data
+        angular.forEach $scope.shops, (shop) ->
+          shop.checked = false
+
+      # モーダルを開く
+      $scope.modalShops.show()
+
+    $scope.closeModalShops = () ->
+      $scope.modalShops.hide()
+
+    $scope.openPopoverPostMenu = ($event, $index) ->
+      $scope.targetIndex = $index
+      $scope.targetPostId = $scope.results[$index].id
+      $scope.popoverPostMenu.show $event
+
+    $scope.closePopoverPostMenu = ->
+      $scope.popoverPostMenu.hide()
+
 
     $scope.doPost = (targetForm) ->
       # titleとimageが入力されている場合のみ
@@ -147,7 +182,7 @@ angular.module "frontApp"
             Api.saveFormData(fdDetails, Const.API.POST_DETSIL, Const.METHOD.POST).then (res) ->
               clearInput()
               targetForm.$setPristine()
-              $scope.modal.hide()
+              $scope.modalPost.hide()
               toaster.pop
                 type: 'success',
                 title: msg,
@@ -156,7 +191,7 @@ angular.module "frontApp"
           else
             clearInput()
             targetForm.$setPristine()
-            $scope.modal.hide()
+            $scope.modalPost.hide()
             toaster.pop
               type: 'success',
               title: msg,
@@ -181,6 +216,7 @@ angular.module "frontApp"
             Api.deleteJson(accessKey, targetPostId, Const.API.POST_DETSIL).then (res) ->
 
     $scope.onEditButton = (index) ->
+      clearInput()
       $scope.isEditing = true
       Api.getJson("", Const.API.POST_DETSIL + '/' + $scope.results[index].id).then (res) ->
         # categoryの設定
@@ -209,7 +245,7 @@ angular.module "frontApp"
             slug: $scope.results[index].category_slug
           id: $scope.results[index].id
         $scope.srcUrl = $scope.results[index].image.thumb.url
-        $scope.modal.show()
+        $scope.modalPost.show()
 
     # 変化を監視してメイン画像を読み込み＋表示を実行
     $scope.$watch 'input.file', (file) ->
@@ -279,3 +315,9 @@ angular.module "frontApp"
           $scope.targetCategorySlug = category.slug
         else
           category.checked = false
+
+    $scope.saveShops = ->
+      console.log($scope.targetPostId)
+      angular.forEach $scope.shops, (shop) ->
+        if shop.checked
+          console.log(shop.name)

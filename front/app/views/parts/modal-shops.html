@@ -1,0 +1,30 @@
+<ion-modal-view>
+  <!-- header -->
+  <ion-header-bar class="bar-dark">
+    <div class="buttons">
+      <button class="button icon ion-close-round" ng-click="closeModalShops()"></button>
+    </div>
+    <h1 class="title">ショップ一覧</h1>
+    <div class="buttons" ng-click="saveShops()">
+      <button class="button">保存する</button>
+    </div>
+  </ion-header-bar>
+  <!-- subheader -->
+  <div class="bar bar-subheader-modal bar-clear edit-menu" align="right">
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search" ng-model="search.name">
+    </label>
+  </div>
+
+  <ion-content class="has-subheader">
+
+    <div class="list">
+      <div class="item item-button-left" ng-repeat="shop in shops | filter:search">
+        <button class="button icon ion-checkmark-round checkbox" ng-class="{active: shop.checked}" ng-click="shop.checked = !shop.checked"></button>
+        {{shop.name}}
+      </div>
+    </div>
+
+  </ion-content>
+</ion-modal-view>
