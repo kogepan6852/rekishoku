@@ -58,21 +58,16 @@ angular.module "frontApp"
         errorHandring(data)
 
     # data登録(POST, FORM DATA)
-    saveFormData:(fd, path, msg) ->
+    saveFormData:(fd, path, method) ->
       $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
-        method: 'POST'
+        method: method
         url: host + path + ".json"
         transformRequest: null
         headers: 'Content-type': undefined
         data: fd
       ).success((data, status, headers, config) ->
         $ionicLoading.hide()
-        if msg
-          toaster.pop
-            type: 'success',
-            title: msg,
-            showCloseButton: true
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
         errorHandring(data)

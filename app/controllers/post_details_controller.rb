@@ -30,17 +30,24 @@ class PostDetailsController < ApplicationController
     isSuccess = true
     post_details = params[:post_details]
     params[:post_details].each_with_index do |post_detail, i|
-      @post_detail = PostDetail.new
+      if post_detail['id']
+        # 更新処理
+        @post_detail = PostDetail.find(post_detail['id'])
+      else
+        # 新規作成処理
+        @post_detail = PostDetail.new
+      end
+
       @post_detail.post_id = post_detail['post_id']
       @post_detail.title = post_detail['title']
       @post_detail.image = post_detail['image']
       @post_detail.content = post_detail['content']
       @post_detail.quotation_url = post_detail['quotation_url']
       @post_detail.quotation_name = post_detail['quotation_name']
-
       if !@post_detail.save
         isSuccess = false
       end
+
     end
 
     respond_to do |format|

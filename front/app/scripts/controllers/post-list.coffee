@@ -18,16 +18,16 @@ angular.module "frontApp"
         $scope.modal = modal
         return
 
-    $scope.categories = [
-      {slug:'episode', name:'歴食エピソード'},
-      {slug:'experience', name:'歴食体験'},
-      {slug:'information', name:'歴食ニュース'}
-    ]
+    $scope.categories = [{}]
+    Api.getJson(accessKey, Const.API.CATEGORY).then (res) ->
+      $scope.categories = res.data
+      $scope.categories[0].checked = true
 
     $scope.isShowBackSlide = false
     $scope.isShowAddPostDetail = true;
     $scope.slideLists = [1, 2, 3]
     $scope.showDeleteButton = false
+    $scope.isEditing = false
 
     # 初期処理
     clearInput = ->
@@ -35,11 +35,12 @@ angular.module "frontApp"
       details = []
       for slideList in $scope.slideLists
         detail =
-          id: slideList
+          index: slideList
           subTitle: null
           subContent: null
           subQuotationUrl: null
           subQuotationName: null
+          id: null
         details.push(detail)
       # postの初期化
       input =
@@ -49,8 +50,14 @@ angular.module "frontApp"
         quotationName: null
         details: details
         category: $scope.categories[0]
+        id: null
         authentication_token: $sessionStorage['token']
       $scope.input = input
+      # categoryの初期化
+      angular.forEach $scope.categories, (category, i) ->
+        category.checked = false
+      $scope.categories[0].checked = true
+
       # 画像を削除する
       angular.forEach angular.element("input[type='file']"), (inputElem) ->
         angular.element(inputElem).val null
@@ -75,50 +82,85 @@ angular.module "frontApp"
           $scope.results = res.data
 
     # Function
-    $scope.openModal = ->
+    $scope.openModal = () ->
+      clearInput()
+      $scope.isEditing = false
       $scope.modal.show()
 
     $scope.closeModal = (targetForm) ->
       targetForm.$setPristine()
-      clearInput()
       $scope.modal.hide()
 
     $scope.editting = false
 
     $scope.doPost = (targetForm) ->
-      # formdata作成
-      fd = new FormData
-      fdDetails = new FormData
-      fd.append 'token', $sessionStorage['token']
-      fd.append 'email', $sessionStorage['email']
-      fd.append 'slug', $scope.input.category.slug
-      fd.append 'post[title]', $scope.input.title.trim()
-      fd.append 'post[image]', $scope.input.file
-      if $scope.input.content then fd.append 'post[content]', $scope.input.content
-      if $scope.input.quotationUrl then fd.append 'post[quotation_url]', $scope.input.quotationUrl
-      if $scope.input.quotationName then fd.append 'post[quotation_name]', $scope.input.quotationName
+      # titleとimageが入力されている場合のみ
+      if $scope.input.title && $scope.srcUrl
+        # caregoryの取得
+        targetSlug = null
+        angular.forEach $scope.categories, (category) ->
+          if category.checked
+            targetSlug = category.slug
+        # formdata作成
+        fd = new FormData
+        fdDetails = new FormData
+        fd.append 'token', $sessionStorage['token']
+        fd.append 'email', $sessionStorage['email']
+        if targetSlug then fd.append 'slug', targetSlug
+        if $scope.input.title then fd.append 'post[title]', $scope.input.title.trim()
+        if $scope.input.file then fd.append 'post[image]', $scope.input.file
+        if $scope.input.content then fd.append 'post[content]', $scope.input.content
+        if $scope.input.quotationUrl then fd.append 'post[quotation_url]', $scope.input.quotationUrl
+        if $scope.input.quotationName then fd.append 'post[quotation_name]', $scope.input.quotationName
 
-      # データ登録
-      Api.saveFormData(fd, Const.API.POST, "").then (res) ->
-        # 初期化処理実行
-        $rootScope.postListInit()
+        # データ登録
+        url = Const.API.POST
+        method = Const.METHOD.POST
+        msg = Const.MSG.SAVED
+        # 更新の場合、idを設定する
+        if $scope.input.id
+          url += "/" + $scope.input.id
+          method = Const.METHOD.PATCH
+          msg = Const.MSG.UPDATED
 
-        angular.forEach $scope.input.details, (detail, i) ->
-          if detail.subTitle || detail.subFile || detail.subContent
-            # formdata作成
-            fdDetail = new FormData
-            fdDetails.append 'post_details[][post_id]', res.data.id
-            if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
-            if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
-            if detail.subContent then fdDetails.append 'post_details[][content]', detail.subContent
-            if detail.subQuotationUrl then fdDetails.append 'post_details[][quotation_url]', detail.subQuotationUrl
-            if detail.subQuotationName then fdDetails.append 'post_details[][quotation_name]', detail.subQuotationName
+        Api.saveFormData(fd, url, method).then (res) ->
+          # 初期化処理実行
+          $rootScope.postListInit()
+          detailCount = 0
 
-        # 詳細データ登録
-        Api.saveFormData(fdDetails, Const.API.POST_DETSIL, Const.MSG.SAVED).then (res) ->
-          clearInput()
-          targetForm.$setPristine()
-          $scope.modal.hide()
+          angular.forEach $scope.input.details, (detail, i) ->
+            if detail.subTitle || detail.subFile || detail.subContent
+              # formdata作成
+              fdDetail = new FormData
+              fdDetails.append 'post_details[][post_id]', res.data.id
+              if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
+              if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
+              if detail.subContent then fdDetails.append 'post_details[][content]', detail.subContent
+              if detail.subQuotationUrl then fdDetails.append 'post_details[][quotation_url]', detail.subQuotationUrl
+              if detail.subQuotationName then fdDetails.append 'post_details[][quotation_name]', detail.subQuotationName
+              if detail.id then fdDetails.append 'post_details[][id]', detail.id
+
+              detailCount += 1
+
+          # 詳細データ登録
+          if detailCount >0
+            Api.saveFormData(fdDetails, Const.API.POST_DETSIL, Const.METHOD.POST).then (res) ->
+              clearInput()
+              targetForm.$setPristine()
+              $scope.modal.hide()
+              toaster.pop
+                type: 'success',
+                title: msg,
+                showCloseButton: true
+
+          else
+            clearInput()
+            targetForm.$setPristine()
+            $scope.modal.hide()
+            toaster.pop
+              type: 'success',
+              title: msg,
+              showCloseButton: true
 
     $scope.doDelete = ->
       $scope.showDeleteButton = false
@@ -139,28 +181,35 @@ angular.module "frontApp"
             Api.deleteJson(accessKey, targetPostId, Const.API.POST_DETSIL).then (res) ->
 
     $scope.onEditButton = (index) ->
+      $scope.isEditing = true
       Api.getJson("", Const.API.POST_DETSIL + '/' + $scope.results[index].id).then (res) ->
-        console.log(res.data)
+        # categoryの設定
+        $scope.checkCategory($scope.results[index].category_id)
         # post detailの作成
         details = []
         angular.forEach $scope.slideLists, (slideList, i) ->
           detail =
-            id: slideList
+            index: slideList
             subTitle: if res.data[i] then res.data[i].title else null
-            subContent:  if res.data[i] then res.data[i].content else null
-            subQuotationUrl:  if res.data[i] then res.data[i].quotation_url else null
-            subQuotationName:  if res.data[i] then res.data[i].quotation_name else null
+            subContent: if res.data[i] then res.data[i].content else null
+            subQuotationUrl: if res.data[i] then res.data[i].quotation_url else null
+            subQuotationName: if res.data[i] then res.data[i].quotation_name else null
+            srcSubUrl: if res.data[i] then res.data[i].image.thumb.url else null
+            id: if res.data[i] then res.data[i].id else null
           details.push(detail)
         # postの作成
         $scope.input =
           title: $scope.results[index].title
           content: $scope.results[index].content
-          quotationUrl: $scope.results[index].quotationUrl
-          quotationName: $scope.results[index].quotationName
+          quotationUrl: $scope.results[index].quotation_url
+          quotationName: $scope.results[index].quotation_name
           details: details
-          category: $scope.results[index].category
+          category:
+            name: $scope.results[index].category_name
+            slug: $scope.results[index].category_slug
+          id: $scope.results[index].id
+        $scope.srcUrl = $scope.results[index].image.thumb.url
         $scope.modal.show()
-
 
     # 変化を監視してメイン画像を読み込み＋表示を実行
     $scope.$watch 'input.file', (file) ->
@@ -222,3 +271,11 @@ angular.module "frontApp"
             isChecked = true
         if !isChecked
           $scope.showDeleteButton = false
+
+    $scope.checkCategory = (id) ->
+      angular.forEach $scope.categories, (category, i) ->
+        if id == category.id
+          category.checked = true
+          $scope.targetCategorySlug = category.slug
+        else
+          category.checked = false
