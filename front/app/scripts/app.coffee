@@ -39,6 +39,12 @@ angular
           'map-tab':
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
+      .state 'tabs.shops',
+        url: '/shops'
+        views:
+          'shops-tab':
+            templateUrl: 'views/shops.html'
+            controller: 'ShopsCtrl'
       .state 'tabs.list',
         url: '/list'
         views:
@@ -51,6 +57,12 @@ angular
           'home-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
+      .state 'tabs.shopDetail',
+        url: '/shop/:id'
+        views:
+          'shops-tab':
+            templateUrl: 'views/shop-detail.html'
+            controller: 'ShopDetailCtrl'
     $urlRouterProvider.otherwise ('/tab/home')
 
   .config(["$httpProvider", ($httpProvider) ->

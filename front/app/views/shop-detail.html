@@ -1,0 +1,29 @@
+<ion-view title="">
+  <div class="bar bar-subheader bar-clear">
+    <button class="button button-clear button-dark" ui-sref="tabs.shops" nav-transition="ios">
+      <i class="icon ion-backspace-outline"></i>
+    </button>
+  </div>
+
+  <ion-content class="has-subheader">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div class="shop-title">
+          <h2>{{shop.name}}</h2>
+          <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}"><i class="icon ion-ios-location"></i>{{shop.address1 + shop.address2}}</a>
+        </div>
+        <div class="shop-image"><img ng-src="{{shop.image.image.url}}"></div>
+        <div class="shop-quotation" ng-if="shop.image_quotation_name"><a href="{{shop.image_quotation_url}}" target="_blank">{{shop.quotation_name}}</a></div>
+        <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div class="shop-image"><img ng-src="{{shop.subimage.subimage.url}}"></div>
+        <div class="shop-menu" ng-if="shop.menu"><p>MENU:{{shop.menu}}</p></div>
+        <div class="shop-url" ng-if="shop.url"><p>URL:{{shop.url}}</p></div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -5,6 +5,7 @@ angular.module("frontApp")
     API:
       POST: '/posts'
       POST_DETSIL: '/post_details'
+      SHOP: '/shops'
       LOGIN: '/users/sign_in.json'
       LOGOUT: '/authentication_token.json'
       USER: '/users'
@@ -18,3 +19,5 @@ angular.module("frontApp")
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'
+    URL:
+      GOOGLE_MAP: 'http://maps.google.co.jp/maps?t=m&z=16&q='

@@ -66,6 +66,7 @@ angular.module "frontApp"
           showCloseButton: true
 
     $scope.doLogout = ->
+      $rootScope.isLogin = false
       accessKey =
         email: $sessionStorage['email']
         token: $sessionStorage['token']
@@ -76,7 +77,6 @@ angular.module "frontApp"
         # login情報の削除
         delete $sessionStorage['token']
         delete $sessionStorage['email']
-        $rootScope.isLogin = false
         # post list初期化
         $rootScope.postListInit()
 

@@ -3,6 +3,8 @@ class CreateShops < ActiveRecord::Migration
     create_table :shops do |t|
       t.string :name, null: false
       t.text :description
+      t.string :url
+      t.text :menu
       t.string :image, null: false
       t.string :subimage
       t.string :image_quotation_url
@@ -13,7 +15,6 @@ class CreateShops < ActiveRecord::Migration
       t.string :address2
       t.float :latitude
       t.float :longitude
-      t.text :menu
 
       t.timestamps null: false
     end

@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20151001160849) do
   create_table "shops", force: :cascade do |t|
     t.string   "name",                 null: false
     t.text     "description"
+    t.string   "url"
+    t.text     "menu"
     t.string   "image",                null: false
     t.string   "subimage"
     t.string   "image_quotation_url"
@@ -100,7 +102,6 @@ ActiveRecord::Schema.define(version: 20151001160849) do
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
-    t.text     "menu"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
