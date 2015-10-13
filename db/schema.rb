@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001160849) do
+ActiveRecord::Schema.define(version: 20151012170403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +48,12 @@ ActiveRecord::Schema.define(version: 20151001160849) do
   end
 
   create_table "people_periods", id: false, force: :cascade do |t|
-    t.integer "person",  null: false
-    t.integer "periods", null: false
+    t.integer "person_id", null: false
+    t.integer "period_id", null: false
   end
 
-  add_index "people_periods", ["periods"], name: "index_people_periods_on_periods", using: :btree
-  add_index "people_periods", ["person"], name: "index_people_periods_on_person", using: :btree
+  add_index "people_periods", ["period_id"], name: "index_people_periods_on_period_id", using: :btree
+  add_index "people_periods", ["person_id"], name: "index_people_periods_on_person_id", using: :btree
 
   create_table "periods", force: :cascade do |t|
     t.string   "name",       null: false
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 20151001160849) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  create_table "posts_shops", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "shop_id", null: false
+  end
+
+  add_index "posts_shops", ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
+  add_index "posts_shops", ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
 
   create_table "shops", force: :cascade do |t|
     t.string   "name",                 null: false
@@ -132,4 +140,12 @@ ActiveRecord::Schema.define(version: 20151001160849) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "categories_people", "categories"
+  add_foreign_key "categories_people", "people"
+  add_foreign_key "categories_shops", "categories"
+  add_foreign_key "categories_shops", "shops"
+  add_foreign_key "people_periods", "people"
+  add_foreign_key "people_periods", "periods"
+  add_foreign_key "posts_shops", "posts"
+  add_foreign_key "posts_shops", "shops"
 end

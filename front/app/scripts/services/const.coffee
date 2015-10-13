@@ -10,6 +10,7 @@ angular.module("frontApp")
       LOGOUT: '/authentication_token.json'
       USER: '/users'
       CATEGORY: '/categories.json'
+      POST_SHOP: '/posts_shops'
     MSG:
       SAVED: '投稿しました'
       DELETED: '削除しました'

@@ -41,18 +41,14 @@ angular.module "frontApp"
 
 
     # data登録(POST, JSON)
-    saveJson: (obj, path, msg) ->
+    saveJson: (obj, path, method) ->
       $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
-        method: 'POST'
+        method: method
         url: host + path + ".json"
         data: obj
       ).success((data, status, headers, config) ->
         $ionicLoading.hide()
-        toaster.pop
-          type: 'success',
-          title: msg,
-          showCloseButton: true
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
         errorHandring(data)

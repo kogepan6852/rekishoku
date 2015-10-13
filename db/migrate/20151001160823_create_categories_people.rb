@@ -4,5 +4,8 @@ class CreateCategoriesPeople < ActiveRecord::Migration
       t.references :category, index: true, null: false
       t.references :person, index: true, null: false
     end
+
+        add_foreign_key :categories_people, :categories
+        add_foreign_key :categories_people, :people
   end
 end

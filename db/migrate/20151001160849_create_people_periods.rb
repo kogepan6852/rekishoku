@@ -1,8 +1,11 @@
 class CreatePeoplePeriods < ActiveRecord::Migration
   def change
     create_table :people_periods, id: false do |t|
-      t.integer :person, index: true, null: false
-      t.integer :periods, index: true, null: false
+      t.references :person, index: true, null: false
+      t.references :period, index: true, null: false
     end
+
+    add_foreign_key :people_periods, :people
+    add_foreign_key :people_periods, :periods
   end
 end

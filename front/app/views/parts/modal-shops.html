@@ -20,8 +20,8 @@
   <ion-content class="has-subheader">
 
     <div class="list">
-      <div class="item item-button-left" ng-repeat="shop in shops | filter:search">
-        <button class="button icon ion-checkmark-round checkbox" ng-class="{active: shop.checked}" ng-click="shop.checked = !shop.checked"></button>
+      <div class="item item-button-left" ng-repeat="shop in shops | filter:search" ng-click="shop.checked = !shop.checked">
+        <button class="button icon ion-checkmark-round checkbox" ng-class="{active: shop.checked}"></button>
         {{shop.name}}
       </div>
     </div>

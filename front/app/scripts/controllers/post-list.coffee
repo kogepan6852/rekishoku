@@ -108,10 +108,17 @@ angular.module "frontApp"
 
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
-      Api.getJson("", Const.API.SHOP + '.json').then (res) ->
-        $scope.shops = res.data
-        angular.forEach $scope.shops, (shop) ->
-          shop.checked = false
+      Api.getJson("", Const.API.SHOP + '.json').then (resShop) ->
+        $scope.shops = resShop.data
+        # 紐づく店舗を取得する
+        obj =
+          post_id: $scope.targetPostId
+        Api.getJson(obj, Const.API.POST_SHOP).then (resPostShop) ->
+          angular.forEach $scope.shops, (shop) ->
+            shop.checked = false
+            angular.forEach resPostShop.data, (postShop) ->
+              if postShop.shop_id == shop.id
+                shop.checked = true
 
       # モーダルを開く
       $scope.modalShops.show()
@@ -183,6 +190,7 @@ angular.module "frontApp"
               clearInput()
               targetForm.$setPristine()
               $scope.modalPost.hide()
+              $scope.popoverPostMenu.hide()
               toaster.pop
                 type: 'success',
                 title: msg,
@@ -317,7 +325,19 @@ angular.module "frontApp"
           category.checked = false
 
     $scope.saveShops = ->
-      console.log($scope.targetPostId)
+      shopIds = []
       angular.forEach $scope.shops, (shop) ->
         if shop.checked
-          console.log(shop.name)
+          shopIds.push(shop.id)
+
+      obj =
+        post_id: $scope.targetPostId
+        shop_ids: shopIds
+
+      Api.saveJson(obj, Const.API.POST_SHOP, Const.METHOD.POST).then (res) ->
+        $scope.modalShops.hide()
+        $scope.popoverPostMenu.hide()
+        toaster.pop
+          type: 'success',
+          title: '保存しました。',
+          showCloseButton: true
