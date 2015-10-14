@@ -23,11 +23,11 @@ angular.module "frontApp"
       backdropClickToClose: false).then (modalShops) ->
         $scope.modalShops = modalShops
 
-    $ionicModal.fromTemplateUrl('views/parts/modal-shops.html',
+    $ionicModal.fromTemplateUrl('views/parts/modal-people.html',
       scope: $scope
       animation: 'slide-in-up'
-      backdropClickToClose: false).then (modalShops) ->
-        $scope.modalShops = modalShops
+      backdropClickToClose: false).then (modalPeople) ->
+        $scope.modalPeople = modalPeople
 
     $ionicPopover.fromTemplateUrl('views/parts/popover-post-menu.html',
       scope: $scope).then (popoverPostMenu) ->
@@ -125,6 +125,26 @@ angular.module "frontApp"
 
     $scope.closeModalShops = () ->
       $scope.modalShops.hide()
+
+    $scope.openModalPeople = () ->
+      # 人物一覧を取得する
+      Api.getJson("", Const.API.PERSON + '.json').then (resPerson) ->
+        $scope.people = resPerson.data
+        # 紐づく店舗を取得する
+        obj =
+          post_id: $scope.targetPostId
+        Api.getJson(obj, Const.API.POST_PERSON).then (resPostPerson) ->
+          angular.forEach $scope.people, (person) ->
+            person.checked = false
+            angular.forEach resPostPerson.data, (postPerson) ->
+              if postPerson.person_id == person.id
+                person.checked = true
+
+      # モーダルを開く
+      $scope.modalPeople.show()
+
+    $scope.closeModalPeople = () ->
+      $scope.modalPeople.hide()
 
     $scope.openPopoverPostMenu = ($event, $index) ->
       $scope.targetIndex = $index
@@ -336,6 +356,24 @@ angular.module "frontApp"
 
       Api.saveJson(obj, Const.API.POST_SHOP, Const.METHOD.POST).then (res) ->
         $scope.modalShops.hide()
+        $scope.popoverPostMenu.hide()
+        toaster.pop
+          type: 'success',
+          title: '保存しました。',
+          showCloseButton: true
+
+    $scope.savePeople = ->
+      personIds = []
+      angular.forEach $scope.people, (person) ->
+        if person.checked
+          personIds.push(person.id)
+
+      obj =
+        post_id: $scope.targetPostId
+        person_ids: personIds
+
+      Api.saveJson(obj, Const.API.POST_PERSON, Const.METHOD.POST).then (res) ->
+        $scope.modalPeople.hide()
         $scope.popoverPostMenu.hide()
         toaster.pop
           type: 'success',

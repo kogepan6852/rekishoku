@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012170403) do
+ActiveRecord::Schema.define(version: 20151014161135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20151012170403) do
 
   add_index "people_periods", ["period_id"], name: "index_people_periods_on_period_id", using: :btree
   add_index "people_periods", ["person_id"], name: "index_people_periods_on_person_id", using: :btree
+
+  create_table "people_posts", id: false, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "post_id",   null: false
+  end
+
+  add_index "people_posts", ["person_id"], name: "index_people_posts_on_person_id", using: :btree
+  add_index "people_posts", ["post_id"], name: "index_people_posts_on_post_id", using: :btree
 
   create_table "periods", force: :cascade do |t|
     t.string   "name",       null: false
@@ -146,6 +154,8 @@ ActiveRecord::Schema.define(version: 20151012170403) do
   add_foreign_key "categories_shops", "shops"
   add_foreign_key "people_periods", "people"
   add_foreign_key "people_periods", "periods"
+  add_foreign_key "people_posts", "people"
+  add_foreign_key "people_posts", "posts"
   add_foreign_key "posts_shops", "posts"
   add_foreign_key "posts_shops", "shops"
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :people_posts
+
   resources :posts_shops
 
   resources :people_periods
