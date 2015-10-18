@@ -215,6 +215,18 @@ img {
 form.post-modal, .post-modal .slider {
   height: 100%;
 }
+.shop-list {
+  display:table;
+}
+.shop-list > div{
+  display:table-cell;
+  vertical-align: top;
+}
+.shop-list .shop-list-image {
+  width: 35%;
+  height: auto;
+  padding-right: 10px;
+}
 
 /**********************
  * Shops page
@@ -337,6 +349,7 @@ label { max-width: initial;}
   padding-left: 5px;
   padding-right: 5px;
 }
+ion-modal-view { z-index: 11!important}
 
 /**********************
  * Responsive Design

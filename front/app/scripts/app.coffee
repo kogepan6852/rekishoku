@@ -51,18 +51,31 @@ angular
           'list-tab':
             templateUrl: 'views/post-list.html'
             controller: 'PostListCtrl'
-      .state 'tabs.postDetail',
+      .state 'tabs.post',
         url: '/post/:id'
         views:
           'home-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
-      .state 'tabs.shopDetail',
+      .state 'tabs.postFromShop',
+        url: '/post/:id'
+        views:
+          'shops-tab':
+            templateUrl: 'views/post-detail.html'
+            controller: 'PostDetailCtrl'
+      .state 'tabs.shop',
         url: '/shop/:id'
         views:
           'shops-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
+      .state 'tabs.shopFromPost',
+        url: '/shop/:id'
+        views:
+          'home-tab':
+            templateUrl: 'views/shop-detail.html'
+            controller: 'ShopDetailCtrl'
+
     $urlRouterProvider.otherwise ('/tab/home')
 
   .config(["$httpProvider", ($httpProvider) ->

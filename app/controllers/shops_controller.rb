@@ -10,6 +10,12 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
+    shop = { "shop" => @shop, "posts" => @shop.posts }
+    respond_to do |format|
+      format.html { render @shop }
+      format.json { render json: shop }
+    end
+
      #render json: @show
   end
 

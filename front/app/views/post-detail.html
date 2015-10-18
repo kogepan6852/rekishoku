@@ -25,6 +25,23 @@
         <div class="post-content" ng-if="postDetail.content"><p ng-bind-html="postDetail.content | newlines"></p></div>
       </div>
     </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div><h2>店舗情報</h2></div>
+        <div class="shop-list" ng-repeat="shop in shops">
+          <div class="shop-list-image"><a class="link" ui-sref="tabs.shopFromPost({id:shop.id})" nav-transition="ios"><img ng-src="{{shop.image.thumb.url}}"></a></div>
+
+          <div class="shop-list-info">
+            <p>{{shop.name}}</p>
+            <p>{{shop.address1}} {{shop.address2}}</p>
+            <p>{{shop.url}}</p>
+            <p ng-if="shop.url"><a target="_blank" href="{{shop.url}}"><i class="icon ion-link"></i>{{shop.url}}</a></p>
+            <p>{{shop.description | limitTo:300}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
