@@ -6,13 +6,14 @@ class ShopsController < ApplicationController
   def index
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
-    address = "島根県松江市秋鹿町３４１９−２" # 仮の住所
-    shopDistance = 10000 #shopからの距離[m]
-
-    #現在地を受け取るの緯度経度を求める
-    addressPlace = Geocoder.coordinates(address);
-    # 店舗フィルタをかかる
-    @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-shopDistance*latitudeRange,addressPlace[1]-shopDistance*longitudeRange,addressPlace[0]+shopDistance*latitudeRange,addressPlace[1]+shopDistance*longitudeRange)
+    if params[:placeAddress] && params[:shopDistance]
+      #現在地を受け取るの緯度経度を求める
+      addressPlace = Geocoder.coordinates(params[:placeAddress]);
+      # 店舗フィルタをかかる
+      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance]*latitudeRange,addressPlace[1]-params[:shopDistance]*longitudeRange,addressPlace[0]+params[:shopDistance]*latitudeRange,addressPlace[1]+params[:shopDistance]*longitudeRange)
+    else
+      @shops=Shop.all
+    end
   end
 
   # GET /shops/1
