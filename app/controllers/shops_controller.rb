@@ -4,7 +4,15 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.all
+    latitudeRange = 0.00000901337 # 緯度計算の値
+    longitudeRange = 0.0000109664 # 経度計算の値
+    address = "島根県松江市秋鹿町３４１９−２" # 仮の住所
+    shopDistance = 10000 #shopからの距離[m]
+
+    #現在地を受け取るの緯度経度を求める
+    addressPlace = Geocoder.coordinates(address);
+    # 店舗フィルタをかかる
+    @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-shopDistance*latitudeRange,addressPlace[1]-shopDistance*longitudeRange,addressPlace[0]+shopDistance*latitudeRange,addressPlace[1]+shopDistance*longitudeRange)
   end
 
   # GET /shops/1
@@ -15,8 +23,6 @@ class ShopsController < ApplicationController
       format.html { render @shop }
       format.json { render json: shop }
     end
-
-     #render json: @show
   end
 
   # GET /shops/new
@@ -31,10 +37,6 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    # 住所から緯度経度を求める
-    # Geocoder.configure(:language  => :ja,  :units => :km )
-    # addressPlace = Geocoder.coordinates(shop_params[:address1]);
-    # 緯度経度を代入する
     @shop = Shop.new(shop_params)
 
     respond_to do |format|
@@ -80,6 +82,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-       params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
     end
 end
