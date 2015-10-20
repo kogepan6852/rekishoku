@@ -10,7 +10,7 @@ class ShopsController < ApplicationController
       #現在地を受け取るの緯度経度を求める
       addressPlace = Geocoder.coordinates(params[:placeAddress]);
       # 店舗フィルタをかかる
-      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance]*latitudeRange,addressPlace[1]-params[:shopDistance]*longitudeRange,addressPlace[0]+params[:shopDistance]*latitudeRange,addressPlace[1]+params[:shopDistance]*longitudeRange)
+      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
     else
       @shops=Shop.all
     end
@@ -21,7 +21,7 @@ class ShopsController < ApplicationController
   def show
     shop = { "shop" => @shop, "posts" => @shop.posts }
     respond_to do |format|
-      format.html { render @shop }
+      format.html { render @shops }
       format.json { render json: shop }
     end
   end
