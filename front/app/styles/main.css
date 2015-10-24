@@ -114,14 +114,6 @@ ion-view .has-subheader {
 /**********************
  * Main page
  **********************/
-/** {
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
--ms-box-sizing: border-box;
--o-box-sizing: border-box;
-box-sizing: border-box;
-}*/
-
 .item-list li {
     width: 50%;
     display: inline-block;
@@ -250,6 +242,30 @@ form.post-modal, .post-modal .slider {
   font-weight: 600;
 }
 
+/**********************
+ * Map page
+ **********************/
+.search-bar {
+  padding: 0;
+}
+.search-bar label{
+  max-width: 500px;
+  width: 60%;
+}
+.search-bar .button{
+  max-width: 200px;
+  min-width: 100px;
+  width: 20%;
+}
+.maps .angular-google-map-container,
+.maps .angular-google-map,
+.maps .scroll,
+.maps .map-include { height: 100%; }
+
+.gmap-windows img {
+  width:130px;
+  height: auto;
+}
 /**********************
  * Side bar
  **********************/

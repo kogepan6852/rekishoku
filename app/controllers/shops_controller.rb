@@ -9,8 +9,12 @@ class ShopsController < ApplicationController
     if params[:placeAddress] && params[:shopDistance]
       #現在地を受け取るの緯度経度を求める
       addressPlace = Geocoder.coordinates(params[:placeAddress]);
-      # 店舗フィルタをかかる
+      # 店舗フィルタをかける
       @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
+      # jsonの場合、戻り値に現在地の経度緯度を追加
+      shop = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1] }}
+      render json: shop
+
     else
       @shops=Shop.all
     end

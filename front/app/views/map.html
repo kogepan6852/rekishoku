@@ -1,64 +1,10 @@
-<div class="main">
-  <ul class="item-list">
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-    <li>
-      <div class="sysThumbnailImage">
-        <img src="http://placehold.jp/440x440.png" class="thumbnail">
-      </div>
-      <div>
-        <div class="sysItemName">サンプル商品10</div>
-        <div class="sysRetailPrice">価格：12,345円（税抜）</div>
-      </div>
-      <input name="submit" value="カートに入れる" type="submit" class="sysCartButton sysCartInButton">
-    </li>
-  </ul>
-</div>
+<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+    <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
+      <ui-gmap-windows show="show">
+          <div ng-non-bindable class="gmap-windows">
+            <h3>{{title}}</h3>
+            <a class="link" href="#/shop/{{id}}"><img src="{{url}}"></a>
+          </div>
+      </ui-gmap-windows>
+    </ui-gmap-markers>
+</ui-gmap-google-map>

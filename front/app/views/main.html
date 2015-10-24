@@ -1,15 +1,15 @@
-  <div class="main" ng-controller="MainCtrl">
-    <ul class="item-list">
-      <li ng-repeat="result in results">
-        <div class="thumbnail-image overlay-image">
+<div class="main">
+  <ul class="item-list">
+    <li ng-repeat="result in results">
+      <div class="thumbnail-image overlay-image">
 
-          <img ng-src="{{result.image.thumb.url}}">
-          <a class="link" ui-sref="post({id:result.id})"></a>
-        </div>
-        <div class="main-content">
-          <div class="category-name">{{result.category_name}}</div>
-          <div class="h4 item-name">{{result.title}}</div>
-        </div>
-      </li>
-    </ul>
-  </div>
+        <img ng-src="{{result.image.thumb.url}}">
+        <a class="link" ui-sref="post({id:result.id})"></a>
+      </div>
+      <div class="main-content">
+        <div class="category-name">{{result.category_name}}</div>
+        <div class="h4 item-name">{{result.title}}</div>
+      </div>
+    </li>
+  </ul>
+</div>

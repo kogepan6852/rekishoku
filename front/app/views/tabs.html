@@ -1,27 +1,40 @@
 <ion-view title="">
   <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios">
 
-     <ion-tab title="Main" icon="ion-ios-home-outline">
-       <!-- <ion-nav-view name="home-tab" animation="slide-left-right" nav-transition="ios"></ion-nav-view> -->
-       <ion-content padding="true">
-       <div ng-include="'views/main.html'"></div>
-       </ion-content>
-     </ion-tab>
-
-     <ion-tab title="Map" icon="ion-ios-navigate-outline">
-       <!-- <ion-nav-view name="map-tab" animation="slide-left-right" nav-transition="ios"></ion-nav-view> -->
-       <ion-content  padding="true">
-         <div ng-include="'views/map.html'"></div>
-       </ion-content>
-     </ion-tab>
-
-     <ion-tab title="Shops" icon="ion-ios-list-outline">
-       <ion-content padding="true">
-         <div ng-include="'views/shops.html'"></div>
-       </ion-content>
+    <!-- Main  -->
+    <ion-tab title="Main" icon="ion-ios-home-outline" ng-controller="MainCtrl">
+      <ion-content>
+        <div ng-include="'views/main.html'"></div>
+      </ion-content>
     </ion-tab>
 
-   </ion-tabs>
+    <!-- Map  -->
+    <ion-tab title="Map" icon="ion-ios-navigate-outline" ng-controller="MapCtrl">
+      <!-- Serach bar -->
+      <div class="bar bar-subheader bar-clear" align="right">
+        <div class="item-input-inset search-bar">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="住所" ng-model="input.address">
+          </label>
+          <button class="button button-small button-dark" ng-click="searchShops()">
+            検索
+          </button>
+        </div>
+      </div>
+      <!-- Google map -->
+      <ion-content class="has-subheader maps">
+        <div class="map-include"ng-include="'views/map.html'"></div>
+      </ion-content>
+    </ion-tab>
+
+    <!-- Shops  -->
+    <ion-tab title="Shops" icon="ion-ios-list-outline" ng-controller="ShopsCtrl">
+      <ion-content>
+        <div ng-include="'views/shops.html'"></div>
+      </ion-content>
+    </ion-tab>
+
+  </ion-tabs>
 </ion-view>
 
 <script type="text/ng-template"></script>

@@ -19,7 +19,8 @@ angular
     'ionic',
     'ui.router',
     'ngStorage',
-    'toaster'
+    'toaster',
+    'uiGmapgoogle-maps'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
