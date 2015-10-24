@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $stateParams, $sessionStorage, Api, Const) ->
+  .controller "PostDetailCtrl", ($scope, $stateParams, $ionicHistory, $sessionStorage, Api, Const) ->
 
     # 変数設定
     $scope.targetId = $stateParams.id
@@ -21,3 +21,5 @@ angular.module 'frontApp'
         $scope.postDetails = res.data
 
     # Function
+    $scope.myGoBack = ->
+      $ionicHistory.goBack()

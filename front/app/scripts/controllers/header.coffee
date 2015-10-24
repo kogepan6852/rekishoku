@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $sessionStorage, Api, toaster, Const) ->
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/parts/modal-login.html',
@@ -91,3 +91,6 @@ angular.module "frontApp"
         $scope.doLogin()
         $scope.modal.hide()
         clearInput()
+
+    $scope.closeMenu = ->
+      $ionicSideMenuDelegate.toggleRight();

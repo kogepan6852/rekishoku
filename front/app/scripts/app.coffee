@@ -23,60 +23,24 @@ angular
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
-      .state 'tabs',
-        url: "/tab",
-        abstract: true,
+      .state 'home',
+        url: "/home",
         templateUrl: "views/tabs.html"
-      .state 'tabs.home',
-        url: '/home'
-        views:
-          'home-tab':
-            templateUrl: 'views/main.html'
-            controller: 'MainCtrl'
-      .state 'tabs.map',
-        url: '/map'
-        views:
-          'map-tab':
-            templateUrl: 'views/map.html'
-            controller: 'MapCtrl'
-      .state 'tabs.shops',
-        url: '/shops'
-        views:
-          'shops-tab':
-            templateUrl: 'views/shops.html'
-            controller: 'ShopsCtrl'
-      .state 'tabs.list',
-        url: '/list'
-        views:
-          'list-tab':
-            templateUrl: 'views/post-list.html'
-            controller: 'PostListCtrl'
-      .state 'tabs.post',
+      .state 'post',
         url: '/post/:id'
-        views:
-          'home-tab':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.postFromShop',
-        url: '/post/:id'
-        views:
-          'shops-tab':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.shop',
+        templateUrl: 'views/post-detail.html'
+        controller: 'PostDetailCtrl'
+      .state 'shop',
         url: '/shop/:id'
-        views:
-          'shops-tab':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.shopFromPost',
-        url: '/shop/:id'
-        views:
-          'home-tab':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
+        templateUrl: 'views/shop-detail.html'
+        controller: 'ShopDetailCtrl'
+      .state 'my-post',
+        url: '/my-post'
+        templateUrl: 'views/post-list.html'
+        controller: 'PostListCtrl'
 
-    $urlRouterProvider.otherwise ('/tab/home')
+
+    $urlRouterProvider.otherwise ('/home')
 
   .config(["$httpProvider", ($httpProvider) ->
 
@@ -87,4 +51,6 @@ angular
     $httpProvider.defaults.headers.post = "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
   ])
   .config ($ionicConfigProvider) ->
-    $ionicConfigProvider.views.transition('none')
+    $ionicConfigProvider.views.maxCache(5)
+    $ionicConfigProvider.views.transition('ios')
+    $ionicConfigProvider.views.forwardCache(true);

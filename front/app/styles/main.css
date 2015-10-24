@@ -67,6 +67,7 @@
 a { color: rgb(205,97,93);}
 a:hover { color: rgb(205, 140, 137); text-decoration: none}
 .tabs { background-color: rgb(205,97,93); color: #fff; border: none; }
+.bar-header.my-post-header { border: none; }
 
 /**********************
  * Header
@@ -396,6 +397,10 @@ ion-modal-view { z-index: 11!important}
     padding: 4px 0 0;
     vertical-align: middle;
   }
+  /* header */
+  .fix-nav i {
+    color: #000;
+  }
 }
 @media screen and (min-width:801px){
   .item-list li{ width: 25%; }
@@ -411,10 +416,12 @@ ion-modal-view { z-index: 11!important}
     padding-top: 0;
     top: 0px;
   }
-
   /* post image */
   .post-image{
     padding: 0 90px;
   }
-
+  /* header*/
+  .bar-header.my-post-header {
+    background-color: rgb(205,97,93);
+  }
 }
