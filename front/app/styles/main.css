@@ -252,6 +252,10 @@ form.post-modal, .post-modal .slider {
   max-width: 500px;
   width: 60%;
 }
+.search-bar input{
+  width: 100%;
+}
+
 .search-bar .button{
   max-width: 200px;
   min-width: 100px;
