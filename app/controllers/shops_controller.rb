@@ -37,9 +37,9 @@ class ShopsController < ApplicationController
 
     # お店検索機能（部分一致含む）とカテゴリ検索
     if params[:searchShop] && params[:searchCategoryName]
-      @shops = Shop.where('name like ? && category_name == ?', params[:searchShop], params[:searchCategoryName])
+      @shops = Shop.where('name LIKE ? && category_name == ?', params[:searchShop], params[:searchCategoryName])
     elsif params[:searchShop]
-      @shops = Shop.where('name like ?',params[:searchShop])
+      @shops = Shop.where('name LIKE ?',params[:searchShop])
     elsif params[:searchCategoryName]
       @shops = Shop.where('category_name == ?', params[:searchCategoryName])
     end

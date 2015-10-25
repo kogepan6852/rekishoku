@@ -12,11 +12,11 @@ class PostsController < ApplicationController
 
     # フリーワードとカテゴリ検索を行なう
     if params[:searchCharacter] && params[:searchCategoryName]
-      @posts = @posts.where('title like ? || content like ? || status like ? && categories_name == ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter],params[:searchCategoryName])
+      @posts = @posts.where('title LIKE ? || content LIKE ? || status LIKE ? && category_name == ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter],params[:searchCategoryName])
     elsif params[:searchCharacter]
-      @posts = @posts.where('title like ? || content like ? || status like ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter])
+      @posts = @posts.where('title LIKE ? || content LIKE ? || status LIKE ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter])
     elsif params[:searchCategoryName]
-      @posts = @posts.where('categories_name == ?', params[:searchCategoryName])
+      @posts = @posts.where('category_name == ?', params[:searchCategoryName])
     end
 
 
