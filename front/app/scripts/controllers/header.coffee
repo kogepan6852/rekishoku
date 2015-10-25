@@ -57,8 +57,6 @@ angular.module "frontApp"
         $sessionStorage['email'] = res.data.email
         $sessionStorage['token'] = res.data.authentication_token
         $rootScope.isLogin = true
-        # post list初期化
-        $rootScope.postListInit()
         # toast表示
         toaster.pop
           type: 'success',
@@ -77,9 +75,6 @@ angular.module "frontApp"
         # login情報の削除
         delete $sessionStorage['token']
         delete $sessionStorage['email']
-        # post list初期化
-        $rootScope.postListInit()
-
 
     $scope.doSignUp = ->
       obj =
@@ -87,10 +82,15 @@ angular.module "frontApp"
         "user[password]": $scope.input.password
         "user[password_confirmation]": $scope.input.password_confirmation
 
-      Api.saveJson(obj, Const.API.USER, Const.MSG.SINGED_UP).then (res) ->
+      Api.saveJson(obj, Const.API.USER, Const.METHOD.POST).then (res) ->
         $scope.doLogin()
         $scope.modal.hide()
         clearInput()
+        # toast表示
+        toaster.pop
+          type: 'success',
+          title: Const.MSG.SINGED_UP,
+          showCloseButton: true
 
     $scope.closeMenu = ->
       $ionicSideMenuDelegate.toggleRight();

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $sessionStorage, Api, toaster, BaseService, Const) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $sessionStorage, $ionicSideMenuDelegate, Api, toaster, BaseService, Const) ->
 
     # 変数設定
     $scope.input = {
@@ -29,7 +29,10 @@ angular.module 'frontApp'
       minZoom: 11
 
     $scope.events =
+      dragstart: (cluster, clusterModels) ->
+        $ionicSideMenuDelegate.canDragContent(false)
       dragend: (cluster, clusterModels) ->
+        $ionicSideMenuDelegate.canDragContent(true)
         obj =
           latitude: cluster.center.G
           longitude: cluster.center.K
