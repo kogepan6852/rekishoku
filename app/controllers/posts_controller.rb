@@ -10,6 +10,16 @@ class PostsController < ApplicationController
         @posts = @posts.where(user_id: current_user.id)
     end
 
+    # フリーワードとカテゴリ検索を行なう
+    if params[:searchCharacter] && params[:searchCategoryName]
+      @posts = @posts.where('title like ? || content like ? || status like ? && categories_name == ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter],params[:searchCategoryName])
+    elsif params[:searchCharacter]
+      @posts = @posts.where('title like ? || content like ? || status like ?', params[:searchCharacter],params[:searchCharacter],params[:searchCharacter])
+    elsif params[:searchCategoryName]
+      @posts = @posts.where('categories_name == ?', params[:searchCategoryName])
+    end
+
+
     render json: @posts
   end
 
