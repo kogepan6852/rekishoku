@@ -1,69 +1,72 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<p id="notice"><%= notice %></p><hr><br>
+<h1 class="center">店舗詳細</h1>
+<br><hr><br>
+<p class="center">
+  <big><strong>名前</strong></big><br>
   <%= @shop.name %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Description:</strong>
+<p class="center">
+  <big><strong>説明</strong></big><br>
   <%= @shop.description %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Image:</strong>
+<p class="center">
+  <big><strong>メイン画像</strong></big><br>
   <%= @shop.image %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Subimage:</strong>
+<p class="center">
+  <big><strong>サブ画像</strong></big><br>
   <%= @shop.subimage %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Image quotation url:</strong>
+<p class="center">
+  <big><strong>画像のURL</strong></big><br>
   <%= @shop.image_quotation_url %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Image quotation name:</strong>
+<p class="center">
+  <big><strong>画像の引用元</strong></big><br>
   <%= @shop.image_quotation_name %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Post quotation url:</strong>
+<p class="center">
+  <strong>画像の掲載してあったサイトのURL</strong>
   <%= @shop.post_quotation_url %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Post quotation name:</strong>
+<p class="center">
+  <strong>画像の掲載してあったサイトの名前</strong>
   <%= @shop.post_quotation_name %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Address1:</strong>
+<p class="center">
+  <big><strong>住所</strong></big><br>
   <%= @shop.address1 %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Address2:</strong>
+<p class="center">
+  <big><strong>「アパート名やマンション名」と「階数」</strong></big><br>
   <%= @shop.address2 %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Latitude:</strong>
+<p class="center">
+  <big><strong>経度</strong></big><br>
   <%= @shop.latitude %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Longitude:</strong>
+<p class="center">
+  <big><strong>緯度</strong></big><br>
   <%= @shop.longitude %>
-</p>
+</p><br><hr><br>
 
-<p>
-  <strong>Menu:</strong>
+<p class="center">
+  <big><strong>メニュー</strong></big><br>
   <%= @shop.menu %>
-</p>
+</p><br><hr><br>
 
-<%= link_to 'Edit', edit_shop_path(@shop) %> |
-<%= link_to 'Back', shops_path %>
+<div class="center">
+  <%= link_to '詳細', @person ,:class => "btn btn-success" %>
+  <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
+</div><br><hr>

@@ -1,15 +1,40 @@
-<ion-tabs class="tabs-icon-top tabs-color-dark">
+<ion-view title="">
+  <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios">
 
-   <ion-tab title="Home" icon="ion-ios-home-outline" ui-sref="tabs.home">
-     <ion-nav-view name="home-tab"></ion-nav-view>
-   </ion-tab>
+    <!-- Main  -->
+    <ion-tab title="Main" icon="ion-ios-home-outline" ng-controller="MainCtrl">
+      <ion-content>
+        <div ng-include="'views/main.html'"></div>
+      </ion-content>
+    </ion-tab>
 
-   <ion-tab title="Map" icon="ion-ios-location" ui-sref="tabs.map">
-     <ion-nav-view name="map-tab"></ion-nav-view>
-   </ion-tab>
+    <!-- Map  -->
+    <ion-tab title="Map" icon="ion-ios-navigate-outline" ng-controller="MapCtrl">
+      <!-- Serach bar -->
+      <div class="bar bar-subheader bar-clear" align="right">
+        <div class="item-input-inset search-bar">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="住所" ng-model="input.address">
+          </label>
+          <button class="button button-small button-dark" ng-click="searchShops()">
+            検索
+          </button>
+        </div>
+      </div>
+      <!-- Google map -->
+      <ion-content class="has-subheader maps">
+        <div class="map-include"ng-include="'views/map.html'"></div>
+      </ion-content>
+    </ion-tab>
 
-   <ion-tab title="Post" icon="ion-ios-list-outline" ui-sref="tabs.list">
-     <ion-nav-view name="list-tab"></ion-nav-view>
-   </ion-tab>
+    <!-- Shops  -->
+    <ion-tab title="Shops" icon="ion-ios-list-outline" ng-controller="ShopsCtrl">
+      <ion-content>
+        <div ng-include="'views/shops.html'"></div>
+      </ion-content>
+    </ion-tab>
 
- </ion-tabs>
+  </ion-tabs>
+</ion-view>
+
+<script type="text/ng-template"></script>

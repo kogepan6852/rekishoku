@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "Api", ($http, $ionicPopup, toaster, Const) ->
+  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const) ->
 
     #host = "http://127.0.0.1:3000"
     host = "http://localhost:3000"
@@ -41,44 +41,44 @@ angular.module "frontApp"
 
 
     # data登録(POST, JSON)
-    saveJson: (obj, path, msg) ->
+    saveJson: (obj, path, method) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
-        method: 'POST'
+        method: method
         url: host + path + ".json"
         data: obj
       ).success((data, status, headers, config) ->
-        toaster.pop
-          type: 'success',
-          title: msg,
-          showCloseButton: true
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data登録(POST, FORM DATA)
-    saveFormData:(fd, path, msg) ->
+    saveFormData:(fd, path, method) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
-        method: 'POST'
+        method: method
         url: host + path + ".json"
         transformRequest: null
         headers: 'Content-type': undefined
         data: fd
       ).success((data, status, headers, config) ->
-        if msg
-          toaster.pop
-            type: 'success',
-            title: msg,
-            showCloseButton: true
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data削除(DELETE)
     deleteJson: (obj, id, path) ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'DELETE'
         url: host + path + "/" + id + ".json"
         params: obj
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data削除(DELETE)

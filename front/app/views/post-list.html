@@ -1,27 +1,34 @@
 <ion-view title="" ng-init="postListInit()">
+  <div class="bar bar-header my-post-header">
+  </div>
+
   <div class="bar bar-subheader bar-clear edit-menu" align="right">
-    <button class="button button-assertive" ng-click="edit()">編集</button>
-    <button class="button button-dark" ng-click="openModal()">新規投稿</button>
+    <button class="button button-assertive icon-left ion-trash-a" ng-click="doDelete()" ng-if="showDeleteButton">削除</button>
+    <button class="button button-dark icon-left ion-plus-round" ng-click="openModalPost()" ng-if="!showDeleteButton" ng-show="isLogin">新規投稿</button>
   </div>
 
   <ion-content class="has-subheader">
-    <table class="table table-striped">
+    <table class="table table-striped item-table">
       <thead>
         <tr>
-            <th>件名</th>
-            <th class="hidden-sm hidden-xs">本文</th>
-            <th class="hidden-xs">引用元URL</th>
-            <th class="hidden-xs">引用元名</th>
-            <th></th>
+          <th class=""></th>
+          <th class="post-title">タイトル</th>
+          <th class="post-content hidden-xs">本文</th>
+          <th class="post-category hidden-xs">カテゴリー</th>
+          <th class="delete-button"></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="result in results">
+          <td class="vertical-align">
+            <button class="button icon ion-checkmark-round checkbox" ng-class="{active: result.checked}" ng-click="onCheckbox(result)"></button>
+          </td>
           <td>{{result.title}}</td>
-          <td class="hidden-sm hidden-xs">{{result.content}}</td>
-          <td class="hidden-xs">{{result.quotation_url}}</td>
-          <td class="hidden-xs">{{result.quotation_name}}</td>
-          <td align="right"><button class="btn btn-danger" ng-click="doDelete($index)" ng-show="editting">削除</button></td>
+          <td class="hidden-xs">{{result.content | limitTo:100}}...</td>
+          <td class="hidden-xs">{{result.category_name}}</td>
+          <td align="right">
+            <button class="button button-dark" ng-click="openPopoverPostMenu($event, $index)"><i class="icon ion-android-more-vertical"></i></button>
+          </td>
         </tr>
       </tbody>
     </table>

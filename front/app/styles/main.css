@@ -2,8 +2,8 @@
  * Common
  **********************/
 .big-modal {
-  top: 10%;
-  bottom: 10%;
+  top: 5%;
+  bottom: 5%;
 }
 
 /* modal-post*/
@@ -19,6 +19,55 @@
   width: 50%;
   margin-left: 25%;
 }
+.item-table tr{
+  height: 44px;
+}
+.button {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.button.ion-checkmark-round.checkbox, .button.ion-checkmark-round.checkbox.activated {
+  border: 1px solid #007bbb;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #fff;
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
+  box-shadow: none!important;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+}
+.button.ion-checkmark-round.checkbox::before {
+    font-size: 19px;
+    line-height: 37px;
+}
+.button.ion-checkmark-round.checkbox.active {
+  background-color: #007bbb;
+  box-shadow: none!important;
+  color: #fff;
+}
+
+.vertical-align {
+  vertical-align: middle!important;
+}
+
+/* input */
+.item-input-wrapper {
+  padding-left: 8px!important;
+  padding-right: 8px!important;
+  width: 100%;
+}
+/* link */
+/*a { color: rgb(88,43,95);}*/
+a { color: rgb(205,97,93);}
+a:hover { color: rgb(205, 140, 137); text-decoration: none}
+.tabs { background-color: rgb(205,97,93); color: #fff; border: none; }
+.bar-header.my-post-header { border: none; }
 
 /**********************
  * Header
@@ -34,7 +83,7 @@ ion-view .has-subheader {
   /*padding-top: 30px;*/
 }
 .bar-subheader.edit-menu .button, .bar-subheader.edit-menu .button::after {
-  max-width: 240px;
+  max-width: 150px;
   position: static !important;
   width: 49%;
 }
@@ -57,18 +106,14 @@ ion-view .has-subheader {
     top: 49px;
     background-color: transparent;
 }
+.bar-subheader-modal {
+    top: 44px;
+    background-color: transparent;
+}
 
 /**********************
  * Main page
  **********************/
-/** {
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
--ms-box-sizing: border-box;
--o-box-sizing: border-box;
-box-sizing: border-box;
-}*/
-
 .item-list li {
     width: 50%;
     display: inline-block;
@@ -78,7 +123,7 @@ box-sizing: border-box;
     line-height: 1.25;
 }
 .item-list {
-  padding: 0;
+  padding: 15px 0 0;
   letter-spacing: -.4em;
   margin: 0;
 }
@@ -136,6 +181,22 @@ img {
   transition-timing-function:ease-in-out;
 }
 /**********************
+ * Post list
+ **********************/
+.item-table .post-title{
+  min-width: 110px;
+}
+.item-table .post-content{
+  max-width: 300px;
+}
+.item-table .post-category{
+  min-width: 120px;
+}
+.item-table .delete-button{
+  min-width: 60px;
+}
+
+/**********************
  * Post detail
  **********************/
 .post-title{
@@ -147,7 +208,68 @@ img {
 form.post-modal, .post-modal .slider {
   height: 100%;
 }
+.shop-list {
+  display:table;
+}
+.shop-list > div{
+  display:table-cell;
+  vertical-align: top;
+}
+.shop-list .shop-list-image {
+  width: 35%;
+  height: auto;
+  padding-right: 10px;
+}
 
+/**********************
+ * Shops page
+ **********************/
+.item-list li {
+  position: relative;
+}
+.item-list .shop-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 3px 15px 12px;
+  width: 100%;
+  height: 50%;
+  max-height: 80px;
+}
+.shop-content div, .shop-content a {
+  margin: 0;
+  font-weight: 600;
+}
+
+/**********************
+ * Map page
+ **********************/
+.search-bar {
+  padding: 0;
+}
+.search-bar label{
+  max-width: 500px;
+  width: 60%;
+}
+.search-bar input{
+  width: 100%;
+}
+
+.search-bar .button{
+  max-width: 200px;
+  min-width: 100px;
+  width: 20%;
+}
+.maps .angular-google-map-container,
+.maps .angular-google-map,
+.maps .scroll,
+.maps .map-include { height: 100%; }
+
+.gmap-windows img {
+  width:130px;
+  height: auto;
+}
 /**********************
  * Side bar
  **********************/
@@ -221,6 +343,7 @@ form.post-modal, .post-modal .slider {
   margin-right: 15px;
   margin-bottom: -7.5px;
   display: inline-block;
+  color: #fff;
 }
 .fix-nav a {
   color: #444;
@@ -247,7 +370,7 @@ label { max-width: initial;}
   padding-left: 5px;
   padding-right: 5px;
 }
-
+ion-modal-view { z-index: 11!important}
 
 /**********************
  * Responsive Design
@@ -294,6 +417,10 @@ label { max-width: initial;}
     padding: 4px 0 0;
     vertical-align: middle;
   }
+  /* header */
+  .fix-nav i {
+    color: #000;
+  }
 }
 @media screen and (min-width:801px){
   .item-list li{ width: 25%; }
@@ -309,10 +436,12 @@ label { max-width: initial;}
     padding-top: 0;
     top: 0px;
   }
-
   /* post image */
   .post-image{
     padding: 0 90px;
   }
-
+  /* header*/
+  .bar-header.my-post-header {
+    background-color: rgb(205,97,93);
+  }
 }

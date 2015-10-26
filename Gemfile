@@ -47,6 +47,10 @@ gem 'fog'
 # admin
 gem 'rails_admin'
 
+# bootstrap
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+
 group :development do
   gem 'annotate', '2.6.5'
 end
@@ -65,4 +69,3 @@ group :development, :test do
   gem 'rack-cors'
 
 end
-

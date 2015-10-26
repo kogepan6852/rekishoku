@@ -1,17 +1,48 @@
 <ion-view title="">
-  <div class="bar bar-subheader bar-clear">
-    <button class="button button-clear button-dark" ui-sref="tabs.home" nav-transition="ios">
-      <i class="icon ion-backspace-outline"></i>
-    </button>
-  </div>
+  <ion-nav-bar class="header">
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
 
-  <ion-content class="has-subheader">
+  <ion-content has-header="true">
+
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-        <div class="post-title"><h2>{{post.title}}</h2></div>
+        <div class="post-title">
+          <h2>{{post.title}}</h2>
+          <p>{{post.created_at | date:'yyyy/M/d'}}</p>
+        </div>
         <div class="post-image"><img ng-src="{{post.image.url}}"></div>
-        <div class="post-content"><p ng-bind-html="post.content | newlines"></p></div>
+        <div class="post-quotation" ng-if="post.quotation_name"><a href="{{post.quotation_url}}" target="_blank">{{post.quotation_name}}</a></div>
+        <div class="post-content" ng-if="post.content"><p ng-bind-html="post.content | newlines"></p></div>
       </div>
     </div>
+    <div class="row" ng-repeat="postDetail in postDetails">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div class="post-title" ng-if="postDetail.title"><h3>{{postDetail.title}}</h3></div>
+        <div class="post-image" ng-if="postDetail.image.url"><img ng-src="{{postDetail.image.url}}"></div>
+        <div class="post-quotation" ng-if="postDetail.quotation_name"><a href="{{postDetail.quotation_url}}" target="_blank">{{postDetail.quotation_name}}</a></div>
+        <div class="post-content" ng-if="postDetail.content"><p ng-bind-html="postDetail.content | newlines"></p></div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div><h2>店舗情報</h2></div>
+        <div class="shop-list" ng-repeat="shop in shops">
+          <div class="shop-list-image"><a class="link" ui-sref="shop({id:shop.id})"><img ng-src="{{shop.image.thumb.url}}"></a></div>
+
+          <div class="shop-list-info">
+            <p>{{shop.name}}</p>
+            <p>{{shop.address1}} {{shop.address2}}</p>
+            <p>{{shop.url}}</p>
+            <p ng-if="shop.url"><a target="_blank" href="{{shop.url}}"><i class="icon ion-link"></i>{{shop.url}}</a></p>
+            <p class="hidden-xs">{{shop.description | limitTo:300}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>
