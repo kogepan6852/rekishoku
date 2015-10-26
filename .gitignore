@@ -17,5 +17,5 @@
 /front/.tmp
 /front/app/bower_components
 
-/public
+/public/*
 /config/secrets.yml

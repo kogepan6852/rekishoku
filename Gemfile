@@ -47,9 +47,14 @@ gem 'fog'
 # admin
 gem 'rails_admin'
 
+
 # bootstrap
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
+
+# 位置情報取得
+gem 'geocoder'
+
 
 group :development do
   gem 'annotate', '2.6.5'

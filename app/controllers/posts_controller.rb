@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.accessible_by(current_ability).joins(:category).select('posts.*, categories.name as category_name').order(created_at: :desc)
+    @posts = Post.accessible_by(current_ability).joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
     if current_user
         @posts = @posts.where(user_id: current_user.id)
     end
@@ -16,7 +16,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    render json: @post
+    post = { "post" => @post, "shops" => @post.shops }
+    render json: post
   end
 
   # GET /posts/new
@@ -31,8 +32,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    history = PostCategory.find_by(slug: params[:slug])
-    @post = Post.new(post_params.merge(user_id: current_user.id, category_id: history.id))
+    category = PostCategory.find_by(slug: params[:slug])
+    @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
 
     respond_to do |format|
       if @post.save
@@ -46,8 +47,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    category = PostCategory.find_by(slug: params[:slug])
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params.merge(category_id: category.id))
         format.json { render :show, status: :ok, location: @post }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }

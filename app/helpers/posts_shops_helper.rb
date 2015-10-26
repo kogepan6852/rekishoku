@@ -1,0 +1,2 @@
+module PostsShopsHelper
+end

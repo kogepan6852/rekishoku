@@ -4,12 +4,47 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.all
+    latitudeRange = 0.00000901337 # 緯度計算の値
+    longitudeRange = 0.0000109664 # 経度計算の値
+    if params[:placeAddress] && params[:shopDistance]
+      #現在地を受け取るの緯度経度を求める
+      addressPlace = Geocoder.coordinates(params[:placeAddress]);
+      # 店舗フィルタをかける
+      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
+
+      # jsonの場合、戻り値に現在地の経度緯度を追加
+      shop = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1], "address" => params[:placeAddress] }}
+      render json: shop
+
+    elsif params[:longitude] && params[:latitude] && params[:shopDistance]
+      # 住所情報の取得
+      input = params[:latitude] + ',' + params[:longitude]
+      address = Geocoder.address(input);
+      addressArray = address.split(" ")
+      # 店舗情報の取得
+      minLatitude = params[:latitude].to_f - params[:shopDistance].to_f*latitudeRange
+      minLongitude = params[:longitude].to_f - params[:shopDistance].to_f*longitudeRange
+      maxLatitude = params[:latitude].to_f + params[:shopDistance].to_f*latitudeRange
+      maxLongitude = params[:longitude].to_f + params[:shopDistance].to_f*longitudeRange
+      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?', minLatitude, minLongitude, maxLatitude, maxLongitude)
+
+      # jsonの場合、戻り値に現在地の経度緯度を追加
+      shop = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
+      render json: shop
+
+    else
+      @shops=Shop.all
+    end
   end
 
   # GET /shops/1
   # GET /shops/1.json
   def show
+    shop = { "shop" => @shop, "posts" => @shop.posts }
+    respond_to do |format|
+      format.html { render @shops }
+      format.json { render json: shop }
+    end
   end
 
   # GET /shops/new
@@ -69,6 +104,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :address1, :address2, :latitude, :longitude, :menu)
     end
 end

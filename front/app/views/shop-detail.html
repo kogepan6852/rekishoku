@@ -1,0 +1,44 @@
+<ion-view title="">
+  <ion-nav-bar class="header">
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content has-header="true">
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div class="shop-title">
+          <h2>{{shop.name}}</h2>
+          <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}"><i class="icon ion-ios-location"></i>{{shop.address1 + shop.address2}}</a>
+        </div>
+        <div class="shop-image"><img ng-src="{{shop.image.url}}"></div>
+        <div class="shop-quotation" ng-if="shop.image_quotation_name"><a href="{{shop.image_quotation_url}}" target="_blank">{{shop.quotation_name}}</a></div>
+        <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div class="shop-image"><img ng-src="{{shop.subimage.url}}"></div>
+        <div class="shop-menu" ng-if="shop.menu"><p>MENU:{{shop.menu}}</p></div>
+        <div class="shop-url" ng-if="shop.url"><p>URL:{{shop.url}}</p></div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <div><h2>歴食体験・エピソード</h2></div>
+        <div class="shop-list" ng-repeat="post in posts">
+          <div class="shop-list-image"><a class="link" ui-sref="post({id:post.id})"><img ng-src="{{post.image.thumb.url}}"></a></div>
+
+          <div class="shop-list-info">
+            <p>{{post.title}}</p>
+            <p class="hidden-xs">{{post.content | limitTo:300}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
