@@ -49,7 +49,7 @@ gem 'rails_admin'
 
 
 # bootstrap
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '3.3.5.1'
 gem 'font-awesome-sass'
 
 # 位置情報取得
