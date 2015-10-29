@@ -1,16 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Post Details</h1>
+<h1 class="center">記事一覧</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Post</th>
-      <th>Title</th>
-      <th>Image</th>
-      <th>Content</th>
-      <th>Quotation url</th>
-      <th>Quotation name</th>
+      <th>番号</th>
+      <th>タイトル</th>
+      <th>画像</th>
+      <th>本文</th>
+      <th>引用元URL</th>
+      <th>引用元名前</th>
+      <th>詳細</th>
+      <th>変更</th>
+      <th>削除</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,14 +27,16 @@
         <td><%= post_detail.content %></td>
         <td><%= post_detail.quotation_url %></td>
         <td><%= post_detail.quotation_name %></td>
-        <td><%= link_to 'Show', post_detail %></td>
-        <td><%= link_to 'Edit', edit_post_detail_path(post_detail) %></td>
-        <td><%= link_to 'Destroy', post_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '詳細', post_detail ,:class => "btn btn-success" %></td>
+        <td><%= link_to '変更', edit_post_detail_path(post_detail) ,:class => "btn btn-success" %></td>
+        <td><%= link_to '削除', post_detail, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Post detail', new_post_detail_path %>
+<br><hr>
+  <div class="center">
+    <%= link_to '新規追加', new_post_detail_path ,:class => "btn btn-primary" %>
+  </div>

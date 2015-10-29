@@ -11,63 +11,65 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :subimage %><br>
-    <%= f.file_field :subimage %>
-  </div>
-  <div class="field">
-    <%= f.label :image_quotation_url %><br>
-    <%= f.text_field :image_quotation_url %>
-  </div>
-  <div class="field">
-    <%= f.label :image_quotation_name %><br>
-    <%= f.text_field :image_quotation_name %>
-  </div>
-  <div class="field">
-    <%= f.label :post_quotation_url %><br>
-    <%= f.text_field :post_quotation_url %>
-  </div>
-  <div class="field">
-    <%= f.label :post_quotation_name %><br>
-    <%= f.text_field :post_quotation_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address1 %><br>
-    <%= f.text_field :address1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %><br>
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.number_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.number_field :longitude %>
-  </div>
-  <div class="field">
-    <%= f.label :menu %><br>
-    <%= f.text_area :menu %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <hr>
+  <div class="center">
+    <%= f.label :名前 %><br>
+    <%= f.text_field :name ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :説明 %><br>
+    <%= f.text_area :description ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :メイン画像 %><br>
+    <%= f.text_field :image ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :サブ画像 %><br>
+    <%= f.text_field :subimage ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :画像のURL %><br>
+    <%= f.text_field :image_quotation_url ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :画像の引用元 %><br>
+    <%= f.text_field :image_quotation_name ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :画像の掲載してあったサイトのURL %><br>
+    <%= f.text_field :post_quotation_url ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :画像の掲載してあったサイトの名前 %><br>
+    <%= f.text_field :post_quotation_name ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :住所 %><br>
+    <%= f.text_field :address1 ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :「アパート名やマンション名」と「階数」 %><br>
+    <%= f.text_field :address2 ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :経度 %><br>
+    <%= f.number_field :latitude ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :緯度 %><br>
+    <%= f.number_field :longitude ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.label :メニュー %><br>
+    <%= f.text_area :menu ,:class => "form-control" %>
+  </div><br><hr><br>
+  <div class="center">
+    <%= f.submit :class=>"btn" %>
+  </div><br><hr><br>
+  <div class="center">
+  <%= link_to '詳細', @person ,:class => "btn btn-success" %>
+  <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
+</div><b<hr>
+
 <% end %>

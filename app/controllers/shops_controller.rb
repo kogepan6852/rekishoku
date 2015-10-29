@@ -33,9 +33,23 @@ class ShopsController < ApplicationController
       # jsonの場合、戻り値に現在地の経度緯度を追加
       shop = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
       render json: shop
-
+    elsif params[:placeAddress]
+      @shops = Shop.where('address1 LIKE ?', params[:placeAddress])
+      render json: @shops
     else
-      @shops=Shop.all
+      @shops = Shop.all
+    end
+
+    # お店検索機能（部分一致含む）とカテゴリ検索
+    if params[:name] && params[:category]
+      @shops = Shop.where('name LIKE ? && category_id == ?', params[:name], params[:category])
+      render json: @shops
+    elsif params[:name]
+      @shops = Shop.where('name LIKE ?',params[:name])
+      render json: @shops
+    elsif params[:category]
+      @shops = Shop.where('category_id == ?', params[:category])
+      render json: @shops
     end
   end
 
