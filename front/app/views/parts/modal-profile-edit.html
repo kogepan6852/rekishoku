@@ -1,0 +1,54 @@
+<ion-modal-view class="big-modal">
+    <!-- ヘッダー -->
+    <ion-header-bar class="bar-dark">
+      <div class="buttons" ng-click="hideModalProfileEdit(profileForm)">
+        <button class="button icon ion-close-round"></button>
+      </div>
+      <h1 class="title">
+        <span >プロフィール</span>
+      </h1>
+      <div class="buttons" ng-click="saveProfile(profileForm)">
+        <button class="button">保存する</button>
+      </div>
+    </ion-header-bar>
+
+    <form name="profileForm" class="post-modal">
+      <ion-content>
+        <div class="list">
+
+          <label class="item item-input-inset item-stacked-label-xs">
+            <span class="input-label">メールアドレス</span>
+            <input class="item-input-wrapper" type="text" ng-model="user.email" readonly="readonly">
+          </label>
+
+          <label class="item item-input-inset item-stacked-label-xs">
+            <span class="input-label">ユーザー名</span>
+            <input class="item-input-wrapper" type="text" ng-model="user.username">
+          </label>
+
+          <label class="item item-input-inset item-stacked-label-xs">
+            <span class="input-label">名字</span>
+            <input class="item-input-wrapper" type="text" ng-model="user.last_name">
+          </label>
+
+          <label class="item item-input-inset item-stacked-label-xs">
+            <span class="input-label">名前</span>
+            <input class="item-input-wrapper" type="text" ng-model="user.first_name">
+          </label>
+
+          <div class="item item-input item-thumbnail-right" href="#">
+            <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
+            <span class="input-label">プロフィール画像</span>
+            <input type="file" file-model="user.image">
+          </div>
+
+          <label class="item item-input-inset item-stacked-label-xs">
+            <span class="input-label">自己紹介</span>
+            <textarea class="item-input-wrapper" rows="8" ng-model="user.profile"></textarea>
+          </label>
+
+        </div>
+      </ion-content>
+    </form>
+
+</ion-modal-view>
