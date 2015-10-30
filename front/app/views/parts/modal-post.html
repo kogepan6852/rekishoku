@@ -33,7 +33,10 @@
               <div class="item item-input item-thumbnail-right" href="#">
                 <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
                 <span class="input-label">メイン画像</span>
-                <input type="file" file-model="input.file">
+                <div class="file">
+                  ファイルを選択
+                  <input type="file" file-model="input.file">
+                </div>
               </div>
 
               <label class="item item-input-inset item-stacked-label-xs">
@@ -66,7 +69,10 @@
               <div class="item item-input item-thumbnail-right" href="#">
                 <img class="uploaded-img" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}">
                 <span class="input-label">サブ画像{{detail.index}}</span>
-                <input type="file" file-model="detail.subFile">
+                <div class="file">
+                  ファイルを選択
+                  <input type="file" file-model="detail.subFile">
+                </div>
               </div>
 
               <label class="item item-input-inset item-stacked-label-xs">

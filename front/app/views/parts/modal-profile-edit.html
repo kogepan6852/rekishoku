@@ -18,33 +18,36 @@
 
           <label class="item item-input-inset item-stacked-label-xs">
             <span class="input-label">メールアドレス</span>
-            <input class="item-input-wrapper" type="text" ng-model="user.email" readonly="readonly">
+            <input class="item-input-wrapper" type="text" ng-model="input.email" readonly="readonly">
           </label>
 
           <label class="item item-input-inset item-stacked-label-xs">
             <span class="input-label">ユーザー名</span>
-            <input class="item-input-wrapper" type="text" ng-model="user.username">
+            <input class="item-input-wrapper" type="text" ng-model="input.username">
           </label>
 
           <label class="item item-input-inset item-stacked-label-xs">
             <span class="input-label">名字</span>
-            <input class="item-input-wrapper" type="text" ng-model="user.last_name">
+            <input class="item-input-wrapper" type="text" ng-model="input.last_name">
           </label>
 
           <label class="item item-input-inset item-stacked-label-xs">
             <span class="input-label">名前</span>
-            <input class="item-input-wrapper" type="text" ng-model="user.first_name">
+            <input class="item-input-wrapper" type="text" ng-model="input.first_name">
           </label>
 
           <div class="item item-input item-thumbnail-right" href="#">
             <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
             <span class="input-label">プロフィール画像</span>
-            <input type="file" file-model="user.image">
+            <div class="file">
+              ファイルを選択
+              <input type="file" file-model="input.file">
+            </div>
           </div>
 
           <label class="item item-input-inset item-stacked-label-xs">
             <span class="input-label">自己紹介</span>
-            <textarea class="item-input-wrapper" rows="8" ng-model="user.profile"></textarea>
+            <textarea class="item-input-wrapper" rows="8" ng-model="input.profile"></textarea>
           </label>
 
         </div>
