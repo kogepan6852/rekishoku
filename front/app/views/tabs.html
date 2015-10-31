@@ -2,7 +2,7 @@
   <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios">
 
     <!-- Main  -->
-    <ion-tab title="Main" icon="ion-ios-home-outline" ng-controller="MainCtrl">
+    <ion-tab title="Posts" icon="ion-ios-list-outline" ng-controller="MainCtrl">
       <ion-content>
         <div ng-include="'views/main.html'"></div>
       </ion-content>
@@ -16,9 +16,7 @@
           <label class="item-input-wrapper">
             <input type="text" placeholder="住所" ng-model="input.address">
           </label>
-          <button class="button button-small button-dark" ng-click="searchShops()">
-            検索
-          </button>
+          <button class="button button-small button-dark" ng-click="searchShops()">検索</button>
         </div>
       </div>
       <!-- Google map -->
@@ -28,7 +26,7 @@
     </ion-tab>
 
     <!-- Shops  -->
-    <ion-tab title="Shops" icon="ion-ios-list-outline" ng-controller="ShopsCtrl">
+    <ion-tab title="Shops" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
       <ion-content>
         <div ng-include="'views/shops.html'"></div>
       </ion-content>

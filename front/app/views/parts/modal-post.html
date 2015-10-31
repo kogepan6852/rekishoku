@@ -21,7 +21,7 @@
             <div class="list">
               <div class="item">
                 <div class="button-bar">
-                  <a class="button" ng-repeat="category in categories" ng-model="category" ng-class="{active: category.checked}" ng-click="checkCategory(category.id)">{{category.name}}</a>
+                  <a class="button" ng-repeat="category in categories" ng-model="category" ng-class="{active: category.checked}" ng-click="checkCategory(category.id)" ng-bind-html="category.name | rekishokuText"></a>
                 </div>
               </div>
 

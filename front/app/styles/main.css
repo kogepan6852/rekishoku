@@ -1,6 +1,13 @@
 /**********************
  * Common
  **********************/
+ h1, .h1 { font-size: 32px; }
+ h2, .h2 { font-size: 24px; }
+ h3, .h3 { font-size: 20px; }
+ h4, .h4 { font-size: 16px; }
+ h5, .h5 { font-size: 14px; }
+ h6, .h6 { font-size: 12px; }
+
 .big-modal {
   top: 5%;
   bottom: 5%;
@@ -153,7 +160,7 @@ ion-view .has-subheader {
  * Main page
  **********************/
 .item-list li, .item-list-sm li {
-    width: 50%;
+    width: 20%;
     display: inline-block;
     vertical-align: top;
     padding: 5px;
@@ -161,7 +168,6 @@ ion-view .has-subheader {
     line-height: 1.25;
 }
 .item-list, .item-list-sm {
-  padding: 15px 0 0;
   letter-spacing: -.4em;
   margin: 0;
 }
@@ -183,18 +189,23 @@ img {
   margin-top: 0;
 }
 .item-name {
-  padding: 5px;
+  padding: 10px;
+  height: 50px;
+  overflow: hidden;
 }
-.item-list .category-name{
-  float: right;
-  font-size: 12px;
-  position: absolute;
+.item-list .main-content .category-name{
   right: 10px;
-  top: -47px;
-  z-index: 100;
-  background-color: rgba(210, 83, 127, 0.75);
-  color: #ffffff;
-  padding: 5px 10px;
+  bottom: 15px;
+}
+.main-content .post-date {
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  padding: 0;
+  font-weight: 200;
+}
+.main-content .post-date i{
+  padding-right: 3px;
 }
 .item-list .main-content, .item-list-sm .main-content {
   position: relative;
@@ -211,13 +222,31 @@ img {
   width: 100%;
   height: 100%;
   opacity: 0;
+  border-radius: 10px;
+  z-index: 100;
 }
-.overlay-image .link:hover {
-  opacity: 0.5;
+.overlay-image .link:hover, .overlay-image .link.activated {
+  opacity: 0.4;
   transition-property: opacity;
   transition-duration:0.3s;
   transition-timing-function:ease-in-out;
 }
+.main-category {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.main-category .button-bar .button{
+  color: rgb(76,42,76);
+  border-color: rgb(76,42,76);
+  background: transparent;
+}
+.main-category .button-bar > .button:first-child {
+    border-radius: 10px 0 0 10px;
+}
+.main-category .button-bar > .button:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
 /**********************
  * Post list
  **********************/
@@ -260,24 +289,64 @@ form.post-modal, .post-modal .slider {
 }
 
 /**********************
- * Shops page
+ * Shops
+ **********************/
+.item-list .item-address {
+  background-color: rgba(131, 81, 112, 1);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 12px;
+  right: 5px;
+  line-height: 16px;
+  margin-right: 10px;
+  max-height: 21px;
+  overflow: hidden;
+  padding: 3px 8px;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  z-index: 100;
+}
+.item-list .shop-content .category-name{
+  bottom: 15px;
+  float: right;
+  right: 80px;
+}
+
+
+/**********************
+ * Main & Shops common
  **********************/
 .item-list li {
   position: relative;
 }
-.item-list .shop-content {
+.item-list .shop-content, .item-list .main-content {
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: 3px 15px 12px;
+  padding: 0 5px 7px;
   width: 100%;
-  height: 50%;
-  max-height: 80px;
 }
-.shop-content div, .shop-content a {
+.shop-content > div, .main-content > div {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  padding: 5px 5px 30px;
+}
+.shop-content div, .main-content div {
   margin: 0;
-  font-weight: 600;
+  color: #fff;
+}
+.item-list .category-name{
+  font-size: 12px;
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(76, 42, 76, 10);
+  color: #ffffff;
+  padding: 3px 8px;
+  text-align: center;
+  max-width: 125px;
+  min-width: 105px;
+  white-space: nowrap;
 }
 
 /**********************
@@ -445,16 +514,60 @@ ion-modal-view { z-index: 11!important}
   .fix-nav,
   .header{z-index:100;}
   .aside.active{display: block;}
+  /* Main */
+  .item-list li {
+    width: 100%;
+    padding: 0;
+    border: 1px solid #dcdcdc;
+    margin-top: -1px;
+  }
+  .item-list li .thumbnail-image {
+    height: 100px;
+    width: 100px;
+  }
+  .item-list li .main-content, .item-list li .shop-content  {
+    height: 100px;
+    padding-left: 100px;
+  }
+  .item-list li .main-content > div, .item-list li .shop-content > div {
+    background: transparent;
+    position: relative;
+  }
+  .item-list .item-name, .item-list .post-date {
+    color: #808080;
+  }
+  .item-list .category-name, .item-list .item-address {
+    bottom: 5px!important;
+  }
+  .main-content .post-date {
+    left: 15px;
+    bottom: 5px;
+  }
+  .main-content .post-date i{
+    padding-right: 3px;
+  }
+  .overlay-image .link {
+    border-radius: 0;
+  }
+  .main-category .button-bar .button {
+      font-size: 14px;
+      text-overflow: initial;
+  }
+  /* Shop */
+
 }
 @media screen and (min-width:481px) and (max-width:800px){
+  .item-list li{ width: 33.333%; }
   .grid-menu a{
     width: 50%;
   }
 }
 @media screen and (max-width:800px){
   .logo {
-    width: 90px;
+    width: 107px;
     height: 60px;
+    background: rgba(0, 0, 0, 0) url("../images/logo-sm.png") no-repeat scroll 0 0 / contain ;
+    background-color: #fff;
     position: absolute;
     left: 50%;
     margin-left: -63px;
@@ -483,8 +596,10 @@ ion-modal-view { z-index: 11!important}
     color: #000;
   }
 }
+@media screen and (min-width:801px) and (max-width:1200px){
+  .item-list li{ width: 25%; }
+}
 @media screen and (min-width:801px){
-  .item-list li{ width: 20%; }
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .header{ width: 20%; border: none; }
@@ -513,13 +628,24 @@ ion-modal-view { z-index: 11!important}
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
   }
-
-  /* 投稿一覧*/
-  .item-list, .item-list-sm {
-    padding: 60px 0 0;
+  /* Main*/
+  .main-category .button-bar{
+    padding-left: 180px;
+    max-width: 800px;
   }
+  .main-category .button-bar .button{
+    border-radius: 10px!important;
+    border: 1px solid rgb(76,42,76);
+    margin-right: 15px;
+    line-height: 34px;
+    min-height: 34px;
+  }
+
   /* Map検索*/
   .search-bar {
     padding-left: 180px;
   }
+}
+@media screen and (min-width:1201px){
+  .item-list li{ width: 20%; }
 }

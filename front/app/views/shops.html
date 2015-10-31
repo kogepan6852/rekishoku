@@ -1,16 +1,26 @@
-  <div class="main">
-    <ul class="item-list">
-      <li ng-repeat="result in results">
-        <div class="thumbnail-image overlay-image">
-
-          <img ng-src="{{result.image.image.thumb.url}}">
-          <a class="link" ui-sref="shop({id:result.id})"></a>
-        </div>
-        <div class="shop-content">
-          <!-- <div class="category-name">{{result.category_name}}</div> -->
-          <div class="h4 item-name">{{result.name}}</div>
-          <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{result.address1}}"><i class="icon ion-ios-location"></i>{{result.address1}}</a>
-        </div>
-      </li>
-    </ul>
+<div class="row">
+  <div class="col main-category">
+    <div class="button-bar">
+      <a class="button" ng-repeat="category in categories" ng-bind-html="category.name"></a>
+    </div>
   </div>
+</div>
+
+<div class="main">
+  <ul class="item-list">
+    <li class="overlay-image" ng-repeat="result in results">
+      <div class="thumbnail-image">
+        <img ng-src="{{result.image.image.thumb.url}}">
+      </div>
+      <div class="shop-content">
+        <div>
+          <div class="category-name">お茶・コース</div>
+          <div class="h4 item-name">{{result.name}}</div>
+          <div class="item-address" ng-if="result.address1">{{result.address1}}</div>
+          <div class="item-address" ng-if="!result.address1">-</div>
+        </div>
+      </div>
+      <a class="link" ui-sref="shop({id:result.id})"></a>
+    </li>
+  </ul>
+</div>
