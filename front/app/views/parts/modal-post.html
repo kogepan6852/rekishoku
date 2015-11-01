@@ -21,7 +21,7 @@
             <div class="list">
               <div class="item">
                 <div class="button-bar">
-                  <a class="button" ng-repeat="category in categories" ng-model="category" ng-class="{active: category.checked}" ng-click="checkCategory(category.id)">{{category.name}}</a>
+                  <a class="button" ng-repeat="category in categories" ng-model="category" ng-class="{active: category.checked}" ng-click="checkCategory(category.id)" ng-bind-html="category.name | rekishokuText"></a>
                 </div>
               </div>
 
@@ -33,7 +33,10 @@
               <div class="item item-input item-thumbnail-right" href="#">
                 <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
                 <span class="input-label">メイン画像</span>
-                <input type="file" file-model="input.file">
+                <div class="file">
+                  ファイルを選択
+                  <input type="file" file-model="input.file">
+                </div>
               </div>
 
               <label class="item item-input-inset item-stacked-label-xs">
@@ -66,7 +69,10 @@
               <div class="item item-input item-thumbnail-right" href="#">
                 <img class="uploaded-img" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}">
                 <span class="input-label">サブ画像{{detail.index}}</span>
-                <input type="file" file-model="detail.subFile">
+                <div class="file">
+                  ファイルを選択
+                  <input type="file" file-model="detail.subFile">
+                </div>
               </div>
 
               <label class="item item-input-inset item-stacked-label-xs">

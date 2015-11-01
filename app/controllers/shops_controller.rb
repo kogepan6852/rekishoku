@@ -8,6 +8,7 @@ class ShopsController < ApplicationController
     longitudeRange = 0.0000109664 # 経度計算の値
     if params[:placeAddress] && params[:shopDistance]
       #現在地を受け取るの緯度経度を求める
+      Geocoder.configure(:language => :ja)
       addressPlace = Geocoder.coordinates(params[:placeAddress]);
       # 店舗フィルタをかける
       @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
@@ -18,6 +19,7 @@ class ShopsController < ApplicationController
     elsif params[:longitude] && params[:latitude] && params[:shopDistance]
       # 住所情報の取得
       input = params[:latitude] + ',' + params[:longitude]
+      Geocoder.configure(:language => :ja)
       address = Geocoder.address(input);
       addressArray = address.split(" ")
       # 店舗情報の取得

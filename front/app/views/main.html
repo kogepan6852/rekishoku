@@ -1,15 +1,25 @@
+<div class="row">
+  <div class="col main-category">
+    <div class="button-bar">
+      <a class="button" ng-repeat="category in categories" ng-bind-html="category.name | rekishokuText"></a>
+    </div>
+  </div>
+</div>
+
 <div class="main">
   <ul class="item-list">
-    <li ng-repeat="result in results">
-      <div class="thumbnail-image overlay-image">
-
-        <img ng-src="{{result.image.thumb.url}}">
-        <a class="link" ui-sref="post({id:result.id})"></a>
+    <li class="overlay-image" ng-repeat="post in posts">
+      <div class="thumbnail-image">
+        <img ng-src="{{post.image.thumb.url}}">
       </div>
       <div class="main-content">
-        <div class="category-name">{{result.category_name}}</div>
-        <div class="h4 item-name">{{result.title}}</div>
+        <div>
+          <div class="category-name">{{post.category_name}}</div>
+          <div class="h4 item-name">{{post.title}}</div>
+          <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
+        </div>
       </div>
+      <a class="link" ui-sref="post({id:post.id})"></a>
     </li>
   </ul>
 </div>

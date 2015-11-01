@@ -70,7 +70,7 @@ angular.module 'frontApp'
           else
             alert(e.message)
     else
-      alert('Location APIがサポートされていません。')
+      alert('位置情報を取得できません。')
 
     # Function
     $scope.searchShops = ->

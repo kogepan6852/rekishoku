@@ -39,7 +39,10 @@ angular
         url: '/my-post'
         templateUrl: 'views/post-list.html'
         controller: 'PostListCtrl'
-
+      .state 'writers',
+        url: '/writers'
+        templateUrl: 'views/writers.html'
+        controller: 'WritersCtrl'
 
     $urlRouterProvider.otherwise ('/home')
 
