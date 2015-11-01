@@ -323,6 +323,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.6.5)
+  autoprefixer-rails
   bootstrap-sass (= 3.3.5.1)
   byebug
   cancancan
@@ -345,6 +346,3 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-
-BUNDLED WITH
-   1.10.6

@@ -14,7 +14,8 @@ angular.module 'frontApp'
     $scope.targetId = $stateParams.id
 
     # 初期処理
-    Api.getJson("", Const.API.POST + '/' + $stateParams.id).then (res) ->
+    path = Const.API.POST + '/' + $stateParams.id
+    Api.getJson("", path).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops
       Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id).then (res) ->

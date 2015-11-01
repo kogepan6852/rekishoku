@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicSlideBoxDelegate, $sessionStorage, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, Api, Const, toaster) ->
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/parts/modal-post.html',
@@ -226,6 +226,20 @@ angular.module "frontApp"
               showCloseButton: true
 
     $scope.doDelete = ->
+      $ionicPopup.show(
+        title: '削除してよろしいですか？'
+        scope: $scope
+        buttons: [
+          { text: 'キャンセル' }
+          {
+            text: '<b>OK</b>'
+            type: 'button-dark'
+            onTap: (e) ->
+              deletePosts()
+          }
+        ])
+
+    deletePosts = ->
       $scope.showDeleteButton = false
       # login情報
       accessKey =
@@ -233,15 +247,26 @@ angular.module "frontApp"
         token: $sessionStorage['token']
       # 削除数
       deleteCount = 0
+      resultLength = 0;
+      angular.forEach $scope.results, (result, index) ->
+        if result.checked
+          resultLength += 1
+
       angular.forEach $scope.results, (result, index) ->
         if result.checked
           targetPostId = result.id
           # データ削除
           Api.deleteJson(accessKey, targetPostId, Const.API.POST).then (res) ->
             $scope.results.splice (index - deleteCount), 1
-            deleteCount += 1;
+            deleteCount += 1
             # 詳細データ削除
             Api.deleteJson(accessKey, targetPostId, Const.API.POST_DETSIL).then (res) ->
+              if resultLength == deleteCount
+                toaster.pop
+                  type: 'success',
+                  title: '削除しました。',
+                  showCloseButton: true
+
 
     $scope.onEditButton = (index) ->
       clearInput()

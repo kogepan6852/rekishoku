@@ -51,6 +51,7 @@ gem 'rails_admin'
 # bootstrap
 gem 'bootstrap-sass', '3.3.5.1'
 gem 'font-awesome-sass'
+gem 'autoprefixer-rails'
 
 # 位置情報取得
 gem 'geocoder'

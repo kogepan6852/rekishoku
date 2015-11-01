@@ -16,4 +16,9 @@ angular.module "frontApp"
     Api.getJson("", Const.API.SHOP + '.json').then (res) ->
       $scope.results = res.data
 
+    categoryObj =
+      type: "ShopCategory"
+    Api.getJson(categoryObj, Const.API.CATEGORY).then (res) ->
+      $scope.categories = res.data
+
     # Function
