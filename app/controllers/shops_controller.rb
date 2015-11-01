@@ -33,7 +33,7 @@ class ShopsController < ApplicationController
       @shops = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
     end
 
-    # お店検索機能（部分一致含む）とカテゴリ検索
+    # 住所（部分一致）と店舗名機能（部分一致含む）とカテゴリ　
     if params[:name]
       @shops = Shop.where('name LIKE ?',params[:name])
     end
