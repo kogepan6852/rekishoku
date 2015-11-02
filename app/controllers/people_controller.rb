@@ -19,12 +19,17 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    @periods = Period.all
   end
 
   # POST /people
   # POST /people.json
   def create
     @person = Person.new(person_params)
+
+
+      period = Period.new
+      @person_period << period
 
     respond_to do |format|
       if @person.save
