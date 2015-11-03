@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 20151102125143) do
     t.string   "image_quotation_name"
     t.string   "post_quotation_url"
     t.string   "post_quotation_name"
+    t.string   "province"
+    t.string   "city"
     t.string   "address1"
     t.string   "address2"
     t.float    "latitude"
