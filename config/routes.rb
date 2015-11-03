@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'users/index'
+  resources :staff
 
+  get 'users/index'
   get 'users/show'
 
   resources :people_posts
