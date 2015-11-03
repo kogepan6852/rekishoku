@@ -4,6 +4,7 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
+    filterFlag = 0
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
     if params[:placeAddress] && params[:shopDistance]
@@ -14,8 +15,8 @@ class ShopsController < ApplicationController
       @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
 
       # jsonの場合、戻り値に現在地の経度緯度を追加
-      @shops = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1], "address" => params[:placeAddress] }}
-
+      shop = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1], "address" => params[:placeAddress] }}
+      render json: shop
     elsif params[:longitude] && params[:latitude] && params[:shopDistance]
       # 住所情報の取得
       input = params[:latitude] + ',' + params[:longitude]
@@ -30,20 +31,24 @@ class ShopsController < ApplicationController
       @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?', minLatitude, minLongitude, maxLatitude, maxLongitude)
 
       # jsonの場合、戻り値に現在地の経度緯度を追加
-      @shops = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
+      shop = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
+      render json: shop
+    else
+      # 住所（部分一致）と店舗名機能（部分一致含む）とカテゴリ　
+      if params[:name]
+        shop = Shop.where('name LIKE ?',params[:name])
+        render json: shop
+      end
+      if params[:category]
+        shop = Shop.where('category_id == ?', params[:category])
+        render json: shop
+      end
+      if params[:placeAddress]
+        shop = Shop.where('address1 LIKE ?', params[:placeAddress])
+      end
     end
 
-    # 住所（部分一致）と店舗名機能（部分一致含む）とカテゴリ　
-    if params[:name]
-      @shops = Shop.where('name LIKE ?',params[:name])
-    end
-    if params[:category]
-      @shops = Shop.where('category_id == ?', params[:category])
-    end
-    if params[:placeAddress]
-      @shops = Shop.where('address1 LIKE ?', params[:placeAddress])
-    end
-    render json: @shops
+
     @shops = Shop.all
   end
 
