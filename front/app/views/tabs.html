@@ -1,8 +1,19 @@
 <ion-view title="">
+  <ion-nav-bar class="header tab-header" animation="slide-left-right" nav-transition="ios">
+    <div class="bar bar-header top">
+      <h1 class="title hidden">歴食</h1>
+      <div class="logo"></div>
+    </div>
+    <nav class="fix-nav" ng-controller="HeaderCtrl">
+      <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
+    </nav>
+  </ion-nav-bar>
+
+
   <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios">
 
     <!-- Main  -->
-    <ion-tab title="Posts" icon="ion-ios-list-outline" ng-controller="MainCtrl">
+    <ion-tab title="Story" icon="ion-ios-list-outline" ng-controller="MainCtrl">
       <ion-content>
         <div ng-include="'views/main.html'"></div>
       </ion-content>
@@ -26,7 +37,7 @@
     </ion-tab>
 
     <!-- Shops  -->
-    <ion-tab title="Shops" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
+    <ion-tab title="Food" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
       <ion-content>
         <div ng-include="'views/shops.html'"></div>
       </ion-content>

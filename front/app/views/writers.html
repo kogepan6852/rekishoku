@@ -1,17 +1,29 @@
 <ion-view title="" ng-init="writersInit()">
-  <div class="bar bar-header my-post-header"></div>
+  <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios">
+    <div class="bar bar-header top">
+      <h1 class="title hidden">歴食</h1>
+      <div class="logo"></div>
+    </div>
+    <nav class="fix-nav" ng-controller="HeaderCtrl">
+      <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
+    </nav>
+  </ion-nav-bar>
 
-  <ion-content>
-    <div class="main">
+
+  <ion-content class="padding-top">
+    <div class="main padding-top">
       <ul class="item-list">
-        <li ng-repeat="user in users">
-          <div class="thumbnail-image overlay-image">
-            <img ng-src="{{user.image.image.thumb.url}}">
+        <li class="overlay-image" ng-repeat="user in users">
+          <div class="thumbnail-image">
+            <img ng-src="{{user.image.image.md.url}}">
           </div>
-          <div class="main-content">
-            <div class="h4 item-username">{{user.username}}</div>
-            <div class="item-profile"><p ng-bind-html="user.profile | newlines"></p></div>
+          <div class="writer-content">
+            <div>
+              <div class="h4 item-username">{{user.username}}</div>
+              <div class="h6 item-profile visible-xs">{{user.profile}}</div>
+            </div>
           </div>
+          <a class="link" ui-sref="writer({id:user.id})"></a>
         </li>
       </ul>
     </div>

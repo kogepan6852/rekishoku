@@ -34,7 +34,9 @@ angular.module "frontApp"
         $scope.popoverPostMenu = popoverPostMenu
 
     $scope.categories = [{}]
-    Api.getJson(accessKey, Const.API.CATEGORY).then (res) ->
+    categoryObj =
+      type: "PostCategory"
+    Api.getJson(categoryObj, Const.API.CATEGORY).then (res) ->
       $scope.categories = res.data
       $scope.categories[0].checked = true
 

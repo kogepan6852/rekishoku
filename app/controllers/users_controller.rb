@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -10,6 +10,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
+    if !current_user
+      user = {
+        "user" =>{
+          "id" => @user.id,
+          "image" => @user.image,
+          "username" => @user.username,
+          "profile" => @user.profile },
+        "posts" => @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc) }
+      render json: user
+    end
   end
 
   # PATCH/PUT /users/1

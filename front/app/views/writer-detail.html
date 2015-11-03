@@ -1,0 +1,44 @@
+<ion-view title="" ng-init="writersInit()">
+  <ion-content class="padding-top">
+    <div class="main">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-0 col-md-2">
+          <div class="thumbnail-writer-image">
+            <img ng-src="{{user.image.image.thumb.url}}">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-6">
+          <div class="profile">
+            <h3>{{user.username}}</h3>
+            <p ng-bind-html="user.profile | newlines"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row list-title" ng-if="posts">
+        <div class="col-md-12">
+          <div class="reki-icon"><h2>投稿一覧</h2></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main" ng-if="posts">
+      <ul class="item-list">
+        <li class="overlay-image" ng-repeat="post in posts">
+          <div class="thumbnail-image">
+            <img ng-src="{{post.image.md.url}}">
+          </div>
+          <div class="main-content">
+            <div>
+              <div class="category-name">{{post.category_name}}</div>
+              <div class="h4 item-name">{{post.title}}</div>
+              <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
+            </div>
+          </div>
+          <a class="link" ui-sref="post({id:post.id})"></a>
+        </li>
+      </ul>
+    </div>
+
+
+ </ion-content>
+</ion-view>

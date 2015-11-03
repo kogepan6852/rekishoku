@@ -1,5 +1,13 @@
 <ion-view title="" ng-init="postListInit()">
-  <div class="bar bar-header my-post-header"></div>
+  <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios">
+    <div class="bar bar-header top">
+      <h1 class="title hidden">歴食</h1>
+      <div class="logo"></div>
+    </div>
+    <nav class="fix-nav" ng-controller="HeaderCtrl">
+      <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
+    </nav>
+  </ion-nav-bar>
 
   <div class="bar bar-subheader bar-clear edit-menu" align="right">
     <button class="button button-assertive icon-left ion-trash-a" ng-click="doDelete()" ng-if="showDeleteButton">削除</button>

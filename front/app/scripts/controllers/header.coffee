@@ -51,9 +51,13 @@ angular.module "frontApp"
       $scope.modalLogin.hide()
 
     $scope.openModalProfileEdit = ->
+      accessKey =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
+
       userId = $sessionStorage['user_id']
       path = Const.API.USER + '/' + userId + '.json'
-      Api.getJson("", path).then (res) ->
+      Api.getJson(accessKey, path).then (res) ->
         $scope.input =
           email: res.data.email
           username: res.data.username

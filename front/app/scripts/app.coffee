@@ -43,6 +43,10 @@ angular
         url: '/writers'
         templateUrl: 'views/writers.html'
         controller: 'WritersCtrl'
+      .state 'writer',
+        url: '/writer/:id'
+        templateUrl: 'views/writer-detail.html'
+        controller: 'WriterDetailCtrl'
 
     $urlRouterProvider.otherwise ('/home')
 
