@@ -18,7 +18,10 @@
       </a>
 
       <div class="item item-divider">My Account</div>
-      <a class="item" ng-click="openModalProfileEdit()" ng-show="isLogin">プロフィール</a>
+      <a class="item item-icon-right" ng-click="moveToWriterDetail()" ng-show="isLogin">
+        プロフィール
+        <i class="icon ion-chevron-right"></i>
+      </a>
       <a class="item" ng-click="openModalLogin()" ng-show="!isLogin">ログイン</a>
       <a class="item" ng-click="doLogout()" ng-show="isLogin">ログアウト</a>
     </div>

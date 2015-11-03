@@ -1,14 +1,24 @@
 /**********************
  * Common
  **********************/
- h1, .h1 { font-size: 32px; }
- h2, .h2 { font-size: 24px; }
- h3, .h3 { font-size: 20px; }
- h4, .h4 { font-size: 16px; }
- h5, .h5 { font-size: 14px; }
- h6, .h6 { font-size: 12px; }
- p { color: #555; }
-
+h1, .h1 { font-size: 32px; }
+h2, .h2 { font-size: 24px; }
+h3, .h3 { font-size: 20px; }
+h4, .h4 { font-size: 16px; }
+h5, .h5 { font-size: 14px; }
+h6, .h6 { font-size: 12px; }
+p { color: #555; }
+.bg-gray {
+  background-attachment: scroll;
+  background-image: url("../images/bg-gray.jpg");
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: auto auto;
+}
+.padding-content {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 .big-modal {
   top: 5%;
   bottom: 5%;
@@ -103,9 +113,8 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none}
 .nav-bar-container .nav-bar-block ion-header-bar { width: 20%; }
 
 .list-title {
-  border-top: 1px solid #dcdcdc;
   height: 49px;
-  padding-top: 10px !important;
+  margin-top: 40px !important;
 }
 .list-title h2{
   margin: 0;
@@ -158,12 +167,14 @@ ion-view .has-subheader {
   border-bottom: 1px solid rgb(212,212,212);
 }
 .bar-subheader {
-    top: 49px;
-    background-color: transparent;
+  top: 49px;
+  background-color: transparent;
+  border: none;
+  height: 46px;
 }
 .bar-subheader-modal {
-    top: 44px;
-    background-color: transparent;
+  top: 44px;
+  background-color: transparent;
 }
 .logo {
   width: 150px;
@@ -245,18 +256,24 @@ ion-view .has-subheader {
   height: 50px;
   overflow: hidden;
 }
-.item-list .main-content .category-name{
+.item-description {
+  color: #555!important;
+  padding: 10px 10px 0;
+  max-height: 82px;
+  overflow: hidden;
+}
+.item-list .category-name, .item-detail-list .category-name{
   right: 10px;
   bottom: 15px;
 }
-.main-content .post-date {
+.main-content .post-date, .detail-content .post-date {
   position: absolute;
   left: 20px;
   bottom: 15px;
   padding: 0;
   font-weight: 200;
 }
-.main-content .post-date i{
+.main-content .post-date i, .detail-content .post-date i {
   padding-right: 3px;
 }
 .item-list .main-content, .item-list-sm .main-content {
@@ -320,8 +337,8 @@ ion-view .has-subheader {
  **********************/
 .detail-image {
    text-align: center;
-   padding-top: 10px;
-   padding-bottom: 15px;
+   padding-top: 5px;
+   padding-bottom: 5px;
  }
  .detail-image img {
    max-height: 500px;
@@ -330,14 +347,15 @@ ion-view .has-subheader {
  }
 .post-title{
   padding: 5px;
-  height: 70px;
 }
-.post-title .date{
+.post-title a {
   float: right;
-  color: #808080;
+  margin-bottom: 5px;
 }
-.post-quotation {
+.post-title .date, .post-quotation {
   text-align: right;
+  color: #808080;
+  margin-bottom: 5px;
 }
 .post-content{
   padding: 5px
@@ -353,15 +371,84 @@ form.post-modal, .post-modal .slider {
   vertical-align: top;
 }
 .shop-list .shop-list-image {
-  width: 35%;
+  width: 250px;
   height: auto;
   padding-right: 10px;
 }
+.shop-list .shop-list-image img {
+  width: 100%;
+  height: auto;
+}
+/* 関連データ */
+.post-shops, .post-shops > div {
+  padding: 0!important;
+}
+.item-detail-list li {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+  letter-spacing: normal;
+  line-height: 1.25;
+  border: 1px solid #dcdcdc;
+  margin-top: -1px;
+}
+.item-detail-list li .thumbnail-image {
+  height: 100px;
+  width: 133px;
+  padding-top: 0;
+}
+.item-detail-list .thumbnail-image img {
+  height: auto;
+  margin-left: 0;
+  width: 100%;
+}
+.item-detail-list li .detail-content {
+  height: 100px;
+  padding-left: 133px;
+}
+.item-detail-list li .detail-content > div {
+  background: transparent;
+  position: relative;
+}
+.item-detail-list .detail-name,
+.item-detail-list .post-date,
+.item-detail-list .item-username {
+  color: #555;
+}
+.item-detail-list .category-name, .item-detail-list .item-address {
+  bottom: 5px!important;
+}
+.detail-content .post-date {
+  left: 10px;
+  bottom: 5px;
+}
+.detail-content .post-date i{
+  padding-right: 3px;
+}
+.item-detail-list .overlay-image .link {
+  border-radius: 0;
+}
+.item-detail-list .main-category .button-bar .button {
+    font-size: 14px;
+    text-overflow: initial;
+}
+.item-detail-list .category-name.shop-category{
+  bottom: 15px;
+  float: right;
+  right: 80px;
+}
+.detail-name {
+  padding: 10px 10px 0;
+  max-height: 50px;
+  overflow: hidden;
+}
+
 
 /**********************
  * Shops
  **********************/
-.item-list .item-address {
+.item-list .item-address, .item-detail-list .item-address {
   background-color: rgba(131, 81, 112, 1);
   bottom: 15px;
   color: #ffffff;
@@ -390,23 +477,23 @@ form.post-modal, .post-modal .slider {
 .item-list li {
   position: relative;
 }
-.item-list .shop-content, .item-list .main-content {
+.item-list .shop-content, .item-list .main-content, .item-detail-list .detail-content {
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 0 5px 7px;
   width: 100%;
 }
-.shop-content > div, .main-content > div {
+.shop-content > div, .main-content > div, .detail-content > div {
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
   padding: 5px 0px 30px;
 }
-.shop-content div, .main-content div {
+.shop-content div, .main-content div, .detail-content div {
   margin: 0;
   color: #fff;
 }
-.item-list .category-name{
+.item-list .category-name, .item-detail-list .category-name{
   font-size: 12px;
   position: absolute;
   z-index: 100;
@@ -495,7 +582,6 @@ form.post-modal, .post-modal .slider {
 .thumbnail-writer-image {
   max-width: 300px;
   margin: 0 auto;
-  padding: 20px 10px 15px;
   text-align: center;
 }
 .thumbnail-writer-image img {
@@ -503,7 +589,6 @@ form.post-modal, .post-modal .slider {
   padding: 15px;
 }
 .profile {
-  padding: 10px 0 15px 0;
   max-height: 300px;
 }
 .profile p {
@@ -766,6 +851,12 @@ ion-modal-view { z-index: 11!important}
     width: 70px;
   }
 
+  /* detail page */
+  .item-description {
+    max-height: 30px;
+    padding: 3px 10px 0;
+  }
+
 }
 @media screen and (min-width:801px) and (max-width:1200px){
   .item-list li{ width: 25%; }
@@ -815,6 +906,15 @@ ion-modal-view { z-index: 11!important}
   /* Map検索*/
   .search-bar {
     padding-left: 180px;
+  }
+  /* detail page */
+  .item-detail-list li .thumbnail-image {
+    height: 180px;
+    width: 240px;
+  }
+  .item-detail-list li .detail-content {
+    height: 180px;
+    padding-left: 240px;
   }
 }
 @media screen and (min-width:1201px){

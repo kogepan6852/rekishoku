@@ -1,7 +1,12 @@
 <ion-view title="" ng-init="writersInit()">
-  <ion-content class="padding-top">
+
+  <div class="bar bar-subheader edit-menu" align="right">
+    <button class="button button-dark icon-left ion-edit" ng-click="openModalProfileEdit()" ng-if="isLoginUser">編集</button>
+  </div>
+
+  <ion-content class="">
     <div class="main">
-      <div class="row">
+      <div class="row bg-gray padding-content">
         <div class="col-xs-12 col-sm-4 col-sm-offset-0 col-md-2">
           <div class="thumbnail-writer-image">
             <img ng-src="{{user.image.image.thumb.url}}">

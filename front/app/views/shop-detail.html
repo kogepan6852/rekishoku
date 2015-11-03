@@ -1,38 +1,59 @@
 <ion-view title="">
-  <ion-content has-header="true">
+  <ion-content has-header="true" class="padding-top">
 
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-        <div class="shop-title">
-          <h2>{{shop.name}}</h2>
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="post-title">
+          <h1>{{shop.name}}</h1>
           <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}"><i class="icon ion-ios-location"></i>{{shop.address1 + shop.address2}}</a>
         </div>
-        <div class="shop-image"><img ng-src="{{shop.image.url}}"></div>
+        <div class="detail-image"><img ng-src="{{shop.image.url}}"></div>
         <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.quotation_name}}</a></div>
         <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-        <div class="shop-image"><img ng-src="{{shop.subimage.url}}"></div>
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="detail-image"><img ng-src="{{shop.subimage.url}}"></div>
         <div class="shop-menu" ng-if="shop.menu"><p>MENU:{{shop.menu}}</p></div>
         <div class="shop-url" ng-if="shop.url"><p>URL:{{shop.url}}</p></div>
       </div>
     </div>
     <hr>
     <div class="row" ng-if="posts.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div><h2>歴食体験・エピソード</h2></div>
-        <div class="shop-list" ng-repeat="post in posts">
+
+        <!-- <div class="shop-list" ng-repeat="post in posts">
           <div class="shop-list-image"><a class="link" ui-sref="post({id:post.id})"><img ng-src="{{post.image.thumb.url}}"></a></div>
 
           <div class="shop-list-info">
             <p>{{post.title}}</p>
             <p class="hidden-xs">{{post.content | limitTo:300}}</p>
           </div>
-        </div>
+        </div> -->
+
       </div>
     </div>
+    <div class="row post-shops" ng-if="shops.length!=0">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <ul class="item-detail-list">
+          <li class="overlay-image" ng-repeat="result in posts">
+            <div class="thumbnail-image">
+              <img ng-src="{{result.image.md.url}}">
+            </div>
+            <div class="detail-content">
+              <div>
+                <div class="category-name">てすと</div>
+                <div class="h4 detail-name">{{result.title}}</div>
+                <div class="h6 item-description hidden-xs">{{result.content | limitTo:300}}</div>
+                <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{result.created_at | date:'yyyy/M/d'}}</div>
+              </div>
+            </div>
+            <a class="link" ui-sref="post({id:result.id})"></a>
+          </li>
+        </ul>
+      </div>
 
   </ion-content>
 </ion-view>
