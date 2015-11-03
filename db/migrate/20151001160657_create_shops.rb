@@ -15,6 +15,9 @@ class CreateShops < ActiveRecord::Migration
       t.string :address2
       t.float :latitude
       t.float :longitude
+      t.string  :province
+      t.string  :city
+
 
       t.timestamps null: false
     end
