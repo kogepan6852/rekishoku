@@ -29,19 +29,19 @@
     <%= f.file_field :subimage %>
   </div><br><hr><br>
   <div class="center">
-    <%= f.label :画像のURL %><br>
+    <%= f.label :画像の引用元URL %><br>
     <%= f.text_field :image_quotation_url ,:class => "form-control" %>
   </div><br><hr><br>
   <div class="center">
-    <%= f.label :画像の引用元 %><br>
+    <%= f.label :画像の引用元名称 %><br>
     <%= f.text_field :image_quotation_name ,:class => "form-control" %>
   </div><br><hr><br>
   <div class="center">
-    <%= f.label :画像の掲載してあったサイトのURL %><br>
+    <%= f.label :記事の掲載元URL %><br>
     <%= f.text_field :post_quotation_url ,:class => "form-control" %>
   </div><br><hr><br>
   <div class="center">
-    <%= f.label :画像の掲載してあったサイトの名前 %><br>
+    <%= f.label :記事の掲載元名称 %><br>
     <%= f.text_field :post_quotation_name ,:class => "form-control" %>
   </div><br><hr><br>
   <div class="center">
@@ -59,14 +59,6 @@
   <div class="center">
     <%= f.label :建物名 %><br>
     <%= f.text_field :address2 ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :経度 %><br>
-    <%= f.number_field :latitude ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :緯度 %><br>
-    <%= f.number_field :longitude ,:class => "form-control" %>
   </div><br><hr><br>
   <div class="center">
     <%= f.label :メニュー %><br>
