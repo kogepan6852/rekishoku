@@ -25,7 +25,12 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    post = { "post" => @post, "shops" => @post.shops }
+    shops = Array.new()
+    @post.shops.each do |shop|
+      obj = { "shop" => shop, "categories" => shop.categories }
+      shops.push(obj);
+    end
+    post = { "post" => @post, "shops" => shops }
     render json: post
   end
 

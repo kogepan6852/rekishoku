@@ -87,3 +87,15 @@ angular.module "frontApp"
             showCloseButton: true
 
           $scope.writersInit()
+
+    # 変化を監視してメイン画像を読み込み＋表示を実行
+    $scope.$watch 'input.file', (file) ->
+      $scope.srcUrl = undefined
+      #画像ファイルじゃなければ何もしない
+      if !file or !file.type.match('image.*')
+        return
+      reader = new FileReader
+      reader.onload = ->
+        $scope.$apply ->
+          $scope.srcUrl = reader.result
+      reader.readAsDataURL file
