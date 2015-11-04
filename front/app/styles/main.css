@@ -23,6 +23,12 @@ p { color: #555; }
   top: 5%;
   bottom: 5%;
 }
+.row-top {
+  padding-top: 25px!important;
+}
+.row-bottom {
+  padding-bottom: 25px!important;
+}
 
 /* modal-post*/
 .uploaded-img {
@@ -348,9 +354,25 @@ ion-view .has-subheader {
 .post-title{
   padding: 5px;
 }
+.post-title .sub {
+  border-bottom: 5px solid rgb(205, 97, 93);
+  margin-right: -5px;
+}
 .post-title a {
   float: right;
   margin-bottom: 5px;
+  margin-top: 2px;
+}
+.post-title .category {
+  background-color: rgba(76, 42, 76, 1);
+  color: #ffffff;
+  max-width: 125px;
+  min-width: 100px;
+  padding: 2px 8px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  left: 5px;
 }
 .post-title .date, .post-quotation {
   text-align: right;
@@ -358,7 +380,8 @@ ion-view .has-subheader {
   margin-bottom: 5px;
 }
 .post-content{
-  padding: 5px
+  padding: 5px;
+  margin-bottom: 15px;
 }
 form.post-modal, .post-modal .slider {
   height: 100%;
@@ -381,7 +404,8 @@ form.post-modal, .post-modal .slider {
 }
 /* 関連データ */
 .post-shops, .post-shops > div {
-  padding: 0!important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .item-detail-list li {
   width: 100%;
@@ -392,6 +416,7 @@ form.post-modal, .post-modal .slider {
   line-height: 1.25;
   border: 1px solid #dcdcdc;
   margin-top: -1px;
+  background-color: #fff;
 }
 .item-detail-list li .thumbnail-image {
   height: 100px;
@@ -481,7 +506,7 @@ form.post-modal, .post-modal .slider {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0 5px 7px;
+  padding: 0 5px 5px;
   width: 100%;
 }
 .shop-content > div, .main-content > div, .detail-content > div {
@@ -855,6 +880,11 @@ ion-modal-view { z-index: 11!important}
   .item-description {
     max-height: 30px;
     padding: 3px 10px 0;
+  }
+  .post-title .category {
+    position: relative;
+    margin-left: auto;
+    margin-bottom: 5px;
   }
 
 }

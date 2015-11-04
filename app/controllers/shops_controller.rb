@@ -55,7 +55,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
-    shop = { "shop" => @shop, "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug') }
+    shop = { "shop" => @shop, "categories" => @shop.categories, "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug') }
     respond_to do |format|
       format.html { render @shops }
       format.json { render json: shop }
