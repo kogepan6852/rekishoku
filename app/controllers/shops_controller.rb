@@ -35,20 +35,20 @@ class ShopsController < ApplicationController
       render json: shop
     else
       # 住所（部分一致）と店舗名機能（部分一致含む）とカテゴリ　
-      if params[:name]
-        shop = Shop.where('name LIKE ?',params[:name])
-        render json: shop
-      end
-      if params[:category]
-        shop = Shop.where('category_id == ?', params[:category])
-        render json: shop
-      end
-      if params[:placeAddress]
-        shop = Shop.where('address1 LIKE ?', params[:placeAddress])
+      if params[:name] || params[:category] || params[:placeAddress]
+        shopSearch = Shop.all
+        if params[:name]
+          shopSearch = shopSearch.where('name LIKE ?',params[:name])
+        end
+        if params[:category]
+          shopSearch = shopSearch.where('category_id == ?', params[:category])
+        end
+        if params[:placeAddress]
+          shopSearch = shopSearch.where('address1 LIKE ?', params[:placeAddress])
+        end
+        render json: shopSearch
       end
     end
-
-
     @shops = Shop.all
   end
 
