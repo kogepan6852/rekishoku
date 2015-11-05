@@ -7,16 +7,17 @@ class ShopsController < ApplicationController
     filterFlag = 0
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
+
+    @shops = Shop.all
     if params[:placeAddress] && params[:shopDistance]
       #現在地を受け取るの緯度経度を求める
       Geocoder.configure(:language => :ja)
       addressPlace = Geocoder.coordinates(params[:placeAddress]);
       # 店舗フィルタをかける
-      @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
+      @shops = @shops.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?',addressPlace[0]-params[:shopDistance].to_f*latitudeRange,addressPlace[1]-params[:shopDistance].to_f*longitudeRange,addressPlace[0]+params[:shopDistance].to_f*latitudeRange,addressPlace[1]+params[:shopDistance].to_f*longitudeRange)
 
       # jsonの場合、戻り値に現在地の経度緯度を追加
-      shop = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1], "address" => params[:placeAddress] }}
-      render json: shop
+      shops = { "shops" => @shops, "current" => { "latitude" => addressPlace[0], "longitude" => addressPlace[1], "address" => params[:placeAddress] }}
     elsif params[:longitude] && params[:latitude] && params[:shopDistance]
       # 住所情報の取得
       input = params[:latitude] + ',' + params[:longitude]
@@ -31,25 +32,34 @@ class ShopsController < ApplicationController
       @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?', minLatitude, minLongitude, maxLatitude, maxLongitude)
 
       # jsonの場合、戻り値に現在地の経度緯度を追加
-      shop = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
-      render json: shop
-    else
+      shops = { "shops" => @shops, "current" => { "latitude" => params[:latitude], "longitude" => params[:longitude], "address" => addressArray[2] }}
+    elsif params[:name] || params[:category] || params[:placeAddress]
       # 住所（部分一致）と店舗名機能（部分一致含む）とカテゴリ　
-      if params[:name] || params[:category] || params[:placeAddress]
-        shopSearch = Shop.all
-        if params[:name]
-          shopSearch = shopSearch.where('name LIKE ?',params[:name])
-        end
-        if params[:category]
-          shopSearch = shopSearch.where('category_id == ?', params[:category])
-        end
-        if params[:placeAddress]
-          shopSearch = shopSearch.where('address1 LIKE ?', params[:placeAddress])
-        end
-        render json: shopSearch
+      if params[:name]
+        @shops = @shops.where('name LIKE ?',params[:name])
       end
+      if params[:category]
+        @shops = @shops.where('category_id == ?', params[:category])
+      end
+      if params[:placeAddress]
+        @shops = shopSearch.where('address1 LIKE ?', params[:placeAddress])
+      end
+      shops = @shops
+    else
+      # shopにカテゴリーを紐付ける
+      newShops = Array.new()
+      @shops.each do |shop|
+        obj = { "shop" => shop, "categories" => shop.categories }
+        newShops.push(obj);
+      end
+      shops = newShops
     end
-    @shops = Shop.all
+
+    respond_to do |format|
+      format.html {}
+      format.json { render json: shops }
+    end
+
   end
 
   # GET /shops/1

@@ -15,17 +15,17 @@
   <ul class="item-list">
     <li class="overlay-image" ng-repeat="result in results">
       <div class="thumbnail-image">
-        <img ng-src="{{result.image.image.md.url}}">
+        <img ng-src="{{result.shop.image.md.url}}">
       </div>
       <div class="shop-content">
         <div>
-          <div class="category-name">お茶・コース</div>
-          <div class="h4 item-name">{{result.name}}</div>
-          <div class="item-address" ng-if="result.address1">{{result.province}}</div>
-          <div class="item-address" ng-if="!result.address1">-</div>
+          <div class="category-name" category-list data="result.categories" ></div>
+          <div class="h4 item-name">{{result.shop.name}}</div>
+          <div class="item-address" ng-if="result.shop.address1">{{result.shop.province}}</div>
+          <div class="item-address" ng-if="!result.shop.address1">-</div>
         </div>
       </div>
-      <a class="link" ui-sref="shop({id:result.id})"></a>
+      <a class="link" ui-sref="shop({id:result.shop.id})"></a>
     </li>
   </ul>
 </div>
