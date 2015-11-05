@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :staff
+  resources :menu
 
   get 'users/index'
   get 'users/show'
