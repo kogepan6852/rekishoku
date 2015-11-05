@@ -1,4 +1,4 @@
-<ion-view title="" ng-init="writersInit()">
+<ion-view title="" ng-init="init()">
   <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios">
     <div class="bar bar-header top">
       <h1 class="title hidden">歴食</h1>
@@ -11,6 +11,11 @@
 
 
   <ion-content class="padding-top">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="init()">
+    </ion-refresher>
+
     <div class="main padding-top">
       <ul class="item-list">
         <li class="overlay-image" ng-repeat="user in users">

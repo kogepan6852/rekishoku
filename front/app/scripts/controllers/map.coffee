@@ -51,26 +51,27 @@ angular.module 'frontApp'
     $scope.targetMarkers = []
 
     # 初期処理
-    # 現在地の取得
-    if navigator.geolocation
-      navigator.geolocation.getCurrentPosition ((position) ->
-        $scope.map.center.latitude = position.coords.latitude
-        $scope.map.center.longitude = position.coords.longitude
+    $scope.init = ->
+      # 現在地の取得
+      if navigator.geolocation
+        navigator.geolocation.getCurrentPosition ((position) ->
+          $scope.map.center.latitude = position.coords.latitude
+          $scope.map.center.longitude = position.coords.longitude
 
-        obj =
-          latitude: position.coords.latitude
-          longitude: position.coords.longitude
-          shopDistance: targetDistance
-        # map表示用データの作成と設定
-        setMapData(obj)
+          obj =
+            latitude: position.coords.latitude
+            longitude: position.coords.longitude
+            shopDistance: targetDistance
+          # map表示用データの作成と設定
+          setMapData(obj)
 
-        ), (e) ->
-          if typeof e == 'string'
-            alert(e)
-          else
-            alert(e.message)
-    else
-      alert('位置情報を取得できません。')
+          ), (e) ->
+            if typeof e == 'string'
+              alert(e)
+            else
+              alert(e.message)
+      else
+        alert('位置情報を取得できません。')
 
     # Function
     $scope.searchShops = ->

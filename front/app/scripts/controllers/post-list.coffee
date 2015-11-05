@@ -91,12 +91,13 @@ angular.module "frontApp"
       email: $sessionStorage['email']
       token: $sessionStorage['token']
 
-    $rootScope.postListInit = ->
+    $scope.init = ->
       $scope.results = ""
       # post取得
       if ($sessionStorage['token'])
         Api.getJson(accessKey, Const.API.POST).then (res) ->
           $scope.results = res.data
+          $scope.$broadcast 'scroll.refreshComplete'
 
     # Function
     $scope.openModalPost = () ->

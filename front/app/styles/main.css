@@ -361,7 +361,7 @@ ion-view .has-subheader {
 .post-title a {
   float: right;
   margin-bottom: 5px;
-  margin-top: 2px;
+  margin-top: 5px;
 }
 .post-title .category {
   background-color: rgba(76, 42, 76, 1);
@@ -535,7 +535,7 @@ form.post-modal, .post-modal .slider {
  * Map page
  **********************/
 .search-bar {
-  padding: 0;
+  padding: 0 0 0 260px;
 }
 .search-bar label{
   max-width: 500px;
@@ -564,7 +564,18 @@ form.post-modal, .post-modal .slider {
   width:130px;
   height: auto;
 }
-
+.present-location {
+  position: absolute;
+  color: rgb(205, 97, 93)!important;
+  left: 5px;
+  top: 6px;
+  font-size: 16px!important;
+  z-index: 20;
+}
+.present-location::before {
+  font-size: 18px!important;
+  margin-right: 2px;
+}
 /**********************
  * Writers page
  **********************/
@@ -886,6 +897,17 @@ ion-modal-view { z-index: 11!important}
     margin-left: auto;
     margin-bottom: 5px;
   }
+  /* Map検索*/
+  .search-bar {
+    padding-left: 35px;
+  }
+  .present-location > span {
+    display: none;
+  }
+  .present-location::before {
+    font-size: 24px!important;
+  }
+
 
 }
 @media screen and (min-width:801px) and (max-width:1200px){
@@ -933,9 +955,8 @@ ion-modal-view { z-index: 11!important}
     min-height: 34px;
   }
 
-  /* Map検索*/
-  .search-bar {
-    padding-left: 180px;
+  .present-location {
+    left: 180px;
   }
   /* detail page */
   .item-detail-list li .thumbnail-image {
