@@ -43,7 +43,7 @@ class ShopsController < ApplicationController
           @shops = @shops.where('category_id == ?', params[:category])
         end
         if params[:placeAddress]
-          @shops = shopSearch.where('address1 LIKE ?', params[:placeAddress])
+          @shops = @shops.where('address1 LIKE ?', params[:placeAddress])
         end
       end
       # shopにカテゴリーを紐付ける

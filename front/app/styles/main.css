@@ -24,10 +24,10 @@ p { color: #555; }
   bottom: 5%;
 }
 .row-top {
-  padding-top: 25px!important;
+  padding-top: 35px!important;
 }
 .row-bottom {
-  padding-bottom: 25px!important;
+  padding-bottom: 35px!important;
 }
 
 /* modal-post*/
@@ -529,6 +529,31 @@ form.post-modal, .post-modal .slider {
   max-width: 125px;
   min-width: 100px;
   white-space: nowrap;
+}
+
+/**********************
+ * Shop detail
+ **********************/
+.shop-info {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.shop-info-item {
+  display: table;
+}
+.shop-info-row > div {
+  display: table-cell;
+}
+.shop-info-row .shop-info-col {
+  width: 60px;
+}
+.detail-map {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.detail-map .angular-google-map-container,
+.detail-map .angular-google-map{
+  height: 200px;
 }
 
 /**********************
