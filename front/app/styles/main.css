@@ -475,12 +475,7 @@ form.post-modal, .post-modal .slider {
   max-height: 50px;
   overflow: hidden;
 }
-
-
-/**********************
- * Shops
- **********************/
-.item-list .item-address, .item-detail-list .item-address {
+.item-detail-list .item-address {
   background-color: rgba(131, 81, 112, 1);
   bottom: 15px;
   color: #ffffff;
@@ -495,10 +490,28 @@ form.post-modal, .post-modal .slider {
   width: 60px;
   z-index: 100;
 }
+/**********************
+ * Shops
+ **********************/
+.item-list .item-address {
+  background-color: rgba(131, 81, 112, 1);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 12px;
+  right: 10px;
+  line-height: 16px;
+  max-height: 21px;
+  overflow: hidden;
+  padding: 3px 8px;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  z-index: 100;
+}
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 65px;
+  right: 75px;
 }
 
 
@@ -950,7 +963,7 @@ ion-modal-view { z-index: 11!important}
   .tab-header{ width: 20%;}
   .has-header { bottom: 0px; }
 
-  /* tab position */
+  /* tab */
   .tab-nav.tabs {
     background-position: center bottom;
     border-bottom-width: 1px;
@@ -958,6 +971,23 @@ ion-modal-view { z-index: 11!important}
     padding-top: 0;
     top: 0px;
   }
+  .tabs .tab-item{
+    font-size: 18px!important;
+    line-height: unset!important;
+  }
+  .tabs .tab-item .icon::before {
+    font-size: 24px;
+    line-height: 49px;
+  }
+  .tabs .tab-item .icon {
+    padding-right: 3px;
+  }
+  .tabs .tab-item .icon {
+    display: inline-block;
+    margin-top: -0.1em;
+    vertical-align: top;
+  }
+
   /* post image */
   .post-image{
     padding: 0 90px;
