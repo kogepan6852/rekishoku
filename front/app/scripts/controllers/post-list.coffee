@@ -190,7 +190,7 @@ angular.module "frontApp"
 
         Api.saveFormData(fd, url, method).then (res) ->
           # 初期化処理実行
-          $rootScope.postListInit()
+          $scope.init()
           detailCount = 0
 
           angular.forEach $scope.input.details, (detail, i) ->

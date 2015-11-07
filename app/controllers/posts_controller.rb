@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       @posts = @posts.where('title LIKE ? || content LIKE ?', params[:text],params[:text],params[:text])
     end
     if params[:category]
-      @posts = @posts.where('category_id == ?', params[:category])
+      @posts = @posts.where(category_id: params[:category].to_i)
     end
     render json: @posts
   end

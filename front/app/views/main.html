@@ -6,7 +6,12 @@
 <div class="row">
   <div class="col main-category">
     <div class="button-bar">
-      <a class="button" ng-repeat="category in categories" ng-bind-html="category.name | rekishokuText"></a>
+      <a class="button"
+        ng-repeat="category in categories"
+        ng-click="search({{category.id}})"
+        ng-bind-html="category.name | rekishokuText"
+        ng-class="{active: targetCategoryId == category.id}"
+      ></a>
     </div>
   </div>
 </div>

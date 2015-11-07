@@ -268,7 +268,7 @@ ion-view .has-subheader {
   max-height: 82px;
   overflow: hidden;
 }
-.item-list .category-name, .item-detail-list .category-name{
+.item-list .category-name{
   right: 10px;
   bottom: 15px;
 }
@@ -314,6 +314,10 @@ ion-view .has-subheader {
   color: rgb(76,42,76);
   border-color: rgb(76,42,76);
   background: transparent;
+}
+.main-category .button-bar .button.active {
+    background: rgb(76, 42, 76);
+    color: rgb(255, 255, 255);
 }
 .main-category .button-bar > .button:first-child {
     border-radius: 10px 0 0 10px;
@@ -444,6 +448,9 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name, .item-detail-list .item-address {
   bottom: 5px!important;
 }
+.item-detail-list .category-name {
+    right: 0px;
+}
 .detail-content .post-date {
   left: 10px;
   bottom: 5px;
@@ -461,26 +468,38 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name.shop-category{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 65px;
 }
 .detail-name {
   padding: 10px 10px 0;
   max-height: 50px;
   overflow: hidden;
 }
-
-
-/**********************
- * Shops
- **********************/
-.item-list .item-address, .item-detail-list .item-address {
+.item-detail-list .item-address {
   background-color: rgba(131, 81, 112, 1);
   bottom: 15px;
   color: #ffffff;
   font-size: 12px;
-  right: 5px;
+  right: 0px;
   line-height: 16px;
-  margin-right: 10px;
+  max-height: 21px;
+  overflow: hidden;
+  padding: 3px 8px;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  z-index: 100;
+}
+/**********************
+ * Shops
+ **********************/
+.item-list .item-address {
+  background-color: rgba(131, 81, 112, 1);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 12px;
+  right: 10px;
+  line-height: 16px;
   max-height: 21px;
   overflow: hidden;
   padding: 3px 8px;
@@ -492,7 +511,7 @@ form.post-modal, .post-modal .slider {
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 75px;
 }
 
 
@@ -831,7 +850,7 @@ ion-modal-view { z-index: 11!important}
     bottom: 5px;
   }
   .main-content .category-name {
-    right: 5px!important;
+    right: 0px!important;
   }
   .main-content .post-date i{
     padding-right: 3px;
@@ -944,7 +963,7 @@ ion-modal-view { z-index: 11!important}
   .tab-header{ width: 20%;}
   .has-header { bottom: 0px; }
 
-  /* tab position */
+  /* tab */
   .tab-nav.tabs {
     background-position: center bottom;
     border-bottom-width: 1px;
@@ -952,6 +971,23 @@ ion-modal-view { z-index: 11!important}
     padding-top: 0;
     top: 0px;
   }
+  .tabs .tab-item{
+    font-size: 18px!important;
+    line-height: unset!important;
+  }
+  .tabs .tab-item .icon::before {
+    font-size: 24px;
+    line-height: 49px;
+  }
+  .tabs .tab-item .icon {
+    padding-right: 3px;
+  }
+  .tabs .tab-item .icon {
+    display: inline-block;
+    margin-top: -0.1em;
+    vertical-align: top;
+  }
+
   /* post image */
   .post-image{
     padding: 0 90px;
