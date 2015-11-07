@@ -40,7 +40,7 @@ class ShopsController < ApplicationController
           @shops = @shops.where('name LIKE ?',params[:name])
         end
         if params[:category]
-          @shops = @shops.where('category_id == ?', params[:category])
+          @shops = @shops.joins(:categories).where('categories_shops.category_id = ?', params[:category].to_i)
         end
         if params[:placeAddress]
           @shops = @shops.where('address1 LIKE ?', params[:placeAddress])

@@ -268,7 +268,7 @@ ion-view .has-subheader {
   max-height: 82px;
   overflow: hidden;
 }
-.item-list .category-name, .item-detail-list .category-name{
+.item-list .category-name{
   right: 10px;
   bottom: 15px;
 }
@@ -314,6 +314,10 @@ ion-view .has-subheader {
   color: rgb(76,42,76);
   border-color: rgb(76,42,76);
   background: transparent;
+}
+.main-category .button-bar .button.active {
+    background: rgb(76, 42, 76);
+    color: rgb(255, 255, 255);
 }
 .main-category .button-bar > .button:first-child {
     border-radius: 10px 0 0 10px;
@@ -444,6 +448,9 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name, .item-detail-list .item-address {
   bottom: 5px!important;
 }
+.item-detail-list .category-name {
+    right: 0px;
+}
 .detail-content .post-date {
   left: 10px;
   bottom: 5px;
@@ -461,7 +468,7 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name.shop-category{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 65px;
 }
 .detail-name {
   padding: 10px 10px 0;
@@ -478,9 +485,8 @@ form.post-modal, .post-modal .slider {
   bottom: 15px;
   color: #ffffff;
   font-size: 12px;
-  right: 5px;
+  right: 0px;
   line-height: 16px;
-  margin-right: 10px;
   max-height: 21px;
   overflow: hidden;
   padding: 3px 8px;
@@ -492,7 +498,7 @@ form.post-modal, .post-modal .slider {
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 65px;
 }
 
 
@@ -831,7 +837,7 @@ ion-modal-view { z-index: 11!important}
     bottom: 5px;
   }
   .main-content .category-name {
-    right: 5px!important;
+    right: 0px!important;
   }
   .main-content .post-date i{
     padding-right: 3px;

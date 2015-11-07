@@ -11,6 +11,7 @@ angular.module "frontApp"
   .controller "ShopsCtrl", ($scope, $ionicSideMenuDelegate, Api, Const) ->
 
     # setting
+    $scope.targetCategoryId = null
 
     # initialize
     categoryObj =
@@ -22,5 +23,19 @@ angular.module "frontApp"
       Api.getJson("", Const.API.SHOP + '.json').then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
+        $scope.targetCategoryId = null
 
     # Function
+    $scope.search = (categoryId) ->
+      if categoryId == $scope.targetCategoryId
+        # 検索条件解除
+        $scope.targetCategoryId = null
+        obj = ""
+      else
+        # 検索条件設定
+        $scope.targetCategoryId = categoryId
+        obj =
+          category: categoryId
+      # 検索
+      Api.getJson(obj, Const.API.SHOP + '.json').then (res) ->
+        $scope.results = res.data
