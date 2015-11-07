@@ -87,8 +87,7 @@ angular.module "frontApp"
                 delete $sessionStorage['token']
                 delete $sessionStorage['email']
                 delete $sessionStorage['user_id']
-                if $rootScope.postListInit
-                  $rootScope.postListInit()
+                $location.path('/home/');
           }
         ])
 
