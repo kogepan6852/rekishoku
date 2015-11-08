@@ -1,9 +1,16 @@
 class ShopsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
   # GET /shops.json
   def index
+    @shops = Shop.all
+  end
+
+  # GET /shops/api
+  # GET /shops/api.json
+  def api
     filterFlag = 0
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
@@ -84,7 +91,12 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    @shop = Shop.new(shop_params)
+    # 住所から緯度経度を求める
+    Geocoder.configure(:language  => :ja,  :units => :km )
+    addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
+    # 緯度経度を代入する
+    @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
+
 
     respond_to do |format|
       if @shop.save
@@ -96,6 +108,8 @@ class ShopsController < ApplicationController
       end
     end
   end
+
+
 
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json

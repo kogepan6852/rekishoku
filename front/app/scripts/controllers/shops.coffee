@@ -25,7 +25,7 @@ angular.module "frontApp"
       obj =
         per: 20
         page: 1
-      Api.getJson(obj, Const.API.SHOP + '.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.targetCategoryId = null
@@ -42,7 +42,7 @@ angular.module "frontApp"
         obj =
           category: categoryId
       # 検索
-      Api.getJson(obj, Const.API.SHOP + '.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
         $scope.results = res.data
 
     $scope.loadMoreData = ->
@@ -51,7 +51,7 @@ angular.module "frontApp"
         per: 20
         page: $scope.page
         category: $scope.targetCategoryId
-      Api.getJson(obj, Const.API.SHOP + '.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
         if res.data.length == 0
           $scope.noMoreLoad = true
         else
