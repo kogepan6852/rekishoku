@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params, people_period_params)
+    @person = Person.new(person_params)
 
     respond_to do |format|
       if @person.save
@@ -75,11 +75,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:name, :furigana)
+      params.require(:person).permit(:name, :furigana, :id, :period_ids => [])
     end
-
-    def people_period_params
-      params.require(:people_period).permit(:person_id, :period_id, :period_ids => [])
-    end
-
 end
