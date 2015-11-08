@@ -8,7 +8,7 @@ class ShopsController < ApplicationController
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
 
-    @shops = Shop.all
+    @shops = Shop.order(created_at: :desc)
     if params[:placeAddress] && params[:shopDistance]
       #現在地を受け取るの緯度経度を求める
       Geocoder.configure(:language => :ja)
@@ -48,7 +48,7 @@ class ShopsController < ApplicationController
       end
       # shopにカテゴリーを紐付ける
       newShops = Array.new()
-      @shops.each do |shop|
+      @shops.page(params[:page]).per(params[:per]).each do |shop|
         obj = { "shop" => shop, "categories" => shop.categories }
         newShops.push(obj);
       end

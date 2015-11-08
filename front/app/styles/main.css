@@ -498,7 +498,7 @@ form.post-modal, .post-modal .slider {
   bottom: 15px;
   color: #ffffff;
   font-size: 12px;
-  right: 10px;
+  right: 0px;
   line-height: 16px;
   max-height: 21px;
   overflow: hidden;
@@ -511,7 +511,7 @@ form.post-modal, .post-modal .slider {
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 75px;
+  right: 65px;
 }
 
 

@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     if params[:category]
       @posts = @posts.where(category_id: params[:category].to_i)
     end
-    render json: @posts
+    render json: @posts.page(params[:page]).per(params[:per])
   end
 
   # GET /posts/1
