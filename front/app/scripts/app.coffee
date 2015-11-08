@@ -38,6 +38,7 @@ angular
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
       .state 'my-post',
+        cache: false,
         url: '/my-post'
         templateUrl: 'views/post-list.html'
         controller: 'PostListCtrl'
