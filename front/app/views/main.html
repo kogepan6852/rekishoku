@@ -33,3 +33,8 @@
     </li>
   </ul>
 </div>
+
+<ion-infinite-scroll
+  ng-if="!noMoreLoad"
+  on-infinite="loadMoreData()">
+</ion-infinite-scroll>

@@ -12,6 +12,8 @@ angular.module "frontApp"
 
     # setting
     $scope.targetCategoryId = null
+    $scope.page = 1
+    $scope.noMoreLoad = false
 
     # initialize
     categoryObj =
@@ -20,11 +22,15 @@ angular.module "frontApp"
       $scope.categories = res.data
 
     $scope.init = ->
-      Api.getJson("", Const.API.POST).then (res) ->
+      obj =
+        per: 20
+        page: 1
+      Api.getJson(obj, Const.API.POST).then (res) ->
         $scope.posts = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.targetCategoryId = null
 
+    # Function
     $scope.search = (categoryId) ->
       if categoryId == $scope.targetCategoryId
         # 検索条件解除
@@ -39,4 +45,16 @@ angular.module "frontApp"
       Api.getJson(obj, Const.API.POST).then (res) ->
         $scope.posts = res.data
 
-    # Function
+    $scope.loadMoreData = ->
+      $scope.page += 1
+      obj =
+        per: 20
+        page: $scope.page
+        category: $scope.targetCategoryId
+      Api.getJson(obj, Const.API.POST).then (res) ->
+        if res.data.length == 0
+          $scope.noMoreLoad = true
+        else
+          angular.forEach res.data, (data, i) ->
+            $scope.posts.push(data)
+          $scope.$broadcast('scroll.infiniteScrollComplete')

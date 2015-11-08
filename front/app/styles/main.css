@@ -862,6 +862,13 @@ ion-modal-view { z-index: 11!important}
       font-size: 14px;
       text-overflow: initial;
   }
+  /* Shop */
+  .item-list .item-address {
+    right: 0px;
+  }
+  .item-list .shop-content .category-name{
+    right: 65px;
+  }
   /* Writer */
   .item-list .item-profile {
     color: #808080;
