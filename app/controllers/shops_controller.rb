@@ -91,7 +91,12 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    @shop = Shop.new(shop_params)
+    # 住所から緯度経度を求める
+    Geocoder.configure(:language  => :ja,  :units => :km )
+    addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
+    # 緯度経度を代入する
+    @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
+
 
     respond_to do |format|
       if @shop.save
