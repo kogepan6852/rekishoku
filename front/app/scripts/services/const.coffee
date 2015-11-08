@@ -5,7 +5,7 @@ angular.module("frontApp")
     API:
       POST: '/posts'
       POST_DETSIL: '/post_details'
-      SHOP: '/shops/api'
+      SHOP: '/shops'
       PERSON: '/people/api'
       LOGIN: '/users/sign_in.json'
       LOGOUT: '/authentication_token.json'

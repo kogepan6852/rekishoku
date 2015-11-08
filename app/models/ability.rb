@@ -36,16 +36,18 @@ class Ability
     can :read, PostDetail
 
     can :manage, :Menu
-    cannot :manage, Shop
+    cannot :manage ,Shop
+    can :api ,Shop
+    can :show ,Shop
     cannot :manage, Person
+    can :api ,Person
+    can :show ,Person
     cannot :manage, Period
-    can :api, Shop
-    can :api, Person
-    can :api, Period
+    can :api ,Period
+    can :show ,Period
 
    if user
       if user.role == 1
-         can :manage, :Menu
          can :manage, Shop
          can :manage, Person
          can :manage, Period

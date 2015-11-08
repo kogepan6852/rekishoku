@@ -82,7 +82,7 @@ angular.module 'frontApp'
       setMapData(obj)
 
     setMapData = (obj) ->
-      Api.getJson(obj, Const.API.SHOP + ".json").then (resShops) ->
+      Api.getJson(obj, Const.API.SHOP + "/api.json").then (resShops) ->
         $scope.map.center.latitude = resShops.data.current.latitude
         $scope.map.center.longitude = resShops.data.current.longitude
         $scope.input.address = resShops.data.current.address
