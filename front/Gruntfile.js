@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    ngconstant: 'grunt-ng-constant'
   });
 
   // Configurable paths for the application
@@ -62,6 +63,29 @@ module.exports = function (grunt) {
           '.tmp/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+    },
+
+    // grunt-ng-constant
+    ngconstant: {
+      options: {
+        name: 'config',
+        dest: '<%= yeoman.app %>/scripts/config/config.js',
+      },
+      development: {
+        constants: {
+          config: grunt.file.readJSON('config/development.json'),
+        }
+      },
+      test: {
+        constants: {
+          config: grunt.file.readJSON('config/test.json'),
+        }
+      },
+      production: {
+        constants: {
+          config: grunt.file.readJSON('config/production.json'),
+        }
       }
     },
 
@@ -441,8 +465,10 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
+    var env = target || 'development';
     grunt.task.run([
       'clean:server',
+      'ngconstant:' + env,
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -458,6 +484,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'ngconstant:test',
     'wiredep',
     'concurrent:test',
     'autoprefixer',
@@ -465,23 +492,27 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', function(target) {
+    var env = target || 'production';
+    grunt.task.run([
+      'clean:dist',
+      'ngconstant:' + env,
+      'wiredep',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'ngtemplates',
+      'concat',
+      'ngAnnotate',
+      'copy:dist',
+      'cdnify',
+      'cssmin',
+      'uglify',
+      'filerev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',

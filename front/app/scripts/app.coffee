@@ -20,7 +20,8 @@ angular
     'ui.router',
     'ngStorage',
     'toaster',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'config'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
