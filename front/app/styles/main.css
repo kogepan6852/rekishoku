@@ -498,7 +498,7 @@ form.post-modal, .post-modal .slider {
   bottom: 15px;
   color: #ffffff;
   font-size: 12px;
-  right: 0px;
+  right: 10px;
   line-height: 16px;
   max-height: 21px;
   overflow: hidden;
@@ -511,7 +511,7 @@ form.post-modal, .post-modal .slider {
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 65px;
+  right: 75px;
 }
 
 
@@ -861,6 +861,13 @@ ion-modal-view { z-index: 11!important}
   .main-category .button-bar .button {
       font-size: 14px;
       text-overflow: initial;
+  }
+  /* Shop */
+  .item-list .item-address {
+    right: 0px;
+  }
+  .item-list .shop-content .category-name{
+    right: 65px;
   }
   /* Writer */
   .item-list .item-profile {
