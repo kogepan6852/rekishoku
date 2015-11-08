@@ -1,9 +1,16 @@
 class ShopsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
   # GET /shops.json
   def index
+    @shops = Shop.all
+  end
+
+  # GET /shops/api
+  # GET /shops/api.json
+  def api
     filterFlag = 0
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
@@ -96,6 +103,8 @@ class ShopsController < ApplicationController
       end
     end
   end
+
+
 
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json

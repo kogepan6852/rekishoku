@@ -35,5 +35,23 @@ class Ability
     can :manage, PostDetail, user_id: user.id if user
     can :read, PostDetail
 
+    can :manage, :Menu
+    cannot :manage, Shop
+    cannot :manage, Person
+    cannot :manage, Period
+    can :api, Shop
+    can :api, Person
+    can :api, Period
+
+   if user
+      if user.role == 1
+         can :manage, :Menu
+         can :manage, Shop
+         can :manage, Person
+         can :manage, Period
+        puts "test1233444829471984"
+     end
+  end
+
   end
 end

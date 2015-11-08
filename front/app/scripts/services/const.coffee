@@ -5,14 +5,14 @@ angular.module("frontApp")
     API:
       POST: '/posts'
       POST_DETSIL: '/post_details'
-      SHOP: '/shops'
-      PERSON: '/people'
+      SHOP: '/shops/api'
+      PERSON: '/people/api'
       LOGIN: '/users/sign_in.json'
       LOGOUT: '/authentication_token.json'
       USER: '/users'
       CATEGORY: '/categories.json'
       POST_SHOP: '/posts_shops'
-      POST_PERSON: '/people_posts'
+      POST_PERSON: '/people_posts/api'
     MSG:
       SAVED: '投稿しました'
       DELETED: '削除しました'
