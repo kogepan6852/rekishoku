@@ -27,16 +27,21 @@
           <td><%= link_to '詳細', @person ,:class => "btn btn-success" %></td>
           <td><%= link_to '戻る', people_path ,:class => "btn btn-primary" %></td>
         </tr>
+      </thead>
+    </table>
 
-        <% @periods.each do |period| %>
-          <tr>
-            <th><%= period.name %></th>
-            <!-- <th colspan="3"></th> -->
-            <% checked = period.people.exists?(@person.id) ? true : false %>
-            <td><%= f.check_box 'period.id', { :name => 'person[period_ids][]', :checked => checked }, period.id, nil %></td>
-          </tr>
+    <table class="table table-hover">
+      <% @periods.each do |period| %>
+        <%= f.fields_for :people_periods do |pp| %>
+          <% checked = period.people.exists?(@person.id) ? true : false %>
+            <thead>
+              <tr>
+                <th><%= period.name %></th>
+                <td><%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked }, period.id, nil %></td>
+              </tr>
+            </thead>
         <% end %>
-      </tbody>
+      <% end %>
     </table>
 
   <div class="center">
