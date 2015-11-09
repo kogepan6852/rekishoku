@@ -1,10 +1,9 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const) ->
+  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const, config) ->
 
-    #host = "http://127.0.0.1:3000"
-    host = "http://localhost:3000"
+    host = config.url.api
 
     # エラー発生時処理
     errorHandring = (data) ->
@@ -21,22 +20,32 @@ angular.module "frontApp"
 
     # data取得(GET)
     getJson: (obj, path) ->
+      $ionicLoading.show(
+        template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+        delay: 500)
       $http(
         method: 'GET'
         url: host + path
         params: obj
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
     # data取得(POST)
     postJson: (obj, path) ->
+      $ionicLoading.show(
+        template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+        delay: 500)
       $http(
         method: 'POST'
         url: host + path
         data: obj
       ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
       ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
         errorHandring(data)
 
 

@@ -91,12 +91,13 @@ angular.module "frontApp"
       email: $sessionStorage['email']
       token: $sessionStorage['token']
 
-    $rootScope.postListInit = ->
+    $scope.init = ->
       $scope.results = ""
       # post取得
       if ($sessionStorage['token'])
         Api.getJson(accessKey, Const.API.POST).then (res) ->
           $scope.results = res.data
+          $scope.$broadcast 'scroll.refreshComplete'
 
     # Function
     $scope.openModalPost = () ->
@@ -151,11 +152,11 @@ angular.module "frontApp"
     $scope.openPopoverPostMenu = ($event, $index) ->
       $scope.targetIndex = $index
       $scope.targetPostId = $scope.results[$index].id
+      $scope.targetStatus = $scope.results[$index].status
       $scope.popoverPostMenu.show $event
 
     $scope.closePopoverPostMenu = ->
       $scope.popoverPostMenu.hide()
-
 
     $scope.doPost = (targetForm) ->
       # titleとimageが入力されている場合のみ
@@ -189,7 +190,7 @@ angular.module "frontApp"
 
         Api.saveFormData(fd, url, method).then (res) ->
           # 初期化処理実行
-          $rootScope.postListInit()
+          $scope.init()
           detailCount = 0
 
           angular.forEach $scope.input.details, (detail, i) ->
@@ -405,4 +406,27 @@ angular.module "frontApp"
         toaster.pop
           type: 'success',
           title: '保存しました。',
+          showCloseButton: true
+
+    $scope.updateStatus = (status) ->
+      fd = new FormData
+      fd.append 'token', $sessionStorage['token']
+      fd.append 'email', $sessionStorage['email']
+      fd.append 'post[status]', status
+
+      # データ登録
+      url = Const.API.POST + "/" + $scope.targetPostId
+      method = Const.METHOD.PATCH
+
+      msg = Const.MSG.PUBLISHED
+      if status == 0
+        msg = Const.MSG.UNPUBLISHED
+
+      Api.saveFormData(fd, url, method).then (res) ->
+        $scope.popoverPostMenu.hide()
+        # 初期化処理実行
+        $scope.init()
+        toaster.pop
+          type: 'success'
+          title: msg
           showCloseButton: true

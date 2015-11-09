@@ -16,6 +16,7 @@
 /front/node_modules
 /front/.tmp
 /front/app/bower_components
+/front/app/scripts/config/
 
 /public/*
 /config/secrets.yml

@@ -13,16 +13,17 @@
   <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios">
 
     <!-- Main  -->
-    <ion-tab title="Story" icon="ion-ios-list-outline" ng-controller="MainCtrl">
-      <ion-content>
+    <ion-tab title="STORY" icon="ion-ios-list-outline" ng-controller="MainCtrl">
+      <ion-content ng-init="init()">
         <div ng-include="'views/main.html'"></div>
       </ion-content>
     </ion-tab>
 
     <!-- Map  -->
-    <ion-tab title="Map" icon="ion-ios-navigate-outline" ng-controller="MapCtrl">
+    <ion-tab title="MAP" icon="ion-ios-navigate-outline" ng-controller="MapCtrl">
       <!-- Serach bar -->
       <div class="bar bar-subheader bar-clear" align="right">
+        <button class="button button-clear icon-left ion-ios-location present-location" ng-click="init()"><span>現在地</span></button>
         <div class="item-input-inset search-bar">
           <label class="item-input-wrapper">
             <input type="text" placeholder="住所" ng-model="input.address">
@@ -31,14 +32,14 @@
         </div>
       </div>
       <!-- Google map -->
-      <ion-content class="has-subheader maps">
+      <ion-content class="has-subheader maps" ng-init="init()" scroll="false">
         <div class="map-include"ng-include="'views/map.html'"></div>
       </ion-content>
     </ion-tab>
 
     <!-- Shops  -->
-    <ion-tab title="Food" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
-      <ion-content>
+    <ion-tab title="FOOD" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
+      <ion-content ng-init="init()">
         <div ng-include="'views/shops.html'"></div>
       </ion-content>
     </ion-tab>

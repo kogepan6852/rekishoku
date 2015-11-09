@@ -324,6 +324,7 @@ DEPENDENCIES
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   pg
   rack-cors
   rails (= 4.2.0)

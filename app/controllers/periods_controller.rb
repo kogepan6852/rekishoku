@@ -1,9 +1,16 @@
 class PeriodsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_period, only: [:show, :edit, :update, :destroy]
 
   # GET /periods
   # GET /periods.json
   def index
+    @periods = Period.all
+  end
+
+  # GET /periods/api
+  # GET /periods/api.json
+  def api
     @periods = Period.all
   end
 

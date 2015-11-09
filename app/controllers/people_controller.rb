@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  load_and_authorize_resource
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_action :set_periods, only: [:new, :edit]
   before_action :set_peoplecategories, only: [:new, :edit]
@@ -6,6 +7,11 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
+    @people = Person.all
+  end
+  # GET /people/api
+  # GET /people/api.json
+  def api
     @people = Person.all
   end
 
