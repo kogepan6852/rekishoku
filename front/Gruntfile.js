@@ -155,6 +155,7 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
+      options: { force: true },
       dist: {
         files: [{
           dot: true,
@@ -520,5 +521,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-  grunt.registerTask('heroku:production', 'build');
+  grunt.registerTask('heroku:production', [
+    'build'
+  ]);
 };
