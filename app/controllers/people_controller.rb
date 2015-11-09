@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_action :set_periods, only: [:new, :edit]
+  before_action :set_peoplecategories, only: [:new, :edit]
 
   # GET /people
   # GET /people.json
@@ -20,7 +21,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-
   end
 
   # POST /people
@@ -73,8 +73,12 @@ class PeopleController < ApplicationController
       @periods = Period.all
     end
 
+    def set_peoplecategories
+      @people_categories = PersonCategory.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:name, :furigana, :id, :period_ids => [])
+      params.require(:person).permit(:name, :furigana, :id, :period_ids => [], :category_ids => [])
     end
 end

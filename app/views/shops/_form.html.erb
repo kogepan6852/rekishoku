@@ -20,6 +20,19 @@
     <%= f.label :説明 %><br>
     <%= f.text_area :description ,:class => "form-control" %>
   </div><br><hr><br>
+  <table class="table table-hover">
+    <% @shops_categories.each do |shop_category| %>
+      <%= f.fields_for :categories_shop do |cs| %>
+        <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+          <thead>
+            <tr>
+              <th><%= shop_category.name %></th>
+              <td><%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %></td>
+            </tr>
+          </thead>
+      <% end %>
+    <% end %>
+  </table>
   <div class="center">
     <%= f.label :URL %><br>
     <%= f.text_field :url ,:class => "form-control" %>

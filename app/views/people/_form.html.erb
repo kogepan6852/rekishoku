@@ -44,6 +44,21 @@
       <% end %>
     </table>
 
+    <table class="table table-hover">
+      <% @people_categories.each do |person_category| %>
+        <%= f.fields_for :categories_people do |cp| %>
+          <% checked = person_category.people.exists?(@person.id) ? true : false %>
+            <thead>
+              <tr>
+                <th><%= person_category.name %></th>
+                <td><%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %></td>
+              </tr>
+            </thead>
+        <% end %>
+      <% end %>
+    </table>
+
+
   <div class="center">
     <%= f.submit :class=>"btn" %>
   </div>

@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :set_shopscategories, only: [:new, :edit]
 
   # GET /shops
   # GET /shops.json
@@ -117,8 +118,12 @@ class ShopsController < ApplicationController
       @shop = Shop.find(params[:id])
     end
 
+    def set_shopscategories
+      @shops_categories = ShopCategory.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu,:province ,:city)
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [])
     end
 end
