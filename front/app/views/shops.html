@@ -1,7 +1,17 @@
+<ion-refresher
+  pulling-text="Pull to refresh..."
+  on-refresh="init()">
+</ion-refresher>
+
 <div class="row">
   <div class="col main-category">
     <div class="button-bar">
-      <a class="button" ng-repeat="category in categories" ng-bind-html="category.name"></a>
+      <a class="button"
+        ng-repeat="category in categories"
+        ng-click="search({{category.id}})"
+        ng-bind-html="category.name"
+        ng-class="{active: targetCategoryId == category.id}"
+      ></a>
     </div>
   </div>
 </div>
@@ -10,17 +20,22 @@
   <ul class="item-list">
     <li class="overlay-image" ng-repeat="result in results">
       <div class="thumbnail-image">
-        <img ng-src="{{result.image.image.md.url}}">
+        <img ng-src="{{result.shop.image.md.url}}">
       </div>
       <div class="shop-content">
         <div>
-          <div class="category-name">お茶・コース</div>
-          <div class="h4 item-name">{{result.name}}</div>
-          <div class="item-address" ng-if="result.address1">{{result.province}}</div>
-          <div class="item-address" ng-if="!result.address1">-</div>
+          <div class="category-name" category-list data="result.categories" ></div>
+          <div class="h4 item-name">{{result.shop.name}}</div>
+          <div class="item-address" ng-if="result.shop.address1">{{result.shop.province}}</div>
+          <div class="item-address" ng-if="!result.shop.address1">-</div>
         </div>
       </div>
-      <a class="link" ui-sref="shop({id:result.id})"></a>
+      <a class="link" ui-sref="shop({id:result.shop.id})"></a>
     </li>
   </ul>
 </div>
+
+<ion-infinite-scroll
+  ng-if="!noMoreLoad"
+  on-infinite="loadMoreData()">
+</ion-infinite-scroll>

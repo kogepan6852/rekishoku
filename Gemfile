@@ -47,6 +47,8 @@ gem 'fog'
 # admin
 gem 'rails_admin'
 
+# paging
+gem 'kaminari'
 
 # bootstrap
 gem 'bootstrap-sass', '3.3.5.1'

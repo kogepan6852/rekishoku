@@ -20,7 +20,9 @@ angular.module "frontApp"
       $rootScope.isLogin = false
     else
       $rootScope.isLogin = true
-
+    $scope.showLogin = false
+    if $location.search()["showLogin"]
+      $scope.showLogin = true
 
     # 初期処理
     clearInput = ->
@@ -87,8 +89,7 @@ angular.module "frontApp"
                 delete $sessionStorage['token']
                 delete $sessionStorage['email']
                 delete $sessionStorage['user_id']
-                if $rootScope.postListInit
-                  $rootScope.postListInit()
+                $location.path('/home/');
           }
         ])
 

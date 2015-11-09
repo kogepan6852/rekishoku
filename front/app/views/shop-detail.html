@@ -1,7 +1,7 @@
 <ion-view title="">
   <ion-content has-header="true" class="padding-top">
 
-    <div class="row">
+    <div class="row row-bottom">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="post-title">
           <h1>{{shop.name}}</h1>
@@ -13,11 +13,37 @@
         <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
       </div>
     </div>
-    <div class="row">
+    <div class="row row-top row-bottom bg-gray">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="detail-image"><img ng-src="{{shop.subimage.url}}"></div>
-        <div class="shop-menu" ng-if="shop.menu"><p>MENU:{{shop.menu}}</p></div>
-        <div class="shop-url" ng-if="shop.url"><p>URL:{{shop.url}}</p></div>
+        <div class="shop-info">
+          <div class="shop-info-row">
+            <div class="shop-info-col">店舗名</div>
+            <div>{{shop.name}}</div>
+          </div>
+          <div class="shop-info-row">
+            <div class="shop-info-col">URL</div>
+            <div><a href="{{shop.url}}" target="_blank">{{shop.url}}</a></div>
+          </div>
+          <div class="shop-info-row">
+            <div class="shop-info-col">所在地</div>
+            <div>
+              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}">
+                {{shop.province + shop.city + shop.address1 + shop.address2}}
+              </a>
+            </div>
+          </div>
+          <div class="shop-info-row">
+            <div class="shop-info-col">MENU</div>
+            <div ng-bind-html="shop.menu | newlines"></div>
+          </div>
+        </div>
+        <div class="detail-map">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+              <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
+              </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
       </div>
     </div>
     <div class="row row-top" ng-if="posts.length!=0">

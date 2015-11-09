@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   get 'users/index'
   get 'users/show'
+  get 'shops/api'
+  get 'people/api'
+  get 'periods/api'
 
   resources :people_posts
 

@@ -13,7 +13,9 @@ angular.module "frontApp"
     # setting
 
     # initialize
-    Api.getJson("", Const.API.USER + '.json').then (res) ->
-      $scope.users = res.data
+    $scope.init = ->
+      Api.getJson("", Const.API.USER + '.json').then (res) ->
+        $scope.users = res.data
+        $scope.$broadcast 'scroll.refreshComplete'
 
     # Function

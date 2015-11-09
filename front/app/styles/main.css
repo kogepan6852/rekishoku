@@ -24,10 +24,10 @@ p { color: #555; }
   bottom: 5%;
 }
 .row-top {
-  padding-top: 25px!important;
+  padding-top: 35px!important;
 }
 .row-bottom {
-  padding-bottom: 25px!important;
+  padding-bottom: 35px!important;
 }
 
 /* modal-post*/
@@ -268,7 +268,7 @@ ion-view .has-subheader {
   max-height: 82px;
   overflow: hidden;
 }
-.item-list .category-name, .item-detail-list .category-name{
+.item-list .category-name{
   right: 10px;
   bottom: 15px;
 }
@@ -314,6 +314,10 @@ ion-view .has-subheader {
   color: rgb(76,42,76);
   border-color: rgb(76,42,76);
   background: transparent;
+}
+.main-category .button-bar .button.active {
+    background: rgb(76, 42, 76);
+    color: rgb(255, 255, 255);
 }
 .main-category .button-bar > .button:first-child {
     border-radius: 10px 0 0 10px;
@@ -361,7 +365,7 @@ ion-view .has-subheader {
 .post-title a {
   float: right;
   margin-bottom: 5px;
-  margin-top: 2px;
+  margin-top: 5px;
 }
 .post-title .category {
   background-color: rgba(76, 42, 76, 1);
@@ -444,6 +448,9 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name, .item-detail-list .item-address {
   bottom: 5px!important;
 }
+.item-detail-list .category-name {
+    right: 0px;
+}
 .detail-content .post-date {
   left: 10px;
   bottom: 5px;
@@ -461,26 +468,38 @@ form.post-modal, .post-modal .slider {
 .item-detail-list .category-name.shop-category{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 65px;
 }
 .detail-name {
   padding: 10px 10px 0;
   max-height: 50px;
   overflow: hidden;
 }
-
-
-/**********************
- * Shops
- **********************/
-.item-list .item-address, .item-detail-list .item-address {
+.item-detail-list .item-address {
   background-color: rgba(131, 81, 112, 1);
   bottom: 15px;
   color: #ffffff;
   font-size: 12px;
-  right: 5px;
+  right: 0px;
   line-height: 16px;
-  margin-right: 10px;
+  max-height: 21px;
+  overflow: hidden;
+  padding: 3px 8px;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  z-index: 100;
+}
+/**********************
+ * Shops
+ **********************/
+.item-list .item-address {
+  background-color: rgba(131, 81, 112, 1);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 12px;
+  right: 10px;
+  line-height: 16px;
   max-height: 21px;
   overflow: hidden;
   padding: 3px 8px;
@@ -492,7 +511,7 @@ form.post-modal, .post-modal .slider {
 .item-list .shop-content .category-name{
   bottom: 15px;
   float: right;
-  right: 80px;
+  right: 75px;
 }
 
 
@@ -532,10 +551,35 @@ form.post-modal, .post-modal .slider {
 }
 
 /**********************
+ * Shop detail
+ **********************/
+.shop-info {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.shop-info-item {
+  display: table;
+}
+.shop-info-row > div {
+  display: table-cell;
+}
+.shop-info-row .shop-info-col {
+  width: 60px;
+}
+.detail-map {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.detail-map .angular-google-map-container,
+.detail-map .angular-google-map{
+  height: 200px;
+}
+
+/**********************
  * Map page
  **********************/
 .search-bar {
-  padding: 0;
+  padding: 0 0 0 260px;
 }
 .search-bar label{
   max-width: 500px;
@@ -564,7 +608,18 @@ form.post-modal, .post-modal .slider {
   width:130px;
   height: auto;
 }
-
+.present-location {
+  position: absolute;
+  color: rgb(205, 97, 93)!important;
+  left: 5px;
+  top: 6px;
+  font-size: 16px!important;
+  z-index: 20;
+}
+.present-location::before {
+  font-size: 18px!important;
+  margin-right: 2px;
+}
 /**********************
  * Writers page
  **********************/
@@ -795,7 +850,7 @@ ion-modal-view { z-index: 11!important}
     bottom: 5px;
   }
   .main-content .category-name {
-    right: 5px!important;
+    right: 0px!important;
   }
   .main-content .post-date i{
     padding-right: 3px;
@@ -806,6 +861,13 @@ ion-modal-view { z-index: 11!important}
   .main-category .button-bar .button {
       font-size: 14px;
       text-overflow: initial;
+  }
+  /* Shop */
+  .item-list .item-address {
+    right: 0px;
+  }
+  .item-list .shop-content .category-name{
+    right: 65px;
   }
   /* Writer */
   .item-list .item-profile {
@@ -886,6 +948,17 @@ ion-modal-view { z-index: 11!important}
     margin-left: auto;
     margin-bottom: 5px;
   }
+  /* Map検索*/
+  .search-bar {
+    padding-left: 35px;
+  }
+  .present-location > span {
+    display: none;
+  }
+  .present-location::before {
+    font-size: 24px!important;
+  }
+
 
 }
 @media screen and (min-width:801px) and (max-width:1200px){
@@ -897,7 +970,7 @@ ion-modal-view { z-index: 11!important}
   .tab-header{ width: 20%;}
   .has-header { bottom: 0px; }
 
-  /* tab position */
+  /* tab */
   .tab-nav.tabs {
     background-position: center bottom;
     border-bottom-width: 1px;
@@ -905,6 +978,23 @@ ion-modal-view { z-index: 11!important}
     padding-top: 0;
     top: 0px;
   }
+  .tabs .tab-item{
+    font-size: 18px!important;
+    line-height: unset!important;
+  }
+  .tabs .tab-item .icon::before {
+    font-size: 24px;
+    line-height: 49px;
+  }
+  .tabs .tab-item .icon {
+    padding-right: 3px;
+  }
+  .tabs .tab-item .icon {
+    display: inline-block;
+    margin-top: -0.1em;
+    vertical-align: top;
+  }
+
   /* post image */
   .post-image{
     padding: 0 90px;
@@ -933,9 +1023,8 @@ ion-modal-view { z-index: 11!important}
     min-height: 34px;
   }
 
-  /* Map検索*/
-  .search-bar {
-    padding-left: 180px;
+  .present-location {
+    left: 180px;
   }
   /* detail page */
   .item-detail-list li .thumbnail-image {

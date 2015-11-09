@@ -7,7 +7,9 @@ class PostsController < ApplicationController
   def index
     @posts = Post.accessible_by(current_ability).joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
     if current_user
-        @posts = @posts.where(user_id: current_user.id)
+      @posts = @posts.where(user_id: current_user.id)
+    else
+      @posts = @posts.where(status: 1)
     end
 
     # フリーワードとカテゴリ検索を行なう
@@ -15,9 +17,9 @@ class PostsController < ApplicationController
       @posts = @posts.where('title LIKE ? || content LIKE ?', params[:text],params[:text],params[:text])
     end
     if params[:category]
-      @posts = @posts.where('category_id == ?', params[:category])
+      @posts = @posts.where(category_id: params[:category].to_i)
     end
-    render json: @posts
+    render json: @posts.page(params[:page]).per(params[:per])
   end
 
   # GET /posts/1
@@ -60,9 +62,12 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    category = PostCategory.find_by(slug: params[:slug])
+    if post_params[:status].blank?
+      category = PostCategory.find_by(slug: params[:slug])
+      post_params.merge(category_id: category.id)
+    end
     respond_to do |format|
-      if @post.update(post_params.merge(category_id: category.id))
+      if @post.update(post_params)
         format.json { render :show, status: :ok, location: @post }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
