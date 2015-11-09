@@ -17,6 +17,11 @@ Category.create(:name => '食事', :slug =>'meal', :type =>'ShopCategory')
 Category.create(:name => 'コース', :slug =>'course', :type =>'ShopCategory')
 Category.create(:name => 'WEB', :slug =>'online', :type =>'ShopCategory')
 
+Category.create(:name => '文化人', :slug =>'cultural_figures', :type =>'PersonCategory')
+Category.create(:name => '文豪', :slug =>'literary_master', :type =>'PersonCategory')
+Category.create(:name => '武将', :slug =>'military_commander', :type =>'PersonCategory')
+Category.create(:name => '貴族', :slug =>'aristocracy', :type =>'PersonCategory')
+
 Period.create(:name => '古墳時代以前')
 Period.create(:name => '飛鳥時代')
 Period.create(:name => '奈良時代')
