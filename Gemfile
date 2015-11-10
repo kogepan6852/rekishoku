@@ -47,8 +47,10 @@ gem 'fog'
 # admin
 gem 'rails_admin'
 
-# paging
-gem 'kaminari'
+# 本番完了コンパイル用
+group :production do
+  gem 'browserify-rails'
+end
 
 # bootstrap
 gem 'bootstrap-sass', '3.3.5.1'
