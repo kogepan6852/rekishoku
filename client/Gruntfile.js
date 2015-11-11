@@ -522,21 +522,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('heroku:production', [
-    'clean:dist',
-    'ngconstant:' + env,
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
+    'build'
   ]);
 };
