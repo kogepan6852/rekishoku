@@ -41,6 +41,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "gifsicle": "~3.0.1"
+    "imagemin-gifsicle": "~4.2.0"
   }
 }
