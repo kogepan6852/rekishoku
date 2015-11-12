@@ -11,10 +11,11 @@
 /log/*
 !/log/.keep
 /tmp
+.tmp
 
 /vendor/bundle
-/front/node_modules
-/front/.tmp
-/front/app/scripts/config/
+/client/node_modules
+/client/.tmp
+/client/app/scripts/config/
 
 /public/*
