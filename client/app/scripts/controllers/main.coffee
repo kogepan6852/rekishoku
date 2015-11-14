@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $ionicSideMenuDelegate, Api, Const) ->
+  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # setting
     $scope.targetCategoryId = null
