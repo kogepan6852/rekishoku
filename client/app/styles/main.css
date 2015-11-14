@@ -300,10 +300,9 @@ ion-view .has-subheader {
   border-radius: 10px;
   z-index: 100;
 }
-.overlay-image .link:hover, .overlay-image .link.activated {
+.overlay-image .link:active, .overlay-image .link.activated {
   opacity: 0.4;
   transition-property: opacity;
-  transition-duration:0.3s;
   transition-timing-function:ease-in-out;
 }
 .main-category {
@@ -314,6 +313,8 @@ ion-view .has-subheader {
   color: rgb(76,42,76);
   border-color: rgb(76,42,76);
   background: transparent;
+  line-height: 32px;
+  min-height: 32px;
 }
 .main-category .button-bar .button.active {
     background: rgb(76, 42, 76);
@@ -936,6 +937,19 @@ ion-modal-view { z-index: 11!important}
     position: absolute;
     top: -3px;
     width: 70px;
+  }
+
+  /* tab */
+  .has-tabs.pane, .bar-footer.has-tabs.pane {
+    bottom: 40px;
+  }
+  .tabs {
+    height: 40px;
+    line-height: 40px;
+  }
+  .tab-item .icon {
+    font-size: 26px!important;
+    height: 25px!important;
   }
 
   /* detail page */
