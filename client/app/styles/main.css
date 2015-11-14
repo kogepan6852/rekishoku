@@ -129,7 +129,7 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none}
  * Icon
  **********************/
 .reki-icon {
-  background-image: url("../images/icons/reki.png");
+  background-image: url("../images/reki.png");
   background-repeat: no-repeat;
   background-position: left;
   background-size:contain;
@@ -290,7 +290,7 @@ ion-view .has-subheader {
   line-height: 100%;
 }
 .overlay-image .link {
-  background: #000 url("../images/icons/link.png") no-repeat scroll center center;
+  background: #000 url("../images/link.png") no-repeat scroll center center;
   left: 0px;
   position: absolute;
   top: 0px;
