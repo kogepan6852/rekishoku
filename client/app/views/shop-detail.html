@@ -1,4 +1,7 @@
 <ion-view title="">
+  <!-- header -->
+  <div class="bar bar-header"></div>
+
   <ion-content has-header="true" class="padding-top">
 
     <div class="row row-bottom">
@@ -9,8 +12,9 @@
           <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}"><i class="icon ion-ios-location"></i>{{shop.province + shop.city + shop.address1 + shop.address2}}</a>
         </div>
         <div class="detail-image"><img ng-src="{{shop.image.url}}"></div>
-        <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.quotation_name}}</a></div>
+        <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a></div>
         <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
+        <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.post_quotation_url}}" target="_blank">{{shop.post_quotation_name}}</a></div>
       </div>
     </div>
     <div class="row row-top row-bottom bg-gray">

@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $stateParams, $sessionStorage, Api, Const) ->
+  .controller "ShopDetailCtrl", ($scope, $stateParams, $sessionStorage, $controller, Api, Const) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # 変数設定
     $scope.targetId = $stateParams.id

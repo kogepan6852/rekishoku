@@ -8,10 +8,16 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "BaseCtrl", ($scope, $rootScope, Api, Const) ->
+  .controller "BaseCtrl", ($scope, $rootScope, Api, Const, $location, $ionicNavBarDelegate) ->
+    
+    path = $location.path()
+    if path.indexOf('home') != -1 || path.indexOf('writers') != -1 || path.indexOf('my-post') != -1
+      $ionicNavBarDelegate.showBackButton false
+    else
+      $ionicNavBarDelegate.showBackButton true
 
-    $scope.onDragUp = ->
+    $scope.onDragUpScroll = ->
       $rootScope.isDown = true
 
-    $scope.onDragDown = ->
+    $scope.onDragDownScroll = ->
       $rootScope.isDown = false

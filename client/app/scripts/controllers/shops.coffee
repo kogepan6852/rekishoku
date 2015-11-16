@@ -12,6 +12,9 @@ angular.module "frontApp"
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
+    
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # setting
     $scope.targetCategoryId = null

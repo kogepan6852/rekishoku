@@ -1,20 +1,10 @@
-<ion-view title="">
-  <ion-nav-bar class="header tab-header" animation="slide-left-right" nav-transition="ios">
-    <div class="bar bar-header top">
-      <h1 class="title hidden">歴食</h1>
-      <div class="logo"></div>
-    </div>
-    <nav class="fix-nav" ng-controller="HeaderCtrl">
-      <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
-    </nav>
-  </ion-nav-bar>
-
+<ion-view title="" hide-back-button="true">
 
   <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios" ng-class="{down: isDown}">
 
     <!-- Main  -->
     <ion-tab title="STORY" icon="ion-ios-list-outline" ng-controller="MainCtrl">
-      <ion-content ng-init="init()" on-drag-up="onDragUp()" on-drag-down="onDragDown()">
+      <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
         <div ng-include="'views/main.html'"></div>
       </ion-content>
     </ion-tab>
@@ -39,7 +29,7 @@
 
     <!-- Shops  -->
     <ion-tab title="FOOD" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
-      <ion-content ng-init="init()" on-drag-up="onDragUp()" on-drag-down="onDragDown()">
+      <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
         <div ng-include="'views/shops.html'"></div>
       </ion-content>
     </ion-tab>

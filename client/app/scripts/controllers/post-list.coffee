@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, Api, Const, toaster) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/parts/modal-post.html',

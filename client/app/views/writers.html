@@ -1,14 +1,6 @@
-<ion-view title="" ng-init="init()">
-  <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios">
-    <div class="bar bar-header top">
-      <h1 class="title hidden">歴食</h1>
-      <div class="logo"></div>
-    </div>
-    <nav class="fix-nav" ng-controller="HeaderCtrl">
-      <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
-    </nav>
-  </ion-nav-bar>
-
+<ion-view title="" ng-init="init()" hide-back-button="true">
+  <!-- header -->
+  <div class="bar bar-header"></div>
 
   <ion-content class="padding-top">
     <ion-refresher

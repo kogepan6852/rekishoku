@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $stateParams, $ionicModal, $sessionStorage, Api, Const, toaster) ->
+  .controller "WriterDetailCtrl", ($scope, $stateParams, $ionicModal, $sessionStorage, $controller, Api, Const, toaster) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # setting
     $ionicModal.fromTemplateUrl('views/parts/modal-profile-edit.html',

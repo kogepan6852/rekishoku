@@ -111,9 +111,9 @@ input[readonly].item-input-wrapper {
 /* link */
 /*a { color: rgb(88,43,95);}*/
 a { color: rgb(205,97,93);}
-a:hover { color: rgb(205, 140, 137); text-decoration: none}
-.tabs { background-color: rgb(205,97,93); color: #fff; border: none; }
-.bar-header { border-bottom: none !important; }
+a:hover { color: rgb(205, 140, 137); text-decoration: none;}
+.tabs { background-color: rgb(205,97,93); color: #fff; border: none; height: 44px;}
+.bar-header { border-bottom: none !important; background-color: rgb(205,97,93);}
 .bar-header.my-post-header { border: none; }
 .nav-bar-container .nav-bar-block[nav-bar="active"] { z-index: 999; }
 .nav-bar-container .nav-bar-block ion-header-bar { width: 20%; }
@@ -142,14 +142,14 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none}
 .top {
    z-index: 20;
    padding: 0 15px;
-   height: 49px;
+   height: 44px;
    min-width: 180px;
 }
 ion-view .has-header {
-    top: 49px;
+    top: 44px;
 }
 ion-view .has-subheader {
-  top: 94px;
+  top: 90px;
 }
 .bar-subheader.edit-menu .button, .bar-subheader.edit-menu .button::after {
   max-width: 150px;
@@ -163,7 +163,7 @@ ion-view .has-subheader {
 
 .header{
   position: fixed;
-  height: 49px;
+  height: 44px;
   background: transparent;
 
   background-image: none;
@@ -173,7 +173,7 @@ ion-view .has-subheader {
   border-bottom: 1px solid rgb(212,212,212);
 }
 .bar-subheader {
-  top: 49px;
+  top: 44px;
   background-color: transparent;
   border: none;
   height: 46px;
@@ -290,7 +290,8 @@ ion-view .has-subheader {
   line-height: 100%;
 }
 .overlay-image .link {
-  background: #000 url("../images/link.png") no-repeat scroll center center;
+  /*background: #000 url("../images/link.png") no-repeat scroll center center;*/
+  background-color: #000;
   left: 0px;
   position: absolute;
   top: 0px;
@@ -301,7 +302,7 @@ ion-view .has-subheader {
   z-index: 100;
 }
 .overlay-image .link:active, .overlay-image .link.activated {
-  opacity: 0.4;
+  opacity: 0.1;
   transition-property: opacity;
   transition-timing-function:ease-in-out;
 }
@@ -893,13 +894,13 @@ ion-modal-view { z-index: 11!important}
 @media screen and (max-width:800px){
   .top { width: 100%; }
   .logo {
-    width: 107px;
-    height: 60px;
+    width: 89px;
+    height: 50px;
     background: rgba(0, 0, 0, 0) url("../images/logo-sm.png") no-repeat scroll 0 0 / contain ;
     background-color: #fff;
     position: absolute;
     left: 50%;
-    margin-left: -63px;
+    margin-left: -48px;
   }
   /* modal */
   .big-modal {
@@ -921,6 +922,7 @@ ion-modal-view { z-index: 11!important}
     vertical-align: middle;
   }
   /* header */
+  .bar-header { background-color: transparent;}
   .fix-nav i { color: #000; }
   .header .bar.top { background-color: transparent; }
   .button-back {
@@ -937,6 +939,10 @@ ion-modal-view { z-index: 11!important}
     position: absolute;
     top: -3px;
     width: 70px;
+  }
+  .button-back.activated {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    box-shadow: none!important;
   }
 
   /* tab */
@@ -1025,6 +1031,9 @@ ion-modal-view { z-index: 11!important}
   .bar-header.my-post-header {
     background-color: rgb(205,97,93);
     height: 49px;
+  }
+  .header {
+    width: 180px;
   }
   /* modal */
   .modal-open .modal {

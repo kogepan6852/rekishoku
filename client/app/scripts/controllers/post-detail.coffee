@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $stateParams, $ionicHistory, $sessionStorage, Api, Const) ->
+  .controller "PostDetailCtrl", ($scope, $stateParams, $ionicHistory, $sessionStorage, $controller, Api, Const) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # 変数設定
     $scope.targetId = $stateParams.id

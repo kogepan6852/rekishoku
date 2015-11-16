@@ -30,15 +30,15 @@
 
   <ion-side-menu-content animation="slide-left-right" nav-transition="ios">
 
-    <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios">
+    <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios" ng-controller="HeaderCtrl">
       <div class="bar bar-header top">
         <h1 class="title hidden">歴食</h1>
-        <div class="logo"></div>
+        <div class="logo" ng-click="moveToHome()"></div>
       </div>
       <nav class="fix-nav" ng-controller="HeaderCtrl">
         <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
       </nav>
-      <ion-nav-back-button class="button-back">
+      <ion-nav-back-button class="button-back" hide-back-button="true">
         <i class="ion-chevron-left"></i> Back
       </ion-nav-back-button>
       <!-- <div ng-include="'views/aside.html'"></div> -->

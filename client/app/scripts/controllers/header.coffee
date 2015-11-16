@@ -116,3 +116,6 @@ angular.module "frontApp"
       userId = $sessionStorage['user_id']
       $location.path('/writer/' + userId);
       $ionicSideMenuDelegate.toggleRight();
+
+    $scope.moveToHome = ->
+      $location.path('/home')

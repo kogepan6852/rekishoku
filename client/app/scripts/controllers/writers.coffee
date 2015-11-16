@@ -8,7 +8,10 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WritersCtrl", ($scope, $ionicSideMenuDelegate, Api, Const) ->
+  .controller "WritersCtrl", ($scope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
 
     # setting
 
