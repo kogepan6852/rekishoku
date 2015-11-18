@@ -14,7 +14,7 @@
         <div class="detail-image"><img ng-src="{{shop.image.url}}"></div>
         <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a></div>
         <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
-        <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.post_quotation_url}}" target="_blank">{{shop.post_quotation_name}}</a></div>
+        <div class="post-quotation" ng-if="shop.post_quotation_url">掲載元：<a href="{{shop.post_quotation_url}}" target="_blank">{{shop.post_quotation_name}}</a></div>
       </div>
     </div>
     <div class="row row-top row-bottom bg-gray">
