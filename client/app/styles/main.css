@@ -962,7 +962,7 @@ ion-modal-view { z-index: 11!important}
     font-size: 30px!important;
     height: 29px!important;
   }
-  .down .tabs {
+  .down .tabs, .hide-tab .tabs {
     bottom: -44px;
   }
 

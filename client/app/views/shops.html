@@ -1,41 +1,47 @@
-<ion-refresher
-  pulling-text="Pull to refresh..."
-  on-refresh="init()">
-</ion-refresher>
+<ion-view title="">
+  <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
 
-<div class="row">
-  <div class="col main-category">
-    <div class="button-bar">
-      <a class="button"
-        ng-repeat="category in categories"
-        ng-click="search({{category.id}})"
-        ng-bind-html="category.name"
-        ng-class="{active: targetCategoryId == category.id}"
-      ></a>
-    </div>
-  </div>
-</div>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="init()">
+    </ion-refresher>
 
-<div class="main">
-  <ul class="item-list">
-    <li class="overlay-image" ng-repeat="result in results">
-      <div class="thumbnail-image">
-        <img ng-src="{{result.shop.subimage.md.url}}">
-      </div>
-      <div class="shop-content">
-        <div>
-          <div class="category-name" category-list data="result.categories" ></div>
-          <div class="h4 item-name">{{result.shop.name}}</div>
-          <div class="item-address" ng-if="result.shop.address1">{{result.shop.province}}</div>
-          <div class="item-address" ng-if="!result.shop.address1">-</div>
+    <div class="row">
+      <div class="col main-category">
+        <div class="button-bar">
+          <a class="button"
+            ng-repeat="category in categories"
+            ng-click="search({{category.id}})"
+            ng-bind-html="category.name"
+            ng-class="{active: targetCategoryId == category.id}"
+          ></a>
         </div>
       </div>
-      <a class="link" ui-sref="shop({id:result.shop.id})"></a>
-    </li>
-  </ul>
-</div>
+    </div>
 
-<ion-infinite-scroll
-  ng-if="!noMoreLoad"
-  on-infinite="loadMoreData()">
-</ion-infinite-scroll>
+    <div class="main">
+      <ul class="item-list">
+        <li class="overlay-image" ng-repeat="result in results">
+          <div class="thumbnail-image">
+            <img ng-src="{{result.shop.subimage.md.url}}">
+          </div>
+          <div class="shop-content">
+            <div>
+              <div class="category-name" category-list data="result.categories" ></div>
+              <div class="h4 item-name">{{result.shop.name}}</div>
+              <div class="item-address" ng-if="result.shop.address1">{{result.shop.province}}</div>
+              <div class="item-address" ng-if="!result.shop.address1">-</div>
+            </div>
+          </div>
+          <a class="link" ui-sref="tabs.shop({id:result.shop.id})"></a>
+        </li>
+      </ul>
+    </div>
+
+    <ion-infinite-scroll
+      ng-if="!noMoreLoad"
+      on-infinite="loadMoreData()">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

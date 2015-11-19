@@ -17,6 +17,7 @@ angular.module "frontApp"
     $scope.targetCategoryId = null
     $scope.page = 1
     $scope.noMoreLoad = false
+    $rootScope.isHideTab = false
 
     # initialize
     categoryObj =

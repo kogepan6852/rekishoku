@@ -8,11 +8,8 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const) ->
 
-    # Controllerの継承
-    $controller 'BaseCtrl', $scope: $scope
-    
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
@@ -20,6 +17,7 @@ angular.module "frontApp"
     $scope.targetCategoryId = null
     $scope.page = 1
     $scope.noMoreLoad = false
+    $rootScope.isHideTab = false
 
     # initialize
     categoryObj =

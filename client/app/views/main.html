@@ -1,40 +1,46 @@
-<ion-refresher
-  pulling-text="Pull to refresh..."
-  on-refresh="init()">
-</ion-refresher>
+<ion-view title="">
+  <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
 
-<div class="row">
-  <div class="col main-category">
-    <div class="button-bar">
-      <a class="button"
-        ng-repeat="category in categories"
-        ng-click="search({{category.id}})"
-        ng-bind-html="category.name | rekishokuText"
-        ng-class="{active: targetCategoryId == category.id}"
-      ></a>
-    </div>
-  </div>
-</div>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="init()">
+    </ion-refresher>
 
-<div class="main">
-  <ul class="item-list">
-    <li class="overlay-image" ng-repeat="post in posts">
-      <div class="thumbnail-image">
-        <img ng-src="{{post.image.md.url}}">
-      </div>
-      <div class="main-content">
-        <div>
-          <div class="category-name">{{post.category_name}}</div>
-          <div class="h4 item-name">{{post.title}}</div>
-          <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
+    <div class="row">
+      <div class="col main-category">
+        <div class="button-bar">
+          <a class="button"
+            ng-repeat="category in categories"
+            ng-click="search({{category.id}})"
+            ng-bind-html="category.name | rekishokuText"
+            ng-class="{active: targetCategoryId == category.id}"
+          ></a>
         </div>
       </div>
-      <a class="link" ui-sref="post({id:post.id})"></a>
-    </li>
-  </ul>
-</div>
+    </div>
 
-<ion-infinite-scroll
-  ng-if="!noMoreLoad"
-  on-infinite="loadMoreData()">
-</ion-infinite-scroll>
+    <div class="main">
+      <ul class="item-list">
+        <li class="overlay-image" ng-repeat="post in posts">
+          <div class="thumbnail-image">
+            <img ng-src="{{post.image.md.url}}">
+          </div>
+          <div class="main-content">
+            <div>
+              <div class="category-name">{{post.category_name}}</div>
+              <div class="h4 item-name">{{post.title}}</div>
+              <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
+            </div>
+          </div>
+          <a class="link" ui-sref="tabs.post({id:post.id})" nav-direction="forward"></a>
+        </li>
+      </ul>
+    </div>
+
+    <ion-infinite-scroll
+      ng-if="!noMoreLoad"
+      on-infinite="loadMoreData()">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

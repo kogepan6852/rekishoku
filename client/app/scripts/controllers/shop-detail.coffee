@@ -8,13 +8,14 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $stateParams, $sessionStorage, $controller, Api, Const) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $sessionStorage, $controller, $state, Api, Const) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # 変数設定
     $scope.targetId = $stateParams.id
+    $rootScope.isHideTab = true
 
     # 初期処理
     Api.getJson("", Const.API.SHOP + '/' + $stateParams.id + '.json').then (res) ->
@@ -43,5 +44,14 @@ angular.module 'frontApp'
       ret['id'] = res.data.shop.id
       shops.push(ret)
       $scope.targetMarkers = shops
+
+    # 現在タブの判定
+    if $state.is('tabs.post') || $state.is('tabs.post-shop')
+      $scope.nowTab = 'post'
+    else if $state.is('tabs.map') || $state.is('tabs.map-shop') || $state.is('tabs.map-shop2')
+      $scope.nowTab = 'map'
+    else if $state.is('tabs.shop')
+      $scope.nowTab = 'shop'
+
 
     # Function

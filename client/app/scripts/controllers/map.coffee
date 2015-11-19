@@ -11,6 +11,7 @@ angular.module 'frontApp'
   .controller 'MapCtrl', ($scope, $rootScope, $window, $sessionStorage, $ionicSideMenuDelegate, Api, toaster, BaseService, Const) ->
 
     # 変数設定
+    $rootScope.isHideTab = false
     $scope.input = {
       address: null
     }

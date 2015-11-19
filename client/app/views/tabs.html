@@ -1,40 +1,25 @@
-<ion-view title="" hide-back-button="true">
+<ion-tabs
+  class="tabs-icon-top tabs-color-light"
+  animation="slide-left-right"
+  nav-transition="ios"
+  ng-class="{down: isDown, 'hide-tab': isHideTab}"
+  ng-controller="TabsCtrl">
 
-  <ion-tabs class="tabs-icon-top tabs-color-light" animation="slide-left-right" nav-transition="ios" ng-class="{down: isDown}">
+  <!-- Main  -->
+  <ion-tab title="STORY" icon="ion-ios-list-outline" ng-click="clickTab(0)">
+    <ion-nav-view name="home-tab"></ion-nav-view>
+  </ion-tab>
 
-    <!-- Main  -->
-    <ion-tab title="STORY" icon="ion-ios-list-outline" ng-controller="MainCtrl">
-      <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
-        <div ng-include="'views/main.html'"></div>
-      </ion-content>
-    </ion-tab>
 
-    <!-- Map  -->
-    <ion-tab title="MAP" icon="ion-ios-navigate-outline" ng-controller="MapCtrl">
-      <!-- Serach bar -->
-      <div class="bar bar-subheader bar-clear" align="right">
-        <button class="button button-clear icon-left ion-ios-location present-location" ng-click="init()"><span>現在地</span></button>
-        <div class="item-input-inset search-bar">
-          <label class="item-input-wrapper">
-            <input type="text" placeholder="住所" ng-model="input.address">
-          </label>
-          <button class="button button-small button-dark" ng-click="searchShops()">検索</button>
-        </div>
-      </div>
-      <!-- Google map -->
-      <ion-content class="has-subheader maps" ng-init="init()" scroll="false">
-        <div class="map-include"ng-include="'views/map.html'"></div>
-      </ion-content>
-    </ion-tab>
+  <!-- Map  -->
+  <ion-tab title="MAP" icon="ion-ios-navigate-outline" ng-click="clickTab(1)">
+    <ion-nav-view name="map-tab"></ion-nav-view>
+  </ion-tab>
 
-    <!-- Shops  -->
-    <ion-tab title="FOOD" icon="ion-android-restaurant" ng-controller="ShopsCtrl">
-      <ion-content ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
-        <div ng-include="'views/shops.html'"></div>
-      </ion-content>
-    </ion-tab>
 
-  </ion-tabs>
-</ion-view>
+  <!-- Shops  -->
+  <ion-tab title="FOOD" icon="ion-android-restaurant" ng-click="clickTab(2)">
+    <ion-nav-view name="shops-tab"></ion-nav-view>
+  </ion-tab>
 
-<script type="text/ng-template"></script>
+</ion-tabs>
