@@ -606,13 +606,13 @@ ion-content.maps {
   padding-bottom: 45px;
 }
 
-.gmap-windows h4 {
-  width:130px;
+.gmap-windows h5 {
+  width:100px;
   max-height: 44px;
   overflow: hidden;
 }
 .gmap-windows img {
-  width:130px;
+  width:100px;
   height: auto;
 }
 .present-location {

@@ -47,7 +47,7 @@ angular.module 'frontApp'
           longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj)
+        setMapData(obj, false)
       zoom_changed: (cluster, clusterModels) ->
         # GoogleMapの距離計算
         targetDistance = BaseService.calMapDistance(cluster.zoom)
@@ -55,7 +55,7 @@ angular.module 'frontApp'
           placeAddress: $scope.input.address
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj)
+        setMapData(obj, true)
 
     $scope.targetMarkers = []
 
@@ -66,7 +66,7 @@ angular.module 'frontApp'
           placeAddress: $rootScope.targetAddress
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj)
+        setMapData(obj, true)
 
       # 現在地の取得
       else if navigator.geolocation
@@ -79,7 +79,7 @@ angular.module 'frontApp'
             longitude: position.coords.longitude
             shopDistance: targetDistance
           # map表示用データの作成と設定
-          setMapData(obj)
+          setMapData(obj, true)
 
           ), (e) ->
             if typeof e == 'string'
@@ -95,10 +95,10 @@ angular.module 'frontApp'
         placeAddress: $scope.input.address
         shopDistance: targetDistance
       # map表示用データの作成と設定
-      setMapData(obj)
+      setMapData(obj, true)
 
-    setMapData = (obj) ->
-      Api.getJson(obj, Const.API.SHOP + "/api.json").then (resShops) ->
+    setMapData = (obj, isLoding) ->
+      Api.getJson(obj, Const.API.SHOP + "/api.json", isLoding).then (resShops) ->
         $scope.isRefresh = false
         # 検索データの保存
         $rootScope.latitude = resShops.data.current.latitude

@@ -18,7 +18,7 @@ angular.module 'frontApp'
     $rootScope.isHideTab = true
 
     # 初期処理
-    Api.getJson("", Const.API.SHOP + '/' + $stateParams.id + '.json').then (res) ->
+    Api.getJson("", Const.API.SHOP + '/' + $stateParams.id + '.json', true).then (res) ->
       $scope.shop = res.data.shop
       $scope.categories = res.data.categories
       $scope.posts = res.data.posts

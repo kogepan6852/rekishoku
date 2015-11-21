@@ -19,10 +19,11 @@ angular.module "frontApp"
         alertPopup.then (res) ->
 
     # data取得(GET)
-    getJson: (obj, path) ->
-      $ionicLoading.show(
-        template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
-        delay: 1000)
+    getJson: (obj, path, isLoading) ->
+      if isLoading
+        $ionicLoading.show(
+          template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+          delay: 1000)
       $http(
         method: 'GET'
         url: host + path

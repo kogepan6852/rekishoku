@@ -19,10 +19,10 @@ angular.module 'frontApp'
 
     # 初期処理
     path = Const.API.POST + '/' + $stateParams.id
-    Api.getJson("", path).then (res) ->
+    Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops
-      Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id).then (res) ->
+      Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id, true).then (res) ->
         $scope.postDetails = res.data
 
     # 現在タブの判定
