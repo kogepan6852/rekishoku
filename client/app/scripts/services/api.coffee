@@ -22,7 +22,7 @@ angular.module "frontApp"
     getJson: (obj, path) ->
       $ionicLoading.show(
         template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
-        delay: 500)
+        delay: 1000)
       $http(
         method: 'GET'
         url: host + path

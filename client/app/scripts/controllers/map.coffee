@@ -15,14 +15,22 @@ angular.module 'frontApp'
     $scope.input = {
       address: null
     }
+    $scope.isRefresh = true
 
     defaultZoom = 14
     targetDistance = BaseService.calMapDistance(defaultZoom)
 
+    # 初期位置の設定
+    latitude = 35.6813818
+    longitude = 139.7660838
+    if $rootScope.latitude & $rootScope.longitude
+      latitude = $rootScope.latitude
+      longitude = $rootScope.longitude
+
     $scope.map =
       center:
-        latitude: 35.6813818
-        longitude: 139.7660838
+        latitude: latitude
+        longitude: longitude
       zoom: defaultZoom
       bounds: {}
     $scope.options =
@@ -35,8 +43,8 @@ angular.module 'frontApp'
       dragend: (cluster, clusterModels) ->
         $ionicSideMenuDelegate.canDragContent(true)
         obj =
-          latitude: cluster.center.G
-          longitude: cluster.center.K
+          latitude: cluster.center.lat()
+          longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
         setMapData(obj)
@@ -53,8 +61,15 @@ angular.module 'frontApp'
 
     # 初期処理
     $scope.init = ->
+      if $rootScope.targetAddress
+        obj =
+          placeAddress: $rootScope.targetAddress
+          shopDistance: targetDistance
+        # map表示用データの作成と設定
+        setMapData(obj)
+
       # 現在地の取得
-      if navigator.geolocation
+      else if navigator.geolocation
         navigator.geolocation.getCurrentPosition ((position) ->
           $scope.map.center.latitude = position.coords.latitude
           $scope.map.center.longitude = position.coords.longitude
@@ -84,9 +99,14 @@ angular.module 'frontApp'
 
     setMapData = (obj) ->
       Api.getJson(obj, Const.API.SHOP + "/api.json").then (resShops) ->
+        $scope.isRefresh = false
+        # 検索データの保存
+        $rootScope.latitude = resShops.data.current.latitude
+        $rootScope.longitude = resShops.data.current.longitude
+        $rootScope.targetAddress = resShops.data.current.address
+        # mapデータ設定
         $scope.map.center.latitude = resShops.data.current.latitude
         $scope.map.center.longitude = resShops.data.current.longitude
-        $scope.input.address = resShops.data.current.address
         shops = []
         # map表示用データの作成
         angular.forEach resShops.data.shops, (shop, i) ->

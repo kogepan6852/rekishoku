@@ -14,8 +14,8 @@
   <ion-content class="has-subheader maps" ng-init="init()" scroll="false">
 
 
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="events" data-tap-disabled="true">
-        <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" refresh="isRefresh" ng-cloak>
+        <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker" doRebuildAll="true">
           <ui-gmap-windows show="show">
               <div ng-non-bindable class="gmap-windows">
                 <h4>{{title}}</h4>
