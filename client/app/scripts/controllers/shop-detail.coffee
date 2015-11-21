@@ -33,6 +33,7 @@ angular.module 'frontApp'
       $scope.options =
         scrollwheel: false
         minZoom: 11
+        draggable: false
 
       shops = []
       ret =
