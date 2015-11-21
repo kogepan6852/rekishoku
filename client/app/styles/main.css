@@ -989,9 +989,8 @@ ion-modal-view { z-index: 11!important}
     display: none;
   }
   .present-location::before {
-    font-size: 24px!important;
+    font-size: 28px!important;
   }
-
 
 }
 @media screen and (min-width:801px) and (max-width:1200px){

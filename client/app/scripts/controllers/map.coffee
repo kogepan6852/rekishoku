@@ -16,6 +16,7 @@ angular.module 'frontApp'
       address: null
     }
     $scope.isRefresh = true
+    $scope.isDragging = false;
 
     defaultZoom = 14
     targetDistance = BaseService.calMapDistance(defaultZoom)
@@ -40,6 +41,7 @@ angular.module 'frontApp'
     $scope.events =
       dragstart: (cluster, clusterModels) ->
         $ionicSideMenuDelegate.canDragContent(false)
+        $scope.isDragging = true;
       dragend: (cluster, clusterModels) ->
         $ionicSideMenuDelegate.canDragContent(true)
         obj =
@@ -105,8 +107,10 @@ angular.module 'frontApp'
         $rootScope.longitude = resShops.data.current.longitude
         $rootScope.targetAddress = resShops.data.current.address
         # mapデータ設定
-        $scope.map.center.latitude = resShops.data.current.latitude
-        $scope.map.center.longitude = resShops.data.current.longitude
+        if !$scope.isDragging
+          $scope.map.center.latitude = resShops.data.current.latitude
+          $scope.map.center.longitude = resShops.data.current.longitude
+        $scope.isDragging = false;
         shops = []
         # map表示用データの作成
         angular.forEach resShops.data.shops, (shop, i) ->
@@ -121,3 +125,7 @@ angular.module 'frontApp'
         $scope.targetMarkers = shops
 
     $scope.clickMarker = ($event) ->
+
+    $scope.moveToCurrentPlace = ->
+      $rootScope.targetAddress = null
+      $scope.init()
