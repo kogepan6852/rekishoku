@@ -13,18 +13,16 @@
   <!-- Google map -->
   <ion-content class="has-subheader maps" ng-init="init()" scroll="false" ng-if="map">
 
-
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" refresh="isRefresh" ng-cloak>
-        <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
-          <ui-gmap-windows show="show">
-              <div ng-non-bindable class="gmap-windows">
-                <h5>{{title}}</h5>
-                <a class="link" href="#/map-shop/{{id}}"><img src="{{url}}"></a>
-              </div>
-          </ui-gmap-windows>
-        </ui-gmap-markers>
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" ng-cloak>
+      <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
+        <ui-gmap-windows show="show">
+          <div ng-non-bindable class="gmap-windows">
+            <h5>{{title}}</h5>
+            <a class="link" href="#/map-shop/{{id}}"><img src="{{url}}"></a>
+          </div>
+        </ui-gmap-windows>
+      </ui-gmap-markers>
     </ui-gmap-google-map>
-
 
   </ion-content>
 </ion-view>

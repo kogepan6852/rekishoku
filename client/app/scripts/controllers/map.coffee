@@ -15,7 +15,6 @@ angular.module 'frontApp'
     $scope.input = {
       address: null
     }
-    $scope.isRefresh = true
     $scope.isDragging = false;
 
     defaultZoom = 14
@@ -27,6 +26,8 @@ angular.module 'frontApp'
     if $rootScope.latitude & $rootScope.longitude
       latitude = $rootScope.latitude
       longitude = $rootScope.longitude
+    if $rootScope.zoom
+      defaultZoom = $rootScope.zoom
 
     $scope.map =
       center:
@@ -37,6 +38,8 @@ angular.module 'frontApp'
     $scope.options =
       scrollwheel: false
       minZoom: 11
+    $scope.markerOptions =
+      icon: '../images/reki.png'
 
     $scope.events =
       dragstart: (cluster, clusterModels) ->
@@ -51,6 +54,7 @@ angular.module 'frontApp'
         # map表示用データの作成と設定
         setMapData(obj, false)
       zoom_changed: (cluster, clusterModels) ->
+        $rootScope.zoom = cluster.zoom
         # GoogleMapの距離計算
         targetDistance = BaseService.calMapDistance(cluster.zoom)
         obj =
@@ -101,7 +105,6 @@ angular.module 'frontApp'
 
     setMapData = (obj, isLoding) ->
       Api.getJson(obj, Const.API.SHOP + "/api.json", isLoding).then (resShops) ->
-        $scope.isRefresh = false
         # 検索データの保存
         $rootScope.latitude = resShops.data.current.latitude
         $rootScope.longitude = resShops.data.current.longitude
