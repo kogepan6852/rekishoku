@@ -587,6 +587,7 @@ form.post-modal, .post-modal .slider {
 .search-bar label{
   max-width: 500px;
   width: 60%;
+  height: 33px;
 }
 .search-bar input{
   width: 100%;
