@@ -591,7 +591,6 @@ form.post-modal, .post-modal .slider {
 }
 .search-bar input{
   width: 100%;
-  padding-bottom: 45px;
 }
 
 .search-bar .button{
@@ -603,6 +602,9 @@ form.post-modal, .post-modal .slider {
 .maps .angular-google-map,
 .maps .scroll,
 .maps .map-include { height: 100%; }
+ion-content.maps {
+  padding-bottom: 45px;
+}
 
 .gmap-windows h4 {
   width:130px;
