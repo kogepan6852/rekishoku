@@ -24,3 +24,4 @@ angular.module "frontApp"
 
     $scope.onDragDownScroll = ->
       $rootScope.isDown = false
+      $rootScope.isHideTab = false

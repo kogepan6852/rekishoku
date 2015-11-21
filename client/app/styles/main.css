@@ -19,6 +19,7 @@ p { color: #555; }
   padding-top: 40px;
   padding-bottom: 40px;
 }
+.has-header { bottom: 0px; }
 .big-modal {
   top: 5%;
   bottom: 5%;
@@ -996,7 +997,6 @@ ion-modal-view { z-index: 11!important}
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .tab-header{ width: 20%;}
-  .has-header { bottom: 0px; }
 
   /* tab */
   .tab-nav.tabs {

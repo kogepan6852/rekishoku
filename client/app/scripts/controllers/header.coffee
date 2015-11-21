@@ -124,3 +124,7 @@ angular.module "frontApp"
       # historyデータを削除する
       $ionicHistory.clearHistory();
       $ionicHistory.clearCache();
+
+    $scope.goBack = ->
+      $rootScope.isHideTab = false
+      $ionicHistory.goBack();
