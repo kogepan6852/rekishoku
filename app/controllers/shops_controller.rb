@@ -57,7 +57,7 @@ class ShopsController < ApplicationController
       # shopにカテゴリーを紐付ける
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
-        obj = { "shop" => shop, "categories" => shop.categories }
+        obj = { "shop" => shop, "categories" => shop.categories , "people" => shop.people}
         newShops.push(obj);
       end
       shops = newShops

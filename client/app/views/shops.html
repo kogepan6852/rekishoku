@@ -27,10 +27,10 @@
           </div>
           <div class="shop-content">
             <div>
-              <div class="category-name" category-list data="result.categories" ></div>
+              <div class="category-name" ng-if="result.people.length!=0" people-list data="result.people" ></div>
               <div class="h4 item-name">{{result.shop.name}}</div>
-              <div class="item-address" ng-if="result.shop.address1">{{result.shop.province}}</div>
-              <div class="item-address" ng-if="!result.shop.address1">-</div>
+              <div class="item-address" ng-if="result.shop.province">{{result.shop.province}}</div>
+              <div class="item-address" ng-if="!result.shop.province">-</div>
             </div>
           </div>
           <a class="link" ui-sref="tabs.shop({id:result.shop.id})"></a>

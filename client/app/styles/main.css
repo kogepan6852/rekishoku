@@ -516,6 +516,9 @@ form.post-modal, .post-modal .slider {
   float: right;
   right: 75px;
 }
+.item-list .shop-content .category-name .small{
+  padding-left: 3px;
+}
 
 
 /**********************
