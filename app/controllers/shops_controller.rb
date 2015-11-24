@@ -2,6 +2,7 @@ class ShopsController < ApplicationController
   load_and_authorize_resource
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
   before_action :set_shopscategories, only: [:new, :edit]
+  before_action :set_peopleshops, only: [:new, :edit]
 
   # GET /shops
   # GET /shops.json
@@ -146,8 +147,12 @@ class ShopsController < ApplicationController
       @shops_categories = ShopCategory.all
     end
 
+    def set_peopleshops
+      @people = Person.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
     end
 end
