@@ -114,7 +114,7 @@ angular.module "frontApp"
 
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
-      Api.getJson("", Const.API.SHOP + '.json', true).then (resShop) ->
+      Api.getJson("", Const.API.SHOP + '/api.json', true).then (resShop) ->
         $scope.shops = resShop.data
         # 紐づく店舗を取得する
         obj =
@@ -379,7 +379,7 @@ angular.module "frontApp"
       shopIds = []
       angular.forEach $scope.shops, (shop) ->
         if shop.checked
-          shopIds.push(shop.id)
+          shopIds.push(shop.shop.id)
 
       obj =
         post_id: $scope.targetPostId
