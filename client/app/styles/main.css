@@ -245,6 +245,18 @@ ion-view .has-subheader {
   top: 0;
   width: auto;
 }
+.thumbnail-image .post-count {
+   position: absolute;
+   z-index: 100;
+   top: 5px;
+   left: 5px;
+   color: #fff;
+   font-weight: 900;
+}
+.thumbnail-image .post-count i {
+   padding-right: 3px;
+}
+
 .sysCartButton {
     display: block;
     width: 100%;
