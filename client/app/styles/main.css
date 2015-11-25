@@ -248,10 +248,11 @@ ion-view .has-subheader {
 .thumbnail-image .post-count {
    position: absolute;
    z-index: 100;
-   top: 5px;
-   left: 5px;
+   top: 10px;
+   left: 10px;
    color: #fff;
    font-weight: 900;
+   font-size: 18px;
 }
 .thumbnail-image .post-count i {
    padding-right: 3px;
@@ -372,6 +373,7 @@ ion-view .has-subheader {
  }
 .post-title{
   padding: 5px;
+  min-height: 80px;
 }
 .post-title .sub {
   border-bottom: 5px solid rgb(205, 97, 93);
@@ -890,6 +892,10 @@ ion-modal-view { z-index: 11!important}
   }
   .item-list .shop-content .category-name{
     right: 65px;
+  }
+  .thumbnail-image .post-count {
+    left: 5px;
+    top: 5px;
   }
   /* Writer */
   .item-list .item-profile {
