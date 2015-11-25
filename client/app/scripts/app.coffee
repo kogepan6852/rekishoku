@@ -21,7 +21,8 @@ angular
     'ngStorage',
     'toaster',
     'uiGmapgoogle-maps',
-    'config'
+    'config',
+    'updateMeta'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
