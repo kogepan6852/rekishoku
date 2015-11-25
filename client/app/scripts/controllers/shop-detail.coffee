@@ -22,6 +22,7 @@ angular.module 'frontApp'
       $scope.shop = res.data.shop
       $scope.categories = res.data.categories
       $scope.posts = res.data.posts
+      $scope.people = res.data.people
 
       # Map用
       $scope.map =
@@ -45,6 +46,16 @@ angular.module 'frontApp'
       ret['id'] = res.data.shop.id
       shops.push(ret)
       $scope.targetMarkers = shops
+
+      # SEO
+      appKeywords = []
+      angular.forEach $scope.people, (person) ->
+        appKeywords.push(person.name)
+      $rootScope.appTitle = $scope.shop.name
+      $rootScope.appDescription = $scope.shop.description.substr(0, 150)
+      $rootScope.appImage = $scope.shop.subimage.url
+      $rootScope.appKeywords = appKeywords.join()
+
 
     # 現在タブの判定
     if $state.is('tabs.post') || $state.is('tabs.post-shop')

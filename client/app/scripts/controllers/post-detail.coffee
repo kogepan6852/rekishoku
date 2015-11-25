@@ -22,6 +22,16 @@ angular.module 'frontApp'
     Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops
+
+      # SEO
+      appKeywords = []
+      angular.forEach $scope.shops, (shop) ->
+        appKeywords.push(shop.shop.name)
+      $rootScope.appTitle = $scope.post.title
+      $rootScope.appDescription = $scope.post.content.substr(0, 150)
+      $rootScope.appImage = $scope.post.image.url
+      $rootScope.appKeywords = appKeywords.join()
+
       Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id, true).then (res) ->
         $scope.postDetails = res.data
 
