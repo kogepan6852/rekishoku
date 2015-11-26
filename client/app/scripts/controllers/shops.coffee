@@ -8,11 +8,8 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const) ->
 
-    # Controllerの継承
-    $controller 'BaseCtrl', $scope: $scope
-    
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
@@ -20,18 +17,19 @@ angular.module "frontApp"
     $scope.targetCategoryId = null
     $scope.page = 1
     $scope.noMoreLoad = false
+    $rootScope.isHideTab = false
 
     # initialize
     categoryObj =
       type: "ShopCategory"
-    Api.getJson(categoryObj, Const.API.CATEGORY).then (res) ->
+    Api.getJson(categoryObj, Const.API.CATEGORY, true).then (res) ->
       $scope.categories = res.data
 
     $scope.init = ->
       obj =
         per: 20
         page: 1
-      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json', true).then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.targetCategoryId = null
@@ -48,7 +46,7 @@ angular.module "frontApp"
         obj =
           category: categoryId
       # 検索
-      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json', true).then (res) ->
         $scope.results = res.data
 
     $scope.loadMoreData = ->
@@ -57,7 +55,7 @@ angular.module "frontApp"
         per: 20
         page: $scope.page
         category: $scope.targetCategoryId
-      Api.getJson(obj, Const.API.SHOP + '/api.json').then (res) ->
+      Api.getJson(obj, Const.API.SHOP + '/api.json', true).then (res) ->
         if res.data.length == 0
           $scope.noMoreLoad = true
         else

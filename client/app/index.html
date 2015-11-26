@@ -1,15 +1,20 @@
 <!doctype html>
-<html>
-  <head>
+<html ng-app="frontApp">
+  <head  ng-controller="BaseCtrl">
     <meta charset="utf-8">
+    <meta content="!" name="fragment">
     <title>歴食</title>
-    <meta name="description" content="歴史好きな人たちに、武将や文豪の愛した食を見るだけでなく食べる体験を提供するサイトです">
-    <meta name="keywords" content="歴史,偉人,食事,歴食,郷土料理">
+    <meta name="description"        content="武将や文豪の愛した食を見るだけでなく食べる体験を提供するサイトです" ng-if="appDescription" />
+    <meta name="keywords"           content="歴史,偉人,食事,歴食,郷土料理" />
+    <!-- FB -->
+    <meta property="og:image"       content="https://rekishoku.herokuapp.com/logo.png" />
     <!-- mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="images/icon.png">
+    <!-- iPhone 5 Retina -->
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="images/splash-image-640x1096.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -22,12 +27,22 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="frontApp">
+  <body>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
     <div ng-include="'views/menu.html'"></div>
     <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
@@ -76,6 +91,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/config/config.js"></script>
     <script src="scripts/controllers/base.js"></script>
+    <script src="scripts/controllers/tabs.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/map.js"></script>

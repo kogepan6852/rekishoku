@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :people_shops
+
   resources :menu
 
   get 'users/index'

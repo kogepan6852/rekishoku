@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $ionicHistory, $ionicNavBarDelegate, Api, toaster, Const) ->
 
     # 変数設定
     $ionicModal.fromTemplateUrl('views/parts/modal-login.html',
@@ -118,4 +118,13 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight();
 
     $scope.moveToHome = ->
-      $location.path('/home')
+      $location.path('/tab/home');
+      # backボタンを隠す
+      $ionicNavBarDelegate.showBackButton false
+      # historyデータを削除する
+      $ionicHistory.clearHistory();
+      $ionicHistory.clearCache();
+
+    $scope.goBack = ->
+      $rootScope.isHideTab = false
+      $ionicHistory.goBack();

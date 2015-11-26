@@ -2,6 +2,7 @@ class ShopsController < ApplicationController
   load_and_authorize_resource
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
   before_action :set_shopscategories, only: [:new, :edit]
+  before_action :set_peopleshops, only: [:new, :edit]
 
   # GET /shops
   # GET /shops.json
@@ -57,7 +58,7 @@ class ShopsController < ApplicationController
       # shopにカテゴリーを紐付ける
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
-        obj = { "shop" => shop, "categories" => shop.categories }
+        obj = { "shop" => shop, "categories" => shop.categories , "people" => shop.people}
         newShops.push(obj);
       end
       shops = newShops
@@ -73,7 +74,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
-    shop = { "shop" => @shop, "categories" => @shop.categories, "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug') }
+    shop = { "shop" => @shop, "categories" => @shop.categories, "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug'), "people" => @shop.people }
     respond_to do |format|
       format.html { render @shops }
       format.json { render json: shop }
@@ -146,8 +147,12 @@ class ShopsController < ApplicationController
       @shops_categories = ShopCategory.all
     end
 
+    def set_peopleshops
+      @people = Person.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
     end
 end

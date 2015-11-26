@@ -14,7 +14,7 @@
         <div class="detail-image"><img ng-src="{{shop.image.url}}"></div>
         <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a></div>
         <div class="shop-content" ng-if="shop.description"><p ng-bind-html="shop.description | newlines"></p></div>
-        <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.post_quotation_url}}" target="_blank">{{shop.post_quotation_name}}</a></div>
+        <div class="post-quotation" ng-if="shop.post_quotation_url">掲載元：<a href="{{shop.post_quotation_url}}" target="_blank">{{shop.post_quotation_name}}</a></div>
       </div>
     </div>
     <div class="row row-top row-bottom bg-gray">
@@ -70,7 +70,10 @@
                 <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
               </div>
             </div>
-            <a class="link" ui-sref="post({id:post.id})"></a>
+            <a class="link" ui-sref="tabs.shop-post({id:post.id})" nav-direction="forward" ng-if="nowTab=='shop'"></a>
+            <a class="link" ui-sref="tabs.post({id:post.id})" nav-direction="forward" ng-if="nowTab=='post'"></a>
+            <a class="link" ui-sref="tabs.map-post({id:post.id})" nav-direction="forward" ng-if="nowTab=='map'"></a>
+            <!-- <a class="link" href="#/tab/post/{{post.id}}"></a> -->
           </li>
         </ul>
       </div>

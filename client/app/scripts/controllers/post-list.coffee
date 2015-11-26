@@ -39,7 +39,7 @@ angular.module "frontApp"
     $scope.categories = [{}]
     categoryObj =
       type: "PostCategory"
-    Api.getJson(categoryObj, Const.API.CATEGORY).then (res) ->
+    Api.getJson(categoryObj, Const.API.CATEGORY, true).then (res) ->
       $scope.categories = res.data
       $scope.categories[0].checked = true
 
@@ -98,7 +98,7 @@ angular.module "frontApp"
       $scope.results = ""
       # post取得
       if ($sessionStorage['token'])
-        Api.getJson(accessKey, Const.API.POST).then (res) ->
+        Api.getJson(accessKey, Const.API.POST, true).then (res) ->
           $scope.results = res.data
           $scope.$broadcast 'scroll.refreshComplete'
 
@@ -114,12 +114,12 @@ angular.module "frontApp"
 
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
-      Api.getJson("", Const.API.SHOP + '.json').then (resShop) ->
+      Api.getJson("", Const.API.SHOP + '/api.json', true).then (resShop) ->
         $scope.shops = resShop.data
         # 紐づく店舗を取得する
         obj =
           post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_SHOP).then (resPostShop) ->
+        Api.getJson(obj, Const.API.POST_SHOP, true).then (resPostShop) ->
           angular.forEach $scope.shops, (shop) ->
             shop.checked = false
             angular.forEach resPostShop.data, (postShop) ->
@@ -134,12 +134,12 @@ angular.module "frontApp"
 
     $scope.openModalPeople = () ->
       # 人物一覧を取得する
-      Api.getJson("", Const.API.PERSON + '.json').then (resPerson) ->
+      Api.getJson("", Const.API.PERSON + '.json', true).then (resPerson) ->
         $scope.people = resPerson.data
         # 紐づく店舗を取得する
         obj =
           post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_PERSON).then (resPostPerson) ->
+        Api.getJson(obj, Const.API.POST_PERSON, true).then (resPostPerson) ->
           angular.forEach $scope.people, (person) ->
             person.checked = false
             angular.forEach resPostPerson.data, (postPerson) ->
@@ -277,7 +277,7 @@ angular.module "frontApp"
     $scope.onEditButton = (index) ->
       clearInput()
       $scope.isEditing = true
-      Api.getJson("", Const.API.POST_DETSIL + '/' + $scope.results[index].id).then (res) ->
+      Api.getJson("", Const.API.POST_DETSIL + '/' + $scope.results[index].id, true).then (res) ->
         # categoryの設定
         $scope.checkCategory($scope.results[index].category_id)
         # post detailの作成
@@ -379,7 +379,7 @@ angular.module "frontApp"
       shopIds = []
       angular.forEach $scope.shops, (shop) ->
         if shop.checked
-          shopIds.push(shop.id)
+          shopIds.push(shop.shop.id)
 
       obj =
         post_id: $scope.targetPostId

@@ -20,6 +20,9 @@
     <%= f.label :説明 %><br>
     <%= f.text_area :description ,:class => "form-control" %>
   </div><br><hr><br>
+
+  <div class="center">
+    <%= f.label :ショップカテゴリー %><br>
   <table class="table table-hover">
     <% @shops_categories.each do |shop_category| %>
       <%= f.fields_for :categories_shop do |cs| %>
@@ -33,6 +36,25 @@
       <% end %>
     <% end %>
   </table>
+  </div><br><hr><br>
+
+  <div class="center">
+    <%= f.label :人物 %>
+  <table class="table table-hover">
+    <% @people.each do |person| %>
+      <%= f.fields_for :people_shops do |pp| %>
+        <% checked = person.shops.exists?(@shop.id) ? true : false %>
+          <thead>
+            <tr>
+              <th><%= person.name %></th>
+              <td><%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %></td>
+            </tr>
+          </thead>
+      <% end %>
+    <% end %>
+  </table>
+  </div><br><hr><br>
+
   <div class="center">
     <%= f.label :URL %><br>
     <%= f.text_field :url ,:class => "form-control" %>
