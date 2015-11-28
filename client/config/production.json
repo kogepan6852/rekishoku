@@ -1,6 +1,10 @@
 {
   "env": "production",
   "url": {
-    "api": ""
+    "api": "",
+    "home": "https://rekishoku.herokuapp.com/#"
+  },
+  "id": {
+    "fb": "944564788957091"
   }
 }

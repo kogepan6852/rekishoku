@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $sessionStorage, $controller, $state, Api, Const) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $sessionStorage, $controller, $state, $location, Api, Const, config) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -46,3 +46,19 @@ angular.module 'frontApp'
     # Function
     $scope.myGoBack = ->
       $ionicHistory.goBack()
+
+    $scope.postToFeed = ->
+      FB.init
+        appId: config.id.fb
+        status: true
+        cookie: true
+
+      obj =
+        display: 'popup'
+        method: 'share'
+        href: 'https://rekishoku.herokuapp.com/#/shop/64'
+        picture: $scope.post.image.url
+        title: $scope.post.title
+        caption: '歴食.jp'
+        description: $scope.post.content
+      FB.ui obj

@@ -1,6 +1,10 @@
 {
   "env": "development",
   "url": {
-    "api": "http://localhost:3000"
+    "api": "http://localhost:3000",
+    "home": "http://localhost:9000/#"
+  },
+  "id": {
+    "fb": "944601872286716"
   }
 }

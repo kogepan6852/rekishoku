@@ -126,6 +126,21 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none;}
 .list-title h2{
   margin: 0;
 }
+
+/* button */
+.button.facebook {
+  background-color: #305097;
+  color: #fff;
+  border: none;
+  width: 150px;
+}
+.button.twitter {
+  background-color: #00aced;
+  color: #fff;
+  border: none;
+  width: 150px;
+}
+
 /**********************
  * Icon
  **********************/
@@ -902,6 +917,10 @@ ion-modal-view { z-index: 11!important}
     color: #808080;
     padding-left: 10px;
     visibility: visible;
+  }
+  /* sns button*/
+  .button.sns-button{
+    width: 49%;
   }
 
 }
