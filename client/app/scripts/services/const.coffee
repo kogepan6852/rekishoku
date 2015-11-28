@@ -12,7 +12,7 @@ angular.module("frontApp")
       USER: '/users'
       CATEGORY: '/categories.json'
       POST_SHOP: '/posts_shops'
-      POST_PERSON: '/people_posts/api'
+      POST_PERSON: '/people_posts'
     MSG:
       SAVED: '投稿しました'
       DELETED: '削除しました'

@@ -11,7 +11,10 @@ class PeoplePostsController < ApplicationController
   # GET /people_posts/1
   # GET /people_posts/1.json
   def show
+    @people_posts = PeoplePost.new
+    render json: @people_posts
   end
+
 
   # GET /people_posts/new
   def new
@@ -85,7 +88,7 @@ class PeoplePostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_people_post
-      @people_post = PeoplePost.find(params[:id])
+        @people_post = PeoplePost.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
