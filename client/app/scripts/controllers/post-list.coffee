@@ -379,7 +379,7 @@ angular.module "frontApp"
       shopIds = []
       angular.forEach $scope.shops, (shop) ->
         if shop.checked
-          shopIds.push(shop.shop.id)
+          shopIds.push(shop.id)
 
       obj =
         post_id: $scope.targetPostId
