@@ -114,7 +114,7 @@ angular.module "frontApp"
 
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
-      Api.getJson("", Const.API.SHOP + '/api.json', true).then (resShop) ->
+      Api.getJson(accessKey, Const.API.SHOP + '/api.json', true).then (resShop) ->
         $scope.shops = resShop.data
         # 紐づく店舗を取得する
         obj =

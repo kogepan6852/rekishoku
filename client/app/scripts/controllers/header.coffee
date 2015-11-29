@@ -89,6 +89,7 @@ angular.module "frontApp"
                 delete $sessionStorage['token']
                 delete $sessionStorage['email']
                 delete $sessionStorage['user_id']
+                clearInput()
                 $location.path('/home/');
           }
         ])

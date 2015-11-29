@@ -132,13 +132,13 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none;}
   background-color: #305097;
   color: #fff;
   border: none;
-  width: 150px;
+  width: 49%;
 }
 .button.twitter {
   background-color: #00aced;
   color: #fff;
   border: none;
-  width: 150px;
+  width: 49%;
 }
 
 /**********************
@@ -156,13 +156,13 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none;}
  * Header
  **********************/
 .top {
-   z-index: 20;
-   padding: 0 15px;
-   height: 44px;
-   min-width: 180px;
+  z-index: 20;
+  padding: 0 15px;
+  height: 44px;
+  min-width: 180px;
 }
 ion-view .has-header {
-    top: 44px;
+  top: 44px;
 }
 ion-view .has-subheader {
   top: 90px;
@@ -634,9 +634,6 @@ form.post-modal, .post-modal .slider {
 .maps .angular-google-map,
 .maps .scroll,
 .maps .map-include { height: 100%; }
-ion-content.maps {
-  padding-bottom: 45px;
-}
 
 .gmap-windows h5 {
   width:100px;
@@ -918,11 +915,18 @@ ion-modal-view { z-index: 11!important}
     padding-left: 10px;
     visibility: visible;
   }
-  /* sns button*/
-  .button.sns-button{
-    width: 49%;
-  }
 
+  /* Map */
+  ion-content.maps {
+    padding-bottom: 45px;
+  }
+  .gmap-windows img {
+    width: 70px;
+  }
+  .gmap-windows h5 {
+    font-size: 12px;
+    width: 70px;
+  }
 }
 /* iPhone5用 */
 @media screen and (max-width:320px){

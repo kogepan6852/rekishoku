@@ -61,4 +61,4 @@ angular.module "frontApp"
         else
           angular.forEach res.data, (data, i) ->
             $scope.posts.push(data)
-          $scope.$broadcast('scroll.infiniteScrollComplete')
+        $scope.$broadcast('scroll.infiniteScrollComplete')
