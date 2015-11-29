@@ -16,8 +16,15 @@ angular.module 'frontApp'
     # 変数設定
     $scope.targetId = $stateParams.id
     $rootScope.isHideTab = true
+    $scope.urlFb = config.url.home + '/#' + $location.url()
+    $scope.urlTwitter = config.url.home + '/%23' + $location.url()
 
     # 初期処理
+    FB.init
+      appId: config.id.fb
+      status: true
+      cookie: true
+
     path = Const.API.POST + '/' + $stateParams.id
     Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
@@ -48,15 +55,10 @@ angular.module 'frontApp'
       $ionicHistory.goBack()
 
     $scope.postToFeed = ->
-      FB.init
-        appId: config.id.fb
-        status: true
-        cookie: true
-
       obj =
         display: 'popup'
         method: 'share'
-        href: 'https://rekishoku.herokuapp.com/#/shop/64'
+        href: $scope.urlFb
         picture: $scope.post.image.url
         title: $scope.post.title
         caption: '歴食.jp'
