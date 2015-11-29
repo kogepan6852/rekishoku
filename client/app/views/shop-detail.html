@@ -73,7 +73,7 @@
             <a class="link" ui-sref="tabs.shop-post({id:post.id})" nav-direction="forward" ng-if="nowTab=='shop'"></a>
             <a class="link" ui-sref="tabs.post({id:post.id})" nav-direction="forward" ng-if="nowTab=='post'"></a>
             <a class="link" ui-sref="tabs.map-post({id:post.id})" nav-direction="forward" ng-if="nowTab=='map'"></a>
-            <!-- <a class="link" href="#/tab/post/{{post.id}}"></a> -->
+            <a class="link" ui-sref="post({id:post.id})" nav-direction="forward" ng-if="nowTab=='other'"></a>
           </li>
         </ul>
       </div>

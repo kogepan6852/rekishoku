@@ -2,7 +2,7 @@
   "env": "production",
   "url": {
     "api": "",
-    "home": "https://rekishoku.herokuapp.com"
+    "home": "http://歴食.jp"
   },
   "id": {
     "fb": "944564788957091"

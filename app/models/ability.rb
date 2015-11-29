@@ -51,7 +51,6 @@ class Ability
          can :manage, Shop
          can :manage, Person
          can :manage, Period
-         can :manage, :all
      end
      if user.role == 0
         can :manage, :all

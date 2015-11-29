@@ -64,6 +64,8 @@ angular.module 'frontApp'
       $scope.nowTab = 'map'
     else if $state.is('tabs.shop')
       $scope.nowTab = 'shop'
+    else
+      $scope.nowTab = 'other'
 
 
     # Function

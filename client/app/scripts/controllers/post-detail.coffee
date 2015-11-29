@@ -49,6 +49,8 @@ angular.module 'frontApp'
       $scope.nowTab = 'map'
     else if $state.is('tabs.shop') || $state.is('tabs.shop-post')
       $scope.nowTab = 'shop'
+    else
+      $scope.nowTab = 'other'
 
     # Function
     $scope.myGoBack = ->

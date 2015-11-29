@@ -115,6 +115,17 @@ angular
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
 
+      .state 'post',
+        cache: false,
+        url: '/post/:id'
+        templateUrl: 'views/post-detail.html'
+        controller: 'PostDetailCtrl'
+      .state 'shop',
+        url: '/shop/:id'
+        templateUrl: 'views/shop-detail.html'
+        controller: 'ShopDetailCtrl'
+
+
     $urlRouterProvider.otherwise ('/home')
 
   .config(["$httpProvider", ($httpProvider) ->
