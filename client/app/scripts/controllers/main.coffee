@@ -51,15 +51,16 @@ angular.module "frontApp"
         $scope.posts = res.data
 
     $scope.loadMoreData = ->
-      $scope.page += 1
-      obj =
-        per: 20
-        page: $scope.page
-        category: $scope.targetCategoryId
-      Api.getJson(obj, Const.API.POST, true).then (res) ->
-        if res.data.length == 0
-          $scope.noMoreLoad = true
-        else
-          angular.forEach res.data, (data, i) ->
-            $scope.posts.push(data)
-        $scope.$broadcast('scroll.infiniteScrollComplete')
+      if $scope.posts
+        $scope.page += 1
+        obj =
+          per: 20
+          page: $scope.page
+          category: $scope.targetCategoryId
+        Api.getJson(obj, Const.API.POST, true).then (res) ->
+          if res.data.length == 0
+            $scope.noMoreLoad = true
+          else
+            angular.forEach res.data, (data, i) ->
+              $scope.posts.push(data)
+          $scope.$broadcast('scroll.infiniteScrollComplete')
