@@ -51,8 +51,12 @@ class Ability
          can :manage, Shop
          can :manage, Person
          can :manage, Period
-        puts "test1233444829471984"
+         can :manage, :all
      end
+     if user.role == 0
+        can :manage, :all
+    end
+
   end
 
   end

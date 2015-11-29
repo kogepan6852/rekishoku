@@ -33,8 +33,12 @@ Rails.application.routes.draw do
   resources :posts
 
   resource :authentication_token, only: [:update, :destroy]
-  devise_for :users, controllers: { sessions: "sessions"  }
+  devise_for :users, controllers: { sessions: "sessions" }
   resources :users, :only => [:index, :show, :update]
+
+  root to: 'menu#index'
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
