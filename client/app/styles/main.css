@@ -113,7 +113,7 @@ input[readonly].item-input-wrapper {
 /*a { color: rgb(88,43,95);}*/
 a { color: rgb(205,97,93);}
 a:hover { color: rgb(205, 140, 137); text-decoration: none;}
-.tabs { background-color: rgb(205,97,93); color: #fff; border: none; height: 44px;}
+.tabs { background-color: rgb(205,97,93)!important; color: #fff; border: none; height: 44px;}
 .bar-header { border-bottom: none !important; background-color: rgb(205,97,93);}
 .bar-header.my-post-header { border: none; }
 .nav-bar-container .nav-bar-block { z-index: 999; }
@@ -1066,6 +1066,8 @@ ion-modal-view { z-index: 11!important}
     -ms-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
+    top: auto!important;
+    bottom: 0;
   }
   .tab-item .icon {
     font-size: 30px!important;
