@@ -196,6 +196,7 @@ ion-view .has-subheader {
   right: 80px;
   top: 0;
   z-index: 500;
+  width: 114px;
 }
 .header .sns-icons a {
   background: #fff none repeat scroll 0 0;
@@ -874,8 +875,9 @@ ion-modal-view { z-index: 11!important}
   /* Header */
   .header{z-index:100;}
   .header .sns-icons{
-    left: 100px;
+    left: 5px;
     right: 100%;
+    width: 96px;
   }
   .header .sns-icons a {
     width: 32px;
