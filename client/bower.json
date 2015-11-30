@@ -1,5 +1,5 @@
 {
-  "name": "front",
+  "name": "client",
   "version": "0.0.0",
   "dependencies": {
     "AngularJS-Toaster": "angularjs-toaster#~0.4.15",
