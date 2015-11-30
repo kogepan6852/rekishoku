@@ -9,7 +9,7 @@
         <div class="post-title">
           <h1>{{shop.name}}</h1>
           <p class="category" ng-if="categories" category-list data="categories" ></p>
-          <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}"><i class="icon ion-ios-location"></i>{{shop.province + shop.city + shop.address1 + shop.address2}}</a>
+          <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}" ng-show="shop.province"><i class="icon ion-ios-location"></i>{{shop.province + shop.city + shop.address1 + shop.address2}}</a>
         </div>
         <div class="detail-image"><img ng-src="{{shop.image.url}}"></div>
         <div class="post-quotation" ng-if="shop.image_quotation_name">掲載元：<a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a></div>
@@ -32,7 +32,7 @@
           <div class="shop-info-row">
             <div class="shop-info-col">所在地</div>
             <div>
-              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}">
+              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}" ng-show="shop.province">
                 {{shop.province + shop.city + shop.address1 + shop.address2}}
               </a>
             </div>
@@ -42,7 +42,7 @@
             <div ng-bind-html="shop.menu | newlines"></div>
           </div>
         </div>
-        <div class="detail-map">
+        <div class="detail-map" ng-if="shop.province">
           <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
               <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
               </ui-gmap-markers>
