@@ -1106,7 +1106,7 @@ ion-modal-view { z-index: 11!important}
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .tab-header{ width: 20%;}
-  ion-content.padding-content {
+  ion-content.image-content {
     padding-left: 15px;
     padding-right: 15px;
   }
