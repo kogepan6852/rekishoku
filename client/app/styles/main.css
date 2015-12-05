@@ -242,7 +242,7 @@ ion-view .has-subheader {
   height: 53px;
   left: 25px;
   top: 17px;
-  width: 115px;
+  width: 115px!important;
   opacity: 0;
   padding-right: 10px!important;
 }
@@ -324,7 +324,7 @@ ion-view .has-subheader {
 .item-description {
   color: #555!important;
   padding: 10px 10px 0;
-  max-height: 82px;
+  max-height: 81px;
   overflow: hidden;
 }
 .item-list .category-name{

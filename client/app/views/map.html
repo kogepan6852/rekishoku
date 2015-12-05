@@ -13,7 +13,7 @@
   <!-- Google map -->
   <ion-content class="has-subheader maps" ng-init="init()" scroll="false" ng-if="map">
 
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" ng-cloak>
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" refresh="!isDragging" ng-cloak>
       <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
         <ui-gmap-windows show="show">
           <div ng-non-bindable class="gmap-windows">
