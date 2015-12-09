@@ -11,56 +11,47 @@
     </div>
   <% end %>
 
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>名前</th>
-          <th>フリガナ</th>
-          <th>詳細</th>
-          <th>戻る</th>
-          <th colspan="3"></th>
-        </tr>
+  <table class="table">
+      <tr>
+        <th><%= f.label :名前 %><span class="text-danger">（必須）</span></th>
+        <td><%= f.text_field :name ,:class => "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :ふりがな（例：まさおかしき） %><span class="text-danger">（必須）</span></th>
+        <td><%= f.text_field :furigana ,:class => "form-control" %></td>
+      </tr>
 
-        <tr>
-          <td><%= f.text_field :name ,:class => "form-control" %></td>
-          <td><%= f.text_field :furigana ,:class => "form-control" %></td>
-          <td><%= link_to '詳細', @person ,:class => "btn btn-success" %></td>
-          <td><%= link_to '戻る', people_path ,:class => "btn btn-primary" %></td>
-        </tr>
-      </thead>
-    </table>
+      <tr>
+        <th><%= f.label :時代 %><span class="text-danger">（必須）</span></th>
+        <td>
+          <% @periods.each do |period| %>
+            <%= f.fields_for :people_periods do |pp| %>
+              <% checked = period.people.exists?(@person.id) ? true : false %>
+                <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked }, period.id, nil %>
+              <%= period.name %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 
-    <table class="table table-hover">
-      <% @periods.each do |period| %>
-        <%= f.fields_for :people_periods do |pp| %>
-          <% checked = period.people.exists?(@person.id) ? true : false %>
-            <thead>
-              <tr>
-                <th><%= period.name %></th>
-                <td><%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked }, period.id, nil %></td>
-              </tr>
-            </thead>
-        <% end %>
-      <% end %>
-    </table>
-
-    <table class="table table-hover">
-      <% @people_categories.each do |person_category| %>
-        <%= f.fields_for :categories_people do |cp| %>
-          <% checked = person_category.people.include?(@person.id) ? true : false %>
-            <thead>
-              <tr>
-                <th><%= person_category.name %></th>
-                <td><%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %></td>
-              </tr>
-            </thead>
-        <% end %>
-      <% end %>
+      <tr>
+        <th><%= f.label :カテゴリー %><span class="text-danger">（必須）</span></th>
+        <td>
+          <% @people_categories.each do |person_category| %>
+            <%= f.fields_for :categories_people do |cp| %>
+              <% checked = person_category.people.include?(@person.id) ? true : false %>
+                <%= person_category.name %>
+              <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
     </table>
 
 
   <div class="center">
     <%= f.submit :class=>"btn" %>
+    <%= link_to '戻る', people_path ,:class => "btn btn-primary" %>
   </div>
 <% end %>
 </div>
