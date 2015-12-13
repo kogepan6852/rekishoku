@@ -75,8 +75,8 @@ class ApiController < ApplicationController
       end
 
       if params[:id]
-        # shops = Shop.find(params[:id])
-        #shops = { "shop" => shops, "categories" => shops.categories, "posts" => shops.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug'), "people" => shops.people }
+        shops = Shop.find(params[:id])
+        shops = { "shop" => shops, "categories" => shops.categories, "posts" => shops.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug'), "people" => shops.people }
       end
 
 
