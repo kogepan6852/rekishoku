@@ -11,104 +11,96 @@
     </div>
   <% end %>
 
-  <hr>
-  <div class="center">
-    <%= f.label :名前 %><br>
-    <%= f.text_field :name ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :説明 %><br>
-    <%= f.text_area :description ,:class => "form-control" %>
-  </div><br><hr><br>
+  <table class="table">
+      <tr>
+        <th><%= f.label :名前 %><span class="text-danger">（必須）</span></th>
+        <td><%= f.text_field :name ,:class => "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>
+        <td><%= f.text_field :name ,:class => "form-control" %></td>
+      </tr>
 
-  <div class="center">
-    <%= f.label :ショップカテゴリー %><br>
-  <table class="table table-hover">
-    <% @shops_categories.each do |shop_category| %>
-      <%= f.fields_for :categories_shop do |cs| %>
-        <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
-          <thead>
-            <tr>
-              <th><%= shop_category.name %></th>
-              <td><%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %></td>
-            </tr>
-          </thead>
-      <% end %>
-    <% end %>
-  </table>
-  </div><br><hr><br>
+      <tr>
+        <th><%= f.label :カテゴリー %><span class="text-danger">（必須）</span></th>
+        <td><% @shops_categories.each do |shop_category| %>
+          <%= f.fields_for :categories_shop do |cs| %>
+            <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+              <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
+              <%= shop_category.name %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 
-  <div class="center">
-    <%= f.label :人物 %>
-  <table class="table table-hover">
-    <% @people.each do |person| %>
-      <%= f.fields_for :people_shops do |pp| %>
-        <% checked = person.shops.exists?(@shop.id) ? true : false %>
-          <thead>
-            <tr>
-              <th><%= person.name %></th>
-              <td><%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %></td>
-            </tr>
-          </thead>
-      <% end %>
-    <% end %>
-  </table>
-  </div><br><hr><br>
+      <tr>
+        <th><%= f.label :人物 %><span class="text-danger">（必須）</span></th>
+        <td>
+          <% @people.each do |person| %>
+            <%= f.fields_for :people_shops do |pp| %>
+              <% checked = person.shops.exists?(@shop.id) ? true : false %>
+                <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
+              <%= person.name %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 
-  <div class="center">
-    <%= f.label :URL %><br>
-    <%= f.text_field :url ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :メイン画像 %><br>
-    <%= f.file_field :image %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :サブ画像 %><br>
-    <%= f.file_field :subimage %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :画像の引用元URL %><br>
-    <%= f.text_field :image_quotation_url ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :画像の引用元名称 %><br>
-    <%= f.text_field :image_quotation_name ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :記事の掲載元URL %><br>
-    <%= f.text_field :post_quotation_url ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :記事の掲載元名称 %><br>
-    <%= f.text_field :post_quotation_name ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :都道府県 %><br>
-    <%= f.text_field :province ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :市区町村 %><br>
-    <%= f.text_field :city ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :その他住所 %><br>
-    <%= f.text_field :address1 ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :建物名 %><br>
-    <%= f.text_field :address2 ,:class => "form-control" %>
-  </div><br><hr><br>
-  <div class="center">
-    <%= f.label :メニュー %><br>
-    <%= f.text_area :menu ,:class => "form-control" %>
-  </div><br><hr><br>
+
+        <tr>
+          <th><%= f.label :メイン画像 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.file_field :image %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :サブ画像 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.file_field :subimage %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :画像の引用元URL %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :image_quotation_url ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :記事の掲載元名称 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :post_quotation_name ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :都道府県 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :province ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :市区町村 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :city ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :その他住所 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :address1 ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :建物名 %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_field :address2 ,:class => "form-control" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :メニュー %><span class="text-danger">（必須）</span></th>
+          <td><%= f.text_area :menu ,:class => "form-control" %></td>
+        </tr>
+    </table>
+
   <div class="center">
     <%= f.submit :class=>"btn" %>
-  </div><br><hr><br>
+    <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
+  </div>
+  <!-- <br><hr><br>
   <div class="center">
   <%= link_to '詳細', @person ,:class => "btn btn-success" %>
   <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
-</div><b<hr>
+</div><br><hr> -->
 
 <% end %>
