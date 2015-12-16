@@ -104,7 +104,7 @@ angular.module 'frontApp'
       setMapData(obj, true)
 
     setMapData = (obj, isLoding) ->
-      Api.getJson(obj, Const.API.SHOP + "/api.json", isLoding).then (resShops) ->
+      Api.getJson(obj, Const.API.SHOP + ".json", isLoding).then (resShops) ->
         # 検索データの保存
         $rootScope.latitude = resShops.data.current.latitude
         $rootScope.longitude = resShops.data.current.longitude
