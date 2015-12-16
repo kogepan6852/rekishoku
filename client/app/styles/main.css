@@ -429,6 +429,24 @@ ion-view .has-subheader {
   margin-bottom: 5px;
   margin-top: 5px;
 }
+.post-title .username {
+  display: table;
+  padding-bottom: 5px;
+}
+.post-title .username img {
+  width: 34px;
+  height: auto;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  display: table-cell;
+  padding-right: 5px;
+}
+.post-title .username p {
+  display: table-cell;
+  vertical-align: middle;
+  color: #aaa;
+}
 .post-title .category {
   background-color: rgba(76, 42, 76, 1);
   color: #ffffff;
@@ -1087,6 +1105,10 @@ ion-modal-view { z-index: 11!important}
     margin-left: auto;
     margin-bottom: 5px;
   }
+  .post-title .username {
+    position: absolute;
+  }
+
   /* Map検索*/
   .search-bar {
     padding-left: 35px;

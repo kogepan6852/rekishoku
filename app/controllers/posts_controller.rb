@@ -27,11 +27,15 @@ class PostsController < ApplicationController
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
     shops = Array.new()
+    # shop情報整形
     @post.shops.each do |shop|
       obj = { "shop" => shop, "categories" => shop.categories }
       shops.push(obj);
     end
-    post = { "post" => @post, "shops" => shops }
+    # user情報整形
+    user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
+
+    post = { "post" => @post, "shops" => shops, "user" => user }
     render json: post
   end
 

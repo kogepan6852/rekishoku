@@ -29,6 +29,7 @@ angular.module 'frontApp'
     Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops
+      $scope.user = res.data.user
 
       # SEO
       appKeywords = []
@@ -66,3 +67,6 @@ angular.module 'frontApp'
         caption: '歴食.jp'
         description: $scope.post.content
       FB.ui obj
+
+    $scope.moveToWriterDetail = ->
+      $location.path('writer/' + $scope.user.id)
