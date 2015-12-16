@@ -69,4 +69,11 @@ angular.module 'frontApp'
       FB.ui obj
 
     $scope.moveToWriterDetail = ->
-      $location.path('writer/' + $scope.user.id)
+      if $scope.nowTab == 'post'
+        $state.go('tabs.post-writer', { id: $scope.user.id })
+      else if $scope.nowTab == 'map'
+        $state.go('tabs.map-writer', { id: $scope.user.id })
+      else if $scope.nowTab == 'shop'
+        $state.go('tabs.shop-writer', { id: $scope.user.id })
+      else
+        $state.go('writer', { id: $scope.user.id })

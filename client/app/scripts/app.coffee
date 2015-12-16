@@ -56,6 +56,14 @@ angular
           'home-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
+      .state 'tabs.post-writer',
+        cache: false,
+        url: '/writer/:id'
+        views:
+          'home-tab':
+            templateUrl: 'views/writer-detail.html'
+            controller: 'WriterDetailCtrl'
+
       .state 'tabs.shop',
         cache: false,
         url: '/shop/:id'
@@ -70,6 +78,14 @@ angular
           'shops-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
+      .state 'tabs.shop-writer',
+        cache: false,
+        url: '/writer/:id'
+        views:
+          'shops-tab':
+            templateUrl: 'views/writer-detail.html'
+            controller: 'WriterDetailCtrl'
+
 
       .state 'tabs.map',
         url: '/map'
@@ -98,7 +114,13 @@ angular
           'map-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
-
+      .state 'tabs.map-writer',
+        cache: false,
+        url: '/writer/:id'
+        views:
+          'map-tab':
+            templateUrl: 'views/writer-detail.html'
+            controller: 'WriterDetailCtrl'
 
       .state 'my-post',
         cache: false,
