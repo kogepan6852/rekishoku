@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, $state, Api, Const, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -433,3 +433,7 @@ angular.module "frontApp"
           type: 'success'
           title: msg
           showCloseButton: true
+
+    $scope.moveToPost = (index) ->
+      $scope.popoverPostMenu.hide()
+      $state.go('post', { id: $scope.results[index].id, preview: "true" })

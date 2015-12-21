@@ -26,6 +26,8 @@ angular.module 'frontApp'
       cookie: true
 
     path = Const.API.POST + '/' + $stateParams.id
+    if $stateParams.preview
+      path += '?preview=' + $stateParams.preview
     Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops

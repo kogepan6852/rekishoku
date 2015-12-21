@@ -26,17 +26,23 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
-    shops = Array.new()
-    # shop情報整形
-    @post.shops.each do |shop|
-      obj = { "shop" => shop, "categories" => shop.categories }
-      shops.push(obj);
-    end
-    # user情報整形
-    user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
+    logger.debug(params[:preview])
+    if params[:preview] == "true" || @post.status == 1
+      shops = Array.new()
+      # shop情報整形
+      @post.shops.each do |shop|
+        obj = { "shop" => shop, "categories" => shop.categories }
+        shops.push(obj);
+      end
+      # user情報整形
+      user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
 
-    post = { "post" => @post, "shops" => shops, "user" => user }
-    render json: post
+      post = { "post" => @post, "shops" => shops, "user" => user }
+      render json: post
+    else
+      post = { "post" => "" }
+      render json: post
+    end
   end
 
   # GET /posts/new

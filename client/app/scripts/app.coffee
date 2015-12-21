@@ -44,7 +44,7 @@ angular
 
       .state 'tabs.post',
         cache: false,
-        url: '/post/:id'
+        url: '/post/:id?preview'
         views:
           'home-tab':
             templateUrl: 'views/post-detail.html'
@@ -139,7 +139,7 @@ angular
 
       .state 'post',
         cache: false,
-        url: '/post/:id'
+        url: '/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
       .state 'shop',
