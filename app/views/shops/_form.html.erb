@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>
-        <td><%= f.text_field :name ,:class => "form-control" %></td>
+        <td><%= f.text_area :description, rows: 10 ,:class => "form-control" %></td>
       </tr>
 
       <tr>
@@ -89,7 +89,7 @@
 
         <tr>
           <th><%= f.label :メニュー %><span class="text-danger">（必須）</span></th>
-          <td><%= f.text_area :menu ,:class => "form-control" %></td>
+          <td><%= f.text_area :menu, rows: 5 ,:class => "form-control" %></td>
         </tr>
     </table>
 
