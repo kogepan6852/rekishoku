@@ -3,11 +3,26 @@ Rails.application.routes.draw do
 
   resources :menu
 
+# API route　
+  get 'api/people'
+  get 'api/people/:id' , to: 'api#people'
+  get 'api/shops'
+  get 'api/shops/:id' , to: 'api#shops'
+  get 'api/periods'
+  get 'api/periods/:id' , to: 'api#periods'
+  get 'api/people_posts'
+  get 'api/people_posts/:id' , to: 'api#people_posts'
+  get 'api/people_shops'
+  get 'api/people_shops/:id' , to: 'people_shops#shops'
+  get 'api/post_show'
+  get 'api/post_show/:id' , to: 'post_show#shops'
+  get 'api/posts_shops'
+  get 'api/posts_shops/:id' , to: 'api#posts_shops'
+
+
+
   get 'users/index'
   get 'users/show'
-  get 'shops/api'
-  get 'people/api'
-  get 'periods/api'
 
   resources :people_posts
 

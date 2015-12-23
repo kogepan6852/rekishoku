@@ -37,14 +37,9 @@ class Ability
 
     can :manage, :Menu
     cannot :manage ,Shop
-    can :api ,Shop
-    can :show ,Shop
     cannot :manage, Person
-    can :api ,Person
-    can :show ,Person
     cannot :manage, Period
-    can :api ,Period
-    can :show ,Period
+    can :manage ,Api
 
    if user
       if user.role == 1
