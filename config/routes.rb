@@ -4,20 +4,24 @@ Rails.application.routes.draw do
   resources :menu
 
 # API route　
-  get 'api/people'
-  get 'api/people/:id' , to: 'api#people'
-  get 'api/shops'
-  get 'api/shops/:id' , to: 'api#shops'
-  get 'api/periods'
-  get 'api/periods/:id' , to: 'api#periods'
-  get 'api/people_posts'
-  get 'api/people_posts/:id' , to: 'api#people_posts'
-  get 'api/people_shops'
-  get 'api/people_shops/:id' , to: 'people_shops#shops'
-  get 'api/post_show'
-  get 'api/post_show/:id' , to: 'post_show#shops'
-  get 'api/posts_shops'
-  get 'api/posts_shops/:id' , to: 'api#posts_shops'
+  get 'api_people/people'
+  get 'api_people/people/:id' , to: 'api_people#people'
+  get 'api_shop/shops'
+  get 'api_shop/shops/:id' , to: 'api_shop#shops'
+  get 'api_people/periods'
+  get 'api_people/periods/:id' , to: 'api_people#periods'
+  get 'api_post/people_posts'
+  get 'api_post/people_posts/:id' , to: 'api_post#people_posts'
+  get 'api_post/people_shops'
+  get 'api_post/people_shops/:id' , to: 'api_post#shops'
+  get 'api_post/post_show'
+  get 'api_post/post_show/:id' , to: 'api_post#post_show'
+  get 'api_post/posts_shops'
+  get 'api_post/posts_shops/:id' , to: 'api_post#posts_shops'
+  get 'api_post/posts'
+  get 'api_post/posts/:id' , to: 'api_post#posts'
+  get 'api_post/categories'
+  get 'api_post/categories/:id' , to: 'api_post#categories'
 
 
 

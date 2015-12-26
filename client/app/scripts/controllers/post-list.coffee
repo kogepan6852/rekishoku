@@ -119,7 +119,7 @@ angular.module "frontApp"
         # 紐づく店舗を取得する
         obj =
           post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_SHOP, true).then (resPostShop) ->
+        Api.getJson(obj, Const.API.POST_SHOP_API, true).then (resPostShop) ->
           angular.forEach $scope.shops, (shop) ->
             shop.checked = false
             angular.forEach resPostShop.data, (postShop) ->
@@ -139,7 +139,7 @@ angular.module "frontApp"
         # 紐づく店舗を取得する
         obj =
           post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_PERSON, true).then (resPostPerson) ->
+        Api.getJson(obj, Const.API.POST_PERSON_API, true).then (resPostPerson) ->
           angular.forEach $scope.people, (person) ->
             person.checked = false
             angular.forEach resPostPerson.data, (postPerson) ->

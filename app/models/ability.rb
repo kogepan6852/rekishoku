@@ -39,7 +39,6 @@ class Ability
     cannot :manage ,Shop
     cannot :manage, Person
     cannot :manage, Period
-    can :manage ,Api
 
    if user
       if user.role == 1
