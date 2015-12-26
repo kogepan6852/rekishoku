@@ -12,6 +12,6 @@ angular.module "frontApp"
       clientPx = document.body.clientWidth
       if document.body.clientHeight > document.body.clientWidth
         clientPx = document.body.clientHeight
-      targetDistance = clientPx * targetMeterPerPx
+      targetDistance = (clientPx - 100) * targetMeterPerPx
 
       return targetDistance

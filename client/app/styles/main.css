@@ -679,18 +679,42 @@ form.post-modal, .post-modal .slider {
   min-width: 100px;
   width: 20%;
 }
+.maps {
+  bottom: 0;
+  left: 0;
+  margin-bottom: -1px;
+  margin-top: -1px;
+  overflow: hidden;
+  padding-top: 1px;
+  position: absolute;
+  right: 0;
+  width: auto;
+}
 .maps .angular-google-map-container,
 .maps .angular-google-map,
 .maps .scroll,
 .maps .map-include { height: 100%; }
 
-.gmap-windows h5 {
-  width:100px;
+.gm-style-iw > div {
+  height: 115px;
+}
+.gmap-windows p {
+  font-size: 12px;
+  width: 71px;
   max-height: 44px;
   overflow: hidden;
+  margin-bottom: 5px;
+  margin-right: -4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
 }
 .gmap-windows img {
-  width:100px;
+  position: absolute;
+  left: 0;
+}
+.gmap-windows img {
+  width: 90px!important;
   height: auto;
 }
 .present-location {
@@ -1003,7 +1027,7 @@ ion-modal-view { z-index: 11!important}
   }
 
   /* Map */
-  ion-content.maps {
+  ion-view div.maps {
     padding-bottom: 45px;
   }
   .gmap-windows img {

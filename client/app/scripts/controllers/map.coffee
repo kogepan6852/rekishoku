@@ -38,8 +38,6 @@ angular.module 'frontApp'
     $scope.options =
       scrollwheel: false
       minZoom: 11
-    $scope.markerOptions =
-      icon: '../images/reki.png'
 
     $scope.events =
       dragstart: (cluster, clusterModels) ->
@@ -58,7 +56,8 @@ angular.module 'frontApp'
         # GoogleMapの距離計算
         targetDistance = BaseService.calMapDistance(cluster.zoom)
         obj =
-          placeAddress: $scope.input.address
+          latitude: cluster.center.lat()
+          longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
         setMapData(obj, true)
@@ -120,9 +119,9 @@ angular.module 'frontApp'
           ret =
             latitude: shop.latitude,
             longitude: shop.longitude,
-            showWindow: true,
             title: shop.name
             url: shop.image.thumb.url
+            icon: '../images/map-pin.png'
           ret['id'] = shop.id
           shops.push(ret)
         $scope.targetMarkers = shops
