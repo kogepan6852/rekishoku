@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "BaseService", ->
+  .factory "BaseService", ($ionicPopup) ->
 
     # GoogleMapの距離計算
     calMapDistance: (zoom) ->
@@ -15,3 +15,18 @@ angular.module "frontApp"
       targetDistance = (clientPx - 100) * targetMeterPerPx
 
       return targetDistance
+
+    # geocoderによる緯度経度の取得
+    getLatLng: (address, callback) ->
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode { address: address }, (result, status) ->
+        if status == google.maps.GeocoderStatus.OK
+          latLng =
+            lat: result[0].geometry.location.lat()
+            lng: result[0].geometry.location.lng()
+          callback(latLng)
+        else
+          alertPopup = $ionicPopup.alert(
+            title: '通信エラーが発生しました'
+            type: 'button-dark')
+          alertPopup.then (res) ->

@@ -14,7 +14,7 @@
   <div class="has-subheader maps" ng-if="map">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" ng-cloak>
-      <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject" click="clickMarker">
+      <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject">
         <ui-gmap-windows show="show">
           <div ng-non-bindable class="gmap-windows">
             <p>{{title}}</p>
