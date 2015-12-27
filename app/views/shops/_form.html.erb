@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>
-        <td><%= f.text_field :name ,:class => "form-control" %></td>
+        <td><%= f.text_area :description, rows: 10 ,:class => "form-control" %></td>
       </tr>
 
       <tr>
@@ -34,7 +34,7 @@
       </tr>
 
       <tr>
-        <th><%= f.label :人物 %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :人物 %></th>
         <td>
           <% @people.each do |person| %>
             <%= f.fields_for :people_shops do |pp| %>
@@ -49,21 +49,33 @@
 
         <tr>
           <th><%= f.label :メイン画像 %><span class="text-danger">（必須）</span></th>
-          <td><%= f.file_field :image %></td>
+            <td><%= f.file_field :image %><br>
+              <!-- <%= f.hidden_field :image_cache %> -->
+              <% if @shop.image? %>
+                <%= f.label :↓以前設定してた画像 %><br>
+                <%= image_tag @shop.image.url ,:class => "width300" %>
+              <% end %>
+            </td>
         </tr>
 
         <tr>
-          <th><%= f.label :サブ画像 %><span class="text-danger">（必須）</span></th>
-          <td><%= f.file_field :subimage %></td>
+          <th><%= f.label :サブ画像 %></th>
+          <td><%= f.file_field :subimage %><br>
+            <!-- <%= f.hidden_field :image_cache %> -->
+            <% if @shop.image? %>
+              <%= f.label :↓以前設定してた画像 %><br>
+              <%= image_tag @shop.subimage.url ,:class => "width300" %>
+            <% end %>
+          </td>
         </tr>
 
         <tr>
-          <th><%= f.label :画像の引用元URL %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :画像の引用元URL %></th>
           <td><%= f.text_field :image_quotation_url ,:class => "form-control" %></td>
         </tr>
 
         <tr>
-          <th><%= f.label :記事の掲載元名称 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :記事の掲載元名称 %></th>
           <td><%= f.text_field :post_quotation_name ,:class => "form-control" %></td>
         </tr>
 
@@ -83,13 +95,13 @@
         </tr>
 
         <tr>
-          <th><%= f.label :建物名 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :建物名 %></th>
           <td><%= f.text_field :address2 ,:class => "form-control" %></td>
         </tr>
 
         <tr>
-          <th><%= f.label :メニュー %><span class="text-danger">（必須）</span></th>
-          <td><%= f.text_area :menu ,:class => "form-control" %></td>
+          <th><%= f.label :メニュー %></th>
+          <td><%= f.text_area :menu, rows: 5 ,:class => "form-control" %></td>
         </tr>
     </table>
 
