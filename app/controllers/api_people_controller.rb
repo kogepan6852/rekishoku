@@ -1,7 +1,7 @@
 class ApiPeopleController < ApplicationController
 
-    # GET /api/people
-    # GET /api/people.json
+    # GET /api_people/people
+    # GET /api_people/people.json
     def people
       @people = Person.all
       respond_to do |format|
@@ -9,12 +9,5 @@ class ApiPeopleController < ApplicationController
         format.json { render json: @people }
       end
     end
-
-    # GET /api/periods
-    # GET /api/periods_api.json
-    def periods
-      @periods = Period.all
-    end
-
 
 end

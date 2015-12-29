@@ -1,7 +1,7 @@
 class ApiShopController < ApplicationController
 
-    # GET /api/shops
-    # GET /api/shops.json
+    # GET /api_shop/shops
+    # GET /api_shop/shops.json
     def shops
       filterFlag = 0
       latitudeRange = 0.00000901337 # 緯度計算の値
