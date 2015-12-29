@@ -16,9 +16,15 @@
         <th><%= f.label :名前 %><span class="text-danger">（必須）</span></th>
         <td><%= f.text_field :name ,:class => "form-control" %></td>
       </tr>
+
       <tr>
-        <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>]
         <td><%= f.text_area :description, rows: 10 ,:class => "form-control" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :店のURL %></th>
+        <td><%= f.text_field :url ,:class => "form-control" %></td>
       </tr>
 
       <tr>
