@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get 'api_post/posts/:id' , to: 'api_post#posts'
   get 'api_post/categories'
   get 'api_post/categories/:id' , to: 'api_post#categories'
-
+  get 'api_post/post_details'
+  get 'api_post/post_details/:id' , to: 'api_post#post_details'
 
 
   get 'users/index'

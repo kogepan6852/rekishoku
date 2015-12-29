@@ -8,6 +8,7 @@ angular.module("frontApp")
       POST_SHOP: '/posts_shops'
       POST_PERSON: '/people_posts'
       POST_API: '/api_post/posts'
+      POST_DETSIL_API: '/api_post/post_details'
       SHOP: '/api_shop/shops'
       PERSON: '/api_people/people'
       LOGIN: '/users/sign_in.json'
