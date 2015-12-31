@@ -12,7 +12,7 @@ Category.create(:name => '歴食エピソード', :slug =>'episode', :type =>'Po
 Category.create(:name => '歴食体験', :slug =>'experience', :type =>'PostCategory')
 Category.create(:name => '歴食ニュース', :slug =>'information', :type =>'PostCategory')
 
-Category.create(:name => 'お茶', :slug =>'tea', :type =>'ShopCategory')
+Category.create(:name => '菓子', :slug =>'tea', :type =>'ShopCategory')
 Category.create(:name => '食事', :slug =>'meal', :type =>'ShopCategory')
 Category.create(:name => 'コース', :slug =>'course', :type =>'ShopCategory')
 Category.create(:name => 'WEB', :slug =>'online', :type =>'ShopCategory')
