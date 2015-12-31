@@ -81,6 +81,7 @@ angular.module "frontApp"
       # 画像を削除する
       angular.forEach angular.element("input[type='file']"), (inputElem) ->
         angular.element(inputElem).val null
+      $scope.srcUrl = null;
       # slideを一番前に移動
       $ionicSlideBoxDelegate.slide(0)
       $scope.isShowBackSlide = false
@@ -128,6 +129,7 @@ angular.module "frontApp"
 
       # モーダルを開く
       $scope.modalShops.show()
+      $scope.popoverPostMenu.hide()
 
     $scope.closeModalShops = () ->
       $scope.modalShops.hide()
@@ -148,6 +150,7 @@ angular.module "frontApp"
 
       # モーダルを開く
       $scope.modalPeople.show()
+      $scope.popoverPostMenu.hide()
 
     $scope.closeModalPeople = () ->
       $scope.modalPeople.hide()
@@ -304,7 +307,9 @@ angular.module "frontApp"
             slug: $scope.results[index].category_slug
           id: $scope.results[index].id
         $scope.srcUrl = $scope.results[index].image.thumb.url
+        # モーダルを開く
         $scope.modalPost.show()
+        $scope.popoverPostMenu.hide()
 
     # 変化を監視してメイン画像を読み込み＋表示を実行
     $scope.$watch 'input.file', (file) ->

@@ -20,6 +20,7 @@
           <th class="post-title">タイトル</th>
           <th class="post-content hidden-xs">本文</th>
           <th class="post-category hidden-xs">カテゴリー</th>
+          <th class="post-status"></th>
           <th class="delete-button"></th>
         </tr>
       </thead>
@@ -31,7 +32,10 @@
           <td>{{result.title}}</td>
           <td class="hidden-xs">{{result.content | limitTo:100}}...</td>
           <td class="hidden-xs">{{result.category_name}}</td>
-          <td align="right">
+          <td class="post-status vertical-align">
+            <div ng-class="{active: result.status == 1}">公開</div>
+          </td>
+          <td class="vertical-align" align="right">
             <button class="button button-dark" ng-click="openPopoverPostMenu($event, $index)"><i class="icon ion-android-more-vertical"></i></button>
           </td>
         </tr>
