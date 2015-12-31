@@ -59,7 +59,7 @@
               <!-- <%= f.hidden_field :image_cache %> -->
               <% if @shop.image? %>
                 <%= f.label :↓以前設定してた画像 %><br>
-                <%= image_tag @shop.image.url ,:class => "width300" %>
+                <%= image_tag @shop.image.url %>
               <% end %>
             </td>
         </tr>
@@ -70,7 +70,7 @@
             <!-- <%= f.hidden_field :image_cache %> -->
             <% if @shop.image? %>
               <%= f.label :↓以前設定してた画像 %><br>
-              <%= image_tag @shop.subimage.url ,:class => "width300" %>
+              <%= image_tag @shop.subimage.url %>
             <% end %>
           </td>
         </tr>
