@@ -8,8 +8,6 @@ class PeriodsController < ApplicationController
     @periods = Period.all
   end
 
-
-
   # GET /periods/1
   # GET /periods/1.json
   def show

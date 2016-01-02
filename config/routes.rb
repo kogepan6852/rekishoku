@@ -4,19 +4,27 @@ Rails.application.routes.draw do
   resources :menu
 
 # API route　
-  get 'api_people/people'
-  get 'api_people/people/:id' , to: 'api_people#people'
-  get 'api_shop/shops'
-  get 'api_shop/shops/:id' , to: 'api_shop#shops'
-  get 'api_period/periods'
-  get 'api_period/periods/:id' , to: 'api_period#periods'
-  get 'api_post/posts'
-  get 'api_post/posts/:id' , to: 'api_post#posts'
-  get 'api_post/categories'
-  get 'api_post/categories/:id' , to: 'api_post#categories'
-  get 'api_post/post_details'
-  get 'api_post/post_details/:id' , to: 'api_post#post_details'
+  get 'api/people', to: 'api_people#index'
+  get 'api/person_list', to: 'api_people#list'
+  get 'api/shops', to: 'api_shops#index'
+  get 'api/shops/:id', to: 'api_shops#show'
+  get 'api/shop_list', to: 'api_shops#list'
+  get 'api/map', to: 'api_shops#map'
+  get 'api/posts', to: 'api_posts#index'
+  get 'api/posts/:id', to: 'api_posts#show'
+  get 'api/post_details/:id', to: 'api_post_details#index'
+  get 'api/categories', to: 'api_categories#index'
 
+  post 'api/posts', to: 'api_posts#create'
+  patch 'api/posts/:id', to: 'api_posts#update'
+  delete 'api/posts/:id', to: 'api_posts#destroy'
+
+  post 'api/post_details', to: 'api_post_details#create'
+  patch 'api/post_details/:id', to: 'api_post_details#update'
+  delete 'api/post_details/:id', to: 'api_post_details#destroy'
+
+  post 'api/people_posts', to: 'api_people_posts#create'
+  post 'api/posts_shops', to: 'api_posts_shops#create'
 
   get 'users/index'
   get 'users/show'

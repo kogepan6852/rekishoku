@@ -1,18 +1,16 @@
 class PeoplePostsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_people_post, only: [:show, :edit, :update, :destroy]
 
   # GET /people_posts
   # GET /people_posts.json
   def index
-    @people_posts = PeoplePost.where(post_id: params[:post_id])
-    render json: @people_posts
+    @people_posts = PeoplePost.all
   end
 
   # GET /people_posts/1
   # GET /people_posts/1.json
   def show
-    @people_posts = PeoplePost.new
-    render json: @people_posts
   end
 
 
@@ -28,37 +26,6 @@ class PeoplePostsController < ApplicationController
   # POST /people_posts
   # POST /people_posts.json
   def create
-    # 削除
-    id = params[:post_id]
-    PeoplePost.delete_all(['post_id = ?', id])
-    # 新規作成の場合
-    isSuccess = true
-    if params[:person_ids]
-      params[:person_ids].each_with_index do |person_id, i|
-        @people_post = PeoplePost.new
-        @people_post.post_id = params[:post_id]
-        @people_post.person_id = person_id
-        if !@people_post.save
-          isSuccess = false
-          @people_post_err = @people_post
-        end
-      end
-
-      respond_to do |format|
-        if isSuccess
-          format.json { render :show, status: :created }
-        else
-          format.json { render json: @people_post_err.errors, status: :unprocessable_entity }
-        end
-      end
-
-    # 削除のみの場合
-    else
-      respond_to do |format|
-        format.json { head :no_content }
-      end
-    end
-
   end
 
   # PATCH/PUT /people_posts/1

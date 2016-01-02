@@ -114,17 +114,12 @@ angular.module "frontApp"
 
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
-      Api.getJson(accessKey, Const.API.SHOP + '.json', true).then (resShop) ->
+      obj =
+        post_id: $scope.targetPostId
+      Api.getJson(obj, Const.API.SHOP_LIST , true).then (resShop) ->
         $scope.shops = resShop.data
-        # 紐づく店舗を取得する
-        obj =
-          post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_SHOP, true).then (resPostShop) ->
-          angular.forEach $scope.shops, (shop) ->
-            shop.checked = false
-            angular.forEach resPostShop.data, (postShop) ->
-              if postShop.shop_id == shop.id
-                shop.checked = true
+        angular.forEach $scope.shops, (shop) ->
+          shop.checked = shop.hasPost
 
       # モーダルを開く
       $scope.modalShops.show()
@@ -134,17 +129,12 @@ angular.module "frontApp"
 
     $scope.openModalPeople = () ->
       # 人物一覧を取得する
-      Api.getJson("", Const.API.PERSON + '.json', true).then (resPerson) ->
+      obj =
+        post_id: $scope.targetPostId
+      Api.getJson(obj, Const.API.PERSON_LIST, true).then (resPerson) ->
         $scope.people = resPerson.data
-        # 紐づく店舗を取得する
-        obj =
-          post_id: $scope.targetPostId
-        Api.getJson(obj, Const.API.POST_PERSON, true).then (resPostPerson) ->
-          angular.forEach $scope.people, (person) ->
-            person.checked = false
-            angular.forEach resPostPerson.data, (postPerson) ->
-              if postPerson.person_id == person.id
-                person.checked = true
+        angular.forEach $scope.people, (person) ->
+          person.checked = person.hasPost
 
       # モーダルを開く
       $scope.modalPeople.show()

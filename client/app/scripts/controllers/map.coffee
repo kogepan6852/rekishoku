@@ -104,15 +104,8 @@ angular.module 'frontApp'
       setMapData(obj, true)
 
     setMapData = (obj, isLoding) ->
-      Api.getJson(obj, Const.API.SHOP + ".json", isLoding).then (resShops) ->
-        # 検索データの保存
-        $rootScope.latitude = resShops.data.current.latitude
-        $rootScope.longitude = resShops.data.current.longitude
-        $rootScope.targetAddress = resShops.data.current.address
+      Api.getJson(obj, Const.API.MAP, isLoding).then (resShops) ->
         # mapデータ設定
-        if !$scope.isDragging
-          $scope.map.center.latitude = resShops.data.current.latitude
-          $scope.map.center.longitude = resShops.data.current.longitude
         $scope.isDragging = false;
         shops = []
         # map表示用データの作成

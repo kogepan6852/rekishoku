@@ -3,18 +3,19 @@
 angular.module("frontApp")
   .factory 'Const', ->
     API:
-      POST: '/posts'
-      POST_DETSIL: '/post_details'
-      POST_SHOP: '/posts_shops'
-      POST_PERSON: '/people_posts'
-      POST_API: '/api_post/posts'
-      POST_DETSIL_API: '/api_post/post_details'
-      SHOP: '/api_shop/shops'
-      PERSON: '/api_people/people'
+      POST: '/api/posts'
+      POST_DETSIL: '/api/post_details'
+      POST_SHOP: '/api/posts_shops'
+      POST_PERSON: '/api/people_posts'
+      PERSON_LIST: '/api/person_list'
+      SHOP: '/api/shops'
+      SHOP_LIST: '/api/shop_list'
+      MAP: '/api/map'
+      PERSON: '/api/people'
+      CATEGORY: '/api/categories'
       LOGIN: '/users/sign_in.json'
       LOGOUT: '/authentication_token.json'
       USER: '/users'
-      CATEGORY: '/api_post/categories.json'
 
     MSG:
       SAVED: '投稿しました'

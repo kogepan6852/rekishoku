@@ -13,11 +13,6 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
-    shop = { "shop" => @shop, "categories" => @shop.categories, "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug'), "people" => @shop.people }
-    respond_to do |format|
-      format.html { render @shops }
-      format.json { render json: shop }
-    end
   end
 
   # GET /shops/new
@@ -49,8 +44,6 @@ class ShopsController < ApplicationController
       end
     end
   end
-
-
 
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json
@@ -93,10 +86,6 @@ class ShopsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
       params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
-    end
-
-    def post_detail_params
-      params.require(:post_detail).permit(:post_id, :title, :image, :content, :quotation_url, :quotation_name)
     end
 
 end

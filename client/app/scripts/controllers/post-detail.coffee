@@ -25,7 +25,7 @@ angular.module 'frontApp'
       status: true
       cookie: true
 
-    path = Const.API.POST_API + '/' + $stateParams.id
+    path = Const.API.POST + '/' + $stateParams.id
     Api.getJson("", path, true).then (res) ->
       $scope.post = res.data.post
       $scope.shops = res.data.shops
@@ -40,7 +40,7 @@ angular.module 'frontApp'
       $rootScope.appImage = $scope.post.image.url
       $rootScope.appKeywords = appKeywords.join()
 
-      Api.getJson("", Const.API.POST_DETSIL_API + '/' + res.data.post.id, true).then (res) ->
+      Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id, true).then (res) ->
         $scope.postDetails = res.data
 
     # 現在タブの判定
