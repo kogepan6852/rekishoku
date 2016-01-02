@@ -17,12 +17,12 @@ angular.module 'frontApp'
     }
     $scope.isDragging = false;
 
-    defaultZoom = 14
-    targetDistance = BaseService.calMapDistance(defaultZoom)
-
     # 初期位置の設定
     latitude = 35.6813818
     longitude = 139.7660838
+    defaultZoom = 14
+    targetDistance = BaseService.calMapDistance(defaultZoom)
+
     if $rootScope.latitude & $rootScope.longitude
       latitude = $rootScope.latitude
       longitude = $rootScope.longitude
@@ -38,8 +38,6 @@ angular.module 'frontApp'
     $scope.options =
       scrollwheel: false
       minZoom: 11
-    $scope.markerOptions =
-      icon: '../images/reki.png'
 
     $scope.events =
       dragstart: (cluster, clusterModels) ->
@@ -58,7 +56,8 @@ angular.module 'frontApp'
         # GoogleMapの距離計算
         targetDistance = BaseService.calMapDistance(cluster.zoom)
         obj =
-          placeAddress: $scope.input.address
+          latitude: cluster.center.lat()
+          longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
         setMapData(obj, true)
@@ -68,42 +67,56 @@ angular.module 'frontApp'
     # 初期処理
     $scope.init = ->
       if $rootScope.targetAddress
+        $scope.input.address = $rootScope.targetAddress
+        $scope.searchShops()
+      else if $rootScope.latitude & $rootScope.longitude
         obj =
-          placeAddress: $rootScope.targetAddress
+          latitude: $rootScope.latitude
+          longitude: $rootScope.longitude
           shopDistance: targetDistance
         # map表示用データの作成と設定
         setMapData(obj, true)
 
-      # 現在地の取得
-      else if navigator.geolocation
-        navigator.geolocation.getCurrentPosition ((position) ->
-          $scope.map.center.latitude = position.coords.latitude
-          $scope.map.center.longitude = position.coords.longitude
-
-          obj =
-            latitude: position.coords.latitude
-            longitude: position.coords.longitude
-            shopDistance: targetDistance
-          # map表示用データの作成と設定
-          setMapData(obj, true)
-
-          ), (e) ->
-            if typeof e == 'string'
-              alert(e)
-            else
-              alert(e.message)
       else
-        alert('位置情報を取得できません。')
+        # 現在地の取得
+        if navigator.geolocation
+          navigator.geolocation.getCurrentPosition ((position) ->
+            $scope.map.center.latitude = position.coords.latitude
+            $scope.map.center.longitude = position.coords.longitude
+
+            obj =
+              latitude: position.coords.latitude
+              longitude: position.coords.longitude
+              shopDistance: targetDistance
+            # map表示用データの作成と設定
+            setMapData(obj, true)
+
+            ), (e) ->
+              if typeof e == 'string'
+                alert(e)
+              else
+                alert(e.message)
+        else
+          alert('位置情報を取得できません。')
 
     # Function
     $scope.searchShops = ->
-      obj =
-        placeAddress: $scope.input.address
-        shopDistance: targetDistance
-      # map表示用データの作成と設定
-      setMapData(obj, true)
+      # 緯度経度の計算
+      BaseService.getLatLng $scope.input.address, (latLng) ->
+        obj =
+          latitude: latLng.lat
+          longitude: latLng.lng
+          shopDistance: targetDistance
+        # map表示用データの作成と設定
+        setMapData(obj, true)
 
     setMapData = (obj, isLoding) ->
+      # 中心位置の設定
+      $scope.map.center.latitude = obj.latitude
+      $scope.map.center.longitude = obj.longitude
+      $rootScope.latitude = obj.latitude
+      $rootScope.longitude = obj.longitude
+
       Api.getJson(obj, Const.API.MAP, isLoding).then (resShops) ->
         # mapデータ設定
         $scope.isDragging = false;
@@ -113,15 +126,15 @@ angular.module 'frontApp'
           ret =
             latitude: shop.latitude,
             longitude: shop.longitude,
-            showWindow: true,
             title: shop.name
             url: shop.image.thumb.url
+            icon: '../images/map-pin.png'
           ret['id'] = shop.id
           shops.push(ret)
         $scope.targetMarkers = shops
 
-    $scope.clickMarker = ($event) ->
-
     $scope.moveToCurrentPlace = ->
       $rootScope.targetAddress = null
+      $rootScope.latitude = null
+      $rootScope.longitude = null
       $scope.init()

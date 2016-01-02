@@ -1,0 +1,49 @@
+<ion-modal-view class="search-modal">
+  <form ng-submit="submitSearch()">
+    <ion-header-bar class="bar-light item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <div class="button button-clear" ng-click="hideModalSearch()">
+        Cancel
+      </div>
+    </ion-header-bar>
+
+    <ion-content>
+      <div class="row padding">
+        <div class="col col-100">
+          <div class="button-bar basic">
+            <a class="button" ng-click="selectPostCategory('post')" ng-class="{active: currentType == 'post'}">STORY</a>
+            <a class="button" ng-click="selectPostCategory('shop')" ng-class="{active: currentType == 'shop'}">FOOD</a>
+          </div>
+        </div>
+      </div>
+      <div class="row padding">
+        <div class="col col-100">
+          <div class="button-bar basic" ng-if="currentType == 'post'">
+            <a class="button"
+              ng-repeat="category in postCategories"
+              ng-click="selectSearchCategory(category.id)"
+              ng-bind-html="category.name | rekishokuText"
+              ng-class="{active: selectedId == category.id}"
+            ></a>
+          </div>
+          <div class="button-bar basic" ng-if="currentType == 'shop'">
+            <a class="button"
+              ng-repeat="category in shopCategories"
+              ng-click="selectSearchCategory(category.id)"
+              ng-bind-html="category.name | rekishokuText"
+              ng-class="{active: selectedId == category.id}"
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="padding">
+        <button class="search-button button button-block button-positive hidden-xs hidden-sm" ng-click="hideModalSearch()">検索</button>
+      </div>
+
+    </ion-content>
+  </form>
+</ion-modal-view>

@@ -8,10 +8,13 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $stateParams, $ionicModal, $sessionStorage, $controller, Api, Const, toaster) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $sessionStorage, $controller, $state, Api, Const, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
+
+    # 変数設定
+    $rootScope.isHideTab = true
 
     # setting
     $ionicModal.fromTemplateUrl('views/parts/modal-profile-edit.html',
@@ -40,6 +43,16 @@ angular.module "frontApp"
 
       if String($stateParams.id) == String($sessionStorage['user_id'])
         $scope.isLoginUser = true
+
+      # 現在タブの判定
+      if $state.is('tabs.post-writer')
+        $scope.nowTab = 'post'
+      else if $state.is('tabs.map-writer')
+        $scope.nowTab = 'map'
+      else if $state.is('tabs.shop-writer')
+        $scope.nowTab = 'shop'
+      else
+        $scope.nowTab = 'other'
 
     # Function
     $scope.openModalProfileEdit = ->

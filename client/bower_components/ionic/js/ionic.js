@@ -2793,12 +2793,16 @@ ionic.tap = {
   isElementTapDisabled: function(ele) {
     if (ele && ele.nodeType === 1) {
       var element = ele;
+      if ($(element).parents('[data-tap-disabled]').length) {
+        return true;
+      }
+     /*
       while (element) {
         if ((element.dataset ? element.dataset.tapDisabled : element.getAttribute('data-tap-disabled')) == 'true') {
           return true;
         }
         element = element.parentElement;
-      }
+      }*/
     }
     return false;
   },

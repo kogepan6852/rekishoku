@@ -16,6 +16,12 @@ angular.module "frontApp"
       animation: 'slide-in-up').then (modalLogin) ->
       $scope.modalLogin = modalLogin
 
+    $ionicModal.fromTemplateUrl('views/parts/modal-search.html',
+      scope: $scope
+      animation: 'scale-in'
+      backdropClickToClose: false).then (modalSearch) ->
+        $scope.modalSearch = modalSearch
+
     if !$sessionStorage['token']
       $rootScope.isLogin = false
     else
@@ -129,3 +135,48 @@ angular.module "frontApp"
     $scope.goBack = ->
       $rootScope.isHideTab = false
       $ionicHistory.goBack();
+
+    $scope.openModalSearch = ->
+      # 現在Pathの取得
+      currentPath = $location.path();
+      if currentPath == '/shops'
+        $scope.currentType = 'shop'
+      else
+        $scope.currentType = 'post'
+
+      if !$scope.shopCategories || !$scope.postCategories
+        # ShopCategoryを取得する
+        shopCategoryObj =
+          type: "ShopCategory"
+        Api.getJson(shopCategoryObj, Const.API.CATEGORY, true).then (res) ->
+          $scope.shopCategories = res.data
+
+        # PostCategoryを取得する
+        postCategoryObj =
+          type: "PostCategory"
+        Api.getJson(postCategoryObj, Const.API.CATEGORY, true).then (res) ->
+          $scope.postCategories = res.data
+
+      $scope.modalSearch.show()
+
+    $scope.hideModalSearch = ->
+      $scope.modalSearch.hide()
+
+    $scope.selectPostCategory = (type) ->
+      if $scope.currentType == type
+        $scope.currentType = null
+      else
+        $scope.currentType = type
+
+    $scope.selectSearchCategory = (id) ->
+      if $scope.selectedId == id
+        $scope.selectedId = null
+      else
+        $scope.selectedId = id
+
+    $scope.submitSearch = ->
+      if $scope.currentType = 'shop'
+        $location.path('/tab/shops');
+      else
+        $location.path('/tab/home');
+      $scope.modalSearch.hide()
