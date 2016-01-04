@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, Api, Const) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -29,28 +29,41 @@ angular.module "frontApp"
       obj =
         per: 20
         page: 1
-      Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
+      if $scope.targetCategoryId
+        obj.category = $scope.targetCategoryId
+      # 検索ワードの設定
+      $scope.keywords = $location.search()['keywords']
+      if $scope.keywords
+        obj.keywords = $scope.keywords
+
+      Api.getJson(obj, Const.API.SHOP, true).then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
-        $scope.targetCategoryId = null
+
+    $rootScope.shopsSearch = (categoryId) ->
+      $scope.targetCategoryId = null
+      $scope.search(categoryId)
 
     # Function
     $scope.search = (categoryId) ->
       $scope.page = 1
+      obj =
+        per: Const.API.SETTING.PER
+        page: $scope.page
       if categoryId == $scope.targetCategoryId
         # 検索条件解除
         $scope.targetCategoryId = null
-        obj =
-          per: 20
-          page: $scope.page
       else
         # 検索条件設定
         $scope.targetCategoryId = categoryId
-        obj =
-          per: 20
-          page: $scope.page
-          category: categoryId
+        obj.category = categoryId
+
+      # 検索ワードの設定
+      $scope.keywords = $location.search()['keywords']
+      if $scope.keywords
+        obj.keywords = $scope.keywords
+
       # 検索
       Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
         $scope.results = res.data
@@ -65,6 +78,9 @@ angular.module "frontApp"
           per: 20
           page: $scope.page
           category: $scope.targetCategoryId
+        # 検索ワードの設定
+        if $scope.keywords
+          obj.keywords = $scope.keywords
         Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
@@ -72,3 +88,9 @@ angular.module "frontApp"
             angular.forEach res.data, (data, i) ->
               $scope.results.push(data)
           $scope.$broadcast('scroll.infiniteScrollComplete')
+
+    $scope.deleteSearchCondition = ->
+      $scope.targetCategoryId = null
+      $scope.keywords = null
+      $location.search('keywords', null)
+      $scope.search()

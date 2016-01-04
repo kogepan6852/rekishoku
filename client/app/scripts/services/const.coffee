@@ -16,6 +16,8 @@ angular.module("frontApp")
       LOGIN: '/users/sign_in.json'
       LOGOUT: '/authentication_token.json'
       USER: '/users'
+      SETTING:
+        PER: 20
 
     MSG:
       SAVED: '投稿しました'

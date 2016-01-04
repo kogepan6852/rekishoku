@@ -220,6 +220,14 @@
     bottom: -44px;
   }
 
+  /* Main */
+  .main-category .search-condition {
+    padding-right: 34px;
+  }
+  .main-category .search-condition .clear-button span {
+    display: none;
+  }
+
   /* detail page */
   .item-description {
     max-height: 30px;
@@ -302,7 +310,8 @@
     -webkit-border-radius: 5px;
   }
   /* Main*/
-  .main-category .button-bar{
+  .main-category .button-bar,
+  .main-category .search-condition{
     padding-left: 180px;
     max-width: 800px;
   }

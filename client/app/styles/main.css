@@ -105,6 +105,59 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.main-category .search-condition {
+  /*padding-right: 34px;*/
+  padding-right: 115px;
+}
+.main-category .search-condition,
+.main-category .search-condition > div {
+  height: 36px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 18px;
+  -moz-border-radius: 18px;
+  -webkit-border-radius: 18px;
+  position: relative;
+}
+.main-category .search-condition span {
+  background-color: #ddd;
+  line-height: 36px;
+  padding: 9px 16px;
+  border-radius: 17px;
+  -moz-border-radius: 17px;
+  -webkit-border-radius: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.main-category .search-condition .clear-button .button {
+  border-radius: 14px;
+  -moz-border-radius: 14px;
+  -webkit-border-radius: 14px;
+  font-size: 14px;
+  min-height: 28px;
+  min-width: 28px;
+  height: 28px;
+  top: 4px;
+  padding: 0 0 0 1px;
+  border: none;
+}
+.main-category .search-condition .clear-button {
+  top: 4px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.main-category .search-condition .clear-button span {
+  background-color: transparent;
+  color: #b2b2b2;
+  padding: 0;
+}
+.main-category .search-condition .button i::before  {
+  line-height: 28px;
+  font-size: 18px;
+}
 
 /**********************
  * Post list

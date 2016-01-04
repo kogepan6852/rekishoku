@@ -4,14 +4,18 @@ class ApiShopsController < ApplicationController
   def index
     @shops = Shop.order(created_at: :desc)
     # 検索条件の設定
-    if params[:name]
-      @shops = @shops.where('name LIKE ?',params[:name])
+    if params[:keywords]
+      keywords = params[:keywords]
+      for kw in keywords.split(" ")
+        # 名前&詳細&メニュー&住所&人物で検索
+        @shops = @shops
+          .joins(:people)
+          .where('shops.name LIKE ? or shops.description LIKE ? or shops.menu LIKE ? or CONCAT(shops.province, shops.city, shops.address1, shops.address2) LIKE ? or people.name LIKE ?',"%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%").uniq
+      end
     end
     if params[:category]
+      # カテゴリーで検索
       @shops = @shops.joins(:categories).where('categories_shops.category_id = ?', params[:category].to_i)
-    end
-    if params[:address]
-      @shops = @shops.where('address1 LIKE ?', params[:address])
     end
 
     # shopにカテゴリーを紐付ける

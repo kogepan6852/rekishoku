@@ -11,6 +11,9 @@ angular.module "frontApp"
   .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $ionicHistory, $ionicNavBarDelegate, Api, toaster, Const) ->
 
     # 変数設定
+    $scope.input =
+      keywords: null
+
     $ionicModal.fromTemplateUrl('views/parts/modal-login.html',
       scope: $scope
       animation: 'slide-in-up').then (modalLogin) ->
@@ -125,7 +128,7 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight();
 
     $scope.moveToHome = ->
-      $location.path('/tab/home');
+      $location.path('/home');
       # backボタンを隠す
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
@@ -137,6 +140,9 @@ angular.module "frontApp"
       $ionicHistory.goBack();
 
     $scope.openModalSearch = ->
+      # 検索ワードの取得
+      $scope.input.keywords = $location.search()['keywords']
+
       # 現在Pathの取得
       currentPath = $location.path();
       if currentPath == '/shops'
@@ -175,8 +181,14 @@ angular.module "frontApp"
         $scope.selectedId = id
 
     $scope.submitSearch = ->
-      if $scope.currentType = 'shop'
-        $location.path('/tab/shops');
+      if !$scope.input.keywords
+        $scope.input.keywords = null
+      if $scope.currentType == 'shop'
+        $location.path('/shops').search('keywords', $scope.input.keywords)
+        if $rootScope.shopsSearch
+          $rootScope.shopsSearch($scope.selectedId)
       else
-        $location.path('/tab/home');
+        $location.path('/home').search('keywords', $scope.input.keywords)
+        if $rootScope.postsSearch
+          $rootScope.postsSearch($scope.selectedId)
       $scope.modalSearch.hide()

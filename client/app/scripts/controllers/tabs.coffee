@@ -13,8 +13,8 @@ angular.module "frontApp"
     # Function
     $scope.clickTab = (index) ->
       if index == 0
-        $location.path('/home')
+        $location.path('/home').search('keywords', null)
       else if index == 1
-        $location.path('/map')
+        $location.path('/map').search('keywords', null)
       else if index == 2
-        $location.path('/shops')
+        $location.path('/shops').search('keywords', null)

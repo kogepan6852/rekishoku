@@ -9,11 +9,19 @@ class ApiPostsController < ApplicationController
       @posts = @posts.where(status: 1)
     end
 
-    # フリーワードとカテゴリ検索を行なう
-    if params[:text]
-      @posts = @posts.where('title LIKE ? || content LIKE ?', params[:text],params[:text],params[:text])
+    # 検索条件の設定
+    if params[:keywords]
+      keywords = params[:keywords]
+      for kw in keywords.split(" ")
+        # タイトル&本文で検索
+        @posts = @posts
+          .joins(:post_details)
+          .where('posts.title LIKE ? or posts.content LIKE ? or post_details.title LIKE ? or post_details.content LIKE ?', "%#{kw}%", "%#{kw}%" , "%#{kw}%", "%#{kw}%").uniq
+      end
     end
+
     if params[:category]
+      # カテゴリーで検索
       @posts = @posts.where(category_id: params[:category].to_i)
     end
     render json: @posts.page(params[:page]).per(params[:per])

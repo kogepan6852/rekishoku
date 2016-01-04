@@ -8,13 +8,23 @@
 
     <div class="row">
       <div class="col main-category">
-        <div class="button-bar basic">
+        <div class="button-bar basic" ng-if="!keywords">
           <a class="button"
             ng-repeat="category in categories"
             ng-click="search({{category.id}})"
             ng-bind-html="category.name | rekishokuText"
             ng-class="{active: targetCategoryId == category.id}"
           ></a>
+        </div>
+        <div class="search-condition" ng-if="keywords">
+          <div>
+            <span ng-show="targetCategoryId">{{targetCategoryId | findTargetCategory:categories}}</span>
+            <span>{{keywords}}</span>
+          </div>
+          <div class="clear-button">
+            <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
+            <span ng-click="deleteSearchCondition()">条件クリア</span>
+          </div>
         </div>
       </div>
     </div>
