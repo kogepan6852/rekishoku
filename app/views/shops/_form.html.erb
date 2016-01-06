@@ -13,12 +13,12 @@
 
   <table class="table shop-info">
       <tr>
-        <th><%= f.label :名前 %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :名前 %><span class="text-danger">*</span></th>
         <td><%= f.text_field :name ,:class => "form-control" %></td>
       </tr>
 
       <tr>
-        <th><%= f.label :説明 %><span class="text-danger">（必須）</span></th>]
+        <th><%= f.label :説明 %><span class="text-danger">*</span></th>
         <td><%= f.text_area :description, rows: 10 ,:class => "form-control" %></td>
       </tr>
 
@@ -28,7 +28,7 @@
       </tr>
 
       <tr>
-        <th><%= f.label :カテゴリー %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :カテゴリー %><span class="text-danger">*</span></th>
         <td><% @shops_categories.each do |shop_category| %>
           <%= f.fields_for :categories_shop do |cs| %>
             <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
@@ -54,7 +54,7 @@
 
 
         <tr>
-          <th><%= f.label :メイン画像 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :メイン画像 %><span class="text-danger">*</span></th>
             <td><%= f.file_field :image %><br>
               <!-- <%= f.hidden_field :image_cache %> -->
               <% if @shop.image? %>
@@ -86,17 +86,17 @@
         </tr>
 
         <tr>
-          <th><%= f.label :都道府県 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :都道府県 %><span class="text-danger">*</span></th>
           <td><%= f.text_field :province ,:class => "form-control" %></td>
         </tr>
 
         <tr>
-          <th><%= f.label :市区町村 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :市区町村 %><span class="text-danger">*</span></th>
           <td><%= f.text_field :city ,:class => "form-control" %></td>
         </tr>
 
         <tr>
-          <th><%= f.label :その他住所 %><span class="text-danger">（必須）</span></th>
+          <th><%= f.label :その他住所 %><span class="text-danger">*</span></th>
           <td><%= f.text_field :address1 ,:class => "form-control" %></td>
         </tr>
 
@@ -106,11 +106,7 @@
         </tr>
 
         <tr>
-<<<<<<< HEAD
           <th><%= f.label :メニュー %></th>
-=======
-          <th><%= f.label :メニュー %><span class="text-danger">（必須）</span></th>
->>>>>>> master
           <td><%= f.text_area :menu, rows: 5 ,:class => "form-control" %></td>
         </tr>
     </table>
