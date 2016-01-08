@@ -13,16 +13,16 @@
 
   <table class="table">
       <tr>
-        <th><%= f.label :名前 %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :名前 %><span class="text-danger">*</span></th>
         <td><%= f.text_field :name ,:class => "form-control" %></td>
       </tr>
       <tr>
-        <th><%= f.label :ふりがな（例：まさおかしき） %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :ふりがな（例：まさおかしき） %><span class="text-danger">*</span></th>
         <td><%= f.text_field :furigana ,:class => "form-control" %></td>
       </tr>
 
       <tr>
-        <th><%= f.label :時代 %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :時代 %><span class="text-danger">*</span></th>
         <td>
           <% @periods.each do |period| %>
             <%= f.fields_for :people_periods do |pp| %>
@@ -35,7 +35,7 @@
       </tr>
 
       <tr>
-        <th><%= f.label :カテゴリー %><span class="text-danger">（必須）</span></th>
+        <th><%= f.label :カテゴリー %><span class="text-danger">*</span></th>
         <td>
           <% @people_categories.each do |person_category| %>
             <%= f.fields_for :categories_people do |cp| %>
