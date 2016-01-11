@@ -1,12 +1,14 @@
 class ApiPeopleController < ApplicationController
 
   # GET /api/people
+  # 一覧表示
   def index
     @people = Person.all
     render json: @people
   end
 
   # GET /api/people-list
+  # post-list用一覧表示
   def list
     @people = Person.all
     people = Array.new()

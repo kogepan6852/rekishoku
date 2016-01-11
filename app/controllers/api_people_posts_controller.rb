@@ -1,4 +1,5 @@
 class ApiPeoplePostsController < ApplicationController
+  authorize_resource :class => false
 
   # POST /api/people_posts
   def create
@@ -20,8 +21,7 @@ class ApiPeoplePostsController < ApplicationController
       end
 
       if isSuccess
-        obj = {}
-        render json: obj, status: :created
+        render json: @people_post, status: :created
       else
         render json: @people_post_err.errors, status: :unprocessable_entity
       end

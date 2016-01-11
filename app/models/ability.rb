@@ -29,28 +29,50 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
+    # 管理画面用アクセスコントロール
     can :manage, Post, user_id: user.id if user
     can :read, Post
 
     can :manage, PostDetail, user_id: user.id if user
     can :read, PostDetail
 
+    can :manage, PostsShop, user_id: user.id if user
+    can :read, PostsShop
+
+    can :manage, PeoplePost, user_id: user.id if user
+    can :read, PeoplePost
+
     can :manage, :Menu
     cannot :manage ,Shop
     cannot :manage, Person
     cannot :manage, Period
 
-   if user
+    if user
       if user.role == 1
          can :manage, Shop
          can :manage, Person
          can :manage, Period
-     end
-     if user.role == 0
+      end
+      if user.role == 0
         can :manage, :all
+      end
     end
 
-  end
+    # API用アクセスコントロール
+    can :read, :api_post
+    can :manage, :api_post if user
+
+    can :read, :api_post_detail
+    can :manage, :api_post_detail if user
+
+    can :read, :api_posts_shop
+    can :manage, :api_posts_shop if user
+
+    can :read, :api_people_post
+    can :manage, :api_people_post if user
+
+    can :read, :api_user
+    can :manage, :api_user if user
 
   end
 end

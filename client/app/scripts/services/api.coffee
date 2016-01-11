@@ -7,7 +7,7 @@ angular.module "frontApp"
 
     # エラー発生時処理
     errorHandring = (data) ->
-      if data.error
+      if data && data.error
         alertPopup = $ionicPopup.alert(
           title: data.error
           type: 'button-dark')
@@ -68,7 +68,7 @@ angular.module "frontApp"
       $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: method
-        url: host + path + ".json"
+        url: host + path
         transformRequest: null
         headers: 'Content-type': undefined
         data: fd

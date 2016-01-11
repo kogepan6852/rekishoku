@@ -4,31 +4,41 @@ Rails.application.routes.draw do
   resources :menu
 
 # API route　
-  get 'api/people', to: 'api_people#index'
-  get 'api/person_list', to: 'api_people#list'
+  # POSTS
+  get 'api/posts', to: 'api_posts#index'
+  get 'api/posts/:id', to: 'api_posts#show'
+  get 'api/post_list', to: 'api_posts#list'
+  post 'api/posts', to: 'api_posts#create'
+  patch 'api/posts/:id', to: 'api_posts#update'
+  delete 'api/posts/:id', to: 'api_posts#destroy'
+  # POST DETAILS
+  get 'api/post_details/:id', to: 'api_post_details#index'
+  post 'api/post_details', to: 'api_post_details#create'
+  patch 'api/post_details/:id', to: 'api_post_details#update'
+  delete 'api/post_details/:id', to: 'api_post_details#destroy'
+  # SHOPS
   get 'api/shops', to: 'api_shops#index'
   get 'api/shops/:id', to: 'api_shops#show'
   get 'api/shop_list', to: 'api_shops#list'
   get 'api/map', to: 'api_shops#map'
-  get 'api/posts', to: 'api_posts#index'
-  get 'api/posts/:id', to: 'api_posts#show'
-  get 'api/post_details/:id', to: 'api_post_details#index'
+  # USERS
+  get 'api/users', to: 'api_users#index'
+  get 'api/users/:id', to: 'api_users#show'
+  patch 'api/users/:id', to: 'api_users#update'
+  # PEOPLE
+  get 'api/people', to: 'api_people#index'
+  get 'api/person_list', to: 'api_people#list'
+  # CATEGORY
   get 'api/categories', to: 'api_categories#index'
-
-  post 'api/posts', to: 'api_posts#create'
-  patch 'api/posts/:id', to: 'api_posts#update'
-  delete 'api/posts/:id', to: 'api_posts#destroy'
-
-  post 'api/post_details', to: 'api_post_details#create'
-  patch 'api/post_details/:id', to: 'api_post_details#update'
-  delete 'api/post_details/:id', to: 'api_post_details#destroy'
-
+  # PEOPLE POSTS
   post 'api/people_posts', to: 'api_people_posts#create'
+  # POSTS SHOPS
   post 'api/posts_shops', to: 'api_posts_shops#create'
-
+  # LOGIN
   get 'users/index'
   get 'users/show'
 
+# ADMIN route
   resources :people_posts
 
   resources :posts_shops

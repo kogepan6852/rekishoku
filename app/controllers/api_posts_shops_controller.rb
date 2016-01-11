@@ -1,4 +1,5 @@
 class ApiPostsShopsController < ApplicationController
+  authorize_resource :class => false
 
   # POST /posts_shops
   def create
@@ -19,17 +20,14 @@ class ApiPostsShopsController < ApplicationController
       end
 
       if isSuccess
-        obj = {}
-        render json: obj, status: :created
+        render json: @posts_shop, status: :created
       else
         render json: @posts_shop_err.errors, status: :unprocessable_entity
       end
 
     # 作成対象がない場合
     else
-      respond_to do |format|
-        format.json { head :no_content }
-      end
+      head :no_content
     end
 
   end

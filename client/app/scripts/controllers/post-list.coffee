@@ -49,7 +49,6 @@ angular.module "frontApp"
     $scope.showDeleteButton = false
     $scope.isEditing = false
 
-    # 初期処理
     clearInput = ->
       # post detailの初期化
       details = []
@@ -95,24 +94,28 @@ angular.module "frontApp"
       email: $sessionStorage['email']
       token: $sessionStorage['token']
 
+    # initialize
     $scope.init = ->
       $scope.results = ""
       # post取得
       if ($sessionStorage['token'])
-        Api.getJson(accessKey, Const.API.POST, true).then (res) ->
+        Api.getJson(accessKey, Const.API.POST_LIST, true).then (res) ->
           $scope.results = res.data
           $scope.$broadcast 'scroll.refreshComplete'
 
     # Function
+    # 投稿用モーダル表示
     $scope.openModalPost = () ->
       clearInput()
       $scope.isEditing = false
       $scope.modalPost.show()
 
+    # 投稿用モーダル非表示
     $scope.closeModalPost = (targetForm) ->
       targetForm.$setPristine()
       $scope.modalPost.hide()
 
+    # 店舗一覧表示用モーダル表示
     $scope.openModalShops = () ->
       # 店舗一覧を取得する
       obj =
@@ -126,9 +129,11 @@ angular.module "frontApp"
       $scope.modalShops.show()
       $scope.popoverPostMenu.hide()
 
+    # 店舗一覧表示用モーダル非表示
     $scope.closeModalShops = () ->
       $scope.modalShops.hide()
 
+    # 人物一覧表示用モーダル表示
     $scope.openModalPeople = () ->
       # 人物一覧を取得する
       obj =
@@ -142,18 +147,22 @@ angular.module "frontApp"
       $scope.modalPeople.show()
       $scope.popoverPostMenu.hide()
 
+    # 人物一覧表示用モーダル表示
     $scope.closeModalPeople = () ->
       $scope.modalPeople.hide()
 
+    # 編集メニューポップオーバー表示
     $scope.openPopoverPostMenu = ($event, $index) ->
       $scope.targetIndex = $index
       $scope.targetPostId = $scope.results[$index].id
       $scope.targetStatus = $scope.results[$index].status
       $scope.popoverPostMenu.show $event
 
+    # 編集メニューポップオーバー非表示
     $scope.closePopoverPostMenu = ->
       $scope.popoverPostMenu.hide()
 
+    # 記事投稿処理
     $scope.doPost = (targetForm) ->
       # titleとimageが入力されている場合のみ
       if $scope.input.title && $scope.srcUrl
@@ -193,6 +202,8 @@ angular.module "frontApp"
             if detail.subTitle || detail.subFile || detail.subContent
               # formdata作成
               fdDetail = new FormData
+              fdDetails.append 'token', $sessionStorage['token']
+              fdDetails.append 'email', $sessionStorage['email']
               fdDetails.append 'post_details[][post_id]', res.data.id
               if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
               if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
@@ -224,6 +235,7 @@ angular.module "frontApp"
               title: msg,
               showCloseButton: true
 
+    # 記事削除処理
     $scope.doDelete = ->
       $ionicPopup.show(
         title: '削除してよろしいですか？'
@@ -266,7 +278,7 @@ angular.module "frontApp"
                   title: '削除しました。',
                   showCloseButton: true
 
-
+    # 記事編集用モーダル表示
     $scope.onEditButton = (index) ->
       clearInput()
       $scope.isEditing = true
@@ -337,18 +349,21 @@ angular.module "frontApp"
           $scope.input.details[index].srcSubUrl = reader.result
       reader.readAsDataURL file
 
+    # 記事編集用モーダル次へボタン
     $scope.prevSlide = ->
       $ionicSlideBoxDelegate.next()
       $scope.isShowBackSlide = true
       if $ionicSlideBoxDelegate.currentIndex() >= 3
         $scope.isShowAddPostDetail = false
 
+    # 記事編集用モーダル前へボタン
     $scope.backSlide = ->
       $ionicSlideBoxDelegate.previous()
       $scope.isShowAddPostDetail = true
       if $ionicSlideBoxDelegate.currentIndex() == 0
         $scope.isShowBackSlide = false
 
+    # リストチェック用
     $scope.onCheckbox = (result) ->
       if !result.checked
         result.checked = true
@@ -362,6 +377,7 @@ angular.module "frontApp"
         if !isChecked
           $scope.showDeleteButton = false
 
+    # カテゴリチェック用
     $scope.checkCategory = (id) ->
       angular.forEach $scope.categories, (category, i) ->
         if id == category.id
@@ -370,6 +386,7 @@ angular.module "frontApp"
         else
           category.checked = false
 
+    # 関連店舗の保存
     $scope.saveShops = ->
       shopIds = []
       angular.forEach $scope.shops, (shop) ->
@@ -377,10 +394,12 @@ angular.module "frontApp"
           shopIds.push(shop.id)
 
       obj =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
         post_id: $scope.targetPostId
         shop_ids: shopIds
 
-      Api.saveJson(obj, Const.API.POST_SHOP, Const.METHOD.POST).then (res) ->
+      Api.saveJson(obj, Const.API.POSTS_SHOPS, Const.METHOD.POST).then (res) ->
         $scope.modalShops.hide()
         $scope.popoverPostMenu.hide()
         toaster.pop
@@ -388,6 +407,7 @@ angular.module "frontApp"
           title: '保存しました。',
           showCloseButton: true
 
+    # 関連人物の保存
     $scope.savePeople = ->
       personIds = []
       angular.forEach $scope.people, (person) ->
@@ -395,10 +415,12 @@ angular.module "frontApp"
           personIds.push(person.id)
 
       obj =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
         post_id: $scope.targetPostId
         person_ids: personIds
 
-      Api.saveJson(obj, Const.API.POST_PERSON, Const.METHOD.POST).then (res) ->
+      Api.saveJson(obj, Const.API.PEOPLE_POSTS, Const.METHOD.POST).then (res) ->
         $scope.modalPeople.hide()
         $scope.popoverPostMenu.hide()
         toaster.pop
@@ -406,6 +428,7 @@ angular.module "frontApp"
           title: '保存しました。',
           showCloseButton: true
 
+    # ステータスのアップデート処理
     $scope.updateStatus = (status) ->
       fd = new FormData
       fd.append 'token', $sessionStorage['token']
@@ -429,6 +452,7 @@ angular.module "frontApp"
           title: msg
           showCloseButton: true
 
+    # 記事詳細への遷移
     $scope.moveToPost = (index) ->
       $scope.popoverPostMenu.hide()
       $state.go('post', { id: $scope.results[index].id, preview: "true" })

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, Api, Const) ->
+  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $sessionStorage, Api, Const) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -18,16 +18,18 @@ angular.module "frontApp"
     $rootScope.isHideTab = false
     $ionicNavBarDelegate.showBackButton false
 
-    # initialize
     categoryObj =
       type: "PostCategory"
     Api.getJson(categoryObj, Const.API.CATEGORY, true).then (res) ->
       $scope.categories = res.data
 
+    # initialize
     $scope.init = ->
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
         per: Const.API.SETTING.PER
         page: 1
       if $scope.targetCategoryId
@@ -47,6 +49,7 @@ angular.module "frontApp"
       $scope.search(categoryId)
 
     # Function
+    # 検索処理
     $scope.search = (categoryId) ->
       $scope.page = 1
       obj =
@@ -72,6 +75,7 @@ angular.module "frontApp"
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
+    # ListのLazy Load用処理
     $scope.loadMoreData = ->
       if $scope.posts
         $scope.page += 1
@@ -91,6 +95,7 @@ angular.module "frontApp"
               $scope.posts.push(data)
           $scope.$broadcast('scroll.infiniteScrollComplete')
 
+    # 検索条件削除
     $scope.deleteSearchCondition = ->
       $scope.targetCategoryId = null
       $scope.keywords = null

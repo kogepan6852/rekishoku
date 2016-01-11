@@ -1,8 +1,9 @@
 class ApiPostDetailsController < ApplicationController
+  authorize_resource :class => false
 
   # GET /api/post_details/1
   def index
-    @post_details = PostDetail.accessible_by(current_ability).where(post_id: params[:id]).order(id: :asc)
+    @post_details = PostDetail.where(post_id: params[:id]).order(id: :asc)
     render json: @post_details
   end
 
@@ -32,8 +33,7 @@ class ApiPostDetailsController < ApplicationController
     end
 
     if isSuccess
-      obj = {}
-      render json: obj, status: :created
+      render json: @post_detail, status: :created
     else
       render json: @post_detail.errors, status: :unprocessable_entity
     end
@@ -41,14 +41,10 @@ class ApiPostDetailsController < ApplicationController
 
   # PATCH/PUT /api/post_details/1
   def update
-    respond_to do |format|
-      if @post_detail.update(post_detail_params)
-        format.html { redirect_to @post_detail, notice: 'Post detail was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post_detail }
-      else
-        format.html { render :edit }
-        format.json { render json: @post_detail.errors, status: :unprocessable_entity }
-      end
+    if @post_detail.update(post_detail_params)
+      render json: @post_detail, status: :ok
+    else
+      render json: @post_detail.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,10 +52,7 @@ class ApiPostDetailsController < ApplicationController
   def destroy
     id = params[:id]
     PostDetail.accessible_by(current_ability).destroy_all(['post_id = ?', id])
-    respond_to do |format|
-      format.html { redirect_to post_details_url, notice: 'Post detail was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

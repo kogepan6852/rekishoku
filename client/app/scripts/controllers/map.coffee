@@ -29,6 +29,7 @@ angular.module 'frontApp'
     if $rootScope.zoom
       defaultZoom = $rootScope.zoom
 
+    # Google Mapの初期設定
     $scope.map =
       center:
         latitude: latitude
@@ -39,6 +40,7 @@ angular.module 'frontApp'
       scrollwheel: false
       minZoom: 11
 
+    # Google Mapの各種イベント処理の設定
     $scope.events =
       dragstart: (cluster, clusterModels) ->
         $ionicSideMenuDelegate.canDragContent(false)
@@ -100,6 +102,7 @@ angular.module 'frontApp'
           alert('位置情報を取得できません。')
 
     # Function
+    # 店舗検索
     $scope.searchShops = ->
       # 緯度経度の計算
       BaseService.getLatLng $scope.input.address, (latLng) ->
@@ -133,6 +136,7 @@ angular.module 'frontApp'
           shops.push(ret)
         $scope.targetMarkers = shops
 
+    # 現在地への移動
     $scope.moveToCurrentPlace = ->
       $rootScope.targetAddress = null
       $rootScope.latitude = null

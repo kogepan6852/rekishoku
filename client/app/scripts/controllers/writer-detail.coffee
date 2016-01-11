@@ -36,8 +36,11 @@ angular.module "frontApp"
 
     $scope.writersInit = ->
       clearInput()
-      path = Const.API.USER + '/' + $stateParams.id + '.json'
-      Api.getJson("", path).then (res) ->
+      accessKey =
+        email: $sessionStorage['email']
+        token: $sessionStorage['token']
+      path = Const.API.USER + '/' + $stateParams.id
+      Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
 
@@ -56,22 +59,15 @@ angular.module "frontApp"
 
     # Function
     $scope.openModalProfileEdit = ->
-      accessKey =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
-
-      userId = $sessionStorage['user_id']
-      path = Const.API.USER + '/' + userId + '.json'
-      Api.getJson(accessKey, path).then (res) ->
-        $scope.input =
-          email: res.data.email
-          username: res.data.username
-          first_name: res.data.first_name
-          last_name: res.data.last_name
-          profile: res.data.profile
-          image: res.data.image
-        $scope.srcUrl = res.data.image.image.thumb.url
-        $scope.modalProfileEdit.show()
+      $scope.input =
+        email: $scope.user.email
+        username: $scope.user.username
+        first_name: $scope.user.first_name
+        last_name: $scope.user.last_name
+        profile: $scope.user.profile
+        image: $scope.user.image
+      $scope.srcUrl = $scope.user.image.image.thumb.url
+      $scope.modalProfileEdit.show()
 
     $scope.hideModalProfileEdit = (targetForm) ->
       clearInput()
@@ -81,6 +77,8 @@ angular.module "frontApp"
     $scope.saveProfile = (targetForm) ->
         fd = new FormData
         userId = $sessionStorage['user_id']
+        fd.append 'token', $sessionStorage['token']
+        fd.append 'email', $sessionStorage['email']
         fd.append 'user[id]', userId
         fd.append 'user[username]', $scope.input.username.trim()
         fd.append 'user[last_name]', $scope.input.last_name.trim()

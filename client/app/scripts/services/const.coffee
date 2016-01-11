@@ -3,19 +3,20 @@
 angular.module("frontApp")
   .factory 'Const', ->
     API:
-      POST: '/api/posts'
-      POST_DETSIL: '/api/post_details'
-      POST_SHOP: '/api/posts_shops'
-      POST_PERSON: '/api/people_posts'
-      PERSON_LIST: '/api/person_list'
-      SHOP: '/api/shops'
-      SHOP_LIST: '/api/shop_list'
-      MAP: '/api/map'
-      PERSON: '/api/people'
-      CATEGORY: '/api/categories'
-      LOGIN: '/users/sign_in.json'
-      LOGOUT: '/authentication_token.json'
-      USER: '/users'
+      POST:         '/api/posts'
+      POST_LIST:    '/api/post_list'
+      POST_DETSIL:  '/api/post_details'
+      POSTS_SHOPS:  '/api/posts_shops'
+      PEOPLE_POSTS: '/api/people_posts'
+      PERSON_LIST:  '/api/person_list'
+      SHOP:         '/api/shops'
+      SHOP_LIST:    '/api/shop_list'
+      MAP:          '/api/map'
+      PERSON:       '/api/people'
+      CATEGORY:     '/api/categories'
+      USER:         '/api/users'
+      LOGIN:        '/users/sign_in.json'
+      LOGOUT:       '/authentication_token.json'
       SETTING:
         PER: 20
 
@@ -30,5 +31,3 @@ angular.module("frontApp")
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'
-    URL:
-      GOOGLE_MAP: 'http://maps.google.co.jp/maps?t=m&z=16&q='

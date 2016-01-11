@@ -1,6 +1,7 @@
 class ApiShopsController < ApplicationController
 
   # GET /api/shops
+  # 一覧表示
   def index
     @shops = Shop.order(created_at: :desc)
     # 検索条件の設定
@@ -36,6 +37,7 @@ class ApiShopsController < ApplicationController
   end
 
   # GET /api/shops/1
+  # 詳細データ表示
   def show
     @shop = Shop.find(params[:id])
     shop = { "shop" => @shop,
@@ -46,6 +48,7 @@ class ApiShopsController < ApplicationController
   end
 
   # GET /api/map
+  # Map検索用一覧表示
   def map
     latitudeRange = 0.00000901337 # 緯度計算の値
     longitudeRange = 0.0000109664 # 経度計算の値
@@ -63,6 +66,7 @@ class ApiShopsController < ApplicationController
   end
 
   # GET /api/shop-list.json
+  # post-list用一覧表示
   def list
     @shops = Shop.all
     shops = Array.new()

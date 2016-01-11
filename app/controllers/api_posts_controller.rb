@@ -1,14 +1,10 @@
 class ApiPostsController < ApplicationController
+  authorize_resource :class => false
 
-  # GET /api/posts/1
+  # GET /api/posts
+  # 一覧表示
   def index
-    @posts = Post.accessible_by(current_ability).joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
-    if current_user
-      @posts = @posts.where(user_id: current_user.id)
-    else
-      @posts = @posts.where(status: 1)
-    end
-
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where(status: 1).order(created_at: :desc)
     # 検索条件の設定
     if params[:keywords]
       keywords = params[:keywords]
@@ -28,6 +24,7 @@ class ApiPostsController < ApplicationController
   end
 
   # GET /api/posts/1
+  # 詳細データ表示
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
     logger.debug(params[:preview])
@@ -49,6 +46,16 @@ class ApiPostsController < ApplicationController
     end
   end
 
+  # GET /api/posts_list
+  # post-list用一覧表示
+  def list
+    @posts = Post.order(created_at: :desc)
+    @posts = @posts.where(user_id: current_user.id)
+    render json: @posts.page(params[:page]).per(params[:per])
+  end
+
+  # POST /posts
+  # 新規作成
   def create
     category = PostCategory.find_by(slug: params[:slug])
     @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
@@ -61,9 +68,9 @@ class ApiPostsController < ApplicationController
   end
 
   # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+  # 更新
   def update
-    @post = Post.find(params[:id])
+    @post = Post.where(user_id: current_user.id).find(params[:id])
     if post_params[:status].blank?
       category = PostCategory.find_by(slug: params[:slug])
       post_params.merge(category_id: category.id)
@@ -76,9 +83,9 @@ class ApiPostsController < ApplicationController
   end
 
   # DELETE /posts/1
-  # DELETE /posts/1.json
+  # 削除
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.where(user_id: current_user.id).find(params[:id])
     @post.destroy
     head :no_content
   end
