@@ -28,7 +28,6 @@
                                   <% end %>
                                 <% end %>
 
-
                               <h5 class="page-header">人物</h5>
                                 <% @people.each do |person| %>
                                   <%= f.fields_for :people_shops do |pp| %>
@@ -41,10 +40,20 @@
                             <h4 class="page-header">画像</h4>
                               <h5 class="page-header">メイン画像<span class="text-danger">*</span></h5>
                                 <%= f.file_field :image %>
-
+                                  <% if @shop.image? %>
+                                    <%= f.label :↓以前設定してた画像 %><br>
+                                    <%= image_tag @shop.image.url ,:class => "previous-image" %>
+                                  <% end %>
 
                               <h5 class="page-header">サブ画像<span class="text-danger">*</span></h5>
                                 <%= f.file_field :subimage %><br>
+                                  <% if @shop.subimage? %>
+                                    <%= f.label :↓以前設定してた画像 %><br>
+                                    <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
+                                  <% end %>
+
+                                  <hr>
+
                                   <div class="form-group float-label-control">
                                     <label for="">画像の引用元URL</label>
                                     <%= f.text_field :image_quotation_url ,:class => "form-control" ,:placeholder =>"画像の引用元URL" %>

@@ -17,6 +17,12 @@
     color: #000;
   }
 }
+
+// 以前設定した画像のサイズ変更
+.previous-image{
+  width: 50%;
+}
+
 // ログインフォーム
 .login-form{
   margin-right: auto;
@@ -24,6 +30,7 @@
   max-width: 500px;
 }
 
+// ボタンの色
 .btn-blue {
     color: #fff;
     background-color: #337ab7;
@@ -35,12 +42,6 @@
     background-color: #d9534f;
     border-color: #d43f3a;
 }
-
-
-
-
-
-
 
 @font-face {
   font-family: 'Glyphicons Halflings';
