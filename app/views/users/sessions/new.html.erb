@@ -1,28 +1,20 @@
-<h2 class="top-padding-30 center">ログイン</h2>
+        <div class="container">
+          <div class="row">
+            <h2 class="center">ログイン</h2>
+            <div class="text-center login-form">
+              <hr>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="text-center login-form">
-    <table class="table">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <tr>
-          <th><%= f.label :メールアドレス %></th>
-          <td><%= f.email_field :email, autofocus: true ,:class => "form-control"  %></td><br>
-        </tr>
+                <%= f.email_field :email, autofocus: true ,:class => "form-control input-lg", :placeholder => "メールアドレス"  %><br>
+                <%= f.password_field :password, autocomplete: "off" ,:class => "form-control input-lg", :placeholder => "パスワード" %>
 
-        <tr>
-          <th><%= f.label :パスワード %></th>
-          <td><%= f.password_field :password, autocomplete: "off" ,:class => "form-control" %></td><br>
-        </tr>
+                <% if devise_mapping.rememberable? -%>
+                  <%= f.check_box :remember_me %><%= f.label :パスワードを記憶する %><br>
+                <% end -%>
 
-    </table>
-
-
-        <% if devise_mapping.rememberable? -%>
-          <%= f.check_box :remember_me %><%= f.label :パスワードを記憶する %><br>
-        <% end -%>
-          <%= f.submit "ログイン" ,:class => "action btn btn-blue" %>
-        <% end %>
-
-          <%= link_to 'アカウント登録', '/users/sign_up' ,:class => "btn btn-red" %>
-          <%= render "users/shared/links" %>
-
-  </div>
+                  <%= f.submit "ログイン" ,:class => "action btn btn-lg btn-success btn-block" %>
+              <% end %>
+            <hr>
+            </div>
+          </div>
+        </div>
