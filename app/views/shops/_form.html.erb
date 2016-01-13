@@ -1,124 +1,110 @@
-<%= form_for(@shop) do |f| %>
-  <% if @shop.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+                <%= form_for(@shop) do |f| %>
+                  <div class="container">
+                    <hr>
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h4 class="page-header">店舗情報</h4>
+                            <form role="form">
+                                <div class="form-group float-label-control">
+                                  <label for="">名前*</label>
+                                    <%= f.text_field :name ,:class => "form-control", :placeholder =>"名前*" %>
+                                </div>
+                                <div class="form-group float-label-control">
+                                  <label for="">説明*</label>
+                                    <%= f.text_area :description, rows: 5 ,:class => "form-control" ,:placeholder =>"説明*" %>
+                                </div>
+                                <div class="form-group float-label-control">
+                                  <label for="">店のURL</label>
+                                  <%= f.text_field :url ,:class => "form-control" ,:placeholder =>"店のURL" %>
+                                </div>
 
-      <ul>
-      <% @shop.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <table class="table shop-info">
-      <tr>
-        <th><%= f.label :名前 %><span class="text-danger">*</span></th>
-        <td><%= f.text_field :name ,:class => "form-control" %></td>
-      </tr>
-
-      <tr>
-        <th><%= f.label :説明 %><span class="text-danger">*</span></th>
-        <td><%= f.text_area :description, rows: 10 ,:class => "form-control" %></td>
-      </tr>
-
-      <tr>
-        <th><%= f.label :店のURL %></th>
-        <td><%= f.text_field :url ,:class => "form-control" %></td>
-      </tr>
-
-      <tr>
-        <th><%= f.label :カテゴリー %><span class="text-danger">*</span></th>
-        <td><% @shops_categories.each do |shop_category| %>
-          <%= f.fields_for :categories_shop do |cs| %>
-            <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
-              <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
-              <%= shop_category.name %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-
-      <tr>
-        <th><%= f.label :人物 %></th>
-        <td>
-          <% @people.each do |person| %>
-            <%= f.fields_for :people_shops do |pp| %>
-              <% checked = person.shops.exists?(@shop.id) ? true : false %>
-                <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
-              <%= person.name %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
+                            <h4 class="page-header">関連</h4>
+                              <h5 class="page-header">カテゴリー<span class="text-danger">*</span></h5>
+                                <% @shops_categories.each do |shop_category| %>
+                                  <%= f.fields_for :categories_shop do |cs| %>
+                                    <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+                                      <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
+                                      <%= shop_category.name %>
+                                  <% end %>
+                                <% end %>
 
 
-        <tr>
-          <th><%= f.label :メイン画像 %><span class="text-danger">*</span></th>
-            <td><%= f.file_field :image %><br>
-              <!-- <%= f.hidden_field :image_cache %> -->
-              <% if @shop.image? %>
-                <%= f.label :↓以前設定してた画像 %><br>
-                <%= image_tag @shop.image.url %>
-              <% end %>
-            </td>
-        </tr>
+                              <h5 class="page-header">人物</h5>
+                                <% @people.each do |person| %>
+                                  <%= f.fields_for :people_shops do |pp| %>
+                                    <% checked = person.shops.exists?(@shop.id) ? true : false %>
+                                      <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
+                                      <%= person.name %>
+                                  <% end %>
+                                <% end %>
 
-        <tr>
-          <th><%= f.label :サブ画像 %></th>
-          <td><%= f.file_field :subimage %><br>
-            <!-- <%= f.hidden_field :image_cache %> -->
-            <% if @shop.image? %>
-              <%= f.label :↓以前設定してた画像 %><br>
-              <%= image_tag @shop.subimage.url %>
-            <% end %>
-          </td>
-        </tr>
+                            <h4 class="page-header">画像</h4>
+                              <h5 class="page-header">メイン画像<span class="text-danger">*</span></h5>
+                                <%= f.file_field :image %>
 
-        <tr>
-          <th><%= f.label :画像の引用元URL %></th>
-          <td><%= f.text_field :image_quotation_url ,:class => "form-control" %></td>
-        </tr>
 
-        <tr>
-          <th><%= f.label :記事の掲載元名称 %></th>
-          <td><%= f.text_field :post_quotation_name ,:class => "form-control" %></td>
-        </tr>
+                              <h5 class="page-header">サブ画像<span class="text-danger">*</span></h5>
+                                <%= f.file_field :subimage %><br>
+                                  <div class="form-group float-label-control">
+                                    <label for="">画像の引用元URL</label>
+                                    <%= f.text_field :image_quotation_url ,:class => "form-control" ,:placeholder =>"画像の引用元URL" %>
+                                  </div>
 
-        <tr>
-          <th><%= f.label :都道府県 %><span class="text-danger">*</span></th>
-          <td><%= f.text_field :province ,:class => "form-control" %></td>
-        </tr>
+                                  <div class="form-group float-label-control">
+                                    <label for="">画像の引用元名称</label>
+                                    <%= f.text_field :image_quotation_name ,:class => "form-control" ,:placeholder =>"画像の引用元名称" %>
+                                  </div>
 
-        <tr>
-          <th><%= f.label :市区町村 %><span class="text-danger">*</span></th>
-          <td><%= f.text_field :city ,:class => "form-control" %></td>
-        </tr>
+                            <h4 class="page-header">住所</h4>
+                              <div class="form-group float-label-control">
+                                <label for="">都道府県</label>
+                                <%= f.text_field :province ,:class => "form-control" ,:placeholder =>"都道府県*" %>
+                              </div>
 
-        <tr>
-          <th><%= f.label :その他住所 %><span class="text-danger">*</span></th>
-          <td><%= f.text_field :address1 ,:class => "form-control" %></td>
-        </tr>
+                              <div class="form-group float-label-control">
+                                <label for="">市区町村</label>
+                                <%= f.text_field :city ,:class => "form-control" ,:placeholder =>"市区町村*" %>
+                              </div>
 
-        <tr>
-          <th><%= f.label :建物名 %></th>
-          <td><%= f.text_field :address2 ,:class => "form-control" %></td>
-        </tr>
+                              <div class="form-group float-label-control">
+                                <label for="">その他の住所</label>
+                                <%= f.text_field :address1 ,:class => "form-control" ,:placeholder =>"その他の住所*" %>
+                              </div>
 
-        <tr>
-          <th><%= f.label :メニュー %></th>
-          <td><%= f.text_area :menu, rows: 5 ,:class => "form-control" %></td>
-        </tr>
-    </table>
+                              <div class="form-group float-label-control">
+                                <label for="">建物名</label>
+                                <%= f.text_field :address2 ,:class => "form-control" ,:placeholder =>"建物名" %>
+                              </div>
 
-  <div class="center">
-    <%= f.submit :class=>"btn" %>
-    <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
-  </div>
-  <!-- <br><hr><br>
-  <div class="center">
-  <%= link_to '詳細', @person ,:class => "btn btn-success" %>
-  <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
-</div><br><hr> -->
+                            <h4 class="page-header">メニュー</h4>
+                              <div class="form-group float-label-control">
+                                <label for="">メニュー</label>
+                                <%= f.text_area :menu, rows: 5 ,:class => "form-control" ,:placeholder =>"メニュー*" %>
+                              </div>
+                            </form>
+                        </div>
 
-<% end %>
+                          <div class="col-sm-4">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h3 class="panel-title">店舗登録時の注意事項</h3>
+                              </div>
+                              <div class="panel-body">
+                                <ul>
+                                  <li>見出しや入力欄に<code>*</code>がついてるものは、必ず入力する</li>
+                                  <li>店のURLは食べログ等ではなく、店舗自身が運営してる独自のURLを選択してください（例：http://aaabbbccc.com）</li>
+                                  <li>カテゴリーと人物は、複数ある場合は、すべて選択する</li>
+                                  <li>メイン画像は、店舗の画像を選択してください<code>横長の画像を使う</code></li>
+                                  <li>サブ画像は、料理の画像を選択してください<code>横長の画像を使う</code></li>
+                                  <li>画像の引用は、できる限り「食べログ」を使う。なければ他でも可。</li>
+                                  <li>市区町村を登録するときに「京都市東山区」このような住所が時々あるので、市区町村には「京都市」だけを登録する</li>
+                                  <li>メニューは、店で扱ってる主なメニューではなく、店が提供してる歴食だけを登録する</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    <hr>
+                    <%= f.submit :class=>"btn" %>
+                  </div>
+                <% end %>

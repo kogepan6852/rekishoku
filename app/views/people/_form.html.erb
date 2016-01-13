@@ -1,57 +1,61 @@
-<%= form_for(@person) do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+          <%= form_for(@person) do |f| %>
+            <div class="container">
+                <hr>
+                  <div class="row">
+                      <div class="col-sm-8">
 
-      <ul>
-      <% @person.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+                          <h4 class="page-header">人物名</h4>
+                          <form role="form">
+                            <div class="form-group float-label-control">
+                              <label for="">名前</label>
+                              <%= f.text_field :name ,:class => "form-control", :placeholder =>"名前*" %>
+                            </div>
+                            <div class="form-group float-label-control">
+                              <label for="">ふりがな（例：まさおかしき</label>
+                              <%= f.text_field :furigana ,:class => "form-control" ,:placeholder =>"ふりがな（例：まさおかしき）*" %>
+                            </div>
+                          </form>
 
-  <table class="table">
-      <tr>
-        <th><%= f.label :名前 %><span class="text-danger">*</span></th>
-        <td><%= f.text_field :name ,:class => "form-control" %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :ふりがな（例：まさおかしき） %><span class="text-danger">*</span></th>
-        <td><%= f.text_field :furigana ,:class => "form-control" %></td>
-      </tr>
+                          <h4 class="page-header">時代<span class="text-danger">*</span></h4>
+                          <form role="form">
+                            <% @periods.each do |period| %>
+                              <%= f.fields_for :people_periods do |pp| %>
+                                <% checked = period.people.exists?(@person.id) ? true : false %>
+                                  <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked}, period.id, nil %>
+                                  <%= period.name %>
+                              <% end %>
+                            <% end %>
+                          </form>
 
-      <tr>
-        <th><%= f.label :時代 %><span class="text-danger">*</span></th>
-        <td>
-          <% @periods.each do |period| %>
-            <%= f.fields_for :people_periods do |pp| %>
-              <% checked = period.people.exists?(@person.id) ? true : false %>
-                <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked }, period.id, nil %>
-              <%= period.name %>
-            <% end %>
+                          <h4 class="page-header">カテゴリー<span class="text-danger">*</span></h4>
+                          <form role="form">
+                            <% @people_categories.each do |person_category| %>
+                              <%= f.fields_for :categories_people do |cp| %>
+                                <% checked = person_category.people.include?(@person.id) ? true : false %>
+                                  <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
+                                  <%= person_category.name %>
+                              <% end %>
+                            <% end %>
+                          </form>
+                        <hr>
+                      </div>
+
+                      <div class="col-sm-4">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">人物登録時の注意事項</h3>
+                          </div>
+                          <div class="panel-body">
+                            <ul>
+                              <li>見出しや入力欄に<code>*</code>がついてるものは、必ず入力する</li>
+                              <li>苗字と名前の間に空白を入れない（例：夏目漱石）</li>
+                              <li>時代とカテゴリーは、複数ある場合は、すべて選択する</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                <hr>
+              <%= f.submit :class=>"btn" %>
+            </div>
           <% end %>
-        </td>
-      </tr>
-
-      <tr>
-        <th><%= f.label :カテゴリー %><span class="text-danger">*</span></th>
-        <td>
-          <% @people_categories.each do |person_category| %>
-            <%= f.fields_for :categories_people do |cp| %>
-              <% checked = person_category.people.include?(@person.id) ? true : false %>
-              <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
-                <%= person_category.name %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-    </table>
-
-
-  <div class="center">
-    <%= f.submit :class=>"btn" %>
-    <%= link_to '戻る', people_path ,:class => "btn btn-primary" %>
-  </div>
-<% end %>
-</div>
