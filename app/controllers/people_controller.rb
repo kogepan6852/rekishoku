@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = Person.all.page(params[:page]).per(20).order("created_at DESC")
   end
 
   # GET /people/1
