@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   resources :posts
 
   resource :authentication_token, only: [:update, :destroy]
-  devise_for :users, controllers: { sessions: "sessions" }
+  devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
 
   root to: 'menu#index'

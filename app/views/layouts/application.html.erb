@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="robots" content="noindex">
 </head>
 
@@ -53,6 +54,7 @@
           <ul class="nav navbar-nav navbar-right">
 
               <% if user_signed_in? %>
+              <li><%= link_to "アカウント登録", "/users/sign_up" %></li>
               <li><%= link_to "ログアウト", "/users/sign_out" %></li>
               <% else %>
               <li><%= link_to "ログイン", "/users/sign_in" %></li>
