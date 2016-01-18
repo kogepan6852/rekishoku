@@ -48,6 +48,11 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json
   def update
+    # 住所から緯度経度を求める
+    Geocoder.configure(:language  => :ja,  :units => :km )
+    addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
+    # 緯度経度を代入する
+    @shop.update(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
     respond_to do |format|
       if @shop.update(shop_params)
         format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
