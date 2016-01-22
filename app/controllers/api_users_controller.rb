@@ -16,7 +16,7 @@ class ApiUsersController < ApplicationController
         "image" => @user.image,
         "username" => @user.username,
         "profile" => @user.profile },
-      "posts" => @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc) }
+      "posts" => @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where(status: 1).order(created_at: :desc) }
     if current_user
       user["user"]["email"] = @user.email
       user["user"]["description"] = @user.description
