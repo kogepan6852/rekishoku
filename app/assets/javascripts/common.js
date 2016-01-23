@@ -1,6 +1,7 @@
 /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
 **************************************************/
 
+// 店舗と人物の登録画面の入力欄　ここから
 (function ($) {
     $.fn.floatLabels = function (options) {
 
@@ -76,3 +77,5 @@
         $('.float-label-control').floatLabels();
     });
 })(jQuery);
+
+// 店舗と人物の登録画面の入力欄 ここまで
