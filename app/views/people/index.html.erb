@@ -1,66 +1,48 @@
-    <div class="container">
-      <div class="row">
-        <!-- パソコン表示用 -->
-        <div class="hidden-xs center">
-          <h1 class="text-center"><i class="fa fa-user"></i>人物一覧</h1>
-          <!-- 人物登録 -->
-          <%= link_to 'New Person', new_person_path ,:class => "btn btn-primary btn-block" %>
-          <!-- 本文 -->
-          <table class="table table-hover">
-            <tr>
-              <th>名前</th>
-              <th>ふりがな</th>
-              <th>詳細</th>
-              <th>変更</th>
-              <!-- <th>削除</th> -->
-            </tr>
-            <tr>
-              <% @people.each do |person| %>
-              <td class="col-md-4"><%= person.name %></td>
-              <td class="col-md-4"><%= person.furigana %></td>
-              <td class="col-md-4"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, person %></td>
-              <td class="col-md-4"><%= link_to "<i class='fa fa-pencil-square-o fa-3x'></i>".html_safe, edit_person_path(person) %></td>
-              <!-- <td><%= link_to '削除', person, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
-              <% end %>
-            </tr>
-          </table>
-          <!-- ページネーション -->
-          <%= paginate(@people) %>
-          <!-- 人物登録 -->
-          <%= link_to 'New Person', new_person_path ,:class => "btn btn-primary btn-block" %>
-        </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="row">
-        <!-- スマホ表示用 -->
-        <div class="visible-xs center">
-          <!-- タイトル -->
-          <h1 class="text-center"><i class="fa fa-user"></i>人物一覧</h1>
-          <!-- 人物登録 -->
-          <%= link_to 'New Person', new_shop_path ,:class => "btn btn-primary btn-block" %>
-          <!-- 本文 -->
+          <h1 class="text-center">人物一覧</h1>
+
+          <div class="center">
+            <tr>
+              <td><%= link_to '新規登録', new_person_path ,:class => "btn btn-primary" %></td>
+              <!-- <td><%= link_to 'menu', "menu" ,:class => "btn btn-primary" %></td>
+              <td><%= link_to "Webサイト表示", "/#/home?showLogin=true",:class => "btn btn-success" %></td> -->
+            </tr>
+          </div>
+
           <table class="table table-hover">
-            <tr>
-              <th>名前</th>
-              <th>詳細</th>
-              <th>変更</th>
-              <!-- <th>削除</th> -->
-            </tr>
-            <tr>
+            <thead>
+              <tr>
+                <th>名前</th>
+                <th>ふりがな</th>
+                <th>詳細</th>
+                <th>変更</th>
+                <!-- <th>削除</th> -->
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+
+            <tbody>
               <% @people.each do |person| %>
-              <td class="col-xs-6"><%= person.name %></td>
-              <td class="col-xs-3"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, person %></td>
-              <td class="col-xs-3"><%= link_to "<i class='fa fa-pencil-square-o fa-3x'></i>".html_safe, edit_person_path(person) %></td>
-              <!-- <td><%= link_to '削除', person, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
+                <tr>
+                  <td><%= person.name %></td>
+                  <td><%= person.furigana %></td>
+                  <td><%= link_to '詳細', person ,:class => "btn btn-success" %></td>
+                  <td><%= link_to '変更', edit_person_path(person) ,:class => "btn btn-success" %></td>
+                  <!-- <td><%= link_to '削除', person, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
+                </tr>
               <% end %>
-            </tr>
+            </tbody>
           </table>
-          <!-- ページネーション -->
-          <%= paginate(@people) %>
-          <!-- 人物登録 -->
-          <%= link_to 'New Person', new_shop_path ,:class => "btn btn-primary btn-block" %>
-        </div>
-      </div>
-    </div>
+
+          <div class="center">
+            <%= paginate(@people) %>
+          </div>
+
+          <hr>
+          <div class="center">
+            <tr>
+              <td><%= link_to '新規登録', new_person_path ,:class => "btn btn-primary" %></td>
+              <!-- <td><%= link_to 'menu', "menu" ,:class => "btn btn-primary" %></td>
+              <td><%= link_to "Webサイト表示", "/#/home?showLogin=true",:class => "btn btn-success" %></td> -->
+            </tr>
+          </div>

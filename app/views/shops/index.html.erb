@@ -1,69 +1,57 @@
-    <p id="notice"><%= notice %></p>
+      <p id="notice"><%= notice %></p>
 
-    <!-- パソコン表示用 -->
-    <div class="hidden-xs center">
-      <!-- タイトル -->
-      <h1><i class="fa fa-home"></i>店舗一覧</h1>
-      <!-- 店舗登録 -->
-      <%= link_to 'New Shop', new_shop_path ,:class => "btn btn-primary btn-block" %>
-      <!-- 本文 -->
+      <h1 class="text-center">店舗一覧</h1>
+
+      <div class="center">
+        <tr>
+          <td><%= link_to 'New Shop', new_shop_path ,:class => "btn btn-primary" %></td>
+          <!-- <td><%= link_to 'menu', "menu" ,:class => "btn btn-primary" %></td>
+          <td><%= link_to "Webサイト表示", "/#/home?showLogin=true",:class => "btn btn-success" %></td> -->
+        </tr>
+      </div>
+
       <table class="table table-hover">
+        <thead>
           <tr>
             <th>名前</th>
-            <th>説明</th>
+            <th>詳細</th>
             <th>都道府県</th>
             <th>市区町村</th>
             <th>その他住所</th>
             <th>詳細</th>
             <th>変更</th>
             <!-- <th>削除</th> -->
+            <th colspan="3"></th>
           </tr>
-          <tr>
-            <% @shops.each do |shop| %>
-            <td class="col-md-1"><%= shop.name %></td>
-            <td class="col-md-5"><%= truncate(shop.description, length: 60) %></td>
-            <td class="col-md-1"><%= shop.province %></td>
-            <td class="col-md-1"><%= shop.city %></td>
-            <td class="col-md-2"><%= shop.address1 %></td>
-            <td class="col-md-1"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
-            <td class="col-md-1"><%= link_to "<i class='fa fa-pencil-square-o fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
-            <!-- <td><%= link_to '削除', shop, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
-            <% end %>
-          </tr>
+        </thead>
+
+
+        <tbody>
+          <% @shops.each do |shop| %>
+            <tr>
+              <td><%= shop.name %></td>
+              <td><%= shop.description %></td>
+              <td><%= shop.province %></td>
+              <td><%= shop.city %></td>
+              <td><%= shop.address1 %></td>
+              <td><%= link_to '詳細', shop ,:class => "btn btn-success" %></td>
+              <td><%= link_to '変更', edit_shop_path(shop) ,:class => "btn btn-success" %></td>
+              <!-- <td><%= link_to '削除', shop, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
+            </tr>
+          <% end %>
+        </tbody>
       </table>
-      <!-- ページネーション -->
-      <%= paginate(@shops) %>
-      <!-- 店舗登録 -->
-      <%= link_to 'New Shop', new_shop_path ,:class => "btn btn-primary btn-block" %>
-    </div>
 
+      <div class="center">
+        <%= paginate(@shops) %>
+      </div>
 
+      <hr>
 
-    <!-- スマホ表示用 -->
-    <div class="visible-xs center">
-      <!-- タイトル -->
-      <h1><i class="fa fa-home"></i>店舗一覧</h1>
-      <!-- 店舗登録 -->
-      <%= link_to 'New Shop', new_shop_path ,:class => "btn btn-lg btn-primary btn-block" %>
-      <!-- 本文 -->
-      <table class="table table-hover">
-          <tr>
-            <th>名前</th>
-            <th>詳細</th>
-            <th>変更</th>
-            <!-- <th>削除</th> -->
-          </tr>
-          <tr>
-            <% @shops.each do |shop| %>
-            <td class="col-xs-6"><%= shop.name %></td>
-            <td class="col-xs-3"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
-            <td class="col-xs-3"><%= link_to "<i class='fa fa-pencil-square-o fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
-            <!-- <td><%= link_to '削除', shop, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
-            <% end %>
-          </tr>
-      </table>
-      <!-- ページネーション -->
-      <%= paginate(@shops) %>
-      <!-- 店舗登録 -->
-      <%= link_to 'New Shop', new_shop_path ,:class => "btn btn-lg btn-primary btn-block" %>
-    </div>
+      <div class="center">
+        <tr>
+          <td><%= link_to 'New Shop', new_shop_path ,:class => "btn btn-primary" %></td>
+          <!-- <td><%= link_to 'menu', "menu" ,:class => "btn btn-primary" %></td>
+          <td><%= link_to "Webサイト表示", "/#/home?showLogin=true",:class => "btn btn-success" %></td> -->
+        </tr>
+      </div>
