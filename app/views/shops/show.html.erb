@@ -19,7 +19,7 @@
 
       <tr>
         <%= form_for(@shop) do |f| %>
-        <td class="col-md-3 col-xs-3">カテゴリー</th>
+        <td class="col-md-3 col-xs-3">カテゴリー<p class="show-content">*ここでは変更できません</p></th>
         <td class="col-md-9 col-xs-9">
           <% @shops_categories.each do |shop_category| %>
             <%= f.fields_for :categories_shop do |cs| %>
@@ -32,7 +32,7 @@
       </tr>
 
       <tr>
-        <td class="col-md-3 col-xs-3">人物</th>
+        <td class="col-md-3 col-xs-3">人物<p class="show-content">*ここでは変更できません</p></th>
         <td class="col-md-9 col-xs-9">
             <% @people.each do |person| %>
               <%= f.fields_for :people_shops do |pp| %>
