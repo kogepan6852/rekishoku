@@ -1,8 +1,8 @@
 class PeopleController < ApplicationController
   load_and_authorize_resource
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-  before_action :set_periods, only: [:new, :edit]
-  before_action :set_peoplecategories, only: [:new, :edit]
+  before_action :set_periods, only: [:new, :edit, :show]
+  before_action :set_peoplecategories, only: [:new, :edit, :show]
 
   # GET /people
   # GET /people.json

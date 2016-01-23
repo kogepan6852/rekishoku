@@ -1,87 +1,116 @@
-<p id="notice"><%= notice %></p><hr><br>
-<h1 class="center">店舗詳細</h1>
-<br><hr><br>
-<p class="center">
-  <big><strong>名前</strong></big><br>
-  <%= @shop.name %>
-</p><br><hr><br>
+<div class="container">
+  <div class="row">
+    <h1>店舗詳細</h1>
+    <table class="table">
+      <tr>
+        <td class="col-md-3 col-xs-3">名前</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.name %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>説明</strong></big><br>
-  <%= @shop.description %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">説明</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.description %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>URL</strong></big><br>
-  <%= @shop.url %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">店のURL</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.url %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>メイン画像</strong></big><br>
-  <%= @shop.image %>
-</p><br><hr><br>
+      <tr>
+        <%= form_for(@shop) do |f| %>
+        <td class="col-md-3 col-xs-3">カテゴリー</th>
+        <td class="col-md-9 col-xs-9">
+          <% @shops_categories.each do |shop_category| %>
+            <%= f.fields_for :categories_shop do |cs| %>
+              <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+                <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
+                <%= shop_category.name %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 
-<p class="center">
-  <big><strong>サブ画像</strong></big><br>
-  <%= @shop.subimage %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">人物</th>
+        <td class="col-md-9 col-xs-9">
+            <% @people.each do |person| %>
+              <%= f.fields_for :people_shops do |pp| %>
+                <% checked = person.shops.exists?(@shop.id) ? true : false %>
+                  <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
+                  <%= person.name %>
+              <% end %>
+            <% end %>
+          </td>
+          <% end %>
+      </tr>
 
-<p class="center">
-  <big><strong>画像の引用元URL</strong></big><br>
-  <%= @shop.image_quotation_url %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">メイン画像</th>
+        <td class="col-md-9 col-xs-9">
+          <% if @shop.image? %>
+            <%= image_tag @shop.image.url ,:class => "previous-image" %>
+          <% end %>
+        </td>
+      </tr>
 
-<p class="center">
-  <big><strong>画像の引用元名称</strong></big><br>
-  <%= @shop.image_quotation_name %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">サブ画像</th>
+        <td class="col-md-9 col-xs-9">
+          <% if @shop.subimage? %>
+            <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
+          <% end %>
+        </td>
+      </tr>
 
-<p class="center">
-  <strong>記事の掲載元URL</strong>
-  <%= @shop.post_quotation_url %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">画像の引用元URL</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.image_quotation_url %></td>
+      </tr>
 
-<p class="center">
-  <strong>記事の掲載元名称</strong>
-  <%= @shop.post_quotation_name %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">画像の引用元名称</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.image_quotation_name %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>都道府県</strong></big><br>
-  <%= @shop.province %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">都道府県</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.province %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>市区町村</strong></big><br>
-  <%= @shop.city %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">市区町村</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.city %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>その他住所</strong></big><br>
-  <%= @shop.address1 %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">その他住所</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.address1 %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>建物名</strong></big><br>
-  <%= @shop.address2 %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">建物名</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.address2 %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>経度</strong></big><br>
-  <%= @shop.latitude %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">経度</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.latitude %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>緯度</strong></big><br>
-  <%= @shop.longitude %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">緯度</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.longitude %></td>
+      </tr>
 
-<p class="center">
-  <big><strong>メニュー</strong></big><br>
-  <%= @shop.menu %>
-</p><br><hr><br>
+      <tr>
+        <td class="col-md-3 col-xs-3">メニュー</th>
+        <td class="col-md-9 col-xs-9"><%= @shop.menu %></td>
+      </tr>
+    </table>
 
-<div class="center">
-  <%= link_to '詳細', @person ,:class => "btn btn-success" %>
-  <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
-</div><br><hr>
+      <div class="col-md-6"><%= link_to '戻る', shops_path,:class => "btn btn-lg btn-primary btn-block" %></div>
+      <div class="col-md-6"><%= link_to '変更', edit_shop_path(@shop) ,:class => "btn btn-lg btn-success btn-block" %></div>
+    </tr>
+  </div>
+</div>

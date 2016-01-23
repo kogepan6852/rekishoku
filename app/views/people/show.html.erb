@@ -1,22 +1,48 @@
-<p id="notice"><%= notice %></p>
-<h1 class="center">人物詳細</h1>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>名前</th>
-      <th>フリガナ</th>
-      <th>変更</th>
-      <th>戻る</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="container">
+  <div class="row">
+    <h1>店舗詳細</h1>
+    <table class="table">
       <tr>
-        <td><%= @person.name %></td>
-        <td><%= @person.furigana %></td>
-        <td><%= link_to '変更', edit_person_path(@person) ,:class => "btn btn-success" %></td>
-        <td><%= link_to '戻る', people_path ,:class => "btn btn-primary" %></td>
+        <th class="col-md-3 col-xs-3">名前</th>
+        <td class="col-md-9 col-xs-9"><%= @person.name %></td>
       </tr>
-  </tbody>
-</table>
+
+      <tr>
+        <th class="col-md-3 col-xs-3">ふりがな</th>
+        <td class="col-md-9 col-xs-9"><%= @person.furigana %></td>
+      </tr>
+
+      <tr>
+        <%= form_for(@person) do |f| %>
+        <th class="col-md-3 col-xs-3">時代<p class="show-content">*ここでは変更できません</p></th>
+        <td class="col-md-9 col-xs-9">
+          <% @periods.each do |period| %>
+            <%= f.fields_for :people_periods do |pp| %>
+              <% checked = period.people.exists?(@person.id) ? true : false %>
+                <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked}, period.id, nil %>
+                <%= period.name %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <th class="col-md-3 col-xs-3">カテゴリー<p class="show-content">*ここでは変更できません</p></th>
+        <td class="col-md-9 col-xs-9">
+          <% @people_categories.each do |person_category| %>
+            <%= f.fields_for :categories_people do |cp| %>
+              <% checked = person_category.people.include?(@person.id) ? true : false %>
+                <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
+                <%= person_category.name %>
+            <% end %>
+          <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+
+      <div class="col-md-6"><%= link_to '戻る', people_path,:class => "btn btn-lg btn-primary btn-block" %></div>
+      <div class="col-md-6"><%= link_to '変更', edit_person_path(@person) ,:class => "btn btn-lg btn-success btn-block" %></div>
+    </tr>
+  </div>
+</div>
