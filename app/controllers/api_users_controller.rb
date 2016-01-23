@@ -3,7 +3,7 @@ class ApiUsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.where('posts_count > 0').order(updated_at: :desc)
     render json: @users
   end
 

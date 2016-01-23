@@ -58,6 +58,8 @@ gem 'autoprefixer-rails'
 # 位置情報取得
 gem 'geocoder'
 
+# counter_cacheの高機能版
+gem 'counter_culture'
 
 group :development do
   gem 'annotate', '2.6.5'
