@@ -57,6 +57,23 @@
   height: 50px;
   overflow: hidden;
 }
+.item-content {
+  height: 100%;
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  padding: 65px 10px 45px;
+  position: absolute;
+  top: 0;
+  white-space: normal;
+}
+.item-content > div{
+  height: 100%;
+  overflow: hidden;
+}
 .item-description {
   color: #555!important;
   padding: 10px 10px 0;
@@ -395,13 +412,32 @@ form.post-modal, .post-modal .slider {
 .item-list li {
   position: relative;
 }
+
 .item-list .shop-content, .item-list .main-content, .item-detail-list .detail-content {
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 0 5px 5px;
   width: 100%;
+  height: 90px;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
+.item-list .shop-content.on-mouse,
+.item-list .main-content.on-mouse,
+.item-detail-list .detail-content.on-mouse{
+  height: 100%;
+  padding-top: 5px;
+}
+.item-list .shop-content.on-mouse .item-name,
+.item-list .main-content.on-mouse .item-name,
+.item-detail-list .detail-content.on-mouse .item-name{
+  height: auto;
+}
+
 .shop-content > div, .main-content > div, .detail-content > div {
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;

@@ -69,6 +69,7 @@
   .item-list li .writer-content {
     height: 100px;
     padding-left: 133px;
+    padding-top: 0!important;
   }
   .item-list li .main-content > div,
   .item-list li .shop-content > div,

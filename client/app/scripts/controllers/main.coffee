@@ -101,3 +101,11 @@ angular.module "frontApp"
       $scope.keywords = null
       $location.search('keywords', null)
       $scope.search()
+
+    # postのmouse over時の挙動
+    $scope.onMouseOverItem = (post) ->
+      post.onMouse = true
+
+    # postのmouse leave時の挙動
+    $scope.onMousemouseLeave = (post) ->
+      post.onMouse = false

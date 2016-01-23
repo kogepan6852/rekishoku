@@ -31,14 +31,15 @@
 
     <div class="main">
       <ul class="item-list">
-        <li class="overlay-image" ng-repeat="post in posts">
+        <li class="overlay-image" ng-repeat="post in posts" ng-mouseover="onMouseOverItem(post)" ng-mouseleave="onMousemouseLeave(post)">
           <div class="thumbnail-image">
             <img ng-src="{{post.image.md.url}}">
           </div>
-          <div class="main-content">
+          <div class="main-content" ng-class="{'on-mouse': post.onMouse}">
             <div>
               <div class="category-name">{{post.category_name}}</div>
               <div class="h4 item-name">{{post.title}}</div>
+              <div class="h5 item-content" ng-if="post.onMouse"><div>{{post.content}}</div></div>
               <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
             </div>
           </div>
