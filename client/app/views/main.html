@@ -39,7 +39,12 @@
             <div>
               <div class="category-name">{{post.category_name}}</div>
               <div class="h4 item-name">{{post.title}}</div>
-              <div class="h5 item-content" ng-if="post.onMouse"><div>{{post.content}}</div></div>
+              <div class="h5 item-content" ng-if="post.onMouse">
+                <div>
+                  {{post.content.substr(0,140)}}
+                  <span ng-if="post.content.length > 140">…</span>
+                </div>
+              </div>
               <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
             </div>
           </div>
