@@ -127,13 +127,25 @@ angular.module "frontApp"
       $location.path('/writer/' + userId);
       $ionicSideMenuDelegate.toggleRight();
 
-    $scope.moveToHome = ->
-      $location.path('/home');
+    clearForMove = ->
       # backボタンを隠す
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
       $ionicHistory.clearCache();
+      $ionicSideMenuDelegate.toggleRight();
+
+    $scope.moveToHome = ->
+      $location.path('/home');
+      clearForMove()
+
+    $scope.moveToShops = ->
+      $location.path('/shops');
+      clearForMove()
+
+    $scope.moveToMap = ->
+      $location.path('/map');
+      clearForMove()
 
     $scope.goBack = ->
       $rootScope.isHideTab = false
