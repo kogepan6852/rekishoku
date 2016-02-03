@@ -138,13 +138,15 @@
     display: none;
   }
 }
-@media screen and (min-width:481px) and (max-width:800px){
+@media screen and (min-width:481px) and (max-width:768px){
   .item-list li{ width: 33.333%; }
   .grid-menu a{
     width: 50%;
   }
 }
-@media screen and (max-width:800px){
+
+/* bootstrap xs */
+@media screen and (max-width:768px){
   .top { width: 100%; }
   .logo {
     width: 89px;
@@ -254,11 +256,24 @@
     font-size: 28px!important;
   }
 
+  /**********************
+   * Search Modal
+   **********************/
+  .search-modal .search-button-content {
+    bottom: 10px;
+    position: absolute;
+    width: 100%;
+  }
+  .search-modal .search-button {
+    max-width: none;
+    width: 100%;
+  }
+
 }
-@media screen and (min-width:801px) and (max-width:1200px){
+@media screen and (min-width:768px) and (max-width:1200px){
   .item-list li{ width: 25%; }
 }
-@media screen and (min-width:801px){
+@media screen and (min-width:768px){
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .tab-header{ width: 20%;}

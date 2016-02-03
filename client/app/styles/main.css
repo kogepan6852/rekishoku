@@ -614,7 +614,15 @@ form.post-modal, .post-modal .slider {
 /**********************
  * Search Modal
  **********************/
+ .search-modal .scroll {
+   height: 100%;
+ }
+ .search-modal .search-button-content {
+   bottom: 10px;
+   position: absolute;
+   width: 100%;
+ }
 .search-modal .search-button {
-  max-width: 300px;
+  max-width: 340px;
   margin: auto;
 }
