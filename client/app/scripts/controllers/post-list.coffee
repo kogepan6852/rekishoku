@@ -45,7 +45,7 @@ angular.module "frontApp"
 
     $scope.isShowBackSlide = false
     $scope.isShowAddPostDetail = true;
-    $scope.slideLists = [1, 2, 3]
+    $scope.slideLists = [1, 2, 3, 4]
     $scope.showDeleteButton = false
     $scope.isEditing = false
 
@@ -337,6 +337,10 @@ angular.module "frontApp"
     $scope.$watch 'input.details[2].subFile', (file) ->
       watchSubFile(2, file)
 
+    # 変化を監視してサブ画像4を読み込み＋表示を実行
+    $scope.$watch 'input.details[3].subFile', (file) ->
+      watchSubFile(3, file)
+
     # 画像監視共通処理
     watchSubFile = (index, file) ->
       $scope.input.details[index].srcSubUrl = undefined
@@ -353,7 +357,7 @@ angular.module "frontApp"
     $scope.prevSlide = ->
       $ionicSlideBoxDelegate.next()
       $scope.isShowBackSlide = true
-      if $ionicSlideBoxDelegate.currentIndex() >= 3
+      if $ionicSlideBoxDelegate.currentIndex() >= 4
         $scope.isShowAddPostDetail = false
 
     # 記事編集用モーダル前へボタン
