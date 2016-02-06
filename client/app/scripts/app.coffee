@@ -143,6 +143,7 @@ angular
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
       .state 'shop',
+        cache: false,
         url: '/shop/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
