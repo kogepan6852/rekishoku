@@ -2,19 +2,29 @@
   width: 300px;
 }
 
-.top-padding-30{
-  padding-top: 30px;
-}
-
 
 // 以前設定した画像のサイズ変更
 .previous-image{
-  width: 50%;
+  width: 70%;
 }
 
 // 詳細画面のUI
 .show-content{
-  color: #777;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+// peopleの横幅の調整
+.people-list{
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.header-list{
+  width: 420px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 // ログインフォーム
@@ -28,6 +38,68 @@
   font-family: 'Glyphicons Halflings';
   src: url('/assets/glyphicons-halflings-regular.eot');
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.content-padding{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.navbar-toggles{
+  border-color: #cd615d;
+}
+
+.header-link a{
+  color: #cd615d;
+
+    &:visited {
+      color: #cd615d;
+    }
+
+    &:hover {
+      color: #cd615d;
+    }
+  }
+
+  .navbar-bg {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
+
+// ログイン画面の「パスワードを記憶する」の位置調整
+.rememberable-padding{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+// タイトルの位置の調整
+.title-position{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.top-link a{
+  color: none;
+
+    &:visited {
+      color: none;
+    }
+
+    &:hover {
+      color: none;
+    }
+  }
+
+  .navbar-bg {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
 }
 
 
@@ -137,3 +209,15 @@
     100% { top: 3em; opacity: 1; }
 }
 // 店舗と人物の登録画面の入力欄　ここまで
+
+
+// showの枠
+.tabbable-panel {
+  border:1px solid #eee;
+  padding: 10px;
+}
+
+// 右上のタブの色
+nav.navbar-bg button.navbar-toggle { background: #cd615d; border-radius: 2px; }
+nav.navbar-bg button.navbar-toggle:hover { background: #999; }
+nav.navbar-bg button.navbar-toggle > span.icon-bar { background: #fff; }
