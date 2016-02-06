@@ -1,10 +1,11 @@
 <div class="container">
     <div class="row">
         <p id="notice"><%= notice %></p>
-        <h2>
+        <h2 class="text-center">
             メニュー
         </h2>
-        <div class="col-md-6">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="blockquote-box clearfix">
                 <div class="square pull-left">
                     <%= link_to image_tag('shops.jpg'), 'shops' %>
@@ -16,19 +17,8 @@
                     店舗の新規登録や変更、削除を行いたいときはこちらでできます。店舗を登録したり変更するときの注意事項は店舗の編集画面に記載しているので確認してから登録するようにしてください。
                 </p>
             </div>
-            <div class="blockquote-box blockquote-primary clearfix">
-                <div class="square pull-left">
-                    <%= link_to image_tag('web.png'), '/#/home?showLogin=true' %>
-                </div>
-                <h4 class="menu">
-                    <%= link_to 'WEBサイト', '/#/home?showLogin=true' %>
-                </h4>
-                <p>
-                    「http://www.歴食.jp/#/home?showLogin=true」にアクセスできます。アクセスできたら、右上のタブをクリックして再度ログインしてください。そしたら、記事の投稿やプロフィールの変更ができます。
-                </p>
-            </div>
-        </div>
-        <div class="col-md-6">
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="blockquote-box blockquote-info clearfix">
                 <div class="square pull-left">
                     <%= link_to image_tag('people.jpg'), 'people' %>
@@ -40,17 +30,22 @@
                   人物の新規登録や変更、削除を行いたいときはこちらでできます。人物を登録したり変更するときの注意事項は人物の編集画面に記載しているので確認してから登録するようにしてください。
                 </p>
             </div>
-            <div class="blockquote-box blockquote-warning clearfix">
-                <div class="square pull-left">
-                    <%= link_to image_tag('user_edit.jpg'), 'users/edit' %>
-                </div>
-                <h4 class="menu">
-                    <%= link_to 'ユーザー情報の変更', 'user/edit' %>
-                </h4>
-                <p>
-                  ログイン時に使っているメールアドレスやパスワードを変更する場合は、こちらから変更することができます。
-                </p>
-            </div>
+          </div>
         </div>
-    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="blockquote-box blockquote-warning clearfix">
+                  <div class="square pull-left">
+                      <%= link_to image_tag('user_edit.jpg'), 'users/edit' %>
+                  </div>
+                  <h4 class="menu">
+                      <%= link_to 'アカウント情報の変更', 'users/edit' %>
+                  </h4>
+                  <p>
+                    ログイン時に使っているメールアドレスやパスワードを変更する場合は、こちらから変更することができます。
+                  </p>
+              </div>
+          </div>
+        </div>
+      </div>
 </div>
