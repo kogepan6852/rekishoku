@@ -52,7 +52,7 @@ gem 'kaminari'
 
 # bootstrap
 gem 'bootstrap-sass', '3.3.5.1'
-gem 'font-awesome-sass'
+gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
 
 # 位置情報取得
