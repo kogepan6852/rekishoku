@@ -1,116 +1,141 @@
 <div class="container">
-  <div class="row">
-    <h1>店舗詳細</h1>
-    <table class="table">
-      <tr>
-        <td class="col-md-3 col-xs-3">名前</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.name %></td>
-      </tr>
+  <h2 class="title-position">SHOP詳細</h2>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">名前</a></li>
+            <li><a href="#tab_2" data-toggle="tab">説明</a></li>
+            <li><a href="#tab_3" data-toggle="tab">店のURL</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_1">
+              <%= @shop.name %>
+            </div>
+            <div class="tab-pane" id="tab_2">
+              <%= @shop.description %>
+            </div>
+            <div class="tab-pane" id="tab_3">
+              <%= @shop.url %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">説明</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.description %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">店のURL</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.url %></td>
-      </tr>
-
-      <tr>
-        <%= form_for(@shop) do |f| %>
-        <td class="col-md-3 col-xs-3">カテゴリー<p class="show-content">*ここでは変更できません</p></th>
-        <td class="col-md-9 col-xs-9">
-          <% @shops_categories.each do |shop_category| %>
-            <%= f.fields_for :categories_shop do |cs| %>
-              <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
-                <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
-                <%= shop_category.name %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">人物<p class="show-content">*ここでは変更できません</p></th>
-        <td class="col-md-9 col-xs-9">
-            <% @people.each do |person| %>
-              <%= f.fields_for :people_shops do |pp| %>
-                <% checked = person.shops.exists?(@shop.id) ? true : false %>
-                  <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
-                  <%= person.name %>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_4" data-toggle="tab">カテゴリー</a></li>
+            <li><a href="#tab_5" data-toggle="tab">人物</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane" id="tab_4">
+              <%= form_for(@shop) do |f| %>
+              <% @shops_categories.each do |shop_category| %>
+                <%= f.fields_for :categories_shop do |cs| %>
+                  <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+                    <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
+                    <%= shop_category.name %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-          <% end %>
-      </tr>
+              <% end %>
+            </div>
+            <div class="tab-pane" id="tab_5">
+              <%= form_for(@shop) do |f| %>
+              <% @people.each do |person| %>
+                <%= f.fields_for :people_shops do |pp| %>
+                  <% checked = person.shops.exists?(@shop.id) ? true : false %>
+                    <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
+                    <%= person.name %>
+                <% end %>
+              <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">メイン画像</th>
-        <td class="col-md-9 col-xs-9">
-          <% if @shop.image? %>
-            <%= image_tag @shop.image.url ,:class => "previous-image" %>
-          <% end %>
-        </td>
-      </tr>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_6" data-toggle="tab">メイン画像</a></li>
+            <li><a href="#tab_7" data-toggle="tab">サブ画像</a></li>
+            <li><a href="#tab_8" data-toggle="tab">画像の引用元URL</a></li>
+            <li><a href="#tab_9" data-toggle="tab">画像の引用元名称</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane" id="tab_6">
 
-      <tr>
-        <td class="col-md-3 col-xs-3">サブ画像</th>
-        <td class="col-md-9 col-xs-9">
-          <% if @shop.subimage? %>
-            <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
-          <% end %>
-        </td>
-      </tr>
+                <%= image_tag @shop.image.url ,:class => "previous-image" %>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">画像の引用元URL</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.image_quotation_url %></td>
-      </tr>
+            </div>
+            <div class="tab-pane" id="tab_7">
+                <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
+            </div>
+            <div class="tab-pane" id="tab_8">
+              <%= @shop.image_quotation_url %>
+            </div>
+            <div class="tab-pane" id="tab_9">
+              <%= @shop.image_quotation_name %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">画像の引用元名称</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.image_quotation_name %></td>
-      </tr>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_10" data-toggle="tab">都道府県</a></li>
+            <li><a href="#tab_11" data-toggle="tab">市区町村</a></li>
+            <li><a href="#tab_12" data-toggle="tab">その他住所</a></li>
+            <li><a href="#tab_13" data-toggle="tab">建物名</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_10">
+              <%= @shop.province %>
+            </div>
+            <div class="tab-pane" id="tab_11">
+              <%= @shop.city %>
+            </div>
+            <div class="tab-pane" id="tab_12">
+              <%= @shop.address1 %>
+            </div>
+            <div class="tab-pane" id="tab_13">
+              <%= @shop.address2 %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">都道府県</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.province %></td>
-      </tr>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_14" data-toggle="tab">経度</a></li>
+            <li><a href="#tab_15" data-toggle="tab">緯度</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_14">
+              <%= @shop.latitude %>
+            </div>
+            <div class="tab-pane" id="tab_15">
+              <%= @shop.longitude %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td class="col-md-3 col-xs-3">市区町村</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.city %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">その他住所</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.address1 %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">建物名</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.address2 %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">経度</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.latitude %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">緯度</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.longitude %></td>
-      </tr>
-
-      <tr>
-        <td class="col-md-3 col-xs-3">メニュー</th>
-        <td class="col-md-9 col-xs-9"><%= @shop.menu %></td>
-      </tr>
-    </table>
-
-      <div class="col-md-6"><%= link_to '戻る', shops_path,:class => "btn btn-lg btn-primary btn-block" %></div>
-      <div class="col-md-6"><%= link_to '変更', edit_shop_path(@shop) ,:class => "btn btn-lg btn-success btn-block" %></div>
-    </tr>
-  </div>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_16" data-toggle="tab">メニュー</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_16">
+              <%= @shop.menu %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr>
+    <div class="col-md-6"><%= link_to '戻る', shops_path,:class => "btn btn-lg btn-primary btn-block" %></div>
+    <div class="col-md-6"><%= link_to '変更', edit_shop_path(@shop) ,:class => "btn btn-lg btn-success btn-block" %></div>
 </div>
