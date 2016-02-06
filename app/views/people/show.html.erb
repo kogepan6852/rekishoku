@@ -1,48 +1,55 @@
-<div class="container">
-  <div class="row">
-    <h1>店舗詳細</h1>
-    <table class="table">
-      <tr>
-        <th class="col-md-3 col-xs-3">名前</th>
-        <td class="col-md-9 col-xs-9"><%= @person.name %></td>
-      </tr>
+  <div class="container">
+    <h2 class="title-position">PEOPLE詳細</h2>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">名前</a></li>
+            <li><a href="#tab_2" data-toggle="tab">ふりがな</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_1">
+              <%= @person.name %>
+            </div>
+            <div class="tab-pane" id="tab_2">
+              <%= @person.furigana %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <th class="col-md-3 col-xs-3">ふりがな</th>
-        <td class="col-md-9 col-xs-9"><%= @person.furigana %></td>
-      </tr>
-
-      <tr>
-        <%= form_for(@person) do |f| %>
-        <th class="col-md-3 col-xs-3">時代<p class="show-content">*ここでは変更できません</p></th>
-        <td class="col-md-9 col-xs-9">
-          <% @periods.each do |period| %>
-            <%= f.fields_for :people_periods do |pp| %>
-              <% checked = period.people.exists?(@person.id) ? true : false %>
-                <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked}, period.id, nil %>
-                <%= period.name %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-
-      <tr>
-        <th class="col-md-3 col-xs-3">カテゴリー<p class="show-content">*ここでは変更できません</p></th>
-        <td class="col-md-9 col-xs-9">
-          <% @people_categories.each do |person_category| %>
-            <%= f.fields_for :categories_people do |cp| %>
-              <% checked = person_category.people.include?(@person.id) ? true : false %>
-                <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
-                <%= person_category.name %>
-            <% end %>
-          <% end %>
-          </td>
-        <% end %>
-      </tr>
-    </table>
-
-      <div class="col-md-6"><%= link_to '戻る', people_path,:class => "btn btn-lg btn-primary btn-block" %></div>
-      <div class="col-md-6"><%= link_to '変更', edit_person_path(@person) ,:class => "btn btn-lg btn-success btn-block" %></div>
-    </tr>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_3" data-toggle="tab">時代</a></li>
+            <li><a href="#tab_4" data-toggle="tab">カテゴリー</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane" id="tab_3">
+              <%= form_for(@person) do |f| %>
+                <% @periods.each do |period| %>
+                  <%= f.fields_for :people_periods do |pp| %>
+                    <% checked = period.people.exists?(@person.id) ? true : false %>
+                    <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked}, period.id, nil %>
+                    <%= period.name %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="tab-pane" id="tab_4">
+              <%= form_for(@person) do |f| %>
+                <% @people_categories.each do |person_category| %>
+                  <%= f.fields_for :categories_people do |cp| %>
+                    <% checked = person_category.people.include?(@person.id) ? true : false %>
+                    <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
+                    <%= person_category.name %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr>
+    <div class="col-md-6"><%= link_to '戻る', people_path,:class => "btn btn-lg btn-primary btn-block" %></div>
+    <div class="col-md-6"><%= link_to '変更', edit_person_path(@person) ,:class => "btn btn-lg btn-success btn-block" %></div>
   </div>
-</div>
