@@ -275,6 +275,7 @@ ion-view .has-subheader {
   left: 25px;
   top: 17px;
   width: 115px!important;
+  min-width: 115px!important;
   opacity: 0;
   padding-right: 10px!important;
 }

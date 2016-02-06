@@ -133,7 +133,7 @@ angular.module "frontApp"
       # historyデータを削除する
       $ionicHistory.clearHistory();
       $ionicHistory.clearCache();
-      $ionicSideMenuDelegate.toggleRight();
+      $ionicSideMenuDelegate.toggleRight(false);
 
     $scope.moveToHome = ->
       $location.path('/home');
