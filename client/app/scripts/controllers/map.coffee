@@ -36,9 +36,12 @@ angular.module 'frontApp'
         longitude: longitude
       zoom: defaultZoom
       bounds: {}
+
     $scope.options =
       scrollwheel: false
       minZoom: 11
+      disableDefaultUI: true
+      zoomControl: true
 
     # Google Mapの各種イベント処理の設定
     $scope.events =
@@ -131,7 +134,9 @@ angular.module 'frontApp'
             longitude: shop.longitude,
             title: shop.name
             url: shop.image.thumb.url
-            icon: '../images/map-pin.png'
+            icon:
+              url: '../images/map-pin.png'
+              scaledSize : new google.maps.Size(25, 35)
           ret['id'] = shop.id
           shops.push(ret)
         $scope.targetMarkers = shops

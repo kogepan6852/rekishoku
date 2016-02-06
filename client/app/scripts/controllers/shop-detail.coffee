@@ -34,6 +34,8 @@ angular.module 'frontApp'
       $scope.options =
         scrollwheel: false
         minZoom: 11
+        disableDefaultUI: true
+        zoomControl: true
         draggable: false
 
       shops = []
@@ -43,6 +45,9 @@ angular.module 'frontApp'
         showWindow: true
         title: res.data.shop.name
         url: res.data.shop.image.thumb.url
+        icon:
+          url: '../images/map-pin.png'
+          scaledSize : new google.maps.Size(25, 35)
       ret['id'] = res.data.shop.id
       shops.push(ret)
       $scope.targetMarkers = shops
