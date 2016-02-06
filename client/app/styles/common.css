@@ -301,9 +301,12 @@ ion-view .has-subheader {
 .toast-top-full-width {
   top: 10px;
 }
+.toast-bottom-full-width {
+  bottom: 10px;
+}
 #toast-container > div {
   padding: 30px 15px 30px 50px;
-  opacity: 0.95;
+  /*opacity: 0.95;*/
   font-size: 20px;
 }
 
