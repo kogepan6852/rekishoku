@@ -436,15 +436,60 @@ angular.module "frontApp"
           title: '保存しました。',
           showCloseButton: true
 
+    # 記事詳細への遷移
+    $scope.moveToPost = (index) ->
+      $scope.popoverPostMenu.hide()
+      $state.go('post', { id: $scope.results[index].id, preview: "true" })
+
+    # 公開
+    $scope.publish = (status, id) ->
+      # 今日日付設定
+      today = new Date()
+      year = today.getFullYear()
+      month = ("0"+(today.getMonth() + 1)).slice(-2)
+      date = ("0"+today.getDate()).slice(-2)
+      dispToday = year + '-' + month + '-' + date
+
+      $scope.input =
+        publishDate: dispToday
+      updStatus = 1 - status;
+
+      msg = '公開してもよろしいですか？'
+      subMsg = '公開日を設定してください。'
+      template = '<input type="text" ng-model="input.publishDate">'
+      if updStatus == 0
+        msg = '非公開にしてもよろしいですか？'
+        subMsg = ''
+        template = ''
+
+      $ionicPopup.show(
+        title: msg
+        subTitle: subMsg
+        template: template
+        scope: $scope
+        buttons: [
+          { text: 'キャンセル' }
+          {
+            text: '<b>OK</b>'
+            type: 'button-dark'
+            onTap: (e) ->
+              if updStatus == 0 || $scope.input.publishDate
+                updateStatus(updStatus, id, $scope.input.publishDate)
+              else
+                e.preventDefault()
+          }
+        ])
+
     # ステータスのアップデート処理
-    $scope.updateStatus = (status) ->
+    updateStatus = (status, postId, publishDate) ->
       fd = new FormData
       fd.append 'token', $sessionStorage['token']
       fd.append 'email', $sessionStorage['email']
       fd.append 'post[status]', status
+      fd.append 'post[published_at]', publishDate
 
       # データ登録
-      url = Const.API.POST + "/" + $scope.targetPostId
+      url = Const.API.POST + "/" + postId
       method = Const.METHOD.PATCH
 
       msg = Const.MSG.PUBLISHED
@@ -459,8 +504,3 @@ angular.module "frontApp"
           type: 'success'
           title: msg
           showCloseButton: true
-
-    # 記事詳細への遷移
-    $scope.moveToPost = (index) ->
-      $scope.popoverPostMenu.hide()
-      $state.go('post', { id: $scope.results[index].id, preview: "true" })

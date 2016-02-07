@@ -42,7 +42,7 @@ class ApiShopsController < ApplicationController
     @shop = Shop.find(params[:id])
     shop = { "shop" => @shop,
              "categories" => @shop.categories,
-             "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where(status: 1).order(created_at: :desc),
+             "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc),
              "people" => @shop.people }
     render json: shop
   end

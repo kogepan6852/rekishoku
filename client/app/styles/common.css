@@ -323,7 +323,7 @@ ion-view .has-subheader {
  * Popover
  **********************/
 .popover-post-menu {
-  height: 330px;
+  /*height: 330px;*/
 }
 
 /**********************

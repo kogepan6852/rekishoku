@@ -4,7 +4,7 @@ class ApiPostsController < ApplicationController
   # GET /api/posts
   # 一覧表示
   def index
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where(status: 1).order(created_at: :desc)
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
     # 検索条件の設定
     if params[:keywords]
       keywords = params[:keywords]
@@ -28,7 +28,7 @@ class ApiPostsController < ApplicationController
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
     logger.debug(params[:preview])
-    if params[:preview] == "true" || @post.status == 1
+    if params[:preview] == "true" || @post.status == 1 && @post.published_at <= Date.today
       shops = Array.new()
       # shop情報整形
       @post.shops.each do |shop|
@@ -49,7 +49,7 @@ class ApiPostsController < ApplicationController
   # GET /api/posts_list
   # post-list用一覧表示
   def list
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
     @posts = @posts.where(user_id: current_user.id)
     render json: @posts.page(params[:page]).per(params[:per])
   end
@@ -93,7 +93,7 @@ class ApiPostsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo)
+      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at)
     end
 
 end

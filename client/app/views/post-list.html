@@ -32,8 +32,9 @@
           <td>{{result.title}}</td>
           <td class="hidden-xs">{{result.content | limitTo:100}}...</td>
           <td class="hidden-xs">{{result.category_name}}</td>
-          <td class="post-status vertical-align">
-            <div ng-class="{active: result.status == 1}">公開</div>
+          <td class="post-status vertical-align" ng-click="publish(result.status, result.id)">
+            <div class="status" ng-class="{active: result.status == 1}">公開</div>
+            <div ng-if="result.status == 1" class="published">{{result.published_at | date:'yyyy-MM-dd'}}</div>
           </td>
           <td class="vertical-align" align="right">
             <button class="button button-dark" ng-click="openPopoverPostMenu($event, $index)"><i class="icon ion-android-more-vertical"></i></button>

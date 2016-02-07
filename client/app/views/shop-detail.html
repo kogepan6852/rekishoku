@@ -67,7 +67,7 @@
                 <div class="category-name">{{post.category_name}}</div>
                 <div class="h4 detail-name">{{post.title}}</div>
                 <div class="h6 item-description hidden-xs">{{post.content | limitTo:300}}</div>
-                <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.created_at | date:'yyyy/M/d'}}</div>
+                <div class="h6 post-date"><i class="icon ion-ios-clock-outline"></i>{{post.published_at | date:'yyyy/M/d'}}</div>
               </div>
             </div>
             <a class="link" ui-sref="tabs.shop-post({id:post.id})" nav-direction="forward" ng-if="nowTab=='shop'"></a>

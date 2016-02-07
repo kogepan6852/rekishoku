@@ -13,7 +13,7 @@
             <p ng-if="user.username">{{user.username}}</p>
           </div>
           <p class="category" ng-if="post.category_name">{{post.category_name}}</p>
-          <p class="date">{{post.created_at | date:'yyyy/M/d'}}</p>
+          <p class="date">{{post.published_at | date:'yyyy/M/d'}}</p>
         </div>
         <div class="detail-image"><img ng-src="{{post.image.url}}"></div>
         <div class="post-quotation" ng-if="post.quotation_name">掲載元：<a href="{{post.quotation_url}}" target="_blank">{{post.quotation_name}}</a></div>
