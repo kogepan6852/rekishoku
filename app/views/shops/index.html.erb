@@ -4,10 +4,10 @@
       <h1 class="title-position"><i class="fa fa-home"></i>SHOPトップ</h1>
       <!-- 店舗登録 -->
       <div class="text-right">
-        <%= link_to "<i class='fa fa-plus'></i>SHOP登録".html_safe, new_shop_path, :class => "btn btn-default btn-round-lg btn-lg people-padding" %>
+        <%= link_to "<i class='fa fa-plus'></i>SHOP登録".html_safe, new_shop_path, :class => "btn btn-default btn-round-lg btn-lg new-padding" %>
       </div>
       <!-- 本文 -->
-      <table class="table top-link">
+      <table class="table">
           <tr>
             <td>名前</td>
             <td>説明</td>
@@ -25,8 +25,8 @@
             <td><%= shop.province %></td>
             <td><%= shop.city %></td>
             <td><%= shop.address1 %></td>
-            <td class="text-right"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
-            <td class="text-right"><%= link_to "<i class='fa fa-pencil fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
+            <td class="text-right fontawesome-icon"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
+            <td class="text-right fontawesome-icon"><%= link_to "<i class='fa fa-pencil fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
             <!-- <td><%= link_to '削除', shop, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
           </tr>
         <% end %>
@@ -42,7 +42,7 @@
       <hr>
       <!-- 店舗登録 -->
       <div class="text-right">
-        <%= link_to "<i class='fa fa-plus'></i>SHOP登録".html_safe, new_shop_path, :class => "btn btn-default btn-round-lg btn-lg people-padding" %>
+        <%= link_to "<i class='fa fa-plus'></i>SHOP登録".html_safe, new_shop_path, :class => "btn btn-default btn-round-lg btn-lg new-padding" %>
       </div>
       <!-- 本文 -->
       <table class="table table-hover">
@@ -56,8 +56,8 @@
         <% @shops.each do |shop| %>
           <tr>
             <td><%= shop.name %></td>
-            <td class="text-right"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
-            <td class="text-right"><%= link_to "<i class='fa fa-pencil fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
+            <td class="text-right fontawesome-icon"><%= link_to "<i class='fa fa-file-text-o fa-3x'></i>".html_safe, shop %></td>
+            <td class="text-right fontawesome-icon"><%= link_to "<i class='fa fa-pencil fa-3x'></i>".html_safe, edit_shop_path(shop) %></td>
             <!-- <td><%= link_to '削除', shop, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger" %></td> -->
           </tr>
         <% end %>

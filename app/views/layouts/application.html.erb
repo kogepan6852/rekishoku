@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>歴食</title>
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta name="robots" content="noindex">
-</head>
+  <html>
+    <head>
+      <title>歴食</title>
+      <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+      <meta name="robots" content="noindex">
+    </head>
 
- <!-- Fixed navbar -->
     <nav class="navbar navbar-bg header-link">
       <div class="container">
         <div class="navbar-header">
@@ -54,15 +53,13 @@
               <% end %>
             <li class="active"><%= link_to "WEBサイト", "/#/home?showLogin=true" %></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
-<body>
-
-<div class="content-padding">
-  <%= yield %>
-</div>
-
-</body>
-</html>
+    <body>
+      <div class="content-padding">
+        <%= yield %>
+      </div>
+    </body>
+  </html>

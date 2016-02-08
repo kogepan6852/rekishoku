@@ -40,6 +40,7 @@
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
+// 全体の左右の幅の調整
 .content-padding{
   padding-left: 30px;
   padding-right: 30px;
@@ -49,6 +50,7 @@
   border-color: #cd615d;
 }
 
+// ヘッダーの背景とリンクの色
 .header-link a{
   color: #cd615d;
 
@@ -79,18 +81,6 @@
   padding-bottom: 20px;
 }
 
-.top-link a{
-  color: none;
-
-    &:visited {
-      color: none;
-    }
-
-    &:hover {
-      color: none;
-    }
-  }
-
   .navbar-bg {
     background-color: #fff;
     border-color: #e7e7e7;
@@ -102,7 +92,26 @@
     transition: all .5s;
 }
 
+// shopのindexとshowのリンクの色
+.fontawesome-icon a {
+   color: #000;
 
+   &:visited {
+     color: #000;
+   }
+ }
+
+.show-link a {
+   color: #fff;
+
+   &:visited {
+     color: #fff;
+   }
+ }
+
+ .new-padding{
+   margin-bottom: 5px;
+ }
 
 // 店舗と人物の登録画面の入力欄　ここから
 .float-label-control{
