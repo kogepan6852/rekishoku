@@ -240,13 +240,13 @@
    padding-bottom: 5px;
  }
  .detail-image img {
-   max-height: 500px;
+   max-height: 600px;
    max-width: 100%;
    width: auto;
  }
 .post-title{
   padding: 5px;
-  min-height: 80px;
+  min-height: 70px;
 }
 .post-title .sub {
   border-bottom: 5px solid rgb(205, 97, 93);
