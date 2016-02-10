@@ -113,6 +113,14 @@
    margin-bottom: 5px;
  }
 
+ .show-tab-link a {
+   color: #000;
+
+   &:visited {
+     color: #000;
+   }
+ }
+
 // 店舗と人物の登録画面の入力欄　ここから
 .float-label-control{
   position: relative;

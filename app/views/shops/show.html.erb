@@ -1,5 +1,5 @@
-<div class="container">
-  <h2 class="title-position">SHOP詳細</h2>
+    <div class="container show-tab-link ">
+      <h2 class="title-position">SHOP詳細</h2>
       <div class="row show-content">
         <div class="tabbable-panel">
           <ul class="nav nav-tabs">
@@ -23,6 +23,7 @@
 
       <div class="row show-content">
         <div class="tabbable-panel">
+          タブをクリックしてください
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_4" data-toggle="tab">カテゴリー</a></li>
             <li><a href="#tab_5" data-toggle="tab">人物</a></li>
@@ -56,6 +57,7 @@
 
       <div class="row show-content">
         <div class="tabbable-panel">
+          タブをクリックしてください
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_6" data-toggle="tab">メイン画像</a></li>
             <li><a href="#tab_7" data-toggle="tab">サブ画像</a></li>
@@ -64,9 +66,7 @@
           </ul>
           <div class="tab-content show-content">
             <div class="tab-pane" id="tab_6">
-
-                <%= image_tag @shop.image.url ,:class => "previous-image" %>
-
+              <%= image_tag @shop.image.url ,:class => "previous-image" %>
             </div>
             <div class="tab-pane" id="tab_7">
                 <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
@@ -135,7 +135,8 @@
           </div>
         </div>
       </div>
+    </div>
+
     <hr>
     <div class="col-md-6 show-link"><%= link_to '戻る', shops_path,:class => "btn btn-lg btn-primary btn-block" %></div>
     <div class="col-md-6 show-link"><%= link_to '変更', edit_shop_path(@shop) ,:class => "btn btn-lg btn-success btn-block" %></div>
-</div>

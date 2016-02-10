@@ -1,5 +1,5 @@
-  <div class="container">
-    <h2 class="title-position">PEOPLE詳細</h2>
+    <div class="container show-tab-link">
+      <h2 class="title-position">PEOPLE詳細</h2>
       <div class="row show-content">
         <div class="tabbable-panel">
           <ul class="nav nav-tabs">
@@ -19,6 +19,7 @@
 
       <div class="row show-content">
         <div class="tabbable-panel">
+          タブをクリックしてください
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_3" data-toggle="tab">時代</a></li>
             <li><a href="#tab_4" data-toggle="tab">カテゴリー</a></li>
@@ -49,7 +50,8 @@
           </div>
         </div>
       </div>
+    </div>
+
     <hr>
     <div class="col-md-6 show-link"><%= link_to '戻る', people_path,:class => "btn btn-lg btn-primary btn-block" %></div>
     <div class="col-md-6 show-link"><%= link_to '変更', edit_person_path(@person) ,:class => "btn btn-lg btn-success btn-block" %></div>
-  </div>
