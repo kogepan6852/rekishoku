@@ -13,6 +13,7 @@
                         <%= pp.check_box 'period.ids', { :name => 'person[period_ids][]', :checked => checked}, period.id, nil %>
                         <%= period.name %>
                       <% end %>
+                      <input type="hidden" name="person[period_ids][]">
                     <% end %>
 
                   <h4 class="page-header">カテゴリー<span class="text-danger">*</span></h4>
@@ -22,6 +23,7 @@
                         <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
                         <%= person_category.name %>
                       <% end %>
+                      <input type="hidden" name="person[category_ids][]">
                     <% end %>
                 </div>
 

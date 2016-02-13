@@ -15,6 +15,7 @@
                                 <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
                                 <%= shop_category.name %>
                               <% end %>
+                              <input type="hidden" name="shop[category_ids][]">
                             <% end %>
 
                         <h5 class="page-header">人物</h5>
@@ -24,6 +25,7 @@
                               <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
                               <%= person.name %>
                             <% end %>
+                            <input type="hidden" name="shop[person_ids][]">
                           <% end %>
 
                         <h4 class="page-header">画像</h4>
