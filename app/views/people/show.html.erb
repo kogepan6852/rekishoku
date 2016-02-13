@@ -40,7 +40,7 @@
               <%= form_for(@person) do |f| %>
                 <% @people_categories.each do |person_category| %>
                   <%= f.fields_for :categories_people do |cp| %>
-                    <% checked = person_category.people.include?(@person.id) ? true : false %>
+                    <% checked = person_category.people.exists?(@person.id) ? true : false %>
                     <%= cp.check_box 'person_category.ids', { :name => 'person[category_ids][]', :checked => checked }, person_category.id, nil %>
                     <%= person_category.name %>
                   <% end %>
