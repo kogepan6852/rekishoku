@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :people_shops
-
-  resources :menu
-
 # API route　
   # POSTS
   get 'api/posts', to: 'api_posts#index'
@@ -39,6 +35,10 @@ Rails.application.routes.draw do
   get 'users/show'
 
 # ADMIN route
+  resources :menu
+
+  resources :people_shops
+
   resources :people_posts
 
   resources :posts_shops

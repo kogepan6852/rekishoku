@@ -163,3 +163,5 @@ angular
     $ionicConfigProvider.views.maxCache(5)
     $ionicConfigProvider.views.transition('ios')
     $ionicConfigProvider.views.forwardCache(true);
+  .config ($locationProvider) ->
+    $locationProvider.hashPrefix('!')
