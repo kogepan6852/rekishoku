@@ -19,11 +19,11 @@
         STORE
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-right" ng-click="closeMenu()" ui-sref="writers" nav-transition="none">
+      <a class="item item-icon-right" ng-click="moveToWriters()">
         ライター一覧
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-right" ng-click="closeMenu()" ui-sref="my-post" nav-transition="none" ng-if="isLogin">
+      <a class="item item-icon-right" ng-click="moveToMyPost()" ng-if="isLogin">
         投稿一覧
         <i class="icon ion-chevron-right"></i>
       </a>

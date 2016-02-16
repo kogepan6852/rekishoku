@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $ionicHistory, $ionicNavBarDelegate, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, Api, toaster, Const) ->
 
     # 変数設定
     $scope.input =
@@ -123,9 +123,10 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight();
 
     $scope.moveToWriterDetail = ->
+      $ionicViewSwitcher.nextTransition('none')
       userId = $sessionStorage['user_id']
-      $location.path('/writer/' + userId);
-      $ionicSideMenuDelegate.toggleRight();
+      $state.go('tabs.post-writer', { id: userId })
+      clearForMove()
 
     clearForMove = ->
       # backボタンを隠す
@@ -136,15 +137,28 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight(false);
 
     $scope.moveToHome = ->
-      $location.path('/home');
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('tabs.home')
       clearForMove()
 
     $scope.moveToShops = ->
-      $location.path('/shops');
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('tabs.shops')
       clearForMove()
 
     $scope.moveToMap = ->
-      $location.path('/map');
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('tabs.map')
+      clearForMove()
+
+    $scope.moveToWriters = ->
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('writers')
+      clearForMove()
+
+    $scope.moveToMyPost = ->
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('my-post')
       clearForMove()
 
     $scope.goBack = ->
@@ -157,7 +171,7 @@ angular.module "frontApp"
 
       # 現在Pathの取得
       currentPath = $location.path();
-      if currentPath == '/shops'
+      if currentPath == '/app/shops'
         $scope.currentType = 'shop'
       else
         $scope.currentType = 'post'
@@ -196,11 +210,11 @@ angular.module "frontApp"
       if !$scope.input.keywords
         $scope.input.keywords = null
       if $scope.currentType == 'shop'
-        $location.path('/shops').search('keywords', $scope.input.keywords)
+        $location.path('/app/shops').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       else
-        $location.path('/home').search('keywords', $scope.input.keywords)
+        $location.path('/app/home').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
       $scope.modalSearch.hide()
