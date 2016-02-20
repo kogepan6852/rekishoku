@@ -17,6 +17,12 @@ class AppPostsController < ApplicationController
     set_meta_tags description: @post.content.gsub(/(\r\n|\r|\n|\f)/,"")
     set_meta_tags keywords: keywords.join(",")
 
+    if params[:_escaped_fragment_].nil?
+
+      logger.debug(request.path)
+      redirect_to("/#" + request.path)
+    end
+
   end
 
   private
