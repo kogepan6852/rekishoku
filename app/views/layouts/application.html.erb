@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>歴食</title>
+  <%= display_meta_tags({
+    :site => '歴食',
+    :title => '歴食'
+  })%>
   <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,6 +12,7 @@
   <meta name="robots" content="noindex">
 </head>
 
+<body>
  <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -65,8 +69,6 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-<body>
 
 <div class="top-padding-30">
   <%= yield %>

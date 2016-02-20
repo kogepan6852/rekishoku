@@ -61,6 +61,9 @@ gem 'geocoder'
 # counter_cacheの高機能版
 gem 'counter_culture'
 
+# seo
+gem 'meta-tags'
+
 group :development do
   gem 'annotate', '2.6.5'
 end

@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   counter_culture :user
   has_many :post_details
   has_and_belongs_to_many :shops
+  has_and_belongs_to_many :people
   mount_uploader :image, ImageUploader
 
   validates :title, presence: true

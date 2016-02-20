@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "/app/*path" => redirect('/#/app/%{path}', status: 302)
+  get 'app/post/:id', to: 'app_posts#show'
 # API route　
   # POSTS
   get 'api/posts', to: 'api_posts#index'
