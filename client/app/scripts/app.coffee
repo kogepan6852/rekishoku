@@ -30,13 +30,13 @@ angular
         abstract: true,
         templateUrl: "views/tabs.html"
       .state 'tabs.home',
-        url: '/app/home'
+        url: '/home'
         views:
           'home-tab':
             templateUrl: 'views/main.html'
             controller: 'MainCtrl'
       .state 'tabs.shops',
-        url: '/app/shops'
+        url: '/shops'
         views:
           'shops-tab':
             templateUrl: 'views/shops.html'
@@ -44,21 +44,21 @@ angular
 
       .state 'tabs.post',
         cache: false,
-        url: '/app/post/:id?preview'
+        url: '/post/:id?preview'
         views:
           'home-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.post-shop',
         cache: false,
-        url: '/app/shop/:id'
+        url: '/shop/:id'
         views:
           'home-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.post-writer',
         cache: false,
-        url: '/app/writer/:id'
+        url: '/writer/:id'
         views:
           'home-tab':
             templateUrl: 'views/writer-detail.html'
@@ -66,21 +66,21 @@ angular
 
       .state 'tabs.shop',
         cache: false,
-        url: '/app/shop/:id'
+        url: '/shop/:id'
         views:
           'shops-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.shop-post',
         cache: false,
-        url: '/app/post/:id'
+        url: '/post/:id'
         views:
           'shops-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.shop-writer',
         cache: false,
-        url: '/app/writer/:id'
+        url: '/writer/:id'
         views:
           'shops-tab':
             templateUrl: 'views/writer-detail.html'
@@ -88,35 +88,35 @@ angular
 
 
       .state 'tabs.map',
-        url: '/app/map'
+        url: '/map'
         views:
           'map-tab':
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
       .state 'tabs.map-post',
         cache: false,
-        url: '/app/post/:id'
+        url: '/post/:id'
         views:
           'map-tab':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.map-shop',
         cache: false,
-        url: '/app/shop/:id'
+        url: '/shop/:id'
         views:
           'map-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.map-shop2',
         cache: false,
-        url: '/app/map-shop/:id'
+        url: '/map-shop/:id'
         views:
           'map-tab':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.map-writer',
         cache: false,
-        url: '/app/writer/:id'
+        url: '/writer/:id'
         views:
           'map-tab':
             templateUrl: 'views/writer-detail.html'
@@ -124,32 +124,32 @@ angular
 
       .state 'my-post',
         cache: false,
-        url: '/app/my-post'
+        url: '/my-post'
         templateUrl: 'views/post-list.html'
         controller: 'PostListCtrl'
       .state 'writers',
-        url: '/app/writers'
+        url: '/writers'
         templateUrl: 'views/writers.html'
         controller: 'WritersCtrl'
       .state 'writer',
         cache: false,
-        url: '/app/writer/:id'
+        url: '/writer/:id'
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
 
       .state 'post',
         cache: false,
-        url: '/app/post/:id?preview'
+        url: '/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
       .state 'shop',
         cache: false,
-        url: '/app/shop/:id'
+        url: '/shop/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
 
 
-    $urlRouterProvider.otherwise ('/app/home')
+    $urlRouterProvider.otherwise ('/home')
 
   .config(["$httpProvider", ($httpProvider) ->
 
@@ -164,4 +164,4 @@ angular
     $ionicConfigProvider.views.transition('ios')
     $ionicConfigProvider.views.forwardCache(true);
   .config ($locationProvider) ->
-    $locationProvider.html5Mode(true)
+    $locationProvider.hashPrefix('!')

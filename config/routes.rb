@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'app/post/:id', to: 'app_posts#show'
+  get 'app', to: 'app_route#show'
+  root to: redirect('app')
+
 # API route　
   # POSTS
   get 'api/posts', to: 'api_posts#index'
@@ -67,7 +69,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
 
-  root to: 'menu#index'
+  # root to: 'menu#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
 

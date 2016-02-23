@@ -403,10 +403,18 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            '*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: 'index.html',
+          rename: function(dest) {
+            return dest + '/app.html';
+          }
         }, {
           expand: true,
           cwd: '.tmp/images',
@@ -520,7 +528,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-  grunt.registerTask('heroku:staging', [
+  grunt.registerTask('heroku:production', [
     'build'
   ]);
 
