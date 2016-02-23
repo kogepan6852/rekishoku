@@ -2,13 +2,16 @@ class AppRouteController < ApplicationController
 
   # 詳細データ表示
   def show
-    path = Rails.root.to_s + "/public/app.html"
+    path = Rails.root.to_s + "/public/main.html"
+    logger.debug("----------------------------------x")
     if params[:_escaped_fragment_].nil?
       render :file => path, :layout => false
     else
       url = params[:_escaped_fragment_]
       urls = url.split('/')
 
+      logger.debug("----------------------------------")
+      logger.debug(urls)
       if urls[1] == 'post' && urls[2].present?
         @post = Post.find(urls[2].to_s)
 
