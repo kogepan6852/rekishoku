@@ -1,87 +1,142 @@
-<p id="notice"><%= notice %></p><hr><br>
-<h1 class="center">店舗詳細</h1>
-<br><hr><br>
-<p class="center">
-  <big><strong>名前</strong></big><br>
-  <%= @shop.name %>
-</p><br><hr><br>
+    <div class="container show-tab-link ">
+      <h2 class="title-position">SHOP詳細</h2>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">名前</a></li>
+            <li><a href="#tab_2" data-toggle="tab">説明</a></li>
+            <li><a href="#tab_3" data-toggle="tab">店のURL</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_1">
+              <%= @shop.name %>
+            </div>
+            <div class="tab-pane" id="tab_2">
+              <%= @shop.description %>
+            </div>
+            <div class="tab-pane" id="tab_3">
+              <%= @shop.url %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="center">
-  <big><strong>説明</strong></big><br>
-  <%= @shop.description %>
-</p><br><hr><br>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          タブをクリックしてください
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_4" data-toggle="tab">カテゴリー</a></li>
+            <li><a href="#tab_5" data-toggle="tab">人物</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane" id="tab_4">
+              <%= form_for(@shop) do |f| %>
+              <% @shops_categories.each do |shop_category| %>
+                <%= f.fields_for :categories_shop do |cs| %>
+                  <% checked = shop_category.shops.exists?(@shop.id) ? true : false %>
+                    <%= cs.check_box 'shop_category.ids', { :name => 'shop[category_ids][]', :checked => checked }, shop_category.id, nil %>
+                    <%= shop_category.name %>
+                <% end %>
+              <% end %>
+              <% end %>
+            </div>
+            <div class="tab-pane" id="tab_5">
+              <%= form_for(@shop) do |f| %>
+              <% @people.each do |person| %>
+                <%= f.fields_for :people_shops do |pp| %>
+                  <% checked = person.shops.exists?(@shop.id) ? true : false %>
+                    <%= pp.check_box 'person.ids', { :name => 'shop[person_ids][]', :checked => checked }, person.id, nil %>
+                    <%= person.name %>
+                <% end %>
+              <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="center">
-  <big><strong>URL</strong></big><br>
-  <%= @shop.url %>
-</p><br><hr><br>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          タブをクリックしてください
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_6" data-toggle="tab">メイン画像</a></li>
+            <li><a href="#tab_7" data-toggle="tab">サブ画像</a></li>
+            <li><a href="#tab_8" data-toggle="tab">画像の引用元URL</a></li>
+            <li><a href="#tab_9" data-toggle="tab">画像の引用元名称</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane" id="tab_6">
+              <%= image_tag @shop.image.url ,:class => "previous-image" %>
+            </div>
+            <div class="tab-pane" id="tab_7">
+                <%= image_tag @shop.subimage.url ,:class => "previous-image" %>
+            </div>
+            <div class="tab-pane" id="tab_8">
+              <%= @shop.image_quotation_url %>
+            </div>
+            <div class="tab-pane" id="tab_9">
+              <%= @shop.image_quotation_name %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="center">
-  <big><strong>メイン画像</strong></big><br>
-  <%= @shop.image %>
-</p><br><hr><br>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_10" data-toggle="tab">都道府県</a></li>
+            <li><a href="#tab_11" data-toggle="tab">市区町村</a></li>
+            <li><a href="#tab_12" data-toggle="tab">その他住所</a></li>
+            <li><a href="#tab_13" data-toggle="tab">建物名</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_10">
+              <%= @shop.province %>
+            </div>
+            <div class="tab-pane" id="tab_11">
+              <%= @shop.city %>
+            </div>
+            <div class="tab-pane" id="tab_12">
+              <%= @shop.address1 %>
+            </div>
+            <div class="tab-pane" id="tab_13">
+              <%= @shop.address2 %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="center">
-  <big><strong>サブ画像</strong></big><br>
-  <%= @shop.subimage %>
-</p><br><hr><br>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_14" data-toggle="tab">経度</a></li>
+            <li><a href="#tab_15" data-toggle="tab">緯度</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_14">
+              <%= @shop.latitude %>
+            </div>
+            <div class="tab-pane" id="tab_15">
+              <%= @shop.longitude %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="center">
-  <big><strong>画像の引用元URL</strong></big><br>
-  <%= @shop.image_quotation_url %>
-</p><br><hr><br>
+      <div class="row show-content">
+        <div class="tabbable-panel">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_16" data-toggle="tab">メニュー</a></li>
+          </ul>
+          <div class="tab-content show-content">
+            <div class="tab-pane active" id="tab_16">
+              <%= @shop.menu %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p class="center">
-  <big><strong>画像の引用元名称</strong></big><br>
-  <%= @shop.image_quotation_name %>
-</p><br><hr><br>
-
-<p class="center">
-  <strong>記事の掲載元URL</strong>
-  <%= @shop.post_quotation_url %>
-</p><br><hr><br>
-
-<p class="center">
-  <strong>記事の掲載元名称</strong>
-  <%= @shop.post_quotation_name %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>都道府県</strong></big><br>
-  <%= @shop.province %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>市区町村</strong></big><br>
-  <%= @shop.city %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>その他住所</strong></big><br>
-  <%= @shop.address1 %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>建物名</strong></big><br>
-  <%= @shop.address2 %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>経度</strong></big><br>
-  <%= @shop.latitude %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>緯度</strong></big><br>
-  <%= @shop.longitude %>
-</p><br><hr><br>
-
-<p class="center">
-  <big><strong>メニュー</strong></big><br>
-  <%= @shop.menu %>
-</p><br><hr><br>
-
-<div class="center">
-  <%= link_to '詳細', @person ,:class => "btn btn-success" %>
-  <%= link_to '戻る', shops_path ,:class => "btn btn-primary" %>
-</div><br><hr>
+    <hr>
+    <div class="col-md-6 show-link"><%= link_to '戻る', shops_path,:class => "btn btn-lg btn-primary btn-block" %></div>
+    <div class="col-md-6 show-link"><%= link_to '変更', edit_shop_path(@shop) ,:class => "btn btn-lg btn-success btn-block" %></div>

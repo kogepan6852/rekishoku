@@ -1,24 +1,51 @@
-<h1 class="text-center">管理メニュー</h1>
-<p id="notice"><%= notice %></p>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>shop登録</th>
-      <th>人物登録</th>
-      <th>メイン画面</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-
-  <tbody>
-      <tr>
-        <td><%= link_to "shop", "shops",:class => "btn btn-success" %></td>
-        <td><%= link_to "people", "people",:class => "btn btn-success" %></td>
-        <td><%= link_to "webサイト表示へ", "/#/home?showLogin=true",:class => "btn btn-success" %></td>
-        <td><%= link_to "ログアウト", "/users/sign_out",:class => "btn btn-danger" %></td>
-      </tr>
-  </tbody>
-</table>
-
-<br>
+<div class="container">
+    <div class="row">
+        <p id="notice"><%= notice %></p>
+        <h2 class="text-center">
+            メニュー
+        </h2>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="blockquote-box clearfix">
+                <div class="square pull-left">
+                    <%= link_to image_tag('shops.jpg'), 'shops' %>
+                </div>
+                <h4 class="menu">
+                    <%= link_to 'SHOP管理画面', 'shops' %>
+                </h4>
+                <p>
+                    店舗の新規登録や変更、削除を行いたいときはこちらでできます。店舗を登録したり変更するときの注意事項は店舗の編集画面に記載しているので確認してから登録するようにしてください。
+                </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="blockquote-box blockquote-info clearfix">
+                <div class="square pull-left">
+                    <%= link_to image_tag('people.jpg'), 'people' %>
+                </div>
+                <h4 class="menu">
+                    <%= link_to 'PEOPLE管理画面', 'people' %>
+                </h4>
+                <p>
+                  人物の新規登録や変更、削除を行いたいときはこちらでできます。人物を登録したり変更するときの注意事項は人物の編集画面に記載しているので確認してから登録するようにしてください。
+                </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="blockquote-box blockquote-warning clearfix">
+                  <div class="square pull-left">
+                      <%= link_to image_tag('user_edit.jpg'), 'users/edit' %>
+                  </div>
+                  <h4 class="menu">
+                      <%= link_to 'アカウント情報の変更', 'users/edit' %>
+                  </h4>
+                  <p>
+                    ログイン時に使っているメールアドレスやパスワードを変更する場合は、こちらから変更することができます。
+                  </p>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>

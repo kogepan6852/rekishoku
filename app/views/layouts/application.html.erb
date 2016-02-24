@@ -15,10 +15,10 @@
 
 <body>
  <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-bg header-link">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -27,53 +27,54 @@
           <a class="navbar-brand" href="#"><%= link_to image_tag('logo.png') ,'/menu' ,:class => "height65" %></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <!-- <li><%= link_to "SHOP管理画面", shops_path %></li>
-            <li><%= link_to "PEOPLE管理画面", people_path %></li> -->
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SHOP管理画面<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to "SHOPトップ", shops_path %></li>
-                <li><%= link_to '店舗登録', new_shop_path %></li>
-                <!-- <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li> -->
-              </ul>
-            </li>
+          <div class="header-list">
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SHOP管理画面<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to "SHOPトップ", shops_path %></li>
+                  <li><%= link_to 'SHOP登録', new_shop_path %></li>
+                </ul>
+              </li>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PEOPLE管理画面<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to "PEOPLEトップ", people_path %></li>
-                <li><%= link_to '人物登録', new_person_path %></li>
-                <!-- <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li> -->
-              </ul>
-            </li>
-          </ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PEOPLE管理画面<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to "PEOPLEトップ", people_path %></li>
+                  <li><%= link_to 'PEOPLE登録', new_person_path %></li>
+                </ul>
+              </li>
+
+              <li><%= link_to "新規アカウント作成", "/users/sign_up" %></li>
+            </ul>
+          <% else %>
+          <% end %>
+        </div>
           <ul class="nav navbar-nav navbar-right">
-
               <% if user_signed_in? %>
-              <li><%= link_to "アカウント登録", "/users/sign_up" %></li>
-              <li><%= link_to "ログアウト", "/users/sign_out" %></li>
+                <li><%= link_to "ログアウト", "/users/sign_out" %></li>
               <% else %>
-              <li><%= link_to "ログイン", "/users/sign_in" %></li>
+                <li><%= link_to "ログイン", "/users/sign_in" %></li>
               <% end %>
-
-              <li class="active"><%= link_to "WEBサイト", "/#/home?showLogin=true" %></li>
+            <li class="active"><%= link_to "WEBサイト", "/#/home?showLogin=true" %></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
+<<<<<<< HEAD
 <div class="top-padding-30">
   <%= yield %>
 </div>
 
 </body>
 </html>
+=======
+    <body>
+      <div class="content-padding">
+        <%= yield %>
+      </div>
+    </body>
+  </html>
+>>>>>>> develop-yoshimoto
