@@ -71,11 +71,15 @@ class ApiPostsController < ApplicationController
   # 更新
   def update
     @post = Post.where(user_id: current_user.id).find(params[:id])
+    # 公開処理(ステータス更新)でない場合
     if post_params[:status].blank?
       category = PostCategory.find_by(slug: params[:slug])
-      post_params.merge(category_id: category.id)
+      result = @post.update(post_params.merge(category_id: category.id))
+    # 公開処理の場合
+    else
+      result = @post.update(post_params)
     end
-    if @post.update(post_params)
+    if result
       render json: @post, status: :ok
     else
       render json: @post.errors, status: :unprocessable_entity
