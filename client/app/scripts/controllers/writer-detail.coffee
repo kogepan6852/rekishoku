@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $sessionStorage, $controller, $state, Api, Const, toaster) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -37,14 +37,14 @@ angular.module "frontApp"
     $scope.writersInit = ->
       clearInput()
       accessKey =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
+        email: $localStorage['email']
+        token: $localStorage['token']
       path = Const.API.USER + '/' + $stateParams.id
       Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
 
-      if String($stateParams.id) == String($sessionStorage['user_id'])
+      if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
 
       # 現在タブの判定
@@ -76,9 +76,9 @@ angular.module "frontApp"
 
     $scope.saveProfile = (targetForm) ->
         fd = new FormData
-        userId = $sessionStorage['user_id']
-        fd.append 'token', $sessionStorage['token']
-        fd.append 'email', $sessionStorage['email']
+        userId = $localStorage['user_id']
+        fd.append 'token', $localStorage['token']
+        fd.append 'email', $localStorage['email']
         fd.append 'user[id]', userId
         fd.append 'user[username]', $scope.input.username.trim()
         fd.append 'user[last_name]', $scope.input.last_name.trim()

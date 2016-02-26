@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $sessionStorage, $controller, $state, Api, Const) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope

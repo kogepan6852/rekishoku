@@ -28,7 +28,7 @@
         <i class="icon ion-chevron-right"></i>
       </a>
 
-      <div class="item item-divider" ng-show="isLogin" ng-cloak>{{'MENU.MY_ACCOUNT'|translate}}</div>
+      <div class="item item-divider" ng-show="isLogin || showLogin" ng-cloak>{{'MENU.MY_ACCOUNT'|translate}}</div>
       <a class="item item-icon-right" ng-click="moveToWriterDetail()" ng-show="isLogin" ng-cloak>
         {{'MENU.PROFILE'|translate}}
         <i class="icon ion-chevron-right"></i>

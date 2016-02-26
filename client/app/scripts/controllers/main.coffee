@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $sessionStorage, Api, Const) ->
+  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $localStorage, Api, Const) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -28,8 +28,8 @@ angular.module "frontApp"
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
+        email: $localStorage['email']
+        token: $localStorage['token']
         per: Const.API.SETTING.PER
         page: 1
       if $scope.targetCategoryId

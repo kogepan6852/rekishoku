@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $sessionStorage, $controller, $state, $location, Api, Const, config) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope

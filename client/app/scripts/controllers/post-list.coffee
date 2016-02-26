@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, $translate, $state, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $localStorage, $controller, $translate, $state, Api, Const, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -70,7 +70,7 @@ angular.module "frontApp"
         details: details
         category: $scope.categories[0]
         id: null
-        authentication_token: $sessionStorage['token']
+        authentication_token: $localStorage['token']
       $scope.input = input
       # categoryの初期化
       angular.forEach $scope.categories, (category, i) ->
@@ -91,14 +91,14 @@ angular.module "frontApp"
     clearInput()
 
     accessKey =
-      email: $sessionStorage['email']
-      token: $sessionStorage['token']
+      email: $localStorage['email']
+      token: $localStorage['token']
 
     # initialize
     $scope.init = ->
       $scope.results = ""
       # post取得
-      if ($sessionStorage['token'])
+      if ($localStorage['token'])
         Api.getJson(accessKey, Const.API.POST_LIST, true).then (res) ->
           $scope.results = res.data
           $scope.$broadcast 'scroll.refreshComplete'
@@ -174,8 +174,8 @@ angular.module "frontApp"
         # formdata作成
         fd = new FormData
         fdDetails = new FormData
-        fd.append 'token', $sessionStorage['token']
-        fd.append 'email', $sessionStorage['email']
+        fd.append 'token', $localStorage['token']
+        fd.append 'email', $localStorage['email']
         if targetSlug then fd.append 'slug', targetSlug
         if $scope.input.title then fd.append 'post[title]', $scope.input.title.trim()
         if $scope.input.file then fd.append 'post[image]', $scope.input.file
@@ -202,8 +202,8 @@ angular.module "frontApp"
             if detail.subTitle || detail.subFile || detail.subContent
               # formdata作成
               fdDetail = new FormData
-              fdDetails.append 'token', $sessionStorage['token']
-              fdDetails.append 'email', $sessionStorage['email']
+              fdDetails.append 'token', $localStorage['token']
+              fdDetails.append 'email', $localStorage['email']
               fdDetails.append 'post_details[][post_id]', res.data.id
               if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
               if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
@@ -254,8 +254,8 @@ angular.module "frontApp"
       $scope.showDeleteButton = false
       # login情報
       accessKey =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
+        email: $localStorage['email']
+        token: $localStorage['token']
       # 削除数
       deleteCount = 0
       resultLength = 0;
@@ -402,8 +402,8 @@ angular.module "frontApp"
           shopIds.push(shop.id)
 
       obj =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
+        email: $localStorage['email']
+        token: $localStorage['token']
         post_id: $scope.targetPostId
         shop_ids: shopIds
 
@@ -423,8 +423,8 @@ angular.module "frontApp"
           personIds.push(person.id)
 
       obj =
-        email: $sessionStorage['email']
-        token: $sessionStorage['token']
+        email: $localStorage['email']
+        token: $localStorage['token']
         post_id: $scope.targetPostId
         person_ids: personIds
 
@@ -483,8 +483,8 @@ angular.module "frontApp"
     # ステータスのアップデート処理
     updateStatus = (status, postId, publishDate) ->
       fd = new FormData
-      fd.append 'token', $sessionStorage['token']
-      fd.append 'email', $sessionStorage['email']
+      fd.append 'token', $localStorage['token']
+      fd.append 'email', $localStorage['email']
       fd.append 'post[status]', status
       fd.append 'post[published_at]', publishDate
 

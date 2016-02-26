@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const) ->
 
     # 変数設定
     $scope.input =
@@ -25,14 +25,6 @@ angular.module "frontApp"
       backdropClickToClose: false).then (modalSearch) ->
         $scope.modalSearch = modalSearch
 
-    if !$sessionStorage['token']
-      $rootScope.isLogin = false
-    else
-      $rootScope.isLogin = true
-    $scope.showLogin = false
-    if $location.search()["showLogin"]
-      $scope.showLogin = true
-
     # 初期処理
     clearInput = ->
       input =
@@ -43,8 +35,23 @@ angular.module "frontApp"
 
     clearInput()
 
-    if $sessionStorage['email']
-      $scope.input.email = $sessionStorage['email']
+    # cookieより値を取得
+    $localStorage['email'] = $cookies.get 'email'
+    if $localStorage['email']
+      $scope.input.email = $localStorage['email']
+    else
+      # login情報の削除
+      delete $localStorage['token']
+      delete $localStorage['email']
+      delete $localStorage['user_id']
+
+    if !$localStorage['token']
+      $rootScope.isLogin = false
+    else
+      $rootScope.isLogin = true
+    $scope.showLogin = false
+    if $location.search()["showLogin"] || $localStorage['email']
+      $scope.showLogin = true
 
     # Function
     $scope.openModalLogin = ->
@@ -57,6 +64,11 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight();
 
     $scope.doLogin = ->
+      # cookieの設定
+      expire = new Date
+      expire.setMonth expire.getMonth() + 1
+      $cookies.put 'email', $scope.input.email, expires: expire
+
       obj =
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
@@ -66,9 +78,9 @@ angular.module "frontApp"
         $scope.modalLogin.hide()
         clearInput()
 
-        $sessionStorage['email'] = res.data.email
-        $sessionStorage['token'] = res.data.authentication_token
-        $sessionStorage['user_id'] = res.data.id
+        $localStorage['email'] = res.data.email
+        $localStorage['token'] = res.data.authentication_token
+        $localStorage['user_id'] = res.data.id
         $rootScope.isLogin = true
         # toast表示
         toaster.pop
@@ -88,16 +100,19 @@ angular.module "frontApp"
             onTap: (e) ->
               $rootScope.isLogin = false
               accessKey =
-                email: $sessionStorage['email']
-                token: $sessionStorage['token']
+                email: $localStorage['email']
+                token: $localStorage['token']
 
               Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
                 $ionicSideMenuDelegate.toggleRight();
                 clearInput()
                 # login情報の削除
-                delete $sessionStorage['token']
-                delete $sessionStorage['email']
-                delete $sessionStorage['user_id']
+                delete $localStorage['token']
+                delete $localStorage['email']
+                delete $localStorage['user_id']
+                # cookieの削除
+                $cookies.remove 'email'
+
                 clearInput()
                 $location.path('/home/');
           }
@@ -124,7 +139,7 @@ angular.module "frontApp"
 
     $scope.moveToWriterDetail = ->
       $ionicViewSwitcher.nextTransition('none')
-      userId = $sessionStorage['user_id']
+      userId = $localStorage['user_id']
       $state.go('tabs.post-writer', { id: userId })
       clearForMove()
 
