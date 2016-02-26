@@ -8,6 +8,7 @@ class AuthenticationTokensController < ApplicationController
 
   def destroy
     current_user.delete_authentication_token
+    sign_out @user
     render nothing: true
   end
 end
