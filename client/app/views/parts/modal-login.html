@@ -7,20 +7,21 @@
   </ion-header-bar>
 
   <ion-content>
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">メールアドレス</span>
-        <input type="text" ng-model="input.email">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">パスワード</span>
-        <input type="password" ng-model="input.password">
-      </label>
-    </div>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">メールアドレス</span>
+          <input type="text" ng-model="input.email" autocomplete="on">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">パスワード</span>
+          <input type="password" ng-model="input.password">
+        </label>
+      </div>
 
-    <div class="padding">
-      <button class="button button-block button-positive" ng-click="doLogin()">ログイン</button>
-    </div>
-
+      <div class="padding">
+        <button class="button button-block button-positive">ログイン</button>
+      </div>
+    </form>
   </ion-content>
 </ion-modal-view>
