@@ -2,7 +2,7 @@
   <ion-content class="image-content" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
 
     <ion-refresher
-      pulling-text="Pull to refresh..."
+      pulling-text="{{'TEXT.PULLING'|translate}}"
       on-refresh="init()">
     </ion-refresher>
 
@@ -23,7 +23,7 @@
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span ng-click="deleteSearchCondition()">条件クリア</span>
+            <span ng-click="deleteSearchCondition()" ng-cloak>{{'BUTTON.CLEAR_CONDITION'|translate}}</span>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
   <div class="bar bar-header"></div>
 
   <div class="bar bar-subheader edit-menu" align="right">
-    <button class="button button-dark icon-left ion-edit" ng-click="openModalProfileEdit()" ng-if="isLoginUser">編集</button>
+    <button class="button button-dark icon-left ion-edit" ng-click="openModalProfileEdit()" ng-if="isLoginUser" ng-cloak>{{'BUTTON.EDIT'|translate}}</button>
   </div>
 
   <ion-content class="">
@@ -23,7 +23,7 @@
       </div>
       <div class="row list-title" ng-if="posts">
         <div class="col-md-12">
-          <div class="reki-icon"><h2>投稿一覧</h2></div>
+          <div class="reki-icon"><h2 ng-cloak>{{'POST.LIST'|translate}}</h2></div>
         </div>
       </div>
     </div>

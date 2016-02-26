@@ -2,12 +2,12 @@
 
   <!-- Serach bar -->
   <div class="bar bar-subheader bar-clear" align="right">
-    <button class="button button-clear icon-left ion-ios-navigate-outline present-location" ng-click="moveToCurrentPlace()"><span>現在地</span></button>
+    <button class="button button-clear icon-left ion-ios-navigate-outline present-location" ng-click="moveToCurrentPlace()"><span ng-cloak>{{'TEXT.CURRENT_PLACE'|translate}}</span></button>
     <div class="item-input-inset search-bar">
       <label class="item-input-wrapper">
-        <input type="text" placeholder="住所" ng-model="input.address">
+        <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
       </label>
-      <button class="button button-small button-dark" ng-click="searchShops()">検索</button>
+      <button class="button button-small button-dark" ng-click="searchShops()" ng-cloak>{{'BUTTON.SEARCH'|translate}}</button>
     </div>
   </div>
   <!-- Google map -->

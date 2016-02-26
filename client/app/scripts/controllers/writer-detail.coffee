@@ -97,7 +97,7 @@ angular.module "frontApp"
           $scope.modalProfileEdit.hide()
           toaster.pop
             type: 'success',
-            title: 'プロフィールを保存しました',
+            title: $translate.instant('MSG.INFO.SAVED_PROFILE'),
             showCloseButton: true
 
           $scope.writersInit()

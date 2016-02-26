@@ -3,38 +3,38 @@
   <ion-side-menu side="right" ng-controller="HeaderCtrl">
 
     <div class="list menu-list">
-      <div class="item item-divider">Menu</div>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToHome()">
+      <div class="item item-divider" ng-cloak>{{'MENU.TITLE'|translate}}</div>
+      <a class="item item-icon-left item-icon-right" ng-click="moveToHome()" ng-cloak>
         <i class="icon ion-ios-list-outline"></i>
-        STORY
+        {{'MENU.STORY'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToMap()">
+      <a class="item item-icon-left item-icon-right" ng-click="moveToMap()" ng-cloak>
         <i class="icon ion-ios-navigate-outline"></i>
-        MAP
+        {{'MENU.MAP'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToShops()">
+      <a class="item item-icon-left item-icon-right" ng-click="moveToShops()" ng-cloak>
         <i class="icon ion-android-restaurant"></i>
-        STORE
+        {{'MENU.STORE'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-right" ng-click="moveToWriters()">
-        ライター一覧
+      <a class="item item-icon-right" ng-click="moveToWriters()" ng-cloak>
+        {{'MENU.WRITERS'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-right" ng-click="moveToMyPost()" ng-if="isLogin">
-        投稿一覧
+      <a class="item item-icon-right" ng-click="moveToMyPost()" ng-if="isLogin" ng-cloak>
+        {{'MENU.POSTS'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
 
-      <div class="item item-divider" ng-show="isLogin">My Account</div>
-      <a class="item item-icon-right" ng-click="moveToWriterDetail()" ng-show="isLogin">
-        プロフィール
+      <div class="item item-divider" ng-show="isLogin" ng-cloak>{{'MENU.MY_ACCOUNT'|translate}}</div>
+      <a class="item item-icon-right" ng-click="moveToWriterDetail()" ng-show="isLogin" ng-cloak>
+        {{'MENU.PROFILE'|translate}}
         <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">ログイン</a>
-      <a class="item" ng-click="doLogout()" ng-show="isLogin">ログアウト</a>
+      <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin" ng-cloak>{{'MENU.LOGIN'|translate}}</a>
+      <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>{{'MENU.LOGOUT'|translate}}</a>
     </div>
 
   </ion-side-menu>

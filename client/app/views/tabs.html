@@ -6,19 +6,19 @@
   ng-controller="TabsCtrl">
 
   <!-- Main  -->
-  <ion-tab title="STORY" icon="ion-ios-list-outline" ng-click="clickTab(0)">
+  <ion-tab title="{{'MENU.STORY'|translate}}" icon="ion-ios-list-outline" ng-click="clickTab(0)" ng-cloak>
     <ion-nav-view name="home-tab"></ion-nav-view>
   </ion-tab>
 
 
   <!-- Map  -->
-  <ion-tab title="MAP" icon="ion-ios-navigate-outline" ng-click="clickTab(1)">
+  <ion-tab title="{{'MENU.MAP'|translate}}" icon="ion-ios-navigate-outline" ng-click="clickTab(1)" ng-cloak>
     <ion-nav-view name="map-tab"></ion-nav-view>
   </ion-tab>
 
 
   <!-- Shops  -->
-  <ion-tab title="STORE" icon="ion-android-restaurant" ng-click="clickTab(2)">
+  <ion-tab title="{{'MENU.STORE'|translate}}" icon="ion-android-restaurant" ng-click="clickTab(2)" ng-cloak>
     <ion-nav-view name="shops-tab"></ion-nav-view>
   </ion-tab>
 

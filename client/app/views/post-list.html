@@ -3,13 +3,13 @@
   <div class="bar bar-header"></div>
 
   <div class="bar bar-subheader bar-clear edit-menu" align="right">
-    <button class="button button-assertive icon-left ion-trash-a" ng-click="doDelete()" ng-if="showDeleteButton">削除</button>
-    <button class="button button-dark icon-left ion-plus-round" ng-click="openModalPost()" ng-if="!showDeleteButton" ng-show="isLogin">新規投稿</button>
+    <button class="button button-assertive icon-left ion-trash-a" ng-click="doDelete()" ng-if="showDeleteButton" ng-cloak>{{'BUTTON.DELETE'|translate}}</button>
+    <button class="button button-dark icon-left ion-plus-round" ng-click="openModalPost()" ng-if="!showDeleteButton" ng-show="isLogin" ng-cloak>{{'BUTTON.NEW_POST'|translate}}</button>
   </div>
 
   <ion-content class="has-subheader">
     <ion-refresher
-      pulling-text="Pull to refresh..."
+      pulling-text="{{'TEXT.PULLING'|translate}}"
       on-refresh="init()">
     </ion-refresher>
 
@@ -17,9 +17,9 @@
       <thead>
         <tr>
           <th class=""></th>
-          <th class="post-title">タイトル</th>
-          <th class="post-content hidden-xs">本文</th>
-          <th class="post-category hidden-xs">カテゴリー</th>
+          <th class="post-title" ng-cloak>{{'POST_LIST.TITLE'|translate}}</th>
+          <th class="post-content hidden-xs" ng-cloak>{{'POST_LIST.CONTENT'|translate}}</th>
+          <th class="post-category hidden-xs" ng-cloak>{{'POST_LIST.CATEGORY'|translate}}</th>
           <th class="post-status"></th>
           <th class="delete-button"></th>
         </tr>
@@ -33,7 +33,7 @@
           <td class="hidden-xs">{{result.content | limitTo:100}}...</td>
           <td class="hidden-xs">{{result.category_name}}</td>
           <td class="post-status vertical-align" ng-click="publish(result.status, result.id)">
-            <div class="status" ng-class="{active: result.status == 1}">公開</div>
+            <div class="status" ng-class="{active: result.status == 1}" ng-cloak>{{'POST_LIST.PUBLISHED'|translate}}</div>
             <div ng-if="result.status == 1" class="published">{{result.published_at | date:'yyyy-MM-dd'}}</div>
           </td>
           <td class="vertical-align" align="right">

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, $state, Api, Const, toaster) ->
+  .controller "PostListCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $ionicModal, $ionicPopover, $ionicPopup, $ionicSlideBoxDelegate, $sessionStorage, $controller, $translate, $state, Api, Const, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -186,12 +186,12 @@ angular.module "frontApp"
         # データ登録
         url = Const.API.POST
         method = Const.METHOD.POST
-        msg = Const.MSG.SAVED
+        msg = $translate.instant('MSG.INFO.POSTED')
         # 更新の場合、idを設定する
         if $scope.input.id
           url += "/" + $scope.input.id
           method = Const.METHOD.PATCH
-          msg = Const.MSG.UPDATED
+          msg = $translate.instant('MSG.INFO.UPDATED')
 
         Api.saveFormData(fd, url, method).then (res) ->
           # 初期化処理実行
@@ -238,12 +238,12 @@ angular.module "frontApp"
     # 記事削除処理
     $scope.doDelete = ->
       $ionicPopup.show(
-        title: '削除してよろしいですか？'
+        title: $translate.instant('MSG.COMFIRM.DELETE')
         scope: $scope
         buttons: [
-          { text: 'キャンセル' }
+          { text: $translate.instant('BUTTON.CANCEL') }
           {
-            text: '<b>OK</b>'
+            text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
             type: 'button-dark'
             onTap: (e) ->
               deletePosts()
@@ -275,7 +275,7 @@ angular.module "frontApp"
               if resultLength == deleteCount
                 toaster.pop
                   type: 'success',
-                  title: '削除しました。',
+                  title: $translate.instant('MSG.INFO.DELETED'),
                   showCloseButton: true
 
     # 記事編集用モーダル表示
@@ -412,7 +412,7 @@ angular.module "frontApp"
         $scope.popoverPostMenu.hide()
         toaster.pop
           type: 'success',
-          title: '保存しました。',
+          title: $translate.instant('MSG.INFO.SAVED'),
           showCloseButton: true
 
     # 関連人物の保存
@@ -433,7 +433,7 @@ angular.module "frontApp"
         $scope.popoverPostMenu.hide()
         toaster.pop
           type: 'success',
-          title: '保存しました。',
+          title: $translate.instant('MSG.INFO.SAVED'),
           showCloseButton: true
 
     # 記事詳細への遷移
@@ -454,11 +454,11 @@ angular.module "frontApp"
         publishDate: dispToday
       updStatus = 1 - status;
 
-      msg = '公開してもよろしいですか？'
-      subMsg = '公開日を設定してください。'
+      msg = $translate.instant('MSG.COMFIRM.PUBLISHE')
+      subMsg = $translate.instant('MSG.COMFIRM.PUBLISHE_SUB')
       template = '<input type="text" ng-model="input.publishDate">'
       if updStatus == 0
-        msg = '非公開にしてもよろしいですか？'
+        msg = $translate.instant('MSG.COMFIRM.UNPUBLISHE')
         subMsg = ''
         template = ''
 
@@ -468,9 +468,9 @@ angular.module "frontApp"
         template: template
         scope: $scope
         buttons: [
-          { text: 'キャンセル' }
+          { text: $translate.instant('BUTTON.CANCEL') }
           {
-            text: '<b>OK</b>'
+            text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
             type: 'button-dark'
             onTap: (e) ->
               if updStatus == 0 || $scope.input.publishDate
@@ -492,9 +492,9 @@ angular.module "frontApp"
       url = Const.API.POST + "/" + postId
       method = Const.METHOD.PATCH
 
-      msg = Const.MSG.PUBLISHED
+      msg = $translate.instant('MSG.INFO.PUBLISHED')
       if status == 0
-        msg = Const.MSG.UNPUBLISHED
+        msg = $translate.instant('MSG.INFO.UNPUBLISHED')
 
       Api.saveFormData(fd, url, method).then (res) ->
         $scope.popoverPostMenu.hide()

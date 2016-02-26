@@ -20,14 +20,6 @@ angular.module("frontApp")
       SETTING:
         PER: 20
 
-    MSG:
-      SAVED: '投稿しました'
-      DELETED: '削除しました'
-      UPDATED: '更新しました'
-      LOGED_IN: 'ログインしました'
-      SINGED_UP: 'アカウントを作成しました'
-      PUBLISHED: '公開しました'
-      UNPUBLISHED: '非公開にしました'
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'

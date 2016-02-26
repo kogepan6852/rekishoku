@@ -1,0 +1,75 @@
+{
+  "MENU": {
+    "TITLE":          "MENU",
+    "STORY":          "STORY",
+    "MAP":            "MAP",
+    "STORE":          "STORE",
+    "WRITERS":        "ライター一覧",
+    "POSTS":          "投稿一覧",
+    "MY_ACCOUNT":     "My Account",
+    "PROFILE":        "プロフィール",
+    "LOGIN":          "ログイン",
+    "LOGOUT":         "ログアウト"
+  },
+  "BUTTON": {
+    "OK":             "OK",
+    "CANCEL":         "キャンセル",
+    "SEARCH":         "検索",
+    "CLEAR_CONDITION":"条件クリア",
+    "DELETE":         "削除",
+    "NEW_POST":       "新規投稿",
+    "EDIT":           "編集"
+  },
+  "TEXT": {
+    "CURRENT_PLACE":  "現在地",
+    "ADDRESS":        "住所",
+    "PULLING":        "Pull to refresh..."
+  },
+  "POST": {
+    "QUOTATION":      "掲載元：",
+    "SHOP_INFO":      "店舗情報",
+    "STORIES":        "歴食体験・エピソード",
+    "LIST":           "投稿一覧"
+  },
+  "SHOP": {
+    "NAME":           "店舗名",
+    "URL":            "URL",
+    "ADDRESS":        "所在地",
+    "MENU":           "MENU"
+  },
+  "POST_LIST": {
+    "TITLE":          "タイトル",
+    "CONTENT":        "本文",
+    "CATEGORY":       "カテゴリー",
+    "PUBLISHED":      "公開"
+  },
+  "SNS": {
+    "SHARE":          "シェア",
+    "TWEET":          "ツイート"
+  },
+  "MSG": {
+    "INFO": {
+      "SAVED":          "保存しました。",
+      "DELETED":        "削除しました。",
+      "SAVED_PROFILE":  "プロフィールを保存しました",
+      "POSTED":         "投稿しました",
+      "UPDATED":        "更新しました",
+      "LOGED_IN":       "ログインしました",
+      "SINGED_UP":      "アカウントを作成しました",
+      "PUBLISHED":      "公開しました",
+      "UNPUBLISHED":    "非公開にしました"
+
+    },
+    "COMFIRM": {
+      "LOGOUT":         "ログアウトしてよろしいですか？",
+      "DELETE":         "削除してよろしいですか？",
+      "PUBLISHE":       "公開してもよろしいですか？",
+      "PUBLISHE_SUB":   "公開日を設定してください",
+      "UNPUBLISHE":     "非公開にしてもよろしいですか？"
+    },
+    "ALERT": {
+      "NO_POSITION":    "位置情報を取得できません"
+    }
+  }
+
+}

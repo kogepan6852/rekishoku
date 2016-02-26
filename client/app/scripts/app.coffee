@@ -21,7 +21,8 @@ angular
     'ngStorage',
     'toaster',
     'uiGmapgoogle-maps',
-    'config'
+    'config',
+    'pascalprecht.translate'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
@@ -159,6 +160,15 @@ angular
 
     $httpProvider.defaults.headers.post = "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
   ])
+  # angular-translateの設定
+  .config(["$translateProvider", ($translateProvider) ->
+    $translateProvider.useStaticFilesLoader
+      prefix: 'assets/i18n/locale-'
+      suffix: '.json'
+    $translateProvider.preferredLanguage 'ja'
+    $translateProvider.fallbackLanguage 'ja'
+  ])
+
   .config ($ionicConfigProvider) ->
     $ionicConfigProvider.views.maxCache(5)
     $ionicConfigProvider.views.transition('ios')

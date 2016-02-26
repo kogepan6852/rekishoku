@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $sessionStorage, $ionicSideMenuDelegate, Api, toaster, BaseService, Const) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $sessionStorage, $ionicSideMenuDelegate, $translate, Api, toaster, BaseService, Const) ->
 
     # 変数設定
     $rootScope.isHideTab = false
@@ -102,7 +102,7 @@ angular.module 'frontApp'
               else
                 alert(e.message)
         else
-          alert('位置情報を取得できません。')
+          alert($translate.instant('MSG.ALERT.NO_POSITION'))
 
     # Function
     # 店舗検索

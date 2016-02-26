@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $sessionStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, Api, toaster, Const) ->
 
     # 変数設定
     $scope.input =
@@ -73,17 +73,17 @@ angular.module "frontApp"
         # toast表示
         toaster.pop
           type: 'success',
-          title: Const.MSG.LOGED_IN,
+          title: $translate.instant('MSG.INFO.LOGED_IN'),
           showCloseButton: true
 
     $scope.doLogout = ->
       $ionicPopup.show(
-        title: 'ログアウトしてよろしいですか？'
+        title: $translate.instant('MSG.COMFIRM.LOGOUT')
         scope: $scope
         buttons: [
-          { text: 'キャンセル' }
+          { text: $translate.instant('BUTTON.CANCEL') }
           {
-            text: '<b>OK</b>'
+            text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
             type: 'button-dark'
             onTap: (e) ->
               $rootScope.isLogin = false
@@ -116,7 +116,7 @@ angular.module "frontApp"
         # toast表示
         toaster.pop
           type: 'success',
-          title: Const.MSG.SINGED_UP,
+          title: $translate.instant('MSG.INFO.SINGED_UP'),
           showCloseButton: true
 
     $scope.closeMenu = ->
