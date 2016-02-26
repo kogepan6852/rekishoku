@@ -8,6 +8,7 @@ h4, .h4 { font-size: 16px; }
 h5, .h5 { font-size: 14px; }
 h6, .h6 { font-size: 12px; }
 p { color: #555; }
+
 .bg-gray {
   background-attachment: scroll;
   background-image: url("../images/bg-gray.png");
@@ -29,6 +30,14 @@ p { color: #555; }
 }
 .row-bottom {
   padding-bottom: 35px!important;
+}
+
+/* for ionic text copy */
+.scroll {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 /* modal-post*/
