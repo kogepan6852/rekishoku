@@ -405,6 +405,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             '!index.html',
+            'sitemap.xml',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
             'assets/i18n/{,*/}*.json'
