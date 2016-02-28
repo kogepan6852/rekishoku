@@ -186,7 +186,7 @@ angular.module "frontApp"
 
       # 現在Pathの取得
       currentPath = $location.path();
-      if currentPath == '/shops'
+      if currentPath == '/app/shops'
         $scope.currentType = 'shop'
       else
         $scope.currentType = 'post'
@@ -225,11 +225,11 @@ angular.module "frontApp"
       if !$scope.input.keywords
         $scope.input.keywords = null
       if $scope.currentType == 'shop'
-        $location.path('/shops').search('keywords', $scope.input.keywords)
+        $location.path('/app/shops').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       else
-        $location.path('/home').search('keywords', $scope.input.keywords)
+        $location.path('/app/home').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
       $scope.modalSearch.hide()

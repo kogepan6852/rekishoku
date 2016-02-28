@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'app/*path', to: 'app_route#show'
   get 'app', to: 'app_route#show'
-  root to: redirect('app')
+  root to: 'app_route#show'
 
 # API route　
   # POSTS
