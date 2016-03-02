@@ -9,32 +9,32 @@
 </url>
 <url>
   <loc>http://www.historipfood.com/app/home</loc>
-  <priority>0.9</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://www.historipfood.com/app/shops</loc>
-  <priority>0.9</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://www.historipfood.com/app/post/65</loc>
-  <priority>0.8</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://www.historipfood.com/app/post/62</loc>
-  <priority>0.8</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://www.historipfood.com/app/post/58</loc>
-  <priority>0.8</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://www.historipfood.com/app/shop/102</loc>
-  <priority>0.8</priority>
+  <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 

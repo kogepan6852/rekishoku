@@ -15,7 +15,7 @@ angular.module "frontApp"
     $rootScope.appTitle = "歴食"
     $rootScope.appDescription = "武将や文豪の愛した食を見るだけでなく食べる体験を提供するサイトです"
     $rootScope.appImage = "https://rekishoku.herokuapp.com/logo.png"
-    $rootScope.appKeywords = "歴史,偉人,食事,歴食,郷土料理"
+    $rootScope.appKeywords = "歴史,偉人,食事,歴食,郷土料理,暦食"
 
 
     path = $location.path()
