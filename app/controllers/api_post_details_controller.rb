@@ -26,6 +26,7 @@ class ApiPostDetailsController < ApplicationController
       @post_detail.content = post_detail['content']
       @post_detail.quotation_url = post_detail['quotation_url']
       @post_detail.quotation_name = post_detail['quotation_name']
+      @post_detail.is_eye_catch = post_detail['is_eye_catch']
       if !@post_detail.save
         isSuccess = false
       end
@@ -58,7 +59,7 @@ class ApiPostDetailsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_detail_params
-      params.require(:post_detail).permit(:post_id, :title, :image, :content, :quotation_url, :quotation_name)
+      params.require(:post_detail).permit(:post_id, :title, :image, :content, :quotation_url, :quotation_name, :is_eye_catch)
     end
 
 end

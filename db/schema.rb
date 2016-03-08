@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206163742) do
+ActiveRecord::Schema.define(version: 20160308105705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,24 +84,26 @@ ActiveRecord::Schema.define(version: 20160206163742) do
     t.text     "content"
     t.string   "quotation_url"
     t.string   "quotation_name"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "is_eye_catch",   default: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",                      null: false
+    t.string   "title",                          null: false
     t.text     "content"
-    t.string   "image",                      null: false
-    t.integer  "favorite_count", default: 0, null: false
-    t.integer  "status",         default: 0, null: false
-    t.integer  "user_id",                    null: false
+    t.string   "image",                          null: false
+    t.integer  "favorite_count", default: 0,     null: false
+    t.integer  "status",         default: 0,     null: false
+    t.integer  "user_id",                        null: false
     t.string   "quotation_url"
     t.string   "quotation_name"
-    t.integer  "category_id",    default: 0, null: false
+    t.integer  "category_id",    default: 0,     null: false
     t.text     "memo"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "published_at"
+    t.boolean  "is_eye_catch",   default: false
   end
 
   create_table "posts_shops", id: false, force: :cascade do |t|
