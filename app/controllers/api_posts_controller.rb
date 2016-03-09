@@ -24,7 +24,8 @@ class ApiPostsController < ApplicationController
     # アイキャッチ画像の設定
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|
-      obj = { "title" => post.title,
+      obj = { "id" => post.id,
+              "title" => post.title,
               "content" => post.content,
               "image" => post.image,
               "published_at" => post.published_at,
