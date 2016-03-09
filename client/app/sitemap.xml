@@ -8,32 +8,42 @@
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/home</loc>
+  <loc>http://www.historipfood.com/#!/home</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/shops</loc>
+  <loc>http://www.historipfood.com/#!/shops</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/post/65</loc>
+  <loc>http://www.historipfood.com/#!/post/65</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/post/62</loc>
+  <loc>http://www.historipfood.com/#!/post/62</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/post/58</loc>
+  <loc>http://www.historipfood.com/#!/post/58</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/shop/102</loc>
+  <loc>http://www.historipfood.com/#!/post/49</loc>
+  <priority>1.0</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.historipfood.com/#!/shop/102</loc>
+  <priority>1.0</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.historipfood.com/#!/shop/95</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>

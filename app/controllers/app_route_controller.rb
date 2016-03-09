@@ -9,11 +9,11 @@ class AppRouteController < ApplicationController
     if params[:_escaped_fragment_].nil?
       render :file => path, :layout => false
     else
-      url = params[:path]
+      url = params[:_escaped_fragment_]
       urls = url.split('/')
 
-      if urls[0] == 'post' && urls[1].present?
-        @post = Post.find(urls[1].to_s)
+      if urls[1] == 'post' && urls[2].present?
+        @post = Post.find(urls[2].to_s)
 
         keywords = Array.new
         @post.people.each do |person|
@@ -27,8 +27,8 @@ class AppRouteController < ApplicationController
         set_meta_tags description: @post.content.gsub(/(\r\n|\r|\n|\f)/,"")
         set_meta_tags keywords: keywords.join(",")
 
-      elsif urls[0] == 'shop' && urls[1].present?
-        @shop = Shop.find(urls[1].to_s)
+      elsif urls[1] == 'shop' && urls[2].present?
+        @shop = Shop.find(urls[2].to_s)
 
         keywords = Array.new
         @shop.people.each do |person|
@@ -39,8 +39,8 @@ class AppRouteController < ApplicationController
         set_meta_tags description: @shop.description.gsub(/(\r\n|\r|\n|\f)/,"")
         set_meta_tags keywords: keywords.join(",")
 
-      elsif urls[0] == 'home' || urls[0] == 'shops'
-        set_meta_tags title: urls[0]
+      elsif urls[1] == 'home' || urls[1] == 'shops'
+        set_meta_tags title: urls[1]
         set_meta_tags description: description
         set_meta_tags keywords: keywords
       else
