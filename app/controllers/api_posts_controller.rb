@@ -58,7 +58,15 @@ class ApiPostsController < ApplicationController
       # user情報整形
       user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
 
-      post = { "post" => @post, "shops" => shops, "user" => user }
+      # アイキャッチ画像設定
+      eyeCatchImage = @post.image
+      @post.post_details.each do |post_detail|
+        if post_detail.is_eye_catch
+          eyeCatchImage = post_detail.image
+        end
+      end
+
+      post = { "post" => @post, "shops" => shops, "user" => user, "eye_catch_image" => eyeCatchImage }
       render json: post
     else
       post = { "post" => "" }
