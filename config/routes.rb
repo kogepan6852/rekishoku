@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'app_route#show'
+  get 'app/*path', to: 'app_route#show'
+  get 'app', to: 'app_route#show'
 
 # API route　
   # POSTS

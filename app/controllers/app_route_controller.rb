@@ -6,16 +6,16 @@ class AppRouteController < ApplicationController
     description = "武将や文豪の愛した食を見るだけでなく食べる体験を提供するサイトです"
     keywords = "歴史,偉人,食事,歴食,郷土料理,暦食"
 
-    if params[:_escaped_fragment_].nil?
+    url = params[:path]
+    if url.nil?
       render :file => path, :layout => false
     else
-      url = params[:_escaped_fragment_]
       urls = url.split('/')
-
-      if urls[1] == 'post' && urls[2].present?
-        @post = Post.find(urls[2].to_s)
+      if urls[0] == 'post' && urls[1].present?
+        @post = Post.find(urls[1].to_s)
 
         keywords = Array.new
+        keywords.push("歴食")
         @post.people.each do |person|
           keywords.push(person.name)
         end
@@ -27,22 +27,18 @@ class AppRouteController < ApplicationController
         set_meta_tags description: @post.content.gsub(/(\r\n|\r|\n|\f)/,"")
         set_meta_tags keywords: keywords.join(",")
 
-      elsif urls[1] == 'shop' && urls[2].present?
-        @shop = Shop.find(urls[2].to_s)
+      # elsif urls[0] == 'shop' && urls[1].present?
+      #   @shop = Shop.find(urls[1].to_s)
+      #
+      #   keywords = Array.new
+      #   @shop.people.each do |person|
+      #     keywords.push(person.name)
+      #   end
+      #   # SEO用metaタグ設定
+      #   set_meta_tags title: @shop.name
+      #   set_meta_tags description: @shop.description.gsub(/(\r\n|\r|\n|\f)/,"")
+      #   set_meta_tags keywords: keywords.join(",")
 
-        keywords = Array.new
-        @shop.people.each do |person|
-          keywords.push(person.name)
-        end
-        # SEO用metaタグ設定
-        set_meta_tags title: @shop.name
-        set_meta_tags description: @shop.description.gsub(/(\r\n|\r|\n|\f)/,"")
-        set_meta_tags keywords: keywords.join(",")
-
-      elsif urls[1] == 'home' || urls[1] == 'shops'
-        set_meta_tags title: urls[1]
-        set_meta_tags description: description
-        set_meta_tags keywords: keywords
       else
         render :file => path, :layout => false
       end
