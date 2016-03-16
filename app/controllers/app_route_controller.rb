@@ -36,6 +36,11 @@ class AppRouteController < ApplicationController
         }
         set_meta_tags open_graph: opg
 
+        # ionic用jsを先に読み込んでおく
+        vendor = Dir.glob(Rails.root.to_s + "/public/scripts/vendor*.js")
+        scripts = Dir.glob(Rails.root.to_s + "/public/scripts/scripts*.js")
+        @vendor_js =  'http://' + request.host_with_port + '/scripts/' + File.basename(vendor[0])
+        @scripts_js =  'http://' + request.host_with_port + '/scripts/' + File.basename(scripts[0])
 
       # elsif urls[0] == 'shop' && urls[1].present?
       #   @shop = Shop.find(urls[1].to_s)
