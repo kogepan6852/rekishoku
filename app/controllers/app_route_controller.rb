@@ -26,6 +26,16 @@ class AppRouteController < ApplicationController
         set_meta_tags title: @post.title
         set_meta_tags description: @post.content.gsub(/(\r\n|\r|\n|\f)/,"")
         set_meta_tags keywords: keywords.join(",")
+        opg = {
+          title: @post.title,
+          type: 'website',
+          image: @post.image.md.url,
+          site_name: "歴食",
+          description: @post.content.gsub(/(\r\n|\r|\n|\f)/,""),
+          locale: 'ja_JP'
+        }
+        set_meta_tags open_graph: opg
+
 
       # elsif urls[0] == 'shop' && urls[1].present?
       #   @shop = Shop.find(urls[1].to_s)
