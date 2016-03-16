@@ -21,7 +21,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-    <%= link_to "続きを見る", 'http://' + request.host_with_port + "/#/app/post/1", class:'btn btn-primary btn-lg btn-block'%>
+    <%= link_to "続きを見る", 'http://' + request.host_with_port + "/#/app/post/" + @post.id.to_s , class:'btn btn-primary btn-lg btn-block'%>
   </div>
 </div>
 <div class="row">
