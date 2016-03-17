@@ -377,4 +377,20 @@ nav.navbar-bg button.navbar-toggle > span.icon-bar { background: #fff; }
     }
   }
 
+  .navbar.navbar-fixed-top .sns-icons{
+    left: 5px;
+    right: 100%;
+    width: 96px;
+    a {
+      width: 32px;
+      border-radius: 0;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
+      background-color: transparent;
+      &:nth-child(1) { right: 66px; }
+      &:nth-child(2) { right: 33px; }
+      &:nth-child(3) { right: 0px; }
+    }
+  }
+
 }

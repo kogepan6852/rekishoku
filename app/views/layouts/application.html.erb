@@ -77,20 +77,21 @@
             <% end %>
           <li class="active"><%= link_to "WEBサイト", "/#/home?showLogin=true" %></li>
         </ul>
-        <% else %>
-        <div class="sns-icons">
-          <a class="facebook-icon" target="_blank" href="https://www.facebook.com/rekishoku">
-            <i class="fa fa-facebook"></i>
-          </a>
-          <a class="twitter-icon" target="_blank" href="https://twitter.com/rekishoku">
-            <i class="fa fa-twitter"></i>
-          </a>
-          <a class="instagram-icon" target="_blank" href="https://instagram.com/rekishoku">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
         <% end %>
       </div>
+      <% if !user_signed_in? %>
+      <div class="sns-icons">
+        <a class="facebook-icon" target="_blank" href="https://www.facebook.com/rekishoku">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a class="twitter-icon" target="_blank" href="https://twitter.com/rekishoku">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="instagram-icon" target="_blank" href="https://instagram.com/rekishoku">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </div>
+      <% end %>
     </div>
   </nav>
 
