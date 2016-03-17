@@ -174,4 +174,5 @@ angular
     $ionicConfigProvider.views.transition('ios')
     $ionicConfigProvider.views.forwardCache(true);
   .config ($locationProvider) ->
+    # $locationProvider.hashPrefix('!')
     $locationProvider.html5Mode(true);

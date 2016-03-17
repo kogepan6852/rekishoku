@@ -14,21 +14,41 @@
 </head>
 
 <body>
+<!-- FB -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.5&appId=944564788957091";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
  <!-- Fixed navbar -->
-  <nav class="navbar navbar-bg header-link">
+  <nav class="navbar navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
+        <% if user_signed_in? %>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#"><%= link_to image_tag('logo.png') ,'/menu' ,:class => "height65" %></a>
+        <% end %>
+        <div class="logo">
+          <% if user_signed_in? %>
+            <%= link_to image_tag('logo.png') ,'/menu' ,:class => "hidden-xs" %>
+            <%= link_to image_tag('logo-sm.png') ,'/menu' ,:class => "visible-xs" %>
+          <% else %>
+            <%= link_to image_tag('logo.png') ,'/app/home' ,:class => "hidden-xs" %>
+            <%= link_to image_tag('logo-sm.png') ,'/app/home' ,:class => "visible-xs" %>
+          <% end %>
+        </div>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <div class="header-list">
         <% if user_signed_in? %>
+        <div class="header-list">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SHOP管理画面<span class="caret"></span></a>
@@ -48,9 +68,7 @@
 
             <li><%= link_to "新規アカウント作成", "/users/sign_up" %></li>
           </ul>
-        <% else %>
-        <% end %>
-      </div>
+        </div>
         <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to "ログアウト", "/users/sign_out" %></li>
@@ -59,11 +77,25 @@
             <% end %>
           <li class="active"><%= link_to "WEBサイト", "/#/home?showLogin=true" %></li>
         </ul>
+        <% end %>
       </div>
+      <% if !user_signed_in? %>
+      <div class="sns-icons">
+        <a class="facebook-icon" target="_blank" href="https://www.facebook.com/rekishoku">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a class="twitter-icon" target="_blank" href="https://twitter.com/rekishoku">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="instagram-icon" target="_blank" href="https://instagram.com/rekishoku">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </div>
+      <% end %>
     </div>
   </nav>
 
-  <div class="top-padding-30">
+  <div class="main-content">
     <%= yield %>
   </div>
 

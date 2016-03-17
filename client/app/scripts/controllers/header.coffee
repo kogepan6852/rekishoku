@@ -186,7 +186,7 @@ angular.module "frontApp"
 
       # 現在Pathの取得
       currentPath = $location.path();
-      if currentPath == '/app/shops'
+      if currentPath == '/shops'
         $scope.currentType = 'shop'
       else
         $scope.currentType = 'post'
