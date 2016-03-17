@@ -31,7 +31,7 @@
               </label>
 
               <div class="item item-input item-thumbnail-right" href="#">
-                <img class="uploaded-img" ng-if="srcUrl" ng-src="{{srcUrl}}">
+                <img class="uploaded-img" ng-class="{'eye-catch': input.isEyeCatch}" ng-if="srcUrl" ng-src="{{srcUrl}}" ng-click="setEyeCatch(-1)">
                 <span class="input-label">メイン画像</span>
                 <div class="file">
                   ファイルを選択
@@ -67,7 +67,7 @@
               </label>
 
               <div class="item item-input item-thumbnail-right" href="#">
-                <img class="uploaded-img" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}">
+                <img class="uploaded-img" ng-class="{'eye-catch': detail.isEyeCatch}" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}" ng-click="setEyeCatch($index)">
                 <span class="input-label">サブ画像{{detail.index}}</span>
                 <div class="file">
                   ファイルを選択

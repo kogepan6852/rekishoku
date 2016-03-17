@@ -20,7 +20,27 @@ class ApiPostsController < ApplicationController
       # カテゴリーで検索
       @posts = @posts.where(category_id: params[:category].to_i)
     end
-    render json: @posts.page(params[:page]).per(params[:per])
+
+    # アイキャッチ画像の設定
+    newPosts = Array.new()
+    @posts.page(params[:page]).per(params[:per]).each do |post|
+      obj = { "id" => post.id,
+              "title" => post.title,
+              "content" => post.content,
+              "image" => post.image,
+              "published_at" => post.published_at,
+              "category_id" => post.category_id,
+              "category_name" => post.category_name,
+              "category_slug" => post.category_slug }
+      post.post_details.each do |post_detail|
+        if post_detail.is_eye_catch
+          obj["image"] = post_detail.image
+        end
+      end
+      newPosts.push(obj);
+    end
+
+    render json: newPosts
   end
 
   # GET /api/posts/1
@@ -38,7 +58,15 @@ class ApiPostsController < ApplicationController
       # user情報整形
       user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
 
-      post = { "post" => @post, "shops" => shops, "user" => user }
+      # アイキャッチ画像設定
+      eyeCatchImage = @post.image
+      @post.post_details.each do |post_detail|
+        if post_detail.is_eye_catch
+          eyeCatchImage = post_detail.image
+        end
+      end
+
+      post = { "post" => @post, "shops" => shops, "user" => user, "eye_catch_image" => eyeCatchImage }
       render json: post
     else
       post = { "post" => "" }
@@ -97,7 +125,7 @@ class ApiPostsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at)
+      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch)
     end
 
 end

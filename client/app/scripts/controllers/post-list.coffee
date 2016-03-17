@@ -176,6 +176,7 @@ angular.module "frontApp"
         fdDetails = new FormData
         fd.append 'token', $localStorage['token']
         fd.append 'email', $localStorage['email']
+        fd.append 'post[is_eye_catch]', $scope.input.isEyeCatch
         if targetSlug then fd.append 'slug', targetSlug
         if $scope.input.title then fd.append 'post[title]', $scope.input.title.trim()
         if $scope.input.file then fd.append 'post[image]', $scope.input.file
@@ -205,6 +206,7 @@ angular.module "frontApp"
               fdDetails.append 'token', $localStorage['token']
               fdDetails.append 'email', $localStorage['email']
               fdDetails.append 'post_details[][post_id]', res.data.id
+              fdDetails.append 'post_details[][is_eye_catch]', detail.isEyeCatch
               if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
               if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
               if detail.subContent then fdDetails.append 'post_details[][content]', detail.subContent
@@ -294,6 +296,7 @@ angular.module "frontApp"
             subContent: if res.data[i] then res.data[i].content else null
             subQuotationUrl: if res.data[i] then res.data[i].quotation_url else null
             subQuotationName: if res.data[i] then res.data[i].quotation_name else null
+            isEyeCatch: if res.data[i] then res.data[i].is_eye_catch else null
             srcSubUrl: if res.data[i] then res.data[i].image.thumb.url else null
             id: if res.data[i] then res.data[i].id else null
           details.push(detail)
@@ -303,6 +306,7 @@ angular.module "frontApp"
           content: $scope.results[index].content
           quotationUrl: $scope.results[index].quotation_url
           quotationName: $scope.results[index].quotation_name
+          isEyeCatch: $scope.results[index].is_eye_catch
           details: details
           category:
             name: $scope.results[index].category_name
@@ -504,3 +508,17 @@ angular.module "frontApp"
           type: 'success'
           title: msg
           showCloseButton: true
+
+    $scope.setEyeCatch = ($index) ->
+      # メイン画像のチェック
+      if $index == -1
+        $scope.input.isEyeCatch = true
+      else
+        $scope.input.isEyeCatch = false
+
+      # サブ画像のチェック
+      angular.forEach $scope.input.details, (detail, i) ->
+        if i == $index
+          detail.isEyeCatch = true
+        else
+          detail.isEyeCatch = false

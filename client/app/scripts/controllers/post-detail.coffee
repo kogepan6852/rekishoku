@@ -32,6 +32,7 @@ angular.module 'frontApp'
       $scope.post = res.data.post
       $scope.shops = res.data.shops
       $scope.user = res.data.user
+      $scope.eyeCatchImage = res.data.eye_catch_image
 
       # SEO
       appKeywords = []
@@ -64,7 +65,7 @@ angular.module 'frontApp'
         display: 'popup'
         method: 'share'
         href: $scope.urlFb
-        picture: $scope.post.image.url
+        picture: $scope.eyeCatchImage.image.url
         title: $scope.post.title
         caption: '歴食.jp'
         description: $scope.post.content

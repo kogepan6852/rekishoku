@@ -48,6 +48,9 @@ p { color: #555; }
   height: auto!important;
   width: auto !important;
 }
+.uploaded-img.eye-catch {
+  border: 3px red solid;
+}
 .slider-pager {
   z-index: 10;
   width: 50%;
