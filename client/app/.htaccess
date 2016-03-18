@@ -212,6 +212,8 @@ AddDefaultCharset utf-8
     Options +FollowSymlinks
   # Options +SymLinksIfOwnerMatch
     RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^(historipfood\.com)(:80)? [NC]
+    RewriteRule ^(.*) http://rekishoku.com/app/$1 [R=301,L]
   # RewriteBase /
 </IfModule>
 
