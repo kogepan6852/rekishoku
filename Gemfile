@@ -64,6 +64,9 @@ gem 'counter_culture'
 # seo
 gem 'meta-tags'
 
+# url redirect
+gem 'rack-rewrite'
+
 group :development do
   gem 'annotate', '2.6.5'
 end
