@@ -32,14 +32,6 @@ p { color: #555; }
   padding-bottom: 35px!important;
 }
 
-/* for ionic text copy */
-.post-detail-view .scroll, .shop-detail-view .scroll, .writer-detail-view .scroll {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
 /* modal-post*/
 .uploaded-img {
   top: 0;
