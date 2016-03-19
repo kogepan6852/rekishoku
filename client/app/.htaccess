@@ -212,8 +212,6 @@ AddDefaultCharset utf-8
     Options +FollowSymlinks
   # Options +SymLinksIfOwnerMatch
     RewriteEngine On
-    RewriteCond %{HTTP_HOST} ^(historipfood\.com)(:80)? [NC]
-    RewriteRule ^(.*) http://rekishoku.com/app/$1 [R=301,L]
   # RewriteBase /
 </IfModule>
 
@@ -239,9 +237,12 @@ AddDefaultCharset utf-8
 # Option 1: rewrite www.example.com → example.com
 
 <IfModule mod_rewrite.c>
+    #Normal way
     RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+    #Heroku way
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST}  ^(www\.)?historipfood\.com$ [NC]
+    RewriteRule ^ http://www.rekishoku.jp/app%{REQUEST_URI} [R=301,L]
 </IfModule>
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -33,7 +33,7 @@ p { color: #555; }
 }
 
 /* for ionic text copy */
-.scroll {
+.scroll h1, .scroll h2, .scroll h3, .scroll h4, .scroll h5, .scroll h6, .scroll p{
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
