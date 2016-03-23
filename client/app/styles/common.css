@@ -283,6 +283,10 @@ ion-view .has-subheader {
   opacity: 0;
   padding-right: 10px!important;
 }
+.button-back.activated {
+  background-color: #fff;
+  box-shadow: none;
+}
 .nav-bar-block[nav-bar="active"] .button-back{
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;

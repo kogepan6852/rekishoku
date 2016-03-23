@@ -18,7 +18,7 @@ angular.module "frontApp"
       $ionicHistory.clearHistory();
       $ionicHistory.clearCache();
       if index == 0
-        $location.path('/app/home').search('keywords', null)
+        $location.path('/app').search('keywords', null)
       else if index == 1
         $location.path('/app/map').search('keywords', null)
       else if index == 2

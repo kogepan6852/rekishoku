@@ -31,7 +31,7 @@ angular
         abstract: true,
         templateUrl: "views/tabs.html"
       .state 'tabs.home',
-        url: '/app/home'
+        url: '/app'
         views:
           'home-tab':
             templateUrl: 'views/main.html'
@@ -149,8 +149,15 @@ angular
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
 
+      # 旧URL用の暫定パス
+      .state 'post-old',
+        cache: false,
+        url: '/post/:id?preview'
+        templateUrl: 'views/post-detail.html'
+        controller: 'PostDetailCtrl'
 
-    $urlRouterProvider.otherwise ('/app/home')
+
+    $urlRouterProvider.otherwise ('/app')
 
   .config(["$httpProvider", ($httpProvider) ->
 

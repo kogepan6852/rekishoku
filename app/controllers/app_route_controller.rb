@@ -3,7 +3,7 @@ class AppRouteController < ApplicationController
   # 詳細データ表示
   def show
     path = Rails.root.to_s + "/public/main.html"
-    description = "武将や文豪の愛した食を見るだけでなく食べる体験を提供するサイトです"
+    description = "歴食は武将や文豪、その時代の人たちが愛した食を見るだけでなく食べる体験を提供するサイトです."
     keywords = "歴史,偉人,食事,歴食,郷土料理,暦食"
 
     url = params[:path]

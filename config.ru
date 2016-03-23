@@ -6,12 +6,6 @@ if ENV['RACK_ENV'] == 'production'
       rack_env['SERVER_NAME'] == 'www.xn--kmww28g.jp'
     }
   end
-elsif ENV['RACK_ENV'] == 'staging'
-  use Rack::Rewrite do
-    r301 %r{.*}, 'http://www.rekishoku.jp$&', :if => Proc.new {|rack_env|
-      rack_env['SERVER_NAME'] == 'www.historipfood.com'
-    }
-  end
 end
 
 require ::File.expand_path('../config/environment', __FILE__)

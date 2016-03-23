@@ -212,10 +212,7 @@ AddDefaultCharset utf-8
     Options +FollowSymlinks
   # Options +SymLinksIfOwnerMatch
     RewriteEngine On
-    RewriteBase /
-
-    RewriteCond %{HTTP_HOST} ^(www\.)?historipfood\.com$ [NC]
-    RewriteRule .* http://www.rekishoku.jp%{REQUEST_URI} [R=301,L]
+  # RewriteBase /
 </IfModule>
 
 # ------------------------------------------------------------------------------

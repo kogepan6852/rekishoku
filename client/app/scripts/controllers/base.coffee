@@ -19,7 +19,7 @@ angular.module "frontApp"
 
 
     path = $location.path()
-    if path.indexOf('/app/home') != -1 || path.indexOf('/app/writers') != -1 || path.indexOf('/app/my-post') != -1
+    if path.indexOf('/app/writers') != -1 || path.indexOf('/app/my-post') != -1
       $ionicNavBarDelegate.showBackButton false
     else
       $ionicNavBarDelegate.showBackButton true

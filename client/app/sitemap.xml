@@ -3,54 +3,13 @@
 
 <!--  created with free sitemap generation system www.sitemapxml.jp  -->
 <url>
-  <loc>http://www.historipfood.com/</loc>
+  <loc>http://www.rekishoku.jp</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.historipfood.com/app/post/65</loc>
+  <loc>http://www.rekishoku.jp/about</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
 </url>
-<url>
-  <loc>http://www.historipfood.com/app/post/62</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/post/58</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/post/56</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/post/54</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/post/52</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/post/49</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/shop/102</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.historipfood.com/app/shop/95</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-</url>
-
 </urlset>

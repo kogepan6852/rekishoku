@@ -16,8 +16,8 @@ angular.module 'frontApp'
     # 変数設定
     $scope.targetId = $stateParams.id
     $rootScope.isHideTab = true
-    $scope.urlFb = config.url.home + '/#' + $location.url()
-    $scope.urlTwitter = config.url.home + '/%23' + $location.url()
+    $scope.urlFb = config.url.home + $location.url()
+    $scope.urlTwitter = config.url.home + $location.url()
 
     # 初期処理
     FB.init

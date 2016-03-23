@@ -492,6 +492,7 @@ form.post-modal, .post-modal .slider {
 }
 .shop-info-row > div {
   display: table-cell;
+  word-break: break-all;
 }
 .shop-info-row .shop-info-col {
   width: 60px;
