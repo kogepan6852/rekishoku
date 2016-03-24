@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'app_route#show'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: 'app_route#show'
+  # 旧URL対応
+  get 'post/*path', to: 'app_route#show'
 
 # API route　
   # POSTS
