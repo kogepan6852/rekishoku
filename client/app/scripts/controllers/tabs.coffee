@@ -16,7 +16,7 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
+      # $ionicHistory.clearCache();
       if index == 0
         $location.path('/app').search('keywords', null)
       else if index == 1
