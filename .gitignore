@@ -19,4 +19,3 @@
 /client/node_modules/*/.cache/
 
 /public/*
-!/public/about
