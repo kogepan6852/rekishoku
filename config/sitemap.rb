@@ -27,6 +27,8 @@ SitemapGenerator::Sitemap.create do
   #   end
   add '/app', :changefreq => 'daily', :priority => 0.9
   Post.find_each do |post|
-    add '/app/post/' + post.id.to_s, :lastmod => post.updated_at, :changefreq => 'weekly'
+    if post.status == 1
+      add '/app/post/' + post.id.to_s, :lastmod => post.updated_at, :changefreq => 'weekly'
+    end
   end
 end
