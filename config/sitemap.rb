@@ -12,6 +12,7 @@ case Rails.env
     SitemapGenerator::Sitemap.search_engines = {}
 end
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
