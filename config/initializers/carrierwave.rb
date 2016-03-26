@@ -2,6 +2,7 @@ CarrierWave.configure do |config|
 
   case Rails.env
     when 'production'
+      config.storage = :fog
       config.fog_credentials = {
           :provider               => 'AWS',
           :aws_access_key_id      => ENV['AWS_ACCESS_KEY'],
@@ -14,6 +15,7 @@ CarrierWave.configure do |config|
       config.fog_directory  = 'rekishoku'
       config.asset_host     = 'https://s3-ap-northeast-1.amazonaws.com/rekishoku'
     when 'staging'
+      config.storage = :fog
       config.fog_credentials = {
           :provider               => 'AWS',
           :aws_access_key_id      => ENV['AWS_ACCESS_KEY'],
