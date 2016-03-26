@@ -1,5 +1,16 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.rekishoku.jp"
+case Rails.env
+  when 'production'
+    SitemapGenerator::Sitemap.default_host = "http://www.rekishoku.jp"
+    SitemapGenerator::Sitemap.sitemaps_host = 'https://s3-ap-northeast-1.amazonaws.com/rekishoku/'
+  when 'staging'
+    SitemapGenerator::Sitemap.default_host = "http://www.historipfood.com"
+    SitemapGenerator::Sitemap.sitemaps_host = 'https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/'
+    SitemapGenerator::Sitemap.search_engines = {}
+  when 'development'
+    SitemapGenerator::Sitemap.default_host = "http://localhost:3000"
+    SitemapGenerator::Sitemap.search_engines = {}
+end
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
 SitemapGenerator::Sitemap.create do

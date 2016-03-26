@@ -40,6 +40,14 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
+# site map
+  case Rails.env
+    when 'production'
+      get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku/sitemaps/sitemap.xml.gz')
+    when 'staging'
+      get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
+  end
+  
 # ADMIN route
   resources :menu
 
