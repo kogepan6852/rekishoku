@@ -63,6 +63,7 @@ gem 'counter_culture'
 
 # seo
 gem 'meta-tags'
+gem "sitemap_generator"
 
 # url redirect
 gem 'rack-rewrite'
