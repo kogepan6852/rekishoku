@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'app_route#show'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: 'app_route#show'
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
     when 'staging'
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
-  
+
 # ADMIN route
   resources :menu
 
@@ -75,6 +76,8 @@ Rails.application.routes.draw do
 
   # devise_for :users
   resources :posts
+
+  resources :prices
 
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }

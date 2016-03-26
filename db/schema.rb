@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326152151) do
+ActiveRecord::Schema.define(version: 20160326155353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(version: 20160326152151) do
   add_index "posts_shops", ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
   add_index "posts_shops", ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
 
+  create_table "prices", force: :cascade do |t|
+    t.integer  "min"
+    t.integer  "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string   "name",                                 null: false
     t.text     "description"
@@ -135,20 +142,18 @@ ActiveRecord::Schema.define(version: 20160326152151) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "posts_shops_count",    default: 0,     null: false
-    t.integer  "daytime_max_price"
-    t.integer  "daytime_min_price"
-    t.integer  "nighttime_max_price"
-    t.integer  "nighttime_min_price"
+    t.string   "phone_no"
+    t.integer  "daytime_price_id"
+    t.integer  "nighttime_price_id"
     t.string   "open_time"
     t.string   "close_time"
-    t.string   "phone_no"
+    t.boolean  "is_closed_sun",        default: false, null: false
     t.boolean  "is_closed_mon",        default: false, null: false
     t.boolean  "is_closed_tue",        default: false, null: false
     t.boolean  "is_closed_wed",        default: false, null: false
     t.boolean  "is_closed_thu",        default: false, null: false
     t.boolean  "is_closed_fri",        default: false, null: false
     t.boolean  "is_closed_sat",        default: false, null: false
-    t.boolean  "is_closed_sun",        default: false, null: false
     t.string   "closed_pattern"
     t.boolean  "is_approved",          default: false, null: false
   end
