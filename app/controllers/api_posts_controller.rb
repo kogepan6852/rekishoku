@@ -82,6 +82,36 @@ class ApiPostsController < ApplicationController
     render json: @posts.page(params[:page]).per(params[:per])
   end
 
+  # GET /api/posts_related
+  # 関連post
+  def relation
+    if params[:type] != "1"
+      # 対象postに紐付く時代を取得する
+      period = Person.select('periods.id').joins(:posts).joins(:periods)
+        .where('posts.id = ? ', params[:id])
+      # 対象のperiodに紐づくpostを取得する
+      person = Person.select('people.id').joins(:periods)
+        .where('periods.id' => period)
+      posts = Post.joins(:category).joins(:people)
+        .select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+        .where('people.id' => person)
+        .where('posts.id != ?', params[:id])
+        .order('posts.created_at desc')
+        .limit(10)
+    else
+      # 対象postに紐付くcategoryを取得する
+      category_id = Post.select("category_id").where(id: params[:id])
+      # 対象のcategoryに紐づくpostを取得する
+      posts = Post.joins(:category)
+        .select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+        .where(category_id: category_id)
+        .where('posts.id != ?', params[:id])
+        .order('posts.created_at desc')
+        .limit(10)
+    end
+    render json: posts
+  end
+
   # POST /posts
   # 新規作成
   def create

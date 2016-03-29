@@ -30,3 +30,16 @@ angular.module "frontApp"
             title: '通信エラーが発生しました'
             type: 'button-dark')
           alertPopup.then (res) ->
+
+    getRanfomArray: (array, num) ->
+      a = array
+      t = []
+      r = []
+      l = a.length
+      n = if num < l then num else l
+      while n-- > 0
+        i = Math.random() * l | 0
+        r[n] = t[i] or a[i]
+        --l
+        t[i] = t[l] or a[l]
+      return r

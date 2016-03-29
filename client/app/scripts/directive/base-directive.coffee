@@ -39,3 +39,12 @@ angular.module "frontApp"
           rtnText = text[0] + "<span class='small'>等</span>"
         element.append(rtnText)
     }
+  .directive 'postItem', ->
+    return {
+      restrict: 'E'
+      scope:
+        post: '=post'
+        nowTab: '=nowTab'
+      templateUrl: 'views/directives/post-item.html'
+      link: (scope, element, attrs) ->
+    }

@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   get 'api/posts', to: 'api_posts#index'
   get 'api/posts/:id', to: 'api_posts#show'
   get 'api/post_list', to: 'api_posts#list'
+  get 'api/posts_related/:id', to: 'api_posts#relation'
   post 'api/posts', to: 'api_posts#create'
   patch 'api/posts/:id', to: 'api_posts#update'
   delete 'api/posts/:id', to: 'api_posts#destroy'
+
   # POST DETAILS
   get 'api/post_details/:id', to: 'api_post_details#index'
   post 'api/post_details', to: 'api_post_details#create'
@@ -47,7 +49,7 @@ Rails.application.routes.draw do
     when 'staging'
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
-  
+
 # ADMIN route
   resources :menu
 

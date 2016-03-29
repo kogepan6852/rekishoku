@@ -7,6 +7,7 @@ angular.module("frontApp")
       POST_LIST:    '/api/post_list'
       POST_DETSIL:  '/api/post_details'
       POSTS_SHOPS:  '/api/posts_shops'
+      POSTS_RELATED:'/api/posts_related'
       PEOPLE_POSTS: '/api/people_posts'
       PERSON_LIST:  '/api/person_list'
       SHOP:         '/api/shops'

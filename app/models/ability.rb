@@ -60,6 +60,7 @@ class Ability
 
     # API用アクセスコントロール
     can :read, :api_post
+    can :relation, :api_post
     can :manage, :api_post if user
 
     can :read, :api_post_detail

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -25,6 +25,7 @@ angular.module 'frontApp'
       status: true
       cookie: true
 
+    # 投稿内容取得
     path = Const.API.POST + '/' + $stateParams.id
     if $stateParams.preview
       path += '?preview=' + $stateParams.preview
@@ -45,6 +46,15 @@ angular.module 'frontApp'
 
       Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id, true).then (res) ->
         $scope.postDetails = res.data
+
+    # 関連投稿内容取得
+    pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
+    Api.getJson("", pathRelated, true).then (res) ->
+      num = 5
+      if res.data.length < num
+        num = res.data.length
+      $scope.postsRelated = BaseService.getRanfomArray(res.data, num)
+
 
     # 現在タブの判定
     if $state.is('tabs.post')

@@ -29,7 +29,8 @@
     "QUOTATION":      "掲載元：",
     "SHOP_INFO":      "店舗情報",
     "STORIES":        "歴食体験・エピソード",
-    "LIST":           "投稿一覧"
+    "LIST":           "投稿一覧",
+    "RELATED":        "関連投稿"
   },
   "SHOP": {
     "NAME":           "店舗名",
