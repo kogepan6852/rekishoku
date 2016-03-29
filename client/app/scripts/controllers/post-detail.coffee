@@ -53,7 +53,7 @@ angular.module 'frontApp'
       num = 5
       if res.data.length < num
         num = res.data.length
-      $scope.postsRelated = BaseService.getRanfomArray(res.data, num)
+      $scope.postsRelated = BaseService.getRandomArray(res.data, num)
 
 
     # 現在タブの判定

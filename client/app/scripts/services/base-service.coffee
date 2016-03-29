@@ -31,7 +31,7 @@ angular.module "frontApp"
             type: 'button-dark')
           alertPopup.then (res) ->
 
-    getRanfomArray: (array, num) ->
+    getRandomArray: (array, num) ->
       a = array
       t = []
       r = []
