@@ -39,7 +39,7 @@ angular.module "frontApp"
       n = if num < l then num else l
       while n-- > 0
         i = Math.random() * l | 0
-        r[n] = t[i] or a[i]
+        r[n] = t[i] || a[i]
         --l
-        t[i] = t[l] or a[l]
+        t[i] = t[l] || a[l]
       return r
