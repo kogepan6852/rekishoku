@@ -49,14 +49,29 @@ class ApiPostsController < ApplicationController
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
     logger.debug(params[:preview])
     if params[:preview] == "true" || @post.status == 1 && @post.published_at <= Date.today
-      shops = Array.new()
       # shop情報整形
+      shops = Array.new()
       @post.shops.each do |shop|
-        obj = { "shop" => shop, "categories" => shop.categories }
+        obj = {
+          "shop" => shop,
+          "categories" => shop.categories }
         shops.push(obj);
       end
       # user情報整形
-      user = { "id" => @post.user.id, "username" => @post.user.username, "image" => @post.user.image.thumb }
+      user = {
+        "id" => @post.user.id,
+        "username" => @post.user.username,
+        "image" => @post.user.image.thumb }
+      # people情報整形
+      people = Array.new()
+      @post.people.each do |person|
+        obj = {
+          "id" => person.id,
+          "name" => person.name,
+          "furigana" => person.furigana,
+          "rating" => person.rating }
+        people.push(obj);
+      end
 
       # アイキャッチ画像設定
       eyeCatchImage = @post.image
@@ -66,7 +81,12 @@ class ApiPostsController < ApplicationController
         end
       end
 
-      post = { "post" => @post, "shops" => shops, "user" => user, "eye_catch_image" => eyeCatchImage }
+      post = {
+        "post" => @post,
+        "shops" => shops,
+        "user" => user,
+        "people" => people,
+        "eye_catch_image" => eyeCatchImage }
       render json: post
     else
       post = { "post" => "" }
@@ -93,9 +113,10 @@ class ApiPostsController < ApplicationController
       person = Person.select('people.id').joins(:periods)
         .where('periods.id' => period)
       posts = Post.joins(:category).joins(:people)
-        .select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+        .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where('people.id' => person)
         .where('posts.id != ?', params[:id])
+        .where("status = ? and published_at <= ?", 1, Date.today)
         .order('posts.created_at desc')
         .limit(10)
     else
@@ -103,9 +124,10 @@ class ApiPostsController < ApplicationController
       category_id = Post.select("category_id").where(id: params[:id])
       # 対象のcategoryに紐づくpostを取得する
       posts = Post.joins(:category)
-        .select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+        .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where(category_id: category_id)
         .where('posts.id != ?', params[:id])
+        .where("status = ? and published_at <= ?", 1, Date.today)
         .order('posts.created_at desc')
         .limit(10)
     end

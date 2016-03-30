@@ -33,6 +33,7 @@ angular.module 'frontApp'
       $scope.post = res.data.post
       $scope.shops = res.data.shops
       $scope.user = res.data.user
+      $scope.people = res.data.people
       $scope.eyeCatchImage = res.data.eye_catch_image
 
       # SEO
@@ -44,16 +45,19 @@ angular.module 'frontApp'
       $rootScope.appImage = $scope.post.image.url
       $rootScope.appKeywords = appKeywords.join()
 
-      Api.getJson("", Const.API.POST_DETSIL + '/' + res.data.post.id, true).then (res) ->
-        $scope.postDetails = res.data
+      # 関連投稿内容取得
+      pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
+      console.log $scope.people.length
+      if $scope.people.length == 0
+        pathRelated += '?type=1'
+      Api.getJson("", pathRelated, true).then (res) ->
+        num = 5
+        if res.data.length < num
+          num = res.data.length
+        $scope.postsRelated = BaseService.getRandomArray(res.data, num)
 
-    # 関連投稿内容取得
-    pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
-    Api.getJson("", pathRelated, true).then (res) ->
-      num = 5
-      if res.data.length < num
-        num = res.data.length
-      $scope.postsRelated = BaseService.getRandomArray(res.data, num)
+    Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
+      $scope.postDetails = res.data
 
 
     # 現在タブの判定

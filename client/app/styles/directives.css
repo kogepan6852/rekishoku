@@ -16,7 +16,7 @@
 }
 .item-detail-list li .thumbnail-image {
   height: 100px;
-  width: 133px;
+  width: 150px;
   padding-top: 0;
 }
 .item-detail-list .thumbnail-image img {
@@ -26,7 +26,7 @@
 }
 .item-detail-list li .detail-content {
   height: 100px;
-  padding-left: 133px;
+  padding-left: 150px;
 }
 .item-detail-list li .detail-content > div {
   background: transparent;
@@ -44,8 +44,8 @@
     right: 0px;
 }
 .detail-content .post-date {
-  left: 10px;
-  bottom: 5px;
+  left: 10px!important;
+  bottom: 5px!important;
 }
 .detail-content .post-date i{
   padding-right: 3px;
@@ -81,4 +81,14 @@
   text-align: center;
   width: 60px;
   z-index: 100;
+}
+
+/* iPhone5用 */
+@media screen and (max-width:320px){
+  .item-detail-list li .thumbnail-image {
+    width: 133px;
+  }
+  .item-detail-list li .detail-content {
+    padding-left: 133px;
+  }
 }

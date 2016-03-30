@@ -357,11 +357,11 @@ form.post-modal, .post-modal .slider {
   padding: 0 5px 5px;
   width: 100%;
   height: 90px;
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  -ms-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .item-list .shop-content.on-mouse,
 .item-list .main-content.on-mouse,

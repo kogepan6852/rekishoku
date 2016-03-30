@@ -359,12 +359,12 @@
   }
   /* detail page */
   .item-detail-list li .thumbnail-image {
-    height: 180px;
-    width: 240px;
+    height: 210px;
+    width: 280px;
   }
   .item-detail-list li .detail-content {
-    height: 180px;
-    padding-left: 240px;
+    height: 210px;
+    padding-left: 280px;
   }
 }
 @media screen and (min-width:1201px){
