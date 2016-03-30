@@ -47,9 +47,8 @@ angular.module 'frontApp'
 
       # 関連投稿内容取得
       pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
-      console.log $scope.people.length
-      if $scope.people.length == 0
-        pathRelated += '?type=1'
+      # if $scope.people.length == 0
+      #   pathRelated += '?type=1'
       Api.getJson("", pathRelated, true).then (res) ->
         num = 5
         if res.data.length < num
