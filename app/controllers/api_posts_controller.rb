@@ -62,6 +62,15 @@ class ApiPostsController < ApplicationController
         "id" => @post.user.id,
         "username" => @post.user.username,
         "image" => @post.user.image.thumb }
+      # people情報整形
+      people = Array.new()
+      @post.people.each do |person|
+        obj = {
+          "id" => person.id,
+          "name" => person.name,
+          "furigana" => person.furigana}
+        people.push(obj);
+      end
 
       # アイキャッチ画像設定
       eyeCatchImage = @post.image
@@ -75,6 +84,7 @@ class ApiPostsController < ApplicationController
         "post" => @post,
         "shops" => shops,
         "user" => user,
+        "people" => people,
         "eye_catch_image" => eyeCatchImage }
       render json: post
     else
