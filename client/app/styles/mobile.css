@@ -171,6 +171,8 @@
     position: absolute;
     left: 50%;
     margin-left: -48px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+    margin-top: 0;
   }
   /* modal */
   .big-modal {
@@ -194,7 +196,7 @@
   /* header */
   .bar-header { background-color: transparent;}
   .fix-nav i { color: #000; }
-  .header .bar.top { background-color: transparent; }
+  .header .bar.top { background-color: transparent; border-bottom: 1px solid #ddd!important;}
   .button-back {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border-color: transparent;
@@ -286,12 +288,13 @@
 
 }
 @media screen and (min-width:768px) and (max-width:1200px){
-  .item-list li{ width: 25%; }
+  .item-list li{ width: 33.333%; }
 }
 @media screen and (min-width:768px){
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .tab-header{ width: 20%;}
+  .bar-header { background-color: rgb(205,97,93)!important;}
   ion-content.image-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -304,6 +307,9 @@
     border-top-width: 0;
     padding-top: 0;
     top: 0px;
+  }
+  .tab-nav.tabs a {
+    display: none;
   }
   .tabs .tab-item{
     font-size: 18px!important;
@@ -322,17 +328,30 @@
     vertical-align: top;
   }
 
+  /* menu */
+  .menu-content {
+    -webkit-transform: translate3d(270px, 0px, 0px) !important;
+    transform: translate3d(235px, 0px, 0px) !important;
+    width: calc(100% - 235px) !important;
+  }
+
+  .nav-bar-container .fix-nav .ion-navicon-round {
+    display: none!important;
+  }
+  ion-side-menu {
+    z-index: 100 !important;
+    box-shadow: -1px 0 2px rgba(0, 0, 0, 0.2), 1px 0 2px rgba(0, 0, 0, 0.2);
+    left: 0;
+    padding-top: 130px;
+    width: 235px!important;
+  }
+  ion-side-menu .bar-header {
+    background-color: transparent!important;
+  }
+
   /* post image */
   .post-image{
     padding: 0 90px;
-  }
-  /* header*/
-  .bar-header.my-post-header {
-    background-color: rgb(205,97,93);
-    height: 49px;
-  }
-  .header {
-    width: 180px;
   }
   /* modal */
   .modal-open .modal {
@@ -343,7 +362,6 @@
   /* Main*/
   .main-category .button-bar,
   .main-category .search-condition{
-    padding-left: 180px;
     max-width: 800px;
   }
   .main-category .button-bar .button{
@@ -355,7 +373,7 @@
   }
 
   .present-location {
-    left: 180px;
+    left: 10px;
   }
   /* detail page */
   .item-detail-list li .thumbnail-image {
@@ -368,5 +386,5 @@
   }
 }
 @media screen and (min-width:1201px){
-  .item-list li{ width: 20%; }
+  .item-list li{ width: 25%; }
 }

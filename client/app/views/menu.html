@@ -1,44 +1,36 @@
 <ion-side-menus>
   <!-- Left menu -->
-  <ion-side-menu side="right" ng-controller="HeaderCtrl">
+  <ion-side-menu side="right" ng-controller="HeaderCtrl" ng-init="init()">
+    <div class="bar bar-header top hidden-xs">
+      <h1 class="title hidden">歴食</h1>
+      <div class="logo" ng-click="moveToHome()"></div>
+    </div>
 
     <div class="list menu-list">
-      <div class="item item-divider" ng-cloak>{{'MENU.TITLE'|translate}}</div>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToHome()" ng-cloak>
+      <!-- pages -->
+      <div class="item item-divider visible-xs" ng-cloak>{{'MENU.TITLE'|translate}}</div>
+      <a class="item item-icon-left item-top" ng-class="{'active': currentType == 'home'}" ng-click="moveToHome()">
         <i class="icon ion-ios-list-outline"></i>
-        {{'MENU.STORY'|translate}}
-        <i class="icon ion-chevron-right"></i>
+        STORY
       </a>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToMap()" ng-cloak>
-        <i class="icon ion-ios-navigate-outline"></i>
-        {{'MENU.MAP'|translate}}
-        <i class="icon ion-chevron-right"></i>
+      <a class="item item-icon-left" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()">
+        <i class="icon ion-ios-navigate-outline"></i>MAP
       </a>
-      <a class="item item-icon-left item-icon-right" ng-click="moveToShops()" ng-cloak>
-        <i class="icon ion-android-restaurant"></i>
-        {{'MENU.STORE'|translate}}
-        <i class="icon ion-chevron-right"></i>
-      </a>
-      <a class="item item-icon-right" ng-click="moveToWriters()" ng-cloak>
-        {{'MENU.WRITERS'|translate}}
-        <i class="icon ion-chevron-right"></i>
-      </a>
-      <a class="item item-icon-right" href="http://www.rekishoku.jp/about" target="_blank">
-        歴食とは？
-        <i class="icon ion-chevron-right"></i>
-      </a>
+      <a class="item item-icon-left" ng-class="{'active': currentType == 'shops'}" ng-click="moveToShops()">
+        <i class="icon ion-android-restaurant"></i>STORE</a>
+      <a class="item" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
+      <a class="item" href="http://www.rekishoku.jp/about" target="_blank">ABOUT</a>
 
-      <div class="item item-divider" ng-show="isLogin || showLogin" ng-cloak>{{'MENU.MY_ACCOUNT'|translate}}</div>
-      <a class="item item-icon-right" ng-click="moveToMyPost()" ng-if="isLogin" ng-cloak>
+      <!-- my account -->
+      <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div>
+      <a class="item item-top" ng-click="moveToMyPost()" ng-if="isLogin">
         {{'MENU.POSTS'|translate}}
-        <i class="icon ion-chevron-right"></i>
       </a>
-      <a class="item item-icon-right" ng-click="moveToWriterDetail()" ng-show="isLogin" ng-cloak>
-        {{'MENU.PROFILE'|translate}}
-        <i class="icon ion-chevron-right"></i>
+      <a class="item" ng-click="moveToWriterDetail()" ng-show="isLogin">
+        PROFILE
       </a>
-      <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin" ng-cloak>{{'MENU.LOGIN'|translate}}</a>
-      <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>{{'MENU.LOGOUT'|translate}}</a>
+      <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
+      <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
     </div>
 
   </ion-side-menu>
@@ -46,7 +38,7 @@
   <ion-side-menu-content animation="slide-left-right" nav-transition="ios">
 
     <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios" ng-controller="HeaderCtrl">
-      <div class="bar bar-header top">
+      <div class="bar bar-header top visible-xs">
         <h1 class="title hidden">歴食</h1>
         <div class="logo" ng-click="moveToHome()"></div>
       </div>
@@ -56,8 +48,8 @@
         <a class="instagram-icon" href="https://instagram.com/rekishoku" target="_blank"><i class="ion-social-instagram-outline"></i></a>
       </div>
       <nav class="fix-nav" ng-controller="HeaderCtrl">
-        <a href="" ng-click="openModalSearch()" ><i class="icon ion-search"></i></a>
-        <a href="" ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
+        <a ng-click="openModalSearch()" ><i class="icon ion-search"></i></a>
+        <a ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
       </nav>
       <ion-nav-back-button class="button-back" ng-click="goBack()">
         <i class="ion-chevron-left"></i> Back

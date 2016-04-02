@@ -5,7 +5,7 @@
   <ion-content has-header="true" class="padding-top">
 
     <div class="row row-bottom">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="post-title">
           <h1>{{shop.name}}</h1>
           <p class="category" ng-if="categories" category-list data="categories" ></p>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="row row-top row-bottom bg-gray">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="detail-image"><img ng-src="{{shop.subimage.url}}"></div>
         <div class="shop-info">
           <div class="shop-info-row">
@@ -51,12 +51,12 @@
       </div>
     </div>
     <div class="row row-top" ng-if="posts.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="reki-icon" ng-cloak><h2>{{'POST.STORIES'|translate}}</h2></div>
       </div>
     </div>
     <div class="row post-shops row-bottom" ng-if="posts.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="item-detail-list">
           <post-item post="post" now-tab="nowTab" ng-repeat="post in posts"></post-item>
         </div>

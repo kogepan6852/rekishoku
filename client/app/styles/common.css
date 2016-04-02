@@ -119,8 +119,7 @@ input[readonly].item-input-wrapper {
 a { color: rgb(205,97,93);}
 a:hover { color: rgb(205, 140, 137); text-decoration: none;}
 .tabs { background-color: rgb(205,97,93)!important; color: #fff; border: none; height: 44px;}
-.bar-header { border-bottom: none !important; background-color: rgb(205,97,93);}
-.bar-header.my-post-header { border: none; }
+.bar-header { border-bottom: none !important;}
 .nav-bar-container .nav-bar-block { z-index: 999; }
 .nav-bar-container .nav-bar-block ion-header-bar { width: 0; }
 
@@ -194,8 +193,9 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none;}
 .top {
   z-index: 20;
   padding: 0 15px;
-  height: 44px;
-  min-width: 180px;
+  height: 43px;
+  width: 235px;
+  position: fixed;
 }
 ion-view .has-header {
   top: 44px;
@@ -208,20 +208,20 @@ ion-view .has-subheader {
   position: static !important;
   width: 49%;
 }
+ion-nav-bar.header {
+  position: fixed;
+}
 .header .bar.top {
   background-color: rgb(205, 97, 93);
-  border: none;
 }
 
 .header{
   position: fixed;
   height: 44px;
   background: transparent;
-
   background-image: none;
   z-index: 10;
   background-image: none;
-  width: 100%;
   border-bottom: 1px solid rgb(212,212,212);
 }
 .header .sns-icons{
@@ -268,10 +268,11 @@ ion-view .has-subheader {
   height: 100px;
   background: rgba(0, 0, 0, 0) url("../images/logo.png") no-repeat scroll 0 0 / contain ;
   background-color: #fff;
-  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+  /*box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);*/
+  margin: 12px auto;
 }
 .button-back {
-  background-color: #fff;
+  /*background-color: #fff;
   border: none;
   font-size: 34px !important;
   font-weight: 600 !important;
@@ -281,7 +282,12 @@ ion-view .has-subheader {
   width: 115px!important;
   min-width: 115px!important;
   opacity: 0;
-  padding-right: 10px!important;
+  padding-right: 10px!important;*/
+  left: 10px;
+  padding: 0 8px !important;
+  border: none;
+  font-size: 18px !important;
+  font-weight: 600 !important;
 }
 .button-back.activated {
   background-color: #fff;
@@ -299,8 +305,29 @@ ion-view .has-subheader {
 /**********************
  * Menu
  **********************/
+.menu-list .item {
+  border: none;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.menu-list .item-divider {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: transparent;
+}
+.menu-list .item-top {
+  border-top: 1px solid #d3d3d3;
+}
 .menu-list .item i{
-  color: #d3d3d3;
+  /*color: #d3d3d3;*/
+}
+.menu-list .item-divider {
+  /*height: 45px;
+  background-color: rgb(205, 97, 93);
+  color: #fff;
+  border: none;*/
+  text-align: center;
+  border: 1px solid #d3d3d3;
 }
 
 /**********************
@@ -337,6 +364,9 @@ ion-view .has-subheader {
 /**********************
  * Modal
  **********************/
+ion-modal-view .bar-header {
+  background-color: transparent!important;
+}
 .scale-in {
   transform: scale(0.9);
   opacity: 0;

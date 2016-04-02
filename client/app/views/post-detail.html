@@ -5,7 +5,7 @@
   <ion-content has-header="true" class="padding-top">
 
     <div class="row">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="post-title">
           <h1>{{post.title}}</h1>
           <div class="username" ng-click="moveToWriterDetail()">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="row" ng-repeat="postDetail in postDetails">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="post-title" ng-if="postDetail.title"><h3 class="sub">{{postDetail.title}}</h3></div>
         <div class="detail-image" ng-if="postDetail.image.url"><img ng-src="{{postDetail.image.url}}"></div>
         <div class="post-quotation" ng-if="postDetail.quotation_name" ng-cloak>{{'POST.QUOTATION'|translate}}<a href="{{postDetail.quotation_url}}" target="_blank">{{postDetail.quotation_name}}</a></div>
@@ -29,19 +29,19 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
         <a class="button icon-left ion-social-facebook sns-button facebook" ng-click ="postToFeed()" ng-cloak>{{'SNS.SHARE'|translate}}</a>
         <a class="button icon-left ion-social-twitter sns-button twitter" target="_blank" href="http://twitter.com/share?text={{post.title}}&url={{urlTwitter}}&hashtags=歴食" ng-cloak>{{'SNS.TWEET'|translate}}</a>
       </div>
     </div>
     <div class="row row-top" ng-if="shops.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="reki-icon"><h2 ng-cloak>{{'POST.SHOP_INFO'|translate}}</h2></div>
 
       </div>
     </div>
     <div class="row post-shops row-bottom" ng-if="shops.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <ul class="item-detail-list">
           <li class="overlay-image" ng-repeat="shop in shops">
             <div class="thumbnail-image">
@@ -65,13 +65,13 @@
       </div>
     </div>
     <div class="row row-top" ng-if="postsRelated.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="reki-icon"><h2 ng-cloak>{{'POST.RELATED'|translate}}</h2></div>
       </div>
     </div>
 
     <div class="row post-shops row-bottom" ng-if="postsRelated.length!=0">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="item-detail-list">
           <post-item post="postRelated" now-tab="nowTab" ng-repeat="postRelated in postsRelated"></post-item>
         </div>

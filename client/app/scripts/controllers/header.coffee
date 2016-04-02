@@ -25,16 +25,6 @@ angular.module "frontApp"
       backdropClickToClose: false).then (modalSearch) ->
         $scope.modalSearch = modalSearch
 
-    # 初期処理
-    clearInput = ->
-      input =
-        email: ""
-        password: ""
-        password_confirmation: ""
-      $scope.input = input
-
-    clearInput()
-
     # cookieより値を取得
     $localStorage['email'] = $cookies.get 'email'
     if $localStorage['email']
@@ -53,7 +43,37 @@ angular.module "frontApp"
     if $location.search()["showLogin"] || $localStorage['email']
       $scope.showLogin = true
 
+    ###
+    # 初期処理
+    ###
+    $scope.init = ->
+      clearInput()
+      # 現在Pathの取得
+      setCurrentType()
+
+    ###
+    # 共通処理
+    ###
+    clearInput = ->
+      input =
+        email: ""
+        password: ""
+        password_confirmation: ""
+      $scope.input = input
+
+    # 現在Pathの取得
+    setCurrentType = ->
+      currentPath = $location.path();
+      if currentPath == '/app/shops'
+        $rootScope.currentType = 'shop'
+      else if currentPath == '/app/map'
+        $rootScope.currentType = 'map'
+      else
+        $rootScope.currentType = 'home'
+
+    ###
     # Function
+    ###
     $scope.openModalLogin = ->
       $scope.modalLogin.show()
 
@@ -148,32 +168,36 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
       $ionicSideMenuDelegate.toggleRight(false);
 
     $scope.moveToHome = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.home')
+      $rootScope.currentType = 'home'
       clearForMove()
 
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.shops')
+      $rootScope.currentType = 'shops'
       clearForMove()
 
     $scope.moveToMap = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.map')
+      $rootScope.currentType = 'map'
       clearForMove()
 
     $scope.moveToWriters = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('writers')
+      $rootScope.currentType = 'writers'
       clearForMove()
 
     $scope.moveToMyPost = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('my-post')
+      $rootScope.currentType = 'myPost'
       clearForMove()
 
     $scope.goBack = ->
@@ -185,11 +209,7 @@ angular.module "frontApp"
       $scope.input.keywords = $location.search()['keywords']
 
       # 現在Pathの取得
-      currentPath = $location.path();
-      if currentPath == '/app/shops'
-        $scope.currentType = 'shop'
-      else
-        $scope.currentType = 'post'
+      setCurrentType()
 
       if !$scope.shopCategories || !$scope.postCategories
         # ShopCategoryを取得する
@@ -210,10 +230,10 @@ angular.module "frontApp"
       $scope.modalSearch.hide()
 
     $scope.selectPostCategory = (type) ->
-      if $scope.currentType == type
-        $scope.currentType = null
+      if $rootScope.currentType == type
+        $rootScope.currentType = null
       else
-        $scope.currentType = type
+        $rootScope.currentType = type
 
     $scope.selectSearchCategory = (id) ->
       if $scope.selectedId == id
@@ -224,7 +244,7 @@ angular.module "frontApp"
     $scope.submitSearch = ->
       if !$scope.input.keywords
         $scope.input.keywords = null
-      if $scope.currentType == 'shop'
+      if $rootScope.currentType == 'shop'
         $location.path('/app/shops').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
