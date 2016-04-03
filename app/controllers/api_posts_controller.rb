@@ -25,7 +25,7 @@ class ApiPostsController < ApplicationController
       # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
-      @posts = @posts.joins(:people).where('people.id' => person)
+      @posts = @posts.joins(:people).where('people.id' => person).uniq
     end
 
     # アイキャッチ画像の設定

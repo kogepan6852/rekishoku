@@ -23,7 +23,7 @@ class ApiShopsController < ApplicationController
       # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
-      @shops = @shops.joins(:people).where('people.id' => person)
+      @shops = @shops.joins(:people).where('people.id' => person).uniq
     end
 
     # shopにカテゴリーを紐付ける
@@ -72,7 +72,7 @@ class ApiShopsController < ApplicationController
       # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
-      @shops = @shops.joins(:people).where('people.id' => person)
+      @shops = @shops.joins(:people).where('people.id' => person).uniq
     end
 
     shops = { "shops" => @shops }
