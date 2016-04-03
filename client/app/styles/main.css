@@ -137,6 +137,7 @@
   -moz-border-radius: 18px;
   -webkit-border-radius: 18px;
   position: relative;
+  color: #000;
 }
 .main-category .search-condition span {
   background-color: #ddd;
@@ -160,6 +161,7 @@
   top: 4px;
   padding: 0 0 0 1px;
   border: none;
+  color: #444!important;
 }
 .main-category .search-condition .clear-button {
   top: 4px;
@@ -492,6 +494,10 @@ form.post-modal, .post-modal .slider {
 .present-location::before {
   font-size: 18px!important;
   margin-right: 2px;
+}
+/* serach bar */
+.map-view .main-category.bar-subheader {
+  padding: 5px 20px;
 }
 /**********************
  * Writers page

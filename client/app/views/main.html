@@ -8,22 +8,23 @@
 
     <div class="row">
       <div class="col main-category">
-        <div class="button-bar basic" ng-if="!keywords">
+        <div class="button-bar basic" ng-if="!keywords && !period">
           <a class="button"
             ng-repeat="category in categories"
-            ng-click="search({{category.id}})"
+            ng-click="search(category.id)"
             ng-bind-html="category.name | rekishokuText"
             ng-class="{active: targetCategoryId == category.id}"
           ></a>
         </div>
-        <div class="search-condition" ng-if="keywords">
+        <div class="search-condition" ng-if="keywords || period">
           <div>
-            <span ng-show="targetCategoryId">{{targetCategoryId | findTargetCategory:categories}}</span>
-            <span>{{keywords}}</span>
+            <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
+            <span ng-if="keywords" ng-bind-html="keywords"></span>
+            <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span ng-click="deleteSearchCondition()" ng-cloak>{{'BUTTON.CLEAR_CONDITION'|translate}}</span>
+            <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
           </div>
         </div>
       </div>

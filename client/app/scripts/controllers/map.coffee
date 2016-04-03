@@ -8,10 +8,19 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $translate, Api, toaster, BaseService, Const) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService) ->
 
-    # 変数設定
+    # Controllerの継承
+    $controller 'BaseCtrl', $scope: $scope
+
+    ###
+    # setting
+    ###
     $rootScope.isHideTab = false
+
+    DataService.getPeriod (data) ->
+      $scope.periods = data
+
     $scope.input = {
       address: null
     }
@@ -69,7 +78,9 @@ angular.module 'frontApp'
 
     $scope.targetMarkers = []
 
-    # 初期処理
+    ###
+    # initialize
+    ###
     $scope.init = ->
       if $rootScope.targetAddress
         $scope.input.address = $rootScope.targetAddress
@@ -104,19 +115,14 @@ angular.module 'frontApp'
         else
           alert($translate.instant('MSG.ALERT.NO_POSITION'))
 
-    # Function
-    # 店舗検索
-    $scope.searchShops = ->
-      # 緯度経度の計算
-      BaseService.getLatLng $scope.input.address, (latLng) ->
-        obj =
-          latitude: latLng.lat
-          longitude: latLng.lng
-          shopDistance: targetDistance
-        # map表示用データの作成と設定
-        setMapData(obj, true)
-
+    ###
+    # Common function
+    ###
     setMapData = (obj, isLoding) ->
+      # 検索ワードの設定
+      searchSata = $scope.getSearchData()
+      obj.keywords = searchSata.keywords
+      obj.period = searchSata.period
       # 中心位置の設定
       $scope.map.center.latitude = obj.latitude
       $scope.map.center.longitude = obj.longitude
@@ -140,6 +146,39 @@ angular.module 'frontApp'
           ret['id'] = shop.id
           shops.push(ret)
         $scope.targetMarkers = shops
+
+    ###
+    # Global function
+    ###
+    $rootScope.mapSearch = ->
+      $scope.search()
+
+    ###
+    # function
+    ###
+    # 検索処理
+    $scope.search = ->
+      # GoogleMapの距離計算
+      obj =
+        latitude: $rootScope.latitude
+        longitude: $rootScope.longitude
+        shopDistance: targetDistance
+
+      # map表示用データの作成と設定
+      setMapData(obj, true)
+
+    # 店舗検索
+    $scope.searchShops = ->
+      if !$scope.input.address
+        return
+      # 緯度経度の計算
+      BaseService.getLatLng $scope.input.address, (latLng) ->
+        obj =
+          latitude: latLng.lat
+          longitude: latLng.lng
+          shopDistance: targetDistance
+        # map表示用データの作成と設定
+        setMapData(obj, true)
 
     # 現在地への移動
     $scope.moveToCurrentPlace = ->

@@ -20,11 +20,13 @@ Rails.application.routes.draw do
   post 'api/post_details', to: 'api_post_details#create'
   patch 'api/post_details/:id', to: 'api_post_details#update'
   delete 'api/post_details/:id', to: 'api_post_details#destroy'
+
   # SHOPS
   get 'api/shops', to: 'api_shops#index'
   get 'api/shops/:id', to: 'api_shops#show'
   get 'api/shop_list', to: 'api_shops#list'
   get 'api/map', to: 'api_shops#map'
+
   # USERS
   get 'api/users', to: 'api_users#index'
   get 'api/users/:id', to: 'api_users#show'
@@ -38,6 +40,8 @@ Rails.application.routes.draw do
   post 'api/people_posts', to: 'api_people_posts#create'
   # POSTS SHOPS
   post 'api/posts_shops', to: 'api_posts_shops#create'
+  # PERIODS
+  get 'api/periods', to: 'api_periods#index'
   # LOGIN
   get 'users/index'
   get 'users/show'

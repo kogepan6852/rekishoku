@@ -1,13 +1,27 @@
-<ion-view title="" cache-view="false" ng-init="init()">
+<ion-view title="" cache-view="false" ng-init="init()" class="map-view">
 
   <!-- Serach bar -->
-  <div class="bar bar-subheader bar-clear" align="right">
+  <div class="bar bar-subheader bar-clear" align="right" ng-if="!keywords && !period">
     <button class="button button-clear icon-left ion-ios-navigate-outline present-location" ng-click="moveToCurrentPlace()"><span ng-cloak>{{'TEXT.CURRENT_PLACE'|translate}}</span></button>
     <div class="item-input-inset search-bar">
       <label class="item-input-wrapper">
         <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
       </label>
       <button class="button button-small button-dark" ng-click="searchShops()" ng-cloak>{{'BUTTON.SEARCH'|translate}}</button>
+    </div>
+  </div>
+
+  <div class="bar bar-subheader bar-clear main-category" ng-if="keywords || period">
+    <div class="search-condition">
+      <div>
+        <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
+        <span ng-if="keywords" ng-bind-html="keywords"></span>
+        <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
+      </div>
+      <div class="clear-button">
+        <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
+        <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
+      </div>
     </div>
   </div>
   <!-- Google map -->

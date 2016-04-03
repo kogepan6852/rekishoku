@@ -30,3 +30,32 @@ angular.module "frontApp"
     $scope.onDragDownScroll = ->
       $rootScope.isDown = false
       $rootScope.isHideTab = false
+
+    # 検索用キーワードをセットする処理
+    $scope.getSearchData = ->
+      # キーワードの設定
+      $scope.keywords = $location.search()['keywords']
+      keywords = null
+      if $scope.keywords
+        keywords = $scope.keywords
+      period = null
+      # 時代の設定
+      $scope.period = $location.search()['period']
+      if $scope.period
+        period = $scope.period
+
+      # 戻り値の設定
+      rtn =
+        keywords: keywords
+        period: period
+
+      return rtn
+
+    # 検索条件削除
+    $scope.deleteSearchCondition = ->
+      $scope.targetCategoryId = null
+      $scope.keywords = null
+      $scope.period = null
+      $location.search('keywords', null)
+      $location.search('period', null)
+      $scope.search()

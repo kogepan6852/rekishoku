@@ -16,6 +16,12 @@ p { color: #555; }
   background-repeat: repeat;
   background-size: auto auto;
 }
+.lite-gray{
+  color: #d3d3d3;
+}
+.bold {
+  font-weight: 600;
+}
 .padding-content {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -129,6 +135,7 @@ a:hover { color: rgb(205, 140, 137); text-decoration: none;}
 }
 .list-title h2{
   margin: 0;
+  padding: 0;
 }
 
 /**********************
@@ -305,10 +312,16 @@ ion-nav-bar.header {
 /**********************
  * Menu
  **********************/
+.menu-list, .menu-list .slider, .menu-list .scroll-view {
+  height: 100%;
+}
+.menu-list .list-slide .scroll {
+  padding-bottom: 44px;
+}
 .menu-list .item {
   border: none;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 .menu-list .item-divider {
   padding-top: 6px;
@@ -329,6 +342,19 @@ ion-nav-bar.header {
   text-align: center;
   border: 1px solid #d3d3d3;
 }
+ion-slide .item-top:first-child {
+  margin-top: 1px;
+}
+ion-slide.list-slide > div.item, ion-slide.list-slide > a.item {
+  margin-left: 1px;
+}
+ion-slide.list-slide .spinner svg {
+  width: 100%;
+}
+.slider-pager {
+  display: none;
+}
+
 
 /**********************
  * Toast

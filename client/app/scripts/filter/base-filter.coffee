@@ -9,11 +9,11 @@ angular.module "frontApp"
   .filter 'rekishokuText', () ->
     (text) -> text.replace('歴食', '<span class="hidden-xs">歴食</span>') if text?
 
-  #歴食の文言にspanタグを追加する
-  .filter 'findTargetCategory', () ->
-    (text, categories) ->
+  #オブジェクトからidに紐づくデータを抽出する
+  .filter 'mapppingId', () ->
+    (id, objs) ->
       targert = undefined
-      angular.forEach categories, (category) ->
-        if category.id == text
-          targert = category.name
+      angular.forEach objs, (obj) ->
+        if obj.id == id
+          targert = obj.name
       return targert

@@ -8,22 +8,26 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $localStorage, Api, Const) ->
+  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
+    ###
     # setting
+    ###
     $scope.targetCategoryId = null
     $rootScope.isHideTab = false
     $ionicNavBarDelegate.showBackButton false
 
-    categoryObj =
-      type: "PostCategory"
-    Api.getJson(categoryObj, Const.API.CATEGORY, true).then (res) ->
-      $scope.categories = res.data
+    DataService.getPostCategory (data) ->
+      $scope.categories = data
+    DataService.getPeriod (data) ->
+      $scope.periods = data
 
+    ###
     # initialize
+    ###
     $scope.init = ->
       $scope.noMoreLoad = false
       $scope.page = 1
@@ -35,20 +39,25 @@ angular.module "frontApp"
       if $scope.targetCategoryId
         obj.category = $scope.targetCategoryId
       # 検索ワードの設定
-      $scope.keywords = $location.search()['keywords']
-      if $scope.keywords
-        obj.keywords = $scope.keywords
+      searchSata = $scope.getSearchData()
+      obj.keywords = searchSata.keywords
+      obj.period = searchSata.period
 
       Api.getJson(obj, Const.API.POST, true).then (res) ->
         $scope.posts = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
+    ###
+    # Global function
+    ###
     $rootScope.postsSearch = (categoryId) ->
       $scope.targetCategoryId = null
       $scope.search(categoryId)
 
-    # Function
+    ###
+    # function
+    ###
     # 検索処理
     $scope.search = (categoryId) ->
       $scope.page = 1
@@ -64,9 +73,9 @@ angular.module "frontApp"
         obj.category = categoryId
 
       # 検索ワードの設定
-      $scope.keywords = $location.search()['keywords']
-      if $scope.keywords
-        obj.keywords = $scope.keywords
+      searchSata = $scope.getSearchData()
+      obj.keywords = searchSata.keywords
+      obj.period = searchSata.period
 
       # 検索
       Api.getJson(obj, Const.API.POST, true).then (res) ->
@@ -94,13 +103,6 @@ angular.module "frontApp"
             angular.forEach res.data, (data, i) ->
               $scope.posts.push(data)
           $scope.$broadcast('scroll.infiniteScrollComplete')
-
-    # 検索条件削除
-    $scope.deleteSearchCondition = ->
-      $scope.targetCategoryId = null
-      $scope.keywords = null
-      $location.search('keywords', null)
-      $scope.search()
 
     # postのmouse over時の挙動
     $scope.onMouseOverItem = (post) ->

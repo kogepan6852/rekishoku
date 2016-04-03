@@ -14,14 +14,15 @@
       <div class="row padding">
         <div class="col col-100">
           <div class="button-bar basic">
-            <a class="button" ng-click="selectPostCategory('post')" ng-class="{active: currentType == 'post'}">STORY</a>
+            <a class="button" ng-click="selectPostCategory('home')" ng-class="{active: currentType == 'home'}">STORY</a>
+            <a class="button" ng-click="selectPostCategory('map')" ng-class="{active: currentType == 'map'}">MAP</a>
             <a class="button" ng-click="selectPostCategory('shop')" ng-class="{active: currentType == 'shop'}">STORE</a>
           </div>
         </div>
       </div>
       <div class="row padding">
         <div class="col col-100">
-          <div class="button-bar basic" ng-if="currentType == 'post'">
+          <div class="button-bar basic" ng-if="currentType == 'home'">
             <a class="button"
               ng-repeat="category in postCategories"
               ng-click="selectSearchCategory(category.id)"

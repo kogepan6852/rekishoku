@@ -7,30 +7,56 @@
     </div>
 
     <div class="list menu-list">
-      <!-- pages -->
-      <div class="item item-divider visible-xs" ng-cloak>{{'MENU.TITLE'|translate}}</div>
-      <a class="item item-icon-left item-top" ng-class="{'active': currentType == 'home'}" ng-click="moveToHome()">
-        <i class="icon ion-ios-list-outline"></i>
-        STORY
-      </a>
-      <a class="item item-icon-left" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()">
-        <i class="icon ion-ios-navigate-outline"></i>MAP
-      </a>
-      <a class="item item-icon-left" ng-class="{'active': currentType == 'shops'}" ng-click="moveToShops()">
-        <i class="icon ion-android-restaurant"></i>STORE</a>
-      <a class="item" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
-      <a class="item" href="http://www.rekishoku.jp/about" target="_blank">ABOUT</a>
+      <ion-slide-box ng-init="disableSwipe()">
+        <ion-slide>
+          <!-- pages -->
+          <div class="item item-divider visible-xs" ng-cloak>{{'MENU.TITLE'|translate}}</div>
+          <a class="item item-icon-left item-top bold" ng-class="{'active': currentType == 'home'}" ng-click="moveToHome()">
+            <i class="icon ion-ios-list-outline"></i>
+            STORY
+          </a>
+          <a class="item item-icon-left bold" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()">
+            <i class="icon ion-ios-navigate-outline"></i>MAP
+          </a>
+          <a class="item item-icon-left bold" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()">
+            <i class="icon ion-android-restaurant"></i>STORE</a>
+          <a class="item bold" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
+          <a class="item bold" href="http://www.rekishoku.jp/about" target="_blank">ABOUT</a>
 
-      <!-- my account -->
-      <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div>
-      <a class="item item-top" ng-click="moveToMyPost()" ng-if="isLogin">
-        {{'MENU.POSTS'|translate}}
-      </a>
-      <a class="item" ng-click="moveToWriterDetail()" ng-show="isLogin">
-        PROFILE
-      </a>
-      <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
-      <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+          <!-- by peridos -->
+          <div class="item item-divider bold" >by PERIODS</div>
+          <a class="item" ng-click="searchByPeriods(10)">江戸時代</a>
+          <a class="item" ng-click="searchByPeriods(11)">明治時代</a>
+          <a class="item" ng-click="searchByPeriods(12)">大正時代</a>
+          <a class="item item-icon-right" ng-click="openPeriods()">
+            and more...
+            <i class="lite-gray icon ion-chevron-right"></i>
+          </a>
+
+
+          <!-- my account -->
+          <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div>
+          <a class="item item-top" ng-click="moveToMyPost()" ng-if="isLogin">
+            {{'MENU.POSTS'|translate}}
+          </a>
+          <a class="item" ng-click="moveToWriterDetail()" ng-show="isLogin">
+            PROFILE
+          </a>
+          <a class="item" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
+          <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+        </ion-slide>
+
+        <ion-slide class="list-slide">
+          <div class="item item-icon-left item-top bold" ng-click="backSlide()" >
+            <i class="lite-gray icon ion-chevron-left"></i>Back
+          </div>
+          <ion-scroll direction="y">
+            <ion-spinner ng-show="!periods"></ion-spinner>
+            <a class="item" ng-click="searchByPeriods({{period.id}})" ng-repeat="period in periods" ng-bind-html="period.name"></a>
+          </ion-scroll>
+        </ion-slide>
+
+      </ion-slide-box>
     </div>
 
   </ion-side-menu>

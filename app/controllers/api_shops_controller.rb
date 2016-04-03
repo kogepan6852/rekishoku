@@ -19,6 +19,13 @@ class ApiShopsController < ApplicationController
       @shops = @shops.joins(:categories).where('categories_shops.category_id = ?', params[:category].to_i)
     end
 
+    if params[:period]
+      # 時代で検索
+      person = Person.select('distinct people.id').joins(:periods)
+        .where('periods.id' => params[:period])
+      @shops = @shops.joins(:people).where('people.id' => person)
+    end
+
     # shopにカテゴリーを紐付ける
     if params[:page] && params[:per]
       newShops = Array.new()
@@ -60,6 +67,13 @@ class ApiShopsController < ApplicationController
     maxLatitude = params[:latitude].to_f + params[:shopDistance].to_f*latitudeRange
     maxLongitude = params[:longitude].to_f + params[:shopDistance].to_f*longitudeRange
     @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?', minLatitude, minLongitude, maxLatitude, maxLongitude)
+
+    if params[:period]
+      # 時代で検索
+      person = Person.select('distinct people.id').joins(:periods)
+        .where('periods.id' => params[:period])
+      @shops = @shops.joins(:people).where('people.id' => person)
+    end
 
     shops = { "shops" => @shops }
     render json: shops

@@ -21,6 +21,13 @@ class ApiPostsController < ApplicationController
       @posts = @posts.where(category_id: params[:category].to_i)
     end
 
+    if params[:period]
+      # 時代で検索
+      person = Person.select('distinct people.id').joins(:periods)
+        .where('periods.id' => params[:period])
+      @posts = @posts.joins(:people).where('people.id' => person)
+    end
+
     # アイキャッチ画像の設定
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|

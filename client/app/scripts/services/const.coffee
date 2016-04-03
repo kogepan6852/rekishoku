@@ -15,6 +15,7 @@ angular.module("frontApp")
       MAP:          '/api/map'
       PERSON:       '/api/people'
       CATEGORY:     '/api/categories'
+      PERIOD:       '/api/periods'
       USER:         '/api/users'
       LOGIN:        '/users/sign_in.json'
       LOGOUT:       '/authentication_token.json'

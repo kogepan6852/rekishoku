@@ -8,9 +8,11 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService) ->
 
-    # 変数設定
+    ###
+    # setting
+    ###
     $scope.input =
       keywords: null
 
@@ -44,15 +46,16 @@ angular.module "frontApp"
       $scope.showLogin = true
 
     ###
-    # 初期処理
+    # initialize
     ###
     $scope.init = ->
       clearInput()
       # 現在Pathの取得
       setCurrentType()
+      $ionicSlideBoxDelegate.enableSlide(false);
 
     ###
-    # 共通処理
+    # Common function
     ###
     clearInput = ->
       input =
@@ -70,6 +73,13 @@ angular.module "frontApp"
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'home'
+
+    clearForMove = ->
+      # backボタンを隠す
+      $ionicNavBarDelegate.showBackButton false
+      # historyデータを削除する
+      $ionicHistory.clearHistory();
+      $ionicSideMenuDelegate.toggleRight(false);
 
     ###
     # Function
@@ -163,13 +173,6 @@ angular.module "frontApp"
       $state.go('tabs.post-writer', { id: userId })
       clearForMove()
 
-    clearForMove = ->
-      # backボタンを隠す
-      $ionicNavBarDelegate.showBackButton false
-      # historyデータを削除する
-      $ionicHistory.clearHistory();
-      $ionicSideMenuDelegate.toggleRight(false);
-
     $scope.moveToHome = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.home')
@@ -179,7 +182,7 @@ angular.module "frontApp"
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.shops')
-      $rootScope.currentType = 'shops'
+      $rootScope.currentType = 'shop'
       clearForMove()
 
     $scope.moveToMap = ->
@@ -212,22 +215,18 @@ angular.module "frontApp"
       setCurrentType()
 
       if !$scope.shopCategories || !$scope.postCategories
-        # ShopCategoryを取得する
-        shopCategoryObj =
-          type: "ShopCategory"
-        Api.getJson(shopCategoryObj, Const.API.CATEGORY, true).then (res) ->
-          $scope.shopCategories = res.data
-
         # PostCategoryを取得する
-        postCategoryObj =
-          type: "PostCategory"
-        Api.getJson(postCategoryObj, Const.API.CATEGORY, true).then (res) ->
-          $scope.postCategories = res.data
+        DataService.getPostCategory (data) ->
+          $scope.postCategories = data
+        # ShopCategoryを取得する
+        DataService.getShopCategory (data) ->
+          $scope.shopCategories = data
 
       $scope.modalSearch.show()
 
     $scope.hideModalSearch = ->
       $scope.modalSearch.hide()
+      setCurrentType()
 
     $scope.selectPostCategory = (type) ->
       if $rootScope.currentType == type
@@ -248,8 +247,47 @@ angular.module "frontApp"
         $location.path('/app/shops').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
+      else if $rootScope.currentType == 'map'
+        $location.path('/app/map').search('keywords', $scope.input.keywords)
+        if $rootScope.mapSearch
+          $rootScope.mapSearch()
       else
         $location.path('/app').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
       $scope.modalSearch.hide()
+
+    $scope.openPeriods = ->
+      $ionicSlideBoxDelegate.next()
+      if $scope.periods
+        return
+
+      DataService.getPeriod (data) ->
+        $scope.periods = data
+
+    $scope.backSlide = ->
+      $ionicSlideBoxDelegate.previous()
+
+    $scope.disableSwipe = ->
+      $ionicSlideBoxDelegate.enableSlide(false);
+
+    $scope.searchByPeriods = (id) ->
+      # shop検索
+      if $rootScope.currentType == 'shop'
+        $location.path('/app/shops').search('period', id)
+        if $rootScope.shopsSearch
+          $rootScope.shopsSearch($scope.selectedId)
+      # map検索
+      else if $rootScope.currentType == 'map'
+        $location.path('/app/map').search('period', id)
+        if $rootScope.mapSearch
+          $rootScope.mapSearch($scope.selectedId)
+      # post検索
+      else
+        $rootScope.currentType = 'home'
+        $location.path('/app').search('period', id)
+        if $rootScope.postsSearch
+          $rootScope.postsSearch($scope.selectedId)
+
+      $ionicSlideBoxDelegate.previous()
+      $ionicSideMenuDelegate.toggleRight(false);
