@@ -1,0 +1,526 @@
+@CHARSET "ISO-8859-1";
+/* Style for our header texts
+* --------------------------------------- */
+html { font-size: 14px!important; }
+#fullpage h1, #fullpage h2, #fullpage h3, #fullpage h4, #fullpage h5 ,#fullpage h6 ,#fullpage p{
+  font-family: "MS Mincho","ＭＳ 明朝","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro",'arial narrow',helvetica;
+}
+#fullpage .title h3{
+  margin:0;
+  padding:0;
+}
+
+#fullpage h1{font-size: 5rem;}
+#fullpage h2{font-size: 3.7rem;}
+#fullpage h3{font-size: 2.8rem;}
+#fullpage h4{font-size: 2rem;}
+#fullpage h5{font-size: 1.5rem;}
+#fullpage h6{font-size: 1.1rem;}
+#fullpage p{
+  font-size: 1.1rem;
+  font-family: arial,helvetica!important;
+  color: #7b7c7d;
+}
+#fullpage a{color: #d05955;}
+#fullpage a:hover, #fullpage a:focus {color: #a25768;}
+
+#section0,
+#section1,
+#section2,
+#section3,
+#section4,
+#section5,
+#section6{
+  background-size: cover;
+  background-attachment: fixed;
+}
+.number {
+  font-family: arial,helvetica !important;
+  font-weight: bold;
+}
+
+#fp-nav ul li .fp-tooltip{
+  color: #474a4d!important;
+}
+
+/* Backgrounds will cover all the section
+* --------------------------------------- */
+.section{
+  background-size: cover;
+}
+
+/* Top
+* --------------------------------------- */
+/* Layer with position absolute in order to have it over the video*/
+#section0 .layer{
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  left: 0;
+  top: 43%;
+  display: none;
+}
+
+/*solves problem with overflowing video in Mac with Chrome */
+#section0{
+  overflow: hidden;
+  /*background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  background-position: center 44%;*/
+}
+
+#section0 .layer h1 {
+  font-weight: bold;
+}
+#section0 .top-image {
+  left: 50%;
+  margin: -100px auto 0 -70px;
+  position: absolute;
+  top: 50%;
+  width: 140px;
+  height: 140px;
+  background-image: url("../img/logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 140px auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  /*border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;*/
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.top {
+  color: #ffffff;
+  background-color: transparent!important;
+  background-image: url("../img/bg_top.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0) url("../img/pixel-screen.png") repeat scroll 0 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  width: auto;
+  z-index: 50;
+}
+
+.top .logo{
+  background-color: rgba(255, 255, 255, 1);
+  top: 30px;
+  left: 30px;
+  position: absolute;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  height: 100px;
+  width: 150px;
+  z-index: 100;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.top .logo img{
+  height: 100%;
+  width: auto;
+}
+
+/* main section
+* --------------------------------------- */
+.main .title {
+  height: 27%;
+  display: table;
+  width: 100%;
+  color: #ffffff;
+}
+.main .title > div{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.main .detail {
+  height: 73%;
+  background-color: #ffffff;
+  display: table;
+  width: 100%;
+  padding-bottom: 70px;
+  color: #474a4d;
+}
+.main .detail .container .row{
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 100%;
+}
+.main .detail .container .row .message {
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.main .detail .container .row .sub-message {
+  padding-top: 10px;
+  font-weight: bold;
+}
+.main .detail .container .row > div{
+  padding: 0 30px 30px;
+}
+.main .detail .container .row > div:first-child{
+  padding: 20px 30px 0px;
+}
+
+.main .detail > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.main .detail img {
+  /*border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  padding: 10px;*/
+  height: 160px;
+  width: auto;
+  position: relative!important;
+}
+.main .detail a .fa {
+  padding-left: 2px;
+}
+
+/* about section
+* --------------------------------------- */
+.about,
+.contact{
+  background-color: transparent!important;
+  background-image: url("../img/bg_about.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  text-shadow: 1px 1px 5px white;
+  color: #000;
+}
+.about .detail {
+  /*padding-bottom: 30px;*/
+  height: 100%;
+  width: 100%;
+  /*display: table;*/
+}
+.about .detail .container{
+  /*display: table-cell;
+  vertical-align: middle;*/
+  height: 100%;
+}
+.about .detail .message {
+  line-height: 1.8em;
+  text-align: left;
+  font-size: 1.2rem!important;
+  display: none;
+}
+.about .detail .message .rekishoku {
+  margin-top: -20px;
+  width: 100px;
+}
+.background-hack {
+  z-index              : -1;
+  background-color     : #cccccc;
+  background-image     : url("../img/bg_about.png");
+  background-repeat    : no-repeat;
+  background-position  : center center;
+  background-size      : cover;
+  position             : fixed;
+  top                  : 0;
+  left                 : 0;
+  right                : 0;
+  bottom               : 0;
+}
+.about .detail .row{
+  height: 100%;
+}
+.about .detail .row > div {
+  height: 100%;
+  display: table;
+}
+.about .row .message-box {
+  height: 100%;
+  background-color: rgba(255, 250, 255, 0.85);
+  padding: 45px 20px 75px;
+  /*border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
+  display: table-cell;
+  vertical-align: middle;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* team section
+* --------------------------------------- */
+.team{
+  color: #474a4d;
+}
+.team .title {
+  height: 10%;
+  display: table;
+  width: 100%;
+  color: #474a4d;
+}
+.team .title > div{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.team .detail {
+  height: 90%;
+  display: table;
+  width: 100%;
+  padding-bottom: 70px;
+  color: #474a4d;
+}
+.team .detail .container .row{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.team .detail .container .row .sub-message {
+  font-weight: bold;
+}
+.team .detail .container .row > div{
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 50%;
+}
+
+.team .detail > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.team .detail img {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  height: 120px;
+}
+.team .detail .profile{
+  height: 100px;
+}
+.team .fp-controlArrow.fp-prev {
+  border-color: transparent #474a4d transparent transparent;
+  margin-left: 30px;
+}
+.team .fp-controlArrow.fp-next {
+  border-color: transparent transparent transparent #474a4d;
+  margin-right: 30px;
+}
+
+
+/* contact section
+* --------------------------------------- */
+.contact{
+  color: #474a4d;
+}
+.contact .title {
+  height: 15%;
+  display: table;
+  width: 100%;
+  /*color: #474a4d;*/
+  color: #ffffff;
+}
+.contact .title > div{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.contact .detail {
+  height: 85%;
+  display: table;
+  width: 100%;
+  padding-bottom: 70px;
+  color: #474a4d;
+}
+.contact .detail .container .row{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+.contact .detail .container .row > div{
+  background-color: rgba(255, 255, 255, 0.85);
+  /*background-color: rgba(251, 250, 245, 0.8);*/
+}
+.contact .detail .container .row > div:first-child{
+  padding-top: 50px;
+  /*border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;*/
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+.contact .detail .container .row > div:last-child{
+  padding-bottom: 60px;
+  /*border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;*/
+  box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.2);
+}
+.contact .detail .container .row > div{
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.contact .detail > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.contact p.contact-btn {
+  width: 100%;
+  max-width: 400px;
+  padding-top: 40px;
+  /*padding-bottom: 100px;*/
+  display: inline-block;
+}
+.contact p.contact-btn a {
+  background-color: #d05955;
+  border-radius: 10px;
+  box-shadow: 0 6px 0 #a25768;
+  color: #fff!important;
+  display: block;
+  font-size: 18px;
+  padding: 20px 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: none 0s ease 0s;
+  text-shadow: none;
+}
+.contact p.contact-btn a:hover {
+  box-shadow: 0 1px 0 #a25768;
+  top: 5px;
+}
+.contact p.contact-btn .fa {
+  padding-right: 10px;
+}
+
+/* footer section
+* --------------------------------------- */
+.footer{
+  /*color: #474a4d;*/
+  color: #ffffff;
+}
+.footer .detail {
+  padding-top: 20px;
+  padding-bottom: 70px;
+}
+.footer .detail .message {
+  line-height: 2em;
+  font-weight: bold;
+}
+.footer h5{
+  font-family: arial,helvetica!important;
+}
+
+
+
+/* Centered texts in each section
+* --------------------------------------- */
+.section{
+  text-align:center;
+  overflow: hidden;
+}
+
+/* Fixed header and footer.
+* --------------------------------------- */
+#header, #footer{
+  position:fixed;
+  height: 50px;
+  display:block;
+  width: 100%;
+  z-index:9;
+  text-align:center;
+  z-index: 100;
+}
+
+#header{
+  top:0px;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 20px 0 0 0;
+}
+#header .logo{
+  background-color: #ffffff;
+  /*top: 0;*/
+  left: 15px;
+  position: absolute;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  height: 100px;
+  width: 150px;
+  border: 5px solid #fffffc;
+  /*border-radius: 255px 15px 225px / 15px 225px 15px 255px;*/
+  border-radius: 25px 255px 15px / 255px 15px 255px 15px;
+}
+#header .logo img{
+  height: 100%;
+  width: auto;
+}
+#footer{
+  bottom:0px;
+  color: #f2f2f2;
+  background: #000;
+  opacity: 0.7;
+  padding: 8px 0 0 0;
+  font-size: 22px;
+}
+#footer .row{
+  position: relative;
+}
+#footer .btn-move{
+  position: relative;
+  bottom: 33px;
+  color: #ffffff!important;
+  padding: 30px 50px;
+  outline: none;
+}
+.sns-icons i{
+  width: 30px;
+  text-align: center;
+}
+.sns-icons a{
+  color: #ffffff!important;
+}
+
+.btn-rekishoku{
+  background-color: transparent;
+  border-color: #ffffff!important;
+  color: #ffffff;
+}
+
+
+/* Bottom menu
+* --------------------------------------- */
+#infoMenu {
+  bottom: 80px;
+}
+#infoMenu li a {
+  color: #ffffff;
+  z-index: 999;
+}
+
+/* Centered texts in each section
+* --------------------------------------- */
+.section{
+  text-align:center;
+  overflow: hidden;
+}
+
+#myVideo{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top:0;
+  right:0;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-color: black; /* in case the video doesn't fit the whole page*/
+  background-image: /* our video */;
+  background-position: center center;
+  background-size: contain;
+  object-fit: cover; /*cover video background */
+  z-index:3;
+}
