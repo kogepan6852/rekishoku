@@ -145,8 +145,7 @@ ActiveRecord::Schema.define(version: 20160326155353) do
     t.string   "phone_no"
     t.integer  "daytime_price_id"
     t.integer  "nighttime_price_id"
-    t.string   "open_time"
-    t.string   "close_time"
+    t.text     "shop_hours"
     t.boolean  "is_closed_sun",        default: false, null: false
     t.boolean  "is_closed_mon",        default: false, null: false
     t.boolean  "is_closed_tue",        default: false, null: false
@@ -154,6 +153,7 @@ ActiveRecord::Schema.define(version: 20160326155353) do
     t.boolean  "is_closed_thu",        default: false, null: false
     t.boolean  "is_closed_fri",        default: false, null: false
     t.boolean  "is_closed_sat",        default: false, null: false
+    t.boolean  "is_closed_hol",        default: false, null: false
     t.string   "closed_pattern"
     t.boolean  "is_approved",          default: false, null: false
   end
