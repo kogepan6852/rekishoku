@@ -22,7 +22,9 @@ angular
     'toaster',
     'uiGmapgoogle-maps',
     'config',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'angulartics',
+    'angulartics.google.analytics'
   ]
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
