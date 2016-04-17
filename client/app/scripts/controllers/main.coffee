@@ -8,13 +8,13 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $localStorage, Api, Const) ->
+  .controller "MainCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
-    $rootScope.appTitle = "歴食 | 記事を見る"
+    $rootScope.appTitle = $translate.instant('SEO.TITLE.HOME')
     $scope.targetCategoryId = null
     $rootScope.isHideTab = false
     $ionicNavBarDelegate.showBackButton false

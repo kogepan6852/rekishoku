@@ -9,7 +9,11 @@ class AppRouteController < ApplicationController
 
   # 記事データ表示
   def post
-    if @urls[0].present?
+    # プレビュー表示の場合
+    if params[:preview]
+      path = "/#" + request.fullpath
+      redirect_to path
+    elsif @urls[0].present?
       @data = Post.find(@urls[0].to_s)
       # SEO用keywordsの設定
       @data.people.each do |person|

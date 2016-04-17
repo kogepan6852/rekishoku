@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -43,6 +43,7 @@ angular.module "frontApp"
       Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + res.data.user.username
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true

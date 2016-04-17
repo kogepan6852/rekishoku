@@ -8,13 +8,13 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, Api, Const) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, Api, Const, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
-    $rootScope.appTitle = "歴食 | 店舗を見る"
+    $rootScope.appTitle = $translate.instant('SEO.TITLE.SHOP')
     $scope.targetCategoryId = null
     $rootScope.isHideTab = false
 
