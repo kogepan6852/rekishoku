@@ -14,6 +14,7 @@ angular.module "frontApp"
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
+    $rootScope.appTitle = "歴食 | 店舗を見る"
     $scope.targetCategoryId = null
     $rootScope.isHideTab = false
 

@@ -11,6 +11,7 @@ angular.module 'frontApp'
   .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $translate, Api, toaster, BaseService, Const) ->
 
     # 変数設定
+    $rootScope.appTitle = "歴食 | MAPを見る"
     $rootScope.isHideTab = false
     $scope.input = {
       address: null

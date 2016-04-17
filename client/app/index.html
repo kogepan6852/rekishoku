@@ -3,7 +3,8 @@
   <head  ng-controller="BaseCtrl">
     <base href="/">
     <meta charset="utf-8">
-    <title>歴食</title>
+    <title ng-if="!appDescription">歴食</title>
+    <title ng-if="appDescription">{{appTitle}}</title>
     <meta name="description"        content="歴食は武将や文豪、その時代の人たちが愛した食を見るだけでなく、食べる体験を提供するサイトです." ng-if="!appDescription"/>
     <meta name="description"        content="{{appDescription}}" ng-if="appDescription"/>
     <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" ng-if="!appKeywords"/>

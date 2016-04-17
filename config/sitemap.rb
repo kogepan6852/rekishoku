@@ -44,4 +44,8 @@ SitemapGenerator::Sitemap.create do
       add '/app/post/' + post.id.to_s, :lastmod => post.updated_at, :changefreq => 'weekly'
     end
   end
+  Shop.find_each do |shop|
+    add '/app/shop/' + shop.id.to_s, :lastmod => shop.updated_at, :changefreq => 'weekly'
+  end
+
 end
