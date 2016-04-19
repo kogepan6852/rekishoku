@@ -8,12 +8,13 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WritersCtrl", ($scope, $ionicSideMenuDelegate, $controller, Api, Const) ->
+  .controller "WritersCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
+    $rootScope.appTitle = $translate.instant('SEO.TITLE.WRITERS')
 
     # initialize
     $scope.init = ->

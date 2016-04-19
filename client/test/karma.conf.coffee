@@ -37,6 +37,9 @@ module.exports = (config) ->
       'bower_components/angular-translate/angular-translate.js'
       'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js'
       'bower_components/angular-translate-handler-log/angular-translate-handler-log.js'
+      'bower_components/SHA-1/sha1.js'
+      'bower_components/angulartics/src/angulartics.js'
+      'bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js'
       'bower_components/angular-mocks/angular-mocks.js'
       # endbower
       # bower:coffee

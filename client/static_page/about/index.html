@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>歴食とは</title>
+	<meta name="description"        content="歴食とは、歴史ストーリーをもつ食です。伊達政宗が発明した仙台名物、夏目漱石が「坊ちゃん」で描写したお菓子、江戸っ子が愛した鍋 など、武将、文豪、その時代の人たちが愛した食を意味します。私たちはそんな食を”実際に食べられるお店”とともに紹介し、”食べる、歴史体験”を提供します。" />
+	<meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" />
+	<!-- FB -->
+	<meta property="og:type"        content="website" />
+	<meta property="og:title"       content="歴食とは" />
+	<meta property="og:description" content="歴食とは、歴史ストーリーをもつ食です。伊達政宗が発明した仙台名物、夏目漱石が「坊ちゃん」で描写したお菓子、江戸っ子が愛した鍋 など、武将、文豪、その時代の人たちが愛した食を意味します。私たちはそんな食を”実際に食べられるお店”とともに紹介し、”食べる、歴史体験”を提供します。" />
+	<meta property="og:image"       content="/about/assets/img/logo.png" />
+	<!-- mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon" href="/about/assets/img/icon.png">
+	<link rel="shortcut icon" href="/about/assets/img/favicon.ico">
+
+	<link rel="stylesheet" type="text/css" href="/about/assets/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="/about/assets/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="/about/assets/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="/about/assets/css/mobile.css" />
+	<link rel="stylesheet" type="text/css" href="/about/assets/css/gifplayer.css" />
+	<link rel="stylesheet" type="text/css" href="/about/vendors/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/about/vendors/font-awesome/css/font-awesome.min.css" />
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<!-- <script type="text/javascript" src="/about/assets/js/jquery-1.9.1.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="/about/vendors/jquery.slimscroll.min.js"></script>
+
+	<script type="text/javascript" src="/about/assets/js/jquery.fullPage.js"></script>
+	<script type="text/javascript" src="/about/assets/js/main.js"></script>
+	<script type="text/javascript" src="/about/vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/about/assets/js/jquery.gifplayer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				anchors: ['top', 'business', 'about', 'work', 'team', 'advisers', 'contact', 'copyright'],
+				sectionsColor: ['#ffffff', '#c0c6c9', '#d05955', '#00636f', '#f5f5f5', '#ffffff', '#ffffff', '#888677'],
+				css3: false,
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['TOP', 'WHAT IS HISTORIP FOODS', 'HOW IT WORKS', 'HOW WE CAN HELP', 'TEAM', 'ADVISERS/PARTNERS', 'CONTACT', 'FOOTER'],
+				responsive: 768,
+				afterLoad: function(anchorLink, index){
+
+					if(index == 1){
+						$('#section0').find('.layer').first().delay(500).fadeIn(1800);
+						$('#section0').find('.top-image').first().delay(500).fadeIn(1800);
+					}
+
+					if(index == 2){
+						$('#section1').find('h5').first().fadeIn(1800);
+					}
+
+				},
+				afterRender: function(){
+					//playing the video
+					$('video').get(0).play();
+				}
+			});
+
+			$('#moveSectionDown').click(function(e){
+				e.preventDefault();
+				$.fn.fullpage.moveSectionDown();
+			});
+
+			$(document).ready( function(){
+				$('.gifplayer').gifplayer();
+			});
+
+		});
+	</script>
+
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-64757165-1', {'allowAnchor': true});
+		ga('send', 'pageview');
+	</script>
+
+</head>
+<body>
+
+	<div id="header">
+		<!-- <div class="logo hidden-xs"><img src="/about/assets/img/logo.png"></div> -->
+	</div>
+	<div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6 text-left sns-icons">
+					<a href="https://www.facebook.com/rekishoku/" target="_blank"><i class="fa fa-facebook"></i></a>
+					<a  href="https://twitter.com/rekishoku" target="_blank"><i class="fa fa-twitter"></i></a>
+					<a  href="https://instagram.com/rekishoku" target="_blank"><i class="fa fa-instagram"></i></a>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+					<a type="button" class="btn btn-rekishoku" href="http://www.rekishoku.jp/" target="_blank">歴食.jpへ</a>
+				</div>
+				<a id="moveSectionDown" class="btn-move" href="#"><i class="fa fa-chevron-down"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="fullpage">
+
+		<!-- 1st Section -->
+		<div class="section top" id="section0">
+			<div class="logo hidden-xs"><img src="/about/assets/img/logo.png"></div>
+			<div class="overlay hidden-xs"></div>
+			<video autoplay loop muted id="myVideo" class="hidden-xs" poster="/about/assets/img/bg_top.png">
+				<source src="/about/assets/img/lp.mp4" type="video/mp4">
+				<source src="/about/assets/img/lp.webm" type="video/webm">
+			</video>
+			<div class="top-image visible-xs"></div>
+			<div class="layer intro">
+				<h1 class="hidden-xs">食べる、<br class="visible-xs" />歴史体験</h1>
+			</div>
+		</div>
+
+		<!-- 4th Section -->
+		<div class="section about" id="section1">
+			<div class="background-hack" class="visible-xs"></div>
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6  col-sm-8 col-sm-offset-4 col-xs-12">
+							<div class="message-box">
+								<h5 class="message">
+									<img class="rekishoku"src="/about/assets/img/rekishoku.png">とは、歴史ストーリーをもつ食です。<br />
+									<br class="visible-xs" />
+									伊達政宗が発明した仙台名物、 <br class="hidden-xs" />
+									夏目漱石が「坊ちゃん」で描写したお菓子、<br class="hidden-xs" />
+									江戸っ子が愛した鍋 など、<br class="hidden-xs" />
+									武将、文豪、その時代の人たちが愛した食を意味します。<br />
+									<br />
+									私たちはそんな食を”実際に食べられるお店”とともに、<br class="hidden-xs" />
+									独自の評価軸”歴食度”によって紹介していきます。<br/>
+									”食べる、歴史体験”をお楽しみ下さい。
+								</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 2nd Section -->
+		<div class="section main" id="section2">
+
+			<div class="title">
+				<div>
+					<h5>HOW IT WORKS</h5>
+					<h3>おしゃれや流行以外のお店選びをしませんか？</h3>
+				</div>
+			</div>
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h4 class="message">歴食.jpは、3つの楽しみ方をご提供します</h4>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">1</h4> -->
+							<img src="/about/assets/img/HF1-1.png" data-gif="/about/assets/img/HF1-1.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">歴史を食で知れる</h5>
+							<p>
+								歴史上の人物と食の関係を歴史好きな<br class="visible-xs" />
+								"歴食ライター"がお伝えします。
+							</p>
+							<p><a href="http://www.rekishoku.jp/app" target="_blank">記事を見る<i class="fa fa-arrow-circle-o-right"></i></a></p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">2</h4> -->
+							<img src="/about/assets/img/HF1-2.png" data-gif="/about/assets/img/HF1-2.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">実際に食べにいける</h5>
+							<p>
+								歴食.jpは実際に食べにいける"食と店"を<br class="visible-xs" />
+								併せてご紹介しています。
+							</p>
+							<p><a href="http://www.rekishoku.jp/app/shops" target="_blank">店舗を見る<i class="fa fa-arrow-circle-o-right"></i></a></p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">3</h4> -->
+							<img src="/about/assets/img/HF1-3.png" data-gif="/about/assets/img/HF1-3.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">歴食度でお店選び</h5>
+							<p>
+								歴史上の人物と食の関係を”歴食度”と<br class="visible-xs" />
+								MAPで検索できます。
+							</p>
+							<p><a href="http://www.rekishoku.jp/app/map" target="_blank">MAPを見る<i class="fa fa-arrow-circle-o-right"></i></a></p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 3rd Section -->
+		<div class="section main" id="section3">
+
+			<div class="title">
+				<div>
+					<h5>HOW WE CAN HELP</h5>
+					<h3>歴食で日本を世界に発信し、地域活性化</h3>
+				</div>
+			</div>
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h4 class="message">歴食.jpは、自治体や地元企業をサポートします</h4>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">1</h4> -->
+							<img src="/about/assets/img/HF2-1.png" data-gif="/about/assets/img/HF2-1.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">歴食WEBの開発</h5>
+							<p>地域の歴食に合ったテイストの歴食サイトを開発・運営します。</p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">2</h4> -->
+							<img src="/about/assets/img/HF2-2.png" data-gif="/about/assets/img/HF2-2.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">歴食ネットワークで広報</h5>
+							<p>
+								歴食.jpでの記事広報に加え、<br class="visible-xs" />
+								提携海外メディアへの掲載も可能です。
+							</p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<!-- <h4 class="number">3</h4> -->
+							<img src="/about/assets/img/HF2-3.png" data-gif="/about/assets/img/HF2-3.gif" class="gifplayer" data-playon="hover" />
+							<h5 class="sub-message">歴食のオンライン販売</h5>
+							<p>
+								歴食ECサイトをOPEN予定です。<br class="visible-xs" />
+								歴食ファンが集まる場で販売代行します。
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 5th Section -->
+		<div class="section team" id="section4">
+
+			<!-- mobile用 -->
+			<div class="title">
+				<div><h5>TEAM</h5></div>
+			</div>
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<img src="/about/assets/img/team_ceo.png">
+							<h5 class="sub-message">CEO<br />KAZUHIRO YONEJIMA</h5>
+							<div class="profile">
+								<p>
+									オイシックス株式会社にてデジタルマーケティング推進担当、2000年創業メンバー。<br class="visible-xs" />
+									事業開発とアライアンス担当。
+								</p>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<img src="/about/assets/img/team_cto.png">
+							<h5 class="sub-message">CTO<br />AKIHIRO TANAKA</h5>
+							<div class="profile">
+								<p>
+									外資系コンサルティング企業のWeb&Mobileエンジニア。<br class="visible-xs" />
+									エンジニアリングと技術関連全般を担当。
+								</p>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<img src="/about/assets/img/team_cco.png">
+							<h5 class="sub-message">CCO<br />RYOSUKE IMAI</h5>
+							<div class="profile">
+								<p>
+									株式会社シーニカ代表、ビジネスデザイナー。<br class="visible-xs" />
+									クリエイティブとコンテンツのディレクションを担当。
+								</p>
+							</div>
+						</div>
+
+						<!-- mobile用 -->
+						<div class="col-md-4 col-md-offset-2  col-sm-4 col-sm-offset-2  col-xs-12">
+							<img src="/about/assets/img/team_cko.png">
+							<h5 class="sub-message">CKO<br />HARUKA OUCHI</h5>
+							<div class="profile">
+								<p>
+									東京工業大学大学院博士。歴史街道マニア。<br class="visible-xs" />
+									歴食の情報収集とサーバーサイドのエンジニアリングを担当 。
+								</p>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<img src="/about/assets/img/team_founder.png">
+							<h5 class="sub-message">FOUNDER, ENGINEER<br />JUNYA KENGO</h5>
+							<div class="profile">
+								<p>
+									株式会社モンスター・ラボのiOSエンジニア。<br class="visible-xs" />
+									サーバーサイドのエンジニアリングと営業を担当。
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 6th Section -->
+		<div class="section team" id="section4">
+
+			<!-- mobile用 -->
+			<div class="title">
+				<div><h5>ADVISERS / PARTNERS</h5></div>
+			</div>
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
+							<img src="/about/assets/img/team_miroc.png">
+							<h5 class="sub-message">MIROC KODACHI</h5>
+							<div class="profile">
+								<p>
+									株式会社リカロン代表。茨城県古河市非公認ご当地キャラ こがにゃんこを手がけるプロデューサー兼デザイナー。
+									歴女クリエイターとして講演活動やラジオなどのメディア出演も行う。
+								</p>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<img src="/about/assets/img/team_todaemi.jpg">
+							<h5 class="sub-message">EMI TODA</h5>
+							<div class="profile">
+								<p>
+									平成生まれの歴女としてNHKやTBSの番組に出演するなど活動中。
+									普段はWebを中心にデザイン、ライティング、写真撮影を手がけるクリエイター。
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 7th Section -->
+		<div class="section contact" id="section5">
+
+			<div class="title">
+				<div><h5>CONTACT</h5></div>
+			</div>
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+							<h5 class="message">
+								歴食ライターに興味ある方、プロジェクトのご相談がある方、
+								プレスの方等、下記よりご連絡ください。
+							</h5>
+						</div>
+
+						<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+							<p class="contact-btn"><a href="mailto:info@rekishoku.jp"><i class="fa fa-envelope-o"></i>問い合わせる</a></p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 7th Section -->
+		<div class="section fp-auto-height footer" id="section6">
+
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h5>©歴食.jp | All Rights Reserved</h5>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+</body>
+</html>

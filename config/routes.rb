@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'app_route#show'
+  get 'app/post/*path', to: 'app_route#post'
+  get 'app/shop/*path', to: 'app_route#shop'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: 'app_route#show'
   # 旧URL対応
@@ -53,9 +55,6 @@ Rails.application.routes.draw do
     when 'staging'
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
-
-# about page
-  get 'about', to: redirect('http://about.rekishoku.jp')
 
 # ADMIN route
   resources :menu

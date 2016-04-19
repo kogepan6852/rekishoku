@@ -16,6 +16,6 @@
 /vendor/bundle
 /client/.tmp
 /client/app/scripts/config/
-/client/node_modules/*/.cache/
+/client/node_modules/
 
 /public/*

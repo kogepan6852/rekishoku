@@ -1,4 +1,13 @@
 {
+  "SEO": {
+    "TITLE": {
+      "BASE":         "歴食 | ",
+      "HOME":         "歴食 | 記事を見る",
+      "MAP":          "歴食 | MAPを見る",
+      "SHOP":         "歴食 | 店舗を見る",
+      "WRITERS":      "歴食 | ライター一覧"
+    }
+  },
   "MENU": {
     "TITLE":          "MENU",
     "STORY":          "STORY",

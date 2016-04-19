@@ -3,10 +3,11 @@
   <head  ng-controller="BaseCtrl">
     <base href="/">
     <meta charset="utf-8">
-    <title>歴食</title>
-    <meta name="description"        content="歴食は武将や文豪、その時代の人たちが愛した食を見るだけでなく食べる体験を提供するサイトです." ng-if="!appDescription"/>
+    <title ng-if="!appDescription">歴食</title>
+    <title ng-if="appDescription">{{appTitle}}</title>
+    <meta name="description"        content="歴食は武将や文豪、その時代の人たちが愛した食を見るだけでなく、食べる体験を提供するサイトです." ng-if="!appDescription"/>
     <meta name="description"        content="{{appDescription}}" ng-if="appDescription"/>
-    <meta name="keywords"           content="歴食,歴史,偉人,食事,郷土料理,暦食" ng-if="!appKeywords"/>
+    <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" ng-if="!appKeywords"/>
     <meta name="keywords"           content="{{appKeywords}}" ng-if="appKeywords"/>
     <!-- FB -->
     <meta property="og:type"        content="website" />
@@ -69,7 +70,6 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-64757165-1', {'allowAnchor': true});
-      ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
     </script>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -94,6 +94,9 @@
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script src="bower_components/SHA-1/sha1.js"></script>
+    <script src="bower_components/angulartics/src/angulartics.js"></script>
+    <script src="bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
