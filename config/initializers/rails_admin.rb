@@ -8,6 +8,9 @@ RailsAdmin.config do |config|
   end
   config.current_user_method(&:current_user)
 
+  # 宣言したDBを表示させないようにする
+  config.excluded_models = ["CategoryShop"]
+
   ## == Cancan ==
   config.authorize_with :cancan
 
@@ -17,7 +20,9 @@ RailsAdmin.config do |config|
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
   config.actions do
-    dashboard                     # mandatory
+    dashboard do
+      statistics false
+    end                    # mandatory
     index                         # mandatory
     new
     export
@@ -31,4 +36,22 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Shop' do
+    weight 1
+    list do
+      field :name
+      field :url
+    end
+
+    field :url  do
+      label "店舗URL"
+      help "必須"
+    end
+   end
+
+   config.model 'Price' do
+     weight 2
+    end
+
 end
