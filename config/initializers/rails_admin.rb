@@ -20,10 +20,8 @@ RailsAdmin.config do |config|
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
   config.actions do
-    dashboard do
-      statistics false
-    end                    # mandatory
-    index                         # mandatory
+    dashboard
+    index
     new
     export
     bulk_delete
@@ -53,43 +51,50 @@ RailsAdmin.config do |config|
         label "管理レベル"
       end
     end
-    field :email  do
-      label "メールアドレス"
-      help "必須"
+    edit do
+      field :email  do
+        label "メールアドレス"
+        help "必須"
+        required true
+      end
+      field :password  do
+        label "パスワード"
+        help "8-32文字"
+      end
+      field :password_confirmation do
+        label "再パスワード入力"
+        help "8-32文字"
+      end
+      field :username do
+        label "公開する名前"
+        help "必須"
+        required true
+      end
+      field :last_name do
+        label "苗字"
+        help "必須"
+        required true
+      end
+      field :first_name do
+        label "名前"
+        help "必須"
+        required true
+      end
+      field :profile do
+        label "プロフィール"
+        help "任意"
+      end
+      field :image do
+        label "プロフィール画面"
+        help "必須"
+        required true
+      end
+      field :role  do
+        label "管理レベル"
+        help "必須　0:管理者　1:ライター 2:一般ユーザー"
+        required true
+      end
     end
-    field :password  do
-      label "パスワード"
-      help "必須　8-32文字"
-    end
-    field :password_confirmation do
-      label "再パスワード入力"
-      help "必須　8-32文字"
-    end
-    field :username do
-      label "公開する名前"
-      help "必須"
-    end
-    field :last_name do
-      label "苗字"
-      help "必須"
-    end
-    field :first_name do
-      label "名前"
-      help "必須"
-    end
-    field :profile do
-      label "プロフィール"
-      help "任意"
-    end
-    field :image do
-      label "プロフィール画面"
-      help "必須"
-    end
-    field :role  do
-      label "管理レベル"
-      help "必須　0:管理者　1:ライター 2:一般ユーザー"
-    end
-
    end
 
    ## カテゴリ
@@ -373,7 +378,5 @@ RailsAdmin.config do |config|
       end
     end
   end
-
-
-
+  
 end
