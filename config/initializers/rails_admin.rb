@@ -37,21 +37,132 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  # ユーザーの管理レベル調整
+  ## ユーザーの管理レベル調整
   config.model 'User' do
     label "ユーザー管理DB"
     weight 4
     list do
       field :email
+      field :username
       field :role
+    end
+    field :email  do
+      label "メールアドレス"
+      help "必須"
+    end
+    field :password  do
+      label "パスワード"
+      help "必須　8-32文字"
+    end
+    field :username do
+      label "公開する名前"
+      help "必須"
+    end
+    field :last_name do
+      label "苗字"
+      help "必須"
+    end
+    field :first_name do
+      label "名前"
+      help "必須"
+    end
+    field :profile do
+      label "プロフィール"
+      help "任意"
+    end
+    field :image do
+      label "プロフィール画面"
+      help "必須"
     end
     field :role  do
       label "管理レベル"
-      help "0:管理者　1:ライター 2:一般ユーザー"
+      help "必須　0:管理者　1:ライター 2:一般ユーザー"
+    end
+
+   end
+
+   ## カテゴリ
+   config.model 'PostCategory' do
+     label "記事カテゴリ"
+     weight 3
+     list do
+       field :name
+       field :slug
+       field :updated_at
+     end
+     field :name  do
+       label "記事カテゴリ名"
+       help "必須　例)菓子"
+     end
+     field :slug  do
+       label "管理用記事カテゴリ"
+       help "必須　英語　例)tea"
+     end
+     field :people do
+       label "関係がある人"
+       help "対象カテゴリを右に移動してくだい"
+     end
+     field :shops do
+       label "関係があるお店"
+       help "対象カテゴリを右に移動してくだい"
+     end
+    end
+
+   ## 人物カテゴリ
+   config.model 'PersonCategory' do
+     label "人物カテゴリ"
+     weight 3
+     list do
+       field :name
+       field :slug
+       field :updated_at
+     end
+     field :name  do
+       label "人物カテゴリ名"
+       help "必須　例)菓子"
+     end
+     field :slug  do
+       label "管理用人物カテゴリ"
+       help "必須　英語　例)tea"
+     end
+     field :people do
+       label "関係がある人"
+       help "対象カテゴリを右に移動してくだい"
+     end
+     field :shops do
+       label "関係があるお店"
+       help "対象カテゴリを右に移動してくだい"
+     end
+    end
+
+  ## お店カテゴリ
+  config.model 'ShopCategory' do
+    label "ショップカテゴリ"
+    weight 3
+    list do
+      field :name
+      field :slug
+      field :updated_at
+    end
+    field :name  do
+      label "ショップカテゴリ名"
+      help "必須　例)菓子"
+    end
+    field :slug  do
+      label "管理用カテゴリ名"
+      help "必須　英語　例)tea"
+    end
+    field :people do
+      label "関係がある人"
+      help "対象カテゴリを右に移動してくだい"
+    end
+    field :shops do
+      label "関係があるお店"
+      help "対象カテゴリを右に移動してくだい"
     end
    end
 
-   # カテゴリ調整
+   ## 人物登録
    config.model 'Person' do
      label "人物登録"
      weight 2
@@ -72,12 +183,12 @@ RailsAdmin.config do |config|
        help "1-3段階　有名だと3"
      end
      field :shops do
-       label "関係なお店"
+       label "関係があるお店"
        help "対象カテゴリを右に移動してくだい"
      end
     end
 
-  # お店データ定義
+  ## お店データ定義
   config.model 'Shop' do
     label "お店登録"
     weight 1
@@ -190,7 +301,7 @@ RailsAdmin.config do |config|
       help "フリーフォーマット"
     end
     field :people do
-      label "関係な人物"
+      label "関係がある人物"
       help "必須 対象カテゴリを右に移動してくだい"
     end
     field :is_approved do
