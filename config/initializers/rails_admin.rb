@@ -97,8 +97,8 @@ RailsAdmin.config do |config|
     end
    end
 
-   ## カテゴリ
-   config.model 'PostCategory' do
+   ## 記事カテゴリ
+  config.model 'PostCategory' do
      label "記事カテゴリ"
      weight 3
      list do
@@ -190,7 +190,7 @@ RailsAdmin.config do |config|
     end
    end
 
-   ## 人物登録
+   ## 人物
    config.model 'Person' do
      label "人物登録"
      weight 2
@@ -231,7 +231,7 @@ RailsAdmin.config do |config|
       end
     end
 
-  ## お店データ定義
+  ## 店舗
   config.model 'Shop' do
     label "お店登録"
     weight 1
@@ -378,5 +378,5 @@ RailsAdmin.config do |config|
       end
     end
   end
-  
+
 end
