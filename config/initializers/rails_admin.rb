@@ -186,10 +186,14 @@ RailsAdmin.config do |config|
        label "ランク"
        help "1-3段階　有名だと3"
      end
-     field :shops do
-       label "関係があるお店"
-       help "対象カテゴリを右に移動してくだい"
-     end
+     field :periods do
+         label "関係がある時代"
+         help "対象カテゴリを右に移動してくだい"
+      end
+      field :shops do
+        label "関係があるお店"
+        help "対象カテゴリを右に移動してくだい"
+      end
     end
 
   ## お店データ定義
