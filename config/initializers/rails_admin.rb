@@ -54,6 +54,10 @@ RailsAdmin.config do |config|
       label "パスワード"
       help "必須　8-32文字"
     end
+    field :password_confirmation do
+      label "再パスワード入力"
+      help "必須　8-32文字"
+    end
     field :username do
       label "公開する名前"
       help "必須"
