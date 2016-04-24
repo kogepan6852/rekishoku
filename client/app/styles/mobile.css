@@ -331,8 +331,8 @@
   /* menu */
   .menu-content {
     -webkit-transform: translate3d(270px, 0px, 0px) !important;
-    transform: translate3d(235px, 0px, 0px) !important;
-    width: calc(100% - 235px) !important;
+    transform: translate3d(215px, 0px, 0px) !important;
+    width: calc(100% - 215px) !important;
   }
 
   .nav-bar-container .fix-nav .ion-navicon-round {
@@ -342,8 +342,8 @@
     z-index: 100 !important;
     box-shadow: -1px 0 2px rgba(0, 0, 0, 0.2), 1px 0 2px rgba(0, 0, 0, 0.2);
     left: 0;
-    padding-top: 130px;
-    width: 235px!important;
+    padding-top: 165px;
+    width: 215px!important;
   }
   ion-side-menu .bar-header {
     background-color: transparent!important;
