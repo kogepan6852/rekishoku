@@ -49,36 +49,6 @@ Rails.application.routes.draw do
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
 
-# ADMIN route
-  resources :menu
-
-  resources :people_shops
-
-  resources :people_posts
-
-  resources :posts_shops
-
-  resources :people_periods
-
-  resources :periods
-
-  resources :categories_people
-
-  resources :categories_shops
-
-  resources :people
-
-  resources :shops
-
-  resources :post_details
-
-  resources :categories
-
-  # devise_for :users
-  resources :posts
-
-  resources :prices
-
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
