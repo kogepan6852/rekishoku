@@ -221,6 +221,9 @@ RailsAdmin.config do |config|
       field :description do
         label "店舗説明"
       end
+      field :total_level do
+        label "歴食度合計"
+      end
       field :is_approved do
         label "承認確認"
       end
@@ -295,14 +298,17 @@ RailsAdmin.config do |config|
       field :daytime_price_id do
         label "日中価格帯"
         help "必須　例）6 :〜5999"
+        required true
       end
       field :nighttime_price_id do
         label "夜間価格帯"
         help "必須 例) 1 :〜999"
+        required true
       end
       field :shop_hours do
         label "営業時間"
         help "必須　例) 9:00〜21:00　フリーフォーマット"
+        required true
       end
       field :is_closed_sun do
         label "日曜定休"
@@ -339,6 +345,30 @@ RailsAdmin.config do |config|
       field :closed_pattern do
         label "その他定休日"
         help "フリーフォーマット"
+      end
+      field :closed_pattern do
+        label "その他定休日"
+        help "フリーフォーマット"
+      end
+      field :history_level do
+        label "創業"
+        help "0:戦後、1:明治以降から昭和戦前、2:江戸時代,3:江戸以前"
+      end
+      field :building_level do
+        label "建物"
+        help "内装と建物　0:どちらも戦後、1:片方が戦前、2:片方が大正以前,3:建物が江戸以前"
+      end
+      field :menu_level do
+        label "メニュー"
+        help "0:創作系、1:復刻、2:当時から、3:オリジナル"
+      end
+      field :person_level do
+        label "人物レベル"
+        help "1:庶民、2:有名人1人、3:有名人2人以上"
+      end
+      field :episode_level do
+        label "エピソード"
+        help "1:関連なし、2:他店or移転前、3:現場(ここで起きたこと)"
       end
       field :people do
         label "関係がある人物"
