@@ -37,7 +37,7 @@ RailsAdmin.config do |config|
 
   ## ユーザーの管理レベル調整
   config.model 'User' do
-    label "ユーザー管理DB"
+    label "ユーザー管理"
     weight 4
     list do
       field :id
@@ -91,7 +91,7 @@ RailsAdmin.config do |config|
       end
       field :role  do
         label "管理レベル"
-        help "必須　0:管理者　1:ライター 2:一般ユーザー"
+        help "必須　0:管理者　1:一般ユーザー 2:ライター"
         required true
       end
     end
@@ -109,21 +109,13 @@ RailsAdmin.config do |config|
     edit do
       field :name  do
         label "記事カテゴリ名"
-        help "必須　例)菓子"
+        help "必須　例)歴食ニュース"
         required true
       end
       field :slug  do
         label "管理用記事カテゴリ"
-        help "必須　英語　例)tea"
+        help "必須　英語　例)information"
         required true
-      end
-      field :people do
-        label "関係がある人"
-        help "対象カテゴリを右に移動してくだい"
-      end
-      field :shops do
-        label "関係があるお店"
-        help "対象カテゴリを右に移動してくだい"
       end
     end
   end
@@ -140,21 +132,14 @@ RailsAdmin.config do |config|
      edit do
        field :name  do
          label "人物カテゴリ名"
-         help "必須　例)菓子"
+         help "必須　例)武将"
          required true
        end
        field :slug  do
          label "管理用人物カテゴリ"
-         help "必須　英語　例)tea"
+         help "必須　英語　例)military_commander"
+         #help.color = "red"
          required true
-       end
-       field :people do
-         label "関係がある人"
-         help "対象カテゴリを右に移動してくだい"
-       end
-       field :shops do
-         label "関係があるお店"
-         help "対象カテゴリを右に移動してくだい"
        end
       end
     end
@@ -178,14 +163,6 @@ RailsAdmin.config do |config|
         label "管理用カテゴリ名"
         help "必須　英語　例)tea"
         required true
-      end
-      field :people do
-        label "関係がある人"
-        help "対象カテゴリを右に移動してくだい"
-      end
-      field :shops do
-        label "関係があるお店"
-        help "対象カテゴリを右に移動してくだい"
       end
     end
    end
@@ -282,19 +259,15 @@ RailsAdmin.config do |config|
       end
       field :image_quotation_url do
         label "画像掲載元URL"
-        help "必要に応じて"
       end
       field :image_quotation_name do
         label "画像掲載元名称"
-        help "必要に応じて"
       end
       field :post_quotation_name do
         label "記事参照元URL"
-        help "必要に応じて"
       end
       field :post_quotation_name do
         label "記事参照元名称"
-        help "必要に応じて"
       end
       field :province do
         label "都道府県"
@@ -313,7 +286,6 @@ RailsAdmin.config do |config|
       end
       field :address2 do
         label "建物名"
-        help "必要に応じて"
       end
       field :phone_no do
         label "電話番号"
@@ -334,35 +306,35 @@ RailsAdmin.config do |config|
       end
       field :is_closed_sun do
         label "日曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_mon do
         label "月曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_tue do
         label "火曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_wed do
         label "水曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_thu do
         label "木曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_fri do
         label "金曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_sat do
         label "土曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_hol do
         label "祝日定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :closed_pattern do
         label "その他定休日"
