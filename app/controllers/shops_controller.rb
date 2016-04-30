@@ -31,7 +31,13 @@ class ShopsController < ApplicationController
     Geocoder.configure(:language  => :ja,  :units => :km )
     addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
     #歴食度_合計
-    total = shop_params[:history_level].to_i + shop_params[:building_level].to_i + shop_params[:menu_level].to_i + shop_params[:person_level].to_i + shop_params[:episode_level].to_i
+    levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
+    total = 0
+    for level in levelArray
+      if shop_params[level]  != "-1"
+        total += shop_params[level].to_i
+      end
+    end
     # 緯度経度と歴食度を代入する
     @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total))
     @shop.save
@@ -45,10 +51,16 @@ class ShopsController < ApplicationController
     Geocoder.configure(:language  => :ja,  :units => :km )
     addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
     #歴食度_合計
-    total = shop_params[:history_level].to_i + shop_params[:building_level].to_i + shop_params[:menu_level].to_i + shop_params[:person_level].to_i + shop_params[:episode_level].to_i
+    levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
+    total = 0
+    for level in levelArray
+      if shop_params[level]  != "-1"
+        total += shop_params[level].to_i
+      end
+    end
+
     # 緯度経度と歴食度を代入する
     @shop.update(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total))
-    #redirect_to :back
     redirect_to "/admin/shop"
   end
 
