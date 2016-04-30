@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
+  post 'admin/shop/new', to: 'shops#create'
+  put 'admin/shop/:id/edit', to: 'shops#update'
+
 # site map
   case Rails.env
     when 'production'

@@ -30,19 +30,18 @@ class ShopsController < ApplicationController
     # 住所から緯度経度を求める
     Geocoder.configure(:language  => :ja,  :units => :km )
     addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
-    # 緯度経度を代入する
-    @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
-
-
-    respond_to do |format|
-      if @shop.save
-        format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
-        format.json { render :show, status: :created, location: @shop }
-      else
-        format.html { render :new }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
+    #歴食度_合計
+    levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
+    total = 0
+    for level in levelArray
+      if shop_params[level]  != "-1"
+        total += shop_params[level].to_i
       end
     end
+    # 緯度経度と歴食度を代入する
+    @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total))
+    @shop.save
+    redirect_to "/admin/shop"
   end
 
   # PATCH/PUT /shops/1
@@ -51,17 +50,18 @@ class ShopsController < ApplicationController
     # 住所から緯度経度を求める
     Geocoder.configure(:language  => :ja,  :units => :km )
     addressPlace = Geocoder.coordinates(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
-    # 緯度経度を代入する
-    @shop.update(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
-    respond_to do |format|
-      if @shop.update(shop_params)
-        format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shop }
-      else
-        format.html { render :edit }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
+    #歴食度_合計
+    levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
+    total = 0
+    for level in levelArray
+      if shop_params[level]  != "-1"
+        total += shop_params[level].to_i
       end
     end
+
+    # 緯度経度と歴食度を代入する
+    @shop.update(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total))
+    redirect_to "/admin/shop"
   end
 
   # DELETE /shops/1
@@ -90,7 +90,7 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :history_level, :building_level, :phone_no, :daytime_price_id, :nighttime_price_id, :shop_hours, :is_closed_sun, :is_closed_mon, :is_closed_tue, :is_closed_wed, :is_closed_thu, :is_closed_fri, :is_closed_sat, :is_closed_hol, :is_approved, :closed_pattern, :total_level, :menu_level, :episode_level, :person_level, :category_ids => [], :person_ids => [])
     end
 
 end

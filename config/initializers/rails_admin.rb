@@ -37,7 +37,7 @@ RailsAdmin.config do |config|
 
   ## ユーザーの管理レベル調整
   config.model 'User' do
-    label "ユーザー管理DB"
+    label "ユーザー管理"
     weight 4
     list do
       field :id
@@ -89,9 +89,12 @@ RailsAdmin.config do |config|
         help "必須"
         required true
       end
-      field :role  do
+      field :role, :enum do
+      enum do
+        Hash[ ['管理者', '一般ユーザー','ライター'].zip(['0', '1','2']) ]
+      end
         label "管理レベル"
-        help "必須　0:管理者　1:ライター 2:一般ユーザー"
+        help "必須　0:管理者　1:一般ユーザー 2:ライター"
         required true
       end
     end
@@ -109,21 +112,13 @@ RailsAdmin.config do |config|
     edit do
       field :name  do
         label "記事カテゴリ名"
-        help "必須　例)菓子"
+        help "必須　例)歴食ニュース"
         required true
       end
       field :slug  do
         label "管理用記事カテゴリ"
-        help "必須　英語　例)tea"
+        help "必須　英語　例)information"
         required true
-      end
-      field :people do
-        label "関係がある人"
-        help "対象カテゴリを右に移動してくだい"
-      end
-      field :shops do
-        label "関係があるお店"
-        help "対象カテゴリを右に移動してくだい"
       end
     end
   end
@@ -140,21 +135,14 @@ RailsAdmin.config do |config|
      edit do
        field :name  do
          label "人物カテゴリ名"
-         help "必須　例)菓子"
+         help "必須　例)武将"
          required true
        end
        field :slug  do
          label "管理用人物カテゴリ"
-         help "必須　英語　例)tea"
+         help "必須　英語　例)military_commander"
+         #help.color = "red"
          required true
-       end
-       field :people do
-         label "関係がある人"
-         help "対象カテゴリを右に移動してくだい"
-       end
-       field :shops do
-         label "関係があるお店"
-         help "対象カテゴリを右に移動してくだい"
        end
       end
     end
@@ -178,14 +166,6 @@ RailsAdmin.config do |config|
         label "管理用カテゴリ名"
         help "必須　英語　例)tea"
         required true
-      end
-      field :people do
-        label "関係がある人"
-        help "対象カテゴリを右に移動してくだい"
-      end
-      field :shops do
-        label "関係があるお店"
-        help "対象カテゴリを右に移動してくだい"
       end
     end
    end
@@ -215,7 +195,10 @@ RailsAdmin.config do |config|
          help "必須"
          required true
        end
-       field :rating  do
+       field :rating, :enum do
+       enum do
+         Hash[ ['1: 学者レベル', '2: 趣味レベル','3: 教科書レベル'].zip(['1', '2','3']) ]
+       end
          label "ランク"
          help "1-3段階　有名だと3"
          required true
@@ -223,10 +206,6 @@ RailsAdmin.config do |config|
        field :periods do
            label "関係がある時代"
            help "対象カテゴリを右に移動してくだい"
-        end
-        field :shops do
-          label "関係があるお店"
-          help "対象カテゴリを右に移動してくだい"
         end
       end
     end
@@ -243,6 +222,9 @@ RailsAdmin.config do |config|
       end
       field :description do
         label "店舗説明"
+      end
+      field :total_level do
+        label "歴食度合計"
       end
       field :is_approved do
         label "承認確認"
@@ -282,19 +264,15 @@ RailsAdmin.config do |config|
       end
       field :image_quotation_url do
         label "画像掲載元URL"
-        help "必要に応じて"
       end
       field :image_quotation_name do
         label "画像掲載元名称"
-        help "必要に応じて"
       end
       field :post_quotation_name do
         label "記事参照元URL"
-        help "必要に応じて"
       end
       field :post_quotation_name do
         label "記事参照元名称"
-        help "必要に応じて"
       end
       field :province do
         label "都道府県"
@@ -313,60 +291,112 @@ RailsAdmin.config do |config|
       end
       field :address2 do
         label "建物名"
-        help "必要に応じて"
       end
       field :phone_no do
         label "電話番号"
         help "必須 例) 080-1234-5678"
         required true
       end
-      field :daytime_price_id do
-        label "日中価格帯"
-        help "必須　例）6 :〜5999"
+      field :daytime_price_id, :enum do
+      enum do
+        Hash[ ['0~999','1000~1999', '2000~2999','3000~3999','4000~4999', '5000~5999','6000~7999','8000~9999', '10000~14999','15000~19999','20000~29999', '30000~49999','50000~999999'].zip(['1','2','3','4','5','6','7','8','9','10','11','12','13']) ]
       end
-      field :nighttime_price_id do
+        label "日中価格帯"
+        help "必須"
+        required true
+      end
+      field :nighttime_price_id, :enum do
+      enum do
+        Hash[ ['0~999','1000~1999', '2000~2999','3000~3999','4000~4999', '5000~5999','6000~7999','8000~9999', '10000~14999','15000~19999','20000~29999', '30000~49999','50000~999999'].zip(['1','2','3','4','5','6','7','8','9','10','11','12','13']) ]
+      end
         label "夜間価格帯"
-        help "必須 例) 1 :〜999"
+        help "必須"
+        required true
       end
       field :shop_hours do
         label "営業時間"
         help "必須　例) 9:00〜21:00　フリーフォーマット"
+        required true
       end
       field :is_closed_sun do
         label "日曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_mon do
         label "月曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_tue do
         label "火曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_wed do
         label "水曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_thu do
         label "木曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_fri do
         label "金曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_sat do
         label "土曜定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :is_closed_hol do
         label "祝日定休"
-        help "正しければチェックをいれてください"
+        help "定休の場合はチェック"
       end
       field :closed_pattern do
         label "その他定休日"
         help "フリーフォーマット"
+      end
+      field :closed_pattern do
+        label "その他定休日"
+        help "フリーフォーマット"
+      end
+      field :history_level, :enum do
+      enum do
+        Hash[ ['不明','0:戦後', '1:明治以降から昭和戦前','2:江戸時代','3:江戸以前'].zip(['-1','0','1','2','3']) ]
+      end
+        label "創業"
+        help "必須"
+        required true
+      end
+      field :building_level, :enum do
+      enum do
+        Hash[ ['不明','0:どちらも戦後', '1:片方が戦前','2:片方が大正以前','3:建物が江戸以前'].zip(['-1','0','1','2','3']) ]
+      end
+        label "建物"
+        help "必須　内装と建物で判断"
+        required true
+      end
+      field :menu_level , :enum do
+      enum do
+        Hash[ ['不明','0:創作系', '1:復刻','2:当時から','3:オリジナル'].zip(['-1','0','1','2','3']) ]
+      end
+        label "メニュー"
+        help "必須"
+        required true
+      end
+      field :person_level, :enum do
+      enum do
+        Hash[ ['不明','1:庶民', '2:有名人1人','3:有名人2人以上'].zip(['-1','1','2','3']) ]
+      end
+        label "人物レベル"
+        help "必須"
+        required true
+      end
+      field :episode_level, :enum do
+      enum do
+        Hash[ ['不明','1:関連なし', '2:他店or移転前','3:実現場'].zip(['-1','1','2','3']) ]
+      end
+        label "エピソード"
+        help "必須"
+        required true
       end
       field :people do
         label "関係がある人物"
