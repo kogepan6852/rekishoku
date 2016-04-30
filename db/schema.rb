@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308105705) do
+ActiveRecord::Schema.define(version: 20160424114521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,10 +41,11 @@ ActiveRecord::Schema.define(version: 20160308105705) do
   add_index "categories_shops", ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",                   null: false
     t.string   "furigana"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "rating",     default: 0, null: false
   end
 
   create_table "people_periods", id: false, force: :cascade do |t|
@@ -114,12 +115,19 @@ ActiveRecord::Schema.define(version: 20160308105705) do
   add_index "posts_shops", ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
   add_index "posts_shops", ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
 
+  create_table "prices", force: :cascade do |t|
+    t.integer  "min"
+    t.integer  "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shops", force: :cascade do |t|
-    t.string   "name",                             null: false
+    t.string   "name",                                 null: false
     t.text     "description"
     t.string   "url"
     t.text     "menu"
-    t.string   "image",                            null: false
+    t.string   "image",                                null: false
     t.string   "subimage"
     t.string   "image_quotation_url"
     t.string   "image_quotation_name"
@@ -131,9 +139,29 @@ ActiveRecord::Schema.define(version: 20160308105705) do
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "posts_shops_count",    default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "posts_shops_count",    default: 0,     null: false
+    t.string   "phone_no"
+    t.integer  "daytime_price_id"
+    t.integer  "nighttime_price_id"
+    t.text     "shop_hours"
+    t.boolean  "is_closed_sun",        default: false, null: false
+    t.boolean  "is_closed_mon",        default: false, null: false
+    t.boolean  "is_closed_tue",        default: false, null: false
+    t.boolean  "is_closed_wed",        default: false, null: false
+    t.boolean  "is_closed_thu",        default: false, null: false
+    t.boolean  "is_closed_fri",        default: false, null: false
+    t.boolean  "is_closed_sat",        default: false, null: false
+    t.boolean  "is_closed_hol",        default: false, null: false
+    t.string   "closed_pattern"
+    t.boolean  "is_approved",          default: false, null: false
+    t.integer  "history_level",        default: 0
+    t.integer  "building_level",       default: 0
+    t.integer  "menu_level",           default: 0
+    t.integer  "person_level",         default: 0
+    t.integer  "episode_level",        default: 0
+    t.integer  "total_level",          default: 0,     null: false
   end
 
   create_table "users", force: :cascade do |t|
