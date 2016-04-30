@@ -57,9 +57,9 @@
           <div class="item item-icon-left item-top bold" ng-click="backSlide()" >
             <i class="icon ion-android-arrow-dropleft"></i>Back
           </div>
-          <ion-scroll direction="y">
-            <ion-spinner ng-show="!periods"></ion-spinner>
-            <a class="item" ng-click="searchByPeriods({{period.id}})" ng-repeat="period in periods" ng-bind-html="period.name"></a>
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuItems"></ion-spinner>
+            <a class="item" ng-click="searchByPeriods({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
           </ion-scroll>
         </ion-slide>
 

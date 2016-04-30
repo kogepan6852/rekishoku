@@ -21,6 +21,8 @@ angular.module 'frontApp'
 
     DataService.getPeriod (data) ->
       $scope.periods = data
+    DataService.getPeople (data) ->
+      $scope.people = data
 
     $scope.input = {
       address: null
@@ -124,6 +126,8 @@ angular.module 'frontApp'
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
+      obj.person = searchSata.person
+
       # 中心位置の設定
       $scope.map.center.latitude = obj.latitude
       $scope.map.center.longitude = obj.longitude

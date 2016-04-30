@@ -28,6 +28,11 @@ class ApiPostsController < ApplicationController
       @posts = @posts.joins(:people).where('people.id' => person).uniq
     end
 
+    if params[:person]
+      # 人物で検索
+      @posts = @posts.joins(:people).where('people.id' => params[:person]).uniq
+    end
+
     # アイキャッチ画像の設定
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|

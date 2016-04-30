@@ -33,3 +33,12 @@ angular.module "frontApp"
       else
         Api.getJson(null, Const.API.PERIOD, false).then (res) ->
           callback res.data
+
+    # periodの取得
+    getPeople: (callback) ->
+      peopleObj = $sessionStorage['people-obj']
+      if peopleObj
+        callback peopleObj
+      else
+        Api.getJson(null, Const.API.PERSON, false).then (res) ->
+          callback res.data

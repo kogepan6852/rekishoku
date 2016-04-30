@@ -43,11 +43,16 @@ angular.module "frontApp"
       $scope.period = $location.search()['period']
       if $scope.period
         period = $scope.period
+      # 人物の設定
+      $scope.person = $location.search()['person']
+      if $scope.person
+        person = $scope.person
 
       # 戻り値の設定
       rtn =
         keywords: keywords
         period: period
+        person: person
 
       return rtn
 
@@ -56,6 +61,8 @@ angular.module "frontApp"
       $scope.targetCategoryId = null
       $scope.keywords = null
       $scope.period = null
+      $scope.person = null
       $location.search('keywords', null)
       $location.search('period', null)
+      $location.search('person', null)
       $scope.search()

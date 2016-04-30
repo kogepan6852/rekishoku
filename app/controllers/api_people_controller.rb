@@ -3,8 +3,17 @@ class ApiPeopleController < ApplicationController
   # GET /api/people
   # 一覧表示
   def index
-    @people = Person.all
-    render json: @people
+    @people = Person.all.order("furigana COLLATE \"C\"")
+    people = Array.new()
+    @people.each do |person|
+      obj = {
+        "id" => person.id,
+        "name" => person.name,
+        "furigana" => person.furigana
+      }
+      people.push(obj)
+    end
+    render json: people
   end
 
   # GET /api/people-list

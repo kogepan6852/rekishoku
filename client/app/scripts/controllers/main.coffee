@@ -25,6 +25,8 @@ angular.module "frontApp"
       $scope.categories = data
     DataService.getPeriod (data) ->
       $scope.periods = data
+    DataService.getPeople (data) ->
+      $scope.people = data
 
     ###
     # initialize
@@ -43,6 +45,7 @@ angular.module "frontApp"
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
+      obj.person = searchSata.person
 
       Api.getJson(obj, Const.API.POST, true).then (res) ->
         $scope.posts = res.data
@@ -77,6 +80,7 @@ angular.module "frontApp"
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
+      obj.person = searchSata.person
 
       # 検索
       Api.getJson(obj, Const.API.POST, true).then (res) ->

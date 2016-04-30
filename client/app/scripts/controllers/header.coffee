@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService) ->
 
     ###
     # setting
@@ -257,13 +257,29 @@ angular.module "frontApp"
           $rootScope.postsSearch($scope.selectedId)
       $scope.modalSearch.hide()
 
+    # 時代の一覧取得
     $scope.openPeriods = ->
+      $scope.menuItems = null
+      $scope.menuTarget = 'period'
       $ionicSlideBoxDelegate.next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
       if $scope.periods
         return
 
       DataService.getPeriod (data) ->
-        $scope.periods = data
+        $scope.menuItems = data
+
+    # 人物の一覧取得
+    $scope.openPeople = ->
+      $scope.menuItems = null
+      $scope.menuTarget = 'person'
+      $ionicSlideBoxDelegate.next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
+      if $scope.people
+        return
+
+      DataService.getPeople (data) ->
+        $scope.menuItems = data
 
     $scope.backSlide = ->
       $ionicSlideBoxDelegate.previous()
@@ -271,21 +287,21 @@ angular.module "frontApp"
     $scope.disableSwipe = ->
       $ionicSlideBoxDelegate.enableSlide(false);
 
-    $scope.searchByPeriods = (id) ->
+    $scope.searchByPeriods = (id, target) ->
       # shop検索
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shops').search('period', id)
+        $location.path('/app/shops').search(target, id)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       # map検索
       else if $rootScope.currentType == 'map'
-        $location.path('/app/map').search('period', id)
+        $location.path('/app/map').search(target, id)
         if $rootScope.mapSearch
           $rootScope.mapSearch($scope.selectedId)
       # post検索
       else
         $rootScope.currentType = 'home'
-        $location.path('/app').search('period', id)
+        $location.path('/app').search(target, id)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
 
