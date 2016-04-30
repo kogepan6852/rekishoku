@@ -9,7 +9,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","Category","Post","PostDetail","Period","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","Category","Period","PostsShop","PeoplePeriod","PeoplePost"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -408,5 +408,117 @@ RailsAdmin.config do |config|
       end
     end
   end
+
+  ## 投稿カテゴリ
+  config.model 'Post' do
+    label "投稿記事_1セクション"
+    weight 0
+    list do
+      field :title do
+        label "題名"
+      end
+      field :image do
+        label "トップ画像"
+      end
+      field :content  do
+        label "内容"
+      end
+      field :status, :enum do
+      enum do
+        Hash[ ['公開','非公開'].zip(['1','0']) ]
+      end
+        label "投稿状態"
+      end
+      field :shops do
+        label "関連店舗"
+      end
+      field :people do
+        label "関連人物"
+      end
+    end
+    edit do
+      field :title  do
+        label "題名"
+        help "必須"
+        required true
+      end
+      field :content  do
+        label "内容"
+        help "必須"
+        required true
+      end
+      field :image  do
+        label "トップ画像"
+        help "必須"
+        required true
+      end
+      field :quotation_url  do
+        label "引用したURL"
+      end
+      field :quotation_name  do
+        label "引用したサイト名"
+      end
+      field :category  do
+        label "対応するカテゴリを選択してください"
+      end
+      field :status, :enum do
+      enum do
+        Hash[ ['公開','非公開'].zip(['1','0']) ]
+      end
+        label "公開状態"
+      end
+      field :shops  do
+        label "関連店舗"
+        help "関連する店舗は右にしてください"
+      end
+      field :people  do
+        label "関連人物"
+        help "関連する人は右にしてください"
+      end
+    end
+   end
+
+   ## 投稿カテゴリ
+   config.model 'PostDetail' do
+     label "投稿記事各セクション"
+     weight 0
+     list do
+       field :post do
+         label "記事名"
+       end
+       field :title do
+         label "サブタイトル"
+       end
+       field :image do
+         label "サブ画像"
+       end
+       field :content do
+         label "内容"
+       end
+     end
+     edit do
+       field :title do
+         label "サブタイトル"
+         help "必須"
+         required true
+       end
+       field :content do
+         label "内容"
+         help "必須"
+         required true
+       end
+       field :image  do
+         label "画像"
+         help "必須"
+         required true
+       end
+       field :quotation_url do
+         label "引用したURL"
+       end
+       field :quotation_name do
+         label "引用したサイト名"
+       end
+     end
+    end
 
 end
