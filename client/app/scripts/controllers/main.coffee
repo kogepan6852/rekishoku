@@ -16,7 +16,6 @@ angular.module "frontApp"
     ###
     # setting
     ###
-    $rootScope.appTitle = $translate.instant('SEO.TITLE.HOME')
     $scope.targetCategoryId = null
     $rootScope.isHideTab = false
     $ionicNavBarDelegate.showBackButton false

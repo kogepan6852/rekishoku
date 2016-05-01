@@ -12,8 +12,8 @@ angular.module "frontApp"
 
     # initialize
     $rootScope.isHideTab = false
-    $rootScope.appTitle = "歴食"
-    $rootScope.appDescription = "歴食は武将や文豪、その時代の人たちが愛した食を見るだけでなく、食べる体験を提供するサイトです."
+    $rootScope.appTitle = "歴食 | 食べる、歴史体験"
+    $rootScope.appDescription = "夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。"
     $rootScope.appImage = "http://rekishoku.jp/logo.png"
     $rootScope.appKeywords = "歴食,暦食,郷土料理,rekishoku,rekisyoku"
 

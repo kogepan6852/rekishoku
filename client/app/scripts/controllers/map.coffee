@@ -16,7 +16,6 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $rootScope.appTitle = $translate.instant('SEO.TITLE.MAP')
     $rootScope.isHideTab = false
 
     DataService.getPeriod (data) ->
