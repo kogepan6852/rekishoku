@@ -41,6 +41,12 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "imagemin-gifsicle": "~4.2.0"
+    "imagemin-gifsicle": "~4.2.0",
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-google-cdn": "^0.4.3",
+    "grunt-usemin": "^3.0.0",
+    "grunt-ng-constant": "~1.1.0",
+    "jit-grunt": "^0.9.1",
+    "time-grunt": "^1.0.0"
   }
 }
