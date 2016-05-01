@@ -24,9 +24,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # ログアウト後のリダイレクト先
-  def after_sign_out_path_for(resource)
-    menu_index_path
-  end
-
 end
