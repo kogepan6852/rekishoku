@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "imagemin-gifsicle": "~4.2.0",
+    "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-google-cdn": "^0.4.3",
     "grunt-usemin": "^3.0.0",
