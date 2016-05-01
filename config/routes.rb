@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
+  # ADMIN
   post 'admin/shop/new', to: 'shops#create'
   put 'admin/shop/:id/edit', to: 'shops#update'
 
@@ -59,7 +60,6 @@ Rails.application.routes.draw do
     when 'staging'
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
-
 
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }

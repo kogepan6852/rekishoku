@@ -31,6 +31,11 @@ class ApiShopsController < ApplicationController
       @shops = @shops.joins(:people).where('people.id' => params[:person]).uniq
     end
 
+    if params[:province]
+      # 都道府県検索
+      @shops = @shops.where(province: params[:province])
+    end
+
     # shopにカテゴリーを紐付ける
     if params[:page] && params[:per]
       newShops = Array.new()
