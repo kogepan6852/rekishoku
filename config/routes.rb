@@ -45,8 +45,12 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
+  # ADMIN_SHOP
   post 'admin/shop/new', to: 'shops#create'
   put 'admin/shop/:id/edit', to: 'shops#update'
+
+  # ADMIN_POST_DETAIL
+  put 'admin/post_detail/:id/edit', to: 'post_details#update'
 
 # site map
   case Rails.env

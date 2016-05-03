@@ -64,15 +64,8 @@ class PostDetailsController < ApplicationController
   # PATCH/PUT /post_details/1
   # PATCH/PUT /post_details/1.json
   def update
-    respond_to do |format|
-      if @post_detail.update(post_detail_params)
-        format.html { redirect_to @post_detail, notice: 'Post detail was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post_detail }
-      else
-        format.html { render :edit }
-        format.json { render json: @post_detail.errors, status: :unprocessable_entity }
-      end
-    end
+    @post_detail.update(post_detail_params)
+    redirect_to "/admin/post_detail"
   end
 
   # DELETE /post_details/1
