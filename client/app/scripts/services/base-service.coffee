@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "BaseService", ($ionicPopup) ->
+  .factory "BaseService", ($ionicPopup, Const) ->
 
     # GoogleMapの距離計算
     calMapDistance: (zoom) ->
@@ -31,6 +31,7 @@ angular.module "frontApp"
             type: 'button-dark')
           alertPopup.then (res) ->
 
+    # 配列をランダムで取得する
     getRandomArray: (array, num) ->
       a = array
       t = []
@@ -43,3 +44,21 @@ angular.module "frontApp"
         --l
         t[i] = t[l] || a[l]
       return r
+
+    # 広告をランダムで取得する
+    getAds:() ->
+      adsLg = Const.ADS.AD300X250
+      adsMd = Const.ADS.AD468X60
+      adsSm = Const.ADS.AD125X125
+      
+      i = Math.floor(Math.random() * adsLg.length)
+      j = Math.floor(Math.random() * adsLg.length)
+      while i == j
+        j = Math.floor(Math.random() * adsLg.length)
+
+      ads =
+        lg: adsLg[i] + '　' + adsLg[j]
+        md: adsMd[i] + '<br>' + adsMd[j]
+        sm: adsSm[i] + '　' + adsSm[j]
+
+      return ads

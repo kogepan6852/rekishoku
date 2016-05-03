@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, BaseService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -61,6 +61,8 @@ angular.module 'frontApp'
       $rootScope.appImage = $scope.shop.subimage.url
       $rootScope.appKeywords = appKeywords.join()
 
+    # 広告取得
+    $scope.ads = BaseService.getAds()
 
     # 現在タブの判定
     if $state.is('tabs.post') || $state.is('tabs.post-shop')

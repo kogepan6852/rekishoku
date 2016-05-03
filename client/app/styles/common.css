@@ -394,6 +394,13 @@ ion-view .has-subheader {
 }
 
 /**********************
+ * 広告
+ **********************/
+.ad-main {
+  text-align: center;
+}
+
+/**********************
  * ionic&bootstrapの競合対策
  **********************/
 .modal-backdrop { background-color: transparent; }
