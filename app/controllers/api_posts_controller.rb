@@ -103,7 +103,7 @@ class ApiPostsController < ApplicationController
     if post_params[:status].blank?
       category = PostCategory.find_by(slug: params[:slug])
       # 記事の掲載元のパラメータ判定
-      if (params[:quotation_url] && params[:quotation_name]) ||  (post_params[:quotation_url] && post_params[:quotation_name])
+      if post_params[:quotation_url] && post_params[:quotation_name]
         result = @post.update(post_params.merge(category_id: category.id))
       else
         result = @post.update(post_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
