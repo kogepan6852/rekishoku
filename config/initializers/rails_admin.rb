@@ -400,7 +400,12 @@ RailsAdmin.config do |config|
       end
       field :people do
         label "関係がある人物"
-        help "必須 対象カテゴリを右に移動してくだい"
+        help "対象人物を右に移動してください"
+      end
+      field :categories do
+        label "関連があるカテゴリ"
+        help "必須 対応するカテゴリを選択してください"
+        required true
       end
       field :is_approved do
         label "承認確認"
