@@ -1,0 +1,148 @@
+/**********************
+ * Setting
+ **********************/
+$h1: 32px;
+$h2: 24px;
+$h3: 20px;
+$h4: 16px;
+$h5: 14px;
+$h6: 12px;
+
+$baseColor: #c95757;
+$baseColorLite: #cd8c89;
+$subColor: #00636F;
+$grayColor: #878677;
+$blackColor: #3E3A39;
+
+/**********************
+ * star
+ **********************/
+star {
+  display: table;
+
+  div {
+    display: table-cell;
+
+    i {
+      color: $baseColor;
+      font-size: $h2;
+    }
+
+    &.star-count {
+      font-size: $h4;
+      padding-left: 5px;
+      color: $grayColor;
+      vertical-align: middle;
+    }
+  }
+}
+
+/**********************
+ * postItem
+ **********************/
+.post-shops {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.item-detail-list {
+  li {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+    letter-spacing: normal;
+    line-height: 1.25;
+    border: 1px solid #dcdcdc;
+    margin-top: -1px;
+    background-color: #fff;
+    .thumbnail-image {
+      height: 100px;
+      width: 150px;
+      padding-top: 0;
+    }
+  }
+  .thumbnail-image img {
+    height: auto;
+    margin-left: 0;
+    width: 100%;
+  }
+  li .detail-content {
+    height: 100px;
+    padding-left: 150px;
+    > div {
+      background: transparent;
+      position: relative;
+    }
+  }
+  .detail-name, .post-date, .item-username {
+    color: #555;
+  }
+  .category-name, .item-address {
+    bottom: 5px !important;
+  }
+  .category-name {
+    right: 0px;
+  }
+}
+
+.detail-content .post-date {
+  left: 10px !important;
+  bottom: 5px !important;
+  i {
+    padding-right: 3px;
+  }
+}
+
+.item-detail-list {
+  .overlay-image .link {
+    border-radius: 0;
+  }
+  .main-category .button-bar .button {
+    font-size: 14px;
+    text-overflow: initial;
+  }
+  .category-name.shop-category {
+    bottom: 15px;
+    float: right;
+    right: 65px;
+  }
+}
+
+.detail-name {
+  padding: 10px 10px 0;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.item-detail-list .item-address {
+  background-color: rgba(131, 81, 112, 1);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 12px;
+  right: 0px;
+  line-height: 16px;
+  max-height: 21px;
+  overflow: hidden;
+  padding: 3px 8px;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  z-index: 100;
+}
+
+/* iPhone5用 */
+@media screen and (max-width: 320px) {
+  .item-detail-list li {
+    .thumbnail-image {
+      width: 133px;
+    }
+    .detail-content {
+      padding-left: 133px;
+    }
+  }
+}

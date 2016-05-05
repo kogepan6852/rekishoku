@@ -6,17 +6,10 @@
       on-refresh="init()">
     </ion-refresher>
 
-    <div class="row">
+    <!-- Search condition -->
+    <div class="row" ng-if="keywords || period || person">
       <div class="col main-category">
-        <div class="button-bar basic" ng-if="!keywords && !period && !person">
-          <a class="button"
-            ng-repeat="category in categories"
-            ng-click="search(category.id)"
-            ng-bind-html="category.name"
-            ng-class="{active: targetCategoryId == category.id}"
-          ></a>
-        </div>
-        <div class="search-condition" ng-if="keywords || period || person">
+        <div class="search-condition">
           <div>
             <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
             <span ng-if="keywords" ng-bind-html="keywords"></span>
@@ -31,26 +24,28 @@
       </div>
     </div>
 
+    <!-- Items -->
     <div class="main">
-      <ul class="item-list">
-        <li class="overlay-image" ng-repeat="result in results">
-          <div class="thumbnail-image">
-            <img ng-src="{{result.shop.subimage.md.url}}">
-            <div class="post-count" ng-show="result.shop.posts_shops_count>0"><i class="icon ion-edit"></i></div>
+      <a class="item" collection-repeat="result in results" ui-sref="tabs.store.detail({id:result.shop.id})" ng-click="moveToStoreDetail()">
+        <img class="main-img" src="../images/dummy-img.png">
+        <img class="main-img subimage" ng-src="{{result.shop.subimage.md.url}}">
+        <div class="detail">
+          <h2>{{result.shop.name}}</h2>
+          <star count="2.7"></star>
+        </div>
+        <div class="tags">
+          <div class="periods">
+            <div class="tag" ng-repeat="period in result.periods"><div>{{period.name}}</div></div>
           </div>
-          <div class="shop-content">
-            <div>
-              <div class="category-name" ng-if="result.people.length!=0" people-list data="result.people" ></div>
-              <div class="h4 item-name">{{result.shop.name}}</div>
-              <div class="item-address" ng-if="result.shop.province">{{result.shop.province}}</div>
-              <div class="item-address" ng-if="!result.shop.province">-</div>
-            </div>
+          <div class="people">
+            <div class="tag" ng-repeat="person in result.people"><div>{{person.name}}</div></div>
           </div>
-          <a class="link" ui-sref="tabs.shop({id:result.shop.id})"></a>
-        </li>
-      </ul>
+        </div>
+        <i class="arrow ion-chevron-right"></i>
+      </a>
     </div>
 
+    <!-- Lazy loading -->
     <ion-infinite-scroll
       ng-if="!noMoreLoad"
       on-infinite="loadMoreData()">

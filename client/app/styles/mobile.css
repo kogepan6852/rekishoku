@@ -3,50 +3,7 @@
  **********************/
 @media screen and (max-width:480px){
   html{ font-size: 0.75rem;}
-.main,.aside{width: 100%;float: none;}
-  .aside{
-    display: none;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    background: #fff;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-  }
-  .fix-nav,
-  /* Header */
-  .header{z-index:100;}
-  .header .sns-icons{
-    left: 5px;
-    right: 100%;
-    width: 96px;
-  }
-  .header .sns-icons a {
-    width: 32px;
-    border-radius: 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    background-color: transparent;
-  }
-  .header .sns-icons a:nth-child(1) {right: 66px;}
-  .header .sns-icons a:nth-child(2) {right: 33px;}
-  .header .sns-icons a:nth-child(3) {right: 0px;}
-  [nav-bar-transition="ios"] .title, [nav-bar-transition="ios"] .buttons, [nav-bar-transition="ios"] .back-text {
-    display: none;
-  }
-  .nav-bar-block .button-back {
-    background-color: #fff;
-    height: 46px;
-    padding-left: 10px !important;
-    text-align: left;
-    width: 100px;
-    border-radius: 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-  }
-
-  .aside.active{display: block;}
+.main
   /* Main */
   .item-list li {
     width: 100%;
@@ -163,17 +120,6 @@
 /* bootstrap xs */
 @media screen and (max-width:768px){
   .top { width: 100%; }
-  .logo {
-    width: 89px;
-    height: 50px;
-    background: rgba(0, 0, 0, 0) url("../images/logo-sm.png") no-repeat scroll 0 0 / contain ;
-    background-color: #fff;
-    position: absolute;
-    left: 50%;
-    margin-left: -48px;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
-    margin-top: 0;
-  }
   /* modal */
   .big-modal {
     top: 0;
@@ -209,7 +155,6 @@
     min-height: 31px !important;
     opacity: 1 !important;
     position: absolute;
-    top: -3px;
     width: 70px;
   }
   .button-back.activated {
@@ -220,17 +165,6 @@
   /* tab */
   .has-tabs.pane {
     bottom: 0px;
-  }
-  .tabs {
-    height: 44px;
-    line-height: 44px;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
-    top: auto!important;
-    bottom: 0;
   }
   .tab-item .icon {
     font-size: 30px!important;
@@ -301,7 +235,7 @@
   }
 
   /* tab */
-  .tab-nav.tabs {
+  /*.tab-nav.tabs {
     background-position: center bottom;
     border-bottom-width: 1px;
     border-top-width: 0;
@@ -326,7 +260,7 @@
     display: inline-block;
     margin-top: -0.1em;
     vertical-align: top;
-  }
+  }*/
 
   /* menu */
   .menu-content {

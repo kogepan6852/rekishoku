@@ -1,0 +1,386 @@
+/**********************
+ * Setting
+ **********************/
+$h1: 32px;
+$h2: 24px;
+$h3: 20px;
+$h4: 16px;
+$h5: 14px;
+$h6: 12px;
+
+$baseColor: #c95757;
+$baseColorLite: #cd8c89;
+$subColor: #00636F;
+$grayColor: #878677;
+$blackColor: #3E3A39;
+
+/**********************
+ * Common
+ **********************/
+
+h1, .h1 { font-size: $h1; }
+h2, .h2 { font-size: $h2; }
+h3, .h3 { font-size: $h3; }
+h4, .h4 { font-size: $h4; }
+h5, .h5 { font-size: $h5; }
+h6, .h6 { font-size: $h6; }
+p {
+  color: #555;
+}
+
+.bg-gray {
+  background-attachment: scroll;
+  background-image: url("../images/bg-gray.png");
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: auto auto;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.big-modal {
+  top: 5%;
+  bottom: 5%;
+}
+
+/* link */
+a {
+  color: $baseColor;
+  &:hover {
+    color: $baseColorLite;
+    text-decoration: none;
+  }
+}
+
+.logo {
+  width: 210px;
+  height: 140px;
+  background: rgba(0, 0, 0, 0) url("../images/logo.png") no-repeat scroll 0 (0 / contain);
+  background-color: #fff;
+  margin: 20px auto;
+}
+
+/**********************
+ * Header
+ **********************/
+.main-header {
+  background-color: #fff!important;
+
+  .logo {
+    width: 89px;
+    z-index: 9999;
+    height: 34px;
+    background: rgba(0, 0, 0, 0) url("../images/logo-sm.png") no-repeat scroll 0 0 / contain ;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    margin-left: -48px;
+    margin-top: 5px;
+  }
+  i {
+    color: #3E3A39;
+  }
+  .back-button {
+    border: none;
+    padding-right: 25px !important;
+    padding-top: 2px !important;
+
+    i {
+      font-size: 24px;
+    }
+  }
+}
+
+/**********************
+ * Footer
+ **********************/
+.search-footer {
+  background-color: $blackColor;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+
+  .title { color: #fff; }
+  .mode-btn {
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    bottom: 20px;
+    height: 60px;
+    width: 60px;
+    left: 15px;
+    position: fixed;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: $subColor;
+    border: none;
+    color: #fff;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+
+    i {
+      font-size: $h1;
+      padding-bottom: 5px;
+      vertical-align: middle;
+    }
+  }
+  &.hide-footer {
+    bottom: -44px;
+    .mode-btn {
+      bottom: 54px;
+    }
+  }
+}
+/**********************
+ * Tab
+ **********************/
+ion-content.has-tabs-top {
+  top: 88px;
+  bottom: 0;
+}
+.main-tab {
+  .tabs {
+    background-color: #fff !important;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    color: #333;
+    border: none;
+    height: 44px;
+    .tab-item {
+      max-width: 100%;
+      &.tab-item-active, &.active {
+        background-color: $baseColor !important;
+        color: #fff!important;
+      }
+    }
+  }
+}
+.sub-tab {
+  height: auto;
+  top: 0;
+  bottom: 0;
+}
+
+/**********************
+ * Button
+ **********************/
+
+.button {
+  &.facebook {
+    background-color: #305097;
+    color: #fff;
+    border: none;
+    width: 49%;
+  }
+  &.twitter {
+    background-color: #00aced;
+    color: #fff;
+    border: none;
+    width: 49%;
+  }
+  &.button-positive {
+    background-color: #cd615d;
+    border: none;
+    &.active, &.activated {
+      background-color: #c35753;
+      border: none;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+/**********************
+ * Icon
+ **********************/
+
+.reki-icon {
+  background-image: url("../images/reki.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+  padding-left: 34px;
+}
+
+/**********************
+ * Menu
+ **********************/
+
+.menu-list {
+  height: 100%;
+  .slider {
+    height: 100%;
+  }
+  .scroll-view {
+    height: 100%;
+    .scroll {
+      padding-bottom: 110px;
+    }
+  }
+  .list-slide .scroll {
+    padding-bottom: 44px;
+  }
+  .item {
+    border: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .item-divider {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: transparent;
+  }
+  .item-top {
+    border-top: 1px solid #d3d3d3;
+  }
+  .item i {
+    color: $baseColor;
+  }
+  .item-divider {
+    text-align: center;
+    border: 1px solid #d3d3d3;
+  }
+}
+
+ion-slide {
+  .item-top:first-child {
+    margin-top: 1px;
+  }
+  &.list-slide {
+    > {
+      div.item, a.item {
+        margin-left: 1px;
+      }
+    }
+    .spinner svg {
+      width: 100%;
+    }
+  }
+}
+
+.slider-pager {
+  display: none;
+}
+
+.menu-list {
+  .menu-footer {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+  }
+  .sns-icons {
+    padding-left: 17px;
+    height: 64px;
+    padding-bottom: 15px;
+    a {
+      background-color: #555;
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      font-size: 24px;
+      line-height: 40px;
+      position: absolute;
+      text-align: center;
+      top: 10px;
+      width: 40px;
+    }
+    i {
+      color: #fff;
+    }
+    a {
+      &:nth-child(1) {
+        right: 72%;
+      }
+      &:nth-child(2) {
+        right: 42%;
+      }
+      &:nth-child(3) {
+        right: 12%;
+      }
+    }
+  }
+}
+
+/**********************
+ * Toast
+ **********************/
+
+.toast-top-full-width {
+  top: 10px;
+}
+
+.toast-bottom-full-width {
+  bottom: 10px;
+}
+
+#toast-container > div {
+  padding: 30px 15px 30px 50px;
+  font-size: 20px;
+}
+
+/**********************
+ * Popup
+ **********************/
+
+.popup-container .popup {
+  border-radius: 10px;
+  padding: 10px;
+  width: 270px;
+}
+
+/**********************
+ * Modal
+ **********************/
+
+ion-modal-view .bar-header {
+  background-color: transparent !important;
+}
+
+.scale-in {
+  transform: scale(0.9);
+  opacity: 0;
+  &.ng-enter, > .ng-enter {
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
+  }
+  &.ng-enter-active, > .ng-enter-active {
+    transform: scale(1);
+    opacity: 1;
+  }
+  &.ng-leave, > .ng-leave {
+    transition: all ease-in-out 250ms;
+  }
+}
+
+/**********************
+ * ionic&bootstrapの競合対策
+ **********************/
+
+.modal-backdrop {
+  background-color: transparent;
+}
+
+.modal-open .modal {
+  overflow-y: hidden;
+}
+
+label {
+  max-width: initial;
+}
+
+.row {
+  margin-left: initial;
+  margin-right: initial;
+  display: block;
+  > div {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+ion-modal-view {
+  z-index: 11 !important;
+}

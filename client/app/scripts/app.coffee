@@ -29,9 +29,49 @@ angular
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state 'tabs',
-        url: "",
         abstract: true,
         templateUrl: "views/tabs.html"
+
+
+
+
+      .state 'tabs.magazine',
+        url: '/app/magazine'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/magazine.html'
+            controller: 'MagazineCtrl'
+
+      .state 'tabs.store',
+        abstract: true
+        views:
+          'tab-store':
+            templateUrl: 'views/tab-store.html'
+
+      # STORE LIST
+      .state 'tabs.store.list',
+        url: '/app/store/list'
+        views:
+          'tab-store-list':
+            templateUrl: 'views/shops.html'
+            controller: 'ShopsCtrl'
+
+      # STORE MAP
+      .state 'tabs.store.map',
+        url: '/app/store/map'
+        views:
+          'tab-store-map':
+            templateUrl: 'views/map.html'
+            controller: 'MapCtrl'
+
+      .state 'tabs.store.detail',
+        url: '/app/store/:id'
+        views:
+          'tab-store-list':
+            templateUrl: 'views/shop-detail.html'
+            controller: 'ShopDetailCtrl'
+
+
       .state 'tabs.home',
         url: '/app'
         views:
@@ -159,7 +199,7 @@ angular
         controller: 'PostDetailCtrl'
 
 
-    $urlRouterProvider.otherwise ('/app')
+    $urlRouterProvider.otherwise ('/app/magazine')
 
   .config(["$httpProvider", ($httpProvider) ->
 
@@ -182,6 +222,9 @@ angular
     $ionicConfigProvider.views.maxCache(5)
     $ionicConfigProvider.views.transition('ios')
     $ionicConfigProvider.views.forwardCache(true);
+    $ionicConfigProvider.tabs.position('top');
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
+
   .config ($locationProvider) ->
     # $locationProvider.hashPrefix('!')
-    $locationProvider.html5Mode(true);
+    # $locationProvider.html5Mode(true);

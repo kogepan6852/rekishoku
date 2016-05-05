@@ -67,9 +67,9 @@ angular.module "frontApp"
     # 現在Pathの取得
     setCurrentType = ->
       currentPath = $location.path();
-      if currentPath == '/app/shops'
+      if currentPath.indexOf('/store/list') != -1
         $rootScope.currentType = 'shop'
-      else if currentPath == '/app/map'
+      else if currentPath.indexOf('/store/map') != -1
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'home'
@@ -205,6 +205,7 @@ angular.module "frontApp"
 
     $scope.goBack = ->
       $rootScope.isHideTab = false
+      $rootScope.isDown = false
       $ionicHistory.goBack();
 
     $scope.openModalSearch = ->
@@ -290,18 +291,18 @@ angular.module "frontApp"
     $scope.searchByPeriods = (id, target) ->
       # shop検索
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shops').search(target, id)
+        $location.path('/app/store/list').search(target, id)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       # map検索
       else if $rootScope.currentType == 'map'
-        $location.path('/app/map').search(target, id)
+        $location.path('/app/store/map').search(target, id)
         if $rootScope.mapSearch
           $rootScope.mapSearch($scope.selectedId)
       # post検索
       else
         $rootScope.currentType = 'home'
-        $location.path('/app').search(target, id)
+        $location.path('/app/magazine').search(target, id)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
 

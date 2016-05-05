@@ -1,0 +1,24 @@
+<div class="sub-tab" ng-controller="TabsCtrl">
+  <ion-tabs>
+
+    <!-- Shops  -->
+    <ion-tab title="{{'MENU.STORE'|translate}}">
+      <ion-nav-view name="tab-store-list" href="#/app/store/list"></ion-nav-view>
+    </ion-tab>
+
+
+    <!-- Map  -->
+    <ion-tab title="{{'MENU.MAP'|translate}}">
+      <ion-nav-view name="tab-store-map" href="#/app/store/map"></ion-nav-view>
+    </ion-tab>
+
+  </ion-tabs>
+</div>
+
+<ion-footer-bar class="search-footer" ng-class="{'hide-footer': isDown}">
+  <h1 class="title"><i class="ion-arrow-down-b"></i> SEARCH</h1>
+  <div class="buttons" ng-click="changeListType()">
+    <button class="button mode-btn">
+      <i ng-class="{'ion-ios-flag-outline':currentType != 'store', 'ion-ios-list-outline':currentType == 'store'}"></i></button>
+  </div>
+</ion-footer-bar>

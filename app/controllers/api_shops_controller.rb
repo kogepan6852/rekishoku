@@ -40,9 +40,19 @@ class ApiShopsController < ApplicationController
     if params[:page] && params[:per]
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
+        # 人に紐付く時代を全て抽出する
+        periods = Array.new()
+        shop.people.each do |person|
+          person.periods.each do |period|
+            periods.push(period);
+          end
+        end
+        # 返却用のオブジェクトを作成する
         obj = { "shop" => shop,
-                "categories" => shop.categories ,
-                "people" => shop.people }
+                "categories" => shop.categories,
+                "people" => shop.people,
+                "periods" => periods.uniq
+              }
         newShops.push(obj);
       end
       shops = newShops

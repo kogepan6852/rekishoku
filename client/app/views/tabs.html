@@ -1,25 +1,20 @@
 <ion-tabs
-  class="tabs-icon-top tabs-color-light"
+  class="main-tab"
   animation="slide-left-right"
   nav-transition="ios"
   ng-class="{down: isDown, 'hide-tab': isHideTab}"
   ng-controller="TabsCtrl">
 
   <!-- Main  -->
-  <ion-tab title="{{'MENU.STORY'|translate}}" icon="ion-ios-list-outline" ng-click="clickTab(0)" ng-cloak>
-    <ion-nav-view name="home-tab"></ion-nav-view>
+  <ion-tab title="{{'MENU.MAGAZINE'|translate}}" href="#/app/magazine">
+    <ion-nav-view name="tab-magazine"></ion-nav-view>
   </ion-tab>
 
 
   <!-- Map  -->
-  <ion-tab title="{{'MENU.MAP'|translate}}" icon="ion-ios-navigate-outline" ng-click="clickTab(1)" ng-cloak>
-    <ion-nav-view name="map-tab"></ion-nav-view>
+  <ion-tab title="{{'MENU.STORE'|translate}}" href="#/app/store/list">
+    <ion-nav-view name="tab-store"></ion-nav-view>
   </ion-tab>
 
-
-  <!-- Shops  -->
-  <ion-tab title="{{'MENU.STORE'|translate}}" icon="ion-android-restaurant" ng-click="clickTab(2)" ng-cloak>
-    <ion-nav-view name="shops-tab"></ion-nav-view>
-  </ion-tab>
 
 </ion-tabs>

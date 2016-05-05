@@ -85,6 +85,10 @@ angular.module "frontApp"
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
+    # 店舗詳細移動時の処理
+    $scope.moveToStoreDetail = ->
+      $rootScope.isDown = true
+
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
       if $scope.results

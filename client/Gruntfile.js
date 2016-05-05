@@ -47,8 +47,8 @@ module.exports = function (grunt) {
         tasks: ['newer:coffee:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
+        tasks: ['newer:sass:dist', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -242,6 +242,19 @@ module.exports = function (grunt) {
           src: '{,*/}*.coffee',
           dest: '.tmp/spec',
           ext: '.js'
+        }]
+      }
+    },
+
+    // Compiles Sacc to Css
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles',
+          src: '{,*/}*.scss',
+          dest: '.tmp/styles',
+          ext: '.css'
         }]
       }
     },
@@ -453,15 +466,15 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'coffee:dist',
-        'copy:styles'
+        'sass:dist'
       ],
       test: [
         'coffee',
-        'copy:styles'
+        'sass'
       ],
       dist: [
         'coffee',
-        'copy:styles',
+        'sass',
         'imagemin',
         'svgmin'
       ]

@@ -10,6 +10,7 @@
   },
   "MENU": {
     "TITLE":          "MENU",
+    "MAGAZINE":       "MAGAZINE",
     "STORY":          "STORY",
     "MAP":            "MAP",
     "STORE":          "STORE",

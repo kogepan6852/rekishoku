@@ -70,17 +70,13 @@
 
   <ion-side-menu-content animation="slide-left-right" nav-transition="ios">
 
-    <ion-nav-bar class="header" animation="slide-left-right" nav-transition="ios" ng-controller="HeaderCtrl">
-      <div class="bar bar-header top visible-xs">
-        <h1 class="title hidden">歴食</h1>
-        <div class="logo" ng-click="moveToHome()"></div>
-      </div>
-      <nav class="fix-nav" ng-controller="HeaderCtrl">
-        <a ng-click="openModalSearch()" ><i class="icon ion-search"></i></a>
-        <a ng-click="toggleRight()" ><i class="icon ion-navicon-round"></i></a>
-      </nav>
+    <ion-nav-bar class="main-header visible-xs" ng-controller="HeaderCtrl">
+      <div class="logo" ng-click="moveToHome()"></div>
+      <ion-nav-buttons side="right">
+        <div class="button button-clear button-dark" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
+      </ion-nav-buttons>
       <ion-nav-back-button class="button-back" ng-click="goBack()">
-        <i class="ion-chevron-left"></i> Back
+        <i class="ion-chevron-left"></i>
       </ion-nav-back-button>
     </ion-nav-bar>
 

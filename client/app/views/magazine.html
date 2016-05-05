@@ -1,0 +1,40 @@
+<ion-view>
+  <ion-content class="magazine" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
+
+    <ion-refresher
+      pulling-text="{{'TEXT.PULLING'|translate}}"
+      on-refresh="init()">
+    </ion-refresher>
+
+    <!-- Serach -->
+    <div class="row">
+      <div class="col main-category">
+        <div class="button-bar basic" ng-if="!keywords && !period && !person">
+          <!-- no search -->
+        </div>
+        <div class="search-condition" ng-if="keywords || period || person">
+          <div>
+            <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
+            <span ng-if="keywords" ng-bind-html="keywords"></span>
+            <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
+            <span ng-if="person" ng-bind-html="person | mapppingId:people"></span>
+          </div>
+          <div class="clear-button">
+            <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
+            <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      MAGAZINE
+    </div>
+
+    <ion-infinite-scroll
+      ng-if="!noMoreLoad"
+      on-infinite="loadMoreData()">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
