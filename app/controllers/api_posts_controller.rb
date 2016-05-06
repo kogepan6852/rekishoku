@@ -165,7 +165,12 @@ class ApiPostsController < ApplicationController
     # 公開処理(ステータス更新)でない場合
     if post_params[:status].blank?
       category = PostCategory.find_by(slug: params[:slug])
-      result = @post.update(post_params.merge(category_id: category.id))
+      # 記事の掲載元のパラメータ判定
+      if post_params[:quotation_url] && post_params[:quotation_name]
+        result = @post.update(post_params.merge(category_id: category.id))
+      else
+        result = @post.update(post_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
+      end
     # 公開処理の場合
     else
       result = @post.update(post_params)

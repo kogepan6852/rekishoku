@@ -400,7 +400,12 @@ RailsAdmin.config do |config|
       end
       field :people do
         label "関係がある人物"
-        help "必須 対象カテゴリを右に移動してくだい"
+        help "対象人物を右に移動してください"
+      end
+      field :categories do
+        label "関連があるカテゴリ"
+        help "必須 対応するカテゴリを選択してください"
+        required true
       end
       field :is_approved do
         label "承認確認"
@@ -411,7 +416,7 @@ RailsAdmin.config do |config|
 
   ## 投稿カテゴリ
   config.model 'Post' do
-    label "投稿記事_1セクション"
+    label "投稿記事"
     weight 0
     list do
       field :title do
@@ -461,6 +466,10 @@ RailsAdmin.config do |config|
       field :category  do
         label "対応するカテゴリを選択してください"
       end
+      field :post_details do
+        label "記事セクション"
+        help "対応しているセクションは右にあるので、ダブルクリックで修正可能です"
+      end
       field :status, :enum do
       enum do
         Hash[ ['公開','非公開'].zip(['1','0']) ]
@@ -481,7 +490,7 @@ RailsAdmin.config do |config|
    ## 投稿カテゴリ
    config.model 'PostDetail' do
      label "投稿記事各セクション"
-     weight 0
+     weight 5
      list do
        field :post do
          label "記事名"

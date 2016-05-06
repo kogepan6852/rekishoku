@@ -64,6 +64,15 @@
         </ul>
       </div>
     </div>
+    <div class="row row-top row-bottom bg-gray">
+      <div class="col-xs-12">
+        <div class="ad-main">
+          <div class="hidden-md hidden-xs" ng-bind-html="ads.lg"></div>
+          <div class="visible-md" ng-bind-html="ads.md"></div>
+          <div class="visible-xs" ng-bind-html="ads.sm"></div>
+        </div>
+      </div>
+    </div>
     <div class="row row-top" ng-if="postsRelated.length!=0">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="reki-icon"><h2 ng-cloak>{{'POST.RELATED'|translate}}</h2></div>

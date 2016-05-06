@@ -8,9 +8,9 @@ class ApiShopsController < ApplicationController
     if params[:keywords]
       keywords = params[:keywords]
       for kw in keywords.split(" ")
-        # 名前&詳細&メニュー&住所&人物で検索
+        # 名前&詳細&メニュー&住所&人物で検索(outer_join仕様)
         @shops = @shops
-          .joins(:people)
+          .eager_load(:people)
           .where('shops.name LIKE ? or shops.description LIKE ? or shops.menu LIKE ? or CONCAT(shops.province, shops.city, shops.address1, shops.address2) LIKE ? or people.name LIKE ?',"%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%").uniq
       end
     end

@@ -89,6 +89,19 @@
             <div ng-bind-html="shop.menu | newlines"></div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row row-top row-bottom">
+      <div class="col-xs-12">
+        <div class="ad-main">
+          <div class="hidden-md hidden-xs" ng-bind-html="ads.lg"></div>
+          <div class="visible-md" ng-bind-html="ads.md"></div>
+          <div class="visible-xs" ng-bind-html="ads.sm"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-top row-bottom bg-gray">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="detail-map" ng-if="shop.province">
           <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
               <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
