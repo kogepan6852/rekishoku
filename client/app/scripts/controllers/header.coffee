@@ -67,9 +67,9 @@ angular.module "frontApp"
     # 現在Pathの取得
     setCurrentType = ->
       currentPath = $location.path();
-      if currentPath.indexOf('/store/list') != -1
+      if currentPath.indexOf('/shop/list') != -1
         $rootScope.currentType = 'shop'
-      else if currentPath.indexOf('/store/map') != -1
+      else if currentPath.indexOf('/shop/map') != -1
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'home'
@@ -207,7 +207,7 @@ angular.module "frontApp"
       $rootScope.isHideTab = false
       $ionicHistory.goBack();
       # STORESに戻る場合、フッターを戻す
-      if $ionicHistory.backTitle() == 'STORES'
+      if $ionicHistory.backTitle() == 'SHOPS'
         $rootScope.hideFooter = false
         $rootScope.hideModeBtn = false
         $ionicNavBarDelegate.showBackButton false
@@ -295,12 +295,12 @@ angular.module "frontApp"
     $scope.searchByPeriods = (id, target) ->
       # shop検索
       if $rootScope.currentType == 'shop'
-        $location.path('/app/store/list').search(target, id)
+        $location.path('/app/shop/list').search(target, id)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       # map検索
       else if $rootScope.currentType == 'map'
-        $location.path('/app/store/map').search(target, id)
+        $location.path('/app/shop/map').search(target, id)
         if $rootScope.mapSearch
           $rootScope.mapSearch($scope.selectedId)
       # post検索

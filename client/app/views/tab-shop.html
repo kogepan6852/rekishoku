@@ -3,13 +3,13 @@
 
     <!-- Shops  -->
     <ion-tab title="{{'MENU.STORE'|translate}}">
-      <ion-nav-view name="tab-store-list" href="#/app/store/list"></ion-nav-view>
+      <ion-nav-view name="tab-shop-list" href="#/app/shop/list"></ion-nav-view>
     </ion-tab>
 
 
     <!-- Map  -->
     <ion-tab title="{{'MENU.MAP'|translate}}">
-      <ion-nav-view name="tab-store-map" href="#/app/store/map"></ion-nav-view>
+      <ion-nav-view name="tab-shop-map" href="#/app/shop/map"></ion-nav-view>
     </ion-tab>
 
   </ion-tabs>
@@ -19,6 +19,6 @@
   <h1 class="title"><i class="ion-arrow-down-b"></i> SEARCH</h1>
   <div class="buttons" ng-click="changeListType()">
     <button class="button mode-btn" ng-class="{'hide-btn': hideModeBtn}">
-      <i ng-class="{'ion-ios-flag-outline':currentType != 'store', 'ion-ios-list-outline':currentType == 'store'}"></i></button>
+      <i ng-class="{'ion-ios-flag-outline':currentType == 'shop', 'ion-ios-list-outline':currentType != 'shop'}"></i></button>
   </div>
 </ion-footer-bar>

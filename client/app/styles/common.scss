@@ -64,8 +64,23 @@ a {
   margin: 20px auto;
 }
 
+hr {
+  margin-top: 5px!important;
+  margin-bottom: 5px!important;
+}
+
+/**********************
+ * Adjuster
+ **********************/
 .no-padding { padding: 0!important;}
 .no-margin { margin: 0!important;}
+
+.padding-top {
+  padding-top: 30px !important;
+}
+.padding-bottom {
+  padding-bottom: 30px !important;
+}
 
 /**********************
  * Header
@@ -177,34 +192,6 @@ ion-content.has-tabs-top {
   height: auto;
   top: 0;
   bottom: 0;
-}
-
-/**********************
- * Button
- **********************/
-
-.button {
-  &.facebook {
-    background-color: #305097;
-    color: #fff;
-    border: none;
-    width: 49%;
-  }
-  &.twitter {
-    background-color: #00aced;
-    color: #fff;
-    border: none;
-    width: 49%;
-  }
-  &.button-positive {
-    background-color: #cd615d;
-    border: none;
-    &.active, &.activated {
-      background-color: #c35753;
-      border: none;
-      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
-    }
-  }
 }
 
 /**********************
@@ -366,6 +353,13 @@ ion-modal-view .bar-header {
   &.ng-leave, > .ng-leave {
     transition: all ease-in-out 250ms;
   }
+}
+
+/**********************
+ * Advertisement
+ **********************/
+.ad-main {
+  text-align: center;
 }
 
 /**********************

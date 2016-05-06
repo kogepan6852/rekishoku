@@ -1,6 +1,7 @@
 <ion-view title="" class="shop-detail-view">
-  <ion-content has-header="true" class="detail">
+  <ion-content has-header="true" class="detail store">
 
+    <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
         <img ng-src="{{shop.image.url}}" src="../images/dummy-img.png" class="hidden-xs">
@@ -14,6 +15,7 @@
       </div>
     </div>
 
+    <!-- MAIN INFORMATION -->
     <div class="row row-bottom">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div class="information">
@@ -44,12 +46,16 @@
       </div>
     </div>
 
-    <div class="row">
+    <hr>
+
+    <!-- DESCRIPTION -->
+    <div class="row padding-top padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
         <div><p ng-bind-html="shop.description | newlines"></p></div>
       </div>
     </div>
 
+    <!-- SUB IMAGE -->
     <div class="row no-padding">
       <div class="top-image">
         <img ng-src="{{shop.subimage.url}}" src="../images/dummy-img.png" class="hidden-xs">
@@ -63,35 +69,18 @@
       </div>
     </div>
 
-    <div class="row bg-gray">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
-        広告
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
-        <div class="shop-info">
-          <div class="shop-info-row">
-            <div class="shop-info-col" ng-cloak>{{'SHOP.URL'|translate}}</div>
-            <div><a href="{{shop.url}}" target="_blank">{{shop.url}}</a></div>
-          </div>
-          <div class="shop-info-row">
-            <div class="shop-info-col" ng-cloak>{{'SHOP.ADDRESS'|translate}}</div>
-            <div>
-              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.address1}}" ng-show="shop.province">
-                {{shop.province + shop.city + shop.address1 + shop.address2}}
-              </a>
-            </div>
-          </div>
-          <div class="shop-info-row">
-            <div class="shop-info-col" ng-cloak>{{'SHOP.MENU'|translate}}</div>
-            <div ng-bind-html="shop.menu | newlines"></div>
-          </div>
+    <!-- MENU -->
+    <div class="row padding-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2 sub-info">
+        <div class="menu-list">
+          <div class="info-title"><span ng-bind-html="'SHOP.MENU'|translate"></span></div>
+          <div ng-bind-html="shop.menu | newlines"></div>
         </div>
       </div>
     </div>
-    <div class="row row-top row-bottom">
+
+    <!-- ADVERTISEMENT -->
+    <div class="row bg-gray padding-top padding-bottom">
       <div class="col-xs-12">
         <div class="ad-main">
           <div class="hidden-md hidden-xs" ng-bind-html="ads.lg"></div>
@@ -100,7 +89,59 @@
         </div>
       </div>
     </div>
-    <div class="row row-top row-bottom bg-gray">
+
+    <!-- SUB INFORMAION -->
+    <div class="row padding-top padding-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+        <div class="sub-info">
+
+          <!-- STORE ADDRESS -->
+          <div ng-show="shop.province">
+            <div class="info-title">
+              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.province + shop.city + shop.address1}}">
+                <span ng-bind-html="'SHOP.ADDRESS'|translate"></span>
+                <i class="ion-arrow-right-b"></i>
+              </a>
+            </div>
+            <div>
+              <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.province + shop.city + shop.address1}}"
+                ng-bind-html="shop.province + shop.city + shop.address1 + shop.address2"></a>
+            </div>
+          </div>
+          <!-- PHONE NO -->
+          <div ng-show="shop.phone_no">
+            <div class="info-title">
+              <a href="tel:{{shop.phone_no | delHyphen}}">
+                <span ng-bind-html="'SHOP.PHONE_NO'|translate"></span>
+                <i class="ion-arrow-right-b"></i>
+              </a>
+            </div>
+            <div><a href="tel:{{shop.phone_no | delHyphen}}" ng-bind-html="shop.phone_no"></a></div>
+          </div>
+          <!-- WEB URL -->
+          <div ng-show="shop.url">
+            <div class="info-title">
+              <a target="_blank" href="{{shop.url}}">
+                <span ng-bind-html="'SHOP.WEB'|translate"></span>
+                <i class="ion-arrow-right-b"></i>
+              </a>
+            </div>
+            <div class="url"><a target="_blank" href="{{shop.url}}" ng-bind-html="shop.url"></a></div>
+          </div>
+          <!-- Business time -->
+          <div>
+            <div class="info-title">
+              <span ng-bind-html="'SHOP.TIME'|translate"></span>
+            </div>
+            <div ng-bind-html="shop.shop_hours | newlines"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="detail-map" ng-if="shop.province">
           <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
@@ -110,9 +151,27 @@
         </div>
       </div>
     </div>
-    <div class="row row-top" ng-if="posts.length!=0">
+
+    <!-- SNS ICONS -->
+    <div class="row padding-bottom">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 no-padding">
+        <div class="sns-icons">
+          <a class="button facebook" ng-click ="postToFeed()"></a>
+          <a class="button twitter" target="_blank" href="http://twitter.com/share?text={{post.title}}&url={{urlTwitter}}&hashtags=歴食"></a>
+          <span class="button like">
+            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Frekishoku&width=71&layout=box_count&action=like&show_faces=true&share=false&height=65&appId=813296825366564"
+              width="71" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- POST -->
+    <div class="row padding-top" ng-if="posts.length!=0">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
-        <div class="reki-icon" ng-cloak><h2>{{'POST.STORIES'|translate}}</h2></div>
+        <h2>{{'POST.EPISODE'|translate}}</h2>
       </div>
     </div>
     <div class="row post-shops row-bottom" ng-if="posts.length!=0">

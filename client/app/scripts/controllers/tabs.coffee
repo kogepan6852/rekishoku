@@ -15,9 +15,9 @@ angular.module "frontApp"
     ###
     checkPath = ->
       currentPath = $location.path();
-      if currentPath.indexOf('/store/list') != -1
-        $rootScope.currentType = 'store'
-      else if currentPath.indexOf('/store/map') != -1
+      if currentPath.indexOf('/shop/list') != -1
+        $rootScope.currentType = 'shop'
+      else if currentPath.indexOf('/shop/map') != -1
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'magazine'
@@ -41,14 +41,16 @@ angular.module "frontApp"
 
       else if index == 1
         $rootScope.appTitle = $translate.instant('SEO.TITLE.SHOP')
-        $location.path('/app/store/list').search('keywords', null)
-        $rootScope.currentType = 'store'
+        $location.path('/app/shop/list').search('keywords', null)
+        $rootScope.currentType = 'shop'
 
     $scope.changeListType = ->
       checkPath()
       currentPath = $location.path();
-      if $rootScope.currentType == 'store'
+      if $rootScope.currentType == 'shop'
         $rootScope.hideFooter = false
-        $location.path('/app/store/map')
+        $rootScope.currentType = 'map'
+        $location.path('/app/shop/map')
       else
-        $location.path('/app/store/list')
+        $rootScope.currentType = 'shop'
+        $location.path('/app/shop/list')

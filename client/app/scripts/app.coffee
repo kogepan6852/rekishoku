@@ -42,40 +42,40 @@ angular
             templateUrl: 'views/magazine.html'
             controller: 'MagazineCtrl'
 
-      .state 'tabs.store',
+      .state 'tabs.shop',
         abstract: true
         views:
-          'tab-store':
-            templateUrl: 'views/tab-store.html'
+          'tab-shop':
+            templateUrl: 'views/tab-shop.html'
 
       # STORE LIST
-      .state 'tabs.store.list',
-        url: '/app/store/list'
+      .state 'tabs.shop.list',
+        url: '/app/shop/list'
         views:
-          'tab-store-list':
+          'tab-shop-list':
             templateUrl: 'views/shops.html'
             controller: 'ShopsCtrl'
 
       # STORE MAP
-      .state 'tabs.store.map',
-        url: '/app/store/map'
+      .state 'tabs.shop.map',
+        url: '/app/shop/map'
         views:
-          'tab-store-map':
+          'tab-shop-map':
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
 
-      .state 'tabs.storeDetal',
-        url: '/app/store/:id'
+      .state 'tabs.shopDetal',
+        url: '/app/shop/:id'
         views:
-          'tab-store':
+          'tab-shop':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
 
       # STORE DETAILS
-      .state 'tabs.store.detail',
-        url: '/app/store/:id'
+      .state 'tabs.shop.detail',
+        url: '/app/shop/:id'
         views:
-          'tab-store-list':
+          'tab-shop-list':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
 
@@ -113,28 +113,6 @@ angular
         url: '/app/writer/:id'
         views:
           'home-tab':
-            templateUrl: 'views/writer-detail.html'
-            controller: 'WriterDetailCtrl'
-
-      .state 'tabs.shop',
-        cache: false,
-        url: '/app/shop/:id'
-        views:
-          'shops-tab':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.shop-post',
-        cache: false,
-        url: '/app/post/:id'
-        views:
-          'shops-tab':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.shop-writer',
-        cache: false,
-        url: '/app/writer/:id'
-        views:
-          'shops-tab':
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
 
@@ -194,8 +172,8 @@ angular
         url: '/app/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
-      .state 'store',
-        url: '/app/store/:id'
+      .state 'shop',
+        url: '/app/shop/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
 

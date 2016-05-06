@@ -86,7 +86,7 @@ angular.module "frontApp"
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
     # 店舗詳細移動時の処理
-    $scope.moveToStoreDetail = ->
+    $scope.moveToShopDetail = ->
       $rootScope.hideFooter = true
       $rootScope.hideModeBtn = true
       $ionicNavBarDelegate.showBackButton true

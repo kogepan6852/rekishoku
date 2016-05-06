@@ -39,15 +39,16 @@
     "PHOTO_BY":      "PHOTO by ",
     "QUOTATION":      "掲載元：",
     "SHOP_INFO":      "店舗情報",
-    "STORIES":        "歴食体験・エピソード",
+    "EPISODE":        "歴食エピソード",
     "LIST":           "投稿一覧",
     "RELATED":        "関連投稿"
   },
   "SHOP": {
-    "NAME":           "店舗名",
-    "URL":            "URL",
-    "ADDRESS":        "所在地",
-    "MENU":           "MENU",
+    "ADDRESS":        "住所",
+    "PHONE_NO":       "電話",
+    "WEB":            "WEB",
+    "TIME":           "営業時間",
+    "MENU":           "代表メニュー",
     "DAYTIME":        "昼：¥",
     "NIGHTTIME":      "夜：¥"
   },
