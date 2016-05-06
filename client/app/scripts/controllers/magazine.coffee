@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MagazineCtrl", ($scope, $rootScope, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService) ->
+  .controller "MagazineCtrl", ($scope, $rootScope, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService, $state) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -47,7 +47,7 @@ angular.module "frontApp"
       obj.person = searchSata.person
 
       Api.getJson(obj, Const.API.POST, true).then (res) ->
-        $scope.posts = res.data
+        $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
@@ -61,10 +61,41 @@ angular.module "frontApp"
     ###
     # function
     ###
+    # 検索処理
+    $scope.search = (categoryId) ->
+      $scope.page = 1
+      obj =
+        per: Const.API.SETTING.PER
+        page: $scope.page
+      if categoryId == $scope.targetCategoryId
+        # 検索条件解除
+        $scope.targetCategoryId = null
+      else
+        # 検索条件設定
+        $scope.targetCategoryId = categoryId
+        obj.category = categoryId
+
+      # 検索ワードの設定
+      searchSata = $scope.getSearchData()
+      obj.keywords = searchSata.keywords
+      obj.period = searchSata.period
+      obj.person = searchSata.person
+
+      # 検索
+      Api.getJson(obj, Const.API.POST, true).then (res) ->
+        $scope.posts = res.data
+        if res.data.length == 0
+          $scope.noMoreLoad = true
+        $scope.$broadcast('scroll.infiniteScrollComplete')
+
+    # 記事詳細移動時の処理
+    $scope.moveToPostDetail = (id) ->
+      $ionicNavBarDelegate.showBackButton true
+      $state.go 'tabs.postDetal', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
-      if $scope.posts
+      if $scope.results
         $scope.page += 1
         obj =
           per: Const.API.SETTING.PER
@@ -79,5 +110,5 @@ angular.module "frontApp"
             $scope.noMoreLoad = true
           else
             angular.forEach res.data, (data, i) ->
-              $scope.posts.push(data)
+              $scope.results.push(data)
           $scope.$broadcast('scroll.infiniteScrollComplete')

@@ -1,5 +1,5 @@
 <ion-view title="SHOPS">
-  <ion-content class="image-content" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
+  <ion-content class="shops" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
 
     <ion-refresher
       pulling-text="{{'TEXT.PULLING'|translate}}"
@@ -28,8 +28,7 @@
     <div>
       <list-item-shop
          ng-repeat="result in results"
-         ui-sref="tabs.shop.detail({id:result.shop.id})"
-         ng-click="moveToShopDetail()"
+         ng-click="moveToShopDetail(result.shop.id)"
          data="result.shop"
          periods="result.periods"
          people="result.people"

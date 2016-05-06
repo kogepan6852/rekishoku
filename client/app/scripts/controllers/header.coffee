@@ -207,7 +207,7 @@ angular.module "frontApp"
       $rootScope.isHideTab = false
       $ionicHistory.goBack();
       # STORESに戻る場合、フッターを戻す
-      if $ionicHistory.backTitle() == 'SHOPS'
+      if $ionicHistory.backTitle() == 'SHOPS' || $ionicHistory.backTitle() == 'MAGAZINE'
         $rootScope.hideFooter = false
         $rootScope.hideModeBtn = false
         $ionicNavBarDelegate.showBackButton false

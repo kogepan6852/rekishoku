@@ -33,10 +33,10 @@ class ApiPostsController < ApplicationController
       @posts = @posts.joins(:people).where('people.id' => params[:person]).uniq
     end
 
-    # アイキャッチ画像の設定
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|
-      obj = { "id" => post.id,
+      # アイキャッチ画像の設定
+      postObj = { "id" => post.id,
               "title" => post.title,
               "content" => post.content,
               "image" => post.image,
@@ -46,9 +46,24 @@ class ApiPostsController < ApplicationController
               "category_slug" => post.category_slug }
       post.post_details.each do |post_detail|
         if post_detail.is_eye_catch
-          obj["image"] = post_detail.image
+          postObj["image"] = post_detail.image
         end
       end
+
+      # 人に紐付く時代を全て抽出する
+      periods = Array.new()
+      post.people.each do |person|
+        person.periods.each do |period|
+          periods.push(period);
+        end
+      end
+
+      # 返却用のオブジェクトを作成する
+      obj = { "post" => postObj,
+              "people" => post.people,
+              "periods" => periods.uniq
+            }
+
       newPosts.push(obj);
     end
 

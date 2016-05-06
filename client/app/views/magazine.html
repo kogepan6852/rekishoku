@@ -6,29 +6,34 @@
       on-refresh="init()">
     </ion-refresher>
 
-    <!-- Serach -->
-    <div class="row">
+    <!-- Search condition -->
+    <div class="row" ng-if="keywords || period || person">
       <div class="col main-category">
-        <div class="button-bar basic" ng-if="!keywords && !period && !person">
-          <!-- no search -->
-        </div>
-        <div class="search-condition" ng-if="keywords || period || person">
+        <div class="search-condition">
           <div>
-            <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
-            <span ng-if="keywords" ng-bind-html="keywords"></span>
-            <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
-            <span ng-if="person" ng-bind-html="person | mapppingId:people"></span>
+            <span ng-if="targetCategoryId" ng-bind="targetCategoryId | mapppingId:categories"></span>
+            <span ng-if="keywords" ng-bind="keywords"></span>
+            <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
+            <span ng-if="person" ng-bind="person | mapppingId:people"></span>
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
+            <span ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="main">
-      MAGAZINE
+    <!-- Items -->
+    <div>
+      <list-item-post
+         ng-repeat="result in results"
+         ng-click="moveToPostDetail(result.post.id)"
+         data="result.post"
+         periods="result.periods"
+         people="result.people"
+         category="result.post.category_name" >
+       </list-item-post>
     </div>
 
     <ion-infinite-scroll

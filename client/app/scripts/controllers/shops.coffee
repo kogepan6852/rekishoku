@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $translate, Api, Const, DataService) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $translate, Api, Const, DataService, $state) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -86,10 +86,11 @@ angular.module "frontApp"
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
     # 店舗詳細移動時の処理
-    $scope.moveToShopDetail = ->
+    $scope.moveToShopDetail = (id) ->
       $rootScope.hideFooter = true
       $rootScope.hideModeBtn = true
       $ionicNavBarDelegate.showBackButton true
+      $state.go 'tabs.shop.detail', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

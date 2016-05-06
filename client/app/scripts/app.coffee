@@ -32,9 +32,7 @@ angular
         abstract: true,
         templateUrl: "views/tabs.html"
 
-
-
-
+      # MAIN TAB
       .state 'tabs.magazine',
         url: '/app/magazine'
         views:
@@ -64,6 +62,15 @@ angular
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
 
+      # POST DETAILS
+      .state 'tabs.postDetal',
+        url: '/app/post/:id'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/post-detail.html'
+            controller: 'PostDetailCtrl'
+
+      # STORE DETAIL DIRECT
       .state 'tabs.shopDetal',
         url: '/app/shop/:id'
         views:

@@ -1,9 +1,18 @@
 <a class="item">
   <img class="main-img" src="../images/dummy-img.png">
-  <img class="main-img subimage" ng-src="{{data.subimage.md.url}}">
+
   <!-- POST -->
+  <img class="main-img subimage" ng-src="{{data.image.image.md.url}}" ng-if="target=='post'">
+  <div class="category" ng-if="target=='post'">
+    <span ng-bind="category"></span>
+  </div>
+  <div class="detail" ng-if="target=='post'">
+    <h2 ng-bind="data.title"></h2>
+    <p class="description" ng-bind="data.content"></p>
+  </div>
 
   <!-- SHOP -->
+  <img class="main-img subimage" ng-src="{{data.subimage.md.url}}" ng-if="target=='shop'">
   <div class="detail" ng-if="target=='shop'">
     <h2 ng-bind="data.name"></h2>
     <star count="rating"></star>
