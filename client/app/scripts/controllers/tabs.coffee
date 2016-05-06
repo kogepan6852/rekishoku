@@ -30,7 +30,6 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
       $rootScope.hideFooter = false
       $rootScope.hideModeBtn = false
 

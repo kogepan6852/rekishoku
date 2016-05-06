@@ -2,4 +2,4 @@
 <div>
   <i ng-class="star" ng-repeat="star in stars track by $index "></i>
 </div>
-<div class="star-count">{{count | number:1}}</div>
+<div class="star-count" ng-bind="count | number:1"></div>

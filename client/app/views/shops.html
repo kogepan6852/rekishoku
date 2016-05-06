@@ -11,14 +11,14 @@
       <div class="col main-category">
         <div class="search-condition">
           <div>
-            <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
-            <span ng-if="keywords" ng-bind-html="keywords"></span>
-            <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
-            <span ng-if="person" ng-bind-html="person | mapppingId:people"></span>
+            <span ng-if="targetCategoryId" ng-bind="targetCategoryId | mapppingId:categories"></span>
+            <span ng-if="keywords" ng-bind="keywords"></span>
+            <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
+            <span ng-if="person" ng-bind="person | mapppingId:people"></span>
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
+            <span ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
           </div>
         </div>
       </div>
@@ -32,7 +32,8 @@
          ng-click="moveToShopDetail()"
          data="result.shop"
          periods="result.periods"
-         people="result.people" >
+         people="result.people"
+         rating="result.rating.average" >
        </list-item-shop>
     </div>
 

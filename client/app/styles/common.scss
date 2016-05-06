@@ -111,6 +111,8 @@ hr {
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  background-image: none;
 
   .title { color: #fff; }
   .mode-btn {

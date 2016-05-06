@@ -8,6 +8,7 @@ angular.module "frontApp"
         data: '=data'
         periods: '=periods'
         people: '=people'
+        rating: '=rating'
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
         scope.target = "shop"

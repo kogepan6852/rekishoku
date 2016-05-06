@@ -5,8 +5,8 @@
 
   <!-- SHOP -->
   <div class="detail" ng-if="target=='shop'">
-    <h2>{{data.name}}</h2>
-    <star count="2.7"></star>
+    <h2 ng-bind="data.name"></h2>
+    <star count="rating"></star>
   </div>
 
   <div class="tags">

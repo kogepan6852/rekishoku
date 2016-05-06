@@ -1,5 +1,5 @@
 <ion-view title="" class="shop-detail-view">
-  <ion-content has-header="true" class="detail store">
+  <ion-content has-header="true" class="detail store" ng-init="init()">
 
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
@@ -10,7 +10,7 @@
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
       <div class="image-quotation">
-        <span ng-bind-html="'POST.PHOTO_BY'|translate"></span>
+        <span ng-bind="'POST.PHOTO_BY'|translate"></span>
         <a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a>
       </div>
     </div>
@@ -21,24 +21,24 @@
         <div class="information">
           <div class="name">
             <h4>STORE</h4>
-            <h1 ng-bind-html="shop.name"></h1>
+            <h1 ng-bind="shop.name"></h1>
           </div>
           <div>
             <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
             <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
           </div>
           <div class="tel">
-            <h2>TEL <span ng-bind-html="shop.phone_no"></span></h2>
+            <h2>TEL <span ng-bind="shop.phone_no"></span></h2>
           </div>
           <div class="other">
             <p>
-              <span ng-bind-html="shop.province"></span>、
+              <span ng-bind="shop.province"></span>、
               <span ng-if="categories" category-list data="categories" ></span>
               <br>
-              <span ng-bind-html="'SHOP.DAYTIME'|translate"></span>
-              <span class="price" ng-bind-html="price.daytime"></span>
-              <span ng-bind-html="'SHOP.NIGHTTIME'|translate"></span>
-              <span class="price" ng-bind-html="price.nighttime"></span>
+              <span ng-bind="'SHOP.DAYTIME'|translate"></span>
+              <span class="price" ng-bind="price.daytime"></span>
+              <span ng-bind="'SHOP.NIGHTTIME'|translate"></span>
+              <span class="price" ng-bind="price.nighttime"></span>
             </p>
             <star label="true" count="rating.average"></star>
           </div>
@@ -64,7 +64,7 @@
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
       <div class="image-quotation">
-        <span ng-bind-html="'POST.PHOTO_BY'|translate"></span>
+        <span ng-bind="'POST.PHOTO_BY'|translate"></span>
         <a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a>
       </div>
     </div>
@@ -73,7 +73,7 @@
     <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2 sub-info">
         <div class="menu-list">
-          <div class="info-title"><span ng-bind-html="'SHOP.MENU'|translate"></span></div>
+          <div class="info-title"><span ng-bind="'SHOP.MENU'|translate"></span></div>
           <div ng-bind-html="shop.menu | newlines"></div>
         </div>
       </div>
@@ -99,39 +99,39 @@
           <div ng-show="shop.province">
             <div class="info-title">
               <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.province + shop.city + shop.address1}}">
-                <span ng-bind-html="'SHOP.ADDRESS'|translate"></span>
+                <span ng-bind="'SHOP.ADDRESS'|translate"></span>
                 <i class="ion-arrow-right-b"></i>
               </a>
             </div>
             <div>
               <a target="_blank" href="http://maps.google.co.jp/maps?t=m&z=16&q={{shop.province + shop.city + shop.address1}}"
-                ng-bind-html="shop.province + shop.city + shop.address1 + shop.address2"></a>
+                ng-bind="shop.province + shop.city + shop.address1 + shop.address2"></a>
             </div>
           </div>
           <!-- PHONE NO -->
           <div ng-show="shop.phone_no">
             <div class="info-title">
               <a href="tel:{{shop.phone_no | delHyphen}}">
-                <span ng-bind-html="'SHOP.PHONE_NO'|translate"></span>
+                <span ng-bind="'SHOP.PHONE_NO'|translate"></span>
                 <i class="ion-arrow-right-b"></i>
               </a>
             </div>
-            <div><a href="tel:{{shop.phone_no | delHyphen}}" ng-bind-html="shop.phone_no"></a></div>
+            <div><a href="tel:{{shop.phone_no | delHyphen}}" ng-bind="shop.phone_no"></a></div>
           </div>
           <!-- WEB URL -->
           <div ng-show="shop.url">
             <div class="info-title">
               <a target="_blank" href="{{shop.url}}">
-                <span ng-bind-html="'SHOP.WEB'|translate"></span>
+                <span ng-bind="'SHOP.WEB'|translate"></span>
                 <i class="ion-arrow-right-b"></i>
               </a>
             </div>
-            <div class="url"><a target="_blank" href="{{shop.url}}" ng-bind-html="shop.url"></a></div>
+            <div class="url"><a target="_blank" href="{{shop.url}}" ng-bind="shop.url"></a></div>
           </div>
           <!-- Business time -->
           <div>
             <div class="info-title">
-              <span ng-bind-html="'SHOP.TIME'|translate"></span>
+              <span ng-bind="'SHOP.TIME'|translate"></span>
             </div>
             <div ng-bind-html="shop.shop_hours | newlines"></div>
           </div>
