@@ -1,0 +1,21 @@
+<a class="item">
+  <img class="main-img" src="../images/dummy-img.png">
+  <img class="main-img subimage" ng-src="{{data.subimage.md.url}}">
+  <!-- POST -->
+
+  <!-- SHOP -->
+  <div class="detail" ng-if="target=='shop'">
+    <h2>{{data.name}}</h2>
+    <star count="2.7"></star>
+  </div>
+
+  <div class="tags">
+    <div class="periods">
+      <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
+    </div>
+    <div class="people">
+      <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
+    </div>
+  </div>
+  <i class="arrow ion-chevron-right"></i>
+</a>

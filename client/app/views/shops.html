@@ -25,24 +25,15 @@
     </div>
 
     <!-- Items -->
-    <div class="main">
-      <a class="item" collection-repeat="result in results" ui-sref="tabs.shop.detail({id:result.shop.id})" ng-click="moveToShopDetail()">
-        <img class="main-img" src="../images/dummy-img.png">
-        <img class="main-img subimage" ng-src="{{result.shop.subimage.md.url}}">
-        <div class="detail">
-          <h2>{{result.shop.name}}</h2>
-          <star count="2.7"></star>
-        </div>
-        <div class="tags">
-          <div class="periods">
-            <info-tag name="{{period.name}}" ng-repeat="period in result.periods"></info-tag>
-          </div>
-          <div class="people">
-            <info-tag name="{{person.name}}" ng-repeat="person in result.people"></info-tag>
-          </div>
-        </div>
-        <i class="arrow ion-chevron-right"></i>
-      </a>
+    <div>
+      <list-item-shop
+         ng-repeat="result in results"
+         ui-sref="tabs.shop.detail({id:result.shop.id})"
+         ng-click="moveToShopDetail()"
+         data="result.shop"
+         periods="result.periods"
+         people="result.people" >
+       </list-item-shop>
     </div>
 
     <!-- Lazy loading -->
