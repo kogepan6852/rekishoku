@@ -26,10 +26,14 @@ angular.module "frontApp"
 
     $scope.onDragUpScroll = ->
       $rootScope.isDown = true
+      $rootScope.hideFooter = true
+      $rootScope.hideModeBtn = false
 
     $scope.onDragDownScroll = ->
       $rootScope.isDown = false
+      $rootScope.hideFooter = false
       $rootScope.isHideTab = false
+      $rootScope.hideModeBtn = false
 
     # 検索用キーワードをセットする処理
     $scope.getSearchData = ->

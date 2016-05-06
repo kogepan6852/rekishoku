@@ -87,7 +87,9 @@ angular.module "frontApp"
 
     # 店舗詳細移動時の処理
     $scope.moveToStoreDetail = ->
-      $rootScope.isDown = true
+      $rootScope.hideFooter = true
+      $rootScope.hideModeBtn = true
+      $ionicNavBarDelegate.showBackButton true
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

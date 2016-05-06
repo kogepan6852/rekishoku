@@ -15,10 +15,10 @@
   </ion-tabs>
 </div>
 
-<ion-footer-bar class="search-footer" ng-class="{'hide-footer': isDown}">
+<ion-footer-bar class="search-footer" ng-class="{'hide-footer': hideFooter}">
   <h1 class="title"><i class="ion-arrow-down-b"></i> SEARCH</h1>
   <div class="buttons" ng-click="changeListType()">
-    <button class="button mode-btn">
+    <button class="button mode-btn" ng-class="{'hide-btn': hideModeBtn}">
       <i ng-class="{'ion-ios-flag-outline':currentType != 'store', 'ion-ios-list-outline':currentType == 'store'}"></i></button>
   </div>
 </ion-footer-bar>

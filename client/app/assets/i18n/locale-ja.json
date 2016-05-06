@@ -36,6 +36,7 @@
     "PULLING":        "Pull to refresh..."
   },
   "POST": {
+    "PHOTO_BY":      "PHOTO by ",
     "QUOTATION":      "掲載元：",
     "SHOP_INFO":      "店舗情報",
     "STORIES":        "歴食体験・エピソード",
@@ -46,7 +47,9 @@
     "NAME":           "店舗名",
     "URL":            "URL",
     "ADDRESS":        "所在地",
-    "MENU":           "MENU"
+    "MENU":           "MENU",
+    "DAYTIME":        "昼：¥",
+    "NIGHTTIME":      "夜：¥"
   },
   "POST_LIST": {
     "TITLE":          "タイトル",

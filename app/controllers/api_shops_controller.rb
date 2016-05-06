@@ -67,11 +67,57 @@ class ApiShopsController < ApplicationController
   # 詳細データ表示
   def show
     @shop = Shop.find(params[:id])
-    shop = { "shop" => @shop,
+
+    # 人に紐付く時代を全て抽出する
+    periods = Array.new()
+    @shop.people.each do |person|
+      person.periods.each do |period|
+        periods.push(period);
+      end
+    end
+
+    # 歴食度の設定
+    history = @shop.history_level >= 0 ? @shop.history_level : nil
+    building = @shop.building_level >= 0 ? @shop.building_level : nil
+    menu = @shop.menu_level >= 0 ? @shop.menu_level : nil
+    person = @shop.person_level >= 0 ? @shop.person_level : nil
+    episode = @shop.episode_level >= 0 ? @shop.episode_level : nil
+
+    validLevel = history == nil ? 0 : 1
+    validLevel += building == nil ? 0 : 1
+    validLevel += menu == nil ? 0 : 1
+    validLevel += person == nil ? 0 : 1
+    validLevel += episode == nil ? 0 : 1
+
+    average_level = ((history.to_i + building.to_i + menu.to_i + person.to_i + episode.to_i) / validLevel.to_f).round(1)
+
+    rating = {
+      "average" => average_level,
+      "detail" => {
+        "history" => history,
+        "building" => building,
+        "menu" => menu,
+        "person" => person,
+        "episode" => episode
+      },
+    }
+
+    # 価格帯
+    price = {
+      "daytime" => @shop.daytime_price.min.to_s + ' - ' + @shop.daytime_price.max.to_s,
+      "nighttime" => @shop.nighttime_price.min.to_s + ' - ' + @shop.nighttime_price.max.to_s
+    }
+
+    # 返却用のオブジェクトを作成する
+    rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc),
-             "people" => @shop.people }
-    render json: shop
+             "people" => @shop.people,
+             "periods" => periods,
+             "rating" => rating,
+             "price" => price
+           }
+    render json: rtnObj
   end
 
   # GET /api/map

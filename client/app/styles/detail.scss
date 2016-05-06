@@ -1,0 +1,91 @@
+/**********************
+ * Setting
+ **********************/
+$h1: 32px;
+$h2: 24px;
+$h3: 20px;
+$h4: 16px;
+$h5: 14px;
+$h6: 12px;
+
+$baseColor: #c95757;
+$baseColorLite: #cd8c89;
+$subColor: #00636F;
+$grayColor: #878677;
+$darkGrayColor: #3E3A39;
+$blackColor: #3E3A39;
+
+
+/**********************
+ * Common
+ **********************/
+ .detail {
+   .top-image {
+      text-align: center;
+
+      img {
+        max-height: 600px;
+        max-width: 100%;
+        width: auto;
+      }
+    }
+    .image-quotation {
+      text-align: right;
+      color: $grayColor;
+      font-size: $h6;
+
+      a, a:hover {
+        color: $grayColor;
+      }
+    }
+
+    .information {
+      padding: 20px 0 5px;
+
+      h1, h2, h3, h4 {
+        color: $blackColor;
+        font-weight: 300;
+      }
+
+      >div {
+        display: table;
+      }
+
+      .name {
+        h4 {
+          color: $subColor;
+          font-weight: 300;
+          margin: 0;
+        }
+        h1 {
+          color: $darkGrayColor;
+          margin-top: 0;
+        }
+      }
+
+      .tel {
+        margin: 20px 0;
+      }
+
+      star {
+        i {
+          font-size: 44px;
+        }
+        div.star-count {
+          font-size: 36px;
+          span {
+            padding-bottom: 5px;
+          }
+        }
+      }
+
+      .other {
+        margin: 20px 0;
+
+        .price {
+          padding-right: 10px;
+        }
+      }
+
+    }
+ }

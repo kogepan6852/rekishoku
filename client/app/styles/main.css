@@ -236,16 +236,6 @@
 /**********************
  * Post detail
  **********************/
-.detail-image {
-   text-align: center;
-   padding-top: 5px;
-   padding-bottom: 5px;
- }
- .detail-image img {
-   max-height: 600px;
-   max-width: 100%;
-   width: auto;
- }
 .post-title{
   padding: 20px 0 5px;
   min-height: 70px;

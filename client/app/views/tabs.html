@@ -6,13 +6,13 @@
   ng-controller="TabsCtrl">
 
   <!-- Main  -->
-  <ion-tab title="{{'MENU.MAGAZINE'|translate}}" href="#/app/magazine">
+  <ion-tab title="{{'MENU.MAGAZINE'|translate}}" href="#/app/magazine" ng-click="clickTab(0)">
     <ion-nav-view name="tab-magazine"></ion-nav-view>
   </ion-tab>
 
 
   <!-- Map  -->
-  <ion-tab title="{{'MENU.STORE'|translate}}" href="#/app/store/list">
+  <ion-tab title="{{'MENU.STORE'|translate}}" href="#/app/store/list" ng-click="clickTab(1)">
     <ion-nav-view name="tab-store"></ion-nav-view>
   </ion-tab>
 

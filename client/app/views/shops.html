@@ -1,4 +1,4 @@
-<ion-view title="">
+<ion-view title="STORES">
   <ion-content class="image-content" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
 
     <ion-refresher
@@ -35,10 +35,10 @@
         </div>
         <div class="tags">
           <div class="periods">
-            <div class="tag" ng-repeat="period in result.periods"><div>{{period.name}}</div></div>
+            <info-tag name="{{period.name}}" ng-repeat="period in result.periods"></info-tag>
           </div>
           <div class="people">
-            <div class="tag" ng-repeat="person in result.people"><div>{{person.name}}</div></div>
+            <info-tag name="{{person.name}}" ng-repeat="person in result.people"></info-tag>
           </div>
         </div>
         <i class="arrow ion-chevron-right"></i>

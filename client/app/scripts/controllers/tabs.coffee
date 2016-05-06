@@ -30,11 +30,15 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
-      # $ionicHistory.clearCache();
+      $ionicHistory.clearCache();
+      $rootScope.hideFooter = false
+      $rootScope.hideModeBtn = false
+
       if index == 0
         $rootScope.appTitle = $translate.instant('SEO.TITLE.HOME')
         $location.path('/app/magazine').search('keywords', null)
         $rootScope.currentType = 'magazine'
+
       else if index == 1
         $rootScope.appTitle = $translate.instant('SEO.TITLE.SHOP')
         $location.path('/app/store/list').search('keywords', null)
@@ -44,7 +48,7 @@ angular.module "frontApp"
       checkPath()
       currentPath = $location.path();
       if $rootScope.currentType == 'store'
-        $rootScope.isDown = false
+        $rootScope.hideFooter = false
         $location.path('/app/store/map')
       else
         $location.path('/app/store/list')

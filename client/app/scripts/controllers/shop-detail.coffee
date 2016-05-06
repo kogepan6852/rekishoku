@@ -23,6 +23,9 @@ angular.module 'frontApp'
       $scope.categories = res.data.categories
       $scope.posts = res.data.posts
       $scope.people = res.data.people
+      $scope.periods = res.data.periods
+      $scope.rating = res.data.rating
+      $scope.price = res.data.price
 
       # Map用
       $scope.map =

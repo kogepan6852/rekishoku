@@ -175,8 +175,8 @@ angular.module "frontApp"
 
     $scope.moveToHome = ->
       $ionicViewSwitcher.nextTransition('none')
-      $state.go('tabs.home')
-      $rootScope.currentType = 'home'
+      $state.go('tabs.magazine')
+      $rootScope.currentType = 'magazine'
       clearForMove()
 
     $scope.moveToShops = ->
@@ -205,8 +205,12 @@ angular.module "frontApp"
 
     $scope.goBack = ->
       $rootScope.isHideTab = false
-      $rootScope.isDown = false
       $ionicHistory.goBack();
+      # STORESに戻る場合、フッターを戻す
+      if $ionicHistory.backTitle() == 'STORES'
+        $rootScope.hideFooter = false
+        $rootScope.hideModeBtn = false
+        $ionicNavBarDelegate.showBackButton false
 
     $scope.openModalSearch = ->
       # 検索ワードの取得

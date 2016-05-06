@@ -64,12 +64,21 @@ angular
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
 
+      .state 'tabs.storeDetal',
+        url: '/app/store/:id'
+        views:
+          'tab-store':
+            templateUrl: 'views/shop-detail.html'
+            controller: 'ShopDetailCtrl'
+
+      # STORE DETAILS
       .state 'tabs.store.detail',
         url: '/app/store/:id'
         views:
           'tab-store-list':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
+
 
 
       .state 'tabs.home',
@@ -185,9 +194,8 @@ angular
         url: '/app/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
-      .state 'shop',
-        cache: false,
-        url: '/app/shop/:id'
+      .state 'store',
+        url: '/app/store/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
 

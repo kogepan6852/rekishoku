@@ -17,5 +17,6 @@
 /client/.tmp
 /client/app/scripts/config/
 /client/node_modules/
+/client/.sass-cache/
 
 /public/*

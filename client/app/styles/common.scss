@@ -12,7 +12,9 @@ $baseColor: #c95757;
 $baseColorLite: #cd8c89;
 $subColor: #00636F;
 $grayColor: #878677;
+$darkGrayColor: #3E3A39;
 $blackColor: #3E3A39;
+
 
 /**********************
  * Common
@@ -62,11 +64,18 @@ a {
   margin: 20px auto;
 }
 
+.no-padding { padding: 0!important;}
+.no-margin { margin: 0!important;}
+
 /**********************
  * Header
  **********************/
 .main-header {
   background-color: #fff!important;
+
+  .title {
+    display: none;
+  }
 
   .logo {
     width: 89px;
@@ -128,6 +137,10 @@ a {
       font-size: $h1;
       padding-bottom: 5px;
       vertical-align: middle;
+    }
+
+    &.hide-btn {
+      bottom: -22px!important;
     }
   }
   &.hide-footer {
