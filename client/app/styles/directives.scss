@@ -37,7 +37,8 @@ star {
  info-tag {
    .tag {
      float: left;
-     width: 73px;
+     min-width: 72px;
+     max-width: 125px;
      font-size: $h6;
      text-align: center;
      padding-right: 5px;

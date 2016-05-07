@@ -50,6 +50,14 @@
 
     }
 
+    // 関連記事、店舗
+    list-item-post, list-item-shop {
+      a.item {
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 5px;
+      }
+    }
+
  }
 
 // SNS icons

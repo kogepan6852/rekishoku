@@ -89,10 +89,46 @@ class ApiShopsController < ApplicationController
     # 価格帯の取得
     price = get_price(@shop)
 
+    # 関連する投稿の取得
+    posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    newPosts = Array.new()
+
+    posts.each do |post|
+      # アイキャッチ画像の設定
+      postObj = { "id" => post.id,
+              "title" => post.title,
+              "content" => post.content,
+              "image" => post.image,
+              "published_at" => post.published_at,
+              "category_id" => post.category_id,
+              "category_name" => post.category_name,
+              "category_slug" => post.category_slug }
+      post.post_details.each do |post_detail|
+        if post_detail.is_eye_catch
+          postObj["image"] = post_detail.image
+        end
+      end
+
+      # 人に紐付く時代を全て抽出する
+      periods = Array.new()
+      post.people.each do |person|
+        person.periods.each do |period|
+          periods.push(period);
+        end
+      end
+      # 返却用のオブジェクトを作成する
+      obj = { "post" => postObj,
+              "people" => post.people,
+              "periods" => periods.uniq
+            }
+
+      newPosts.push(obj);
+    end
+
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
-             "posts" => @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc),
+             "posts" => newPosts,
              "people" => @shop.people,
              "periods" => periods.uniq,
              "rating" => rating,

@@ -58,9 +58,6 @@ angular.module 'frontApp'
     Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
       $scope.postDetails = res.data
 
-    # 広告取得
-    $scope.ads = BaseService.getAds()
-
     # 現在タブの判定
     if $state.is('tabs.post')
       $scope.nowTab = 'post'

@@ -79,6 +79,7 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
       $ionicHistory.clearHistory();
+      $ionicHistory.clearCache();
       $ionicSideMenuDelegate.toggleRight(false);
 
     ###
