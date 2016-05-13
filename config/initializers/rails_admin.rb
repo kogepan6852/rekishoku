@@ -141,7 +141,6 @@ RailsAdmin.config do |config|
        field :slug  do
          label "管理用人物カテゴリ"
          help "必須　英語　例)military_commander"
-         #help.color = "red"
          required true
        end
       end
@@ -403,7 +402,7 @@ RailsAdmin.config do |config|
         help "対象人物を右に移動してください"
       end
       field :categories do
-        label "関連があるカテゴリ"
+        label "関連があるカテゴリを選択"
         help "必須 対応するカテゴリを選択してください"
         required true
       end
@@ -427,6 +426,9 @@ RailsAdmin.config do |config|
       end
       field :content  do
         label "内容"
+      end
+      field :user_id  do
+        label "投稿者"
       end
       field :status, :enum do
       enum do
@@ -484,6 +486,10 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
+    end
+
+    update do
+      exclude_fields :user_id
     end
    end
 
