@@ -142,3 +142,71 @@ star {
      }
    }
  }
+
+/**********************
+ * sns-icons
+ **********************/
+sns-icons {
+  .sns-icons {
+    width: 100%;
+
+    .button {
+      position: relative;
+      display: block;
+      float: left;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      color: #fff;
+      border: none;
+      margin: 1%;
+      padding: 0;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+
+      &:after {
+        position: initial;
+        padding-top: 100%;
+        display: block;
+        content: "";
+      }
+
+      &.facebook {
+        background-color: #233B7D;
+        //  background-color: #305097;
+        background-image: url("../images/sns-fb.png");
+        width: 31%;
+      }
+
+      &.twitter {
+        background-color: #1772AE;
+        //  background-color: #00aced;
+        background-image: url("../images/sns-tw.png");
+        width: 31%;
+      }
+
+      &.like {
+        background-color: $grayColor;
+        width: 32%;
+
+        &:after {
+          padding-top: 97%;
+        }
+
+        >iframe {
+          left: 50%;
+          margin-left: -34px;
+          margin-top: -30px;
+          position: absolute;
+          top: 50%;
+        }
+      }
+
+      &.active, &.activated {
+        opacity: 0.7;
+      }
+
+    }
+  }
+}

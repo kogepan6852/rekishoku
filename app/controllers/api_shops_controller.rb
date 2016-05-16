@@ -1,5 +1,8 @@
 class ApiShopsController < ApplicationController
 
+  include ShopInfo
+  include RelatedInfo
+
   # GET /api/shops
   # 一覧表示
   def index
@@ -95,27 +98,11 @@ class ApiShopsController < ApplicationController
 
     posts.each do |post|
       # アイキャッチ画像の設定
-      postObj = { "id" => post.id,
-              "title" => post.title,
-              "content" => post.content,
-              "image" => post.image,
-              "published_at" => post.published_at,
-              "category_id" => post.category_id,
-              "category_name" => post.category_name,
-              "category_slug" => post.category_slug }
-      post.post_details.each do |post_detail|
-        if post_detail.is_eye_catch
-          postObj["image"] = post_detail.image
-        end
-      end
+      postObj = get_post(post)
 
       # 人に紐付く時代を全て抽出する
-      periods = Array.new()
-      post.people.each do |person|
-        person.periods.each do |period|
-          periods.push(period);
-        end
-      end
+      periods = get_periods(post.people)
+      
       # 返却用のオブジェクトを作成する
       obj = { "post" => postObj,
               "people" => post.people,
@@ -190,47 +177,6 @@ class ApiShopsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
       params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
-    end
-
-    # 価格帯の取得
-    def get_price(shop)
-      price = {}
-      if shop.daytime_price && shop.nighttime_price
-        price = {
-          "daytime" => shop.daytime_price.min.to_s(:delimited) + ' - ' + shop.daytime_price.max.to_s(:delimited),
-          "nighttime" => shop.nighttime_price.min.to_s(:delimited) + ' - ' + shop.nighttime_price.max.to_s(:delimited)
-        }
-      end
-      return price
-    end
-
-    # 歴食度の設定
-    def cal_rating(shop)
-      history = shop.history_level >= 0 ? shop.history_level : nil
-      building = shop.building_level >= 0 ? shop.building_level : nil
-      menu = shop.menu_level >= 0 ? shop.menu_level : nil
-      person = shop.person_level >= 0 ? shop.person_level : nil
-      episode = shop.episode_level >= 0 ? shop.episode_level : nil
-
-      validLevel = history == nil ? 0 : 1
-      validLevel += building == nil ? 0 : 1
-      validLevel += menu == nil ? 0 : 1
-      validLevel += person == nil ? 0 : 1
-      validLevel += episode == nil ? 0 : 1
-
-      average_level = ((history.to_i + building.to_i + menu.to_i + person.to_i + episode.to_i) / validLevel.to_f).round(1)
-
-      rating = {
-        "average" => average_level,
-        "detail" => {
-          "history" => history,
-          "building" => building,
-          "menu" => menu,
-          "person" => person,
-          "episode" => episode
-        },
-      }
-      return rating
     end
 
 end

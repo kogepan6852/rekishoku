@@ -36,12 +36,13 @@
     "PULLING":        "Pull to refresh..."
   },
   "POST": {
-    "PHOTO_BY":      "PHOTO by ",
+    "PHOTO_BY":       "PHOTO by ",
+    "TEXT_BY":        "TEXT by ",
     "QUOTATION":      "掲載元：",
-    "SHOP_INFO":      "店舗情報",
+    "SHOP_INFO":      "関連する歴食店",
     "EPISODE":        "歴食エピソード",
     "LIST":           "投稿一覧",
-    "RELATED":        "関連投稿"
+    "RELATED":        "関連するエピソード"
   },
   "SHOP": {
     "ADDRESS":        "住所",

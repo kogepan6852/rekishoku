@@ -37,6 +37,7 @@ angular.module 'frontApp'
         $scope.periods = res.data.periods
         $scope.rating = res.data.rating
         $scope.price = res.data.price
+        $scope.eyeCatchImage = res.data.shop.subimage.md.url
 
         # Map用
         $scope.map =
@@ -97,7 +98,7 @@ angular.module 'frontApp'
         method: 'share'
         href: $scope.urlFb
         picture: $scope.eyeCatchImage.image.url
-        title: $scope.post.title
+        title: $scope.shop.name
         caption: '歴食.jp'
-        description: $scope.post.content
+        description: $scope.shop.description
       FB.ui obj

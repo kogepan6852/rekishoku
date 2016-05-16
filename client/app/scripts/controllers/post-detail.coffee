@@ -34,6 +34,7 @@ angular.module 'frontApp'
       $scope.shops = res.data.shops
       $scope.user = res.data.user
       $scope.people = res.data.people
+      $scope.periods = res.data.periods
       $scope.eyeCatchImage = res.data.eye_catch_image
 
       # SEO

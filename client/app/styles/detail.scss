@@ -6,6 +6,7 @@
  .detail {
    .top-image {
       text-align: center;
+      min-height: 200px;
 
       img {
         max-height: 600px;
@@ -30,6 +31,7 @@
       h1, h2, h3, h4 {
         color: $blackColor;
         font-weight: 300;
+        letter-spacing: 1px;
       }
 
       >div {
@@ -37,10 +39,13 @@
       }
 
       .name {
+        height: 67px;
+        min-height: 67px;
+
         h4 {
           color: $subColor;
           font-weight: 300;
-          margin: 0;
+          margin: 0 0 3px 0;
         }
         h1 {
           color: $darkGrayColor;
@@ -48,6 +53,16 @@
         }
       }
 
+      .tags {
+        height: 23px;
+        min-height: 23px;
+      }
+    }
+
+    .description {
+      p {
+        letter-spacing: 1px;
+      }
     }
 
     // 関連記事、店舗
@@ -60,65 +75,29 @@
 
  }
 
-// SNS icons
-.sns-icons {
-  width: 100%;
-
-  .button {
-    position: relative;
-    display: block;
-    float: left;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    color: #fff;
-    border: none;
-    margin: 1%;
-    padding: 0;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-
-    &:after {
-      position: initial;
-      padding-top: 100%;
-      display: block;
-      content: "";
-    }
-
-    &.facebook {
-      background-color: #233B7D;
-      //  background-color: #305097;
-      background-image: url("../images/sns-fb.png");
-      width: 31%;
-    }
-
-    &.twitter {
-      background-color: #1772AE;
-      //  background-color: #00aced;
-      background-image: url("../images/sns-tw.png");
-      width: 31%;
-    }
-
-    &.like {
-      background-color: $grayColor;
-      width: 32%;
-
-      &:after {
-        padding-top: 97%;
-      }
-
-      >iframe {
-        left: 50%;
-        margin-left: -34px;
-        margin-top: -30px;
-        position: absolute;
-        top: 50%;
+/**********************
+ * Post
+ **********************/
+.detail.post {
+  .information {
+    .date {
+      float: right;
+      position: absolute;
+      top: 18px;
+      right: 5px;
+      p {
+        color: $grayColor;
+        font-size: $h6;
       }
     }
 
-    &.active, &.activated {
-      opacity: 0.7;
+    .writer {
+      padding: 5px 0;
+
+      p {
+        color: $grayColor;
+        font-size: $h6;
+      }
     }
 
   }

@@ -1,6 +1,9 @@
 class ApiPostsController < ApplicationController
   authorize_resource :class => false
 
+  include ShopInfo
+  include RelatedInfo
+
   # GET /api/posts
   # 一覧表示
   def index
@@ -36,27 +39,10 @@ class ApiPostsController < ApplicationController
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|
       # アイキャッチ画像の設定
-      postObj = { "id" => post.id,
-              "title" => post.title,
-              "content" => post.content,
-              "image" => post.image,
-              "published_at" => post.published_at,
-              "category_id" => post.category_id,
-              "category_name" => post.category_name,
-              "category_slug" => post.category_slug }
-      post.post_details.each do |post_detail|
-        if post_detail.is_eye_catch
-          postObj["image"] = post_detail.image
-        end
-      end
+      postObj = get_post(post)
 
       # 人に紐付く時代を全て抽出する
-      periods = Array.new()
-      post.people.each do |person|
-        person.periods.each do |period|
-          periods.push(period);
-        end
-      end
+      periods = get_periods(post.people)
 
       # 返却用のオブジェクトを作成する
       obj = { "post" => postObj,
@@ -76,14 +62,6 @@ class ApiPostsController < ApplicationController
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
     logger.debug(params[:preview])
     if params[:preview] == "true" || @post.status == 1 && @post.published_at <= Date.today
-      # shop情報整形
-      shops = Array.new()
-      @post.shops.each do |shop|
-        obj = {
-          "shop" => shop,
-          "categories" => shop.categories }
-        shops.push(obj);
-      end
       # user情報整形
       user = {
         "id" => @post.user.id,
@@ -107,11 +85,41 @@ class ApiPostsController < ApplicationController
         end
       end
 
+      # 人に紐付く時代を全て抽出する
+      postPeriods = get_periods(@post.people)
+
+      # shop情報整形
+      shops = Array.new()
+      @post.shops.each do |shop|
+        # 人に紐付く時代を全て抽出する
+        shopPeriods = Array.new()
+        shop.people.each do |person|
+          person.periods.each do |period|
+            shopPeriods.push(period);
+          end
+        end
+
+        # 歴食度の設定
+        rating = cal_rating(shop)
+        # 価格帯の取得
+        price = get_price(shop)
+
+        obj = { "shop" => shop,
+                "categories" => shop.categories,
+                "people" => shop.people,
+                "periods" => shopPeriods.uniq,
+                "rating" => rating,
+                "price" => price
+              }
+        shops.push(obj);
+      end
+
       post = {
         "post" => @post,
         "shops" => shops,
         "user" => user,
         "people" => people,
+        "periods" => postPeriods.uniq,
         "eye_catch_image" => eyeCatchImage }
       render json: post
     else
@@ -157,7 +165,25 @@ class ApiPostsController < ApplicationController
         .order('posts.created_at desc')
         .limit(10)
     end
-    render json: posts
+
+    # 返却用オブジェクト作成
+    newPosts = Array.new()
+    posts.each do |post|
+      # アイキャッチ画像の設定
+      postObj = get_post(post)
+
+      # 人に紐付く時代を全て抽出する
+      periods = get_periods(post.people)
+
+      obj = { "post" => postObj,
+              "people" => post.people,
+              "periods" => periods
+            }
+
+      newPosts.push(obj)
+    end
+
+    render json: newPosts
   end
 
   # POST /posts
