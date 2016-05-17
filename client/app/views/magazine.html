@@ -26,6 +26,19 @@
 
     <!-- Items -->
     <div>
+
+      <a class="item feature" ng-if="!keywords && !period && !person">
+        <img class="main-img" src="../images/sample.png">
+        <div class="description">
+          <h3 ng-bind="'POST.FEATURE'|translate"></h3>
+          <h2 ng-bind="feature.post.title"></h2>
+          <p ng-bind="feature.post.content"></p>
+        </div>
+        <div class="tags">
+          <info-tag name="{{period.name}}" ng-repeat="period in feature.periods"></info-tag>
+          <info-tag name="{{person.name}}" ng-repeat="person in feature.people"></info-tag>
+        </div>
+      </a>
       <list-item-post
          ng-repeat="result in results"
          ng-click="moveToPostDetail(result.post.id)"

@@ -46,6 +46,18 @@ angular.module "frontApp"
       obj.period = searchSata.period
       obj.person = searchSata.person
 
+      # 特集テスト用データ
+      $scope.feature = {
+        post: {
+          title: "幕末時代の甘味処10選",
+          content: "ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。",
+          image: "../images/sample.png"
+        },
+        people: [{name: "JK"}, {name: "こげぱん"}, {name: "堅固潤也"}]
+        periods: [{name: "江戸時代"}]
+      }
+
+      # 記事一覧取得
       Api.getJson(obj, Const.API.POST, true).then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'

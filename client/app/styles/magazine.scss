@@ -1,1 +1,48 @@
 @import "setting";
+
+.magazine {
+  .feature {
+    padding: 0;
+    margin-bottom: -4px;
+    position: relative;
+
+    .main-img {
+      width: 130%;
+      margin-left: -15%;
+      height: auto;
+    }
+
+    .description {
+      position: absolute;
+      bottom: 33px;
+      padding: 5px;
+      height: 94px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+
+      h2 {
+        font-size: $h2;
+        color: #fff;
+        margin: 0;
+      }
+      h3 { color: #fff; }
+      p {
+        color: #fff;
+        font-size: $h6;
+        height: 40px;
+        overflow: hidden;
+        white-space: normal;
+      }
+    }
+
+    .tags {
+      position: absolute;;
+      bottom: 0;
+      padding: 5px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      height: 33px;
+      overflow: hidden;
+    }
+  }
+}

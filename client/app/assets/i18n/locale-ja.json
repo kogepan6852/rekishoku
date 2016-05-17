@@ -42,7 +42,8 @@
     "SHOP_INFO":      "関連する歴食店",
     "EPISODE":        "歴食エピソード",
     "LIST":           "投稿一覧",
-    "RELATED":        "関連するエピソード"
+    "RELATED":        "関連するエピソード",
+    "FEATURE":        "特集記事"
   },
   "SHOP": {
     "ADDRESS":        "住所",
