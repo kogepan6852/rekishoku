@@ -95,7 +95,7 @@ angular.module "frontApp"
 
       # 検索
       Api.getJson(obj, Const.API.POST, true).then (res) ->
-        $scope.posts = res.data
+        $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')

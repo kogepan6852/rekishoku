@@ -10,9 +10,11 @@
     <div class="list menu-list">
       <ion-slide-box ng-init="disableSwipe()">
         <ion-slide>
+          <!-- Search bar -->
+          <ion-header-bar class="bar-light item-input-inset visible-xs"></ion-header-bar>
+
           <ion-scroll direction="y">
             <!-- pages -->
-            <div class="item item-divider visible-xs"></div>
             <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome()" ng-bind="'MENU.MAGAZINE'|translate"></a>
             <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
 
@@ -73,10 +75,23 @@
     <div class="list menu-list">
       <ion-slide-box ng-init="disableSwipe()">
         <ion-slide>
+          <!-- Search bar -->
+          <ion-header-bar class="bar-light item-input-inset">
+            <form ng-submit="submitSearch()">
+              <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input ng-model="input.keywords" type="search" placeholder="Search">
+              </label>
+              <!-- <div class="button button-clear" ng-click="hideModalSearch()">
+                Cancel
+              </div> -->
+            </form>
+          </ion-header-bar>
+
+          <!-- Search condition -->
           <ion-scroll direction="y">
-            <div class="item item-divider visible-xs"></div>
             <!-- by peridos -->
-            <a class="item item-icon-right item-top" ng-click="openPeriods()">
+            <a class="item item-icon-right" ng-click="openPeriods()">
               by PERIODS
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
@@ -89,9 +104,9 @@
         </ion-slide>
 
         <ion-slide class="list-slide">
-          <div class="item item-icon-left item-top bold" ng-click="backSlide()" >
-            <i class="icon ion-android-arrow-dropleft"></i>Back
-          </div>
+          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide()" >
+            <i class="icon ion-android-arrow-dropleft"></i>
+          </ion-header-bar>
           <ion-scroll direction="y" delegate-handle="list-slide">
             <ion-spinner ng-show="!menuItems"></ion-spinner>
             <a class="item" ng-click="searchByPeriods({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>

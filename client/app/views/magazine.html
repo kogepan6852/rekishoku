@@ -7,8 +7,8 @@
     </ion-refresher>
 
     <!-- Search condition -->
-    <div class="row" ng-if="keywords || period || person">
-      <div class="col main-category">
+    <div class="row search-condition-bar" ng-if="keywords || period || person">
+      <div class="col">
         <div class="search-condition">
           <div>
             <span ng-if="targetCategoryId" ng-bind="targetCategoryId | mapppingId:categories"></span>
@@ -18,7 +18,7 @@
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
+            <span class="hidden-xs" ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
           </div>
         </div>
       </div>

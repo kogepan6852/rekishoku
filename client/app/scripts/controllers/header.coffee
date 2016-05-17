@@ -253,7 +253,7 @@ angular.module "frontApp"
       if !$scope.input.keywords
         $scope.input.keywords = null
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shops').search('keywords', $scope.input.keywords)
+        $location.path('/app/shop/list').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
       else if $rootScope.currentType == 'map'
@@ -261,10 +261,11 @@ angular.module "frontApp"
         if $rootScope.mapSearch
           $rootScope.mapSearch()
       else
-        $location.path('/app').search('keywords', $scope.input.keywords)
+        $location.path('/app/magazine').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
-      $scope.modalSearch.hide()
+      # $scope.modalSearch.hide()
+      $ionicSideMenuDelegate.toggleLeft(false);
 
     # 時代の一覧取得
     $scope.openPeriods = ->
