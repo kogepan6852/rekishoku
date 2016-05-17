@@ -18,12 +18,6 @@ angular.module 'frontApp'
     ###
     $scope.targetId = $stateParams.id
     $rootScope.isHideTab = true
-    $scope.urlFb = config.url.home + $location.url()
-    $scope.urlTwitter = config.url.home + $location.url()
-    FB.init
-      appId: config.id.fb
-      status: true
-      cookie: true
 
     ###
     # initialize
@@ -80,11 +74,11 @@ angular.module 'frontApp'
 
 
       # 現在タブの判定
-      if $state.is('tabs.post') || $state.is('tabs.post-shop')
-        $scope.nowTab = 'post'
-      else if $state.is('tabs.map') || $state.is('tabs.map-shop') || $state.is('tabs.map-shop2')
+      if $state.is('tabs.postDetal')
+        $scope.nowTab = 'magazine'
+      else if $state.is('tabs.shop.map') || $state.is('tabs.map-post')
         $scope.nowTab = 'map'
-      else if $state.is('tabs.shop')
+      else if $state.is('tabs.shop.detail') || $state.is('tabs.shop-post')
         $scope.nowTab = 'shop'
       else
         $scope.nowTab = 'other'
@@ -92,13 +86,22 @@ angular.module 'frontApp'
     ###
     # function
     ###
-    $scope.postToFeed = ->
-      obj =
-        display: 'popup'
-        method: 'share'
-        href: $scope.urlFb
-        picture: $scope.eyeCatchImage.image.url
-        title: $scope.shop.name
-        caption: '歴食.jp'
-        description: $scope.shop.description
-      FB.ui obj
+    $scope.moveToPostDetail = (id) ->
+      if $scope.nowTab == 'magazine'
+        $state.go('tabs.postDetal', { id: id })
+      else if $scope.nowTab == 'map'
+        $state.go('tabs.map-post', { id: id })
+      else if $scope.nowTab == 'shop'
+        $state.go('tabs.shop.post-detail', { id: id })
+      else
+        $state.go('tabs.postDetal', { id: id })
+
+    $scope.moveToShopDetail = (id) ->
+      if $scope.nowTab == 'magazine'
+        $state.go('tabs.post-shop', { id: id })
+      else if $scope.nowTab == 'map'
+        $state.go('tabs.map-shop', { id: id })
+      else if $scope.nowTab == 'shop'
+        $state.go('tabs.shop.detail', { id: id })
+      else
+        $state.go('tabs.shopDetal', { id: id })

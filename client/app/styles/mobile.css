@@ -264,7 +264,7 @@
 
   /* menu */
   .menu-content {
-    -webkit-transform: translate3d(270px, 0px, 0px) !important;
+    -webkit-transform: translate3d(215px, 0px, 0px) !important;
     transform: translate3d(215px, 0px, 0px) !important;
     width: calc(100% - 215px) !important;
   }

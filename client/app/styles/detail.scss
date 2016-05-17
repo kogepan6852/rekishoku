@@ -158,4 +158,13 @@
     padding-top: 20px!important;
   }
 
+  .detail-map {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    .angular-google-map-container, .angular-google-map {
+      height: 250px;
+    }
+  }
+
 }

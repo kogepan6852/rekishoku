@@ -32,7 +32,7 @@ angular
         abstract: true,
         templateUrl: "views/tabs.html"
 
-      # MAIN TAB
+      # MAGAZINE TAB
       .state 'tabs.magazine',
         url: '/app/magazine'
         views:
@@ -40,6 +40,7 @@ angular
             templateUrl: 'views/magazine.html'
             controller: 'MagazineCtrl'
 
+      # STORE TAB
       .state 'tabs.shop',
         abstract: true
         views:
@@ -87,41 +88,47 @@ angular
             controller: 'ShopDetailCtrl'
 
 
-
-      .state 'tabs.home',
-        url: '/app'
-        views:
-          'home-tab':
-            templateUrl: 'views/main.html'
-            controller: 'MainCtrl'
-      .state 'tabs.shops',
-        url: '/app/shops'
-        views:
-          'shops-tab':
-            templateUrl: 'views/shops.html'
-            controller: 'ShopsCtrl'
-
-      .state 'tabs.post',
-        cache: false,
-        url: '/app/post/:id?preview'
-        views:
-          'home-tab':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
+      # MAGAZINEタブ用の各ページのルーティング
+      # .state 'tabs.post.detail',
+      #   cache: false,
+      #   url: '/app/post/:id?preview'
+      #   views:
+      #     'tab-magazine':
+      #       templateUrl: 'views/post-detail.html'
+      #       controller: 'PostDetailCtrl'
       .state 'tabs.post-shop',
         cache: false,
         url: '/app/shop/:id'
         views:
-          'home-tab':
+          'tab-magazine':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.post-writer',
         cache: false,
         url: '/app/writer/:id'
         views:
-          'home-tab':
+          'tab-magazine':
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
+
+
+      # STORE LISTタブ用の各ページのルーティング
+      .state 'tabs.shop.post-detail',
+        cache: false,
+        url: '/app/post/:id'
+        views:
+          'tab-shop-list':
+            templateUrl: 'views/post-detail.html'
+            controller: 'PostDetailCtrl'
+      .state 'tabs.shop.writer-detail',
+        cache: false,
+        url: '/app/writer/:id'
+        views:
+          'tab-shop-list':
+            templateUrl: 'views/writer-detail.html'
+            controller: 'WriterDetailCtrl'
+
+
 
 
       .state 'tabs.map',
@@ -220,4 +227,4 @@ angular
 
   .config ($locationProvider) ->
     # $locationProvider.hashPrefix('!')
-    # $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);

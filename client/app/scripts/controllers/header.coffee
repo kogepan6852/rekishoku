@@ -72,7 +72,7 @@ angular.module "frontApp"
       else if currentPath.indexOf('/shop/map') != -1
         $rootScope.currentType = 'map'
       else
-        $rootScope.currentType = 'home'
+        $rootScope.currentType = 'magazine'
 
     clearForMove = ->
       # backボタンを隠す
@@ -93,6 +93,9 @@ angular.module "frontApp"
 
     $scope.toggleRight = ->
       $ionicSideMenuDelegate.toggleRight();
+
+    $scope.toggleLeft = ->
+      $ionicSideMenuDelegate.toggleLeft();
 
     $scope.doLogin = ->
       # cookieの設定
@@ -182,7 +185,7 @@ angular.module "frontApp"
 
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
-      $state.go('tabs.shops')
+      $state.go('tabs.shop.list')
       $rootScope.currentType = 'shop'
       clearForMove()
 
@@ -306,7 +309,7 @@ angular.module "frontApp"
           $rootScope.mapSearch($scope.selectedId)
       # post検索
       else
-        $rootScope.currentType = 'home'
+        $rootScope.currentType = 'magazine'
         $location.path('/app/magazine').search(target, id)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)

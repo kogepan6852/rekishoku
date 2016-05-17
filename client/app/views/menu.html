@@ -1,6 +1,7 @@
 <ion-side-menus>
-  <!-- Left menu -->
-  <ion-side-menu side="right" ng-controller="HeaderCtrl" ng-init="init()">
+
+  <!-- Main menu -->
+  <ion-side-menu side="right" ng-controller="HeaderCtrl" ng-init="init()" width="215">
     <div class="bar bar-header top hidden-xs">
       <h1 class="title hidden">歴食</h1>
       <div class="logo" ng-click="moveToHome()"></div>
@@ -11,18 +12,17 @@
         <ion-slide>
           <ion-scroll direction="y">
             <!-- pages -->
-            <div class="item item-divider visible-xs" ng-cloak>{{'MENU.TITLE'|translate}}</div>
-            <a class="item item-top" ng-class="{'active': currentType == 'home'}" ng-click="moveToHome()">STORY</a>
-            <a class="item" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()">MAP</a>
-            <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()">STORE</a>
+            <div class="item item-divider visible-xs"></div>
+            <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome()" ng-bind="'MENU.MAGAZINE'|translate"></a>
+            <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
 
             <!-- by peridos -->
-            <a class="item item-icon-right item-top" ng-click="openPeriods()">
+            <a class="item item-icon-right hidden-xs item-top" ng-click="openPeriods()">
               by PERIODS
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right" ng-click="openPeople()">
+            <a class="item item-icon-right hidden-xs" ng-click="openPeople()">
               by PEOPLE
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
@@ -68,9 +68,46 @@
 
   </ion-side-menu>
 
+  <!-- Search Menu for Mobile -->
+  <ion-side-menu class="visible-xs" side="left" ng-controller="HeaderCtrl" ng-init="init()" width="215">
+    <div class="list menu-list">
+      <ion-slide-box ng-init="disableSwipe()">
+        <ion-slide>
+          <ion-scroll direction="y">
+            <div class="item item-divider visible-xs"></div>
+            <!-- by peridos -->
+            <a class="item item-icon-right item-top" ng-click="openPeriods()">
+              by PERIODS
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <!-- by people -->
+            <a class="item item-icon-right" ng-click="openPeople()">
+              by PEOPLE
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+          </ion-scroll>
+        </ion-slide>
+
+        <ion-slide class="list-slide">
+          <div class="item item-icon-left item-top bold" ng-click="backSlide()" >
+            <i class="icon ion-android-arrow-dropleft"></i>Back
+          </div>
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuItems"></ion-spinner>
+            <a class="item" ng-click="searchByPeriods({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+          </ion-scroll>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+  </ion-side-menu>
+
+  <!-- Content -->
   <ion-side-menu-content animation="slide-left-right" nav-transition="ios">
 
     <ion-nav-bar class="main-header visible-xs" ng-controller="HeaderCtrl">
+      <ion-nav-buttons side="left">
+        <div class="button button-clear button-dark" ng-click="toggleLeft()" ><i class="icon ion-ios-search"></i></div>
+      </ion-nav-buttons>
       <div class="logo" ng-click="moveToHome()"></div>
       <ion-nav-buttons side="right">
         <div class="button button-clear button-dark" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
