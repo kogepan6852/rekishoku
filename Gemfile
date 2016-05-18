@@ -36,9 +36,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'cancancan'
 
-# file uploader
-gem "carrierwave"
-
 # fileupload
 gem 'carrierwave'
 gem 'rmagick'
