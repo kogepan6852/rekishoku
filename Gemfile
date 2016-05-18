@@ -66,9 +66,6 @@ gem 'google-analytics-rails'
 # url redirect
 gem 'rack-rewrite'
 
-# Assets
-gem 'sass'
-
 group :development do
   gem 'annotate', '2.6.5'
 end
