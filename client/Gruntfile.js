@@ -249,6 +249,9 @@ module.exports = function (grunt) {
 
     // Compiles Sacc to Css
     sass: {
+      options: {
+        bundleExec: true
+      },
       dist: {
         files: [{
           expand: true,
@@ -490,7 +493,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-sass');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -530,7 +532,6 @@ module.exports = function (grunt) {
       'clean:dist',
       'ngconstant:' + env,
       'wiredep',
-      'sass',
       'useminPrepare',
       'concurrent:dist',
       'autoprefixer',
