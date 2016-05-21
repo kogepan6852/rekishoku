@@ -1,5 +1,5 @@
 <ion-view title="SHOPS">
-  <ion-content class="shops" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()">
+  <ion-content class="shops" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()" delegate-handle="shops">
 
     <ion-refresher
       pulling-text="{{'TEXT.PULLING'|translate}}"
@@ -8,7 +8,7 @@
 
     <!-- Search condition -->
     <div class="row search-condition-bar" ng-if="keywords || period || person">
-      <div class="col">
+      <div class="col no-padding">
         <div class="search-condition">
           <div>
             <span ng-if="targetCategoryId" ng-bind="targetCategoryId | mapppingId:categories"></span>

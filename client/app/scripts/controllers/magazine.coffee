@@ -67,6 +67,7 @@ angular.module "frontApp"
     # Global function
     ###
     $rootScope.postsSearch = (categoryId) ->
+      $scope.noMoreLoad = false
       $scope.targetCategoryId = null
       $scope.search(categoryId)
 
@@ -114,8 +115,10 @@ angular.module "frontApp"
           page: $scope.page
           category: $scope.targetCategoryId
         # 検索ワードの設定
-        if $scope.keywords
-          obj.keywords = $scope.keywords
+        searchSata = $scope.getSearchData()
+        obj.keywords = searchSata.keywords
+        obj.period = searchSata.period
+        obj.person = searchSata.person
 
         Api.getJson(obj, Const.API.POST, true).then (res) ->
           if res.data.length == 0

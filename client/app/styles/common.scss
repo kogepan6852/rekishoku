@@ -396,19 +396,14 @@ ion-modal-view .bar-header {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    border-radius: 18px;
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
     position: relative;
     color: #000;
+
     > div {
       height: 36px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      border-radius: 18px;
-      -moz-border-radius: 18px;
-      -webkit-border-radius: 18px;
       position: relative;
       color: #000;
     }
@@ -416,13 +411,15 @@ ion-modal-view .bar-header {
       background-color: $grayColor;
       color: #fff;
       line-height: 36px;
-      padding: 9px 16px;
+      padding: 5px 10px;
       border-radius: 20px;
       -moz-border-radius: 20px;
       -webkit-border-radius: 20px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      margin-left: 3px;
+      font-size: $h6;
     }
     .clear-button {
       top: 4px;
@@ -441,7 +438,7 @@ ion-modal-view .bar-header {
         top: 4px;
         padding: 0 0 0 1px;
         border: none;
-        color: #444 !important;
+        color: $grayColor !important;
       }
       span {
         background-color: transparent;

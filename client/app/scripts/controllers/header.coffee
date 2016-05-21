@@ -256,14 +256,19 @@ angular.module "frontApp"
         $location.path('/app/shop/list').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
+        $ionicScrollDelegate.$getByHandle('shops').scrollTop();
+
       else if $rootScope.currentType == 'map'
         $location.path('/app/map').search('keywords', $scope.input.keywords)
         if $rootScope.mapSearch
           $rootScope.mapSearch()
+
       else
         $location.path('/app/magazine').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
+        $ionicScrollDelegate.$getByHandle('magazine').scrollTop();
+
       # $scope.modalSearch.hide()
       $ionicSideMenuDelegate.toggleLeft(false);
 
@@ -297,23 +302,29 @@ angular.module "frontApp"
     $scope.disableSwipe = ->
       $ionicSlideBoxDelegate.enableSlide(false);
 
-    $scope.searchByPeriods = (id, target) ->
+    $scope.searchByConditions = (id, target) ->
       # shop検索
       if $rootScope.currentType == 'shop'
         $location.path('/app/shop/list').search(target, id)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch($scope.selectedId)
+        # TOPへScroll
+        $ionicScrollDelegate.$getByHandle('shops').scrollTop();
+
       # map検索
       else if $rootScope.currentType == 'map'
         $location.path('/app/shop/map').search(target, id)
         if $rootScope.mapSearch
           $rootScope.mapSearch($scope.selectedId)
+
       # post検索
       else
         $rootScope.currentType = 'magazine'
         $location.path('/app/magazine').search(target, id)
         if $rootScope.postsSearch
           $rootScope.postsSearch($scope.selectedId)
+        # TOPへScroll
+        $ionicScrollDelegate.$getByHandle('magazine').scrollTop();
 
       $ionicSlideBoxDelegate.previous()
       $ionicSideMenuDelegate.toggleRight(false);

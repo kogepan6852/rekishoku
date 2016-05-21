@@ -109,7 +109,7 @@
           </ion-header-bar>
           <ion-scroll direction="y" delegate-handle="list-slide">
             <ion-spinner ng-show="!menuItems"></ion-spinner>
-            <a class="item" ng-click="searchByPeriods({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <a class="item" ng-click="searchByConditions({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
           </ion-scroll>
         </ion-slide>
       </ion-slide-box>
