@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1
-  # GET /posts/1.json  
+  # GET /posts/1.json
   # def show
   # end
 
@@ -41,13 +41,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    @post.update(post_params)
+    redirect_to "/admin/post"
   end
 
   # DELETE /posts/1

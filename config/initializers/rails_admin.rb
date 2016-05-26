@@ -141,7 +141,6 @@ RailsAdmin.config do |config|
        field :slug  do
          label "管理用人物カテゴリ"
          help "必須　英語　例)military_commander"
-         #help.color = "red"
          required true
        end
       end
@@ -302,16 +301,12 @@ RailsAdmin.config do |config|
         Hash[ ['0~999','1000~1999', '2000~2999','3000~3999','4000~4999', '5000~5999','6000~7999','8000~9999', '10000~14999','15000~19999','20000~29999', '30000~49999','50000~999999'].zip(['1','2','3','4','5','6','7','8','9','10','11','12','13']) ]
       end
         label "日中価格帯"
-        help "必須"
-        required true
       end
       field :nighttime_price_id, :enum do
       enum do
         Hash[ ['0~999','1000~1999', '2000~2999','3000~3999','4000~4999', '5000~5999','6000~7999','8000~9999', '10000~14999','15000~19999','20000~29999', '30000~49999','50000~999999'].zip(['1','2','3','4','5','6','7','8','9','10','11','12','13']) ]
       end
         label "夜間価格帯"
-        help "必須"
-        required true
       end
       field :shop_hours do
         label "営業時間"
@@ -403,7 +398,7 @@ RailsAdmin.config do |config|
         help "対象人物を右に移動してください"
       end
       field :categories do
-        label "関連があるカテゴリ"
+        label "関連があるカテゴリを選択"
         help "必須 対応するカテゴリを選択してください"
         required true
       end
@@ -427,6 +422,9 @@ RailsAdmin.config do |config|
       end
       field :content  do
         label "内容"
+      end
+      field :user_id  do
+        label "投稿者"
       end
       field :status, :enum do
       enum do
@@ -484,6 +482,10 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
+    end
+
+    update do
+      exclude_fields :user_id
     end
    end
 

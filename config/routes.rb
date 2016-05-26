@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'api/posts', to: 'api_posts#create'
   patch 'api/posts/:id', to: 'api_posts#update'
   delete 'api/posts/:id', to: 'api_posts#destroy'
-
+  
   # POST DETAILS
   get 'api/post_details/:id', to: 'api_post_details#index'
   post 'api/post_details', to: 'api_post_details#create'
@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   put 'admin/shop/:id/edit', to: 'shops#update'
 
   # ADMIN_POST_DETAIL
+  put 'admin/post/:id/edit', to: 'posts#update'
   put 'admin/post_detail/:id/edit', to: 'post_details#update'
 
 # site map
