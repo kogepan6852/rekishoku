@@ -43,6 +43,8 @@ angular.module "frontApp"
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
       obj.person = searchSata.person
+      obj.category = searchSata.category
+      obj.province = searchSata.province
 
       Api.getJson(obj, Const.API.SHOP, true).then (res) ->
         $scope.results = res.data
@@ -52,33 +54,27 @@ angular.module "frontApp"
     ###
     # Global function
     ###
-    $rootScope.shopsSearch = (categoryId) ->
+    $rootScope.shopsSearch = ->
       $scope.noMoreLoad = false
-      $scope.targetCategoryId = null
-      $scope.search(categoryId)
+      $scope.search()
 
     ###
     # function
     ###
     # 検索処理
-    $scope.search = (categoryId) ->
+    $scope.search = ->
       $scope.page = 1
       obj =
         per: Const.API.SETTING.PER
         page: $scope.page
-      if categoryId == $scope.targetCategoryId
-        # 検索条件解除
-        $scope.targetCategoryId = null
-      else
-        # 検索条件設定
-        $scope.targetCategoryId = categoryId
-        obj.category = categoryId
 
       # 検索ワードの設定
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
       obj.person = searchSata.person
+      obj.category = searchSata.category
+      obj.province = searchSata.province
 
       # 検索
       Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
@@ -107,6 +103,8 @@ angular.module "frontApp"
         obj.keywords = searchSata.keywords
         obj.period = searchSata.period
         obj.person = searchSata.person
+        obj.category = searchSata.category
+        obj.province = searchSata.province
 
         Api.getJson(obj, Const.API.SHOP, true).then (res) ->
           if res.data.length == 0

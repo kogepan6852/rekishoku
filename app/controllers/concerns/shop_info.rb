@@ -13,11 +13,11 @@ module ShopInfo
 
   # 歴食度の設定
   def cal_rating(shop)
-    history = shop.history_level >= 0 ? shop.history_level : nil
-    building = shop.building_level >= 0 ? shop.building_level : nil
-    menu = shop.menu_level >= 0 ? shop.menu_level : nil
-    person = shop.person_level >= 0 ? shop.person_level : nil
-    episode = shop.episode_level >= 0 ? shop.episode_level : nil
+    history = shop.history_level
+    building = shop.building_level
+    menu = shop.menu_level
+    person = shop.person_level
+    episode = shop.episode_level
 
     validLevel = history == nil ? 0 : 1
     validLevel += building == nil ? 0 : 1

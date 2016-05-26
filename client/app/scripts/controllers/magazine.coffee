@@ -16,7 +16,6 @@ angular.module "frontApp"
     ###
     # setting
     ###
-    $scope.targetCategoryId = null
     $rootScope.isHideTab = false
     $ionicNavBarDelegate.showBackButton false
 
@@ -38,13 +37,13 @@ angular.module "frontApp"
         token: $localStorage['token']
         per: Const.API.SETTING.PER
         page: 1
-      if $scope.targetCategoryId
-        obj.category = $scope.targetCategoryId
       # 検索ワードの設定
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
       obj.person = searchSata.person
+      obj.category = searchSata.category
+      obj.province = searchSata.province
 
       # 特集テスト用データ
       $scope.feature = {
@@ -66,33 +65,27 @@ angular.module "frontApp"
     ###
     # Global function
     ###
-    $rootScope.postsSearch = (categoryId) ->
+    $rootScope.postsSearch = ->
       $scope.noMoreLoad = false
-      $scope.targetCategoryId = null
-      $scope.search(categoryId)
+      $scope.search()
 
     ###
     # function
     ###
     # 検索処理
-    $scope.search = (categoryId) ->
+    $scope.search = ->
       $scope.page = 1
       obj =
         per: Const.API.SETTING.PER
         page: $scope.page
-      if categoryId == $scope.targetCategoryId
-        # 検索条件解除
-        $scope.targetCategoryId = null
-      else
-        # 検索条件設定
-        $scope.targetCategoryId = categoryId
-        obj.category = categoryId
 
       # 検索ワードの設定
       searchSata = $scope.getSearchData()
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
       obj.person = searchSata.person
+      obj.category = searchSata.category
+      obj.province = searchSata.province
 
       # 検索
       Api.getJson(obj, Const.API.POST, true).then (res) ->
@@ -113,12 +106,13 @@ angular.module "frontApp"
         obj =
           per: Const.API.SETTING.PER
           page: $scope.page
-          category: $scope.targetCategoryId
         # 検索ワードの設定
         searchSata = $scope.getSearchData()
         obj.keywords = searchSata.keywords
         obj.period = searchSata.period
         obj.person = searchSata.person
+        obj.category = searchSata.category
+        obj.province = searchSata.province
 
         Api.getJson(obj, Const.API.POST, true).then (res) ->
           if res.data.length == 0

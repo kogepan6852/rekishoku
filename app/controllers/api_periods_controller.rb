@@ -1,7 +1,7 @@
 class ApiPeriodsController < ApplicationController
   # GET /periods
   def index
-    @periods = Period.all
+    @periods = Period.all.order(id: :desc)
     periods = Array.new()
     @periods.each do |period|
       obj = {

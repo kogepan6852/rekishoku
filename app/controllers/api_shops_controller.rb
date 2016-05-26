@@ -7,7 +7,8 @@ class ApiShopsController < ApplicationController
   # 一覧表示
   def index
     @shops = Shop.order(created_at: :desc)
-    # 検索条件の設定
+    
+    # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
       for kw in keywords.split(" ")
@@ -17,25 +18,25 @@ class ApiShopsController < ApplicationController
           .where('shops.name LIKE ? or shops.description LIKE ? or shops.menu LIKE ? or CONCAT(shops.province, shops.city, shops.address1, shops.address2) LIKE ? or people.name LIKE ?',"%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%").uniq
       end
     end
+    # カテゴリーで検索
     if params[:category]
-      # カテゴリーで検索
       @shops = @shops.joins(:categories).where('categories_shops.category_id = ?', params[:category].to_i)
     end
 
+    # 時代で検索
     if params[:period]
-      # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
       @shops = @shops.joins(:people).where('people.id' => person).uniq
     end
 
+    # 人物で検索
     if params[:person]
-      # 人物で検索
       @shops = @shops.joins(:people).where('people.id' => params[:person]).uniq
     end
 
+    # 都道府県検索
     if params[:province]
-      # 都道府県検索
       @shops = @shops.where(province: params[:province])
     end
 
@@ -102,7 +103,7 @@ class ApiShopsController < ApplicationController
 
       # 人に紐付く時代を全て抽出する
       periods = get_periods(post.people)
-      
+
       # 返却用のオブジェクトを作成する
       obj = { "post" => postObj,
               "people" => post.people,

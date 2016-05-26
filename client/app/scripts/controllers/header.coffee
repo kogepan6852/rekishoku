@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService, HeaderService) ->
 
     ###
     # setting
@@ -255,7 +255,7 @@ angular.module "frontApp"
       if $rootScope.currentType == 'shop'
         $location.path('/app/shop/list').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
-          $rootScope.shopsSearch($scope.selectedId)
+          $rootScope.shopsSearch()
         $ionicScrollDelegate.$getByHandle('shops').scrollTop();
 
       else if $rootScope.currentType == 'map'
@@ -266,65 +266,63 @@ angular.module "frontApp"
       else
         $location.path('/app/magazine').search('keywords', $scope.input.keywords)
         if $rootScope.postsSearch
-          $rootScope.postsSearch($scope.selectedId)
+          $rootScope.postsSearch()
         $ionicScrollDelegate.$getByHandle('magazine').scrollTop();
 
       # $scope.modalSearch.hide()
       $ionicSideMenuDelegate.toggleLeft(false);
 
-    # 時代の一覧取得
-    $scope.openPeriods = ->
+    # 時代一覧の取得
+    $scope.openPeriods = (handle) ->
       $scope.menuItems = null
       $scope.menuTarget = 'period'
-      $ionicSlideBoxDelegate.next()
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
       $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
-      if $scope.periods
-        return
 
       DataService.getPeriod (data) ->
         $scope.menuItems = data
 
-    # 人物の一覧取得
-    $scope.openPeople = ->
+    # 人物一覧の取得
+    $scope.openPeople = (handle) ->
       $scope.menuItems = null
       $scope.menuTarget = 'person'
-      $ionicSlideBoxDelegate.next()
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
       $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
-      if $scope.people
-        return
 
       DataService.getPeople (data) ->
         $scope.menuItems = data
 
-    $scope.backSlide = ->
-      $ionicSlideBoxDelegate.previous()
+    # カテゴリー一覧の取得
+    $scope.openCategories = (handle) ->
+      $scope.menuItems = null
+      $scope.menuTarget = 'category'
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
+
+      if $rootScope.currentType == 'magazine'
+        # PostCategoryを取得する
+        DataService.getPostCategory (data) ->
+          $scope.menuItems = data
+      else
+        # ShopCategoryを取得する
+        DataService.getShopCategory (data) ->
+          $scope.menuItems = data
+
+    # 都道府県一覧の取得
+    $scope.openProvinces = (handle) ->
+      $scope.menuItems = null
+      $scope.menuTarget = 'province'
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
+
+      # 検索用にオブジェクト生成
+      $scope.menuItems = HeaderService.getProvinces()
+
+    $scope.backSlide = (handle) ->
+      $ionicSlideBoxDelegate.$getByHandle(handle).previous()
 
     $scope.disableSwipe = ->
       $ionicSlideBoxDelegate.enableSlide(false);
 
     $scope.searchByConditions = (id, target) ->
-      # shop検索
-      if $rootScope.currentType == 'shop'
-        $location.path('/app/shop/list').search(target, id)
-        if $rootScope.shopsSearch
-          $rootScope.shopsSearch($scope.selectedId)
-        # TOPへScroll
-        $ionicScrollDelegate.$getByHandle('shops').scrollTop();
-
-      # map検索
-      else if $rootScope.currentType == 'map'
-        $location.path('/app/shop/map').search(target, id)
-        if $rootScope.mapSearch
-          $rootScope.mapSearch($scope.selectedId)
-
-      # post検索
-      else
-        $rootScope.currentType = 'magazine'
-        $location.path('/app/magazine').search(target, id)
-        if $rootScope.postsSearch
-          $rootScope.postsSearch($scope.selectedId)
-        # TOPへScroll
-        $ionicScrollDelegate.$getByHandle('magazine').scrollTop();
-
-      $ionicSlideBoxDelegate.previous()
-      $ionicSideMenuDelegate.toggleRight(false);
+      HeaderService.searchByConditions(id, target)

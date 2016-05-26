@@ -7,14 +7,15 @@
     </ion-refresher>
 
     <!-- Search condition -->
-    <div class="row search-condition-bar" ng-if="keywords || period || person">
+    <div class="row search-condition-bar" ng-if="keywords || period || person || category || province">
       <div class="col no-padding">
         <div class="search-condition">
           <div>
-            <span ng-if="targetCategoryId" ng-bind="targetCategoryId | mapppingId:categories"></span>
+            <span ng-if="category" ng-bind="category | mapppingId:categories"></span>
             <span ng-if="keywords" ng-bind="keywords"></span>
             <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
             <span ng-if="person" ng-bind="person | mapppingId:people"></span>
+            <span ng-if="province" ng-bind="province"></span>
           </div>
           <div class="clear-button">
             <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
@@ -27,7 +28,7 @@
     <!-- Items -->
     <div>
 
-      <a class="item feature" ng-if="!keywords && !period && !person">
+      <a class="item feature" ng-if="!keywords && !period && !person && !category && !province">
         <img class="main-img" src="../images/sample.png">
         <div class="description">
           <h3 ng-bind="'POST.FEATURE'|translate"></h3>

@@ -37,12 +37,16 @@ angular.module "frontApp"
 
     # 検索用キーワードをセットする処理
     $scope.getSearchData = ->
+      keywords = null
+      period = null
+      person = null
+      category = null
+      province = null
+
       # キーワードの設定
       $scope.keywords = $location.search()['keywords']
-      keywords = null
       if $scope.keywords
         keywords = $scope.keywords
-      period = null
       # 時代の設定
       $scope.period = $location.search()['period']
       if $scope.period
@@ -51,22 +55,35 @@ angular.module "frontApp"
       $scope.person = $location.search()['person']
       if $scope.person
         person = $scope.person
+      # カテゴリーの設定
+      $scope.category = $location.search()['category']
+      if $scope.category
+        category = $scope.category
+      # 都道府県の設定
+      $scope.province = $location.search()['province']
+      if $scope.province
+        province = $scope.province
 
       # 戻り値の設定
       rtn =
         keywords: keywords
         period: period
         person: person
+        category: category
+        province: province
 
       return rtn
 
     # 検索条件削除
     $scope.deleteSearchCondition = ->
-      $scope.targetCategoryId = null
+      $scope.category = null
       $scope.keywords = null
       $scope.period = null
       $scope.person = null
+      $scope.province = null
+      $location.search('category', null)
       $location.search('keywords', null)
       $location.search('period', null)
       $location.search('person', null)
+      $location.search('province', null)
       $scope.search()

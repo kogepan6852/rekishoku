@@ -8,7 +8,7 @@ class ApiPostsController < ApplicationController
   # 一覧表示
   def index
     @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
-    # 検索条件の設定
+    # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
       for kw in keywords.split(" ")
@@ -19,21 +19,26 @@ class ApiPostsController < ApplicationController
       end
     end
 
+    # カテゴリーで検索
     if params[:category]
-      # カテゴリーで検索
       @posts = @posts.where(category_id: params[:category].to_i)
     end
 
+    # 時代で検索
     if params[:period]
-      # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
       @posts = @posts.joins(:people).where('people.id' => person).uniq
     end
 
+    # 人物で検索
     if params[:person]
-      # 人物で検索
       @posts = @posts.joins(:people).where('people.id' => params[:person]).uniq
+    end
+
+    # 人物で検索
+    if params[:province]
+      @posts = @posts.joins(:shops).where('shops.province' => params[:province]).uniq
     end
 
     newPosts = Array.new()

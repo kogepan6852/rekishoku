@@ -126,6 +126,7 @@ angular.module 'frontApp'
       obj.keywords = searchSata.keywords
       obj.period = searchSata.period
       obj.person = searchSata.person
+      obj.category = searchSata.category
 
       # 中心位置の設定
       $scope.map.center.latitude = obj.latitude

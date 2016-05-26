@@ -12,6 +12,7 @@ angular.module "frontApp"
         postCategoryObj =
           type: "PostCategory"
         Api.getJson(postCategoryObj, Const.API.CATEGORY, false).then (res) ->
+          $sessionStorage['post-category-obj'] = res.data
           callback res.data
 
     # shop用categoryの取得
@@ -23,6 +24,7 @@ angular.module "frontApp"
         shopCategoryObj =
           type: "ShopCategory"
         Api.getJson(shopCategoryObj, Const.API.CATEGORY, false).then (res) ->
+          $sessionStorage['shop-category-obj'] = res.data
           callback res.data
 
     # periodの取得
@@ -32,6 +34,7 @@ angular.module "frontApp"
         callback periodObj
       else
         Api.getJson(null, Const.API.PERIOD, false).then (res) ->
+          $sessionStorage['period-obj'] = res.data
           callback res.data
 
     # periodの取得
@@ -41,4 +44,5 @@ angular.module "frontApp"
         callback peopleObj
       else
         Api.getJson(null, Const.API.PERSON, false).then (res) ->
+          $sessionStorage['people-obj'] = res.data
           callback res.data
