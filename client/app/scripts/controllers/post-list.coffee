@@ -82,7 +82,7 @@ angular.module "frontApp"
         angular.element(inputElem).val null
       $scope.srcUrl = null;
       # slideを一番前に移動
-      $ionicSlideBoxDelegate.slide(0)
+      $ionicSlideBoxDelegate.$getByHandle('modal-post').slide(0)
       $scope.isShowBackSlide = false
       $scope.isShowAddPostDetail = true
       # 削除ボタンを非表示
@@ -363,16 +363,16 @@ angular.module "frontApp"
 
     # 記事編集用モーダル次へボタン
     $scope.prevSlide = ->
-      $ionicSlideBoxDelegate.next()
+      $ionicSlideBoxDelegate.$getByHandle('modal-post').next()
       $scope.isShowBackSlide = true
-      if $ionicSlideBoxDelegate.currentIndex() >= 5
+      if $ionicSlideBoxDelegate.$getByHandle('modal-post').currentIndex() >= 5
         $scope.isShowAddPostDetail = false
 
     # 記事編集用モーダル前へボタン
     $scope.backSlide = ->
-      $ionicSlideBoxDelegate.previous()
+      $ionicSlideBoxDelegate.$getByHandle('modal-post').previous()
       $scope.isShowAddPostDetail = true
-      if $ionicSlideBoxDelegate.currentIndex() == 0
+      if $ionicSlideBoxDelegate.$getByHandle('modal-post').currentIndex() == 0
         $scope.isShowBackSlide = false
 
     # リストチェック用

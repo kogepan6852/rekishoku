@@ -1,4 +1,4 @@
-<ion-modal-view class="big-modal">
+<ion-modal-view class="big-modal modal-post">
     <!-- ヘッダー -->
     <ion-header-bar class="bar-dark">
       <div class="buttons" ng-click="closeModalPost(postForm)">
@@ -13,8 +13,8 @@
       </div>
     </ion-header-bar>
 
-    <form name="postForm" class="post-modal">
-      <ion-slide-box>
+    <form name="postForm">
+      <ion-slide-box delegate-handle="modal-post">
         <!-- メイン投稿 -->
         <ion-slide>
           <ion-content>
