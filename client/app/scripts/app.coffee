@@ -57,6 +57,7 @@ angular
 
       # STORE MAP
       .state 'tabs.shop.map',
+        cache: false
         url: '/app/shop/map'
         views:
           'tab-shop-map':
@@ -65,6 +66,7 @@ angular
 
       # POST DETAILS
       .state 'tabs.postDetal',
+        cache: false
         url: '/app/post/:id'
         views:
           'tab-magazine':
@@ -73,6 +75,7 @@ angular
 
       # STORE DETAIL DIRECT
       .state 'tabs.shopDetal',
+        cache: false
         url: '/app/shop/:id'
         views:
           'tab-shop':
@@ -81,6 +84,7 @@ angular
 
       # STORE DETAILS
       .state 'tabs.shop.detail',
+        cache: false
         url: '/app/shop/:id'
         views:
           'tab-shop-list':
