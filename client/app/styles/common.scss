@@ -143,12 +143,23 @@ hr {
     i {
       font-size: $h1;
       padding-bottom: 5px;
-      vertical-align: middle;
     }
 
     &.hide-btn {
       bottom: -22px!important;
     }
+
+    span {
+      line-height: 8px;
+      font-size: $h6;
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      width: 50px;
+      left: 50%;
+      margin-left: -25px;
+    }
+
   }
   &.hide-footer {
     bottom: -44px;

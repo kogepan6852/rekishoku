@@ -13,17 +13,19 @@ angular.module "frontApp"
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
-    # 変数設定
-    $rootScope.isHideTab = true
-
+    ###
     # setting
+    ###
+    $rootScope.isHideTab = true
     $ionicModal.fromTemplateUrl('views/parts/modal-profile-edit.html',
       scope: $scope
       animation: 'slide-in-up').then (modalProfileEdit) ->
       $scope.modalProfileEdit = modalProfileEdit
     $scope.isLoginUser = false
 
-    # initialize
+    ###
+    # Common function
+    ###
     clearInput = ->
       input =
         email: ""
@@ -34,7 +36,10 @@ angular.module "frontApp"
       angular.forEach angular.element("input[type='file']"), (inputElem) ->
         angular.element(inputElem).val null
 
-    $scope.writersInit = ->
+    ###
+    # initialize
+    ###
+    $scope.init = ->
       clearInput()
       accessKey =
         email: $localStorage['email']
@@ -49,16 +54,18 @@ angular.module "frontApp"
         $scope.isLoginUser = true
 
       # 現在タブの判定
-      if $state.is('tabs.post-writer')
+      if $state.is('tabs.writerPost')
         $scope.nowTab = 'post'
-      else if $state.is('tabs.map-writer')
+      else if $state.is('tabs.shop.mapWriter')
         $scope.nowTab = 'map'
-      else if $state.is('tabs.shop-writer')
+      else if $state.is('tabs.shop.writerDetail')
         $scope.nowTab = 'shop'
       else
         $scope.nowTab = 'other'
 
-    # Function
+    ###
+    # function
+    ###
     $scope.openModalProfileEdit = ->
       $scope.input =
         email: $scope.user.email
@@ -101,7 +108,7 @@ angular.module "frontApp"
             title: $translate.instant('MSG.INFO.SAVED_PROFILE'),
             showCloseButton: true
 
-          $scope.writersInit()
+          $scope.init()
 
     # 変化を監視してメイン画像を読み込み＋表示を実行
     $scope.$watch 'input.file', (file) ->
@@ -114,3 +121,13 @@ angular.module "frontApp"
         $scope.$apply ->
           $scope.srcUrl = reader.result
       reader.readAsDataURL file
+
+    $scope.moveToPostDetail = (id) ->
+      if $scope.nowTab == 'magazine'
+        $state.go('tabs.postDetal', { id: id })
+      else if $scope.nowTab == 'map'
+        $state.go('tabs.shop.postDetailMap', { id: id })
+      else if $scope.nowTab == 'shop'
+        $state.go('tabs.shop.postDetail', { id: id })
+      else
+        $state.go('tabs.postDetal', { id: id })

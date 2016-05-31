@@ -1,6 +1,8 @@
 class ApiUsersController < ApplicationController
   authorize_resource :class => false
 
+  include RelatedInfo
+
   # GET /users
   def index
     @users = User.where('posts_count > 0').order(updated_at: :desc)
@@ -10,13 +12,34 @@ class ApiUsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
+
+    # 関連する投稿の取得
+    posts = @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    newPosts = Array.new()
+
+    posts.each do |post|
+      # アイキャッチ画像の設定
+      postObj = get_post(post)
+
+      # 人に紐付く時代を全て抽出する
+      periods = get_periods(post.people)
+
+      # 返却用のオブジェクトを作成する
+      obj = { "post" => postObj,
+              "people" => post.people,
+              "periods" => periods.uniq
+            }
+
+      newPosts.push(obj);
+    end
+
     user = {
       "user" =>{
         "id" => @user.id,
         "image" => @user.image,
         "username" => @user.username,
         "profile" => @user.profile },
-      "posts" => @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc) }
+      "posts" => newPosts}
     if current_user
       user["user"]["email"] = @user.email
       user["user"]["description"] = @user.description
