@@ -16,7 +16,8 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $rootScope.isHideTab = false
+    $rootScope.hideFooter = false
+    $rootScope.hideModeBtn = false
 
     DataService.getPeriod (data) ->
       $scope.periods = data

@@ -61,9 +61,9 @@ angular.module 'frontApp'
       # 現在タブの判定
       if $state.is('tabs.postDetal')
         $scope.nowTab = 'magazine'
-      else if $state.is('tabs.shop.map') || $state.is('tabs.map-post')
+      else if $state.is('tabs.shop.postDetailMap')
         $scope.nowTab = 'map'
-      else if $state.is('tabs.shop.post-detail')
+      else if $state.is('tabs.shop.postDetail')
         $scope.nowTab = 'shop'
       else
         $scope.nowTab = 'other'
@@ -75,28 +75,28 @@ angular.module 'frontApp'
       if $scope.nowTab == 'magazine'
         $state.go('tabs.postDetal', { id: id })
       else if $scope.nowTab == 'map'
-        $state.go('tabs.map-post', { id: id })
+        $state.go('tabs.shop.postDetailMap', { id: id })
       else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.post-detail', { id: id })
+        $state.go('tabs.shop.postDetail', { id: id })
       else
         $state.go('post', { id: $scope.user.id })
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.post-shop', { id: id })
+        $state.go('tabs.shopDetalPost', { id: id })
       else if $scope.nowTab == 'map'
-        $state.go('tabs.map-shop', { id: id })
+        $state.go('tabs.shop.detailMap', { id: id })
       else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.detail', { id: id })
+        $state.go('tabs.shop.shopDetail', { id: id })
       else
         $state.go('tabs.shopDetal', { id: id })
 
     $scope.moveToWriterDetail = ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.post-writer', { id: $scope.user.id })
+        $state.go('tabs.writerPost', { id: $scope.user.id })
       else if $scope.nowTab == 'map'
-        $state.go('tabs.map-writer', { id: $scope.user.id })
+        $state.go('tabs.shop.mapWriter', { id: $scope.user.id })
       else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.writer-detail', { id: $scope.user.id })
+        $state.go('tabs.shop.writerDetail', { id: $scope.user.id })
       else
         $state.go('writer', { id: $scope.user.id })

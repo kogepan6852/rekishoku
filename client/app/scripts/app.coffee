@@ -47,7 +47,7 @@ angular
           'tab-shop':
             templateUrl: 'views/tab-shop.html'
 
-      # STORE LIST
+      # STORE TAB LIST
       .state 'tabs.shop.list',
         url: '/app/shop/list'
         views:
@@ -55,7 +55,7 @@ angular
             templateUrl: 'views/shops.html'
             controller: 'ShopsCtrl'
 
-      # STORE MAP
+      # STORE TAB MAP
       .state 'tabs.shop.map',
         cache: false
         url: '/app/shop/map'
@@ -64,7 +64,7 @@ angular
             templateUrl: 'views/map.html'
             controller: 'MapCtrl'
 
-      # POST DETAILS
+      # MAGAZINEタブ用の各ページのルーティング
       .state 'tabs.postDetal',
         cache: false
         url: '/app/post/:id'
@@ -72,6 +72,20 @@ angular
           'tab-magazine':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
+      .state 'tabs.writerPost',
+        cache: false,
+        url: '/app/writer/:id'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/writer-detail.html'
+            controller: 'WriterDetailCtrl'
+      .state 'tabs.shopDetalPost',
+        cache: false
+        url: '/app/shop/:id'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/shop-detail.html'
+            controller: 'ShopDetailCtrl'
 
       # STORE DETAIL DIRECT
       .state 'tabs.shopDetal',
@@ -82,49 +96,22 @@ angular
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
 
-      # STORE DETAILS
-      .state 'tabs.shop.detail',
+      # STORE LISTタブ用の各ページのルーティング
+      .state 'tabs.shop.shopDetail',
         cache: false
         url: '/app/shop/:id'
         views:
           'tab-shop-list':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
-
-
-      # MAGAZINEタブ用の各ページのルーティング
-      # .state 'tabs.post.detail',
-      #   cache: false,
-      #   url: '/app/post/:id?preview'
-      #   views:
-      #     'tab-magazine':
-      #       templateUrl: 'views/post-detail.html'
-      #       controller: 'PostDetailCtrl'
-      .state 'tabs.post-shop',
-        cache: false,
-        url: '/app/shop/:id'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.post-writer',
-        cache: false,
-        url: '/app/writer/:id'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/writer-detail.html'
-            controller: 'WriterDetailCtrl'
-
-
-      # STORE LISTタブ用の各ページのルーティング
-      .state 'tabs.shop.post-detail',
+      .state 'tabs.shop.postDetail',
         cache: false,
         url: '/app/post/:id'
         views:
           'tab-shop-list':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
-      .state 'tabs.shop.writer-detail',
+      .state 'tabs.shop.writerDetail',
         cache: false,
         url: '/app/writer/:id'
         views:
@@ -132,44 +119,32 @@ angular
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
 
-
-
-
-      .state 'tabs.map',
-        url: '/app/map'
-        views:
-          'map-tab':
-            templateUrl: 'views/map.html'
-            controller: 'MapCtrl'
-      .state 'tabs.map-post',
-        cache: false,
-        url: '/app/post/:id'
-        views:
-          'map-tab':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.map-shop',
-        cache: false,
-        url: '/app/shop/:id'
-        views:
-          'map-tab':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.map-shop2',
-        cache: false,
+      # STORE DETAILS
+      .state 'tabs.shop.detailMap',
+        cache: false
         url: '/app/map-shop/:id'
         views:
-          'map-tab':
+          'tab-shop-map':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
-      .state 'tabs.map-writer',
+
+      # STORE MAPタブ用の各ページのルーティング
+      .state 'tabs.shop.postDetailMap',
+        cache: false,
+        url: '/app/post/:id'
+        views:
+          'tab-shop-map':
+            templateUrl: 'views/post-detail.html'
+            controller: 'PostDetailCtrl'
+      .state 'tabs.shop.mapWriter',
         cache: false,
         url: '/app/writer/:id'
         views:
-          'map-tab':
+          'tab-shop-map':
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
 
+      # そのた
       .state 'my-post',
         cache: false,
         url: '/app/my-post'
@@ -190,10 +165,6 @@ angular
         url: '/app/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
-      .state 'shop',
-        url: '/app/shop/:id'
-        templateUrl: 'views/shop-detail.html'
-        controller: 'ShopDetailCtrl'
 
       # 旧URL用の暫定パス
       .state 'post-old',

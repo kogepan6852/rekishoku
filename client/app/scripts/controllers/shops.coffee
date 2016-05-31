@@ -88,7 +88,7 @@ angular.module "frontApp"
       $rootScope.hideFooter = true
       $rootScope.hideModeBtn = true
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.shop.detail', {id:id}
+      $state.go 'tabs.shop.shopDetail', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

@@ -17,7 +17,8 @@ angular.module 'frontApp'
     # setting
     ###
     $scope.targetId = $stateParams.id
-    $rootScope.isHideTab = true
+    $rootScope.hideFooter = true
+    $rootScope.hideModeBtn = true
 
     ###
     # initialize
@@ -76,9 +77,9 @@ angular.module 'frontApp'
       # 現在タブの判定
       if $state.is('tabs.postDetal')
         $scope.nowTab = 'magazine'
-      else if $state.is('tabs.shop.map') || $state.is('tabs.map-post')
+      else if $state.is('tabs.shop.detailMap')
         $scope.nowTab = 'map'
-      else if $state.is('tabs.shop.detail') || $state.is('tabs.shop-post')
+      else if $state.is('tabs.shop.shopDetail')
         $scope.nowTab = 'shop'
       else
         $scope.nowTab = 'other'
@@ -90,18 +91,18 @@ angular.module 'frontApp'
       if $scope.nowTab == 'magazine'
         $state.go('tabs.postDetal', { id: id })
       else if $scope.nowTab == 'map'
-        $state.go('tabs.map-post', { id: id })
+        $state.go('tabs.shop.postDetailMap', { id: id })
       else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.post-detail', { id: id })
+        $state.go('tabs.shop.postDetail', { id: id })
       else
         $state.go('tabs.postDetal', { id: id })
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.post-shop', { id: id })
+        $state.go('tabs.shopDetalPost', { id: id })
       else if $scope.nowTab == 'map'
-        $state.go('tabs.map-shop', { id: id })
+        $state.go('tabs.shop.postDetailMap', { id: id })
       else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.detail', { id: id })
+        $state.go('tabs.shop.shopDetail', { id: id })
       else
         $state.go('tabs.shopDetal', { id: id })
