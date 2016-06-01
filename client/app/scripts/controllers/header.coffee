@@ -174,7 +174,7 @@ angular.module "frontApp"
     $scope.moveToWriterDetail = ->
       $ionicViewSwitcher.nextTransition('none')
       userId = $localStorage['user_id']
-      $state.go('tabs.post-writer', { id: userId })
+      $state.go('writer', { id: userId })
       clearForMove()
 
     $scope.moveToHome = ->

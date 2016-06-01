@@ -159,12 +159,17 @@ angular
         url: '/app/writer/:id'
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
-
       .state 'post',
         cache: false,
         url: '/app/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
+      .state 'shop',
+        cache: false,
+        url: '/app/shop/:id'
+        templateUrl: 'views/shop-detail.html'
+        controller: 'ShopDetailCtrl'
+
 
       # 旧URL用の暫定パス
       .state 'post-old',

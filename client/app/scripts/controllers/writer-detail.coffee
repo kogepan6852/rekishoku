@@ -130,4 +130,4 @@ angular.module "frontApp"
       else if $scope.nowTab == 'shop'
         $state.go('tabs.shop.postDetail', { id: id })
       else
-        $state.go('tabs.postDetal', { id: id })
+        $state.go('post', { id: id })
