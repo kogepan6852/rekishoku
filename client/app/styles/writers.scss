@@ -1,0 +1,64 @@
+@import "setting";
+
+.writers-view {
+  .overlay-image {
+    position: relative;
+    line-height: 100%;
+
+    .thumbnail-image img {
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+    }
+
+    .link {
+      background-color: #000;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 100;
+
+      &:active, &.activated {
+        opacity: 0.1;
+        transition-property: opacity;
+        transition-timing-function: ease-in-out;
+      }
+    }
+  }
+
+  .writer-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 5px 5px;
+    width: 100%;
+    height: 56px;
+
+    > div {
+      background-color: rgba(0, 0, 0, 0.4);
+      height: 100%;
+      padding: 5px;
+    }
+    div {
+      margin: 0;
+    }
+  }
+
+  .item-username {
+    padding: 10px 10px 0;
+    height: 36px;
+    overflow: hidden;
+    padding: 10px 10px 0;
+    height: 36px;
+    overflow: hidden;
+  }
+
+  .item-profile {
+    height: 44px;
+    overflow: hidden;
+  }
+
+}

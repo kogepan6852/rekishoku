@@ -1,0 +1,27 @@
+.writer-detail-view {
+  .edit-menu {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+  }
+
+  .thumbnail-writer-image {
+    max-width: 300px;
+    min-height: 215px;
+    margin: 0 auto;
+    text-align: center;
+
+    img {
+      border-radius: 50%;
+      padding: 15px;
+    }
+  }
+  .profile {
+    max-height: 300px;
+
+    p {
+      color: #808080;
+    }
+  }
+
+}

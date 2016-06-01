@@ -72,60 +72,6 @@
 .map-view .main-category.bar-subheader {
   padding: 5px 20px;
 }
-/**********************
- * Writers page
- **********************/
-.item-list .writer-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 0 5px 5px;
-  width: 100%;
-  height: 56px;
-}
-.writer-content > div {
-  background-color: rgba(0, 0, 0, 0.4);
-  height: 100%;
-  padding: 5px;
-}
-.writer-content div {
-  color: #fff;
-  margin: 0;
-}
-.item-username {
-  padding: 10px 10px 0;
-  height: 36px;
-  overflow: hidden;
-}
-.item-username {
-  padding: 10px 10px 0;
-  height: 36px;
-  overflow: hidden;
-}
-.item-profile {
-  height: 44px;
-  overflow: hidden;
-  visibility: hidden;
-}
-
-/**********************
- * Writer detail page
- **********************/
-.thumbnail-writer-image {
-  max-width: 300px;
-  margin: 0 auto;
-  text-align: center;
-}
-.thumbnail-writer-image img {
-  border-radius: 50%;
-  padding: 15px;
-}
-.profile {
-  max-height: 300px;
-}
-.profile p {
-  color: #808080;
-}
 
 /**********************
  * Search Modal
