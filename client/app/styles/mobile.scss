@@ -23,24 +23,6 @@
     width: 100%;
     margin-top: -6px;
   }
-  .item-list li .main-content,
-  .item-list li .shop-content,
-  .item-list li .writer-content {
-    height: 100px;
-    padding-left: 150px;
-    padding-top: 0!important;
-  }
-  .item-list li .main-content > div,
-  .item-list li .shop-content > div,
-  .item-list li .writer-content > div {
-    background: transparent;
-    position: relative;
-  }
-  .item-list .item-name,
-  .item-list .post-date,
-  .item-list .item-username {
-    color: #555;
-  }
   .item-list .category-name, .item-list .item-address {
     bottom: 5px!important;
   }
@@ -95,18 +77,6 @@
 @media screen and (max-width:320px){
   .post-date .icon {
     display: none;
-  }
-
-  .item-list li .thumbnail-image {
-    width: 133px;
-  }
-  .thumbnail-image img {
-    margin-top: 0;
-  }
-  .item-list li .main-content,
-  .item-list li .shop-content,
-  .item-list li .writer-content {
-    padding-left: 133px;
   }
 
 }

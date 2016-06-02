@@ -12,7 +12,8 @@
       <ul class="item-list">
         <li class="overlay-image" ng-repeat="user in users">
           <div class="thumbnail-image">
-            <img ng-src="{{user.image.md.url}}">
+            <img class="hidden-xs" ng-src="{{user.image.md.url}}">
+            <img class="visible-xs" ng-src="{{user.image.thumb.url}}">
           </div>
           <div class="writer-content">
             <div>
