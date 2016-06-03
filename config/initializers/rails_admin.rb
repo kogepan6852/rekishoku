@@ -532,4 +532,51 @@ RailsAdmin.config do |config|
      end
     end
 
+
+    ## 特集
+    config.model 'Feature' do
+      label "特集作成"
+      weight 0
+      list do
+        field :title do
+          label "タイトル"
+        end
+        field :image do
+          label "メイン写真"
+        end
+        field :is_map do
+          label "マップ表示有無"
+        end
+      end
+      edit do
+        field :title do
+          label "サブタイトル"
+          help "必須"
+          required true
+        end
+        field :content do
+          label "内容"
+          help "必須"
+          required true
+        end
+        field :image  do
+          label "画像"
+          help "必須"
+          required true
+        end
+        field :quotation_url do
+          label "引用したURL"
+        end
+        field :quotation_name do
+          label "引用したサイト名"
+        end
+        field :is_map do
+          label "マップ表示有無"
+        end
+        field :quotation_name do
+          label "引用したサイト名"
+        end
+      end
+     end
+
 end
