@@ -9,7 +9,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","Category","Period","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","Category","Period","PostsShop","PeoplePeriod","PeoplePost"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -168,6 +168,29 @@ RailsAdmin.config do |config|
       end
     end
    end
+
+   ## お店カテゴリ
+   config.model 'FeatureCategory' do
+     label "特集カテゴリ"
+     weight 3
+     list do
+       field :name
+       field :slug
+       field :updated_at
+     end
+     edit do
+       field :name  do
+         label "特集カテゴリ名"
+         help "必須　例)菓子"
+         required true
+       end
+       field :slug  do
+         label "管理用カテゴリ名"
+         help "必須　英語　例)tea"
+         required true
+       end
+     end
+    end
 
    ## 人物
    config.model 'Person' do
@@ -531,5 +554,100 @@ RailsAdmin.config do |config|
        end
      end
     end
+
+
+    ####  特集
+    config.model 'Feature' do
+      label "特集作成"
+      weight 0
+      list do
+        field :title do
+          label "タイトル"
+        end
+        field :image do
+          label "メイン写真"
+        end
+        field :is_map do
+          label "マップ表示有無"
+        end
+      end
+      edit do
+          field :title do
+            label "タイトル"
+            help "必須"
+            required true
+          end
+          field :content do
+            label "内容"
+            help "必須"
+            required true
+          end
+          field :image  do
+            label "画像"
+            help "必須"
+            required true
+          end
+          field :quotation_url do
+            label "引用したURL"
+          end
+          field :quotation_name do
+            label "引用したサイト名"
+          end
+          field :is_map do
+            label "マップ表示有無"
+          end
+          # field :feature_details do
+          #   label "特集紐付け"
+          # end
+          # field :published_at do
+          #   label "公開時間"
+          #   I18n.l(self.value, format:localized_date_format)
+          # end
+      end
+     end
+
+     ##  外部リング
+     config.model 'ExternalLink' do
+       label "外部リンク"
+       weight 0
+       list do
+         field :title do
+           label "タイトル"
+         end
+         field :image do
+           label "メイン写真"
+         end
+         field :content do
+           label "コメント"
+         end
+       end
+       edit do
+           field :title do
+             label "タイトル"
+             help "必須"
+             required true
+           end
+           field :content do
+             label "内容"
+             help "必須"
+             required true
+           end
+           field :image  do
+             label "画像"
+             help "必須"
+             required true
+           end
+           field :quotation_url do
+             label "引用したURL"
+           end
+           field :quotation_name do
+             label "引用したサイト名"
+           end
+           # field :feature_details do
+           #   label "特集紐付け"
+           # end
+       end
+      end
+
 
 end
