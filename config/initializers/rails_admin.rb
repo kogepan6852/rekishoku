@@ -437,6 +437,7 @@ RailsAdmin.config do |config|
     label "投稿記事"
     weight 0
     list do
+      field :id
       field :title do
         label "題名"
       end
@@ -561,6 +562,7 @@ RailsAdmin.config do |config|
       label "特集作成"
       weight 0
       list do
+        field :id
         field :title do
           label "タイトル"
         end
@@ -596,9 +598,9 @@ RailsAdmin.config do |config|
           field :is_map do
             label "マップ表示有無"
           end
-          # field :feature_details do
-          #   label "特集紐付け"
-          # end
+          field :feature_details do
+            label "特集詳細"
+          end
           # field :published_at do
           #   label "公開時間"
           #   I18n.l(self.value, format:localized_date_format)
@@ -606,11 +608,68 @@ RailsAdmin.config do |config|
       end
      end
 
+     ## 特集詳細
+     config.model 'FeatureDetail' do
+       label "特集概要作成"
+       weight 0
+       list do
+         field :title do
+           label "タイトル"
+         end
+         field :type , :enum do
+         enum do
+           Hash[ ['お店','記事', '外部リンク'].zip(['0','1','2']) ]
+         end
+           label "どのDBか"
+         end
+         field :related_id do
+           label "参照DBのID"
+         end
+         field :feature_id do
+           label "特集ID"
+         end
+         field :order do
+           label "順番"
+         end
+       end
+       edit do
+           field :title do
+             label "タイトル"
+             help "必須"
+             required true
+           end
+           field :feature_id do
+             label "特集ID"
+           end
+           field :type, :enum do
+           enum do
+             Hash[ ['お店','記事', '外部リンク'].zip(['0','1','2']) ]
+           end
+             label "タイプ"
+           end
+           field :shops do
+             label "お店"
+           end
+           field :posts do
+             label "記事"
+           end
+           field :external_links do
+             label "外部リンク"
+           end
+           field :order , :enum do
+           enum do
+             Hash[ ['1','2','3','4','5','6','7','8'].zip(['1','2','3','4','5','6','7','8']) ]
+           end
+             label "順番"
+           end
+       end
+      end
      ##  外部リング
      config.model 'ExternalLink' do
        label "外部リンク"
-       weight 0
+       weight 1
        list do
+         field :id
          field :title do
            label "タイトル"
          end
@@ -643,9 +702,6 @@ RailsAdmin.config do |config|
            field :quotation_name do
              label "引用したサイト名"
            end
-           # field :feature_details do
-           #   label "特集紐付け"
-           # end
        end
       end
 
