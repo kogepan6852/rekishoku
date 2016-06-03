@@ -4,6 +4,8 @@ class CreateFeatures < ActiveRecord::Migration
       t.string   "title",                          null: false
       t.text     "content"
       t.string   "image",                          null: false
+      t.string   "quotation_url"
+      t.string   "quotation_name"
       t.boolean  "is_map",         default: false
       t.integer  "category_id",    default: 0,     null: false
       t.datetime "created_at",                     null: false
