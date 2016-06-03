@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20160602084342) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.datetime "published_at"
-    t.integer  "status",         default: 0,     null: false
+    t.boolean  "status",         default: false
     t.integer  "user_id",                        null: false
   end
 
