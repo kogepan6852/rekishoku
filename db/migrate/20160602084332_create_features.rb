@@ -10,7 +10,7 @@ class CreateFeatures < ActiveRecord::Migration
       t.datetime "updated_at",                     null: false
       t.datetime "published_at"
       t.integer  "status",         default: 0,     null: false
-      t.integer 　:user_id, 　　　　　　　　　　　　　　null: false
+      t.integer  "user_id",                        null: false
     end
   end
 end
