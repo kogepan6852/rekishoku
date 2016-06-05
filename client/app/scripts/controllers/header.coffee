@@ -274,6 +274,7 @@ angular.module "frontApp"
 
     # 時代一覧の取得
     $scope.openPeriods = (handle) ->
+      $scope.showNextSlide = false;
       $scope.menuItems = null
       $scope.menuTarget = 'period'
       $ionicSlideBoxDelegate.$getByHandle(handle).next()
@@ -282,18 +283,33 @@ angular.module "frontApp"
       DataService.getPeriod (data) ->
         $scope.menuItems = data
 
-    # 人物一覧の取得
-    $scope.openPeople = (handle) ->
+
+    # 人物カテゴリ一覧の取得
+    $scope.openPeopleCategory = (handle) ->
+      $scope.showNextSlide = true;
       $scope.menuItems = null
       $scope.menuTarget = 'person'
       $ionicSlideBoxDelegate.$getByHandle(handle).next()
       $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
 
-      DataService.getPeople (data) ->
+      DataService.getPeopleCategory (data) ->
         $scope.menuItems = data
+
+    # 人物一覧の取得
+    $scope.openPeople = (handle, id) ->
+      $scope.showNextSlide = false;
+      $scope.menuSubItems = null
+      $scope.menuTarget = 'person'
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
+
+      DataService.getPeople ((data) ->
+        $scope.menuSubItems = data
+      ), id
 
     # カテゴリー一覧の取得
     $scope.openCategories = (handle) ->
+      $scope.showNextSlide = false;
       $scope.menuItems = null
       $scope.menuTarget = 'category'
       $ionicSlideBoxDelegate.$getByHandle(handle).next()
@@ -308,18 +324,31 @@ angular.module "frontApp"
         DataService.getShopCategory (data) ->
           $scope.menuItems = data
 
-    # 都道府県一覧の取得
-    $scope.openProvinces = (handle) ->
+    # 都道府県エリアの取得
+    $scope.openProvincesArea = (handle) ->
+      $scope.showNextSlide = true;
       $scope.menuItems = null
       $scope.menuTarget = 'province'
       $ionicSlideBoxDelegate.$getByHandle(handle).next()
-      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop()
 
       # 検索用にオブジェクト生成
-      $scope.menuItems = HeaderService.getProvinces()
+      $scope.menuItems = HeaderService.getProvincesArea()
+
+    # 都道府県一覧の取得
+    $scope.openProvinces = (handle, index) ->
+      $scope.showNextSlide = false;
+      $scope.menuSubItems = null
+      $scope.menuTarget = 'province'
+      $ionicSlideBoxDelegate.$getByHandle(handle).next()
+      $ionicScrollDelegate.$getByHandle('list-slide').scrollTop()
+
+      # 検索用にオブジェクト生成
+      $scope.menuSubItems = HeaderService.getProvinces(index)
 
     $scope.backSlide = (handle) ->
       $ionicSlideBoxDelegate.$getByHandle(handle).previous()
+      $scope.showNextSlide = true;
 
     $scope.disableSwipe = ->
       $ionicSlideBoxDelegate.enableSlide(false);

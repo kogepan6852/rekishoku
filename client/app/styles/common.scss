@@ -258,11 +258,6 @@ ion-slide {
     margin-top: 1px;
   }
   &.list-slide {
-    > {
-      div.item, a.item {
-        margin-left: 1px;
-      }
-    }
     .spinner svg {
       width: 100%;
     }

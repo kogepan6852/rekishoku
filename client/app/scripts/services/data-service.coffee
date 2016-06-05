@@ -27,6 +27,18 @@ angular.module "frontApp"
           $sessionStorage['shop-category-obj'] = res.data
           callback res.data
 
+    # people用categoryの取得
+    getPeopleCategory: (callback) ->
+      categoryObj = $sessionStorage['people-category-obj']
+      if categoryObj
+        callback categoryObj
+      else
+        peopleCategoryObj =
+          type: "PersonCategory"
+        Api.getJson(peopleCategoryObj, Const.API.CATEGORY, false).then (res) ->
+          $sessionStorage['people-category-obj'] = res.data
+          callback res.data
+
     # periodの取得
     getPeriod: (callback) ->
       periodObj = $sessionStorage['period-obj']
@@ -38,11 +50,18 @@ angular.module "frontApp"
           callback res.data
 
     # periodの取得
-    getPeople: (callback) ->
-      peopleObj = $sessionStorage['people-obj']
+    getPeople: (callback, id) ->
+      if !id
+        id = 0
+
+      peopleObj = $sessionStorage['people-obj-'+id]
       if peopleObj
         callback peopleObj
       else
-        Api.getJson(null, Const.API.PERSON, false).then (res) ->
-          $sessionStorage['people-obj'] = res.data
+        categoryObj = null
+        if id
+          categoryObj =
+            category: id
+        Api.getJson(categoryObj, Const.API.PERSON, false).then (res) ->
+          $sessionStorage['people-obj-'+id] = res.data
           callback res.data

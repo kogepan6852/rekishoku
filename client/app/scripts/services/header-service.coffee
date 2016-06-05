@@ -26,14 +26,25 @@ angular.module "frontApp"
         if $rootScope.postsSearch
           $rootScope.postsSearch()
         # TOPへScroll
-        $ionicScrollDelegate.$getByHandle('magazine').scrollTop();
+        $ionicScrollDelegate.$getByHandle('magazine').scrollTop()
 
-      $ionicSlideBoxDelegate.previous()
+      $ionicSlideBoxDelegate.slide(0)
       $ionicSideMenuDelegate.toggleRight(false);
 
+    # 検索用都道府県エリアの取得
+    getProvincesArea: ->
+      provincesArea = $translate.instant('PROVINCES.AREA').split(',')
+      provincesAreaObj = []
+
+      angular.forEach provincesArea, (province, i) ->
+        obj = {id: province, name: province}
+        provincesAreaObj.push obj
+
+      return provincesAreaObj
+
     # 検索用都道府県の取得
-    getProvinces: ->
-      provinces = $translate.instant('PROVINCES').split(',')
+    getProvinces: (index) ->
+      provinces = $translate.instant('PROVINCES.' + index).split(',')
       provincesObj = []
 
       angular.forEach provinces, (province, i) ->

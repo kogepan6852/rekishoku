@@ -4,6 +4,11 @@ class ApiPeopleController < ApplicationController
   # 一覧表示
   def index
     @people = Person.all.order("furigana COLLATE \"C\"")
+    # カテゴリーで検索
+    if params[:category]
+      @people = @people.joins(:categories).where('categories_people.person_id = ?', params[:category].to_i)
+    end
+
     people = Array.new()
     @people.each do |person|
       obj = {

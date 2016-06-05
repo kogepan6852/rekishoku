@@ -9,6 +9,7 @@
 
     <div class="list menu-list">
       <ion-slide-box ng-init="disableSwipe()" delegate-handle="right-menu">
+        <!-- Slide1 -->
         <ion-slide>
           <!-- Search bar -->
           <ion-header-bar class="bar-light item-input-inset visible-xs"></ion-header-bar>
@@ -29,10 +30,16 @@
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right hidden-xs" ng-click="openPeople('right-menu')">
+            <a class="item item-icon-right hidden-xs" ng-click="openPeopleCategory('right-menu')">
               by PEOPLE
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
+            <!-- by people -->
+            <a class="item item-icon-right" ng-click="openProvincesArea('right-menu')">
+              by AREA
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+
 
             <!-- other -->
             <a class="item item-top" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
@@ -60,13 +67,39 @@
 
         </ion-slide>
 
+        <!-- Slide2 -->
         <ion-slide class="list-slide">
           <div class="item item-icon-left item-top bold" ng-click="backSlide('right-menu')" >
             <i class="icon ion-android-arrow-dropleft"></i>Back
           </div>
           <ion-scroll direction="y" delegate-handle="list-slide">
             <ion-spinner ng-show="!menuItems"></ion-spinner>
-            <a class="item" ng-click="searchByConditions({{menuItem.id}}, '{{menuTarget}}')" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <!-- person -->
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('right-menu')">
+              ALL
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('right-menu', menuItem.id)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <!-- provinces -->
+            <a ng-if="showNextSlide && menuTarget=='province'" class="item item-icon-right" ng-click="openProvinces('right-menu', $index)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+          </ion-scroll>
+        </ion-slide>
+
+        <!-- Slide3 -->
+        <ion-slide class="list-slide">
+          <div class="item item-icon-left item-top bold" ng-click="backSlide('right-menu')" >
+            <i class="icon ion-android-arrow-dropleft"></i>Back
+          </div>
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuSubItems"></ion-spinner>
+            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems" ng-bind-html="menuItem.name"></a>
           </ion-scroll>
         </ion-slide>
 
@@ -79,6 +112,7 @@
   <ion-side-menu class="visible-xs" side="left" ng-controller="HeaderCtrl" ng-init="init()" width="215">
     <div class="list menu-list">
       <ion-slide-box ng-init="disableSwipe()" delegate-handle="left-menu">
+        <!-- Slide1 -->
         <ion-slide>
           <!-- Search bar -->
           <ion-header-bar class="bar-light item-input-inset">
@@ -106,12 +140,12 @@
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right" ng-click="openPeople('left-menu')">
+            <a class="item item-icon-right" ng-click="openPeopleCategory('left-menu')">
               by PERSON
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right" ng-click="openProvinces('left-menu')">
+            <a class="item item-icon-right" ng-click="openProvincesArea('left-menu')">
               by AREA
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
@@ -119,15 +153,42 @@
           </ion-scroll>
         </ion-slide>
 
+        <!-- Slide2 -->
         <ion-slide class="list-slide">
           <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" >
             <i class="icon ion-android-arrow-dropleft"></i>
           </ion-header-bar>
           <ion-scroll direction="y" delegate-handle="list-slide">
             <ion-spinner ng-show="!menuItems"></ion-spinner>
-            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <!-- person -->
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu')">
+              ALL
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu', menuItem.id)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <!-- provinces -->
+            <a ng-if="showNextSlide && menuTarget=='province'" class="item item-icon-right" ng-click="openProvinces('left-menu', $index)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
           </ion-scroll>
         </ion-slide>
+
+        <!-- Slide3 -->
+        <ion-slide class="list-slide">
+          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" >
+            <i class="icon ion-android-arrow-dropleft"></i>
+          </ion-header-bar>
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuSubItems"></ion-spinner>
+            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems" ng-bind-html="menuItem.name"></a>
+          </ion-scroll>
+        </ion-slide>
+
       </ion-slide-box>
     </div>
   </ion-side-menu>
