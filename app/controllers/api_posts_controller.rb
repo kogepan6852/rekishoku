@@ -182,7 +182,7 @@ class ApiPostsController < ApplicationController
 
       obj = { "post" => postObj,
               "people" => post.people,
-              "periods" => periods
+              "periods" => periods.uniq
             }
 
       newPosts.push(obj)
