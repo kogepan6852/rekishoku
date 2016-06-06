@@ -572,6 +572,9 @@ RailsAdmin.config do |config|
         field :is_map do
           label "マップ表示有無"
         end
+        field :categories do
+          label "関連があるカテゴリ"
+        end
       end
       edit do
           field :title do
@@ -597,6 +600,11 @@ RailsAdmin.config do |config|
           end
           field :is_map do
             label "マップ表示有無"
+          end
+          field :category do
+            label "関連があるカテゴリを選択"
+            help "必須 対応するカテゴリを選択してください"
+            required true
           end
           field :feature_details do
             label "特集詳細"
@@ -704,6 +712,5 @@ RailsAdmin.config do |config|
            end
        end
       end
-
 
 end
