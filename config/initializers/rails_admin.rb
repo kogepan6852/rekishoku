@@ -609,10 +609,9 @@ RailsAdmin.config do |config|
           field :feature_details do
             label "特集詳細"
           end
-          # field :published_at do
-          #   label "公開時間"
-          #   I18n.l(self.value, format:localized_date_format)
-          # end
+          field :published_at do
+            label "公開時間"
+          end
       end
      end
 
