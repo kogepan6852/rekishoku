@@ -8,11 +8,10 @@ class CreateFeatures < ActiveRecord::Migration
       t.string   "quotation_name"
       t.boolean  "is_map",         default: false
       t.integer  "category_id",    default: 0,     null: false
-      t.datetime "created_at",                     null: false
-      t.datetime "updated_at",                     null: false
       t.datetime "published_at"
       t.boolean  "status",         default: false
       t.integer  "user_id",                        null: false
+      t.timestamps                                 null: false
     end
   end
 end

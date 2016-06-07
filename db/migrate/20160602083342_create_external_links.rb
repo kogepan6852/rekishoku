@@ -6,6 +6,7 @@ class CreateExternalLinks < ActiveRecord::Migration
       t.string   "image",                          null: false
       t.string   "quotation_url"
       t.string   "quotation_name"
+      t.timestamps 　　　　　　　　　　　　　　　　　　　null: false
     end
   end
 end

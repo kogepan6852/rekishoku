@@ -8,23 +8,23 @@
 
 # coding: utf-8
 
-Category.create(:name => '歴食エピソード', :slug =>'episode', :type =>'PostCategory')
-Category.create(:name => '歴食体験', :slug =>'experience', :type =>'PostCategory')
-Category.create(:name => '歴食ニュース', :slug =>'information', :type =>'PostCategory')
+Category.create(:name => 'EPISODE', :slug =>'episode', :type =>'PostCategory')
+Category.create(:name => 'EXPERIENCE', :slug =>'experience', :type =>'PostCategory')
+Category.create(:name => 'INFOMATION', :slug =>'information', :type =>'PostCategory')
 
-Category.create(:name => '菓子', :slug =>'tea', :type =>'ShopCategory')
-Category.create(:name => '食事', :slug =>'meal', :type =>'ShopCategory')
-Category.create(:name => 'コース', :slug =>'course', :type =>'ShopCategory')
-Category.create(:name => 'WEB', :slug =>'online', :type =>'ShopCategory')
+Category.create(:name => 'TEA', :slug =>'tea', :type =>'ShopCategory')
+Category.create(:name => 'MEAL', :slug =>'meal', :type =>'ShopCategory')
+Category.create(:name => 'COURSE', :slug =>'course', :type =>'ShopCategory')
+Category.create(:name => 'ONLINE', :slug =>'online', :type =>'ShopCategory')
 
-Category.create(:name => '文化人', :slug =>'cultural_figures', :type =>'PersonCategory')
-Category.create(:name => '文豪', :slug =>'literary_master', :type =>'PersonCategory')
-Category.create(:name => '武将', :slug =>'military_commander', :type =>'PersonCategory')
-Category.create(:name => '貴族', :slug =>'aristocracy', :type =>'PersonCategory')
+Category.create(:name => 'CULTURAL FIGURES', :slug =>'cultural_figures', :type =>'PersonCategory')
+Category.create(:name => 'LITERARY MASTER', :slug =>'literary_master', :type =>'PersonCategory')
+Category.create(:name => 'MILITARY COMMANDER', :slug =>'military_commander', :type =>'PersonCategory')
+Category.create(:name => 'ARISTOCRACY', :slug =>'aristocracy', :type =>'PersonCategory')
 
-Category.create(:name => '特集', :slug =>'feature', :type =>'FeatureCategory')
-Category.create(:name => 'ツアー', :slug =>'tour', :type =>'FeatureCategory')
-Category.create(:name => 'イベント', :slug =>'event', :type =>'FeatureCategory')
+Category.create(:name => 'FEATIRE', :slug =>'feature', :type =>'FeatureCategory')
+Category.create(:name => 'TOUR', :slug =>'tour', :type =>'FeatureCategory')
+Category.create(:name => 'EVENT', :slug =>'event', :type =>'FeatureCategory')
 
 Period.create(:name => '古墳時代以前')
 Period.create(:name => '飛鳥時代')

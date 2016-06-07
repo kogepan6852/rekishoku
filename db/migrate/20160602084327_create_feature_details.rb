@@ -6,6 +6,7 @@ class CreateFeatureDetails < ActiveRecord::Migration
       t.integer  "type",           default: 0,     null: false
       t.integer  "related_id",                     null: false
       t.integer  "order",          default: 0,     null: false
+      t.timestamps                                 null: false
     end
   end
 end
