@@ -7,17 +7,18 @@ class FeaturesController < ApplicationController
   def create
     #### 来たデータが保存されていない。。
     #### それに対応する必要がある
-    category = FeatureCategory.find_by(slug: params[:slug])
-    @feature = Feature.new(feature_params.merge(user_id: 1, category_id: 9))
+    setPublishedAt = feature_params[:published_at].split(/\D+/)
+    @feature = Feature.new(feature_params.merge(user_id: current_user.id, published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     @feature.save
-    redirect_to "/admin"
+    redirect_to "/admin/feature"
   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @feature.update(feature_params)
-    redirect_to "/admin"
+    setPublishedAt = feature_params[:published_at].split(/\D+/)
+    @feature.update(feature_params.merge(user_id: current_user.id, published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    redirect_to "/admin/feature"
   end
 
 
@@ -29,6 +30,6 @@ class FeaturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feature_params
-      params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :category_id, :feature_details_ids => [])
+      params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :published_at, :category_id, :feature_details_ids => [])
     end
 end

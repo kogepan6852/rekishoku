@@ -572,7 +572,7 @@ RailsAdmin.config do |config|
         field :is_map do
           label "マップ表示有無"
         end
-        field :categories do
+        field :category do
           label "関連があるカテゴリ"
         end
       end
