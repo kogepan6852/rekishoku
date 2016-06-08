@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   # ADMIN_FEATURE_DETAIL
   post 'admin/feature_detail/new', to: 'feature_details#create'
   put 'admin/feature_detail/:id/edit', to: 'feature_details#update'
+  delete 'admin/feature_detail/:id/delete', to: 'feature_details#destroy'
 
 
 # site map

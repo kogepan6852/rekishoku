@@ -612,6 +612,9 @@ RailsAdmin.config do |config|
           field :published_at do
             label "公開時間"
           end
+          field :user do
+            label "ライター"
+          end
       end
      end
 
@@ -623,7 +626,7 @@ RailsAdmin.config do |config|
          field :title do
            label "タイトル"
          end
-         field :type , :enum do
+         field :info_type , :enum do
          enum do
            Hash[ ['お店','記事', '外部リンク'].zip(['0','1','2']) ]
          end
@@ -631,9 +634,6 @@ RailsAdmin.config do |config|
          end
          field :related_id do
            label "参照DBのID"
-         end
-         field :feature_id do
-           label "特集ID"
          end
          field :order do
            label "順番"
@@ -645,10 +645,7 @@ RailsAdmin.config do |config|
              help "必須"
              required true
            end
-           field :feature_id do
-             label "特集ID"
-           end
-           field :type, :enum do
+           field :info_type, :enum do
            enum do
              Hash[ ['お店','記事', '外部リンク'].zip(['0','1','2']) ]
            end
