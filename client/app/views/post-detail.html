@@ -21,7 +21,7 @@
         <div class="information">
           <div class="name">
             <h4 ng-bind="post.category_name"></h4>
-            <h1 ng-bind="post.title"></h1>
+            <h1 ng-bind="post.title" class="mincho"></h1>
           </div>
           <div class="date" ng-if="post.category_slug=='news'">
             <p ng-bind="post.published_at | date:'yyyy/M/d'"></p>

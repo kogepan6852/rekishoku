@@ -7,14 +7,16 @@
     <span ng-bind="category"></span>
   </div>
   <div class="detail" ng-if="target=='post'">
-    <h2 ng-bind="data.title"></h2>
-    <p class="description" ng-bind="data.content"></p>
+    <div>
+      <h2 ng-bind="data.title" class="mincho"></h2>
+      <p class="description hidden-xs" ng-bind="data.content"></p>
+    </div>
   </div>
 
   <!-- SHOP -->
   <img class="main-img subimage" ng-src="{{data.subimage.md.url}}" ng-if="target=='shop'">
   <div class="detail" ng-if="target=='shop'">
-    <h2 ng-bind="data.name"></h2>
+    <h2 ng-bind="data.name" class="mincho"></h2>
     <star count="rating"></star>
   </div>
 

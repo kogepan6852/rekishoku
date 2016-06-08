@@ -207,4 +207,4 @@ angular
 
   .config ($locationProvider) ->
     # $locationProvider.hashPrefix('!')
-    $locationProvider.html5Mode(true);
+    # $locationProvider.html5Mode(true);

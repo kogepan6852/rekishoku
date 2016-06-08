@@ -1,0 +1,59 @@
+@import "setting";
+
+// MD以上
+@media screen and (min-width:768px){
+  /**********************
+   * info-tag
+   **********************/
+   info-tag {
+     .tag {
+       min-width: 100px;
+       max-width: 180px;
+
+       >div {
+         padding: 3px 10px;
+       }
+     }
+   }
+  /**********************
+   * list-item-post, list-item-shop
+   **********************/
+   list-item-post, list-item-shop {
+     .item {
+       .main-img {
+         margin-left: 0;
+         width: 50%;
+         margin-top: -2.5%;
+         margin-bottom: -2.5%;
+       }
+       .category {
+         width: 150px;
+         padding-bottom: 7px;
+         padding-top: 5px;
+       }
+       .detail {
+         padding: 5% 22px 95px 15px;
+         >div {
+           overflow: hidden;
+           height: 100%;
+         }
+       }
+
+       i.arrow {
+         font-size: 44px;
+         margin-top: -14px;
+         right: 20px;
+       }
+
+       .tags {
+         height: 58px;
+         margin-bottom: 15px;
+         padding-left: 14px;
+
+         .periods, .people {
+           height: 32px;
+         }
+       }
+     }
+   }
+}

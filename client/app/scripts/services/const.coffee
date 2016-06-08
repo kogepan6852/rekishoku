@@ -21,7 +21,9 @@ angular.module("frontApp")
       LOGOUT:       '/authentication_token.json'
       SETTING:
         PER: 20
-
+    CATEGORY:
+      EPISODE :1
+      COOKING :2
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'

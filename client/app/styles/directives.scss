@@ -106,11 +106,16 @@ star {
        height: 100%;
 
        .description {
-         display: none;
+         margin-top: 15px;
+         padding-right: 40px;
+         overflow: hidden;
+         white-space: normal;
+         color: #000;
        }
        h2 {
-         max-height: 64px;
-         line-height: 22px;
+         font-size: $h3;
+         max-height: 60px;
+         line-height: $h3;
          overflow: hidden;
          white-space: normal;
        }

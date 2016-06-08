@@ -3,6 +3,8 @@
 /**********************
  * Common
  **********************/
+html{ font-size: 62.5%; /*10px*/ }
+
 body {
  font-family: 'Noto Sans Japanese', serif;
  font-weight: 200;
@@ -16,6 +18,10 @@ h5, .h5 { font-size: $h5; }
 h6, .h6 { font-size: $h6; }
 p {
   color: #000;
+}
+.mincho {
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-weight: 600!important;
 }
 
 .bg-gray {

@@ -62,6 +62,31 @@ angular.module "frontApp"
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
+      # 最新レシピ取得
+      objRecipe =
+        email: $localStorage['email']
+        token: $localStorage['token']
+        per: 1
+        page: 1
+      # 検索ワードの設定
+      objRecipe.category = Const.CATEGORY.COOKING
+      # 記事一覧取得
+      Api.getJson(objRecipe, Const.API.POST, false).then (res) ->
+        if res.data.length > 0
+          $scope.recipe = res.data[0]
+
+      # 最新ショップ取得
+      objShop =
+        email: $localStorage['email']
+        token: $localStorage['token']
+        per: 1
+        page: 1
+      # 記事一覧取得
+      Api.getJson(objShop, Const.API.SHOP, false).then (res) ->
+        if res.data.length > 0
+          $scope.shop = res.data[0]
+
+
     ###
     # Global function
     ###
@@ -98,6 +123,11 @@ angular.module "frontApp"
     $scope.moveToPostDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
       $state.go 'tabs.postDetal', {id:id}
+
+    # ショップ詳細移動時の処理
+    $scope.moveToShopDetail = (id) ->
+      $ionicNavBarDelegate.showBackButton true
+      $state.go 'tabs.shopDetalPost', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
