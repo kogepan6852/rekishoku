@@ -5,7 +5,7 @@ class FeaturesController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @feature = Feature.new(feature_params.merge(published_at: Time.zone.local("2016","01","01","12","30")))
+    @feature = Feature.new(feature_params.merge(published_at: Time.zone.local("2016","01","01","00","00")))
     @feature.save
     redirect_to "/admin/feature"
   end
