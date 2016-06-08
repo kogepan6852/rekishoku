@@ -3,5 +3,4 @@ class Feature < ActiveRecord::Base
   belongs_to :category
   has_many :feature_details
   belongs_to :user
-  counter_culture :user
 end
