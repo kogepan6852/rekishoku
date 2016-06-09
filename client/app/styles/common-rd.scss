@@ -1,6 +1,6 @@
 @import "setting";
 
-// MD以上
+// SM以上
 @media screen and (min-width:768px){
   html{ font-size: 87.5%; /*14px*/ }
 
@@ -35,4 +35,34 @@
      }
    }
 
+   /**********************
+    * Search
+    **********************/
+   .search-condition-bar {
+     padding: 15px;
+
+     .search-condition {
+       span {
+         padding: 5px 20px;
+       }
+     }
+   }
+
+}
+
+// LG以上
+@media screen and (min-width:1200px){
+  ion-view {
+    background-attachment: scroll;
+    background-image: url("../images/bg-paper.png");
+    background-position: left top;
+    background-repeat: repeat;
+    background-size: auto auto;
+
+    ion-content {
+      max-width: 1085px;
+      margin: 0 auto;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
 }

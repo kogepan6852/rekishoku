@@ -1,6 +1,6 @@
 @import "setting";
 
-// MD以上
+// SM以上
 @media screen and (min-width:768px){
   /**********************
    * info-tag
@@ -11,7 +11,7 @@
        max-width: 180px;
 
        >div {
-         padding: 3px 10px;
+         padding: 3px 5px;
        }
      }
    }
@@ -21,10 +21,8 @@
    list-item-post, list-item-shop {
      .item {
        .main-img {
-         margin-left: 0;
-         width: 50%;
-         margin-top: -2.5%;
-         margin-bottom: -2.5%;
+         width: 60%;
+         margin-left: -5%;
        }
        .category {
          width: 150px;
@@ -32,10 +30,22 @@
          padding-top: 5px;
        }
        .detail {
-         padding: 5% 22px 95px 15px;
+         padding: 5% 62px 90px 15px;
+         left: 45%;
+         width: 55%;
          >div {
            overflow: hidden;
            height: 100%;
+
+           h2 {
+             max-height: 84px;
+             letter-spacing: 2px;
+           }
+
+           .description {
+             margin-top: 10px;
+             letter-spacing: 1px;
+           }
          }
        }
 
@@ -49,6 +59,8 @@
          height: 58px;
          margin-bottom: 15px;
          padding-left: 14px;
+         left: 45%;
+         width: 55%;
 
          .periods, .people {
            height: 32px;
@@ -56,4 +68,29 @@
        }
      }
    }
+}
+
+// MD以上
+@media screen and (min-width:992px){
+  /**********************
+   * list-item-post, list-item-shop
+   **********************/
+  list-item-post, list-item-shop {
+    .item {
+      .main-img {
+        margin-left: 0;
+        width: 45%;
+        margin-top: -3%;
+        margin-bottom: -3%;
+      }
+      .detail {
+        padding: 4% 62px 90px 15px;
+        >div {
+          h2{
+            max-height: 56px;
+          }
+        }
+      }
+    }
+  }
 }

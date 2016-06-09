@@ -1,6 +1,6 @@
 @import "setting";
 
-// MD以上
+// SM以上
 @media screen and (min-width:768px){
   .magazine {
     .top-area {
@@ -20,7 +20,6 @@
       .feature {
         .main-img {
           height: auto;
-          margin-bottom: -3px;
         }
 
         .description {
@@ -28,8 +27,12 @@
           height: 120px;
           bottom: 57px;
 
+          h2 {
+            letter-spacing: 2px;
+          }
           p {
             height: 44px;
+            letter-spacing: 1px;
           }
         }
 
@@ -40,5 +43,27 @@
       }
 
     }
+  }
+}
+
+// MD以上
+@media screen and (min-width:992px){
+  .magazine {
+
+  }
+}
+
+// LG以上
+@media screen and (min-width:1200px){
+  .magazine {
+    .top-area {
+      .feature, .post, .shop {
+        .main-img {
+          margin-left: auto;
+          width: 100%;
+        }
+      }
+    }
+
   }
 }
