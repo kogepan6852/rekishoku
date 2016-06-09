@@ -6,14 +6,17 @@ class FeatureDetailsController < ApplicationController
 # POST /posts.json
 def create
   related_id = 0
-  if feature_detail_params[:info_type] == "0"
+  if feature_detail_check_params[:shop_ids].size == 3
     related_id = feature_detail_params[:shop_ids][2]
-  elsif feature_detail_params[:info_type] == "1"
+  elsif feature_detail_check_params[:post_ids].count == 3
     related_id = feature_detail_params[:post_ids][2]
-  else
-    related_id = feature_detail_params[:external_link_ids][2]
   end
-  @feature_detail = FeatureDetail.new(feature_detail_sent_params.merge(related_id: related_id))
+
+  if feature_detail_check_params[:is_external_link]
+    @feature_detail = FeatureDetail.new(feature_detail_external_link_params.merge(related_id: related_id))
+  else
+    @feature_detail = FeatureDetail.new(feature_detail_params.merge(related_id: related_id))
+  end
   @feature_detail.save
   redirect_to "/admin/feature_detail"
 end
@@ -40,10 +43,14 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def feature_detail_params
-    params.require(:feature_detail).permit(:title, :content, :info_type, :order, :shop_ids => [], :post_ids => [], :external_link_ids => [])
+    params.require(:feature_detail).permit(:title, :content, :info_type, :order, :is_external_link)
   end
 
-  def feature_detail_sent_params
-    params.require(:feature_detail).permit(:title, :content, :info_type, :order)
+  def feature_detail_check_params
+    params.require(:feature_detail).permit(:is_external_link, :shop_ids => [], :post_ids => [])
+  end
+
+  def feature_detail_external_link_params
+    params.require(:feature_detail).permit(:title, :content, :info_type, :order, :is_external_link, :external_link_title, :content, :image, :quotation_url, :quotation_name)
   end
 end
