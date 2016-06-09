@@ -62,21 +62,21 @@
               </div>
             </div>
           </a>
-          <!-- POST -->
+          <!-- POST(COOKING) -->
           <a class="item post side-area" ng-click="moveToPostDetail(recipe.post.id)">
             <img class="main-img" ng-src="{{recipe.post.image.image.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="recipe">
               <span ng-bind="recipe.post.category_name"></span>
             </div>
-            <div class="description">
+            <div class="description cooking">
               <h4 ng-bind="recipe.post.title" class="mincho"></h4>
             </div>
-            <div class="tags">
+            <!-- <div class="tags">
               <div>
                 <info-tag name="{{period.name}}" ng-repeat="period in recipe.periods"></info-tag>
                 <info-tag name="{{person.name}}" ng-repeat="person in recipe.people"></info-tag>
               </div>
-            </div>
+            </div> -->
           </a>
         </div>
       </div>
