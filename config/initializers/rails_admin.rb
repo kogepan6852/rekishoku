@@ -425,6 +425,9 @@ RailsAdmin.config do |config|
         help "必須 対応するカテゴリを選択してください"
         required true
       end
+      field :feature_details do
+        label "特集詳細の連携"
+      end
       field :is_approved do
         label "承認確認"
         help "承認を取得した場合は、チェックを追加してください"
@@ -506,6 +509,9 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
+      field :feature_details do
+        label "特集詳細の連携"
+      end
     end
 
     update do
@@ -575,12 +581,6 @@ RailsAdmin.config do |config|
         field :category do
           label "カテゴリ"
         end
-        field :info_type , :enum do
-        enum do
-          Hash[ ['お店','記事'].zip(['0','1']) ]
-        end
-          label "まとめ特集"
-        end
       end
       edit do
           field :title do
@@ -612,12 +612,6 @@ RailsAdmin.config do |config|
             help "必須 対応するカテゴリを選択してください"
             required true
           end
-          field :info_type, :enum do
-          enum do
-            Hash[ ['お店','記事'].zip(['0','1']) ]
-          end
-            label "まとめ項目"
-          end
           field :feature_details do
             label "特集詳細"
           end
@@ -638,9 +632,9 @@ RailsAdmin.config do |config|
           field :title do
             label "タイトル"
           end
-          field :info_type , :enum do
+          field :related_type , :enum do
           enum do
-            Hash[ ['お店','記事', '外部リンク'].zip(['shops','posts','external_links']) ]
+            Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
           end
             label "どのDBか"
           end
@@ -657,13 +651,6 @@ RailsAdmin.config do |config|
               help "必須"
               required true
             end
-            field :related_type, :enum do
-            enum do
-              Hash[ ['お店','記事', '外部リンク'].zip(['shops','posts','external_links']) ]
-            end
-              label "タイプ"
-            end
-
             field :order , :enum do
             enum do
               Hash[ ['1','2','3','4','5','6','7','8','9','10'].zip(['1','2','3','4','5','6','7','8','9','10']) ]
@@ -709,6 +696,9 @@ RailsAdmin.config do |config|
             end
             field :quotation_name do
               label "引用したサイト名"
+            end
+            field :feature_details do
+              label "特集詳細のID"
             end
         end
        end
