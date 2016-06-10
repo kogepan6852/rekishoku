@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160602084342) do
   add_index "categories_shops", ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
 
   create_table "external_links", force: :cascade do |t|
-    t.string   "title"
+    t.string   "name"
     t.text     "content"
     t.string   "image",          null: false
     t.string   "quotation_url"
