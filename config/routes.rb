@@ -30,6 +30,10 @@ Rails.application.routes.draw do
   get 'api/shop_list', to: 'api_shops#list'
   get 'api/map', to: 'api_shops#map'
 
+  # FEATURES
+  get 'api/features', to: 'api_features#index'
+  get 'api/features/:id', to: 'api_features#show'
+
   # USERS
   get 'api/users', to: 'api_users#index'
   get 'api/users/:id', to: 'api_users#show'

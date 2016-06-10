@@ -1,21 +1,26 @@
 class ApiFeaturesController < ApplicationController
-  before_action :set_feature, only: [:edit, :update, :destroy]
+  before_action :set_feature, only: [:edit, :show, :destroy]
 
   # POST /posts
   # POST /posts.json
-  def create
-    setPublishedAt = feature_params[:published_at].split(/\D+/)
-    @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
-    @feature.save
-    redirect_to "/admin/feature"
+  def index
+    feature = Feature.order(created_at: :desc)
+    # カテゴリーで検索
+    if params[:category]
+      feature = feature.where(category_id: params[:category].to_i)
+    end
+    render json: feature
   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
-  def update
-    setPublishedAt = feature_params[:published_at].split(/\D+/)
-    @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
-    redirect_to "/admin/feature"
+  def show
+    feature = Feature.order(created_at: :desc)
+    # カテゴリーで検索
+    if params[:category]
+      feature = feature.where(category_id: params[:category].to_i)
+    end
+    render json: feature
   end
 
 
