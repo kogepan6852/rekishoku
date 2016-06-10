@@ -3,7 +3,7 @@ class CreateFeatureDetails < ActiveRecord::Migration
     create_table :feature_details do |t|
       t.integer  "feature_id",                     null: false
       t.string   "title",                          null: false
-      t.integer  "type",           default: 0,     null: false
+      t.integer  "related_type",   default: 0,     null: false
       t.integer  "related_id",                     null: false
       t.integer  "order",          default: 0,     null: false
       t.timestamps                                 null: false
