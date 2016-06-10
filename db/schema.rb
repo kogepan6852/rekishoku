@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160602084342) do
   create_table "feature_details", force: :cascade do |t|
     t.integer  "feature_id"
     t.string   "title",                    null: false
-    t.integer  "related_type", default: 0, null: false
-    t.integer  "related_id",               null: false
+    t.string   "related_type"
+    t.integer  "related_id",   default: 0
     t.integer  "order",        default: 0, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
