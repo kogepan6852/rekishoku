@@ -1,0 +1,49 @@
+@import "setting";
+
+// SM以上
+@media screen and (min-width:768px){
+  /**********************
+   * Common
+   **********************/
+   .detail {
+     .top-image {
+       img {
+         margin-top: -5%;
+         margin-bottom: -5%;
+       }
+     }
+   }
+
+}
+// MD以上
+
+@media screen and (min-width:992px){
+  // /**********************
+  //  * Common
+  //  **********************/
+  //  .detail {
+  //    .top-image {
+  //      img {
+  //        margin-top: -10%;
+  //        margin-bottom: -10%;
+  //      }
+  //    }
+  //  }
+
+}
+
+// LG以上
+@media screen and (min-width:1200px){
+  /**********************
+   * Common
+   **********************/
+   .detail {
+     .top-image {
+       img {
+         margin-top: -10%;
+         margin-bottom: -10%;
+       }
+     }
+   }
+
+}

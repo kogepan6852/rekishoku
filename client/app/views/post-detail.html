@@ -17,7 +17,7 @@
 
     <!-- MAIN INFORMATION -->
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="information">
           <div class="name">
             <h4 ng-bind="post.category_name"></h4>
@@ -44,7 +44,7 @@
 
     <!-- DESCRIPTION -->
     <div class="row padding-top padding-bottom">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="description"><p ng-bind-html="post.content | newlines"></p></div>
       </div>
     </div>
@@ -52,25 +52,25 @@
 
     <!-- DETAILS TITLE -->
     <div class="row" ng-repeat-start="postDetail in postDetails" ng-if="postDetail.title">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <h2 ng-bind="postDetail.title"></h2>
       </div>
     </div>
     <!-- DETAILS IMAGE -->
     <div class="row no-padding" ng-if="postDetail.image.url">
-      <div class="top-image">
+      <div class="top-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <img ng-src="{{postDetail.image.url}}" src="../images/dummy-img.png" class="hidden-xs">
         <img ng-src="{{postDetail.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
       </div>
     </div>
     <!-- DETAILS DESCRIPTION -->
     <div class="row padding-bottom no-margin" ng-repeat-end>
-      <div class="image-quotation" ng-if="postDetail.image.url">
+      <div class="image-quotation col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ng-if="postDetail.image.url">
         <span ng-bind="'POST.PHOTO_BY'|translate"></span>
         <a href="{{postDetail.quotation_url}}" target="_blank" ng-if="postDetail.quotation_name" ng-bind="postDetail.quotation_name"></a>
         <span ng-if="!postDetail.quotation_name" ng-bind="user.username"></span>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div><p ng-bind-html="postDetail.content | newlines"></p></div>
       </div>
     </div>
@@ -79,13 +79,13 @@
 
     <!-- SHOPS -->
     <div class="row padding-top" ng-if="shops.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <h2 ng-bind="'POST.SHOP_INFO'|translate"></h2>
       </div>
     </div>
 
     <div class="row padding-bottom" ng-if="posts.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2 no-padding">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
         <!-- Items -->
          <list-item-shop
             ng-repeat="shop in shops"
@@ -99,7 +99,7 @@
     </div>
 
     <!-- <div class="row post-shops row-bottom" ng-if="shops.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <ul class="item-detail-list">
           <li class="overlay-image" ng-repeat="shop in shops">
             <div class="thumbnail-image">
@@ -134,14 +134,14 @@
     <advertisment-row seed="0"></advertisment-row>
 
     <div class="row padding-top" ng-if="postsRelated.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <h2 ng-bind="'POST.RELATED'|translate"></h2>
       </div>
     </div>
 
     <!-- RELATED POSTS -->
     <div class="row padding-bottom" ng-if="postsRelated.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2 no-padding">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
         <!-- Items -->
         <list-item-post
            ng-repeat="post in postsRelated"

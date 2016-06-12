@@ -118,6 +118,15 @@ star {
          overflow: hidden;
          white-space: normal;
        }
+
+       &.no-tag {
+         >div {
+           height: 100%;
+           h2 {
+             max-height: 100%;
+           }
+         }
+       }
      }
 
      i.arrow {

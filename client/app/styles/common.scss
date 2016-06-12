@@ -85,6 +85,7 @@ ion-content {
  **********************/
 .main-header {
   background-color: #fff!important;
+  border: none;
 
   .title {
     display: none;
@@ -222,6 +223,11 @@ ion-content.has-tabs-top {
 /**********************
  * Menu
  **********************/
+ion-side-menu {
+  .bar-header {
+    border: none;
+  }
+}
 .menu-list {
   height: 100%;
   .slider {

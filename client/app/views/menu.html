@@ -196,13 +196,13 @@
   <!-- Content -->
   <ion-side-menu-content animation="slide-left-right" nav-transition="ios">
 
-    <ion-nav-bar class="main-header visible-xs" ng-controller="HeaderCtrl">
+    <ion-nav-bar class="main-header" ng-controller="HeaderCtrl">
       <ion-nav-buttons side="left">
-        <div class="button button-clear button-dark" ng-click="toggleLeft()" ><i class="icon ion-ios-search"></i></div>
+        <div class="button button-clear button-dark visible-xs" ng-click="toggleLeft()" ><i class="icon ion-ios-search"></i></div>
       </ion-nav-buttons>
-      <div class="logo" ng-click="moveToHome()"></div>
+      <div class="logo visible-xs" ng-click="moveToHome()"></div>
       <ion-nav-buttons side="right">
-        <div class="button button-clear button-dark" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
+        <div class="button button-clear button-dark visible-xs" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
       </ion-nav-buttons>
       <ion-nav-back-button class="button-back" ng-click="goBack()">
         <i class="ion-chevron-left"></i>

@@ -6,7 +6,7 @@
   <div class="category" ng-if="target=='post'">
     <span ng-bind="category"></span>
   </div>
-  <div class="detail" ng-if="target=='post'">
+  <div class="detail" ng-if="target=='post'" ng-class="{'no-tag': periods.length == 0 && people.length == 0}">
     <div>
       <h2 ng-bind="data.title" class="mincho"></h2>
       <p class="description hidden-xs hidden-sm" ng-bind="data.content"></p>

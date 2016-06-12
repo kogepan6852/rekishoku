@@ -5,6 +5,35 @@
   html{ font-size: 87.5%; /*14px*/ }
 
   /**********************
+   * Header
+   **********************/
+  .main-header {
+    background-color: transparent!important;
+    width: 100px;
+
+    .back-button {
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      opacity: 0.8;
+      padding-top: 7px!important;
+      padding-left: 18px!important;
+      height: 60px;
+      width: 60px;
+      top: 30px;
+      left: 30px;
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -ms-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+
+      i {
+        font-size: 34px;
+      }
+    }
+  }
+  /**********************
    * Tab
    **********************/
    ion-content.has-tabs-top {
@@ -60,7 +89,7 @@
     background-size: auto auto;
 
     ion-content {
-      max-width: 1085px;
+      max-width: 1235px;
       margin: 0 auto;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     }
