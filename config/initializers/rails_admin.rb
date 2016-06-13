@@ -513,13 +513,12 @@ RailsAdmin.config do |config|
         label "特集詳細の連携"
       end
     end
-
     update do
       exclude_fields :user_id
     end
    end
 
-   ## 投稿カテゴリ
+   ## 記事詳細
    config.model 'PostDetail' do
      label "投稿記事各セクション"
      weight 5
@@ -623,15 +622,25 @@ RailsAdmin.config do |config|
             Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
           end
             label "連携DB"
+            help "必須"
+            required true
           end
           field :feature_details do
             label "特集詳細"
+          end
+          field :status, :enum do
+          enum do
+            Hash[ ['公開','非公開'].zip(['1','0']) ]
+          end
+            label "公開状態"
           end
           field :published_at do
             label "公開時間"
           end
           field :user do
             label "ライター"
+            required true
+            help "必須"
           end
       end
      end
@@ -668,6 +677,8 @@ RailsAdmin.config do |config|
               Hash[ ['1','2','3','4','5','6','7','8','9','10'].zip(['1','2','3','4','5','6','7','8','9','10']) ]
             end
               label "順番"
+              required true
+              help "必須"
             end
         end
        end
