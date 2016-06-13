@@ -2,17 +2,18 @@ class FeaturesController < ApplicationController
   load_and_authorize_resource
   before_action :set_feature, only: [:edit, :update, :destroy]
 
-  # POST /posts
-  # POST /posts.json
+  # POST /feature
+  # POST /feature.json
   def create
     @feature = Feature.new(feature_params.merge(published_at: Time.zone.local("2016","07","01","00","00")))
     @feature.save
     redirect_to "/admin/feature"
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+  # PATCH/PUT /feature/1
+  # PATCH/PUT /feature/1.json
   def update
+    ## 公開日の設定
     setPublishedAt = feature_time_params[:published_at].split(/\D+/)
     @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     redirect_to "/admin/feature"

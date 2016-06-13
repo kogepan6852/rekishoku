@@ -61,11 +61,6 @@ Rails.application.routes.draw do
   post 'admin/feature/new', to: 'features#create'
   put 'admin/feature/:id/edit', to: 'features#update'
 
-  # ADMIN_FEATURE_DETAIL
-  # post 'admin/feature_detail/new', to: 'feature_details#create'
-  # put 'admin/feature_detail/:id/edit', to: 'feature_details#update'
-
-
 # site map
   case Rails.env
     when 'production'
