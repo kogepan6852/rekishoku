@@ -43,37 +43,35 @@ class ApiFeaturesController < ApplicationController
     end
 
     newFeatures = Array.new()
-    setFature = Array.new()
+    periods = Array.new()
+    people = Array.new()
+    logger.debug("今日もいい天気！")
     @features.page(params[:page]).per(params[:per]).each do |feature|
+
       feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
       feature_details.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
-            periods = Person.select('periods.id').joins(:shops).joins(:periods)
+            periods += Person.select('periods.id').joins(:shops).joins(:periods)
               .where('shops.id = ? ', feature_detail[:related_id])
-            people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
+            people += Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
             logger.debug("今日もいい天気！")
         elsif feature[:features_details_related_type] == "Post"
           features = Post.find(feature[:features_details_related_id])
         elsif feature[:features_details_related_type] == "ExternalLink"
           features = ExternalLink.find(feature[:features_details_related_id])
         end
-        # 返却用のオブジェクトを作成する
-        obj = { "feature_details" => feature_detail,
-                "people" => people.uniq,
-                "periods" => periods.uniq
-              }
 
-        newFeatures.push(obj);
       end
       fatureData = {
               "feature" => feature,
-              "feature_details" => newFeatures,
+              "people" => people.uniq,
+              "periods" => periods.uniq
             }
 
-      setFature.push(fatureData);
+      newFeatures.push(fatureData);
     end
 
-    render json: setFature
+    render json: newFeatures
   end
 
   # PATCH/PUT /posts/1
@@ -89,10 +87,10 @@ class ApiFeaturesController < ApplicationController
         "username" => @feature.user.username,
         "image" => @feature.user.image.thumb }
 
-      shops = Array.new()
+      feature_details = Array.new()
       # 紐付けしている
-      feature_details = FeatureDetail.where('feature_id = ? ', @feature[:id])
-      feature_details.each do |feature_detail|
+      feature_details_where = FeatureDetail.where('feature_id = ? ', @feature[:id])
+      feature_details_where.each do |feature_detail|
         # 人に紐付く時代を全て抽出する
         shop = Shop.find(feature_detail[:related_id])
         logger.debug("こんにちはー")
@@ -108,7 +106,7 @@ class ApiFeaturesController < ApplicationController
         # 価格帯の取得
         price = get_price(shop)
 
-        obj = { "feature_details" => feature_detail,
+        obj = { "feature_detail" => feature_detail,
                 "shop" => shop,
                 "categories" => shop.categories,
                 "people" => shop.people,
@@ -116,12 +114,12 @@ class ApiFeaturesController < ApplicationController
                 "rating" => rating,
                 "price" => price
               }
-        shops.push(obj);
+        feature_details.push(obj);
       end
-      
+
       feature = {
         "feature" => @feature,
-        "shops" => shops.uniq,
+        "feature_details" => feature_details.uniq,
         "user" => user }
       render json: feature
     else
