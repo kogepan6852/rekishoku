@@ -1,32 +1,38 @@
 <ion-view title="" cache-view="false" ng-init="init()" class="map-view">
 
   <!-- Serach bar -->
-  <div class="bar bar-subheader bar-clear" align="right" ng-if="!keywords && !period && !person">
-    <button class="button button-clear icon-left ion-ios-navigate-outline present-location" ng-click="moveToCurrentPlace()"><span ng-cloak>{{'TEXT.CURRENT_PLACE'|translate}}</span></button>
+  <!-- <div class="bar bar-clear" align="right" ng-if="!keywords && !period && !person">
     <div class="item-input-inset search-bar">
-      <label class="item-input-wrapper">
-        <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
-      </label>
+      <form ng-submit="searchShops()">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
+        </label>
+      </form>
       <button class="button button-small button-dark" ng-click="searchShops()" ng-cloak>{{'BUTTON.SEARCH'|translate}}</button>
+    </div>
+  </div> -->
+
+  <!-- Search condition -->
+  <div class="row search-condition-bar" ng-if="keywords || period || person || category || province">
+    <div class="col no-padding">
+      <div class="search-condition">
+        <div>
+          <span ng-if="category" ng-bind="category | mapppingId:categories"></span>
+          <span ng-if="keywords" ng-bind="keywords"></span>
+          <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
+          <span ng-if="person" ng-bind="person | mapppingId:people"></span>
+          <span ng-if="province" ng-bind="province"></span>
+        </div>
+        <div class="clear-button">
+          <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
+          <span class="hidden-xs" ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="bar bar-subheader bar-clear main-category" ng-if="keywords || period || person">
-    <div class="search-condition">
-      <div>
-        <span ng-if="targetCategoryId" ng-bind-html="targetCategoryId | mapppingId:categories"></span>
-        <span ng-if="keywords" ng-bind-html="keywords"></span>
-        <span ng-if="period" ng-bind-html="period | mapppingId:periods"></span>
-        <span ng-if="person" ng-bind-html="person | mapppingId:people"></span>
-      </div>
-      <div class="clear-button">
-        <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-        <span ng-click="deleteSearchCondition()" ng-bind-html="'BUTTON.CLEAR_CONDITION'|translate"></span>
-      </div>
-    </div>
-  </div>
   <!-- Google map -->
-  <div class="has-subheader maps" ng-if="map">
+  <div class="maps" ng-if="map">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" ng-cloak>
       <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject">

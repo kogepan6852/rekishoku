@@ -1,0 +1,10 @@
+@import "setting";
+
+// SM以上
+@media screen and (min-width:768px){
+  .map-view {
+    .search-condition-bar {
+      top: 0;
+    }
+  }
+}

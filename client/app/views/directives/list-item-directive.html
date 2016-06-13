@@ -18,6 +18,21 @@
   <div class="detail" ng-if="target=='shop'">
     <h2 ng-bind="data.name" class="mincho"></h2>
     <star count="rating"></star>
+    <div class="hidden-xs">
+      <p class="description">
+        <span ng-bind="data.province"></span><span ng-bind="data.city"></span>
+        <span ng-repeat="categorie in categories">
+          <span>、</span><span ng-bind="categorie.name"></span>
+        </span>
+      </p>
+      <p class="price">
+        <span ng-bind="'SHOP.DAYTIME'|translate"></span><span ng-bind="price.daytime"></span>
+        <span ng-bind="'SHOP.NIGHTTIME'|translate"></span><span ng-bind="price.nighttime"></span>
+      </p>
+      <p class="rep-menu">
+        <span ng-bind="'SHOP.MENU'|translate"></span>：<span ng-bind="data.menu | lfToPoint"></span>
+      </p>
+    </div>
   </div>
 
   <div class="tags">

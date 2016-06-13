@@ -1,0 +1,44 @@
+@import "setting";
+
+/**********************
+ * Common
+ **********************/
+@media screen and (max-width:768px){
+  .big-modal {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%
+  }
+  
+  /* form */
+  .item-stacked-label-xs {
+    background-color: transparent;
+    box-shadow: none;
+    display: block;
+    .input-label, .icon {
+      display: inline-block;
+      padding: 4px 0 0;
+      vertical-align: middle;
+    }
+  }
+}
+
+/**********************
+ * Search Modal
+ **********************/
+.search-modal {
+  .scroll {
+    height: 100%;
+  }
+  .search-button-content {
+    bottom: 10px;
+    position: absolute;
+    width: 100%;
+  }
+  .search-button {
+    max-width: 340px;
+    margin: auto;
+  }
+}

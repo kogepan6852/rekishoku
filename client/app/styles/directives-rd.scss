@@ -33,19 +33,10 @@
          padding: 5% 62px 90px 15px;
          left: 45%;
          width: 55%;
+
          >div {
            overflow: hidden;
            height: 100%;
-
-           h2 {
-             max-height: 84px;
-             letter-spacing: 2px;
-           }
-
-           .description {
-             margin-top: 10px;
-             letter-spacing: 1px;
-           }
          }
 
          &.no-tag {
@@ -72,6 +63,43 @@
        }
      }
    }
+
+   list-item-post {
+     .item {
+       .detail {
+         >div {
+           h2 {
+             max-height: 84px;
+             letter-spacing: 2px;
+           }
+
+           .description {
+             margin-top: 10px;
+             letter-spacing: 1px;
+           }
+         }
+       }
+     }
+   }
+
+   list-item-shop {
+     .item {
+       .detail {
+         >div {
+           padding-left: 15px;
+
+           .description {
+             color: #000;
+             margin-top: 10px;
+           }
+           .rep-menu {
+             color: #000;
+             padding-top: 5px;
+           }
+         }
+       }
+     }
+   }
 }
 
 // MD以上
@@ -84,16 +112,31 @@
       .main-img {
         margin-left: 0;
         width: 45%;
-        margin-top: -3%;
-        margin-bottom: -3%;
+        margin-top: -2%;
+        margin-bottom: -2%;
       }
       .detail {
-        padding: 4% 62px 90px 15px;
+        padding: 2% 62px 90px 15px;
         >div {
           h2{
             max-height: 56px;
           }
         }
+      }
+    }
+  }
+}
+
+// LG以上
+@media screen and (min-width:1200px){
+  /**********************
+   * list-item-post, list-item-shop
+   **********************/
+  list-item-post, list-item-shop {
+    .item {
+      .main-img {
+        margin-top: -5%;
+        margin-bottom: -5%;
       }
     }
   }

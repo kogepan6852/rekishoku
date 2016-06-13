@@ -15,8 +15,9 @@
   </ion-tabs>
 </div>
 
-<ion-footer-bar class="search-footer" ng-class="{'hide-footer': hideFooter}">
-  <h1 class="title"><i class="ion-arrow-down-b"></i> SORT BY</h1>
+<!-- <ion-footer-bar class="search-footer" ng-class="{'hide-footer': hideFooter}"> -->
+<ion-footer-bar class="search-footer">
+  <!-- <h1 class="title"><i class="ion-arrow-down-b"></i> SORT BY</h1> -->
   <div class="buttons" ng-click="changeListType()">
     <button class="button mode-btn" ng-class="{'hide-btn': hideModeBtn}">
       <i ng-class="{'ion-ios-flag-outline':currentType == 'shop', 'ion-ios-list-outline':currentType != 'shop'}"></i>

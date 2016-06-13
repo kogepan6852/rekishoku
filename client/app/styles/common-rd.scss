@@ -34,6 +34,22 @@
     }
   }
   /**********************
+   * Footer
+   **********************/
+  .search-footer {
+    .mode-btn {
+      left: 30px;
+      bottom: 30px;
+      height: 75px;
+      width: 75px;
+
+      &.hide-btn {
+        bottom: -75px!important;
+      }
+    }
+  }
+
+  /**********************
    * Tab
    **********************/
    ion-content.has-tabs-top {

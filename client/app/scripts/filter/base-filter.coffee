@@ -21,3 +21,7 @@ angular.module "frontApp"
   # ハイフンを削除する
   .filter 'delHyphen', () ->
     (text) -> text.replace('-', '') if text?
+
+  # 改行コードを点へ変換する
+  .filter 'lfToPoint', () ->
+    (text) -> text.replace(/\n/g, '、') if text?

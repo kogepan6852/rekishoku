@@ -1,7 +1,76 @@
 @import "setting";
 
 .map-view {
-  div.maps {
-    padding-bottom: 45px;
+  .search-condition-bar {
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 88px;
+
+    .clear-button span {
+      color: #fff;
+      font-weight: 400;
+    }
   }
+
+
+  .maps {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: -1px;
+    margin-top: -1px;
+    overflow: hidden;
+    padding-top: 1px;
+    position: absolute;
+    width: auto;
+
+    .angular-google-map-container, .angular-google-map, .scroll, .map-include {
+      height: 100%;
+    }
+  }
+
+  .gm-style-iw > div {
+    height: 115px;
+  }
+
+  .gmap-windows {
+    p {
+      font-size: 12px;
+      width: 71px;
+      max-height: 44px;
+      overflow: hidden;
+      margin-bottom: 5px;
+      margin-right: -4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-weight: 600;
+    }
+    img {
+      position: absolute;
+      left: 0;
+      width: 90px !important;
+      height: auto;
+    }
+  }
+
+  .present-location {
+    position: absolute;
+    color: rgb(205, 97, 93) !important;
+    left: 5px;
+    top: 6px;
+    font-size: 16px !important;
+    z-index: 20;
+    &::before {
+      font-size: 18px !important;
+      margin-right: 2px;
+    }
+  }
+
+  /* serach bar */
+  .main-category.bar-subheader {
+    padding: 5px 20px;
+  }
+
 }

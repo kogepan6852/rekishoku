@@ -21,7 +21,7 @@
         <div class="information">
           <div class="name">
             <h4 ng-bind="post.category_name"></h4>
-            <h1 ng-bind="post.title" class="mincho"></h1>
+            <h1 ng-bind="post.title" class="mincho b"></h1>
           </div>
           <div class="date" ng-if="post.category_slug=='news'">
             <p ng-bind="post.published_at | date:'yyyy/M/d'"></p>
@@ -91,37 +91,13 @@
             ng-repeat="shop in shops"
             ng-click="moveToShopDetail(shop.shop.id)"
             data="shop.shop"
+            categories="shop.categories"
             periods="shop.periods"
             people="shop.people"
             rating="shop.rating.average" >
           </list-item-shop>
       </div>
     </div>
-
-    <!-- <div class="row post-shops row-bottom" ng-if="shops.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <ul class="item-detail-list">
-          <li class="overlay-image" ng-repeat="shop in shops">
-            <div class="thumbnail-image">
-              <img ng-src="{{shop.shop.image.md.url}}">
-            </div>
-            <div class="detail-content">
-              <div>
-                <div class="category-name shop-category" category-list data="shop.categories" ></div>
-                <div class="h4 detail-name">{{shop.shop.name}}</div>
-                <div class="h6 item-description hidden-xs">{{shop.shop.description | limitTo:300}}</div>
-                <div class="item-address" ng-if="shop.shop.address1">{{shop.shop.province}}</div>
-                <div class="item-address" ng-if="!shop.shop.address1">-</div>
-              </div>
-            </div>
-            <a class="link" ui-sref="tabs.post-shop({id:shop.shop.id})" nav-direction="forward" ng-if="nowTab=='post'"></a>
-            <a class="link" ui-sref="tabs.shop({id:shop.shop.id})" nav-direction="forward" ng-if="nowTab=='shop'"></a>
-            <a class="link" ui-sref="tabs.map-shop({id:shop.shop.id})" nav-direction="forward" ng-if="nowTab=='map'"></a>
-            <a class="link" ui-sref="shop({id:shop.shop.id})" nav-direction="forward" ng-if="nowTab=='other'"></a>
-          </li>
-        </ul>
-      </div>
-    </div> -->
 
     <!-- SNS ICONS -->
     <sns-icons

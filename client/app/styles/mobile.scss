@@ -1,8 +1,6 @@
 /**********************
  * Responsive Design
  **********************/
-@media screen and (max-width:480px){
-}
 @media screen and (min-width:481px) and (max-width:768px){
   .item-list li{ width: 33.333%; }
   .grid-menu a{
@@ -13,47 +11,10 @@
 /* bootstrap xs */
 @media screen and (max-width:768px){
   .top { width: 100%; }
-  /* modal */
-  .big-modal {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%
-  }
-  /* form */
-  .item-stacked-label-xs {
-    background-color: transparent;
-    box-shadow: none;
-    display: block;
-  }
-  .item-stacked-label-xs .input-label, .item-stacked-label-xs .icon {
-    display: inline-block;
-    padding: 4px 0 0;
-    vertical-align: middle;
-  }
   /* header */
   .bar-header { background-color: transparent;}
   .fix-nav i { color: #000; }
   .header .bar.top { background-color: transparent; border-bottom: 1px solid #ddd!important;}
-  .button-back {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border-color: transparent;
-    box-shadow: none;
-    color: #b2b2b2;
-    font-size: 17px !important;
-    font-weight: 400 !important;
-    left: 0;
-    line-height: 32px !important;
-    min-height: 31px !important;
-    opacity: 1 !important;
-    position: absolute;
-    width: 70px;
-  }
-  .button-back.activated {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    box-shadow: none!important;
-  }
 
   /* tab */
   .has-tabs.pane {
@@ -73,20 +34,6 @@
   }
   .main-category .search-condition .clear-button span {
     display: none;
-  }
-
-  /* detail page */
-  .item-description {
-    max-height: 30px;
-    padding: 3px 10px 0;
-  }
-  .post-title .category {
-    position: relative;
-    margin-left: auto;
-    margin-bottom: 5px;
-  }
-  .post-title .username {
-    position: absolute;
   }
 
   /* Map検索*/
@@ -126,34 +73,6 @@
     padding-right: 15px;
   }
 
-  /* tab */
-  /*.tab-nav.tabs {
-    background-position: center bottom;
-    border-bottom-width: 1px;
-    border-top-width: 0;
-    padding-top: 0;
-    top: 0px;
-  }
-  .tab-nav.tabs a {
-    display: none;
-  }
-  .tabs .tab-item{
-    font-size: 18px!important;
-    line-height: 44px!important;
-  }
-  .tabs .tab-item .icon::before {
-    font-size: 24px;
-    line-height: 44px;
-  }
-  .tabs .tab-item .icon {
-    padding-right: 3px;
-  }
-  .tabs .tab-item .icon {
-    display: inline-block;
-    margin-top: -0.1em;
-    vertical-align: top;
-  }*/
-
   /* menu */
   .menu-content {
     -webkit-transform: translate3d(215px, 0px, 0px) !important;
@@ -185,31 +104,7 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
   }
-  /* Main*/
-  .main-category .button-bar,
-  .main-category .search-condition{
-    max-width: 800px;
-  }
-  .main-category .button-bar .button{
-    border-radius: 10px!important;
-    border: 1px solid rgb(76,42,76);
-    margin-right: 15px;
-    line-height: 34px;
-    min-height: 34px;
-  }
-
-  .present-location {
-    left: 10px;
-  }
-  /* detail page */
-  .item-detail-list li .thumbnail-image {
-    height: 210px;
-    width: 280px;
-  }
-  .item-detail-list li .detail-content {
-    height: 210px;
-    padding-left: 280px;
-  }
+  
 }
 @media screen and (min-width:1201px){
   .item-list li{ width: 25%; }
