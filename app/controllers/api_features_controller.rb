@@ -5,7 +5,7 @@ class ApiFeaturesController < ApplicationController
   # POST /posts.json
   def index
     ###### copy
-    @features = Feature.joins(:feature_details).joins(:category).select('features.*, feature_details.id as features_details_id, feature_details.related_type as features_details_related_type, feature_details.related_id as features_details_related_id, feature_details.order as features_details_order,categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).order(published_at: :desc)
+    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).order(published_at: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -40,28 +40,38 @@ class ApiFeaturesController < ApplicationController
     end
 
     newFeatures = Array.new()
+    setFature = Array.new()
     @features.page(params[:page]).per(params[:per]).each do |feature|
-      if feature[:features_details_related_type] == "Shop"
-        periods = Person.select('periods.id').joins(:shops).joins(:periods)
-          .where('shops.id = ? ', feature[:features_details_related_id])
-        people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature[:features_details_related_id])
-      elsif feature[:features_details_related_type] == "Post"
-        features = Post.find(feature[:features_details_related_id])
-      elsif feature[:features_details_related_type] == "ExternalLink"
-        features = ExternalLink.find(feature[:features_details_related_id])
+      feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
+      feature_details.page(params[:page]).per(params[:per]).each do |feature_detail|
+        if feature_detail[:related_type] == "Shop"
+            periods = Person.select('periods.id').joins(:shops).joins(:periods)
+              .where('shops.id = ? ', feature_detail[:related_id])
+            people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
+            logger.debug("今日もいい天気！")
+        elsif feature[:features_details_related_type] == "Post"
+          features = Post.find(feature[:features_details_related_id])
+        elsif feature[:features_details_related_type] == "ExternalLink"
+          features = ExternalLink.find(feature[:features_details_related_id])
+        end
+        # 返却用のオブジェクトを作成する
+        obj = { "feature_details" => feature_detail,
+                "people" => people.uniq,
+                "periods" => periods.uniq
+              }
+
+        newFeatures.push(obj);
       end
-
-
-      # 返却用のオブジェクトを作成する
-      obj = { "feature" => feature,
-              "people" => people.uniq,
-              "periods" => periods.uniq
+      fatureData = {
+              "feature" => feature,
+              "feature_details" => newFeatures,
             }
 
-      newFeatures.push(obj);
+      setFature.push(fatureData);
+
     end
 
-    render json: newFeatures
+    render json: setFature
   end
 
   # PATCH/PUT /posts/1
@@ -75,21 +85,15 @@ class ApiFeaturesController < ApplicationController
         "id" => @features.user.id,
         "username" => @features.user.username,
         "image" => @features.user.image.thumb }
-      # people情報整形
-      people = Array.new()
-      @post.people.each do |person|
-        obj = {
-          "id" => person.id,
-          "name" => person.name,
-          "furigana" => person.furigana}
-        people.push(obj);
-      end
 
-      # 人に紐付く時代を全て抽出する
-      postPeriods = get_periods(@post.people)
+      # shopsに紐付けしている時代を取得をする
+      periods = Person.select('periods.id').joins(:shops).joins(:periods)
+          .where('shops.id = ? ', feature[:features_details_related_id])
+      # shopsに紐付いてる人物を取得する
+      people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature[:features_details_related_id])
 
-      # shop情報整形
-      shops = Array.new()
+      # 紐付けしている
+      shops = Shop.where('shops.id = ? ', feature[:features_details_related_id])
       @post.shops.each do |shop|
         # 人に紐付く時代を全て抽出する
         shopPeriods = Array.new()
