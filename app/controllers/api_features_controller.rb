@@ -1,6 +1,9 @@
 class ApiFeaturesController < ApplicationController
   before_action :set_feature, only: [:edit, :show, :destroy]
 
+  include ShopInfo
+  include RelatedInfo
+
   # POST /posts
   # POST /posts.json
   def index
@@ -43,7 +46,7 @@ class ApiFeaturesController < ApplicationController
     setFature = Array.new()
     @features.page(params[:page]).per(params[:per]).each do |feature|
       feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
-      feature_details.page(params[:page]).per(params[:per]).each do |feature_detail|
+      feature_details.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
             periods = Person.select('periods.id').joins(:shops).joins(:periods)
               .where('shops.id = ? ', feature_detail[:related_id])
@@ -68,7 +71,6 @@ class ApiFeaturesController < ApplicationController
             }
 
       setFature.push(fatureData);
-
     end
 
     render json: setFature
@@ -77,54 +79,51 @@ class ApiFeaturesController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def show
-    @features = Feature.joins(:feature_details).joins(:category).select('features.*, feature_details.id as features_details_id, feature_details.related_type as features_details_related_type, feature_details.related_id as features_details_related_id, feature_details.order as features_details_order,categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).find(params[:id]).order(:order)
-    logger.debug(params[:preview])
-    if params[:preview] == "true" || @features.status == 1 && @features.published_at <= Date.today
+    @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).find(params[:id])
+    logger.debug("森です！")
+    if params[:preview] == "true" || @feature.status == true && @feature.published_at <= Date.today
+      logger.debug("こんにちはー")
       # user情報整形
       user = {
-        "id" => @features.user.id,
-        "username" => @features.user.username,
-        "image" => @features.user.image.thumb }
+        "id" => @feature.user.id,
+        "username" => @feature.user.username,
+        "image" => @feature.user.image.thumb }
 
-      # shopsに紐付けしている時代を取得をする
-      periods = Person.select('periods.id').joins(:shops).joins(:periods)
-          .where('shops.id = ? ', feature[:features_details_related_id])
-      # shopsに紐付いてる人物を取得する
-      people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature[:features_details_related_id])
-
+      shops = Array.new()
       # 紐付けしている
-      shops = Shop.where('shops.id = ? ', feature[:features_details_related_id])
-      @post.shops.each do |shop|
+      feature_details = FeatureDetail.where('feature_id = ? ', @feature[:id])
+      feature_details.each do |feature_detail|
         # 人に紐付く時代を全て抽出する
-        shopPeriods = Array.new()
-        shop.people.each do |person|
-          person.periods.each do |period|
-            shopPeriods.push(period);
-          end
-        end
+        shop = Shop.find(feature_detail[:related_id])
+        logger.debug("こんにちはー")
+        logger.debug(shop)
+        # shopsに紐付けしている時代を取得をする
+        periods = Person.select('periods.id').joins(:shops).joins(:periods)
+            .where('shops.id = ? ', feature_detail[:related_id])
+        # shopsに紐付いてる人物を取得する
+        people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
 
         # 歴食度の設定
         rating = cal_rating(shop)
         # 価格帯の取得
         price = get_price(shop)
 
-        obj = { "shop" => shop,
+        obj = { "feature_details" => feature_detail,
+                "shop" => shop,
                 "categories" => shop.categories,
                 "people" => shop.people,
-                "periods" => shopPeriods.uniq,
+                "periods" => periods,
                 "rating" => rating,
                 "price" => price
               }
         shops.push(obj);
       end
-
+      
       feature = {
         "feature" => @feature,
-        "shops" => shops,
-        "user" => user,
-        "people" => people,
-        "periods" => postPeriods.uniq, }
-      render json: post
+        "shops" => shops.uniq,
+        "user" => user }
+      render json: feature
     else
       feature = { "feature" => "" }
       render json: feature
