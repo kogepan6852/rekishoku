@@ -17,7 +17,7 @@
           <ion-scroll direction="y">
             <!-- pages -->
             <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome()" ng-bind="'MENU.MAGAZINE'|translate"></a>
-            <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
+            <a class="item" ng-class="{'active': currentType == 'shop' || currentType == 'map'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
 
             <!-- by categories -->
             <a class="item item-icon-right hidden-xs item-top" ng-click="openCategories('right-menu')">

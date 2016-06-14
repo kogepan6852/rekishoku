@@ -59,6 +59,7 @@
 
          .periods, .people {
            height: 32px;
+           overflow: hidden;
          }
        }
      }
@@ -74,7 +75,7 @@
            }
 
            .description {
-             margin-top: 10px;
+             margin-top: 15px;
              letter-spacing: 1px;
            }
          }
@@ -93,11 +94,11 @@
              margin-top: 5px;
            }
            .price {
-             margin-top: 5px;
+             margin-top: 3px;
            }
            .rep-menu {
              color: #000;
-             margin-top: 5px;
+             margin-top: 3px;
            }
          }
        }
@@ -143,8 +144,8 @@
   list-item-post, list-item-shop {
     .item {
       .main-img {
-        margin-top: -5%;
-        margin-bottom: -5%;
+        margin-top: -3.5%;
+        margin-bottom: -3.5%;
       }
 
       .detail {
