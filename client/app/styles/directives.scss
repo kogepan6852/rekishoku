@@ -106,11 +106,21 @@ star {
        height: 100%;
 
        .description {
+         font-size: $h5;
+         line-height: $h4;
          margin-top: 15px;
          margin-bottom: 0;
          overflow: hidden;
          white-space: normal;
          color: #000;
+       }
+       .price, .rep-menu {
+         font-size: $h5;
+         line-height: $h5;
+
+         .daytime {
+           padding-right: 10px;
+         }
        }
        h2 {
          font-size: $h3;

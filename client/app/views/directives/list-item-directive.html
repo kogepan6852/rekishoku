@@ -26,8 +26,8 @@
         </span>
       </p>
       <p class="price">
-        <span ng-bind="'SHOP.DAYTIME'|translate"></span><span ng-bind="price.daytime"></span>
-        <span ng-bind="'SHOP.NIGHTTIME'|translate"></span><span ng-bind="price.nighttime"></span>
+        <span ng-bind="'SHOP.DAYTIME'|translate"></span><span class="daytime" ng-bind="price.daytime"></span>
+        <span ng-bind="'SHOP.NIGHTTIME'|translate"></span><span class="nighttime" ng-bind="price.nighttime"></span>
       </p>
       <p class="rep-menu">
         <span ng-bind="'SHOP.MENU'|translate"></span>：<span ng-bind="data.menu | lfToPoint"></span>
