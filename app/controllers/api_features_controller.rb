@@ -4,10 +4,10 @@ class ApiFeaturesController < ApplicationController
   include ShopInfo
   include RelatedInfo
 
-  # POST /posts
-  # POST /posts.json
+  # POST /api/features
+  # POST /api/features.json
   def index
-    ###### copy
+    
     @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).order(published_at: :desc)
     # フリーワードで検索
     if params[:keywords]
@@ -45,42 +45,38 @@ class ApiFeaturesController < ApplicationController
     newFeatures = Array.new()
     periods = Array.new()
     people = Array.new()
-    logger.debug("今日もいい天気！")
-    @features.page(params[:page]).per(params[:per]).each do |feature|
 
+    @features.page(params[:page]).per(params[:per]).each do |feature|
       feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
       feature_details.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
             periods += Person.select('periods.id').joins(:shops).joins(:periods)
               .where('shops.id = ? ', feature_detail[:related_id])
             people += Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
-            logger.debug("今日もいい天気！")
         elsif feature[:features_details_related_type] == "Post"
           features = Post.find(feature[:features_details_related_id])
         elsif feature[:features_details_related_type] == "ExternalLink"
           features = ExternalLink.find(feature[:features_details_related_id])
         end
-
       end
+
       fatureData = {
               "feature" => feature,
               "people" => people.uniq,
               "periods" => periods.uniq
             }
-
       newFeatures.push(fatureData);
     end
 
     render json: newFeatures
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+  # PATCH/PUT /api/features/1
+  # PATCH/PUT /api/features/1.json
   def show
     @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).find(params[:id])
-    logger.debug("森です！")
+
     if params[:preview] == "true" || @feature.status == true && @feature.published_at <= Date.today
-      logger.debug("こんにちはー")
       # user情報整形
       user = {
         "id" => @feature.user.id,
@@ -89,12 +85,10 @@ class ApiFeaturesController < ApplicationController
 
       feature_details = Array.new()
       # 紐付けしている
-      feature_details_where = FeatureDetail.where('feature_id = ? ', @feature[:id])
-      feature_details_where.each do |feature_detail|
+      feature_details_id = FeatureDetail.where('feature_id = ? ', @feature[:id])
+      feature_details_id.each do |feature_detail|
         # 人に紐付く時代を全て抽出する
         shop = Shop.find(feature_detail[:related_id])
-        logger.debug("こんにちはー")
-        logger.debug(shop)
         # shopsに紐付けしている時代を取得をする
         periods = Person.select('periods.id').joins(:shops).joins(:periods)
             .where('shops.id = ? ', feature_detail[:related_id])
