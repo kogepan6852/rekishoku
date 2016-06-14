@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   has_many :post_details
   has_and_belongs_to_many :shops
   has_and_belongs_to_many :people
+  has_and_belongs_to_many :feature_details
   mount_uploader :image, ImageUploader
 
   validates :title, presence: true

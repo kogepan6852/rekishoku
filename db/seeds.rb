@@ -22,6 +22,9 @@ Category.create(:name => '文豪', :slug =>'literary_master', :type =>'PersonCat
 Category.create(:name => '武将', :slug =>'military_commander', :type =>'PersonCategory')
 Category.create(:name => '貴族', :slug =>'aristocracy', :type =>'PersonCategory')
 
+Category.create(:name => 'TOUR', :slug =>'tour', :type =>'FeatureCategory')
+Category.create(:name => 'EVENT', :slug =>'event', :type =>'FeatureCategory')
+
 Period.create(:name => '古墳時代以前')
 Period.create(:name => '飛鳥時代')
 Period.create(:name => '奈良時代')
