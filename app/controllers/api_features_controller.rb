@@ -154,13 +154,11 @@ class ApiFeaturesController < ApplicationController
       # shopsに紐付いてる人物を取得する
       people = Person.joins(:posts).joins(:periods).where('posts.id = ? ', feature_detail[:related_id])
 
+      # 返却用のオブジェクトを作成する
       obj = { "feature_detail" => feature_detail,
-              "shop" => shop,
-              "categories" => shop.categories,
-              "people" => shop.people,
-              "periods" => periods,
-              "rating" => rating,
-              "price" => price
+              "post" => post,
+              "people" => post.people,
+              "periods" => periods.uniq
             }
       return obj
     end
