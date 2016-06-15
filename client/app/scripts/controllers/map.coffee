@@ -19,6 +19,8 @@ angular.module 'frontApp'
     $rootScope.hideFooter = false
     $rootScope.hideModeBtn = false
 
+    DataService.getShopCategory (data) ->
+      $scope.categories = data
     DataService.getPeriod (data) ->
       $scope.periods = data
     DataService.getPeople (data) ->
@@ -51,7 +53,7 @@ angular.module 'frontApp'
 
     $scope.options =
       scrollwheel: false
-      minZoom: 11
+      minZoom: 9
       disableDefaultUI: true
       zoomControl: true
 
@@ -85,6 +87,8 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
+      if $rootScope.zoom
+        targetDistance = BaseService.calMapDistance($rootScope.zoom)
       if $rootScope.targetAddress
         $scope.input.address = $rootScope.targetAddress
         $scope.searchShops()
@@ -111,6 +115,13 @@ angular.module 'frontApp'
             setMapData(obj, true)
 
             ), (e) ->
+              obj =
+                latitude: $rootScope.latitude
+                longitude: $rootScope.longitude
+                shopDistance: targetDistance
+              # map表示用データの作成と設定
+              setMapData(obj, true)
+              # エラー表示
               if typeof e == 'string'
                 alert(e)
               else
@@ -123,11 +134,12 @@ angular.module 'frontApp'
     ###
     setMapData = (obj, isLoding) ->
       # 検索ワードの設定
-      searchSata = $scope.getSearchData()
-      obj.keywords = searchSata.keywords
-      obj.period = searchSata.period
-      obj.person = searchSata.person
-      obj.category = searchSata.category
+      searchData = $scope.getSearchData()
+      obj.keywords = searchData.keywords
+      obj.period = searchData.period
+      obj.person = searchData.person
+      obj.category = searchData.category
+      obj.province = searchData.province
 
       # 中心位置の設定
       $scope.map.center.latitude = obj.latitude

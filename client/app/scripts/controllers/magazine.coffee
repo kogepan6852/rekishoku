@@ -38,12 +38,12 @@ angular.module "frontApp"
         per: Const.API.SETTING.PER
         page: 1
       # 検索ワードの設定
-      searchSata = $scope.getSearchData()
-      obj.keywords = searchSata.keywords
-      obj.period = searchSata.period
-      obj.person = searchSata.person
-      obj.category = searchSata.category
-      obj.province = searchSata.province
+      searchData = $scope.getSearchData()
+      obj.keywords = searchData.keywords
+      obj.period = searchData.period
+      obj.person = searchData.person
+      obj.category = searchData.category
+      obj.province = searchData.province
 
       # 特集テスト用データ
       $scope.feature = {
@@ -105,12 +105,12 @@ angular.module "frontApp"
         page: $scope.page
 
       # 検索ワードの設定
-      searchSata = $scope.getSearchData()
-      obj.keywords = searchSata.keywords
-      obj.period = searchSata.period
-      obj.person = searchSata.person
-      obj.category = searchSata.category
-      obj.province = searchSata.province
+      searchData = $scope.getSearchData()
+      obj.keywords = searchData.keywords
+      obj.period = searchData.period
+      obj.person = searchData.person
+      obj.category = searchData.category
+      obj.province = searchData.province
 
       # 検索
       Api.getJson(obj, Const.API.POST, true).then (res) ->
@@ -137,12 +137,12 @@ angular.module "frontApp"
           per: Const.API.SETTING.PER
           page: $scope.page
         # 検索ワードの設定
-        searchSata = $scope.getSearchData()
-        obj.keywords = searchSata.keywords
-        obj.period = searchSata.period
-        obj.person = searchSata.person
-        obj.category = searchSata.category
-        obj.province = searchSata.province
+        searchData = $scope.getSearchData()
+        obj.keywords = searchData.keywords
+        obj.period = searchData.period
+        obj.person = searchData.person
+        obj.category = searchData.category
+        obj.province = searchData.province
 
         Api.getJson(obj, Const.API.POST, true).then (res) ->
           if res.data.length == 0

@@ -248,8 +248,24 @@ ion-content.has-tabs-top {
 ion-side-menu {
   .bar-header {
     border: none;
+    
+    button {
+      position: fixed;
+      top: 7px;
+    }
+  }
+
+  .search-header {
+    .item-icon-left {
+      padding-left: 42px;
+
+      button {
+        top: 4px;
+      }
+    }
   }
 }
+
 .menu-list {
   height: 100%;
   .slider {

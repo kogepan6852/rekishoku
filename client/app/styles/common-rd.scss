@@ -80,6 +80,24 @@
      }
    }
 
+   ion-side-menu {
+     z-index: 100 !important;
+     box-shadow: -1px 0 2px rgba(0, 0, 0, 0.2), 1px 0 2px rgba(0, 0, 0, 0.2);
+     left: 0;
+     padding-top: 165px;
+     width: 215px!important;
+
+     .bar-header {
+       background-color: transparent!important;
+     }
+   }
+
+   .menu-content {
+     -webkit-transform: translate3d(215px, 0px, 0px) !important;
+     transform: translate3d(215px, 0px, 0px) !important;
+     width: calc(100% - 215px) !important;
+   }
+
    /**********************
     * Search
     **********************/

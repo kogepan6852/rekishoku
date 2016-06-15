@@ -32,7 +32,7 @@
   },
   "TEXT": {
     "CURRENT_PLACE":  "現在地",
-    "ADDRESS":        "住所",
+    "ADDRESS":        "ADDRESS",
     "PULLING":        "Pull to refresh..."
   },
   "POST": {

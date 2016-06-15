@@ -12,7 +12,15 @@
         <!-- Slide1 -->
         <ion-slide>
           <!-- Search bar -->
-          <ion-header-bar class="bar-light item-input-inset visible-xs"></ion-header-bar>
+          <ion-header-bar no-tap-scroll="true" class="bar-light item-input-inset visible-xs"></ion-header-bar>
+          <ion-header-bar no-tap-scroll="true" class="bar-light item-input-inset search-header hidden-xs">
+            <button class="button button-clear icon ion-ios-search" ng-click="submitSearch()"></button>
+            <form ng-submit="submitSearch()">
+              <label class="item-icon-left">
+                <input ng-model="input.keywords" type="search" placeholder="Search">
+              </label>
+            </form>
+          </ion-header-bar>
 
           <ion-scroll direction="y">
             <!-- pages -->
@@ -74,6 +82,7 @@
           </div>
           <ion-scroll direction="y" delegate-handle="list-slide">
             <ion-spinner ng-show="!menuItems"></ion-spinner>
+            <!-- other -->
             <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
             <!-- person -->
             <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('right-menu')">
@@ -115,7 +124,7 @@
         <!-- Slide1 -->
         <ion-slide>
           <!-- Search bar -->
-          <ion-header-bar class="bar-light item-input-inset">
+          <ion-header-bar class="bar-light item-input-inset" no-tap-scroll="true">
             <form ng-submit="submitSearch()">
               <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
@@ -155,7 +164,7 @@
 
         <!-- Slide2 -->
         <ion-slide class="list-slide">
-          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" >
+          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" no-tap-scroll="true">
             <i class="icon ion-android-arrow-dropleft"></i>
           </ion-header-bar>
           <ion-scroll direction="y" delegate-handle="list-slide">
@@ -180,7 +189,7 @@
 
         <!-- Slide3 -->
         <ion-slide class="list-slide">
-          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" >
+          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" no-tap-scroll="true">
             <i class="icon ion-android-arrow-dropleft"></i>
           </ion-header-bar>
           <ion-scroll direction="y" delegate-handle="list-slide">

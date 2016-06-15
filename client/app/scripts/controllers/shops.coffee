@@ -39,12 +39,12 @@ angular.module "frontApp"
       if $scope.targetCategoryId
         obj.category = $scope.targetCategoryId
       # 検索ワードの設定
-      searchSata = $scope.getSearchData()
-      obj.keywords = searchSata.keywords
-      obj.period = searchSata.period
-      obj.person = searchSata.person
-      obj.category = searchSata.category
-      obj.province = searchSata.province
+      searchData = $scope.getSearchData()
+      obj.keywords = searchData.keywords
+      obj.period = searchData.period
+      obj.person = searchData.person
+      obj.category = searchData.category
+      obj.province = searchData.province
 
       Api.getJson(obj, Const.API.SHOP, true).then (res) ->
         $scope.results = res.data
@@ -69,12 +69,12 @@ angular.module "frontApp"
         page: $scope.page
 
       # 検索ワードの設定
-      searchSata = $scope.getSearchData()
-      obj.keywords = searchSata.keywords
-      obj.period = searchSata.period
-      obj.person = searchSata.person
-      obj.category = searchSata.category
-      obj.province = searchSata.province
+      searchData = $scope.getSearchData()
+      obj.keywords = searchData.keywords
+      obj.period = searchData.period
+      obj.person = searchData.person
+      obj.category = searchData.category
+      obj.province = searchData.province
 
       # 検索
       Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
@@ -99,12 +99,12 @@ angular.module "frontApp"
           page: $scope.page
           category: $scope.targetCategoryId
         # 検索ワードの設定
-        searchSata = $scope.getSearchData()
-        obj.keywords = searchSata.keywords
-        obj.period = searchSata.period
-        obj.person = searchSata.person
-        obj.category = searchSata.category
-        obj.province = searchSata.province
+        searchData = $scope.getSearchData()
+        obj.keywords = searchData.keywords
+        obj.period = searchData.period
+        obj.person = searchData.person
+        obj.category = searchData.category
+        obj.province = searchData.province
 
         Api.getJson(obj, Const.API.SHOP, true).then (res) ->
           if res.data.length == 0

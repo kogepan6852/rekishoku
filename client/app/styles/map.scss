@@ -1,6 +1,18 @@
 @import "setting";
 
 .map-view {
+  .search-bar {
+    position: relative;
+    >div {
+      position: absolute;
+      right: 15px;
+
+      label {
+        width: 250px;
+      }
+    }
+  }
+
   .search-condition-bar {
     position: fixed;
     z-index: 100;
@@ -12,7 +24,6 @@
       font-weight: 400;
     }
   }
-
 
   .maps {
     top: 0;
