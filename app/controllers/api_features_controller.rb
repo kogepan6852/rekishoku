@@ -7,7 +7,7 @@ class ApiFeaturesController < ApplicationController
   # POST /api/features
   # POST /api/features.json
   def index
-    
+
     @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).order(published_at: :desc)
     # フリーワードで検索
     if params[:keywords]
@@ -53,10 +53,12 @@ class ApiFeaturesController < ApplicationController
             periods += Person.select('periods.id').joins(:shops).joins(:periods)
               .where('shops.id = ? ', feature_detail[:related_id])
             people += Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
-        elsif feature[:features_details_related_type] == "Post"
-          features = Post.find(feature[:features_details_related_id])
-        elsif feature[:features_details_related_type] == "ExternalLink"
-          features = ExternalLink.find(feature[:features_details_related_id])
+        elsif feature_detail[:related_type] == "Post"
+          periods += Person.select('periods.id').joins(:posts).joins(:periods)
+            .where('posts.id = ? ', feature_detail[:related_id])
+          people += Person.joins(:posts).joins(:periods).where('posts.id = ? ', feature_detail[:related_id])
+        elsif feature_detail[:related_type] == "ExternalLink"
+
         end
       end
 
