@@ -1,4 +1,4 @@
 class ExternalLink < ActiveRecord::Base
-  mount_uploader :image, ImageUploader
-  has_and_belongs_to_many :feature_details
-end
+   mount_uploader :image, ImageUploader
+   has_many :feature_details, :as => :related
+ end

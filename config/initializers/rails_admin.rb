@@ -425,6 +425,9 @@ RailsAdmin.config do |config|
         help "必須 対応するカテゴリを選択してください"
         required true
       end
+      field :feature_details do
+        label "特集詳細の連携"
+      end
       field :is_approved do
         label "承認確認"
         help "承認を取得した場合は、チェックを追加してください"
@@ -437,6 +440,7 @@ RailsAdmin.config do |config|
     label "投稿記事"
     weight 0
     list do
+      field :id
       field :title do
         label "題名"
       end
@@ -505,14 +509,16 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
+      field :feature_details do
+        label "特集詳細の連携"
+      end
     end
-
     update do
       exclude_fields :user_id
     end
    end
 
-   ## 投稿カテゴリ
+   ## 記事詳細
    config.model 'PostDetail' do
      label "投稿記事各セクション"
      weight 5
@@ -561,6 +567,7 @@ RailsAdmin.config do |config|
       label "特集作成"
       weight 0
       list do
+        field :id
         field :title do
           label "タイトル"
         end
@@ -569,6 +576,15 @@ RailsAdmin.config do |config|
         end
         field :is_map do
           label "マップ表示有無"
+        end
+        field :category do
+          label "カテゴリ"
+        end
+        field :feature_details_type , :enum do
+        enum do
+          Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
+        end
+          label "連携DB"
         end
       end
       edit do
@@ -596,58 +612,129 @@ RailsAdmin.config do |config|
           field :is_map do
             label "マップ表示有無"
           end
-          # field :feature_details do
-          #   label "特集紐付け"
-          # end
-          # field :published_at do
-          #   label "公開時間"
-          #   I18n.l(self.value, format:localized_date_format)
-          # end
+          field :category do
+            label "カテゴリ"
+            help "必須 対応するカテゴリを選択してください"
+            required true
+          end
+          field :feature_details_type , :enum do
+          enum do
+            Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
+          end
+            label "連携DB"
+            help "必須"
+            required true
+          end
+          field :feature_details do
+            label "特集詳細"
+          end
+          field :status, :enum do
+          enum do
+            Hash[ ['公開','非公開'].zip([ true, false]) ]
+          end
+            label "公開状態"
+            required true
+          end
+          field :published_at do
+            label "公開時間"
+            required true
+          end
+          field :user do
+            label "ライター"
+            required true
+            help "必須"
+          end
       end
      end
 
-     ##  外部リング
-     config.model 'ExternalLink' do
-       label "外部リンク"
-       weight 0
-       list do
-         field :title do
-           label "タイトル"
-         end
-         field :image do
-           label "メイン写真"
-         end
-         field :content do
-           label "コメント"
-         end
+     ## 特集詳細
+      config.model 'FeatureDetail' do
+        label "特集概要作成"
+        weight 0
+        list do
+          field :title do
+            label "タイトル"
+          end
+          field :order do
+            label "順番"
+          end
+          field :related_type , :enum do
+          enum do
+            Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
+          end
+            label "どのDBか"
+          end
+          field :related_id do
+            label "参照DBのID"
+          end
+        end
+        edit do
+            field :title do
+              label "タイトル"
+              help "必須"
+              required true
+            end
+            field :order , :enum do
+            enum do
+              Hash[ ['1','2','3','4','5','6','7','8','9','10'].zip(['1','2','3','4','5','6','7','8','9','10']) ]
+            end
+              label "順番"
+              required true
+              help "必須"
+            end
+            field :related_type , :enum do
+            enum do
+              Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
+            end
+              label "どのDBか"
+            end
+            field :related_id do
+              label "参照DBのID"
+            end
+        end
        end
-       edit do
-           field :title do
-             label "タイトル"
-             help "必須"
-             required true
-           end
-           field :content do
-             label "内容"
-             help "必須"
-             required true
-           end
-           field :image  do
-             label "画像"
-             help "必須"
-             required true
-           end
-           field :quotation_url do
-             label "引用したURL"
-           end
-           field :quotation_name do
-             label "引用したサイト名"
-           end
-           # field :feature_details do
-           #   label "特集紐付け"
-           # end
+      ##  外部リング
+      config.model 'ExternalLink' do
+        label "外部リンク"
+        weight 1
+        list do
+          field :id
+          field :name do
+            label "タイトル"
+          end
+          field :image do
+            label "メイン写真"
+          end
+          field :content do
+            label "コメント"
+          end
+        end
+        edit do
+            field :name do
+              label "タイトル"
+              help "必須"
+              required true
+            end
+            field :content do
+              label "内容"
+              help "必須"
+              required true
+            end
+            field :image  do
+              label "画像"
+              help "必須"
+              required true
+            end
+            field :quotation_url do
+              label "引用したURL"
+            end
+            field :quotation_name do
+              label "引用したサイト名"
+            end
+            field :feature_details do
+              label "特集詳細のID"
+            end
+        end
        end
-      end
-
 
 end

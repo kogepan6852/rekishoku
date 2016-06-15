@@ -1,0 +1,2 @@
+module FeatureDetailsHelper
+end
