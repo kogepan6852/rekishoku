@@ -116,16 +116,13 @@ angular.module 'frontApp'
 
             ), (e) ->
               obj =
-                latitude: $rootScope.latitude
-                longitude: $rootScope.longitude
+                latitude: latitude
+                longitude: longitude
                 shopDistance: targetDistance
               # map表示用データの作成と設定
               setMapData(obj, true)
               # エラー表示
-              if typeof e == 'string'
-                alert(e)
-              else
-                alert(e.message)
+              alert($translate.instant('MSG.ALERT.NO_POSITION'))
         else
           alert($translate.instant('MSG.ALERT.NO_POSITION'))
 

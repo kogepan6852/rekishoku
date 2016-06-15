@@ -1,17 +1,4 @@
 <ion-view title="" cache-view="false" ng-init="init()" class="map-view">
-
-  <!-- Serach bar -->
-  <div class="bar bar-clear search-bar" align="right" ng-if="!keywords && !period && !person">
-    <div class="item-input-inset">
-      <form ng-submit="searchShops()">
-        <label class="item-input-wrapper">
-          <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
-        </label>
-      </form>
-      <button class="button button-small button-dark" ng-click="searchShops()" ng-cloak>{{'BUTTON.SEARCH'|translate}}</button>
-    </div>
-  </div>
-
   <!-- Search condition -->
   <div class="row search-condition-bar" ng-if="keywords || period || person || category || province">
     <div class="col no-padding">
