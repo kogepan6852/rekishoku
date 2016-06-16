@@ -731,6 +731,9 @@ RailsAdmin.config do |config|
             field :quotation_name do
               label "引用したサイト名"
             end
+            field :people do
+              label "関係のある人物"
+            end
             field :feature_details do
               label "特集詳細のID"
             end
