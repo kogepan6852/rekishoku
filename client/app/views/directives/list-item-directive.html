@@ -18,7 +18,7 @@
   <div class="detail" ng-if="target=='shop'">
     <h2 ng-bind="data.name" class="mincho"></h2>
     <star count="rating"></star>
-    <div class="hidden-xs">
+    <div class="hidden-xs" ng-hide="hideInfo">
       <p class="description">
         <span ng-bind="data.province"></span><span ng-bind="data.city"></span>
         <span ng-repeat="categorie in categories">

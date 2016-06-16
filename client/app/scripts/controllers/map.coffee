@@ -34,7 +34,7 @@ angular.module 'frontApp'
     # 初期位置の設定
     latitude = 35.6813818
     longitude = 139.7660838
-    defaultZoom = 14
+    defaultZoom = 13
     targetDistance = BaseService.calMapDistance(defaultZoom)
 
     if $rootScope.latitude & $rootScope.longitude
@@ -69,7 +69,7 @@ angular.module 'frontApp'
           longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, false)
+        setMapData(obj, false, false)
       zoom_changed: (cluster, clusterModels) ->
         $rootScope.zoom = cluster.zoom
         # GoogleMapの距離計算
@@ -79,7 +79,7 @@ angular.module 'frontApp'
           longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, true)
+        setMapData(obj, true, false)
 
     $scope.targetMarkers = []
 
@@ -98,7 +98,7 @@ angular.module 'frontApp'
           longitude: $rootScope.longitude
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, true)
+        setMapData(obj, true, true)
 
       else
         # 現在地の取得
@@ -112,7 +112,7 @@ angular.module 'frontApp'
               longitude: position.coords.longitude
               shopDistance: targetDistance
             # map表示用データの作成と設定
-            setMapData(obj, true)
+            setMapData(obj, true, true)
 
             ), (e) ->
               obj =
@@ -120,7 +120,7 @@ angular.module 'frontApp'
                 longitude: longitude
                 shopDistance: targetDistance
               # map表示用データの作成と設定
-              setMapData(obj, true)
+              setMapData(obj, true, true)
               # エラー表示
               alert($translate.instant('MSG.ALERT.NO_POSITION'))
         else
@@ -129,7 +129,7 @@ angular.module 'frontApp'
     ###
     # Common function
     ###
-    setMapData = (obj, isLoding) ->
+    setMapData = (obj, isLoading, isMove) ->
       # 検索ワードの設定
       searchData = $scope.getSearchData()
       obj.keywords = searchData.keywords
@@ -138,29 +138,56 @@ angular.module 'frontApp'
       obj.category = searchData.category
       obj.province = searchData.province
 
-      # 中心位置の設定
-      $scope.map.center.latitude = obj.latitude
-      $scope.map.center.longitude = obj.longitude
-      $rootScope.latitude = obj.latitude
-      $rootScope.longitude = obj.longitude
+      # mapデータの取得
+      getMapData = (latLng) ->
+        if latLng
+          obj.latitude = latLng.latitude
+          obj.longitude = latLng.longitude
 
-      Api.getJson(obj, Const.API.MAP, isLoding).then (resShops) ->
-        # mapデータ設定
-        $scope.isDragging = false;
-        shops = []
-        # map表示用データの作成
-        angular.forEach resShops.data.shops, (shop, i) ->
-          ret =
-            latitude: shop.latitude,
-            longitude: shop.longitude,
-            title: shop.name
-            url: shop.image.thumb.url
-            icon:
-              url: '../images/map-pin.png'
-              scaledSize : new google.maps.Size(25, 35)
-          ret['id'] = shop.id
-          shops.push(ret)
-        $scope.targetMarkers = shops
+        $scope.map.center.latitude = obj.latitude
+        $scope.map.center.longitude = obj.longitude
+        $rootScope.latitude = obj.latitude
+        $rootScope.longitude = obj.longitude
+
+        Api.getJson(obj, Const.API.MAP, isLoading).then (resShops) ->
+          # mapデータ設定
+          $scope.isDragging = false;
+          shops = []
+          # map表示用データの作成
+          angular.forEach resShops.data.shops, (shop, i) ->
+            ret =
+              latitude: shop.latitude,
+              longitude: shop.longitude,
+              title: shop.name
+              url: shop.image.thumb.url
+              icon:
+                url: '../images/map-pin.png'
+                scaledSize : new google.maps.Size(25, 35)
+            ret['id'] = shop.id
+            shops.push(ret)
+          $scope.targetMarkers = shops
+
+      # 住所検索の場合
+      targetAddress = obj.province
+      if targetAddress && isMove
+        # map位置を移動して検索
+        calLatLng targetAddress, getMapData
+      else
+        # そのまま検索
+        getMapData()
+
+    # 位置検索
+    calLatLng = (address, callback) ->
+      if !address
+        return
+      # 緯度経度の計算
+      BaseService.getLatLng address, (latLng) ->
+        obj =
+          latitude: latLng.lat
+          longitude: latLng.lng
+          shopDistance: targetDistance
+
+        callback obj
 
     ###
     # Global function
@@ -180,20 +207,7 @@ angular.module 'frontApp'
         shopDistance: targetDistance
 
       # map表示用データの作成と設定
-      setMapData(obj, true)
-
-    # 店舗検索
-    $scope.searchShops = ->
-      if !$scope.input.address
-        return
-      # 緯度経度の計算
-      BaseService.getLatLng $scope.input.address, (latLng) ->
-        obj =
-          latitude: latLng.lat
-          longitude: latLng.lng
-          shopDistance: targetDistance
-        # map表示用データの作成と設定
-        setMapData(obj, true)
+      setMapData(obj, true, true)
 
     # 現在地への移動
     $scope.moveToCurrentPlace = ->

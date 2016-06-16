@@ -259,7 +259,7 @@ angular.module "frontApp"
         $ionicScrollDelegate.$getByHandle('shops').scrollTop();
 
       else if $rootScope.currentType == 'map'
-        $location.path('/app/map').search('keywords', $scope.input.keywords)
+        $location.path('/app/shop/map').search('keywords', $scope.input.keywords)
         if $rootScope.mapSearch
           $rootScope.mapSearch()
 

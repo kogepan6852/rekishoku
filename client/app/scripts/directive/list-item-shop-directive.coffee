@@ -11,6 +11,7 @@ angular.module "frontApp"
         people: '=people'
         price: '=price'
         rating: '=rating'
+        hideInfo: '=hideInfo'
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
         scope.target = "shop"

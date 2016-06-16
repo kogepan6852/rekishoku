@@ -7,7 +7,7 @@ class ApiShopsController < ApplicationController
   # 一覧表示
   def index
     @shops = Shop.order(created_at: :desc)
-    
+
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -149,6 +149,11 @@ class ApiShopsController < ApplicationController
     if params[:person]
       # 人物で検索
       @shops = @shops.joins(:people).where('people.id' => params[:person]).uniq
+    end
+
+    # 都道府県検索
+    if params[:province]
+      @shops = @shops.where(province: params[:province])
     end
 
     shops = { "shops" => @shops }
