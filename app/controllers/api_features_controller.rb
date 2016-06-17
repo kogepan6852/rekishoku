@@ -37,7 +37,7 @@ class ApiFeaturesController < ApplicationController
       @features = @features.joins(:people).where('people.id' => params[:person]).uniq
     end
 
-    # 人物で検索
+    # 都道府県検索
     if params[:province]
       @features = @features.joins(:shops).where('shops.province' => params[:province]).uniq
     end
@@ -47,20 +47,20 @@ class ApiFeaturesController < ApplicationController
     people = Array.new()
 
     @features.page(params[:page]).per(params[:per]).each do |feature|
-      feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
-      feature_details.each do |feature_detail|
-        if feature_detail[:related_type] == "Shop"
-            periods += Person.select('periods.id').joins(:shops).joins(:periods)
-              .where('shops.id = ? ', feature_detail[:related_id])
-            people += Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
-        elsif feature_detail[:related_type] == "Post"
-          periods += Person.select('periods.id').joins(:posts).joins(:periods)
-            .where('posts.id = ? ', feature_detail[:related_id])
-          people += Person.joins(:posts).joins(:periods).where('posts.id = ? ', feature_detail[:related_id])
-        elsif feature_detail[:related_type] == "ExternalLink"
-
-        end
+      type = feature[:feature_details_type]
+      if type == 1 || type == 4 || type == 6 || type == 7
+        shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
+        people += get_people_reports(shops)
       end
+      if type == 2 || type == 4 || type == 5 || type == 7
+        posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
+        people += get_people_reports(posts)
+      end
+      if type == 3 || type == 5 || type == 6 || type == 7
+        extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
+        people += get_people_reports(posts)
+      end
+      periods += get_periods(people)
 
       fatureData = {
               "feature" => feature,
@@ -122,44 +122,5 @@ class ApiFeaturesController < ApplicationController
       params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :published_at, :category_id, :feature_detail_ids => [])
     end
 
-    def shops_show(feature_detail)
-      # 人に紐付く時代を全て抽出する
-      shop = Shop.find(feature_detail[:related_id])
-      # shopsに紐付けしている時代を取得をする
-      periods = Person.select('periods.id').joins(:shops).joins(:periods)
-          .where('shops.id = ? ', feature_detail[:related_id])
-      # shopsに紐付いてる人物を取得する
-      people = Person.joins(:shops).joins(:periods).where('shops.id = ? ', feature_detail[:related_id])
-      # 歴食度の設定
-      rating = cal_rating(shop)
-      # 価格帯の取得
-      price = get_price(shop)
-      obj = { "feature_detail" => feature_detail,
-              "shop" => shop,
-              "categories" => shop.categories,
-              "people" => shop.people,
-              "periods" => periods,
-              "rating" => rating,
-              "price" => price
-            }
-      return obj
-    end
 
-    def posts_show(feature_detail)
-      # 人に紐付く時代を全て抽出する
-      post = Post.find(feature_detail[:related_id])
-      # shopsに紐付けしている時代を取得をする
-      periods = Person.select('periods.id').joins(:posts).joins(:periods)
-          .where('posts.id = ? ', feature_detail[:related_id])
-      # shopsに紐付いてる人物を取得する
-      people = Person.joins(:posts).joins(:periods).where('posts.id = ? ', feature_detail[:related_id])
-
-      # 返却用のオブジェクトを作成する
-      obj = { "feature_detail" => feature_detail,
-              "post" => post,
-              "people" => post.people,
-              "periods" => periods.uniq
-            }
-      return obj
-    end
 end
