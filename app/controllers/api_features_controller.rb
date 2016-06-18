@@ -66,6 +66,7 @@ class ApiFeaturesController < ApplicationController
         end
         periods += get_periods(people)
 
+        # 返却用のオブジェクトを作成する
         fatureData = {
                 "feature" => feature,
                 "people" => people.uniq,
@@ -114,6 +115,7 @@ class ApiFeaturesController < ApplicationController
         feature_details.push(obj)
       end
 
+      # 返却用のオブジェクトを作成する
       feature = {
         "feature" => @feature,
         "feature_details" => feature_details.uniq,
