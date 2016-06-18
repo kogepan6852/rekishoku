@@ -67,9 +67,9 @@ angular.module "frontApp"
     # 現在Pathの取得
     setCurrentType = ->
       currentPath = $location.path();
-      if currentPath.indexOf('/shop/list') != -1
+      if currentPath.indexOf('/shops/list') != -1
         $rootScope.currentType = 'shop'
-      else if currentPath.indexOf('/shop/map') != -1
+      else if currentPath.indexOf('/shops/map') != -1
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'magazine'
@@ -253,13 +253,13 @@ angular.module "frontApp"
       if !$scope.input.keywords
         $scope.input.keywords = null
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shop/list').search('keywords', $scope.input.keywords)
+        $location.path('/app/shops/list').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch()
         $ionicScrollDelegate.$getByHandle('shops').scrollTop();
 
       else if $rootScope.currentType == 'map'
-        $location.path('/app/shop/map').search('keywords', $scope.input.keywords)
+        $location.path('/app/shops/map').search('keywords', $scope.input.keywords)
         if $rootScope.mapSearch
           $rootScope.mapSearch()
 
