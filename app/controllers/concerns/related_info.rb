@@ -26,12 +26,11 @@ module RelatedInfo
         periods.push(period);
       end
     end
-
     return periods
   end
 
   # 対象のお店から紐づく人物を取得する
-  def get_people_reports(reports)
+  def gets_people(reports)
     people = Array.new()
     reports.each do |report|
       report.people.each do |person|
@@ -51,9 +50,7 @@ module RelatedInfo
     return people
   end
 
-  def shops_show(feature_detail)
-    # 対応するお店を取得する
-    shop = Shop.find(feature_detail[:related_id])
+  def shop_show(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
     # shopsに紐付けしている時代を取得をする
@@ -62,8 +59,8 @@ module RelatedInfo
     rating = cal_rating(shop)
     # 価格帯の取得
     price = get_price(shop)
-    obj = { "feature_detail" => feature_detail,
-            "shop" => shop,
+    # 返却用のオブジェクトを作成する
+    obj = { "shop" => shop,
             "categories" => shop.categories,
             "people" => shop.people,
             "periods" => periods,
@@ -73,17 +70,16 @@ module RelatedInfo
     return obj
   end
 
-  def posts_show(feature_detail)
-    # 対応するPostを取得する
-    post = Post.find(feature_detail[:related_id])
+  def post_show(post)
+    # アイキャッチ画像の設定
+    postObj = get_post(post)
     # postsに紐付いてる人物を取得する
     people = get_people(post)
     # postsに紐付けしている時代を取得をする
     periods = get_periods(people)
 
     # 返却用のオブジェクトを作成する
-    obj = { "feature_detail" => feature_detail,
-            "post" => post,
+    obj = { "post" => postObj,
             "people" => post.people,
             "periods" => periods.uniq
           }

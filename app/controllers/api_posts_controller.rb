@@ -43,21 +43,8 @@ class ApiPostsController < ApplicationController
 
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|
-      # アイキャッチ画像の設定
-      postObj = get_post(post)
-
-      # 人に紐付く時代を全て抽出する
-      periods = get_periods(post.people)
-
-      # 返却用のオブジェクトを作成する
-      obj = { "post" => postObj,
-              "people" => post.people,
-              "periods" => periods.uniq
-            }
-
-      newPosts.push(obj);
+      newPosts.push(post_show(post))
     end
-
     render json: newPosts
   end
 
@@ -89,34 +76,14 @@ class ApiPostsController < ApplicationController
           eyeCatchImage = post_detail.image
         end
       end
-
+      
       # 人に紐付く時代を全て抽出する
       postPeriods = get_periods(@post.people)
 
       # shop情報整形
       shops = Array.new()
       @post.shops.each do |shop|
-        # 人に紐付く時代を全て抽出する
-        shopPeriods = Array.new()
-        shop.people.each do |person|
-          person.periods.each do |period|
-            shopPeriods.push(period);
-          end
-        end
-
-        # 歴食度の設定
-        rating = cal_rating(shop)
-        # 価格帯の取得
-        price = get_price(shop)
-
-        obj = { "shop" => shop,
-                "categories" => shop.categories,
-                "people" => shop.people,
-                "periods" => shopPeriods.uniq,
-                "rating" => rating,
-                "price" => price
-              }
-        shops.push(obj);
+        shops.push(shop_show(shop));
       end
 
       post = {
