@@ -509,12 +509,7 @@ ion-modal-view .bar-header {
       font-size: $h6;
     }
     .clear-button {
-      top: 4px;
-      position: absolute;
-      right: 0;
-      top: 0;
-
-      .button {
+      &.button {
         border-radius: 14px;
         -moz-border-radius: 14px;
         -webkit-border-radius: 14px;
@@ -526,8 +521,9 @@ ion-modal-view .bar-header {
         padding: 0 0 0 1px;
         border: none;
         color: $grayColor !important;
+        margin-left: 15px;
       }
-      span {
+      &span {
         background-color: transparent;
         color: #b2b2b2;
         padding: 0;
