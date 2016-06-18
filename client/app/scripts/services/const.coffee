@@ -20,7 +20,7 @@ angular.module("frontApp")
       LOGIN:        '/users/sign_in.json'
       LOGOUT:       '/authentication_token.json'
       SETTING:
-        PER: 20
+        PER: 5
     CATEGORY:
       EPISODE :1
       COOKING :2

@@ -34,7 +34,7 @@ angular.module "frontApp"
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
-        per: 20
+        per: Const.API.SETTING.PER
         page: 1
       if $scope.targetCategoryId
         obj.category = $scope.targetCategoryId
