@@ -52,7 +52,7 @@
   /**********************
    * Tab
    **********************/
-   ion-content.has-tabs-top {
+   ion-content.has-tabs-top, ion-content.no-tabs-top {
      top: 0;
    }
    .main-tab {

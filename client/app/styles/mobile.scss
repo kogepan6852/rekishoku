@@ -1,13 +1,6 @@
 /**********************
  * Responsive Design
  **********************/
-@media screen and (min-width:481px) and (max-width:768px){
-  .item-list li{ width: 33.333%; }
-  .grid-menu a{
-    width: 50%;
-  }
-}
-
 /* bootstrap xs */
 @media screen and (max-width:768px){
   .top { width: 100%; }
@@ -58,18 +51,10 @@
   }
 
 }
-@media screen and (min-width:768px) and (max-width:1200px){
-  .item-list li{ width: 33.333%; }
-}
 @media screen and (min-width:768px){
   .item-list-sm li{ width: 12.5%; }
   .top .title { right: auto!important; }
   .tab-header{ width: 20%;}
-  ion-content.image-content {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
   .nav-bar-container .fix-nav .ion-navicon-round {
     display: none!important;
   }
@@ -85,7 +70,4 @@
     -webkit-border-radius: 5px;
   }
 
-}
-@media screen and (min-width:1201px){
-  .item-list li{ width: 25%; }
 }

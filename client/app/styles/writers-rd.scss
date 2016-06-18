@@ -1,0 +1,73 @@
+@import "setting";
+
+// SM以上
+@media screen and (min-width:768px){
+  .writers-view {
+    .item-list li {
+      width: 33.333%;
+      padding: 10px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .overlay-image {
+      position: relative;
+      line-height: 100%;
+
+      .thumbnail-image {
+        display: block;
+        overflow: hidden;
+        padding-top: 100%;
+        position: relative;
+        width: 100%;
+
+        img {
+          border-radius: 0;
+          -moz-border-radius: 0;
+          -webkit-border-radius: 0;
+          padding: 0;
+          height: 100%;
+          margin-left: -17.5%;
+          position: absolute;
+          top: 0;
+          width: auto;
+        }
+      }
+
+      .writer-content {
+        padding: 0 10px 10px;
+        height: 60px;
+        >div {
+          background-color: rgba(0,0,0,.4);
+          height: 100%;
+          padding: 15px;
+          div {
+            color: #fff;
+          }
+        }
+      }
+
+      .item-username {
+        height: 100%
+      }
+
+    }
+  }
+}
+
+// MD以上
+@media screen and (min-width:992px){
+  .writers-view {
+    .item-list li {
+      width: 25%;
+    }
+  }
+}
+// LG以上
+@media screen and (min-width:1200px){
+  .writers-view {
+    .item-list li {
+      width: 20%;
+    }
+  }
+}

@@ -208,6 +208,10 @@ ion-content.has-tabs-top {
   top: 88px;
   bottom: 0;
 }
+ion-content.no-tabs-top {
+  top: 44px;
+  bottom: 0;
+}
 .main-tab {
   .tabs {
     background-color: #fff !important;
