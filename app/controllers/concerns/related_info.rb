@@ -29,28 +29,7 @@ module RelatedInfo
     return periods
   end
 
-  # 対象のお店から紐づく人物を取得する
-  def gets_people(reports)
-    people = Array.new()
-    reports.each do |report|
-      report.people.each do |person|
-        people.push(person)
-      end
-    end
-    return people
-  end
-
-  # 対象のお店から紐づく人物を取得する
-  def get_people(report)
-    people = Array.new()
-      report.people.each do |person|
-        people.push(person)
-      end
-
-    return people
-  end
-
-  def shop_show(shop)
+  def get_shop_json(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
     # shopsに紐付けしている時代を取得をする
@@ -70,7 +49,7 @@ module RelatedInfo
     return obj
   end
 
-  def post_show(post)
+  def get_post_json(post)
     # アイキャッチ画像の設定
     postObj = get_post(post)
     # postsに紐付いてる人物を取得する
@@ -85,5 +64,15 @@ module RelatedInfo
           }
     return obj
   end
+
+  private
+    # 対象のお店から紐づく人物を取得する
+    def get_people(report)
+      people = Array.new()
+        report.people.each do |person|
+          people.push(person)
+        end
+      return people
+    end
 
 end

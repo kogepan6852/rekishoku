@@ -1,5 +1,4 @@
 class ApiFeaturesController < ApplicationController
-  before_action :set_feature, only: [:edit, :show, :destroy]
 
   include ShopInfo
   include RelatedInfo
@@ -8,7 +7,7 @@ class ApiFeaturesController < ApplicationController
   # POST /api/features.json
   def index
 
-    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).order(published_at: :desc)
+    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -45,24 +44,20 @@ class ApiFeaturesController < ApplicationController
     newFeatures = Array.new()
     periods = Array.new()
     people = Array.new()
-    @shops = Shop.joins(:feature_details)
-    @posts = Post.joins(:feature_details)
-    @extrnal_links = ExternalLink.joins(:feature_details)
-
     if params[:page] && params[:per]
       @features.page(params[:page]).per(params[:per]).each do |feature|
         type = feature[:feature_details_type]
         if type == 1 || type == 4 || type == 6 || type == 7
-          shops = @shops.where('feature_id = ? ', feature[:id])
-          people += gets_people(shops)
+          shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          people += get_people_feature(shops)
         end
         if type == 2 || type == 4 || type == 5 || type == 7
-          posts = @posts.where('feature_id = ? ', feature[:id])
-          people += gets_people(posts)
+          posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          people += get_people_feature(posts)
         end
         if type == 3 || type == 5 || type == 6 || type == 7
-          extrnal_links = @extrnal_links.where('feature_id = ? ', feature[:id])
-          people += gets_people(posts)
+          extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          people += get_people_feature(posts)
         end
         periods += get_periods(people)
 
@@ -83,7 +78,7 @@ class ApiFeaturesController < ApplicationController
   # PATCH/PUT /api/features/1
   # PATCH/PUT /api/features/1.json
   def show
-    @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", true, Date.today).find(params[:id])
+    @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).find(params[:id])
 
     if params[:preview] == "true" || @feature.status == true && @feature.published_at <= Date.today
       # user情報整形
@@ -103,11 +98,11 @@ class ApiFeaturesController < ApplicationController
         if feature_detail[:related_type] == "Shop"
           # 対応するShopを取得する
           shop = @shops.find(feature_detail[:related_id])
-          obj = shop_show(shop)
+          obj = get_shop_json(shop)
         elsif feature_detail[:related_type] == "Post"
           # 対応するPostを取得する
           post = @posts.find(feature_detail[:related_id])
-          obj = post_show(post)
+          obj = get_post_json(post)
         elsif feature_detail[:related_type] == "ExternalLink"
 
         end
@@ -129,15 +124,20 @@ class ApiFeaturesController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feature
-      @feature = Feature.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def feature_params
       params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :published_at, :category_id, :feature_detail_ids => [])
     end
 
+    # 対象のお店から紐づく人物を取得する
+    def get_people_feature(reports)
+      people = Array.new()
+      reports.each do |report|
+        report.people.each do |person|
+          people.push(person)
+        end
+      end
+      return people
+    end
 
 end

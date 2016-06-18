@@ -45,7 +45,7 @@ class ApiShopsController < ApplicationController
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
         # 返却用のオブジェクトを作成する
-        newShops.push(shop_show(shop))
+        newShops.push(get_shop_json(shop))
       end
       shops = newShops
     else
@@ -79,7 +79,7 @@ class ApiShopsController < ApplicationController
 
     # post情報整形
     posts.each do |post|
-      newPosts.push(post_show(post));
+      newPosts.push(get_post_json(post));
     end
 
     # 返却用のオブジェクトを作成する

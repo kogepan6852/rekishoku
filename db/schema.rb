@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160602084342) do
     t.integer  "feature_details_type", default: 0,     null: false
     t.boolean  "is_map",               default: false
     t.integer  "category_id",          default: 0,     null: false
-    t.boolean  "status",               default: false
+    t.integer  "status",               default: 0,     null: false
     t.integer  "user_id",                              null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

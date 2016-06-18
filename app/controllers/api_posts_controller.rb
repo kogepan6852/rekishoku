@@ -43,7 +43,7 @@ class ApiPostsController < ApplicationController
 
     newPosts = Array.new()
     @posts.page(params[:page]).per(params[:per]).each do |post|
-      newPosts.push(post_show(post))
+      newPosts.push(get_post_json(post))
     end
     render json: newPosts
   end
@@ -76,14 +76,14 @@ class ApiPostsController < ApplicationController
           eyeCatchImage = post_detail.image
         end
       end
-      
+
       # 人に紐付く時代を全て抽出する
       postPeriods = get_periods(@post.people)
 
       # shop情報整形
       shops = Array.new()
       @post.shops.each do |shop|
-        shops.push(shop_show(shop));
+        shops.push(get_shop_json(shop));
       end
 
       post = {

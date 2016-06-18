@@ -630,7 +630,7 @@ RailsAdmin.config do |config|
           end
           field :status, :enum do
           enum do
-            Hash[ ['公開','非公開'].zip([ true, false]) ]
+            Hash[ ['公開','非公開'].zip([ 1, 0]) ]
           end
             label "公開状態"
             required true
