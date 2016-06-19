@@ -26,22 +26,17 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    category = PostCategory.find_by(slug: params[:slug])
-    @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
-
-    respond_to do |format|
-      if @post.save
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    setPublishedAt = post_time_params[:published_at].split(/\D+/)
+    @post = Post.new(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    @post.save
+    redirect_to "/admin/post"
   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @post.update(post_params)
+    setPublishedAt = post_time_params[:published_at].split(/\D+/)
+    @post.update(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     redirect_to "/admin/post"
   end
 
@@ -64,5 +59,9 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo)
+    end
+
+    def post_time_params
+      params.require(:post).permit(:published_at)
     end
 end

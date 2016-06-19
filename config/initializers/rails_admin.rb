@@ -497,6 +497,11 @@ RailsAdmin.config do |config|
         Hash[ ['公開','非公開'].zip(['1','0']) ]
       end
         label "公開状態"
+        required true
+      end
+      field :published_at do
+        label "公開時間"
+        required true
       end
       field :shops  do
         label "関連店舗"
@@ -506,9 +511,11 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
-    end
-    update do
-      exclude_fields :user_id
+      field :user do
+        label "ライター"
+        required true
+        help "必須"
+      end
     end
    end
 

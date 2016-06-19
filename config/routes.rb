@@ -57,8 +57,11 @@ Rails.application.routes.draw do
   post 'admin/shop/new', to: 'shops#create'
   put 'admin/shop/:id/edit', to: 'shops#update'
 
-  # ADMIN_POST_DETAIL
+  # ADMIN_POST
+  post 'admin/post/new', to: 'posts#create'
   put 'admin/post/:id/edit', to: 'posts#update'
+
+  # ADMIN_POST_DETAIL
   put 'admin/post_detail/:id/edit', to: 'post_details#update'
 
   # ADMIN_FEATURE
