@@ -425,9 +425,6 @@ RailsAdmin.config do |config|
         help "必須 対応するカテゴリを選択してください"
         required true
       end
-      field :feature_details do
-        label "特集詳細の連携"
-      end
       field :is_approved do
         label "承認確認"
         help "承認を取得した場合は、チェックを追加してください"
@@ -508,9 +505,6 @@ RailsAdmin.config do |config|
       field :people  do
         label "関連人物"
         help "関連する人は右にしてください"
-      end
-      field :feature_details do
-        label "特集詳細の連携"
       end
     end
     update do
@@ -731,9 +725,6 @@ RailsAdmin.config do |config|
             end
             field :quotation_name do
               label "引用したサイト名"
-            end
-            field :feature_details do
-              label "特集詳細のID"
             end
         end
        end
