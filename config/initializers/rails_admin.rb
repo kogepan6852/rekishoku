@@ -671,8 +671,9 @@ RailsAdmin.config do |config|
         edit do
             field :title do
               label "タイトル"
-              help "必須"
-              required true
+            end
+            field :content do
+              label "コメント"
             end
             field :order , :enum do
             enum do
