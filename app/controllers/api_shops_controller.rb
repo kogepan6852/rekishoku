@@ -44,8 +44,28 @@ class ApiShopsController < ApplicationController
     if params[:page] && params[:per]
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
+        # 人に紐付く時代を全て抽出する
+        periods = Array.new()
+        shop.people.each do |person|
+          person.periods.each do |period|
+            periods.push(period);
+          end
+        end
+
+        # 歴食度の設定
+        rating = cal_rating(shop)
+        # 価格帯の取得
+        price = get_price(shop)
+
         # 返却用のオブジェクトを作成する
-        newShops.push(get_shop_json(shop))
+        obj = { "shop" => shop,
+                "categories" => shop.categories,
+                "people" => shop.people,
+                "periods" => periods.uniq,
+                "rating" => rating,
+                "price" => price
+              }
+        newShops.push(obj);
       end
       shops = newShops
     else
@@ -77,9 +97,20 @@ class ApiShopsController < ApplicationController
     posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
     newPosts = Array.new()
 
-    # post情報整形
     posts.each do |post|
-      newPosts.push(get_post_json(post));
+      # アイキャッチ画像の設定
+      postObj = get_post(post)
+
+      # 人に紐付く時代を全て抽出する
+      periods = get_periods(post.people)
+
+      # 返却用のオブジェクトを作成する
+      obj = { "post" => postObj,
+              "people" => post.people,
+              "periods" => periods.uniq
+            }
+
+      newPosts.push(obj);
     end
 
     # 返却用のオブジェクトを作成する

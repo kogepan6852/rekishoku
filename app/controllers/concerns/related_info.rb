@@ -38,10 +38,12 @@ module RelatedInfo
     rating = cal_rating(shop)
     # 価格帯の取得
     price = get_price(shop)
+
+    people = people.where("rating != ?", 0.000000000)
     # 返却用のオブジェクトを作成する
     obj = { "shop" => shop,
             "categories" => shop.categories,
-            "people" => shop.people,
+            "people" => people,
             "periods" => periods,
             "rating" => rating,
             "price" => price
@@ -66,7 +68,7 @@ module RelatedInfo
   end
 
   private
-    # 対象のお店から紐づく人物を取得する
+    # 対象の記事/店舗/外部リンクから紐づく人物を取得する
     def get_people(report)
       people = Array.new()
         report.people.each do |person|
