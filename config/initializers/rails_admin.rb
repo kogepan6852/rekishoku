@@ -217,12 +217,8 @@ RailsAdmin.config do |config|
          help "必須"
          required true
        end
-       field :rating, :enum do
-       enum do
-         Hash[ ['1: 学者レベル', '2: 趣味レベル','3: 教科書レベル'].zip(['1', '2','3']) ]
-       end
+       field :rating do
          label "ランク"
-         help "1-3段階　有名だと3"
          required true
        end
        field :periods do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602084342) do
+ActiveRecord::Schema.define(version: 20160620054851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,8 @@ ActiveRecord::Schema.define(version: 20160602084342) do
 
   create_table "feature_details", force: :cascade do |t|
     t.integer  "feature_id"
-    t.string   "title",                    null: false
+    t.string   "title"
+    t.text     "content"
     t.string   "related_type"
     t.integer  "related_id",   default: 0
     t.integer  "order",        default: 0, null: false
@@ -69,27 +70,26 @@ ActiveRecord::Schema.define(version: 20160602084342) do
   end
 
   create_table "features", force: :cascade do |t|
-    t.string   "title",                                null: false
+    t.string   "title",                          null: false
     t.text     "content"
-    t.string   "image",                                null: false
+    t.string   "image",                          null: false
     t.string   "quotation_url"
     t.string   "quotation_name"
-    t.integer  "feature_details_type", default: 0,     null: false
-    t.boolean  "is_map",               default: false
-    t.integer  "category_id",          default: 0,     null: false
-    t.boolean  "status",               default: false
-    t.integer  "user_id",                              null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.boolean  "is_map",         default: false
+    t.integer  "category_id",    default: 0,     null: false
+    t.integer  "status",         default: 0,     null: false
+    t.integer  "user_id",                        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "published_at"
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",                   null: false
+    t.string   "name",                     null: false
     t.string   "furigana"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "rating",     default: 0, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.float    "rating",     default: 0.0, null: false
   end
 
   create_table "people_periods", id: false, force: :cascade do |t|
