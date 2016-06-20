@@ -30,6 +30,10 @@ Rails.application.routes.draw do
   get 'api/shop_list', to: 'api_shops#list'
   get 'api/map', to: 'api_shops#map'
 
+  # FEATURES
+  get 'api/features', to: 'api_features#index'
+  get 'api/features/:id', to: 'api_features#show'
+
   # USERS
   get 'api/users', to: 'api_users#index'
   get 'api/users/:id', to: 'api_users#show'
@@ -53,8 +57,11 @@ Rails.application.routes.draw do
   post 'admin/shop/new', to: 'shops#create'
   put 'admin/shop/:id/edit', to: 'shops#update'
 
-  # ADMIN_POST_DETAIL
+  # ADMIN_POST
+  post 'admin/post/new', to: 'posts#create'
   put 'admin/post/:id/edit', to: 'posts#update'
+
+  # ADMIN_POST_DETAIL
   put 'admin/post_detail/:id/edit', to: 'post_details#update'
 
   # ADMIN_FEATURE
