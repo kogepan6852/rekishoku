@@ -70,18 +70,17 @@ ActiveRecord::Schema.define(version: 20160602084342) do
   end
 
   create_table "features", force: :cascade do |t|
-    t.string   "title",                                null: false
+    t.string   "title",                          null: false
     t.text     "content"
-    t.string   "image",                                null: false
+    t.string   "image",                          null: false
     t.string   "quotation_url"
     t.string   "quotation_name"
-    t.integer  "feature_details_type", default: 0,     null: false
-    t.boolean  "is_map",               default: false
-    t.integer  "category_id",          default: 0,     null: false
-    t.integer  "status",               default: 0,     null: false
-    t.integer  "user_id",                              null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.boolean  "is_map",         default: false
+    t.integer  "category_id",    default: 0,     null: false
+    t.integer  "status",         default: 0,     null: false
+    t.integer  "user_id",                        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "published_at"
   end
 

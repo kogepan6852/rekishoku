@@ -48,10 +48,11 @@ class ApiFeaturesController < ApplicationController
     if params[:page] && params[:per]
       @features.page(params[:page]).per(params[:per]).each do |feature|
         feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
+        type = String.new()
         
         ## 特集詳細タイプが一つの場合
         feature_details.each do |feature_detail|
-          type = feature[:related_type]
+          type = feature_detail[:related_type]
           break
         end
 
@@ -76,9 +77,10 @@ class ApiFeaturesController < ApplicationController
               newFeatures.push(fatureData);
       end
       render json: newFeatures
+    else
+      render json: @features
     end
 
-    render json: @features
   end
 
   # PATCH/PUT /api/features/1

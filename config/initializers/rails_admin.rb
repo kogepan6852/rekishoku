@@ -581,12 +581,6 @@ RailsAdmin.config do |config|
         field :category do
           label "カテゴリ"
         end
-        field :feature_details_type , :enum do
-        enum do
-          Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
-        end
-          label "連携DB"
-        end
       end
       edit do
           field :title do
@@ -616,14 +610,6 @@ RailsAdmin.config do |config|
           field :category do
             label "カテゴリ"
             help "必須 対応するカテゴリを選択してください"
-            required true
-          end
-          field :feature_details_type , :enum do
-          enum do
-            Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
-          end
-            label "連携DB"
-            help "必須"
             required true
           end
           field :feature_details do
