@@ -44,18 +44,24 @@ class ApiFeaturesController < ApplicationController
     newFeatures = Array.new()
     periods = Array.new()
     people = Array.new()
+
     if params[:page] && params[:per]
       @features.page(params[:page]).per(params[:per]).each do |feature|
-        type = feature[:feature_details_type]
-        if type == 1 || type == 4 || type == 6 || type == 7
+        feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
+        
+        ## 特集詳細タイプが一つの場合
+        feature_details.each do |feature_detail|
+          type = feature[:related_type]
+          break
+        end
+
+        if type == "Shop"
           shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
           people += get_people_feature(shops)
-        end
-        if type == 2 || type == 4 || type == 5 || type == 7
+        elsif type == "Post"
           posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
           people += get_people_feature(posts)
-        end
-        if type == 3 || type == 5 || type == 6 || type == 7
+        elsif type == "ExternalLink"
           extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
           people += get_people_feature(posts)
         end
