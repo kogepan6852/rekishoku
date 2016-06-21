@@ -425,9 +425,6 @@ RailsAdmin.config do |config|
         help "必須 対応するカテゴリを選択してください"
         required true
       end
-      field :feature_details do
-        label "特集詳細の連携"
-      end
       field :is_approved do
         label "承認確認"
         help "承認を取得した場合は、チェックを追加してください"
@@ -500,6 +497,11 @@ RailsAdmin.config do |config|
         Hash[ ['公開','非公開'].zip(['1','0']) ]
       end
         label "公開状態"
+        required true
+      end
+      field :published_at do
+        label "公開時間"
+        required true
       end
       field :shops  do
         label "関連店舗"
@@ -509,12 +511,11 @@ RailsAdmin.config do |config|
         label "関連人物"
         help "関連する人は右にしてください"
       end
-      field :feature_details do
-        label "特集詳細の連携"
+      field :user do
+        label "ライター"
+        required true
+        help "必須"
       end
-    end
-    update do
-      exclude_fields :user_id
     end
    end
 
@@ -580,12 +581,6 @@ RailsAdmin.config do |config|
         field :category do
           label "カテゴリ"
         end
-        field :feature_details_type , :enum do
-        enum do
-          Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
-        end
-          label "連携DB"
-        end
       end
       edit do
           field :title do
@@ -617,20 +612,12 @@ RailsAdmin.config do |config|
             help "必須 対応するカテゴリを選択してください"
             required true
           end
-          field :feature_details_type , :enum do
-          enum do
-            Hash[ ['Shopのみ','Postのみ','外部リンクのみ','ShopとPost','Postと外部リンク','Shopと外部リンク','全て'].zip(['1','2','3','4','5','6','7']) ]
-          end
-            label "連携DB"
-            help "必須"
-            required true
-          end
           field :feature_details do
             label "特集詳細"
           end
           field :status, :enum do
           enum do
-            Hash[ ['公開','非公開'].zip([ true, false]) ]
+            Hash[ ['公開','非公開'].zip([ 1, 0]) ]
           end
             label "公開状態"
             required true
@@ -671,8 +658,9 @@ RailsAdmin.config do |config|
         edit do
             field :title do
               label "タイトル"
-              help "必須"
-              required true
+            end
+            field :content do
+              label "コメント"
             end
             field :order , :enum do
             enum do
@@ -730,9 +718,6 @@ RailsAdmin.config do |config|
             end
             field :quotation_name do
               label "引用したサイト名"
-            end
-            field :feature_details do
-              label "特集詳細のID"
             end
         end
        end
