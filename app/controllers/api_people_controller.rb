@@ -6,7 +6,7 @@ class ApiPeopleController < ApplicationController
     @people = Person.all.order("furigana COLLATE \"C\"")
     # カテゴリーで検索
     if params[:category]
-      @people = @people.joins(:categories).where('categories_people.person_id = ?', params[:category].to_i)
+      @people = @people.joins(:categories).where('categories_people.category_id = ?', params[:category].to_i)
     end
 
     people = Array.new()

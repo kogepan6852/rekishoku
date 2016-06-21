@@ -137,13 +137,13 @@ angular.module "frontApp"
                 email: $localStorage['email']
                 token: $localStorage['token']
 
+              # login情報の削除
+              delete $localStorage['token']
+              delete $localStorage['email']
+              delete $localStorage['user_id']
               Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
                 $ionicSideMenuDelegate.toggleRight();
                 clearInput()
-                # login情報の削除
-                delete $localStorage['token']
-                delete $localStorage['email']
-                delete $localStorage['user_id']
                 # cookieの削除
                 $cookies.remove 'email'
 
