@@ -22,7 +22,7 @@
             </form>
           </ion-header-bar>
 
-          <ion-scroll direction="y">
+          <ion-scroll direction="y" ng-class="{'login': isLogin}">
             <!-- pages -->
             <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome()" ng-bind="'MENU.MAGAZINE'|translate"></a>
             <a class="item" ng-class="{'active': currentType == 'shop' || currentType == 'map'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
@@ -65,7 +65,7 @@
           <!-- my account -->
           <div class="menu-footer">
             <a class="item item-top" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
-            <a class="item" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
             <div class="item sns-icons">
               <a class="facebook-icon" href="https://www.facebook.com/%E6%AD%B4%E9%A3%9F-292634487527691/" target="_blank"><i class="ion-social-facebook"></i></a>
               <a class="twitter-icon" href="https://twitter.com/rekishoku" target="_blank"><i class="ion-social-twitter"></i></a>

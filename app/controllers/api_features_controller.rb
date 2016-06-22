@@ -42,29 +42,29 @@ class ApiFeaturesController < ApplicationController
     end
 
     newFeatures = Array.new()
-    periods = Array.new()
-    people = Array.new()
 
     if params[:page] && params[:per]
       @features.page(params[:page]).per(params[:per]).each do |feature|
-        feature_details = FeatureDetail.where('feature_id = ? ', feature[:id])
-        type = String.new()
-        
-        ## 特集詳細タイプが一つの場合
-        feature_details.each do |feature_detail|
-          type = feature_detail[:related_type]
-          break
+        type = Array.new()
+        periods = Array.new()
+        people = Array.new()
+
+        feature.feature_details.each do |feature_detail|
+          type.push(feature_detail[:related_type])
         end
 
-        if type == "Shop"
+        if type.include?("Shop")
           shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
           people += get_people_feature(shops)
-        elsif type == "Post"
+        end
+        if type.include?("Post")
           posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
           people += get_people_feature(posts)
-        elsif type == "ExternalLink"
-          extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          people += get_people_feature(posts)
+        end
+        if type.include?("ExternalLink")
+          # 外部リンク作成後解放
+          # extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          # people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
 
@@ -96,23 +96,18 @@ class ApiFeaturesController < ApplicationController
         "image" => @feature.user.image.thumb }
 
       feature_details = Array.new()
-      @shops = Shop.all
-      @posts = Post.all
-      @extrnal_links = ExternalLink.all
-
       # それぞれの詳細対応
-      feature_details_id = FeatureDetail.where('feature_id = ? ', @feature[:id])
-      feature_details_id.each do |feature_detail|
+      @feature.feature_details.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
-          # 対応するShopを取得する
-          shop = @shops.find(feature_detail[:related_id])
-          obj = get_shop_json(shop)
+          # 対応するShopの情報を取得する
+          obj = get_shop_json(feature_detail.related)
         elsif feature_detail[:related_type] == "Post"
-          # 対応するPostを取得する
-          post = @posts.find(feature_detail[:related_id])
+          # 対応するPostの情報を取得する
+          post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(feature_detail[:related_id])
           obj = get_post_json(post)
         elsif feature_detail[:related_type] == "ExternalLink"
-
+          # 対応するExternalLinkの情報を取得する
+          obj = get_external_link_json(feature_detail.related)
         end
         obj.store("feature_detail",feature_detail)
         feature_details.push(obj)
@@ -138,14 +133,19 @@ class ApiFeaturesController < ApplicationController
     end
 
     # 対象のお店から紐づく人物を取得する
-    def get_people_feature(reports)
+    def get_people_feature(articles)
       people = Array.new()
-      reports.each do |report|
-        report.people.each do |person|
+      articles.each do |article|
+        article.people.each do |person|
           people.push(person)
         end
       end
       return people
+    end
+
+    def get_external_link_json(external_link)
+      # 返却用のオブジェクトを作成する
+      obj = { "external_link" => external_link }
     end
 
 end

@@ -282,6 +282,9 @@ ion-side-menu {
     .scroll {
       padding-bottom: 110px;
     }
+    &.login .scroll {
+      padding-bottom: 164px;
+    }
   }
   .list-slide .scroll {
     padding-bottom: 44px;
@@ -312,8 +315,10 @@ ion-side-menu {
 }
 
 ion-slide {
-  .item-top:first-child {
-    margin-top: 1px;
+  ion-scroll {
+    .item-top:first-child {
+      margin-top: 1px;
+    }    
   }
   &.list-slide {
     .spinner svg {
@@ -331,6 +336,7 @@ ion-slide {
     bottom: 0;
     position: absolute;
     width: 100%;
+    box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
   }
   .sns-icons {
     padding-left: 17px;

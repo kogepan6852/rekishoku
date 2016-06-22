@@ -42,7 +42,7 @@ star {
      font-size: $h6;
      text-align: center;
      padding-right: 5px;
-     padding-bottom: 3px;
+     padding-bottom: 5px;
 
      >div {
        color: #fff;
@@ -155,6 +155,7 @@ star {
 
        .periods, .people {
          height: 25px;
+         overflow: hidden;
        }
      }
    }

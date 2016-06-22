@@ -117,7 +117,7 @@ class ApiShopsController < ApplicationController
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
-             "people" => @shop.people,
+             "people" => @shop.people.uniq,
              "periods" => periods.uniq,
              "rating" => rating,
              "price" => price

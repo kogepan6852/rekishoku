@@ -41,8 +41,8 @@ module RelatedInfo
     # 返却用のオブジェクトを作成する
     obj = { "shop" => shop,
             "categories" => shop.categories,
-            "people" => shop.people,
-            "periods" => periods,
+            "people" => shop.people.uniq,
+            "periods" => periods.uniq,
             "rating" => rating,
             "price" => price
           }
