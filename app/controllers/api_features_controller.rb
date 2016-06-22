@@ -62,9 +62,8 @@ class ApiFeaturesController < ApplicationController
           people += get_people_feature(posts)
         end
         if type.include?("ExternalLink")
-          # 外部リンク作成後解放
-          # extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          # people += get_people_feature(extrnal_links)
+          extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
 
@@ -144,8 +143,16 @@ class ApiFeaturesController < ApplicationController
     end
 
     def get_external_link_json(external_link)
+      # external_linkに紐付いてる人物を取得する
+      people = get_people(external_link)
+      # external_linkに紐付けしている時代を取得をする
+      periods = get_periods(external_link.people)
       # 返却用のオブジェクトを作成する
-      obj = { "external_link" => external_link }
+      obj = { "external_link" => external_link,
+              "people" => people.uniq,
+              "periods" => periods.uniq
+            }
+      return obj
     end
 
 end
