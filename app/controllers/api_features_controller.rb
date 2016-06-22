@@ -103,16 +103,15 @@ class ApiFeaturesController < ApplicationController
         if feature_detail[:related_type] == "Shop"
           # 対応するShopの情報を取得する
           obj = get_shop_json(feature_detail.related)
-          people += get_people(feature_detail.related)
         elsif feature_detail[:related_type] == "Post"
           # 対応するPostの情報を取得する
           post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(feature_detail[:related_id])
           obj = get_post_json(post)
-          people += get_people(feature_detail.related)
         elsif feature_detail[:related_type] == "ExternalLink"
           # 対応するExternalLinkの情報を取得する
           obj = get_external_link_json(feature_detail.related)
         end
+        people += get_people(feature_detail.related)
         obj.store("feature_detail",feature_detail)
         feature_details.push(obj)
       end
