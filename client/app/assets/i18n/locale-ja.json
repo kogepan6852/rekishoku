@@ -28,7 +28,8 @@
     "CLEAR_CONDITION":"条件クリア",
     "DELETE":         "削除",
     "NEW_POST":       "新規投稿",
-    "EDIT":           "編集"
+    "EDIT":           "編集",
+    "GO":             "GO"
   },
   "TEXT": {
     "CURRENT_PLACE":  "現在地",

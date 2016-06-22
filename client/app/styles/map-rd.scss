@@ -3,8 +3,32 @@
 // SM以上
 @media screen and (min-width:768px){
   .map-view {
+    .search-bar {
+      .address-input {
+        right: 15px;
+        top: 5px;
+
+        label {
+          width: 200px
+        }
+      }
+    }
+
     .search-condition-bar {
       top: 0;
+    }
+  }
+}
+
+// MD以上
+@media screen and (min-width:992px){
+  .map-view {
+    .search-bar {
+      .address-input {
+        label {
+          width: 300px
+        }
+      }
     }
   }
 }

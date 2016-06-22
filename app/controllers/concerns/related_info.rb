@@ -26,8 +26,53 @@ module RelatedInfo
         periods.push(period);
       end
     end
-
     return periods
   end
+
+  def get_shop_json(shop)
+    # shopsに紐付いてる人物を取得する
+    people = get_people(shop)
+    # shopsに紐付けしている時代を取得をする
+    periods = get_periods(people)
+    # 歴食度の設定
+    rating = cal_rating(shop)
+    # 価格帯の取得
+    price = get_price(shop)
+    # 返却用のオブジェクトを作成する
+    obj = { "shop" => shop,
+            "categories" => shop.categories,
+            "people" => shop.people.uniq,
+            "periods" => periods.uniq,
+            "rating" => rating,
+            "price" => price
+          }
+    return obj
+  end
+
+  def get_post_json(post)
+    # アイキャッチ画像の設定
+    postObj = get_post(post)
+    # postsに紐付いてる人物を取得する
+    people = get_people(post)
+    # postsに紐付けしている時代を取得をする
+    periods = get_periods(people)
+
+    # 返却用のオブジェクトを作成する
+    obj = { "post" => postObj,
+            "people" => post.people,
+            "periods" => periods.uniq
+          }
+    return obj
+  end
+
+  private
+    # 対象のお店から紐づく人物を取得する
+    def get_people(report)
+      people = Array.new()
+        report.people.each do |person|
+          people.push(person)
+        end
+      return people
+    end
 
 end

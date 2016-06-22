@@ -1,26 +1,31 @@
+@import "setting";
+
 .writer-detail-view {
-  .edit-menu {
-    background-color: transparent;
-    background-image: none;
-    border: none;
-  }
+  .main-info {
+    padding-top: 59px;
 
-  .thumbnail-writer-image {
-    max-width: 300px;
-    min-height: 185px;
-    margin: 0 auto;
-    text-align: center;
+    .thumbnail-writer-image {
+      max-width: 300px;
+      min-height: 185px;
+      margin: 0 auto;
+      text-align: center;
 
-    img {
-      border-radius: 50%;
-      padding: 15px;
+      img {
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        padding: 15px;
+      }
     }
-  }
-  .profile {
-    max-height: 300px;
+    .edit-button {
+      text-align: center;
+    }
+    .profile {
+      max-height: 300px;
 
-    p {
-      color: #808080;
+      p {
+        color: #808080;
+      }
     }
   }
 

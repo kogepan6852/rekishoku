@@ -49,7 +49,7 @@ angular
 
       # STORE TAB LIST
       .state 'tabs.shop.list',
-        url: '/app/shop/list'
+        url: '/app/shops/list'
         views:
           'tab-shop-list':
             templateUrl: 'views/shops.html'
@@ -58,7 +58,7 @@ angular
       # STORE TAB MAP
       .state 'tabs.shop.map',
         cache: false
-        url: '/app/shop/map'
+        url: '/app/shops/map'
         views:
           'tab-shop-map':
             templateUrl: 'views/map.html'

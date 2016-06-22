@@ -3,12 +3,44 @@
 .map-view {
   .search-bar {
     position: relative;
-    >div {
+    z-index: 999;
+    height: 0;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    transform: translateX(0);
+
+    &.hide-input {
+      transform: translateX(100%);
+    }
+
+    .address-input {
       position: absolute;
-      right: 15px;
+      right: 0px;
+      top: 84px;
+      width: 100%;
+      form {
+        width: 100%;
+      }
 
       label {
-        width: 250px;
+        width: 100%;
+        border-radius: 18px 0 0 18px;
+        -moz-border-radius: 18px 0 0 18px;
+        -webkit-border-radius: 18px 0 0 18px;
+        border-color: $subColor;
+        background-color: rgba(255,255,255,.9);
+      }
+      button {
+        border-radius: 0 18px 18px 0;
+        -moz-border-radius: 0 18px 18px 0;
+        -webkit-border-radius: 0 18px 18px 0;
+        border-width: 0;
+        line-height: 33px;
+        width: 80px;
+        background-color: $subColor;
       }
     }
   }

@@ -16,10 +16,7 @@
             <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
             <span ng-if="person" ng-bind="person | mapppingId:people"></span>
             <span ng-if="province" ng-bind="province"></span>
-          </div>
-          <div class="clear-button">
-            <button class="button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
-            <span class="hidden-xs" ng-click="deleteSearchCondition()" ng-bind="'BUTTON.CLEAR_CONDITION'|translate"></span>
+            <button class="button clear-button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
           </div>
         </div>
       </div>

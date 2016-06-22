@@ -6,11 +6,20 @@
    * Common
    **********************/
    .detail {
-     .top-image, .detail-image {
+     .top-image {
        img {
          margin-top: -5%;
          margin-bottom: -5%;
        }
+     }
+   }
+
+   /**********************
+    * Post
+    **********************/
+   .detail.post {
+     .description {
+       padding-top: 25px;
      }
    }
 

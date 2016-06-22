@@ -5,14 +5,14 @@
   ng-class="{down: isDown, 'hide-tab': isHideTab}"
   ng-controller="TabsCtrl">
 
-  <!-- Main  -->
+  <!-- Magazine  -->
   <ion-tab title="{{'MENU.MAGAZINE'|translate}}" href="#/app/magazine" ng-click="clickTab(0)">
     <ion-nav-view name="tab-magazine"></ion-nav-view>
   </ion-tab>
 
 
-  <!-- Map  -->
-  <ion-tab title="{{'MENU.STORE'|translate}}" href="#/app/shop/list" ng-click="clickTab(1)">
+  <!-- Shops  -->
+  <ion-tab title="{{'MENU.STORE'|translate}}" href="#/app/shops/list" ng-click="clickTab(1)">
     <ion-nav-view name="tab-shop"></ion-nav-view>
   </ion-tab>
 

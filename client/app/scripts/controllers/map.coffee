@@ -209,6 +209,19 @@ angular.module 'frontApp'
       # map表示用データの作成と設定
       setMapData(obj, true, true)
 
+    # 店舗検索
+    $scope.searchShops = ->
+      if !$scope.input.address
+        return
+      # 緯度経度の計算
+      BaseService.getLatLng $scope.input.address, (latLng) ->
+        obj =
+          latitude: latLng.lat
+          longitude: latLng.lng
+          shopDistance: targetDistance
+        # map表示用データの作成と設定
+        setMapData(obj, true)
+
     # 現在地への移動
     $scope.moveToCurrentPlace = ->
       $rootScope.targetAddress = null

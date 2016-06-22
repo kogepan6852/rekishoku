@@ -4,7 +4,8 @@
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
-        <img ng-src="{{post.image.url}}" src="../images/dummy-img.png" class="hidden-xs">
+        <img ng-src="{{post.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
+        <img ng-src="{{post.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
         <img ng-src="{{post.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
       </div>
     </div>
@@ -26,7 +27,7 @@
           <div class="date" ng-if="post.category_slug=='news'">
             <p ng-bind="post.published_at | date:'yyyy/M/d'"></p>
           </div>
-          <div class="tags">
+          <div class="tags" ng-if="periods.length > 0 && people.length > 0">
             <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
             <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
           </div>
@@ -40,10 +41,10 @@
       </div>
     </div>
 
-    <hr>
+    <hr class="hidden-xs">
 
     <!-- DESCRIPTION -->
-    <div class="row padding-top padding-bottom">
+    <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="description"><p ng-bind-html="post.content | newlines"></p></div>
       </div>
@@ -59,8 +60,8 @@
     <!-- DETAILS IMAGE -->
     <div class="row no-padding" ng-if="postDetail.image.url">
       <div class="detail-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <img ng-src="{{postDetail.image.url}}" src="../images/dummy-img.png" class="hidden-xs">
-        <img ng-src="{{postDetail.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img ng-src="{{postDetail.image.w960.url}}" src="../images/dummy-img.png" class="hidden-xs">
+        <img ng-src="{{postDetail.image.w640.url}}" src="../images/dummy-img.png" class="visible-xs">
       </div>
     </div>
     <!-- DETAILS DESCRIPTION -->

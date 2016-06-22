@@ -1,8 +1,5 @@
 <ion-view title="" ng-init="init()" hide-back-button="true" class="writers-view">
-  <!-- header -->
-  <div class="bar bar-header"></div>
-
-  <ion-content class="image-content" class="padding-top">
+  <ion-content class="no-tabs-top" class="padding-top">
     <ion-refresher
       pulling-text="{{'TEXT.PULLING'|translate}}"
       on-refresh="init()">
@@ -17,8 +14,8 @@
           </div>
           <div class="writer-content">
             <div>
-              <div class="h4 item-username">{{user.username}}</div>
-              <div class="h6 item-profile visible-xs">{{user.profile}}</div>
+              <div class="mincho item-username">{{user.username}}</div>
+              <div class="item-profile visible-xs">{{user.profile}}</div>
             </div>
           </div>
           <a class="link" ui-sref="writer({id:user.id})"></a>

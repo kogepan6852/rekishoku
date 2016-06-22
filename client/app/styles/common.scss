@@ -208,6 +208,10 @@ ion-content.has-tabs-top {
   top: 88px;
   bottom: 0;
 }
+ion-content.no-tabs-top {
+  top: 44px;
+  bottom: 0;
+}
 .main-tab {
   .tabs {
     background-color: #fff !important;
@@ -248,10 +252,10 @@ ion-content.has-tabs-top {
 ion-side-menu {
   .bar-header {
     border: none;
-    
+
     button {
       position: fixed;
-      top: 7px;
+      top: 6px;
     }
   }
 
@@ -277,6 +281,9 @@ ion-side-menu {
 
     .scroll {
       padding-bottom: 110px;
+    }
+    &.login .scroll {
+      padding-bottom: 164px;
     }
   }
   .list-slide .scroll {
@@ -308,8 +315,10 @@ ion-side-menu {
 }
 
 ion-slide {
-  .item-top:first-child {
-    margin-top: 1px;
+  ion-scroll {
+    .item-top:first-child {
+      margin-top: 1px;
+    }    
   }
   &.list-slide {
     .spinner svg {
@@ -327,6 +336,7 @@ ion-slide {
     bottom: 0;
     position: absolute;
     width: 100%;
+    box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
   }
   .sns-icons {
     padding-left: 17px;
@@ -505,12 +515,7 @@ ion-modal-view .bar-header {
       font-size: $h6;
     }
     .clear-button {
-      top: 4px;
-      position: absolute;
-      right: 0;
-      top: 0;
-
-      .button {
+      &.button {
         border-radius: 14px;
         -moz-border-radius: 14px;
         -webkit-border-radius: 14px;
@@ -522,8 +527,9 @@ ion-modal-view .bar-header {
         padding: 0 0 0 1px;
         border: none;
         color: $grayColor !important;
+        margin-left: 15px;
       }
-      span {
+      &span {
         background-color: transparent;
         color: #b2b2b2;
         padding: 0;
