@@ -44,28 +44,7 @@ class ApiShopsController < ApplicationController
     if params[:page] && params[:per]
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
-        # 人に紐付く時代を全て抽出する
-        periods = Array.new()
-        shop.people.each do |person|
-          person.periods.each do |period|
-            periods.push(period);
-          end
-        end
-
-        # 歴食度の設定
-        rating = cal_rating(shop)
-        # 価格帯の取得
-        price = get_price(shop)
-
-        # 返却用のオブジェクトを作成する
-        obj = { "shop" => shop,
-                "categories" => shop.categories,
-                "people" => shop.people,
-                "periods" => periods.uniq,
-                "rating" => rating,
-                "price" => price
-              }
-        newShops.push(obj);
+        newShops.push(get_shop_json(shop))
       end
       shops = newShops
     else
@@ -80,13 +59,10 @@ class ApiShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
 
-    # 人に紐付く時代を全て抽出する
-    periods = Array.new()
-    @shop.people.each do |person|
-      person.periods.each do |period|
-        periods.push(period);
-      end
-    end
+    # shopに紐付いてる人物を取得する
+    people = get_people(@shop)
+    # shopに紐付けしている時代を取得をする
+    periods = get_periods(@shop.people)
 
     # 歴食度の設定
     rating = cal_rating(@shop)
@@ -98,26 +74,14 @@ class ApiShopsController < ApplicationController
     newPosts = Array.new()
 
     posts.each do |post|
-      # アイキャッチ画像の設定
-      postObj = get_post(post)
-
-      # 人に紐付く時代を全て抽出する
-      periods = get_periods(post.people)
-
-      # 返却用のオブジェクトを作成する
-      obj = { "post" => postObj,
-              "people" => post.people,
-              "periods" => periods.uniq
-            }
-
-      newPosts.push(obj);
+      newPosts.push(get_post_json(post));
     end
 
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
-             "people" => @shop.people.uniq,
+             "people" =>  people.uniq,
              "periods" => periods.uniq,
              "rating" => rating,
              "price" => price
