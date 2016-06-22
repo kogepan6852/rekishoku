@@ -2,13 +2,11 @@
 
 .magazine {
   .top-area {
-    // 特集
-    .feature {
+    // 特集横記事
+    .post, .shop, .feature {
       padding: 0;
-      margin-bottom: -4px;
       position: relative;
-      z-index: 100;
-      overflow: hidden;
+
 
       .main-img {
         width: 130%;
@@ -17,69 +15,13 @@
         margin-bottom: -3px;
       }
 
-      .description {
-        position: absolute;
-        bottom: 33px;
-        padding: 5px;
-        height: 94px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-
-        h2 {
-          font-size: $h2;
-          color: #fff;
-          margin: 0;
-        }
-        h5 {
-          font-size: $h5;
-          color: #fff;
-          font-weight: 300;
-        }
-        p {
-          color: #fff;
-          font-size: $h6;
-          height: 40px;
-          overflow: hidden;
-          white-space: normal;
-        }
-      }
-
-      .tags {
-        position: absolute;
-        bottom: 0;
-        padding: 5px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        height: 33px;
-        overflow: hidden;
-        >div {
-          overflow: hidden;
-          height: 26px;
-        }
-      }
-    }
-
-    // 特集横記事
-    .post, .shop {
-      padding: 0;
-      margin-bottom: -4px;
-      position: relative;
-      overflow: unset;
-
-
-      .main-img {
-        width: 130%;
-        margin-left: -15%;
-        height: auto;
-      }
-
       .category {
         position: absolute;
         top: 0;
         left: 0;
         background-color: $subColor;
         color: #fff;
-        width: 150px;
+        width: 120px;
         padding-bottom: 7px;
         padding-top: 5px;
         font-size: $h5;
@@ -89,15 +31,15 @@
 
       .description {
         position: absolute;
-        bottom: 0;
-        padding: 15px 15px 57px;
+        bottom: 57px;
+        padding: 15px 15px 0;
         max-height: 127px;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.4);
         overflow: hidden;
 
-        &.cooking {
-          padding: 15px;
+        &.no-tag {
+          bottom: 0;
         }
         h4 {
           font-size: $h4;
@@ -116,11 +58,42 @@
         width: 100%;
         height: 57px;
         overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.4);
+
         >div {
           overflow: hidden;
           height: 26px;
         }
       }
+    }
+
+    // 特集
+    .feature {
+      .description {
+        bottom: 33px;
+        padding: 5px;
+
+        h2 {
+          font-size: $h2;
+          color: #fff;
+          margin: 0;
+          white-space: normal;
+          max-height: 60px;
+        }
+        p {
+          color: #fff;
+          font-size: $h6;
+          height: 40px;
+          overflow: hidden;
+          white-space: normal;
+        }
+      }
+
+      .tags {
+        padding: 5px;
+        height: 33px;
+      }
+
     }
 
     .shop {
@@ -133,11 +106,6 @@
         }
       }
     }
-
-
-
-
-
 
   }
 }

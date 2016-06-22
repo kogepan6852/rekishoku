@@ -13,6 +13,7 @@ angular.module("frontApp")
       SHOP:         '/api/shops'
       SHOP_LIST:    '/api/shop_list'
       MAP:          '/api/map'
+      FEATURE:      '/api/features'
       PERSON:       '/api/people'
       CATEGORY:     '/api/categories'
       PERIOD:       '/api/periods'
