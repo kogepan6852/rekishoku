@@ -98,9 +98,10 @@ class ApiFeaturesController < ApplicationController
       feature_details = Array.new()
       periods = Array.new()
       people = Array.new()
+      feature_details_order = @feature.feature_details.order(:order)
 
       # それぞれの詳細対応
-      @feature.feature_details.each do |feature_detail|
+      feature_details_order.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
           # 対応するShopの情報を取得する
           obj = get_shop_json(feature_detail.related)
