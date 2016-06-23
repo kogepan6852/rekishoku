@@ -322,11 +322,6 @@ ion-side-menu {
 }
 
 ion-slide {
-  ion-scroll {
-    .item-top:first-child {
-      margin-top: 1px;
-    }
-  }
   &.list-slide {
     .spinner svg {
       width: 100%;

@@ -141,7 +141,7 @@
     <!-- MAP -->
     <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <div class="detail-map" ng-if="shop.province">
+        <div class="detail-map" ng-if="shop.province && map">
           <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
               <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
               </ui-gmap-markers>

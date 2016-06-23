@@ -7,9 +7,7 @@ angular.module "frontApp"
     calMapDistance: (zoom) ->
       meterPerPx = Const.MAP.METER_PER_PX
       # GoogleMap上の1pxあたりのmを求める
-      console.log zoom
       targetMeterPerPx = meterPerPx/Math.pow(2, zoom - 9)
-      console.log targetMeterPerPx
       # 画面幅に応じてGoogleMap横(または縦)の距離を求める
       clientPx = document.body.clientWidth
       if document.body.clientHeight > document.body.clientWidth

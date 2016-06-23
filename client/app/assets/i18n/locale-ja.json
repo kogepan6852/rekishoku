@@ -86,7 +86,8 @@
       "UNPUBLISHE":     "非公開にしてもよろしいですか？"
     },
     "ALERT": {
-      "NO_POSITION":    "位置情報を取得できません"
+      "NO_POSITION":    "位置情報を取得できません",
+      "ERROR":          "通信エラー"
     }
   },
   "PROVINCES": {

@@ -4,10 +4,10 @@
     <div class="item-input-inset address-input">
       <form ng-submit="searchShops()">
         <label class="item-input-wrapper">
-          <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" ng-cloak>
+          <input type="text" placeholder="{{'TEXT.ADDRESS'|translate}}" ng-model="input.address" />
         </label>
       </form>
-      <button class="button button-small" ng-click="searchShops()" ng-cloak>{{'BUTTON.GO'|translate}}</button>
+      <button class="button button-small" ng-click="searchShops()" ng-bind="'BUTTON.GO'|translate"></button>
     </div>
   </div>
 
