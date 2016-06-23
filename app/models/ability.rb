@@ -48,14 +48,19 @@ class Ability
     cannot :manage, Period
 
     if user
+      ## マスター権限
       if user.role == 0
         can :manage, :all
-      elsif user.role == 1
+      ## ライター権限
+      elsif user.role == 2
          can :manage, Shop
          can :manage, Person
          can :manage, Period
+      ## 編集者権限
       elsif user.role == 3
         can :manage, Shop
+        can :manage, Person
+        can :manage, Period
         can :manage, Feature
         can :manage, FeatureDetail
         can :manage, ExternalLink
