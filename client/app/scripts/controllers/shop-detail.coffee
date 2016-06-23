@@ -20,6 +20,19 @@ angular.module 'frontApp'
     $rootScope.hideFooter = true
     $rootScope.hideModeBtn = true
 
+    # Map用パラメータの設定
+    $scope.map =
+      center:
+        latitude: Const.MAP.CENTER.DEFAULT.LAT
+        longitude:  Const.MAP.CENTER.DEFAULT.LNG
+      zoom: 14
+    $scope.options =
+      scrollwheel: false
+      minZoom: Const.MAP.ZOOM.MIN
+      disableDefaultUI: true
+      zoomControl: true
+      draggable: false
+
     ###
     # initialize
     ###
@@ -35,18 +48,8 @@ angular.module 'frontApp'
         $scope.eyeCatchImage = res.data.shop.subimage.md.url
 
         # Map用
-        $scope.map =
-          center:
-            latitude: res.data.shop.latitude
-            longitude: res.data.shop.longitude
-          zoom: 14
-          bounds: {}
-        $scope.options =
-          scrollwheel: false
-          minZoom: Const.MAP.ZOOM.MIN
-          disableDefaultUI: true
-          zoomControl: true
-          draggable: false
+        $scope.map.center.latitude =  res.data.shop.latitude
+        $scope.map.center.longitude = res.data.shop.longitude
 
         shops = []
         ret =

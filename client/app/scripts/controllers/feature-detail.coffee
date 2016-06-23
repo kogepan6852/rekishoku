@@ -20,6 +20,20 @@ angular.module 'frontApp'
     $rootScope.hideFooter = true
     $rootScope.hideModeBtn = true
 
+    # Map用パラメータの設定
+    $scope.map =
+      center:
+        latitude: Const.MAP.CENTER.DEFAULT.LAT
+        longitude:  Const.MAP.CENTER.DEFAULT.LNG
+      zoom: Const.MAP.ZOOM.DEFAULT
+      bounds: {}
+    $scope.options =
+      scrollwheel: false
+      minZoom: Const.MAP.ZOOM.MIN
+      disableDefaultUI: true
+      zoomControl: true
+      draggable: false
+
     ###
     # initialize
     ###
@@ -64,18 +78,9 @@ angular.module 'frontApp'
         targetZoom = BaseService.getZoomByDistance(latDistance, lngDistance)
 
         # Map用パラメータの設定
-        $scope.map =
-          center:
-            latitude: (maxLat + minLat) / 2
-            longitude:  (maxlng + minLng) / 2
-          zoom: targetZoom
-          bounds: {}
-        $scope.options =
-          scrollwheel: false
-          minZoom: Const.MAP.ZOOM.MIN
-          disableDefaultUI: true
-          zoomControl: true
-          draggable: false
+        $scope.map.center.latitude = (maxLat + minLat) / 2
+        $scope.map.center.longitude = (maxlng + minLng) / 2
+        $scope.map.zoom = targetZoom
 
         # SEO
         appKeywords = []

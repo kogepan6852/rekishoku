@@ -31,6 +31,7 @@ angular.module("frontApp")
     MAP:
       ZOOM:
         MIN: 9
+        DEFAULT:13
       CENTER:
         DEFAULT:
           LAT: 35.6813818

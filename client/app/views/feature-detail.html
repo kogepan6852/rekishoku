@@ -62,10 +62,12 @@
     </div>
 
     <!-- DETAILS DESCRIPTION -->
-    <div class="row no-margin" ng-if="detail.feature_detail.content">
+    <div class="row no-margin" ng-class="{'no-headline': !detail.feature_detail.title && !detail.feature_detail.content}">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <div><p ng-bind-html="detail.feature_detail.content | newlines"></p></div>
-        <div><h4 class="number">SPOT {{$index+1}}</h4></div>
+        <div ng-if="detail.feature_detail.content"><p ng-bind-html="detail.feature_detail.content | newlines"></p></div>
+        <div ng-if="!detail.feature_detail.title || (detail.feature_detail.title && detail.feature_detail.content)">
+          <h4 class="number">SPOT {{$index+1}}</h4>
+        </div>
       </div>
     </div>
 
