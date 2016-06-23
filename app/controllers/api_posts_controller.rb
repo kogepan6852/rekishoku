@@ -143,18 +143,7 @@ class ApiPostsController < ApplicationController
     # 返却用オブジェクト作成
     newPosts = Array.new()
     posts.each do |post|
-      # アイキャッチ画像の設定
-      postObj = get_post(post)
-
-      # 人に紐付く時代を全て抽出する
-      periods = get_periods(post.people)
-
-      obj = { "post" => postObj,
-              "people" => post.people,
-              "periods" => periods.uniq
-            }
-
-      newPosts.push(obj)
+      newPosts.push(get_post_json(post))
     end
 
     render json: newPosts
