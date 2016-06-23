@@ -83,7 +83,7 @@ angular.module 'frontApp'
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetalPost', { id: id })
+        $state.go('tabs.shopDetailPost', { id: id })
       else if $scope.nowTab == 'map'
         $state.go('tabs.shop.detailMap', { id: id })
       else if $scope.nowTab == 'shop'

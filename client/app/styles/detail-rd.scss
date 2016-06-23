@@ -12,12 +12,18 @@
          margin-bottom: -5%;
        }
      }
+
+     .detail-map {
+       .angular-google-map-container, .angular-google-map {
+         height: 350px;
+       }
+     }
    }
 
    /**********************
     * Post
     **********************/
-   .detail.post {
+   .detail.post, .detail.feature {
      .description {
        padding-top: 25px;
      }

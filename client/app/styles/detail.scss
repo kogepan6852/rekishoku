@@ -3,8 +3,8 @@
 /**********************
  * Common
  **********************/
- .detail {
-   .top-image, .detail-image {
+.detail {
+  .top-image, .detail-image {
       text-align: center;
       overflow: hidden;
 
@@ -12,67 +12,91 @@
         width: 100%;
         height: auto;
       }
-    }
-    .image-quotation {
-      text-align: right;
+  }
+  .image-quotation {
+    text-align: right;
+    color: $grayColor;
+    font-size: $h6;
+    padding: 2px 5px;
+
+    a, a:hover {
       color: $grayColor;
-      font-size: $h6;
-      padding: 2px 5px;
+    }
+  }
 
-      a, a:hover {
-        color: $grayColor;
-      }
+  .information {
+    padding: 20px 0 5px;
+
+    h1, h2, h3, h4 {
+      color: $darkGrayColor;
+      font-weight: 300;
+      letter-spacing: 1px;
     }
 
-    .information {
-      padding: 20px 0 5px;
+    >div {
+      display: table;
+    }
 
-      h1, h2, h3, h4 {
-        color: $darkGrayColor;
+    .name {
+      height: 67px;
+      min-height: 67px;
+
+      h4 {
+        color: $subColor;
         font-weight: 300;
-        letter-spacing: 1px;
+        margin: 0 0 3px 0;
       }
-
-      >div {
-        display: table;
-      }
-
-      .name {
-        height: 67px;
-        min-height: 67px;
-
-        h4 {
-          color: $subColor;
-          font-weight: 300;
-          margin: 0 0 3px 0;
-        }
-        h1 {
-          color: $darkGrayColor;
-          margin-top: 0;
-        }
-      }
-
-      .tags {
-        height: 23px;
-        min-height: 23px;
+      h1 {
+        color: $darkGrayColor;
+        margin-top: 0;
       }
     }
 
-    .description {
-      p {
-        letter-spacing: 1px;
-      }
+    .tags {
+      height: 23px;
+      min-height: 23px;
     }
+  }
 
-    // 関連記事、店舗
-    list-item-post, list-item-shop {
-      a.item {
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-        margin-bottom: 5px;
-      }
+  .description {
+    p {
+      letter-spacing: 1px;
     }
+  }
 
- }
+  .number {
+    color: $subColor;
+  }
+
+  .detail-title {
+    .number {
+      margin-bottom: 0;
+    }
+    .title {
+      margin-top: 0;
+    }
+  }
+  .no-title {
+    margin-top: -30px;
+  }
+
+  .detail-map {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .angular-google-map-container, .angular-google-map {
+      height: 250px;
+    }
+  }
+
+  // 関連記事、店舗
+  list-item-post, list-item-shop {
+    a.item {
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 5px;
+    }
+  }
+}
 
 /**********************
  * Post
@@ -158,15 +182,6 @@
 
   .menu-list {
     padding-top: 20px!important;
-  }
-
-  .detail-map {
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    .angular-google-map-container, .angular-google-map {
-      height: 250px;
-    }
   }
 
 }

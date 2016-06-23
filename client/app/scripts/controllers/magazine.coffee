@@ -109,12 +109,12 @@ angular.module "frontApp"
     # ショップ詳細移動時の処理
     $scope.moveToShopDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.shopDetalPost', {id:id}
+      $state.go 'tabs.shopDetailPost', {id:id}
 
     # ショップ詳細移動時の処理
     $scope.moveToFeatureDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.featureDetail', {id:id}
+      $state.go 'tabs.featureDetalPost', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

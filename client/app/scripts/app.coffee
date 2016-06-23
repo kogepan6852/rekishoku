@@ -79,13 +79,19 @@ angular
           'tab-magazine':
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
-      .state 'tabs.shopDetalPost',
+      .state 'tabs.shopDetailPost',
         cache: false
         url: '/app/shop/:id'
         views:
           'tab-magazine':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
+      .state 'tabs.featureDetalPost',
+        url: '/app/feature/:id'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/feature-detail.html'
+            controller: 'FeatureDetailCtrl'
 
       # STORE DETAIL DIRECT
       .state 'tabs.shopDetal',

@@ -43,7 +43,7 @@ angular.module 'frontApp'
           bounds: {}
         $scope.options =
           scrollwheel: false
-          minZoom: 11
+          minZoom: Const.MAP.ZOOM.MIN
           disableDefaultUI: true
           zoomControl: true
           draggable: false
@@ -75,7 +75,7 @@ angular.module 'frontApp'
 
 
       # 現在タブの判定
-      if $state.is('tabs.postDetal')
+      if $state.is('tabs.shopDetailPost')
         $scope.nowTab = 'magazine'
       else if $state.is('tabs.shop.detailMap')
         $scope.nowTab = 'map'
@@ -99,7 +99,7 @@ angular.module 'frontApp'
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetalPost', { id: id })
+        $state.go('tabs.shopDetailPost', { id: id })
       else if $scope.nowTab == 'map'
         $state.go('tabs.shop.postDetailMap', { id: id })
       else if $scope.nowTab == 'shop'

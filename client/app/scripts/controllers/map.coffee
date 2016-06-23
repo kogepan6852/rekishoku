@@ -32,8 +32,8 @@ angular.module 'frontApp'
     $scope.isDragging = false;
 
     # 初期位置の設定
-    latitude = 35.6813818
-    longitude = 139.7660838
+    latitude: Const.MAP.CENTER.DEFAULT.LAT
+    longitude: Const.MAP.CENTER.DEFAULT.LNG
     defaultZoom = 13
     targetDistance = BaseService.calMapDistance(defaultZoom)
 
@@ -53,7 +53,7 @@ angular.module 'frontApp'
 
     $scope.options =
       scrollwheel: false
-      minZoom: 9
+      minZoom: Const.MAP.ZOOM.MIN
       disableDefaultUI: true
       zoomControl: true
 
@@ -116,8 +116,8 @@ angular.module 'frontApp'
 
             ), (e) ->
               obj =
-                latitude: latitude
-                longitude: longitude
+                latitude: Const.MAP.CENTER.DEFAULT.LAT
+                longitude: Const.MAP.CENTER.DEFAULT.LNG
                 shopDistance: targetDistance
               # map表示用データの作成と設定
               setMapData(obj, true, true)

@@ -28,6 +28,16 @@ angular.module("frontApp")
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'
+    MAP:
+      ZOOM:
+        MIN: 9
+      CENTER:
+        DEFAULT:
+          LAT: 35.6813818
+          LNG: 139.7660838
+      METER_PER_PX: 238.09524
+      LAT_PER_METER: 0.00000901337
+      LNG_PER_METER: 0.0000109664
 
     ADS:
       AD300X250: [

@@ -1,0 +1,122 @@
+<ion-view title="" class="feature-detail-view">
+  <ion-content has-header="true" class="detail feature" ng-init="init()">
+
+    <ion-refresher
+      pulling-text="{{'TEXT.PULLING'|translate}}"
+      on-refresh="init()">
+    </ion-refresher>
+
+    <!-- MAIN IMAGE -->
+    <div class="row no-padding">
+      <div class="top-image no-padding">
+        <img ng-src="{{feature.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
+        <img ng-src="{{feature.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
+        <img ng-src="{{feature.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+      </div>
+    </div>
+    <div class="row no-padding no-margin" ng-if="feature.image_quotation_name">
+      <div class="image-quotation">
+        <span ng-bind="'POST.PHOTO_BY'|translate"></span>
+        <a href="{{feature.image_quotation_url}}" target="_blank">{{feature.image_quotation_name}}</a>
+      </div>
+    </div>
+
+    <!-- MAIN INFORMATION -->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="information">
+          <div class="name">
+            <h4 ng-bind="feature.category_name"></h4>
+            <h1 ng-bind="feature.title" class="mincho b"></h1>
+          </div>
+          <div class="tags" ng-if="periods.length > 0 && people.length > 0">
+            <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
+            <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
+          </div>
+          <div class="writer" ng-click="moveToWriterDetail()">
+            <p>
+              <span ng-bind="'POST.TEXT_BY'|translate"></span>
+              <span ng-bind="user.username"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hidden-xs">
+
+    <!-- DESCRIPTION -->
+    <div class="row padding-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="description"><p ng-bind-html="feature.content | newlines"></p></div>
+      </div>
+    </div>
+
+
+    <!-- Rerated Items -->
+    <div class="row detail-title" ng-repeat-start="detail in featureDetails" ng-if="detail.feature_detail.title">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <h2 class="number" ng-if="!detail.feature_detail.content">SPOT {{$index+1}}</h2>
+        <h2 class="title" ng-bind="detail.feature_detail.title"></h2>
+      </div>
+    </div>
+
+    <!-- DETAILS DESCRIPTION -->
+    <div class="row no-margin" ng-if="detail.feature_detail.content">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div><p ng-bind-html="detail.feature_detail.content | newlines"></p></div>
+        <div><h4 class="number">SPOT {{$index+1}}</h4></div>
+      </div>
+    </div>
+
+    <div class="row padding-bottom" ng-class="{'no-title': !detail.feature_detail.title && !detail.feature_detail.content}" ng-repeat-end>
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+        <!-- POST -->
+        <list-item-post
+           ng-if="detail.post"
+           ng-click="moveToPostDetail(detail.post.id)"
+           data="detail.post"
+           periods="detail.periods"
+           people="detail.people"
+           category="detail.post.category_name" >
+         </list-item-post>
+         <!-- SHOP -->
+         <list-item-shop
+            ng-if="detail.shop"
+            ng-click="moveToShopDetail(detail.shop.id)"
+            data="detail.shop"
+            categories="detail.categories"
+            periods="detail.periods"
+            people="detail.people"
+            rating="detail.rating.average"
+            hide-info="true" >
+          </list-item-shop>
+
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="row padding-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="detail-map" ng-if="feature.is_map">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+              <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
+              </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
+      </div>
+    </div>
+
+    <!-- SNS ICONS -->
+    <sns-icons
+      class="padding-top"
+      image-url="eyeCatchImage.image.url"
+      title="shop.name"
+      description="shop.description" >
+    </sns-icons>
+
+    <!-- ADVERTISEMENT -->
+    <advertisment-row seed="1"></advertisment-row>
+
+  </ion-content>
+</ion-view>
