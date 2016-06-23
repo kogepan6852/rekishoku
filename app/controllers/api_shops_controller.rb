@@ -44,7 +44,6 @@ class ApiShopsController < ApplicationController
     if params[:page] && params[:per]
       newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
-        # 返却用のオブジェクトを作成する
         newShops.push(get_shop_json(shop))
       end
       shops = newShops
@@ -60,13 +59,10 @@ class ApiShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
 
-    # 人に紐付く時代を全て抽出する
-    periods = Array.new()
-    @shop.people.each do |person|
-      person.periods.each do |period|
-        periods.push(period);
-      end
-    end
+    # shopに紐付いてる人物を取得する
+    people = get_people(@shop)
+    # shopに紐付けしている時代を取得をする
+    periods = get_periods(@shop.people)
 
     # 歴食度の設定
     rating = cal_rating(@shop)
@@ -77,7 +73,6 @@ class ApiShopsController < ApplicationController
     posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
     newPosts = Array.new()
 
-    # post情報整形
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
@@ -86,7 +81,7 @@ class ApiShopsController < ApplicationController
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
-             "people" => @shop.people.uniq,
+             "people" =>  people.uniq,
              "periods" => periods.uniq,
              "rating" => rating,
              "price" => price

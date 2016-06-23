@@ -29,11 +29,22 @@ module RelatedInfo
     return periods
   end
 
+  # 対象の情報から紐づく人物を取得する
+  def get_people(article)
+    people = Array.new()
+    article.people.each do |person|
+      if person[:rating] != 0.0
+         people.push(person)
+      end
+    end
+    return people
+  end
+
   def get_shop_json(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
     # shopsに紐付けしている時代を取得をする
-    periods = get_periods(people)
+    periods = get_periods(shop.people)
     # 歴食度の設定
     rating = cal_rating(shop)
     # 価格帯の取得
@@ -41,7 +52,7 @@ module RelatedInfo
     # 返却用のオブジェクトを作成する
     obj = { "shop" => shop,
             "categories" => shop.categories,
-            "people" => shop.people.uniq,
+            "people" => people.uniq,
             "periods" => periods.uniq,
             "rating" => rating,
             "price" => price
@@ -55,24 +66,14 @@ module RelatedInfo
     # postsに紐付いてる人物を取得する
     people = get_people(post)
     # postsに紐付けしている時代を取得をする
-    periods = get_periods(people)
+    periods = get_periods(post.people)
 
     # 返却用のオブジェクトを作成する
     obj = { "post" => postObj,
-            "people" => post.people,
+            "people" => people.uniq,
             "periods" => periods.uniq
           }
     return obj
   end
-
-  private
-    # 対象のお店から紐づく人物を取得する
-    def get_people(report)
-      people = Array.new()
-        report.people.each do |person|
-          people.push(person)
-        end
-      return people
-    end
 
 end

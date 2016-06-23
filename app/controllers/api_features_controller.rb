@@ -147,7 +147,9 @@ class ApiFeaturesController < ApplicationController
       people = Array.new()
       articles.each do |article|
         article.people.each do |person|
-          people.push(person)
+          if person[:rating] != 0.0
+            people.push(person)
+          end
         end
       end
       return people

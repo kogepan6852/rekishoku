@@ -62,11 +62,13 @@ class ApiPostsController < ApplicationController
       # people情報整形
       people = Array.new()
       @post.people.each do |person|
-        obj = {
-          "id" => person.id,
-          "name" => person.name,
-          "furigana" => person.furigana}
-        people.push(obj);
+        if person[:rating] != 0.0
+          obj = {
+            "id" => person.id,
+            "name" => person.name,
+            "furigana" => person.furigana}
+          people.push(obj);
+        end
       end
 
       # アイキャッチ画像設定
