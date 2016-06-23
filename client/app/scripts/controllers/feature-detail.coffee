@@ -28,6 +28,8 @@ angular.module 'frontApp'
         $scope.feature = res.data.feature
         $scope.featureDetails = res.data.feature_details
         $scope.user = res.data.user
+        $scope.people = res.data.people
+        $scope.periods = res.data.periods
 
         # Map用
         shops = []
