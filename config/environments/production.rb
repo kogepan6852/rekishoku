@@ -81,6 +81,6 @@ Rails.application.configure do
   GA.tracker = "UA-64757165-1"
 
   # prerender.io(SEO for SPA)
-  config.middleware.use Rack::Prerender, prerender_token: 'zeJzE6OXcjajAT4aENY9'
-  
+  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+
 end
