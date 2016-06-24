@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -37,9 +37,14 @@ angular.module 'frontApp'
 
         # SEO
         appKeywords = []
-        angular.forEach $scope.shops, (shop) ->
-          appKeywords.push(shop.shop.name)
-        $rootScope.appTitle = $scope.post.title
+        appKeywords.push($translate.instant('SEO.KEYWORDS.MEAL'))
+        angular.forEach $scope.people, (person) ->
+          appKeywords.push(person.name)
+        if $scope.post.category_slug =="cooking"
+          appKeywords = []
+          appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+          appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
         $rootScope.appDescription = $scope.post.content.substr(0, 150)
         $rootScope.appImage = $scope.post.image.url
         $rootScope.appKeywords = appKeywords.join()

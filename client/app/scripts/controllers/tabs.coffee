@@ -34,12 +34,12 @@ angular.module "frontApp"
       $rootScope.hideModeBtn = false
 
       if index == 0
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.HOME')
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.HOME')
         $location.path('/app/magazine').search('keywords', null)
         $rootScope.currentType = 'magazine'
 
       else if index == 1
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.SHOP')
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
         $location.path('/app/shops/list').search('keywords', null)
         $rootScope.currentType = 'shop'
 

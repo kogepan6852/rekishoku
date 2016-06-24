@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService) ->
+  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -87,7 +87,7 @@ angular.module 'frontApp'
         angular.forEach $scope.featureDetails, (featureDetail) ->
           if featureDetail.shop
             appKeywords.push(featureDetail.shop.name)
-        $rootScope.appTitle = $scope.feature.title
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.feature.title
         $rootScope.appDescription = $scope.feature.content.substr(0, 150)
         $rootScope.appImage = $scope.feature.image.url
         $rootScope.appKeywords = appKeywords.join()

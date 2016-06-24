@@ -48,7 +48,15 @@ angular.module "frontApp"
       Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + res.data.user.username
+
+        # SEO
+        appKeywords = []
+        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+        appKeywords.push($scope.user.username)
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
+        $rootScope.appDescription = $scope.user.profile.substr(0, 150)
+        $rootScope.appImage = $scope.user.image.url
+        $rootScope.appKeywords = appKeywords.join()
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true

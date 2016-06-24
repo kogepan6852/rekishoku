@@ -2,18 +2,22 @@
 <html ng-app="frontApp">
   <head  ng-controller="BaseCtrl">
     <base href="/">
+    <meta name="fragment" content="!">
     <meta charset="utf-8">
-    <title ng-if="!appDescription">歴食 | 食べる、歴史体験</title>
-    <title ng-if="appDescription">{{appTitle}}</title>
+    <title ng-if="!appTitle">歴食 | 食べる、歴史体験</title>
+    <title ng-if="appTitle">{{appTitle}}</title>
     <meta name="description"        content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription"/>
     <meta name="description"        content="{{appDescription}}" ng-if="appDescription"/>
     <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" ng-if="!appKeywords"/>
     <meta name="keywords"           content="{{appKeywords}}" ng-if="appKeywords"/>
     <!-- FB -->
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="歴食" />
-    <meta property="og:description" content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" />
-    <meta property="og:image"       content="http://rekishoku.jp/logo.png" />
+    <meta property="og:title"       content="歴食" ng-if="!appTitle" />
+    <meta property="og:title"       content="{{appTitle}}" ng-if="appTitle" />
+    <meta property="og:description" content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription" />
+    <meta property="og:description" content="{{appDescription}}" ng-if="appDescription" />
+    <meta property="og:image"       content="http://rekishoku.jp/logo.png" ng-if="!appImage" />
+    <meta property="og:image"       content="http://rekishoku.jp/logo.png" ng-if="appImage" />
     <!-- mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">

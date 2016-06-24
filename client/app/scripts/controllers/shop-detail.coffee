@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -67,9 +67,9 @@ angular.module 'frontApp'
 
         # SEO
         appKeywords = []
-        angular.forEach $scope.people, (person) ->
-          appKeywords.push(person.name)
-        $rootScope.appTitle = $scope.shop.name
+        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+        appKeywords.push($scope.shop.name)
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.shop.name
         $rootScope.appDescription = $scope.shop.description.substr(0, 150)
         $rootScope.appImage = $scope.shop.subimage.url
         $rootScope.appKeywords = appKeywords.join()

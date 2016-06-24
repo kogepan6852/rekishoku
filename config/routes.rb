@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   root to: 'app_route#show'
-  get 'app/post/*path', to: 'app_route#post'
-  get 'app/shop/*path', to: 'app_route#shop'
+  # get 'app/post/*path', to: 'app_route#post'
+  # get 'app/shop/*path', to: 'app_route#shop'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: 'app_route#show'
   # 旧URL対応
