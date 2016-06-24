@@ -230,7 +230,7 @@ RailsAdmin.config do |config|
 
   ## 店舗
   config.model 'Shop' do
-    label "お店登録"
+    label "お店"
     weight 1
 
     list do
@@ -430,7 +430,7 @@ RailsAdmin.config do |config|
 
   ## 投稿カテゴリ
   config.model 'Post' do
-    label "投稿記事"
+    label "記事"
     weight 0
     list do
       field :id
@@ -561,7 +561,7 @@ RailsAdmin.config do |config|
 
     ####  特集
     config.model 'Feature' do
-      label "特集作成"
+      label "特集"
       weight 0
       list do
         field :id
@@ -632,7 +632,7 @@ RailsAdmin.config do |config|
 
      ## 特集詳細
       config.model 'FeatureDetail' do
-        label "特集概要作成"
+        label "特集詳細"
         weight 0
         list do
           field :title do
@@ -666,14 +666,10 @@ RailsAdmin.config do |config|
               required true
               help "必須"
             end
-            field :related_type , :enum do
-            enum do
-              Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
-            end
-              label "どのDBか"
-            end
-            field :related_id do
-              label "参照DBのID"
+            field :related do
+              label "紐付けする情報"
+              help "必須"
+              required true
             end
         end
        end
