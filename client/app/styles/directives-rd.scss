@@ -34,6 +34,11 @@
          left: 45%;
          width: 55%;
 
+         h2 {
+           font-size: $h3;
+           line-height: $h3;
+         }
+
          >div {
            overflow: hidden;
            height: 100%;
