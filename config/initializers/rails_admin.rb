@@ -91,10 +91,10 @@ RailsAdmin.config do |config|
       end
       field :role, :enum do
       enum do
-        Hash[ ['管理者', '一般ユーザー','ライター','特集編集者'].zip(['0','1','2','3']) ]
+        Hash[ ['管理者', '一般ユーザー','ライター','編集者'].zip(['0','1','2','3']) ]
       end
         label "管理レベル"
-        help "必須　0:管理者　1:一般ユーザー 2:ライター 3:特集編集者"
+        help "必須　0:管理者　1:一般ユーザー 2:ライター 3:編集者"
         required true
       end
     end
