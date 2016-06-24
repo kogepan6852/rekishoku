@@ -60,7 +60,7 @@ angular.module 'frontApp'
               title: featureDetail.shop.name
               url: featureDetail.shop.image.thumb.url
               icon:
-                url: '../images/map-pin-' + (i + 1) + '.png'
+                url: '../images/map-pin.png'
                 scaledSize : new google.maps.Size(25, 35)
             ret['id'] = featureDetail.shop.id
             shops.push(ret)
