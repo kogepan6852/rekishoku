@@ -53,6 +53,7 @@ angular.module 'frontApp'
         # Map用アイコンの設定
         angular.forEach $scope.featureDetails, (featureDetail, i) ->
           if featureDetail.shop
+            url = '../images/map-pin' + (i + 1) + '.png'
             ret =
               latitude: featureDetail.shop.latitude
               longitude: featureDetail.shop.longitude
@@ -60,7 +61,7 @@ angular.module 'frontApp'
               title: featureDetail.shop.name
               url: featureDetail.shop.image.thumb.url
               icon:
-                url: '../images/map-pin1.png'
+                url: url
                 scaledSize : new google.maps.Size(25, 35)
             ret['id'] = featureDetail.shop.id
             shops.push(ret)
