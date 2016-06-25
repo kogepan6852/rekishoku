@@ -289,7 +289,7 @@ RailsAdmin.config do |config|
       field :image_quotation_name do
         label "画像掲載元名称"
       end
-      field :post_quotation_name do
+      field :post_quotation_url do
         label "記事参照元URL"
       end
       field :post_quotation_name do
@@ -401,7 +401,7 @@ RailsAdmin.config do |config|
       end
       field :person_level, :enum do
       enum do
-        Hash[ ['不明','1:庶民', '2:有名人1人','3:有名人2人以上'].zip(['-1','1','2','3']) ]
+        Hash[ ['不明','0','1', '2','3'].zip(['-1','0','1','2','3']) ]
       end
         label "人物レベル"
         help "必須"
