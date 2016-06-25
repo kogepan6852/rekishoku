@@ -42,7 +42,7 @@ module RelatedInfo
 
   def get_check_people(check_people)
     people = Array.new()
-    check_people.order(rating: :desc).each do |person|
+    check_people.each do |person|
       if person[:rating] != 0.0
          people.push(person)
       end

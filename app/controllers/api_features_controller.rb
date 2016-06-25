@@ -67,7 +67,7 @@ class ApiFeaturesController < ApplicationController
           # people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
-        people = get_check_people(people)
+        people = get_check_people(people).sort {|(k1, v1), (k2, v2)| v2 <=> v1 }
 
         # 返却用のオブジェクトを作成する
         fatureData = {
@@ -121,7 +121,7 @@ class ApiFeaturesController < ApplicationController
       end
 
       periods += get_periods(people)
-      people = get_check_people(people)
+      people = get_check_people(people).sort {|(k1, v1), (k2, v2)| v2 <=> v1 }
 
       # 返却用のオブジェクトを作成する
       feature = {
