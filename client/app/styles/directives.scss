@@ -50,6 +50,17 @@ star {
       font-size: $h4!important;
       display: none;
     }
+
+    .count {
+      width: 76px;
+      text-align: center;
+      height: 22px;
+
+      span {
+        font-size: $h4;
+      }
+    }
+
   }
 
 }
