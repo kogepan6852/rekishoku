@@ -47,6 +47,12 @@ module RelatedInfo
          people.push(person)
       end
     end
+
+    ## 連想配列のキーでの降順処理
+    people.sort! do |a, b|
+      b[:rating] <=> a[:rating]
+    end
+
     return people
   end
 
