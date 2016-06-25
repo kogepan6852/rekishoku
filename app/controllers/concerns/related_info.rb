@@ -40,6 +40,16 @@ module RelatedInfo
     return people
   end
 
+  def get_check_people(check_people)
+    people = Array.new()
+    check_people.each do |person|
+      if person[:rating] != 0.0
+         people.push(person)
+      end
+    end
+    return people
+  end
+
   def get_shop_json(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)

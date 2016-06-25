@@ -225,6 +225,9 @@ RailsAdmin.config do |config|
            label "関係がある時代"
            help "対象カテゴリを右に移動してくだい"
         end
+        field :categories  do
+          label "対応するカテゴリを選択してください"
+        end
       end
     end
 
