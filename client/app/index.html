@@ -1,9 +1,11 @@
 <!doctype html>
-<html ng-app="frontApp">
+<html ng-app="frontApp" lang="ja">
   <head  ng-controller="BaseCtrl">
     <base href="/">
     <meta name="fragment" content="!">
     <meta charset="utf-8">
+    <meta http-equiv="content-language" content="ja">
+
     <title ng-if="!appTitle">歴食 | 食べる、歴史体験</title>
     <title ng-if="appTitle">{{appTitle}}</title>
     <meta name="description"        content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription"/>
@@ -23,8 +25,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="images/icon.png">
-    <!-- iPhone 5 Retina -->
-    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="images/splash-image-640x1096.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->

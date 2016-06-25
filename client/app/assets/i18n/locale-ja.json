@@ -57,8 +57,8 @@
     "WEB":            "WEB",
     "TIME":           "営業時間",
     "MENU":           "代表メニュー",
-    "DAYTIME":        "昼：¥",
-    "NIGHTTIME":      "夜：¥"
+    "DAYTIME":        "昼：",
+    "NIGHTTIME":      "夜："
   },
   "POST_LIST": {
     "TITLE":          "タイトル",
