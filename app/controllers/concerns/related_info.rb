@@ -32,7 +32,7 @@ module RelatedInfo
   # 対象の情報から紐づく人物を取得する
   def get_people(article)
     people = Array.new()
-    article.people.each do |person|
+    article.people.order(rating: :desc).each do |person|
       if person[:rating] != 0.0
          people.push(person)
       end
@@ -42,7 +42,7 @@ module RelatedInfo
 
   def get_check_people(check_people)
     people = Array.new()
-    check_people.each do |person|
+    check_people.order(rating: :desc).each do |person|
       if person[:rating] != 0.0
          people.push(person)
       end
