@@ -135,9 +135,9 @@
     .tel { margin: 20px 0; }
 
     star {
-      i { font-size: 44px; }
+      i { font-size: $h1; }
       div.star-count {
-        font-size: 36px;
+        font-size: $h2;
         span {
           padding-bottom: 5px;
         }
@@ -147,8 +147,17 @@
     .other {
       margin: 10px 0;
       .price { padding-right: 8px; }
-    }
 
+      .rating-details {
+        padding: 5px 0;
+
+        star {
+          float: left;
+          width: 50%;
+        }
+      }
+
+    }
   }
 
   .sub-info {

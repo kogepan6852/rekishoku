@@ -22,7 +22,7 @@
     </div>
 
     <!-- MAIN INFORMATION -->
-    <div class="row row-bottom">
+    <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="information">
           <div class="name">
@@ -49,8 +49,15 @@
               <span class="price">
                 <span ng-bind="price.nighttime.min | currency:'¥':0"></span> - <span ng-bind="price.nighttime.max | number"></span>
               </span>
-          </p>
+            </p>
             <star label="true" count="rating.average"></star>
+            <div class="rating-details">
+              <star label="true" count="rating.detail.history" type="history"></star>
+              <star label="true" count="rating.detail.person" type="person"></star>
+              <star label="true" count="rating.detail.building" type="building"></star>
+              <star label="true" count="rating.detail.episode" type="episode"></star>
+              <star label="true" count="rating.detail.menu" type="menu"></star>
+            </div>
           </div>
         </div>
       </div>

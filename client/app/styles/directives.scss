@@ -11,6 +11,7 @@ star {
     display: table-cell;
 
     &.star-label {
+      font-size: $h3;
       padding-top: 7px;
       padding-right: 10px;
       color: $darkGrayColor;
@@ -24,11 +25,33 @@ star {
 
     &.star-count {
       font-size: $h4;
-      padding-left: 5px;
+      padding-left: 10px;
       color: $grayColor;
       vertical-align: middle;
     }
   }
+
+  .small-star {
+    padding-left: 10px;
+    padding-right: 5px;
+
+    .star-label {
+      padding-top: 2px;
+      padding-right: 5px;
+      font-size: $h6;
+      width: 70px;
+    }
+
+    i {
+      font-size: $h3!important;
+    }
+
+    .star-count {
+      font-size: $h4!important;
+      display: none;
+    }
+  }
+
 }
 
 /**********************

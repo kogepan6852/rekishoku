@@ -58,7 +58,15 @@
     "TIME":           "営業時間",
     "MENU":           "代表メニュー",
     "DAYTIME":        "昼：",
-    "NIGHTTIME":      "夜："
+    "NIGHTTIME":      "夜：",
+    "HF_RATING":      "歴食度",
+    "RATING": {
+      "HISTORY":      "創業年",
+      "BUILDING":     "建物",
+      "MENU":         "メニュー",
+      "PERSON":       "人物",
+      "EPISODE":      "エピソード"
+    }
   },
   "POST_LIST": {
     "TITLE":          "タイトル",

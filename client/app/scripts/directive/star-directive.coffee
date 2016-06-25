@@ -1,14 +1,28 @@
 "use strict"
 
 angular.module "frontApp"
-  .directive 'star', ->
+  .directive 'star', ($translate) ->
     return {
       restrict: 'E'
       scope:
         label: '=label'
         count: '=count'
+        type: '@type'
       templateUrl: 'views/directives/star-directive.html'
       link: (scope, element, attrs) ->
+        if scope.type == "history"
+          scope.title = $translate.instant('SHOP.RATING.HISTORY')
+        else if scope.type == "building"
+          scope.title = $translate.instant('SHOP.RATING.BUILDING')
+        else if scope.type == "menu"
+          scope.title = $translate.instant('SHOP.RATING.MENU')
+        else if scope.type == "person"
+          scope.title = $translate.instant('SHOP.RATING.PERSON')
+        else if scope.type == "episode"
+          scope.title = $translate.instant('SHOP.RATING.EPISODE')
+        else
+          scope.title = $translate.instant('SHOP.HF_RATING')
+
         scope.$watch 'count', ->
           # 星ありの数
           starCount = Math.floor(scope.count);  # 整数部の取得

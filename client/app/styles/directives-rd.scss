@@ -3,6 +3,24 @@
 // SM以上
 @media screen and (min-width:768px){
   /**********************
+   * star
+   **********************/
+  star {
+    .small-star {
+      padding-left: 20px;
+
+      .star-label {
+        width: 110px;
+      }
+
+      i {
+        font-size: $h3!important;
+      }
+
+    }
+  }
+
+  /**********************
    * info-tag
    **********************/
    info-tag {
