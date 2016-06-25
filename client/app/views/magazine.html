@@ -28,7 +28,8 @@
       <div class="top-area" ng-if="!keywords && !period && !person && !category && !province">
         <!-- POST -->
         <a class="item feature left-box" ng-click="moveToPostDetail(topItem.post.id)">
-          <img class="main-img" src="../images/sample.png" ng-src="{{topItem.post.image.image.md.url}}">
+          <img class="main-img visible-md visible-lg" src="../images/sample.png" ng-src="{{topItem.post.image.image.lg.url}}">
+          <img class="main-img visible-xs visible-sm" src="../images/sample.png" ng-src="{{topItem.post.image.image.md.url}}">
           <div class="category" ng-if="topItem">
             <span ng-bind="topItem.post.category_name"></span>
           </div>

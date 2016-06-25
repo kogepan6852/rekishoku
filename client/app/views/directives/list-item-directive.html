@@ -1,11 +1,11 @@
 <a class="item">
   <img class="main-img" src="../images/dummy-img.png">
 
-  <!-- POST -->
   <img class="main-img subimage visible-lg" ng-src="{{data.image.image.lg.url}}" ng-if="target=='post'">
   <img class="main-img subimage visible-md visible-sm" ng-src="{{data.image.image.md.url}}" ng-if="target=='post'">
   <img class="main-img subimage visible-xs" ng-src="{{data.image.image.sm.url}}" ng-if="target=='post'">
 
+  <!-- POST -->
   <div class="category" ng-if="target=='post'">
     <span ng-bind="category"></span>
   </div>
