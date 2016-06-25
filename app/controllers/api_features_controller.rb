@@ -67,6 +67,7 @@ class ApiFeaturesController < ApplicationController
           # people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
+        people = get_check_people(people)
 
         # 返却用のオブジェクトを作成する
         fatureData = {
@@ -120,7 +121,7 @@ class ApiFeaturesController < ApplicationController
       end
 
       periods += get_periods(people)
-      people += get_check_people(people)
+      people = get_check_people(people)
 
       # 返却用のオブジェクトを作成する
       feature = {
@@ -148,9 +149,7 @@ class ApiFeaturesController < ApplicationController
       people = Array.new()
       articles.each do |article|
         article.people.each do |person|
-          if person[:rating] != 0.0
             people.push(person)
-          end
         end
       end
       return people
