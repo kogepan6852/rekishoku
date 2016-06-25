@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620054851) do
+ActiveRecord::Schema.define(version: 20160625154206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(version: 20160620054851) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "categories_features", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "feature_id",  null: false
-  end
-
-  add_index "categories_features", ["category_id"], name: "index_categories_features_on_category_id", using: :btree
-  add_index "categories_features", ["feature_id"], name: "index_categories_features_on_feature_id", using: :btree
 
   create_table "categories_people", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
@@ -237,8 +229,6 @@ ActiveRecord::Schema.define(version: 20160620054851) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "categories_features", "categories"
-  add_foreign_key "categories_features", "features"
   add_foreign_key "categories_people", "categories"
   add_foreign_key "categories_people", "people"
   add_foreign_key "categories_shops", "categories"
