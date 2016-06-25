@@ -7,7 +7,7 @@ class ApiPostsController < ApplicationController
   # GET /api/posts
   # 一覧表示
   def index
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]

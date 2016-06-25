@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc)
+    @shops = Shop.order(created_at: :desc, id: :desc)
 
     # フリーワードで検索
     if params[:keywords]
