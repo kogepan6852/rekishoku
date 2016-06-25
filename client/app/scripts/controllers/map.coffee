@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService, $state, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -16,8 +16,8 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $rootScope.hideFooter = false
-    $rootScope.hideModeBtn = false
+    $rootScope.isHideTab = false
+    $ionicNavBarDelegate.showBackButton false
 
     DataService.getShopCategory (data) ->
       $scope.categories = data
@@ -87,6 +87,11 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
+      # mapへ直アクセスかどうかの判定
+      $scope.isDirect = false
+      if $state.is("map")
+        $scope.isDirect = true
+
       if $rootScope.zoom
         targetDistance = BaseService.calMapDistance($rootScope.zoom)
       if $rootScope.targetAddress

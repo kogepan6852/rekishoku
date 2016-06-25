@@ -26,7 +26,7 @@ angular
     'angulartics',
     'angulartics.google.analytics'
   ]
-  .config ($stateProvider, $urlRouterProvider) ->
+  .config ($stateProvider, $urlRouterProvider, $routeProvider) ->
     $stateProvider
       .state 'tabs',
         abstract: true,
@@ -54,6 +54,13 @@ angular
           'tab-shop-list':
             templateUrl: 'views/shops.html'
             controller: 'ShopsCtrl'
+
+      # STORE TAB MAP DIRECT
+      .state 'map',
+        cache: false
+        url: '/app/shops/map'
+        templateUrl: 'views/map.html'
+        controller: 'MapCtrl'
 
       # STORE TAB MAP
       .state 'tabs.shop.map',
@@ -102,6 +109,13 @@ angular
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
 
+      # STORE DETAIL from MAP DIRECT
+      .state 'mapShopDetal',
+        cache: false
+        url: '/app/map-shop/:id'
+        templateUrl: 'views/shop-detail.html'
+        controller: 'ShopDetailCtrl'
+
       # STORE LISTタブ用の各ページのルーティング
       .state 'tabs.shop.shopDetail',
         cache: false
@@ -128,7 +142,7 @@ angular
       # STORE DETAILS
       .state 'tabs.shop.detailMap',
         cache: false
-        url: '/app/map-shop/:id'
+        url: '/app/map/shop/:id'
         views:
           'tab-shop-map':
             templateUrl: 'views/shop-detail.html'

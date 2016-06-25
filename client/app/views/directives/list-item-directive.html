@@ -31,11 +31,11 @@
       <p class="price">
         <span ng-bind="'SHOP.DAYTIME'|translate"></span>
         <span class="daytime">
-          <span ng-bind="price.daytime.min | currency:'¥':0"></span> - <span ng-bind="price.daytime.max | currency:'¥':0"></span>
+          <span ng-bind="price.daytime.min | currency:'¥':0"></span> - <span ng-bind="price.daytime.max | number"></span>
         </span>
         <span ng-bind="'SHOP.NIGHTTIME'|translate"></span>
         <span class="nighttime">
-          <span ng-bind="price.nighttime.min | currency:'¥':0"></span> - <span ng-bind="price.nighttime.max | currency:'¥':0"></span>
+          <span ng-bind="price.nighttime.min | currency:'¥':0"></span> - <span ng-bind="price.nighttime.max | number"></span>
         </span>
       </p>
       <p class="rep-menu">
