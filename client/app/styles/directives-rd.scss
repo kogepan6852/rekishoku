@@ -114,6 +114,10 @@
    list-item-shop {
      .item {
        .detail {
+         h2 {
+           white-space: nowrap;
+         }
+
          >div {
            padding-left: 15px;
 

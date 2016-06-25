@@ -140,13 +140,12 @@ star {
        height: 100%;
 
        .description {
-        //  font-size: $h5;
-        //  line-height: $h4;
          margin-top: 15px;
          margin-bottom: 0;
          overflow: hidden;
          white-space: normal;
          color: #000;
+         white-space: nowrap;
        }
 
        h2 {
@@ -198,6 +197,9 @@ star {
  list-item-shop {
    .item {
      .detail {
+       h2 {
+         max-height: 32px;
+       }
        .description {
          font-size: $h5;
          line-height: $h4;
