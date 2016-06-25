@@ -76,6 +76,8 @@ angular.module "frontApp"
 
     # 検索条件削除
     $scope.deleteSearchCondition = ->
+      $scope.noMoreLoad = false
+      
       $scope.category = null
       $scope.keywords = null
       $scope.period = null
