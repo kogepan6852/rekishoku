@@ -145,7 +145,6 @@ star {
          overflow: hidden;
          white-space: normal;
          color: #000;
-         white-space: nowrap;
        }
 
        h2 {
@@ -203,6 +202,7 @@ star {
        .description {
          font-size: $h5;
          line-height: $h4;
+         white-space: nowrap;
        }
        .price, .rep-menu {
          font-size: $h5;
