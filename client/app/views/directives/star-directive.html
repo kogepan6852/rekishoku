@@ -1,8 +1,8 @@
 <div ng-class="{'small-star': type}">
   <div ng-if="label" class="star-label" ng-bind="title"></div>
   <div class="count">
-    <i ng-class="star" ng-if="count" ng-repeat="star in stars track by $index "></i>
-    <span ng-if="!count">-</span>
+    <i ng-class="star" ng-if="count != null" ng-repeat="star in stars track by $index "></i>
+    <span ng-if="count == null">-</span>
   </div>
   <div class="star-count" ng-bind="count | number:1"></div>
 </div>
