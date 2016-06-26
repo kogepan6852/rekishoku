@@ -55,7 +55,7 @@ angular.module "frontApp"
         appKeywords.push($scope.user.username)
         $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
         $rootScope.appDescription = $scope.user.profile.substr(0, 150)
-        $rootScope.appImage = $scope.user.image.url
+        $rootScope.appImage = $scope.user.image.image.md.url
         $rootScope.appKeywords = appKeywords.join()
 
       if String($stateParams.id) == String($localStorage['user_id'])
