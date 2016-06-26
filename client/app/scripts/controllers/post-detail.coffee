@@ -46,7 +46,7 @@ angular.module 'frontApp'
           appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
         $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
         $rootScope.appDescription = $scope.post.content.substr(0, 150)
-        $rootScope.appImage = $scope.post.image.url
+        $rootScope.appImage = $scope.eyeCatchImage.image.md.url
         $rootScope.appKeywords = appKeywords.join()
 
         # 関連投稿内容取得

@@ -71,7 +71,7 @@ angular.module 'frontApp'
         appKeywords.push($scope.shop.name)
         $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.shop.name
         $rootScope.appDescription = $scope.shop.description.substr(0, 150)
-        $rootScope.appImage = $scope.shop.subimage.url
+        $rootScope.appImage = $scope.shop.subimage.md.url
         $rootScope.appKeywords = appKeywords.join()
 
         $scope.$broadcast 'scroll.refreshComplete'

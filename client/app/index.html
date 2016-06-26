@@ -19,7 +19,7 @@
     <meta property="og:description" content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription" />
     <meta property="og:description" content="{{appDescription}}" ng-if="appDescription" />
     <meta property="og:image"       content="http://rekishoku.jp/logo.png" ng-if="!appImage" />
-    <meta property="og:image"       content="http://rekishoku.jp/logo.png" ng-if="appImage" />
+    <meta property="og:image"       content="{{appImage}}" ng-if="appImage" />
     <!-- mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">

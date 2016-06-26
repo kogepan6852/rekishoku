@@ -37,8 +37,9 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
-  add '/app', :changefreq => 'daily', :priority => 0.9
-  add '/about', :changefreq => 'daily', :priority => 0.9
+  add '/app/magazine', :changefreq => 'daily', :priority => 0.9
+  add '/app/shops/list', :changefreq => 'daily', :priority => 0.8
+  add '/about', :changefreq => 'yearly', :priority => 0.5
   Post.find_each do |post|
     if post.status == 1
       add '/app/post/' + post.id.to_s, :lastmod => post.updated_at, :changefreq => 'weekly'
@@ -46,6 +47,11 @@ SitemapGenerator::Sitemap.create do
   end
   Shop.find_each do |shop|
     add '/app/shop/' + shop.id.to_s, :lastmod => shop.updated_at, :changefreq => 'weekly'
+  end
+  User.find_each do |user|
+    if user.role == 1 || user.role == 2
+      add '/app/writer/' + user.id.to_s, :lastmod => user.updated_at, :changefreq => 'weekly'
+    end
   end
 
 end
