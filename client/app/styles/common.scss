@@ -560,13 +560,15 @@ label {
   max-width: initial;
 }
 
-.row {
-  margin-left: initial;
-  margin-right: initial;
-  display: block;
-  > div {
-    padding-left: 5px;
-    padding-right: 5px;
+ion-view {
+  .row {
+    margin-left: initial;
+    margin-right: initial;
+    display: block;
+    > div {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   }
 }
 
