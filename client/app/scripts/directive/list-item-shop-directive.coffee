@@ -15,4 +15,7 @@ angular.module "frontApp"
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
         scope.target = "shop"
+        # レイアウトのリサイズを検知
+        scope.$on 'resize::resize', (event, args) ->
+          scope.windowType = args.windowType
     }

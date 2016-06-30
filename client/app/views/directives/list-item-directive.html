@@ -1,11 +1,14 @@
 <a class="item">
   <img class="main-img" src="../images/dummy-img.png">
 
-  <img class="main-img subimage visible-lg" ng-src="{{data.image.image.lg.url}}" ng-if="target=='post'">
-  <img class="main-img subimage visible-md visible-sm" ng-src="{{data.image.image.md.url}}" ng-if="target=='post'">
-  <img class="main-img subimage visible-xs" ng-src="{{data.image.image.sm.url}}" ng-if="target=='post'">
-
   <!-- POST -->
+  <img class="main-img subimage visible-lg visible-md visible-sm"
+      ng-src="{{data.image.image.md.url}}"
+      ng-if="target=='post' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
+  <img class="main-img subimage visible-xs"
+      ng-src="{{data.image.image.sm.url}}"
+      ng-if="target=='post' && windowType=='xs'">
+
   <div class="category" ng-if="target=='post'">
     <span ng-bind="category"></span>
   </div>
@@ -17,7 +20,13 @@
   </div>
 
   <!-- SHOP -->
-  <img class="main-img subimage" ng-src="{{data.subimage.md.url}}" ng-if="target=='shop'">
+  <img class="main-img subimage visible-lg visible-md visible-sm"
+      ng-src="{{data.subimage.md.url}}"
+      ng-if="target=='shop' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
+  <img class="main-img subimage visible-xs"
+      ng-src="{{data.subimage.sm.url}}"
+      ng-if="target=='shop' && windowType=='xs'">
+
   <div class="detail" ng-if="target=='shop'">
     <h2 ng-bind="data.name" class="mincho"></h2>
     <star count="rating"></star>
