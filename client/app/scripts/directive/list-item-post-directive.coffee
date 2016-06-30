@@ -9,11 +9,8 @@ angular.module "frontApp"
         periods: '=periods'
         people: '=people'
         category: '=category'
+        windowType: '=windowType'
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
         scope.target = "post"
-        # レイアウトのリサイズを検知
-        scope.$on 'resize::resize', (event, args) ->
-          scope.windowType = args.windowType
-
     }
