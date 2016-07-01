@@ -9,9 +9,10 @@
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
-        <img ng-src="{{shop.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
-        <img ng-src="{{shop.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
-        <img ng-src="{{shop.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{shop.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg" ng-if="windowType=='lg'">
+        <img ng-src="{{shop.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md" ng-if="windowType=='sm' || windowType=='md'">
+        <img ng-src="{{shop.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
@@ -75,8 +76,9 @@
     <!-- SUB IMAGE -->
     <div class="row no-padding">
       <div class="detail-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <img ng-src="{{shop.subimage.lg.url}}" src="../images/dummy-img.png" class="hidden-xs">
-        <img ng-src="{{shop.subimage.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{shop.subimage.lg.url}}" src="../images/dummy-img.png" class="hidden-xs" ng-if="windowType!='xs' && windowType">
+        <img ng-src="{{shop.subimage.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">

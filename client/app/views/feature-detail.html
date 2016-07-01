@@ -9,9 +9,10 @@
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
-        <img ng-src="{{feature.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
-        <img ng-src="{{feature.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
-        <img ng-src="{{feature.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{feature.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg" ng-if="windowType=='lg'">
+        <img ng-src="{{feature.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md" ng-if="windowType=='sm' || windowType=='md'">
+        <img ng-src="{{feature.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="feature.image_quotation_name">

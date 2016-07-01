@@ -4,9 +4,10 @@
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
-        <img ng-src="{{post.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
-        <img ng-src="{{post.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
-        <img ng-src="{{post.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{post.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg" ng-if="windowType=='lg'">
+        <img ng-src="{{post.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md" ng-if="windowType=='sm' || windowType=='md'">
+        <img ng-src="{{post.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="post.quotation_name">
@@ -60,8 +61,9 @@
     <!-- DETAILS IMAGE -->
     <div class="row no-padding" ng-if="postDetail.image.url">
       <div class="detail-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <img ng-src="{{postDetail.image.w960.url}}" src="../images/dummy-img.png" class="hidden-xs">
-        <img ng-src="{{postDetail.image.w640.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{postDetail.image.w960.url}}" src="../images/dummy-img.png" class="hidden-xs" ng-if="windowType!='xs' && windowType">
+        <img ng-src="{{postDetail.image.w640.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <!-- DETAILS DESCRIPTION -->
