@@ -92,4 +92,4 @@ angular.module "frontApp"
 
     # レイアウトのリサイズを検知
     $scope.$on 'resize::resize', (event, args) ->
-      $scope.windowType = args.windowType
+      $rootScope.windowType = args.windowType
