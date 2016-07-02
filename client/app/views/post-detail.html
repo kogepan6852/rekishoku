@@ -28,7 +28,7 @@
           <div class="date" ng-if="post.category_slug=='news'">
             <p ng-bind="post.published_at | date:'yyyy/M/d'"></p>
           </div>
-          <div class="tags" ng-if="periods.length > 0 && people.length > 0">
+          <div class="tags" ng-if="periods.length > 0 || people.length > 0">
             <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
             <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
           </div>
