@@ -63,7 +63,7 @@ angular.module "frontApp"
 
       # 現在タブの判定
       if $state.is('tabs.writerPost')
-        $scope.nowTab = 'post'
+        $scope.nowTab = 'magazine'
       else if $state.is('tabs.shop.mapWriter')
         $scope.nowTab = 'map'
       else if $state.is('tabs.shop.writerDetail')
