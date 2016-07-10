@@ -558,6 +558,12 @@ RailsAdmin.config do |config|
        field :quotation_name do
          label "引用したサイト名"
        end
+       field :is_eye_catch, :enum do
+       enum do
+         Hash[ ['設定しない','設定する'].zip([false, true]) ]
+       end
+         label "アイキャッチ画像"
+       end
      end
     end
 

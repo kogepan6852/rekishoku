@@ -87,6 +87,6 @@ class PostDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_detail_params
-      params.require(:post_detail).permit(:post_id, :title, :image, :content, :quotation_url, :quotation_name)
+      params.require(:post_detail).permit(:post_id, :title, :image, :content, :quotation_url, :quotation_name, :is_eye_catch)
     end
 end
