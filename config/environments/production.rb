@@ -82,12 +82,4 @@ Rails.application.configure do
 
   # prerender.io(SEO for SPA)
   config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
-
-  # rack-cors (for web-font)
-  config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins '*'
-      resource '*', :headers => 'Content-*', :methods => [:get], :max_age => 0
-    end
-  end
 end
