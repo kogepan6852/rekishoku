@@ -64,6 +64,13 @@ class PostDetailsController < ApplicationController
   # PATCH/PUT /post_details/1
   # PATCH/PUT /post_details/1.json
   def update
+
+    if post_detail_params[:is_eye_catch]
+      post_details = PostDetail.where(params[:post_id])
+      post_details.each do |post_detail|
+        post_detail.update(is_eye_catch: false)
+      end
+    end
     @post_detail.update(post_detail_params)
     redirect_to "/admin/post_detail"
   end
