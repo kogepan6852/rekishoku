@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
+  config.action_controller.asset_host = "//#{ENV['CDN_ASSET_HOST']}" unless ENV['CDN_ASSET_HOST'].blank?
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -83,4 +83,11 @@ Rails.application.configure do
   # prerender.io(SEO for SPA)
   config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
 
+  # rack-cors (for web-font)
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', :headers => 'Content-*', :methods => [:get], :max_age => 0
+    end
+  end
 end
