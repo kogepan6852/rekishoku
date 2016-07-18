@@ -52,8 +52,7 @@ class ApiPostsController < ApplicationController
   # 詳細データ表示
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
-    logger.debug(params[:preview])
-    if params[:preview] == "true" || @post.status == 1 && @post.published_at <= Date.today
+    if params[:preview] == "true" || @post.status == 1
       # user情報整形
       user = {
         "id" => @post.user.id,

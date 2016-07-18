@@ -73,7 +73,7 @@ angular
 
       # MAGAZINEタブ用の各ページのルーティング
       .state 'tabs.postDetal',
-        url: '/app/post/:id'
+        url: '/app/post/:id?preview'
         views:
           'tab-magazine':
             templateUrl: 'views/post-detail.html'
