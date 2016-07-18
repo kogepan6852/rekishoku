@@ -17,7 +17,7 @@
       <ion-slide-box delegate-handle="modal-post">
         <!-- メイン投稿 -->
         <ion-slide>
-          <ion-content>
+          <ion-content has-bouncing="false">
             <div class="list">
               <div class="item">
                 <div class="button-bar">
@@ -59,7 +59,7 @@
         </ion-slide>
 
         <ion-slide ng-repeat="detail in input.details">
-          <ion-content>
+          <ion-content has-bouncing="false">
             <div class="list">
               <label class="item item-input-inset item-stacked-label-xs">
                 <span class="input-label">サブタイトル{{detail.index}}</span>

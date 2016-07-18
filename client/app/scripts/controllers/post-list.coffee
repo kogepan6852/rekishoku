@@ -109,6 +109,7 @@ angular.module "frontApp"
       clearInput()
       $scope.isEditing = false
       $scope.modalPost.show()
+      $ionicSlideBoxDelegate.$getByHandle('modal-post').enableSlide(false);
 
     # 投稿用モーダル非表示
     $scope.closeModalPost = (targetForm) ->
@@ -316,6 +317,7 @@ angular.module "frontApp"
         # モーダルを開く
         $scope.modalPost.show()
         $scope.popoverPostMenu.hide()
+        $ionicSlideBoxDelegate.$getByHandle('modal-post').enableSlide(false);
 
     # 変化を監視してメイン画像を読み込み＋表示を実行
     $scope.$watch 'input.file', (file) ->
