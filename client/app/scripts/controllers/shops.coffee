@@ -51,6 +51,9 @@ angular.module "frontApp"
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
+        # Prerender.io
+        $scope.readyToCache(1000)
+
     ###
     # Global function
     ###

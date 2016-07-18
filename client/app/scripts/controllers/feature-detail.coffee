@@ -94,6 +94,9 @@ angular.module 'frontApp'
 
         $scope.$broadcast 'scroll.refreshComplete'
 
+        # Prerender.io
+        $scope.readyToCache(1000)
+
 
       # 現在タブの判定
       if $state.is('tabs.featureDetalPost')

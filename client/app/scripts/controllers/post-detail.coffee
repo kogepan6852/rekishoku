@@ -59,6 +59,9 @@ angular.module 'frontApp'
             num = res.data.length
           $scope.postsRelated = BaseService.getRandomArray(res.data, num)
 
+          # Prerender.io
+          $scope.readyToCache(1000)
+
       # 投稿内容詳細取得
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
         $scope.postDetails = res.data

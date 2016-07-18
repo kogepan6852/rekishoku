@@ -52,18 +52,21 @@ angular.module "frontApp"
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-      # 最新ショップ取得
+        # Prerender.io
+        $scope.readyToCache(1000)
+
+      # TOP用情報取得
       objTop =
         email: $localStorage['email']
         token: $localStorage['token']
         per: 1
         page: 1
-      # 記事一覧取得
+      # 最新ショップ取得
       Api.getJson(objTop, Const.API.SHOP, false).then (res) ->
         if res.data.length > 0
           $scope.shop = res.data[0]
 
-      # 特集一覧取得
+      # 最新特集取得
       Api.getJson(objTop, Const.API.FEATURE, false).then (res) ->
         if res.data.length > 0
           $scope.feature = res.data[0]

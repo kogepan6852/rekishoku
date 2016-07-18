@@ -58,6 +58,9 @@ angular.module "frontApp"
         $rootScope.appImage = $scope.user.image.image.md.url
         $rootScope.appKeywords = appKeywords.join()
 
+        # Prerender.io
+        $scope.readyToCache(1000)
+
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
 
