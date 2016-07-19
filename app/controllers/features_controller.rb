@@ -2,12 +2,17 @@ class FeaturesController < ApplicationController
   load_and_authorize_resource
   before_action :set_feature, only: [:edit, :update, :destroy]
 
+  require 'net/http'
+  include Prerender
+
   # POST /feature
   # POST /feature.json
   def create
     setPublishedAt = feature_time_params[:published_at].split(/\D+/)
+
     @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     @feature.save
+    Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
 
