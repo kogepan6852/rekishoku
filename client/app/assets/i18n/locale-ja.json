@@ -2,10 +2,11 @@
   "SEO": {
     "TITLE": {
       "BASE":         "歴食 | ",
-      "HOME":         "歴食 | MAGAZINE",
-      "MAP":          "歴食 | MAP",
-      "SHOP":         "歴食 | STORE",
-      "WRITERS":      "歴食 | WRITERS"
+      "HOME":         "MAGAZINE",
+      "MAP":          "MAP",
+      "SHOP":         "STORE",
+      "WRITERS":      "WRITERS",
+      "MY_POST":      "MY POST"
     },
     "KEYWORDS": {
       "BASE":         "歴食",

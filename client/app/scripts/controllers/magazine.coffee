@@ -16,8 +16,10 @@ angular.module "frontApp"
     ###
     # setting
     ###
-    $rootScope.isHideTab = false
-    $ionicNavBarDelegate.showBackButton false
+    $scope.$on '$ionicView.enter', (e) ->
+      $rootScope.isHideTab = false
+      $rootScope.hideModeBtn = false
+      $ionicNavBarDelegate.showBackButton false
 
     DataService.getPostCategory (data) ->
       $scope.categories = data
@@ -127,12 +129,11 @@ angular.module "frontApp"
           per: Const.API.SETTING.PER
           page: $scope.page
         # 検索ワードの設定
-        searchData = $scope.getSearchData()
-        obj.keywords = searchData.keywords
-        obj.period = searchData.period
-        obj.person = searchData.person
-        obj.category = searchData.category
-        obj.province = searchData.province
+        obj.keywords = $scope.keywords
+        obj.period = $scope.period
+        obj.person = $scope.person
+        obj.category = $scope.category
+        obj.province = $scope.province
 
         Api.getJson(obj, Const.API.POST, true).then (res) ->
           if res.data.length == 0

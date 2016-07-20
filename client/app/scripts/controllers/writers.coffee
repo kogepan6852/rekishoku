@@ -8,13 +8,15 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WritersCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const, $translate) ->
+  .controller "WritersCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const, $translate, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
-    $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.WRITERS')
+    $scope.$on '$ionicView.enter', (e) ->
+      $rootScope.hideModeBtn = false
+      $ionicNavBarDelegate.showBackButton false
 
     # initialize
     $scope.init = ->

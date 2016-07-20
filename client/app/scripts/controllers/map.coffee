@@ -16,8 +16,10 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $rootScope.isHideTab = false
-    $ionicNavBarDelegate.showBackButton false
+    $scope.$on '$ionicView.enter', (e) ->
+      $rootScope.isHideTab = false
+      $rootScope.hideModeBtn = false
+      $ionicNavBarDelegate.showBackButton false
 
     DataService.getShopCategory (data) ->
       $scope.categories = data

@@ -182,40 +182,40 @@ angular.module "frontApp"
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.magazine')
       $rootScope.currentType = 'magazine'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.HOME')
       clearForMove(isReload)
 
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.shop.list')
       $rootScope.currentType = 'shop'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
       clearForMove(false)
 
     $scope.moveToMap = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.map')
       $rootScope.currentType = 'map'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.MAP')
       clearForMove(false)
 
     $scope.moveToWriters = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('writers')
       $rootScope.currentType = 'writers'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.WRITERS')
       clearForMove(false)
 
     $scope.moveToMyPost = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('my-post')
       $rootScope.currentType = 'myPost'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.MY_POST')
       clearForMove(true)
 
     $scope.goBack = ->
       $rootScope.isHideTab = false
       $ionicHistory.goBack();
-      # STORESに戻る場合、フッターを戻す
-      if $ionicHistory.backTitle() == 'STORE' || $ionicHistory.backTitle() == 'MAGAZINE' || $ionicHistory.backTitle() == 'MAP'
-        $rootScope.hideFooter = false
-        $rootScope.hideModeBtn = false
-        $ionicNavBarDelegate.showBackButton false
 
     $scope.openModalSearch = ->
       # 検索ワードの取得
