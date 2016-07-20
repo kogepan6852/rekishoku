@@ -107,8 +107,15 @@ angular.module 'frontApp'
 
       else
         # 現在地の取得
+        $scope.current = null;
         if navigator.geolocation
           navigator.geolocation.getCurrentPosition ((position) ->
+            # 現在地アイコン用
+            $scope.current = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            };
+            # MAP用
             $scope.map.center.latitude = position.coords.latitude
             $scope.map.center.longitude = position.coords.longitude
 
@@ -156,8 +163,20 @@ angular.module 'frontApp'
 
         Api.getJson(obj, Const.API.MAP, isLoading).then (resShops) ->
           # mapデータ設定
-          $scope.isDragging = false;
+          $scope.isDragging = false
+          $scope.currentIcon = []
           shops = []
+          # 現在地アイコンの設定
+          if $scope.current
+            now =
+              latitude: $scope.current.latitude,
+              longitude: $scope.current.longitude,
+              icon:
+                url: '../images/current-pin.png'
+                scaledSize : new google.maps.Size(35, 35)
+            now['id'] = 0
+            $scope.currentIcon.push(now)
+
           # map表示用データの作成
           angular.forEach resShops.data.shops, (shop, i) ->
             ret =

@@ -31,6 +31,7 @@
   <div class="maps" ng-if="map">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" bounds="map.bounds" events="events" data-tap-disabled="true" ng-cloak>
+      <!-- shop icons -->
       <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject">
         <!-- direct access -->
         <ui-gmap-windows show="show" ng-if="isDirect">
@@ -47,6 +48,11 @@
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
+
+      <!-- current place -->
+      <ui-gmap-markers models="currentIcon" coords="'self'" icon="'icon'" clusterEvents="clickEventsObject">
+      </ui-gmap-markers>
+
     </ui-gmap-google-map>
 
   </div>
