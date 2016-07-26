@@ -2,10 +2,15 @@
   "SEO": {
     "TITLE": {
       "BASE":         "歴食 | ",
-      "HOME":         "歴食 | 記事一覧",
+      "HOME":         "歴食 | MAGAZINE",
       "MAP":          "歴食 | MAP",
-      "SHOP":         "歴食 | 店舗一覧",
-      "WRITERS":      "歴食 | ライター一覧"
+      "SHOP":         "歴食 | STORE",
+      "WRITERS":      "歴食 | WRITERS"
+    },
+    "KEYWORDS": {
+      "BASE":         "歴食",
+      "MEAL":         "食",
+      "COOKING":      "クッキング"
     }
   },
   "MENU": {
@@ -52,8 +57,16 @@
     "WEB":            "WEB",
     "TIME":           "営業時間",
     "MENU":           "代表メニュー",
-    "DAYTIME":        "昼：¥",
-    "NIGHTTIME":      "夜：¥"
+    "DAYTIME":        "昼：",
+    "NIGHTTIME":      "夜：",
+    "HF_RATING":      "歴食度",
+    "RATING": {
+      "HISTORY":      "創業年",
+      "BUILDING":     "建物",
+      "MENU":         "メニュー",
+      "PERSON":       "人物",
+      "EPISODE":      "エピソード"
+    }
   },
   "POST_LIST": {
     "TITLE":          "タイトル",
@@ -86,7 +99,8 @@
       "UNPUBLISHE":     "非公開にしてもよろしいですか？"
     },
     "ALERT": {
-      "NO_POSITION":    "位置情報を取得できません"
+      "NO_POSITION":    "位置情報を取得できません",
+      "ERROR":          "通信エラー"
     }
   },
   "PROVINCES": {

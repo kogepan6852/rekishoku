@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "TabsCtrl", ($scope, $rootScope, $ionicTabsDelegate, $location, $ionicNavBarDelegate, $ionicHistory, $translate) ->
+  .controller "TabsCtrl", ($scope, $rootScope, $ionicTabsDelegate, $location, $ionicNavBarDelegate, $ionicHistory, $translate, $state) ->
 
     ###
     # Common function
@@ -34,12 +34,12 @@ angular.module "frontApp"
       $rootScope.hideModeBtn = false
 
       if index == 0
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.HOME')
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.HOME')
         $location.path('/app/magazine').search('keywords', null)
         $rootScope.currentType = 'magazine'
 
       else if index == 1
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.SHOP')
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
         $location.path('/app/shops/list').search('keywords', null)
         $rootScope.currentType = 'shop'
 
@@ -49,7 +49,7 @@ angular.module "frontApp"
       if $rootScope.currentType == 'shop'
         $rootScope.hideFooter = false
         $rootScope.currentType = 'map'
-        $location.path('/app/shops/map')
+        $state.go('tabs.shop.map')
       else
         $rootScope.currentType = 'shop'
-        $location.path('/app/shops/list')
+        $state.go('tabs.shop.list')

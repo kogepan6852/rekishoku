@@ -48,13 +48,19 @@ class Ability
     cannot :manage, Period
 
     if user
-      if user.role == 1
-         can :manage, Shop
-         can :manage, Person
-         can :manage, Period
-      end
+      ## Admin権限
       if user.role == 0
         can :manage, :all
+      ## 編集者権限
+      elsif user.role == 3
+        can :manage, Shop
+        can :manage, Person
+        can :manage, Period
+        can :manage, Feature
+        can :manage, FeatureDetail
+        can :manage, ExternalLink
+        can :access, :rails_admin
+        can :dashboard
       end
     end
 

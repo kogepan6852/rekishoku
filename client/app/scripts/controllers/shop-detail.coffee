@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -19,6 +19,19 @@ angular.module 'frontApp'
     $scope.targetId = $stateParams.id
     $rootScope.hideFooter = true
     $rootScope.hideModeBtn = true
+
+    # Map用パラメータの設定
+    $scope.map =
+      center:
+        latitude: Const.MAP.CENTER.DEFAULT.LAT
+        longitude:  Const.MAP.CENTER.DEFAULT.LNG
+      zoom: 14
+    $scope.options =
+      scrollwheel: false
+      minZoom: Const.MAP.ZOOM.MIN
+      disableDefaultUI: true
+      zoomControl: true
+      draggable: false
 
     ###
     # initialize
@@ -35,18 +48,8 @@ angular.module 'frontApp'
         $scope.eyeCatchImage = res.data.shop.subimage.md.url
 
         # Map用
-        $scope.map =
-          center:
-            latitude: res.data.shop.latitude
-            longitude: res.data.shop.longitude
-          zoom: 14
-          bounds: {}
-        $scope.options =
-          scrollwheel: false
-          minZoom: 11
-          disableDefaultUI: true
-          zoomControl: true
-          draggable: false
+        $scope.map.center.latitude =  res.data.shop.latitude
+        $scope.map.center.longitude = res.data.shop.longitude
 
         shops = []
         ret =
@@ -64,18 +67,21 @@ angular.module 'frontApp'
 
         # SEO
         appKeywords = []
-        angular.forEach $scope.people, (person) ->
-          appKeywords.push(person.name)
-        $rootScope.appTitle = $scope.shop.name
+        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+        appKeywords.push($scope.shop.name)
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.shop.name
         $rootScope.appDescription = $scope.shop.description.substr(0, 150)
-        $rootScope.appImage = $scope.shop.subimage.url
+        $rootScope.appImage = $scope.shop.subimage.md.url
         $rootScope.appKeywords = appKeywords.join()
 
         $scope.$broadcast 'scroll.refreshComplete'
 
+        # Prerender.io
+        $scope.readyToCache(1000)
+
 
       # 現在タブの判定
-      if $state.is('tabs.postDetal')
+      if $state.is('tabs.shopDetailPost')
         $scope.nowTab = 'magazine'
       else if $state.is('tabs.shop.detailMap')
         $scope.nowTab = 'map'
@@ -99,7 +105,7 @@ angular.module 'frontApp'
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetalPost', { id: id })
+        $state.go('tabs.shopDetailPost', { id: id })
       else if $scope.nowTab == 'map'
         $state.go('tabs.shop.postDetailMap', { id: id })
       else if $scope.nowTab == 'shop'

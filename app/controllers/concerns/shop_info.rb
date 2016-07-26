@@ -2,12 +2,27 @@ module ShopInfo
   # 価格帯の取得
   def get_price(shop)
     price = {}
-    if shop.daytime_price && shop.nighttime_price
-      price = {
-        "daytime" => shop.daytime_price.min.to_s(:delimited) + ' - ' + shop.daytime_price.max.to_s(:delimited),
-        "nighttime" => shop.nighttime_price.min.to_s(:delimited) + ' - ' + shop.nighttime_price.max.to_s(:delimited)
+    daytime = nil
+    nighttime = nil
+
+    if shop.daytime_price
+      daytime = {
+        "min" => shop.daytime_price.min,
+        "max" => shop.daytime_price.max
       }
     end
+
+    if shop.nighttime_price
+      nighttime = {
+        "min" => shop.nighttime_price.min,
+        "max" => shop.nighttime_price.max
+      }
+    end
+
+    price = {
+      "daytime" => daytime,
+      "nighttime" => nighttime
+    }
     return price
   end
 

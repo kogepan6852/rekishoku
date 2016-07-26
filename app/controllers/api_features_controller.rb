@@ -66,6 +66,7 @@ class ApiFeaturesController < ApplicationController
           people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
+        people = get_check_people(people)
 
         # 返却用のオブジェクトを作成する
         fatureData = {
@@ -97,16 +98,19 @@ class ApiFeaturesController < ApplicationController
       feature_details = Array.new()
       periods = Array.new()
       people = Array.new()
+      feature_details_order = @feature.feature_details.order(:order)
 
       # それぞれの詳細対応
-      @feature.feature_details.each do |feature_detail|
+      feature_details_order.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
           # 対応するShopの情報を取得する
           obj = get_shop_json(feature_detail.related)
+          people += feature_detail.related.people
         elsif feature_detail[:related_type] == "Post"
           # 対応するPostの情報を取得する
           post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(feature_detail[:related_id])
           obj = get_post_json(post)
+          people += feature_detail.related.people
         elsif feature_detail[:related_type] == "ExternalLink"
           # 対応するExternalLinkの情報を取得する
           obj = get_external_link_json(feature_detail.related)
@@ -117,6 +121,7 @@ class ApiFeaturesController < ApplicationController
       end
 
       periods += get_periods(people)
+      people = get_check_people(people)
 
       # 返却用のオブジェクトを作成する
       feature = {
@@ -144,7 +149,7 @@ class ApiFeaturesController < ApplicationController
       people = Array.new()
       articles.each do |article|
         article.people.each do |person|
-          people.push(person)
+            people.push(person)
         end
       end
       return people

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService, $state, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -16,8 +16,8 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $rootScope.hideFooter = false
-    $rootScope.hideModeBtn = false
+    $rootScope.isHideTab = false
+    $ionicNavBarDelegate.showBackButton false
 
     DataService.getShopCategory (data) ->
       $scope.categories = data
@@ -32,9 +32,9 @@ angular.module 'frontApp'
     $scope.isDragging = false;
 
     # 初期位置の設定
-    latitude = 35.6813818
-    longitude = 139.7660838
-    defaultZoom = 13
+    latitude = Const.MAP.CENTER.DEFAULT.LAT
+    longitude = Const.MAP.CENTER.DEFAULT.LNG
+    defaultZoom = Const.MAP.ZOOM.DEFAULT
     targetDistance = BaseService.calMapDistance(defaultZoom)
 
     if $rootScope.latitude & $rootScope.longitude
@@ -53,7 +53,7 @@ angular.module 'frontApp'
 
     $scope.options =
       scrollwheel: false
-      minZoom: 9
+      minZoom: Const.MAP.ZOOM.MIN
       disableDefaultUI: true
       zoomControl: true
 
@@ -87,6 +87,11 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
+      # mapへ直アクセスかどうかの判定
+      $scope.isDirect = false
+      if $state.is("map")
+        $scope.isDirect = true
+
       if $rootScope.zoom
         targetDistance = BaseService.calMapDistance($rootScope.zoom)
       if $rootScope.targetAddress
@@ -116,8 +121,8 @@ angular.module 'frontApp'
 
             ), (e) ->
               obj =
-                latitude: latitude
-                longitude: longitude
+                latitude: Const.MAP.CENTER.DEFAULT.LAT
+                longitude: Const.MAP.CENTER.DEFAULT.LNG
                 shopDistance: targetDistance
               # map表示用データの作成と設定
               setMapData(obj, true, true)

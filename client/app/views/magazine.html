@@ -26,25 +26,35 @@
     <div>
       <!-- Top -->
       <div class="top-area" ng-if="!keywords && !period && !person && !category && !province">
-        <!-- FEATURE -->
-        <a class="item feature left-box">
-          <img class="main-img" src="../images/sample.png">
-          <div class="description">
-            <h5 ng-bind="'POST.FEATURE'|translate"></h5>
-            <h2 ng-bind="feature.post.title" class="mincho"></h2>
-            <p ng-bind="feature.post.content"></p>
+        <!-- POST -->
+        <a class="item feature left-box" ng-click="moveToPostDetail(topItem.post.id)">
+          <img class="main-img visible-md visible-lg"
+              ng-if="windowType=='md' || windowType=='lg'"
+              src="../images/sample.png"
+              ng-src="{{topItem.post.image.image.lg.url}}">
+          <img class="main-img visible-xs visible-sm"
+              ng-if="windowType=='xs' || windowType=='sm' || !windowType"
+              src="../images/sample.png"
+              ng-src="{{topItem.post.image.image.md.url}}">
+
+          <div class="category" ng-if="topItem">
+            <span ng-bind="topItem.post.category_name"></span>
           </div>
-          <div class="tags">
+          <div class="description" ng-class="{'no-tag':topItem.periods.length == 0 && topItem.people.length == 0}" ng-if="topItem">
+            <h2 ng-bind="topItem.post.title" class="mincho"></h2>
+            <p ng-bind="topItem.post.content"></p>
+          </div>
+          <div class="tags" ng-if="topItem.periods.length > 0 || topItem.people.length > 0">
             <div>
-              <info-tag name="{{period.name}}" ng-repeat="period in feature.periods"></info-tag>
-              <info-tag name="{{person.name}}" ng-repeat="person in feature.people"></info-tag>
+              <info-tag name="{{period.name}}" ng-repeat="period in topItem.periods"></info-tag>
+              <info-tag name="{{person.name}}" ng-repeat="person in topItem.people"></info-tag>
             </div>
           </div>
         </a>
-        <div class="right-box hidden-xs hidden-sm">
+        <div class="right-box hidden-xs hidden-sm" ng-if="windowType!='xs' && windowType!='sm'">
           <!-- SHOP -->
           <a class="item shop side-area" ng-click="moveToShopDetail(shop.shop.id)">
-            <img class="main-img" ng-src="{{shop.shop.image.md.url}}" src="../images/dummy-img.png">
+            <img class="main-img" ng-src="{{shop.shop.subimage.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="shop">
               <span>STORE</span>
             </div>
@@ -59,31 +69,33 @@
               </div>
             </div>
           </a>
-          <!-- POST(COOKING) -->
-          <a class="item post side-area" ng-click="moveToPostDetail(recipe.post.id)">
-            <img class="main-img" ng-src="{{recipe.post.image.image.md.url}}" src="../images/dummy-img.png">
-            <div class="category" ng-if="recipe">
-              <span ng-bind="recipe.post.category_name"></span>
+          <!-- FEATURE -->
+          <a class="item post side-area" ng-click="moveToFeatureDetail(feature.feature.id)">
+            <img class="main-img" ng-src="{{feature.feature.image.md.url}}" src="../images/dummy-img.png">
+            <div class="category" ng-if="feature">
+              <span ng-bind="feature.feature.category_name"></span>
             </div>
-            <div class="description cooking">
-              <h4 ng-bind="recipe.post.title" class="mincho"></h4>
+            <div class="description">
+              <h4 ng-bind="feature.feature.title" class="mincho"></h4>
             </div>
-            <!-- <div class="tags">
+            <div class="tags">
               <div>
-                <info-tag name="{{period.name}}" ng-repeat="period in recipe.periods"></info-tag>
-                <info-tag name="{{person.name}}" ng-repeat="person in recipe.people"></info-tag>
+                <info-tag name="{{period.name}}" ng-repeat="period in feature.periods"></info-tag>
+                <info-tag name="{{person.name}}" ng-repeat="person in feature.people"></info-tag>
               </div>
-            </div> -->
+            </div>
           </a>
         </div>
       </div>
       <list-item-post
          ng-repeat="result in results"
+         ng-hide="$index==0 && !keywords && !period && !person && !category && !province"
          ng-click="moveToPostDetail(result.post.id)"
          data="result.post"
          periods="result.periods"
          people="result.people"
-         category="result.post.category_name" >
+         category="result.post.category_name"
+         window-type="windowType" >
        </list-item-post>
     </div>
 

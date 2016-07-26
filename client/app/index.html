@@ -1,26 +1,30 @@
 <!doctype html>
-<html ng-app="frontApp">
+<html ng-app="frontApp" lang="ja" resize="resize">
   <head  ng-controller="BaseCtrl">
     <base href="/">
+    <meta name="fragment" content="!">
     <meta charset="utf-8">
-    <title ng-if="!appDescription">歴食 | 食べる、歴史体験</title>
-    <title ng-if="appDescription">{{appTitle}}</title>
+    <meta http-equiv="content-language" content="ja">
+
+    <title ng-if="!appTitle">歴食 | 食べる、歴史体験</title>
+    <title ng-if="appTitle">{{appTitle}}</title>
     <meta name="description"        content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription"/>
     <meta name="description"        content="{{appDescription}}" ng-if="appDescription"/>
     <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" ng-if="!appKeywords"/>
     <meta name="keywords"           content="{{appKeywords}}" ng-if="appKeywords"/>
     <!-- FB -->
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="歴食" />
-    <meta property="og:description" content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" />
-    <meta property="og:image"       content="http://rekishoku.jp/logo.png" />
+    <meta property="og:title"       content="歴食" ng-if="!appTitle" />
+    <meta property="og:title"       content="{{appTitle}}" ng-if="appTitle" />
+    <meta property="og:description" content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription" />
+    <meta property="og:description" content="{{appDescription}}" ng-if="appDescription" />
+    <meta property="og:image"       content="http://rekishoku.jp/logo.png" ng-if="!appImage" />
+    <meta property="og:image"       content="{{appImage}}" ng-if="appImage" />
     <!-- mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="images/icon.png">
-    <!-- iPhone 5 Retina -->
-    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="images/splash-image-640x1096.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -61,6 +65,8 @@
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1537447703220535&ev=PageView&noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
+    <!-- Prerender.io -->
+    <script> window.prerenderReady = false; </script>
   </head>
   <body>
     <!--[if lte IE 8]>
@@ -87,7 +93,6 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
@@ -96,18 +101,15 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/ionic/js/ionic.js"></script>
     <script src="bower_components/ionic/js/ionic-angular.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
-    <script src="bower_components/SHA-1/sha1.js"></script>
     <script src="bower_components/angulartics/src/angulartics.js"></script>
     <script src="bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
     <!-- endbower -->
@@ -126,6 +128,7 @@
     <script src="scripts/controllers/shop-detail.js"></script>
     <script src="scripts/controllers/post-list.js"></script>
     <script src="scripts/controllers/post-detail.js"></script>
+    <script src="scripts/controllers/feature-detail.js"></script>
     <script src="scripts/controllers/writers.js"></script>
     <script src="scripts/controllers/writer-detail.js"></script>
     <script src="scripts/services/api.js"></script>
@@ -140,6 +143,7 @@
     <script src="scripts/directive/list-item-shop-directive.js"></script>
     <script src="scripts/directive/advertisment-row-directive.js"></script>
     <script src="scripts/directive/sns-icons-directive.js"></script>
+    <script src="scripts/directive/resize-directice.js"></script>
     <script src="scripts/filter/base-filter.js"></script>
     <!-- Google Maps API -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>

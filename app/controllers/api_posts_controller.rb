@@ -1,13 +1,15 @@
 class ApiPostsController < ApplicationController
   authorize_resource :class => false
 
+  require 'net/http'
+  include Prerender
   include ShopInfo
   include RelatedInfo
 
   # GET /api/posts
   # 一覧表示
   def index
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -52,8 +54,7 @@ class ApiPostsController < ApplicationController
   # 詳細データ表示
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
-    logger.debug(params[:preview])
-    if params[:preview] == "true" || @post.status == 1 && @post.published_at <= Date.today
+    if params[:preview] == "true" || @post.status == 1
       # user情報整形
       user = {
         "id" => @post.user.id,
@@ -62,11 +63,13 @@ class ApiPostsController < ApplicationController
       # people情報整形
       people = Array.new()
       @post.people.each do |person|
-        obj = {
-          "id" => person.id,
-          "name" => person.name,
-          "furigana" => person.furigana}
-        people.push(obj);
+        if person[:rating] != 0.0
+          obj = {
+            "id" => person.id,
+            "name" => person.name,
+            "furigana" => person.furigana}
+          people.push(obj);
+        end
       end
 
       # アイキャッチ画像設定
@@ -141,18 +144,7 @@ class ApiPostsController < ApplicationController
     # 返却用オブジェクト作成
     newPosts = Array.new()
     posts.each do |post|
-      # アイキャッチ画像の設定
-      postObj = get_post(post)
-
-      # 人に紐付く時代を全て抽出する
-      periods = get_periods(post.people)
-
-      obj = { "post" => postObj,
-              "people" => post.people,
-              "periods" => periods.uniq
-            }
-
-      newPosts.push(obj)
+      newPosts.push(get_post_json(post))
     end
 
     render json: newPosts
@@ -163,8 +155,8 @@ class ApiPostsController < ApplicationController
   def create
     category = PostCategory.find_by(slug: params[:slug])
     @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
-
     if @post.save
+      Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
       render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity

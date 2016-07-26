@@ -74,12 +74,13 @@ angular.module "frontApp"
       else
         $rootScope.currentType = 'magazine'
 
-    clearForMove = ->
+    clearForMove = (isReload) ->
       # backボタンを隠す
       $ionicNavBarDelegate.showBackButton false
       # historyデータを削除する
-      $ionicHistory.clearHistory();
-      $ionicHistory.clearCache();
+      if isReload
+        $ionicHistory.clearHistory();
+        $ionicHistory.clearCache();
       $ionicSideMenuDelegate.toggleRight(false);
 
     ###
@@ -175,43 +176,43 @@ angular.module "frontApp"
       $ionicViewSwitcher.nextTransition('none')
       userId = $localStorage['user_id']
       $state.go('writer', { id: userId })
-      clearForMove()
+      clearForMove(false)
 
-    $scope.moveToHome = ->
+    $scope.moveToHome = (isReload) ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.magazine')
       $rootScope.currentType = 'magazine'
-      clearForMove()
+      clearForMove(isReload)
 
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.shop.list')
       $rootScope.currentType = 'shop'
-      clearForMove()
+      clearForMove(false)
 
     $scope.moveToMap = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.map')
       $rootScope.currentType = 'map'
-      clearForMove()
+      clearForMove(false)
 
     $scope.moveToWriters = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('writers')
       $rootScope.currentType = 'writers'
-      clearForMove()
+      clearForMove(false)
 
     $scope.moveToMyPost = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('my-post')
       $rootScope.currentType = 'myPost'
-      clearForMove()
+      clearForMove(true)
 
     $scope.goBack = ->
       $rootScope.isHideTab = false
       $ionicHistory.goBack();
       # STORESに戻る場合、フッターを戻す
-      if $ionicHistory.backTitle() == 'SHOPS' || $ionicHistory.backTitle() == 'MAGAZINE'
+      if $ionicHistory.backTitle() == 'STORE' || $ionicHistory.backTitle() == 'MAGAZINE' || $ionicHistory.backTitle() == 'MAP'
         $rootScope.hideFooter = false
         $rootScope.hideModeBtn = false
         $ionicNavBarDelegate.showBackButton false

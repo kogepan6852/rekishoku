@@ -45,46 +45,31 @@ angular.module "frontApp"
       obj.category = searchData.category
       obj.province = searchData.province
 
-      # 特集テスト用データ
-      $scope.feature = {
-        post: {
-          title: "幕末時代の甘味処10選",
-          content: "ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。",
-          image: "../images/sample.png"
-        },
-        people: [{name: "JK"}, {name: "こげぱん"}, {name: "堅固潤也"}]
-        periods: [{name: "江戸時代"}]
-      }
-
       # 記事一覧取得
       Api.getJson(obj, Const.API.POST, true).then (res) ->
+        $scope.topItem = res.data[0]
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-      # 最新レシピ取得
-      objRecipe =
-        email: $localStorage['email']
-        token: $localStorage['token']
-        per: 1
-        page: 1
-      # 検索ワードの設定
-      objRecipe.category = Const.CATEGORY.COOKING
-      # 記事一覧取得
-      Api.getJson(objRecipe, Const.API.POST, false).then (res) ->
-        if res.data.length > 0
-          $scope.recipe = res.data[0]
+        # Prerender.io
+        $scope.readyToCache(1000)
 
-      # 最新ショップ取得
-      objShop =
+      # TOP用情報取得
+      objTop =
         email: $localStorage['email']
         token: $localStorage['token']
         per: 1
         page: 1
-      # 記事一覧取得
-      Api.getJson(objShop, Const.API.SHOP, false).then (res) ->
+      # 最新ショップ取得
+      Api.getJson(objTop, Const.API.SHOP, false).then (res) ->
         if res.data.length > 0
           $scope.shop = res.data[0]
+
+      # 最新特集取得
+      Api.getJson(objTop, Const.API.FEATURE, false).then (res) ->
+        if res.data.length > 0
+          $scope.feature = res.data[0]
 
 
     ###
@@ -127,7 +112,12 @@ angular.module "frontApp"
     # ショップ詳細移動時の処理
     $scope.moveToShopDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.shopDetalPost', {id:id}
+      $state.go 'tabs.shopDetailPost', {id:id}
+
+    # ショップ詳細移動時の処理
+    $scope.moveToFeatureDetail = (id) ->
+      $ionicNavBarDelegate.showBackButton true
+      $state.go 'tabs.featureDetalPost', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

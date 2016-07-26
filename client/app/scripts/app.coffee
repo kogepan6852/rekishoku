@@ -26,7 +26,7 @@ angular
     'angulartics',
     'angulartics.google.analytics'
   ]
-  .config ($stateProvider, $urlRouterProvider) ->
+  .config ($stateProvider, $urlRouterProvider, $routeProvider) ->
     $stateProvider
       .state 'tabs',
         abstract: true,
@@ -55,6 +55,13 @@ angular
             templateUrl: 'views/shops.html'
             controller: 'ShopsCtrl'
 
+      # STORE TAB MAP DIRECT
+      .state 'map',
+        cache: false
+        url: '/app/shops/map'
+        templateUrl: 'views/map.html'
+        controller: 'MapCtrl'
+
       # STORE TAB MAP
       .state 'tabs.shop.map',
         cache: false
@@ -66,53 +73,58 @@ angular
 
       # MAGAZINEタブ用の各ページのルーティング
       .state 'tabs.postDetal',
-        cache: false
-        url: '/app/post/:id'
+        url: '/app/post/:id?preview'
         views:
           'tab-magazine':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.writerPost',
-        cache: false,
         url: '/app/writer/:id'
         views:
           'tab-magazine':
             templateUrl: 'views/writer-detail.html'
             controller: 'WriterDetailCtrl'
-      .state 'tabs.shopDetalPost',
-        cache: false
+      .state 'tabs.shopDetailPost',
         url: '/app/shop/:id'
         views:
           'tab-magazine':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
+      .state 'tabs.featureDetalPost',
+        url: '/app/feature/:id'
+        views:
+          'tab-magazine':
+            templateUrl: 'views/feature-detail.html'
+            controller: 'FeatureDetailCtrl'
 
       # STORE DETAIL DIRECT
       .state 'tabs.shopDetal',
-        cache: false
         url: '/app/shop/:id'
         views:
           'tab-shop':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
 
+      # STORE DETAIL from MAP DIRECT
+      .state 'mapShopDetal',
+        url: '/app/map-shop/:id'
+        templateUrl: 'views/shop-detail.html'
+        controller: 'ShopDetailCtrl'
+
       # STORE LISTタブ用の各ページのルーティング
       .state 'tabs.shop.shopDetail',
-        cache: false
         url: '/app/shop/:id'
         views:
           'tab-shop-list':
             templateUrl: 'views/shop-detail.html'
             controller: 'ShopDetailCtrl'
       .state 'tabs.shop.postDetail',
-        cache: false,
         url: '/app/post/:id'
         views:
           'tab-shop-list':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.shop.writerDetail',
-        cache: false,
         url: '/app/writer/:id'
         views:
           'tab-shop-list':
@@ -121,8 +133,7 @@ angular
 
       # STORE DETAILS
       .state 'tabs.shop.detailMap',
-        cache: false
-        url: '/app/map-shop/:id'
+        url: '/app/map/shop/:id'
         views:
           'tab-shop-map':
             templateUrl: 'views/shop-detail.html'
@@ -130,14 +141,12 @@ angular
 
       # STORE MAPタブ用の各ページのルーティング
       .state 'tabs.shop.postDetailMap',
-        cache: false,
         url: '/app/post/:id'
         views:
           'tab-shop-map':
             templateUrl: 'views/post-detail.html'
             controller: 'PostDetailCtrl'
       .state 'tabs.shop.mapWriter',
-        cache: false,
         url: '/app/writer/:id'
         views:
           'tab-shop-map':
@@ -155,17 +164,14 @@ angular
         templateUrl: 'views/writers.html'
         controller: 'WritersCtrl'
       .state 'writer',
-        cache: false,
         url: '/app/writer/:id'
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
       .state 'post',
-        cache: false,
         url: '/app/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'
       .state 'shop',
-        cache: false,
         url: '/app/shop/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
@@ -173,7 +179,6 @@ angular
 
       # 旧URL用の暫定パス
       .state 'post-old',
-        cache: false,
         url: '/post/:id?preview'
         templateUrl: 'views/post-detail.html'
         controller: 'PostDetailCtrl'

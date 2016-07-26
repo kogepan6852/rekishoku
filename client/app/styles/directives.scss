@@ -11,6 +11,7 @@ star {
     display: table-cell;
 
     &.star-label {
+      font-size: $h3;
       padding-top: 7px;
       padding-right: 10px;
       color: $darkGrayColor;
@@ -24,11 +25,44 @@ star {
 
     &.star-count {
       font-size: $h4;
-      padding-left: 5px;
+      padding-left: 10px;
       color: $grayColor;
       vertical-align: middle;
     }
   }
+
+  .small-star {
+    padding-left: 10px;
+    padding-right: 5px;
+
+    .star-label {
+      padding-top: 2px;
+      padding-right: 5px;
+      font-size: $h6;
+      width: 72px;
+    }
+
+    i {
+      font-size: $h3!important;
+    }
+
+    .star-count {
+      font-size: $h4!important;
+      display: none;
+    }
+
+    .count {
+      width: 76px;
+      text-align: center;
+      height: 22px;
+
+      span {
+        font-size: $h4;
+      }
+    }
+
+  }
+
 }
 
 /**********************
@@ -106,8 +140,6 @@ star {
        height: 100%;
 
        .description {
-        //  font-size: $h5;
-        //  line-height: $h4;
          margin-top: 15px;
          margin-bottom: 0;
          overflow: hidden;
@@ -116,9 +148,9 @@ star {
        }
 
        h2 {
-         font-size: $h3;
-         max-height: 60px;
-         line-height: $h3;
+         font-size: $h4;
+         max-height: 64px;
+         line-height: $h4;
          overflow: hidden;
          white-space: normal;
        }
@@ -164,9 +196,13 @@ star {
  list-item-shop {
    .item {
      .detail {
+       h2 {
+         max-height: 32px;
+       }
        .description {
          font-size: $h5;
          line-height: $h4;
+         white-space: nowrap;
        }
        .price, .rep-menu {
          font-size: $h5;

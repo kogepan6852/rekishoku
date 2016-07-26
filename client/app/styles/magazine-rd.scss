@@ -17,28 +17,45 @@
         vertical-align: top;
       }
 
-      .feature {
+      .post, .shop, .feature {
         .main-img {
           height: auto;
         }
 
+        .category {
+          width: 150px;
+          padding-bottom: 7px;
+          padding-top: 5px;
+        }
+
         .description {
           padding: 15px;
-          height: 120px;
-          bottom: 57px;
+          bottom: 42px;
 
           h2 {
             letter-spacing: 2px;
           }
           p {
-            height: 44px;
+            height: 60px;
             letter-spacing: 1px;
           }
+
         }
 
         .tags {
-          height: 57px;
-          padding: 15px;
+          height: 42px;
+          padding: 0 15px 15px;
+        }
+      }
+
+      // 特集
+      .feature {
+        .description {
+          max-height: 172px;
+
+          h2 {
+            max-height: 82px;
+          }
         }
       }
 

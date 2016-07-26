@@ -1,4 +1,4 @@
-<ion-view title="SHOPS">
+<ion-view title="STORE">
   <ion-content class="shops" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()" delegate-handle="shops">
 
     <ion-refresher
@@ -32,7 +32,8 @@
          periods="result.periods"
          people="result.people"
          price="result.price"
-         rating="result.rating.average" >
+         rating="result.rating.average"
+         window-type="windowType" >
        </list-item-shop>
     </div>
 

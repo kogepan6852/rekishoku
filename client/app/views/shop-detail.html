@@ -9,9 +9,10 @@
     <!-- MAIN IMAGE -->
     <div class="row no-padding">
       <div class="top-image no-padding">
-        <img ng-src="{{shop.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg">
-        <img ng-src="{{shop.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md">
-        <img ng-src="{{shop.image.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{shop.image.xl.url}}" src="../images/dummy-img.png" class="visible-lg" ng-if="windowType=='lg'">
+        <img ng-src="{{shop.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md" ng-if="windowType=='sm' || windowType=='md'">
+        <img ng-src="{{shop.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
@@ -22,7 +23,7 @@
     </div>
 
     <!-- MAIN INFORMATION -->
-    <div class="row row-bottom">
+    <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="information">
           <div class="name">
@@ -42,11 +43,22 @@
               <span ng-if="categories" category-list data="categories" ></span>
               <br>
               <span ng-bind="'SHOP.DAYTIME'|translate"></span>
-              <span class="price" ng-bind="price.daytime"></span>
+              <span class="price">
+                <span ng-bind="price.daytime.min | currency:'¥':0"></span> - <span ng-bind="price.daytime.max | number"></span>
+              </span>
               <span ng-bind="'SHOP.NIGHTTIME'|translate"></span>
-              <span class="price" ng-bind="price.nighttime"></span>
+              <span class="price">
+                <span ng-bind="price.nighttime.min | currency:'¥':0"></span> - <span ng-bind="price.nighttime.max | number"></span>
+              </span>
             </p>
             <star label="true" count="rating.average"></star>
+            <div class="rating-details">
+              <star label="true" count="rating.detail.history" type="history"></star>
+              <star label="true" count="rating.detail.person" type="person"></star>
+              <star label="true" count="rating.detail.building" type="building"></star>
+              <star label="true" count="rating.detail.episode" type="episode"></star>
+              <star label="true" count="rating.detail.menu" type="menu"></star>
+            </div>
           </div>
         </div>
       </div>
@@ -64,8 +76,9 @@
     <!-- SUB IMAGE -->
     <div class="row no-padding">
       <div class="detail-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <img ng-src="{{shop.subimage.url}}" src="../images/dummy-img.png" class="hidden-xs">
-        <img ng-src="{{shop.subimage.md.url}}" src="../images/dummy-img.png" class="visible-xs">
+        <img src="../images/dummy-img.png" ng-if="!windowType">
+        <img ng-src="{{shop.subimage.lg.url}}" src="../images/dummy-img.png" class="hidden-xs" ng-if="windowType!='xs' && windowType">
+        <img ng-src="{{shop.subimage.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
@@ -141,7 +154,7 @@
     <!-- MAP -->
     <div class="row padding-bottom">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <div class="detail-map" ng-if="shop.province">
+        <div class="detail-map" ng-if="shop.province && map">
           <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
               <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
               </ui-gmap-markers>
@@ -175,7 +188,8 @@
            data="post.post"
            periods="post.periods"
            people="post.people"
-           category="post.post.category_name" >
+           category="post.post.category_name"
+           window-type="windowType">
          </list-item-post>
       </div>
     </div>

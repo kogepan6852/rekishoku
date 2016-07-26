@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
+  # Stagingの場合はベーシック認証を設定
+  http_basic_authenticate_with :name => ENV['BASIC_AUTH_USERNAME'], :password => ENV['BASIC_AUTH_PASSWORD'] if Rails.env == "staging"
+
   # json でのリクエストの場合CSRFトークンの検証をスキップ
   skip_before_action :verify_authenticity_token,     if: -> {request.format.json?}
   # トークンによる認証

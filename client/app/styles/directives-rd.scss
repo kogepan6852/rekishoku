@@ -3,6 +3,28 @@
 // SM以上
 @media screen and (min-width:768px){
   /**********************
+   * star
+   **********************/
+  star {
+    .small-star {
+      padding-left: 20px;
+
+      .star-label {
+        width: 110px;
+      }
+
+      i {
+        font-size: $h3!important;
+      }
+
+      .count {
+        height: 28px;
+      }
+
+    }
+  }
+
+  /**********************
    * info-tag
    **********************/
    info-tag {
@@ -15,6 +37,7 @@
        }
      }
    }
+
   /**********************
    * list-item-post, list-item-shop
    **********************/
@@ -33,6 +56,11 @@
          padding: 5% 62px 90px 15px;
          left: 45%;
          width: 55%;
+
+         h2 {
+           font-size: $h3;
+           line-height: $h3;
+         }
 
          >div {
            overflow: hidden;
@@ -86,6 +114,10 @@
    list-item-shop {
      .item {
        .detail {
+         h2 {
+           white-space: nowrap;
+         }
+
          >div {
            padding-left: 15px;
 

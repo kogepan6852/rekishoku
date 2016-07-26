@@ -14,7 +14,7 @@ angular.module "frontApp"
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
-    $rootScope.appTitle = $translate.instant('SEO.TITLE.WRITERS')
+    $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.WRITERS')
 
     # initialize
     $scope.init = ->

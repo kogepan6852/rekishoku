@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -37,11 +37,16 @@ angular.module 'frontApp'
 
         # SEO
         appKeywords = []
-        angular.forEach $scope.shops, (shop) ->
-          appKeywords.push(shop.shop.name)
-        $rootScope.appTitle = $scope.post.title
+        appKeywords.push($translate.instant('SEO.KEYWORDS.MEAL'))
+        angular.forEach $scope.people, (person) ->
+          appKeywords.push(person.name)
+        if $scope.post.category_slug =="cooking"
+          appKeywords = []
+          appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+          appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
         $rootScope.appDescription = $scope.post.content.substr(0, 150)
-        $rootScope.appImage = $scope.post.image.url
+        $rootScope.appImage = $scope.eyeCatchImage.image.md.url
         $rootScope.appKeywords = appKeywords.join()
 
         # 関連投稿内容取得
@@ -53,6 +58,9 @@ angular.module 'frontApp'
           if res.data.length < num
             num = res.data.length
           $scope.postsRelated = BaseService.getRandomArray(res.data, num)
+
+          # Prerender.io
+          $scope.readyToCache(1000)
 
       # 投稿内容詳細取得
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
@@ -83,7 +91,7 @@ angular.module 'frontApp'
 
     $scope.moveToShopDetail = (id) ->
       if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetalPost', { id: id })
+        $state.go('tabs.shopDetailPost', { id: id })
       else if $scope.nowTab == 'map'
         $state.go('tabs.shop.detailMap', { id: id })
       else if $scope.nowTab == 'shop'

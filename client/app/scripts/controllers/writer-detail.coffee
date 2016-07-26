@@ -48,14 +48,25 @@ angular.module "frontApp"
       Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + res.data.user.username
+
+        # SEO
+        appKeywords = []
+        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+        appKeywords.push($scope.user.username)
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
+        $rootScope.appDescription = $scope.user.profile.substr(0, 150)
+        $rootScope.appImage = $scope.user.image.image.md.url
+        $rootScope.appKeywords = appKeywords.join()
+
+        # Prerender.io
+        $scope.readyToCache(1000)
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
 
       # 現在タブの判定
       if $state.is('tabs.writerPost')
-        $scope.nowTab = 'post'
+        $scope.nowTab = 'magazine'
       else if $state.is('tabs.shop.mapWriter')
         $scope.nowTab = 'map'
       else if $state.is('tabs.shop.writerDetail')

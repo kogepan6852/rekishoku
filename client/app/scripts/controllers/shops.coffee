@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, $translate, Api, Const, DataService, $state) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, Api, Const, DataService, $state) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -50,6 +50,9 @@ angular.module "frontApp"
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
+
+        # Prerender.io
+        $scope.readyToCache(1000)
 
     ###
     # Global function

@@ -13,6 +13,7 @@ angular.module("frontApp")
       SHOP:         '/api/shops'
       SHOP_LIST:    '/api/shop_list'
       MAP:          '/api/map'
+      FEATURE:      '/api/features'
       PERSON:       '/api/people'
       CATEGORY:     '/api/categories'
       PERIOD:       '/api/periods'
@@ -27,6 +28,17 @@ angular.module("frontApp")
     METHOD:
       POST: 'POST'
       PATCH: 'PATCH'
+    MAP:
+      ZOOM:
+        MIN: 9
+        DEFAULT:13
+      CENTER:
+        DEFAULT:
+          LAT: 35.6813818
+          LNG: 139.7660838
+      METER_PER_PX: 238.09524
+      LAT_PER_METER: 0.00000901337
+      LNG_PER_METER: 0.0000109664
 
     ADS:
       AD300X250: [

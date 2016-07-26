@@ -91,10 +91,10 @@ RailsAdmin.config do |config|
       end
       field :role, :enum do
       enum do
-        Hash[ ['管理者', '一般ユーザー','ライター'].zip(['0', '1','2']) ]
+        Hash[ ['管理者', '一般ユーザー','ライター','編集者'].zip(['0','1','2','3']) ]
       end
         label "管理レベル"
-        help "必須　0:管理者　1:一般ユーザー 2:ライター"
+        help "必須　0:管理者　1:一般ユーザー 2:ライター 3:編集者"
         required true
       end
     end
@@ -217,24 +217,23 @@ RailsAdmin.config do |config|
          help "必須"
          required true
        end
-       field :rating, :enum do
-       enum do
-         Hash[ ['1: 学者レベル', '2: 趣味レベル','3: 教科書レベル'].zip(['1', '2','3']) ]
-       end
+       field :rating do
          label "ランク"
-         help "1-3段階　有名だと3"
          required true
        end
        field :periods do
            label "関係がある時代"
            help "対象カテゴリを右に移動してくだい"
         end
+        field :categories  do
+          label "対応するカテゴリを選択してください"
+        end
       end
     end
 
   ## 店舗
   config.model 'Shop' do
-    label "お店登録"
+    label "お店"
     weight 1
 
     list do
@@ -290,7 +289,7 @@ RailsAdmin.config do |config|
       field :image_quotation_name do
         label "画像掲載元名称"
       end
-      field :post_quotation_name do
+      field :post_quotation_url do
         label "記事参照元URL"
       end
       field :post_quotation_name do
@@ -402,7 +401,7 @@ RailsAdmin.config do |config|
       end
       field :person_level, :enum do
       enum do
-        Hash[ ['不明','1:庶民', '2:有名人1人','3:有名人2人以上'].zip(['-1','1','2','3']) ]
+        Hash[ ['不明','0','1', '2','3'].zip(['-1','0','1','2','3']) ]
       end
         label "人物レベル"
         help "必須"
@@ -434,7 +433,7 @@ RailsAdmin.config do |config|
 
   ## 投稿カテゴリ
   config.model 'Post' do
-    label "投稿記事"
+    label "記事"
     weight 0
     list do
       field :id
@@ -559,13 +558,19 @@ RailsAdmin.config do |config|
        field :quotation_name do
          label "引用したサイト名"
        end
+       field :is_eye_catch, :enum do
+       enum do
+         Hash[ ['設定しない','設定する'].zip([false, true]) ]
+       end
+         label "アイキャッチ画像"
+       end
      end
     end
 
 
     ####  特集
     config.model 'Feature' do
-      label "特集作成"
+      label "特集"
       weight 0
       list do
         field :id
@@ -636,7 +641,7 @@ RailsAdmin.config do |config|
 
      ## 特集詳細
       config.model 'FeatureDetail' do
-        label "特集概要作成"
+        label "特集詳細"
         weight 0
         list do
           field :title do
@@ -670,14 +675,10 @@ RailsAdmin.config do |config|
               required true
               help "必須"
             end
-            field :related_type , :enum do
-            enum do
-              Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
-            end
-              label "どのDBか"
-            end
-            field :related_id do
-              label "参照DBのID"
+            field :related do
+              label "紐付けする情報"
+              help "必須"
+              required true
             end
         end
        end

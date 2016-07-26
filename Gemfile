@@ -66,6 +66,9 @@ gem 'google-analytics-rails'
 # url redirect
 gem 'rack-rewrite'
 
+# prerender.io(SEO for SPA)
+gem 'prerender_rails'
+
 group :development do
   gem 'annotate', '2.6.5'
 end

@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "BaseCtrl", ($scope, $rootScope, Api, Const, $location, $ionicNavBarDelegate) ->
+  .controller "BaseCtrl", ($scope, $rootScope, Api, Const, $location, $ionicNavBarDelegate, $timeout) ->
 
     # initialize
     $rootScope.isHideTab = false
@@ -76,6 +76,8 @@ angular.module "frontApp"
 
     # 検索条件削除
     $scope.deleteSearchCondition = ->
+      $scope.noMoreLoad = false
+
       $scope.category = null
       $scope.keywords = null
       $scope.period = null
@@ -87,3 +89,14 @@ angular.module "frontApp"
       $location.search('person', null)
       $location.search('province', null)
       $scope.search()
+
+    # Prerender.ioにcache取得の通知をする
+    $scope.readyToCache = (time) ->
+      # Prerender.io
+      $timeout (->
+        window.prerenderReady = true;
+      ), time
+
+    # レイアウトのリサイズを検知
+    $scope.$on 'resize::resize', (event, args) ->
+      $rootScope.windowType = args.windowType

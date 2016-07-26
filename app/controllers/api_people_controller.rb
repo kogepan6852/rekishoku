@@ -11,12 +11,14 @@ class ApiPeopleController < ApplicationController
 
     people = Array.new()
     @people.each do |person|
-      obj = {
-        "id" => person.id,
-        "name" => person.name,
-        "furigana" => person.furigana
-      }
-      people.push(obj)
+      if person[:rating] != 0.0
+        obj = {
+          "id" => person.id,
+          "name" => person.name,
+          "furigana" => person.furigana
+        }
+        people.push(obj)
+      end
     end
     render json: people
   end
