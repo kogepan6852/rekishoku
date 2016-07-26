@@ -88,7 +88,7 @@ class ApiFeaturesController < ApplicationController
   def show
     @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).find(params[:id])
 
-    if params[:preview] == "true" || @feature.status == 1 && @feature.published_at <= Date.today
+    if params[:preview] == "true" || @feature.status == 1
       # user情報整形
       user = {
         "id" => @feature.user.id,
