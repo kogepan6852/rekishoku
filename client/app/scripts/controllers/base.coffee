@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "BaseCtrl", ($scope, $rootScope, Api, Const, $location, $ionicNavBarDelegate, $timeout) ->
+  .controller "BaseCtrl", ($scope, $rootScope, Api, Const, $location, $ionicNavBarDelegate, $timeout, $window) ->
 
     # initialize
     $rootScope.isHideTab = false
@@ -94,7 +94,7 @@ angular.module "frontApp"
     $scope.readyToCache = (time) ->
       # Prerender.io
       $timeout (->
-        window.prerenderReady = true;
+        $window.prerenderReady = true;
       ), time
 
     # レイアウトのリサイズを検知
