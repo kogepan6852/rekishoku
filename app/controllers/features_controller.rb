@@ -22,6 +22,7 @@ class FeaturesController < ApplicationController
     ## 公開日の設定
     setPublishedAt = feature_time_params[:published_at].split(/\D+/)
     @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    Net::HTTP.get_response(URI.parse(api_url("feature",@shop[:id])))
     redirect_to "/admin/feature"
   end
 
