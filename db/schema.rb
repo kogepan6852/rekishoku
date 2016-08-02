@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 20160625154206) do
     t.float    "rating",     default: 0.0, null: false
   end
 
+  create_table "people_external_links", id: false, force: :cascade do |t|
+    t.integer "person_id",        null: false
+    t.integer "external_link_id", null: false
+  end
+
+  add_index "people_external_links", ["external_link_id"], name: "index_people_external_links_on_external_link_id", using: :btree
+  add_index "people_external_links", ["person_id"], name: "index_people_external_links_on_person_id", using: :btree
+
   create_table "people_periods", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "period_id", null: false
@@ -233,6 +241,8 @@ ActiveRecord::Schema.define(version: 20160625154206) do
   add_foreign_key "categories_people", "people"
   add_foreign_key "categories_shops", "categories"
   add_foreign_key "categories_shops", "shops"
+  add_foreign_key "people_external_links", "external_links"
+  add_foreign_key "people_external_links", "people"
   add_foreign_key "people_periods", "people"
   add_foreign_key "people_periods", "periods"
   add_foreign_key "people_posts", "people"

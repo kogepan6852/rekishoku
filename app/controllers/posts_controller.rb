@@ -2,6 +2,9 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   before_action :set_post, only: [:edit, :update, :destroy]
 
+  require 'net/http'
+  include Prerender
+
   # GET /posts
   # GET /posts.json
   def index
@@ -29,6 +32,7 @@ class PostsController < ApplicationController
     setPublishedAt = post_time_params[:published_at].split(/\D+/)
     @post = Post.new(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     @post.save
+    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 
@@ -37,6 +41,7 @@ class PostsController < ApplicationController
   def update
     setPublishedAt = post_time_params[:published_at].split(/\D+/)
     @post.update(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    Net::HTTP.get_response(URI.parse(api_url("post",@shop[:id])))
     redirect_to "/admin/post"
   end
 

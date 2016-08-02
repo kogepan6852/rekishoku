@@ -62,9 +62,8 @@ class ApiFeaturesController < ApplicationController
           people += get_people_feature(posts)
         end
         if type.include?("ExternalLink")
-          # 外部リンク作成後解放
-          # extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          # people += get_people_feature(extrnal_links)
+          extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
+          people += get_people_feature(extrnal_links)
         end
         periods += get_periods(people)
         people = get_check_people(people)
@@ -89,7 +88,7 @@ class ApiFeaturesController < ApplicationController
   def show
     @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).find(params[:id])
 
-    if params[:preview] == "true" || @feature.status == 1 && @feature.published_at <= Date.today
+    if params[:preview] == "true" || @feature.status == 1
       # user情報整形
       user = {
         "id" => @feature.user.id,
@@ -106,16 +105,15 @@ class ApiFeaturesController < ApplicationController
         if feature_detail[:related_type] == "Shop"
           # 対応するShopの情報を取得する
           obj = get_shop_json(feature_detail.related)
-          people += feature_detail.related.people
         elsif feature_detail[:related_type] == "Post"
           # 対応するPostの情報を取得する
           post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(feature_detail[:related_id])
           obj = get_post_json(post)
-          people += feature_detail.related.people
         elsif feature_detail[:related_type] == "ExternalLink"
           # 対応するExternalLinkの情報を取得する
           obj = get_external_link_json(feature_detail.related)
         end
+        people += get_people(feature_detail.related)
         obj.store("feature_detail",feature_detail)
         feature_details.push(obj)
       end
@@ -156,8 +154,16 @@ class ApiFeaturesController < ApplicationController
     end
 
     def get_external_link_json(external_link)
+      # external_linkに紐付いてる人物を取得する
+      people = get_people(external_link)
+      # external_linkに紐付けしている時代を取得をする
+      periods = get_periods(external_link.people)
       # 返却用のオブジェクトを作成する
-      obj = { "external_link" => external_link }
+      obj = { "external_link" => external_link,
+              "people" => people.uniq,
+              "periods" => periods.uniq
+            }
+      return obj
     end
 
 end

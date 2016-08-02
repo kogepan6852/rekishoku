@@ -1,6 +1,8 @@
 class ApiPostsController < ApplicationController
   authorize_resource :class => false
 
+  require 'net/http'
+  include Prerender
   include ShopInfo
   include RelatedInfo
 
@@ -153,7 +155,6 @@ class ApiPostsController < ApplicationController
   def create
     category = PostCategory.find_by(slug: params[:slug])
     @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
-
     if @post.save
       render json: @post, status: :created
     else
@@ -176,6 +177,7 @@ class ApiPostsController < ApplicationController
       end
     # 公開処理の場合
     else
+      Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
       result = @post.update(post_params)
     end
     if result
