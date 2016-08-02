@@ -69,6 +69,9 @@
       "EPISODE":      "エピソード"
     }
   },
+  "EXTERNAL_LINK": {
+    "LABEL": "外部リンク"
+  },
   "POST_LIST": {
     "TITLE":          "タイトル",
     "CONTENT":        "本文",

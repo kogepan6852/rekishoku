@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   def update
     setPublishedAt = post_time_params[:published_at].split(/\D+/)
     @post.update(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
-    Net::HTTP.get_response(URI.parse(api_url("post",@shop[:id])))
+    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 

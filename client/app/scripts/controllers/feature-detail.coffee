@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate) ->
+  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -140,3 +140,10 @@ angular.module 'frontApp'
         $state.go('tabs.shop.writerDetail', { id: $scope.user.id })
       else
         $state.go('writer', { id: $scope.user.id })
+
+    $scope.clickExternalLink = (detail) ->
+      if $scope.windowType == 'xs'
+        detail.showLink = !detail.showLink
+      else
+        $window.open detail.external_link.quotation_url
+        return true

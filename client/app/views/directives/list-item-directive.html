@@ -53,7 +53,29 @@
     </div>
   </div>
 
-  <div class="tags">
+  <!-- EXTERNAL LINK -->
+  <img class="main-img subimage visible-lg visible-md visible-sm"
+      ng-src="{{data.image.md.url}}"
+      ng-if="target=='externalLink' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
+  <img class="main-img subimage visible-xs"
+      ng-src="{{data.image.sm.url}}"
+      ng-if="target=='externalLink' && windowType=='xs'">
+
+  <div class="category" ng-if="target=='externalLink'">
+    <span ng-bind="'EXTERNAL_LINK.LABEL'|translate"></span>
+  </div>
+  <div class="detail no-tag"
+      ng-class="{'more-info':showLink}"
+      ng-if="target=='externalLink'"
+      ng-click="clickLink()">
+    <div>
+      <h2 ng-bind="data.name" class="mincho"></h2>
+      <p class="description" ng-bind="data.content"></p>
+      <button class="button button-clear button-small" ng-class="{'hide-button': !showLink}" ng-click="openLink()">more info</button>
+    </div>
+  </div>
+
+  <div class="tags" ng-if="target!='externalLink'">
     <div class="periods">
       <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
     </div>
@@ -61,5 +83,6 @@
       <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
     </div>
   </div>
-  <i class="arrow ion-chevron-right"></i>
+  <i class="arrow ion-chevron-right" ng-hide="showLink && target=='externalLink'"></i>
+  <i class="arrow ion-close-round" ng-hide="!showLink" ng-if"target=='externalLink'"></i>
 </a>

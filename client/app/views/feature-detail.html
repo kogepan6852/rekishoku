@@ -96,6 +96,14 @@
             hide-info="true"
             window-type="windowType" >
           </list-item-shop>
+          <!-- EXTERNAL LINK -->
+          <list-item-external-link
+             ng-if="detail.external_link"
+             ng-click="clickExternalLink(detail)"
+             data="detail.external_link"
+             window-type="windowType"
+             show-link="detail.showLink">
+           </list-item-external-link>
 
       </div>
     </div>

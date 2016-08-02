@@ -14,4 +14,10 @@ $subColor: #00636F;
 $grayColor: #878677;
 $darkGrayColor: #3E3A39;
 
+@mixin css3($property, $value) {
+     @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+          #{$prefix}#{$property}: $value;
+     }
+}
+
 @import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);

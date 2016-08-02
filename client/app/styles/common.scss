@@ -144,13 +144,9 @@ ion-content {
 .search-footer {
   // background-color: $darkGrayColor;
   background-color: transparent;
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
   background-image: none;
   height: 0;
+  @include css3(transition, all 0.3s ease-out);
 
   .title { color: #fff; }
   .mode-btn {
@@ -166,11 +162,7 @@ ion-content {
     background-color: $subColor;
     border: none;
     color: #fff;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
+    @include css3(transition, all 0.2s ease-out);
 
     i {
       font-size: $h1;
