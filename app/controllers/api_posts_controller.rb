@@ -156,7 +156,6 @@ class ApiPostsController < ApplicationController
     category = PostCategory.find_by(slug: params[:slug])
     @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
     if @post.save
-      Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
       render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -178,6 +177,7 @@ class ApiPostsController < ApplicationController
       end
     # 公開処理の場合
     else
+      Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
       result = @post.update(post_params)
     end
     if result

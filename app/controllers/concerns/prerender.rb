@@ -6,8 +6,6 @@ module Prerender
     case Rails.env
     when 'production'
       set_url = "http://www.rekishoku.jp/app/" + report_type + "/" + report_id.to_s
-    when 'staging'
-      set_url = "http://rekishoku-stg.herokuapp.com/app/" + report_type + "/" + report_id.to_s
     end
 
     parameters = {
