@@ -709,6 +709,8 @@ RailsAdmin.config do |config|
             end
             field :image  do
               label "画像"
+              help "必須"
+              required true
             end
             field :quotation_url do
               label "引用したURL"
