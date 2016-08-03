@@ -68,6 +68,10 @@ Rails.application.routes.draw do
   post 'admin/feature/new', to: 'features#create'
   put 'admin/feature/:id/edit', to: 'features#update'
 
+  # ADMIN_ ExternalLink
+  post 'admin/external_link/new', to: 'external_links#create'
+  put 'admin/external_link/:id/edit', to: 'external_links#update'
+
 # site map
   case Rails.env
     when 'production'
