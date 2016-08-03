@@ -49,9 +49,9 @@ angular.module "frontApp"
     getZoomByDistance: (latDistance, lngDistance) ->
       # 画面幅ごとのmap表示領域の調整
       clientPx = document.body.clientWidth
-      targetWidth = 250
+      targetWidth = 220
       if clientPx > 768
-        targetWidth = 350
+        targetWidth = 320
       # zoomの計算
       latZoom = Math.LOG2E * Math.log((targetWidth * Const.MAP.METER_PER_PX * Const.MAP.LAT_PER_METER) / latDistance ) + 9
       lngZoom = Math.LOG2E * Math.log((targetWidth * Const.MAP.METER_PER_PX * Const.MAP.LAT_PER_METER) / lngDistance ) + 9

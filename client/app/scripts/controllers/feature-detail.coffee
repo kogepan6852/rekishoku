@@ -53,19 +53,26 @@ angular.module 'frontApp'
         # Map用アイコンの設定
         angular.forEach $scope.featureDetails, (featureDetail, i) ->
           if featureDetail.shop
+            target = featureDetail.shop
+            idType = "shop"
+          else if featureDetail.external_link
+            target = featureDetail.external_link
+            idType = "link"
+
+          if target
             ret =
-              latitude: featureDetail.shop.latitude
-              longitude: featureDetail.shop.longitude
+              latitude: target.latitude
+              longitude: target.longitude
               showWindow: true
-              title: featureDetail.shop.name
-              url: featureDetail.shop.image.thumb.url
+              title: target.name
+              url: target.image.thumb.url
               icon:
                 url: '../images/map-pin' + (i + 1) + '.png'
                 scaledSize : new google.maps.Size(25, 35)
-            ret['id'] = featureDetail.shop.id
+            ret['id'] = i
             shops.push(ret)
-            latArray.push(featureDetail.shop.latitude)
-            lngArray.push(featureDetail.shop.longitude)
+            latArray.push(target.latitude)
+            lngArray.push(target.longitude)
         $scope.targetMarkers = shops
 
         # shopが全て収まるzoomを計算
