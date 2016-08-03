@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625154206) do
+ActiveRecord::Schema.define(version: 20160803011601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,13 +41,19 @@ ActiveRecord::Schema.define(version: 20160625154206) do
   add_index "categories_shops", ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
 
   create_table "external_links", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",           null: false
     t.text     "content"
-    t.string   "image",          null: false
+    t.string   "image"
     t.string   "quotation_url"
     t.string   "quotation_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "province"
+    t.string   "city"
+    t.string   "address1"
+    t.string   "address2"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "feature_details", force: :cascade do |t|

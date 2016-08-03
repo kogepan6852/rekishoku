@@ -706,8 +706,6 @@ RailsAdmin.config do |config|
             end
             field :content do
               label "内容"
-              help "必須"
-              required true
             end
             field :image  do
               label "画像"
@@ -719,6 +717,24 @@ RailsAdmin.config do |config|
             end
             field :quotation_name do
               label "引用したサイト名"
+            end
+            field :province do
+              label "都道府県"
+              help "必須"
+              required true
+            end
+            field :city do
+              label "市町村"
+              help "必須"
+              required true
+            end
+            field :address1 do
+              label "その他住所"
+              help "必須 例) 銀座8-14-7"
+              required true
+            end
+            field :address2 do
+              label "建物名"
             end
             field :people do
               label "関係のある人物"
