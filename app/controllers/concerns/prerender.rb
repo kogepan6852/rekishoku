@@ -12,6 +12,7 @@ module Prerender
       "prerenderToken" => ENV['PRERENDER_TOKEN'],
       "url" => set_url,
     }
+    logger.debug(BASE_API_URL + "?" + parameters.map{|key,value| URI.encode(key.to_s) + "=" + URI.encode(value.to_s)}.join("&"))
     return BASE_API_URL + "?" + parameters.map{|key,value| URI.encode(key.to_s) + "=" + URI.encode(value.to_s)}.join("&")
   end
 end
