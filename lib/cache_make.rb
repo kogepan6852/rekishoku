@@ -4,7 +4,7 @@ require "rails_admin/config/actions/base"
 module RailsAdmin
     module Config
         module Actions
-            class DisplayOrderAction < RailsAdmin::Config::Actions::Base
+            class CacheMake < RailsAdmin::Config::Actions::Base
                 RailsAdmin::Config::Actions.register(self)
 
                 # カスタムコントローラを作成するため、以下を true にする

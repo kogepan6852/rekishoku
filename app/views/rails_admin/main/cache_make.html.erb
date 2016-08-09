@@ -1,13 +1,11 @@
 <%= form_tag("", method: "put") do %>
     <table class="table table-striped　table-bordered">
         <tr>
-            <th>Name</th>
-            <th>Order</th>
+            <th>id</th>
         </tr>
         <% @objects.each do |object| %>
             <tr>
-                <td><%=object.name%></td>
-                <td><input type="number" value="<%=object.order%>" name="products[][order]"></td>
+                <td><%=object.id%></td>
                 <input type="hidden" value="<%=object.id%>" name="products[][id]"/>
             </tr>
         <% end %>
