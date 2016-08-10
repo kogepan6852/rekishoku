@@ -29,7 +29,7 @@ module RailsAdmin
                             # 一覧表示　（モデル内容を全て取得）
                             @objects = list_entries(@model_config, :destroy, get_association_scope_from_params, false)
                         elsif request.put?
-                            # 表示順の更新
+                            # 通信用
                             http_client = HTTPClient.new
 
                             # prerender.ioの対応
