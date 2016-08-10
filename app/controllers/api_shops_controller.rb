@@ -103,6 +103,22 @@ class ApiShopsController < ApplicationController
     maxLongitude = params[:longitude].to_f + params[:shopDistance].to_f*longitudeRange
     @shops = Shop.where('latitude >= ? AND longitude >= ? AND latitude <= ? AND longitude <= ?', minLatitude, minLongitude, maxLatitude, maxLongitude)
 
+    # フリーワードで検索
+    if params[:keywords]
+      keywords = params[:keywords]
+      for kw in keywords.split(" ")
+        # 名前&詳細&メニュー&住所&人物で検索(outer_join仕様)
+        @shops = @shops
+          .eager_load(:people)
+          .where('shops.name LIKE ? or shops.description LIKE ? or shops.menu LIKE ? or CONCAT(shops.province, shops.city, shops.address1, shops.address2) LIKE ? or people.name LIKE ?',"%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%", "%#{kw}%").uniq
+      end
+    end
+
+    # カテゴリーで検索
+    if params[:category]
+      @shops = @shops.joins(:categories).where('categories_shops.category_id = ?', params[:category].to_i)
+    end
+
     if params[:period]
       # 時代で検索
       person = Person.select('distinct people.id').joins(:periods)
