@@ -1,14 +1,7 @@
 <%= form_tag("", method: "put") do %>
     <table class="table table-striped　table-bordered">
-        <tr>
-            <th>id</th>
-        </tr>
-        <% @objects.each do |object| %>
-            <tr>
-                <td><%=object.id%></td>
-                <input type="hidden" value="<%=object.id%>" name="products[][id]"/>
-            </tr>
-        <% end %>
+      <%= label :page, :cacheid %>
+      <%= text_field :page, :name %>
     </table>
-    <%= submit_tag("更新") %>
+    <%= submit_tag("キャッシュ作成/更新") %>
 <% end %>

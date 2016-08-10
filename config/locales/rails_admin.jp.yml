@@ -48,6 +48,10 @@ ja:
         title: "%{model_label_plural}の一覧"
         menu: "一覧"
         breadcrumb: "%{model_label_plural}"
+      cache_make:
+        title: "%{model_label_plural}のキャッシュ作成/更新"
+        menu: "キャッシュ作成/更新"
+        breadcrumb: "%{model_label_plural}"
       show:
         title: "%{model_label} '%{object_label}'の詳細"
         menu: "詳細"

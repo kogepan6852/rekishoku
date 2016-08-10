@@ -5,6 +5,8 @@ module RailsAdmin
     module Config
         module Actions
             class CacheMake < RailsAdmin::Config::Actions::Base
+                require 'net/http'
+                include Prerender
                 RailsAdmin::Config::Actions.register(self)
 
                 # カスタムコントローラを作成するため、以下を true にする
@@ -28,12 +30,22 @@ module RailsAdmin
                             @objects = list_entries(@model_config, :destroy, get_association_scope_from_params, false)
                         elsif request.put?
                             # 表示順の更新
-                            objects = list_entries(@model_config, :destroy)
-                            params[:products].each do |params_product|
-                                object = objects.find(params_product[:id])
-                                object.update_attributes(order: params_product[:order])
-                            end
-                            redirect_to(:back)
+                            http_client = HTTPClient.new
+
+                            # prerender.ioの対応
+                            endpoint_uri = 'http://api.prerender.io/recache'
+                            set_url = "http://www.rekishoku.jp/app/"+ params[:model_name] + "/" + params[:page][:name].to_s
+                            request_content = {:prerenderToken => ENV["PRERENDER_TOKEN"], :url => set_url}
+                            content_json = request_content.to_json
+
+                            http_client.set_auth(endpoint_uri, ENV["PRERENDER_MEAL"], ENV["PRERENDER_PASSWORD"])
+                            http_client.post_content(endpoint_uri, content_json, 'Content-Type' => 'application/json')
+
+                            # Facebook対応
+                            endpoint_uri = 'https://graph.facebook.com'
+                            request_content = {:scrape => true, :id => set_url}
+                            content_json = request_content.to_json
+                            http_client.post_content(endpoint_uri, content_json, 'Content-Type' => 'application/json')
                         else
                             raise "エラーメッセージ"
                         end
