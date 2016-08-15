@@ -86,7 +86,7 @@ class ApiFeaturesController < ApplicationController
   # PATCH/PUT /api/features/1
   # PATCH/PUT /api/features/1.json
   def show
-    @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).find(params[:id])
+    @feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ?", 1).find(params[:id])
 
     if params[:preview] == "true" || @feature.status == 1
       # user情報整形
