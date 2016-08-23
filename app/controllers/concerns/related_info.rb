@@ -26,7 +26,7 @@ module RelatedInfo
         periods.push(period);
       end
     end
-    return periods
+    return periods.sort{ |a, b| a[:id] <=> b[:id] }
   end
 
   # 対象の情報から紐づく人物を取得する
