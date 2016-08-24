@@ -11,7 +11,7 @@ class ApiShopsController < ApplicationController
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
-      for kw in keywords.split(" ")
+      for kw in keywords.gsub("　", " ").split(" ")
         # 名前&詳細&メニュー&住所&人物で検索(outer_join仕様)
         @shops = @shops
           .eager_load(:people)
@@ -106,7 +106,7 @@ class ApiShopsController < ApplicationController
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
-      for kw in keywords.split(" ")
+      for kw in keywords.gsub("　", " ").split(" ")
         # 名前&詳細&メニュー&住所&人物で検索(outer_join仕様)
         @shops = @shops
           .eager_load(:people)
