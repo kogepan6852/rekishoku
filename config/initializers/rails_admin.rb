@@ -32,7 +32,10 @@ RailsAdmin.config do |config|
     show_in_app
 
     # カスタムアクションを宣言
-    cache_make
+    if Rails.env == 'production'
+      cache_make
+    end
+
   end
 
   ## ユーザーの管理レベル調整
