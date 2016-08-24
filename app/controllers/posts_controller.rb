@@ -29,8 +29,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    setPublishedAt = post_time_params[:published_at].split(/\D+/)
-    if post_time_params[:published_at] == nil
+    if post_time_params[:published_at] != ""
+      setPublishedAt = post_time_params[:published_at].split(/\D+/)
       @post = Post.new(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
       @post = Post.new(post_params)
@@ -44,8 +44,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    setPublishedAt = post_time_params[:published_at].split(/\D+/)
-    if post_time_params[:published_at]  == nil
+    if post_time_params[:published_at] != ""
+      setPublishedAt = post_time_params[:published_at].split(/\D+/)
       @post.update(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
       @post.update(post_params)
