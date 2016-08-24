@@ -486,6 +486,7 @@ RailsAdmin.config do |config|
       end
       field :category  do
         label "対応するカテゴリを選択してください"
+        required true
       end
       field :post_details do
         label "記事セクション"
@@ -500,7 +501,6 @@ RailsAdmin.config do |config|
       end
       field :published_at do
         label "公開時間"
-        required true
       end
       field :shops  do
         label "関連店舗"
@@ -629,7 +629,6 @@ RailsAdmin.config do |config|
           end
           field :published_at do
             label "公開時間"
-            required true
           end
           field :user do
             label "ライター"

@@ -8,9 +8,12 @@ class FeaturesController < ApplicationController
   # POST /feature
   # POST /feature.json
   def create
-    setPublishedAt = feature_time_params[:published_at].split(/\D+/)
-
-    @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    if feature_time_params:[published_at] != ""
+      setPublishedAt = feature_time_params[:published_at].split(/\D+/)
+      @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    else
+      @feature = Feature.new(feature_params)
+    end
     @feature.save
     Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
@@ -20,8 +23,12 @@ class FeaturesController < ApplicationController
   # PATCH/PUT /feature/1.json
   def update
     ## 公開日の設定
-    setPublishedAt = feature_time_params[:published_at].split(/\D+/)
-    @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    if feature_time_params:[published_at] != ""
+      setPublishedAt = feature_time_params[:published_at].split(/\D+/)
+      @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+    else
+      @feature.update(feature_params)
+    end
     Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
