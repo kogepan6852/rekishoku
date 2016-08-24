@@ -48,6 +48,11 @@ SitemapGenerator::Sitemap.create do
   Shop.find_each do |shop|
     add '/app/shop/' + shop.id.to_s, :lastmod => shop.updated_at, :changefreq => 'weekly'
   end
+  Feature.find_each do |feature|
+    if feature.status == 1
+      add '/app/feature/' + feature.id.to_s, :lastmod => feature.updated_at, :changefreq => 'weekly'
+    end
+  end
   User.find_each do |user|
     if user.role == 1 || user.role == 2
       add '/app/writer/' + user.id.to_s, :lastmod => user.updated_at, :changefreq => 'weekly'
