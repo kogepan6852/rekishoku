@@ -1,3 +1,5 @@
+require Rails.root.join('lib', 'cache_make.rb')
+
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -18,7 +20,6 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
   config.actions do
     dashboard
     index
@@ -30,9 +31,11 @@ RailsAdmin.config do |config|
     delete
     show_in_app
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    # カスタムアクションを宣言
+    if Rails.env == 'production'
+      cache_make
+    end
+
   end
 
   ## ユーザーの管理レベル調整

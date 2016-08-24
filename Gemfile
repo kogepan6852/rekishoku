@@ -66,6 +66,9 @@ gem 'google-analytics-rails'
 # url redirect
 gem 'rack-rewrite'
 
+# post
+gem 'httpclient', '~> 2.7', '>= 2.7.1'
+
 # prerender.io(SEO for SPA)
 gem 'prerender_rails'
 
