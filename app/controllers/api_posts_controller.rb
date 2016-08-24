@@ -13,7 +13,7 @@ class ApiPostsController < ApplicationController
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
-      for kw in keywords.split(" ")
+      for kw in keywords.gsub("　", " ").split(" ")
         # タイトル&本文で検索
         @posts = @posts
           .joins(:post_details)
