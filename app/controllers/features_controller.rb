@@ -8,7 +8,7 @@ class FeaturesController < ApplicationController
   # POST /feature
   # POST /feature.json
   def create
-    if feature_time_params:[published_at] != ""
+    if feature_time_params[:published_at] != ""
       setPublishedAt = feature_time_params[:published_at].split(/\D+/)
       @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
@@ -23,7 +23,7 @@ class FeaturesController < ApplicationController
   # PATCH/PUT /feature/1.json
   def update
     ## 公開日の設定
-    if feature_time_params:[published_at] != ""
+    if feature_time_params[:published_at] != ""
       setPublishedAt = feature_time_params[:published_at].split(/\D+/)
       @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
