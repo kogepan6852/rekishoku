@@ -177,7 +177,7 @@ class ApiPostsController < ApplicationController
       end
     # 公開処理の場合
     else
-      set_cache_url = "http://www.rekishoku.jp/app/shop/150" 
+      set_cache_url = "http://www.rekishoku.jp/app/post/" + @post[:id].to_s
       api_url(set_cache_url)
       result = @post.update(post_params)
     end
