@@ -2,9 +2,6 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   before_action :set_post, only: [:edit, :update, :destroy]
 
-  require 'net/http'
-  include Prerender
-
   # GET /posts
   # GET /posts.json
   def index

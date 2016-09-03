@@ -2,9 +2,6 @@ class FeaturesController < ApplicationController
   load_and_authorize_resource
   before_action :set_feature, only: [:edit, :update, :destroy]
 
-  require 'net/http'
-  include Prerender
-
   # POST /feature
   # POST /feature.json
   def create

@@ -4,8 +4,6 @@ class ShopsController < ApplicationController
   before_action :set_shopscategories, only: [:new, :edit, :show]
   before_action :set_peopleshops, only: [:new, :edit, :show]
 
-  require 'net/http'
-  include Prerender
   include ApiGeocoder
 
   # GET /shops
