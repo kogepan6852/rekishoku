@@ -15,7 +15,6 @@ class FeaturesController < ApplicationController
       @feature = Feature.new(feature_params)
     end
     @feature.save
-    Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
 
@@ -29,7 +28,6 @@ class FeaturesController < ApplicationController
     else
       @feature.update(feature_params)
     end
-    Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
 

@@ -177,7 +177,8 @@ class ApiPostsController < ApplicationController
       end
     # 公開処理の場合
     else
-      Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
+      set_cache_url = "http://www.rekishoku.jp/app/shop/150" 
+      api_url(set_cache_url)
       result = @post.update(post_params)
     end
     if result

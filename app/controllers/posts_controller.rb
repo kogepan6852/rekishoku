@@ -37,7 +37,6 @@ class PostsController < ApplicationController
     end
 
     @post.save
-    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 
@@ -50,7 +49,6 @@ class PostsController < ApplicationController
     else
       @post.update(post_params)
     end
-    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 
