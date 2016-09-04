@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate, $window) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -22,6 +22,27 @@ angular.module "frontApp"
       animation: 'slide-in-up').then (modalProfileEdit) ->
       $scope.modalProfileEdit = modalProfileEdit
     $scope.isLoginUser = false
+
+    # 画面表示ごとの初期処理
+    $scope.$on '$ionicView.beforeEnter', (e) ->
+      $window.prerenderReady = false;
+      if $scope.user
+        setSeo()
+
+    ###
+    # common function
+    ###
+    setSeo = ->
+      appKeywords = []
+      appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+      appKeywords.push($scope.user.username)
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
+      $rootScope.appDescription = $scope.user.profile.substr(0, 150)
+      $rootScope.appImage = $scope.user.image.image.md.url
+      $rootScope.appKeywords = appKeywords.join()
+
+      # Prerender.io
+      $scope.readyToCache(1000)
 
     ###
     # Common function
@@ -50,16 +71,7 @@ angular.module "frontApp"
         $scope.posts = res.data.posts
 
         # SEO
-        appKeywords = []
-        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
-        appKeywords.push($scope.user.username)
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
-        $rootScope.appDescription = $scope.user.profile.substr(0, 150)
-        $rootScope.appImage = $scope.user.image.image.md.url
-        $rootScope.appKeywords = appKeywords.join()
-
-        # Prerender.io
-        $scope.readyToCache(1000)
+        setSeo()
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true

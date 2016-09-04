@@ -34,6 +34,28 @@ angular.module 'frontApp'
       zoomControl: true
       draggable: false
 
+    # 画面表示ごとの初期処理
+    $scope.$on '$ionicView.beforeEnter', (e) ->
+      $window.prerenderReady = false;
+      if $scope.feature && $scope.featureDetails
+        setSeo()
+
+    ###
+    # common function
+    ###
+    setSeo = ->
+      appKeywords = []
+      angular.forEach $scope.featureDetails, (featureDetail) ->
+        if featureDetail.shop
+          appKeywords.push(featureDetail.shop.name)
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.feature.title
+      $rootScope.appDescription = $scope.feature.content.substr(0, 150)
+      $rootScope.appImage = $scope.feature.image.url
+      $rootScope.appKeywords = appKeywords.join()
+
+      # Prerender.io
+      $scope.readyToCache(1000)
+
     ###
     # initialize
     ###
@@ -90,20 +112,9 @@ angular.module 'frontApp'
         $scope.map.zoom = targetZoom
 
         # SEO
-        appKeywords = []
-        angular.forEach $scope.featureDetails, (featureDetail) ->
-          if featureDetail.shop
-            appKeywords.push(featureDetail.shop.name)
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.feature.title
-        $rootScope.appDescription = $scope.feature.content.substr(0, 150)
-        $rootScope.appImage = $scope.feature.image.url
-        $rootScope.appKeywords = appKeywords.join()
+        setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
-
-        # Prerender.io
-        $scope.readyToCache(1000)
-
 
       # 現在タブの判定
       if $state.is('tabs.featureDetalPost')

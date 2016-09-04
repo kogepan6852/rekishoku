@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -32,6 +32,27 @@ angular.module 'frontApp'
       disableDefaultUI: true
       zoomControl: true
       draggable: false
+
+    # 画面表示ごとの初期処理
+    $scope.$on '$ionicView.beforeEnter', (e) ->
+      $window.prerenderReady = false;
+      if $scope.shop
+        setSeo()
+
+    ###
+    # common function
+    ###
+    setSeo = ->
+      appKeywords = []
+      appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+      appKeywords.push($scope.shop.name)
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.shop.name
+      $rootScope.appDescription = $scope.shop.description.substr(0, 150)
+      $rootScope.appImage = $scope.shop.subimage.md.url
+      $rootScope.appKeywords = appKeywords.join()
+
+      # Prerender.io
+      $scope.readyToCache(1000)
 
     ###
     # initialize
@@ -66,19 +87,9 @@ angular.module 'frontApp'
         $scope.targetMarkers = shops
 
         # SEO
-        appKeywords = []
-        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
-        appKeywords.push($scope.shop.name)
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.shop.name
-        $rootScope.appDescription = $scope.shop.description.substr(0, 150)
-        $rootScope.appImage = $scope.shop.subimage.md.url
-        $rootScope.appKeywords = appKeywords.join()
+        setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
-
-        # Prerender.io
-        $scope.readyToCache(1000)
-
 
       # 現在タブの判定
       if $state.is('tabs.shopDetailPost')

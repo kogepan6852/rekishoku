@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -18,6 +18,32 @@ angular.module 'frontApp'
     ###
     $scope.targetId = $stateParams.id
     $rootScope.isHideTab = true
+
+    # 画面表示ごとの初期処理
+    $scope.$on '$ionicView.beforeEnter', (e) ->
+      $window.prerenderReady = false;
+      if $scope.post && $scope.people && $scope.eyeCatchImage
+        setSeo()
+
+    ###
+    # common function
+    ###
+    setSeo = ->
+      appKeywords = []
+      appKeywords.push($translate.instant('SEO.KEYWORDS.MEAL'))
+      angular.forEach $scope.people, (person) ->
+        appKeywords.push(person.name)
+      if $scope.post.category_slug =="cooking"
+        appKeywords = []
+        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
+        appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
+      $rootScope.appDescription = $scope.post.content.substr(0, 150)
+      $rootScope.appImage = $scope.eyeCatchImage.image.md.url
+      $rootScope.appKeywords = appKeywords.join()
+
+      # Prerender.io
+      $scope.readyToCache(1000)
 
     ###
     # initialize
@@ -36,18 +62,7 @@ angular.module 'frontApp'
         $scope.eyeCatchImage = res.data.eye_catch_image
 
         # SEO
-        appKeywords = []
-        appKeywords.push($translate.instant('SEO.KEYWORDS.MEAL'))
-        angular.forEach $scope.people, (person) ->
-          appKeywords.push(person.name)
-        if $scope.post.category_slug =="cooking"
-          appKeywords = []
-          appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
-          appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
-        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
-        $rootScope.appDescription = $scope.post.content.substr(0, 150)
-        $rootScope.appImage = $scope.eyeCatchImage.image.md.url
-        $rootScope.appKeywords = appKeywords.join()
+        setSeo()
 
         # 関連投稿内容取得
         pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
@@ -58,9 +73,6 @@ angular.module 'frontApp'
           if res.data.length < num
             num = res.data.length
           $scope.postsRelated = BaseService.getRandomArray(res.data, num)
-
-          # Prerender.io
-          $scope.readyToCache(1000)
 
       # 投稿内容詳細取得
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
