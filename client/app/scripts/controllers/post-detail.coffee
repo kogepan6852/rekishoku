@@ -30,13 +30,20 @@ angular.module 'frontApp'
     ###
     setSeo = ->
       appKeywords = []
-      appKeywords.push($translate.instant('SEO.KEYWORDS.MEAL'))
+      # 人物
       angular.forEach $scope.people, (person) ->
         appKeywords.push(person.name)
+      # 時代
+      angular.forEach $scope.periods, (period) ->
+        appKeywords.push(period.name)
+      # 固定ワード
+      appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
+      appKeywords.push($translate.instant('SEO.KEYWORDS.KINSHIP'))
+      # 歴食クッキング
       if $scope.post.category_slug =="cooking"
         appKeywords = []
-        appKeywords.push($translate.instant('SEO.KEYWORDS.BASE'))
-        appKeywords.push($translate.instant('SEO.KEYWORDS.COOKING'))
+        appKeywords.push($translate.instant('SEO.KEYWORDS.R_COOKING'))
+      # セット
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
       $rootScope.appDescription = $scope.post.content.substr(0, 150)
       $rootScope.appImage = $scope.eyeCatchImage.image.md.url

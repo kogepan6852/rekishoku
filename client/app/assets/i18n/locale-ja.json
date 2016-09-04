@@ -10,8 +10,10 @@
     },
     "KEYWORDS": {
       "BASE":         "歴食",
-      "MEAL":         "食",
-      "COOKING":      "クッキング"
+      "COOKING":      "料理",
+      "R_COOKING":    "歴食クッキング",
+      "KINSHIP":      "ゆかり",
+      "OLD_FIRM":     "老舗"
     }
   },
   "MENU": {
