@@ -2,9 +2,6 @@ class FeaturesController < ApplicationController
   load_and_authorize_resource
   before_action :set_feature, only: [:edit, :update, :destroy]
 
-  require 'net/http'
-  include Prerender
-
   # POST /feature
   # POST /feature.json
   def create
@@ -15,7 +12,6 @@ class FeaturesController < ApplicationController
       @feature = Feature.new(feature_params)
     end
     @feature.save
-    Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
 
@@ -29,7 +25,6 @@ class FeaturesController < ApplicationController
     else
       @feature.update(feature_params)
     end
-    Net::HTTP.get_response(URI.parse(api_url("feature",@feature[:id])))
     redirect_to "/admin/feature"
   end
 
