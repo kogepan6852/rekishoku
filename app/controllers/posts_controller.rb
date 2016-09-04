@@ -2,9 +2,6 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   before_action :set_post, only: [:edit, :update, :destroy]
 
-  require 'net/http'
-  include Prerender
-
   # GET /posts
   # GET /posts.json
   def index
@@ -37,7 +34,6 @@ class PostsController < ApplicationController
     end
 
     @post.save
-    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 
@@ -50,7 +46,6 @@ class PostsController < ApplicationController
     else
       @post.update(post_params)
     end
-    Net::HTTP.get_response(URI.parse(api_url("post",@post[:id])))
     redirect_to "/admin/post"
   end
 

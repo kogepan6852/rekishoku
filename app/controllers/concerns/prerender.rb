@@ -1,18 +1,23 @@
 module Prerender
-  BASE_API_URL = "http://api.prerender.io/recache".freeze
 
   # API実行用のURLを返却
-  def api_url(report_type, report_id)
-    case Rails.env
-    when 'production'
-      set_url = "http://www.rekishoku.jp/app/" + report_type + "/" + report_id.to_s
-    end
+  def create_page_cache(cache_url)
+    if Rails.env == 'production'
+      # 通信用
+      http_client = HTTPClient.new
 
-    parameters = {
-      "prerenderToken" => ENV['PRERENDER_TOKEN'],
-      "url" => set_url,
-    }
-    logger.debug(BASE_API_URL + "?" + parameters.map{|key,value| URI.encode(key.to_s) + "=" + URI.encode(value.to_s)}.join("&"))
-    return BASE_API_URL + "?" + parameters.map{|key,value| URI.encode(key.to_s) + "=" + URI.encode(value.to_s)}.join("&")
+      # prerender.ioの対応
+      endpoint_uri = 'http://api.prerender.io/recache'
+      request_content = {:prerenderToken => ENV["PRERENDER_TOKEN"], :url => cache_url}
+      content_json = request_content.to_json
+      http_client.set_auth(endpoint_uri, ENV["PRERENDER_MEAL"], ENV["PRERENDER_PASSWORD"])
+      http_client.post_content(endpoint_uri, content_json, 'Content-Type' => 'application/json')
+
+      # Facebook対応
+      endpoint_uri = 'https://graph.facebook.com'
+      request_content = {:scrape => "true", :id => cache_url}
+      content_json = request_content.to_json
+      http_client.post_content(endpoint_uri, content_json, 'Content-Type' => 'application/json')
+    end
   end
 end
