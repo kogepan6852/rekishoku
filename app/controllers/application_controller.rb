@@ -10,15 +10,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token,     if: -> {request.format.json?}
   # トークンによる認証
   before_action      :authenticate_user_from_token!, if: -> {params[:email].present?}
-
-  before_filter :allow_cross_domain_access
-  def allow_cross_domain_access
-    headers['Access-Control-Allow-Origin'] = 'http://www.rekishoku.jp'
-    headers['Access-Control-Allow-Methods'] = 'POST, PUT, OPTIONS'
-    headers['Access-Control-Request-Method'] = '*'
-    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  end
-
+  
   # 権限無しのリソースにアクセスしようとした場合
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
