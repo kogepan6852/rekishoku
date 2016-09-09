@@ -72,6 +72,9 @@ gem 'httpclient', '~> 2.7', '>= 2.7.1'
 # prerender.io(SEO for SPA)
 gem 'prerender_rails'
 
+# heroku logs
+gem 'rails_12factor', group: :production
+
 group :development do
   gem 'annotate', '2.6.5'
 end

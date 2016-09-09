@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token,     if: -> {request.format.json?}
   # トークンによる認証
   before_action      :authenticate_user_from_token!, if: -> {params[:email].present?}
-
+  
   # 権限無しのリソースにアクセスしようとした場合
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
