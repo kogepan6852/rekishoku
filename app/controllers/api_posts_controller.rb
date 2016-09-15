@@ -177,7 +177,7 @@ class ApiPostsController < ApplicationController
     # 公開処理の場合
     else
       cache_url = "http://www.rekishoku.jp/app/post/" + @post[:id].to_s
-      create_page_cache(cache_url)
+      create_page_cache(cache_url, @post[:image], @post[:title], @post[:content])
       result = @post.update(post_params)
     end
     if result
