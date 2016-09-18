@@ -146,11 +146,4 @@ angular.module "frontApp"
       reader.readAsDataURL file
 
     $scope.moveToPostDetail = (id) ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.postDetal', { id: id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.postDetailMap', { id: id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.postDetail', { id: id })
-      else
-        $state.go('post', { id: id })
+      $state.go('postDetail', { id: id })

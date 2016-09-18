@@ -26,7 +26,7 @@ angular.module "frontApp"
     $scope.onDragUpScroll = ->
       $rootScope.isDown = true
       $rootScope.hideFooter = true
-      $rootScope.hideModeBtn = false
+      $rootScope.hideModeBtn = true
 
     $scope.onDragDownScroll = ->
       $rootScope.isDown = false

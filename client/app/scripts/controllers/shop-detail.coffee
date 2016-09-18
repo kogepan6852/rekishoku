@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -16,9 +16,11 @@ angular.module 'frontApp'
     ###
     # setting
     ###
+    $scope.$on '$ionicView.enter', (e) ->
+      $ionicNavBarDelegate.showBackButton true
+
     $scope.targetId = $stateParams.id
     $rootScope.hideFooter = true
-    $rootScope.hideModeBtn = true
 
     # Map用パラメータの設定
     $scope.map =
@@ -121,21 +123,7 @@ angular.module 'frontApp'
     # function
     ###
     $scope.moveToPostDetail = (id) ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.postDetal', { id: id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.postDetailMap', { id: id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.postDetail', { id: id })
-      else
-        $state.go('post', { id: id })
+      $state.go('postDetail', { id: id })
 
     $scope.moveToShopDetail = (id) ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetailPost', { id: id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.postDetailMap', { id: id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.shopDetail', { id: id })
-      else
-        $state.go('shop', { id: id })
+      $state.go('shopDetail', { id: id })

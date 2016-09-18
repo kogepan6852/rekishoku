@@ -1,22 +1,22 @@
 <div class="sub-tab" ng-controller="TabsCtrl">
-  <ion-tabs>
+  <div class="tabs-striped tabs-background-stable">
 
-    <!-- Shops  -->
-    <ion-tab title="{{'MENU.STORE'|translate}}">
-      <ion-nav-view name="tab-shop-list" href="#/app/shops/list"></ion-nav-view>
-    </ion-tab>
+    <div class="tabs">
+      <a class="tab-item" ui-sref=".shop.list" nav-transition="none">
+        STORE
+      </a>
+      <a class="tab-item" ui-sref=".shop.map" nav-transition="none">
+        MAP
+      </a>
+    </div>
+  </div>
 
+  <ion-nav-view></ion-nav-view>
 
-    <!-- Map  -->
-    <ion-tab title="{{'MENU.MAP'|translate}}">
-      <ion-nav-view name="tab-shop-map" href="#/app/shops/map"></ion-nav-view>
-    </ion-tab>
-
-  </ion-tabs>
 </div>
 
 <!-- <ion-footer-bar class="search-footer" ng-class="{'hide-footer': hideFooter}"> -->
-<ion-footer-bar class="search-footer">
+<ion-footer-bar class="search-footer" ng-controller="TabsCtrl">
   <!-- <h1 class="title"><i class="ion-arrow-down-b"></i> SORT BY</h1> -->
   <div class="buttons" ng-click="changeListType()">
     <button class="button mode-btn" ng-class="{'hide-btn': hideModeBtn}">

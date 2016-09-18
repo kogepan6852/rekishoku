@@ -1,5 +1,5 @@
 <ion-view title="">
-  <ion-content class="shops" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()" delegate-handle="shops">
+  <ion-content class="shops has-tabs-top" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()" delegate-handle="shops">
 
     <ion-refresher
       pulling-text="{{'TEXT.PULLING'|translate}}"
@@ -45,4 +45,16 @@
     </ion-infinite-scroll>
 
   </ion-content>
+
+  <!-- <ion-footer-bar class="search-footer" ng-class="{'hide-footer': hideFooter}"> -->
+  <ion-footer-bar class="search-footer" ng-controller="TabsCtrl">
+    <!-- <h1 class="title"><i class="ion-arrow-down-b"></i> SORT BY</h1> -->
+    <div class="buttons" ng-click="moveToMap()">
+      <button class="button mode-btn first-btn" ng-class="{'hide-btn': hideModeBtn}">
+        <i class="ion-ios-flag-outline"></i>
+        <span>MAP</span>
+      </button>
+    </div>
+  </ion-footer-bar>
+
 </ion-view>

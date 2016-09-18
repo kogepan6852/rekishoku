@@ -29,153 +29,63 @@ angular
   .config ($stateProvider, $urlRouterProvider, $routeProvider) ->
     $stateProvider
       .state 'tabs',
-        abstract: true,
+        url: '',
         templateUrl: "views/tabs.html"
 
       # MAGAZINE TAB
       .state 'tabs.magazine',
         url: '/app/magazine'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/magazine.html'
-            controller: 'MagazineCtrl'
-
-      # STORE TAB
-      .state 'tabs.shop',
-        abstract: true
-        views:
-          'tab-shop':
-            templateUrl: 'views/tab-shop.html'
+        templateUrl: 'views/magazine.html'
+        controller: 'MagazineCtrl'
 
       # STORE TAB LIST
-      .state 'tabs.shop.list',
-        url: '/app/shops/list'
-        views:
-          'tab-shop-list':
-            templateUrl: 'views/shops.html'
-            controller: 'ShopsCtrl'
+      .state 'tabs.shops',
+        url: '/app/shops'
+        templateUrl: 'views/shops.html'
+        controller: 'ShopsCtrl'
 
-      # STORE TAB MAP DIRECT
+      # MAP
       .state 'map',
-        cache: false
-        url: '/app/shops/map'
+        url: '/app/map'
         templateUrl: 'views/map.html'
         controller: 'MapCtrl'
 
-      # STORE TAB MAP
-      .state 'tabs.shop.map',
-        cache: false
-        url: '/app/shops/map'
-        views:
-          'tab-shop-map':
-            templateUrl: 'views/map.html'
-            controller: 'MapCtrl'
-
-      # MAGAZINEタブ用の各ページのルーティング
-      .state 'tabs.postDetal',
+      # 記事詳細
+      .state 'postDetail',
         url: '/app/post/:id?preview'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.writerPost',
-        url: '/app/writer/:id'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/writer-detail.html'
-            controller: 'WriterDetailCtrl'
-      .state 'tabs.shopDetailPost',
-        url: '/app/shop/:id'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.featureDetalPost',
-        url: '/app/feature/:id'
-        views:
-          'tab-magazine':
-            templateUrl: 'views/feature-detail.html'
-            controller: 'FeatureDetailCtrl'
+        templateUrl: 'views/post-detail.html'
+        controller: 'PostDetailCtrl'
 
-      # STORE DETAIL DIRECT
-      .state 'tabs.shopDetal',
+      # 店舗詳細
+      .state 'shopDetail',
         url: '/app/shop/:id'
-        views:
-          'tab-shop':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-
-      # STORE DETAIL from MAP DIRECT
-      .state 'mapShopDetal',
-        url: '/app/map-shop/:id'
         templateUrl: 'views/shop-detail.html'
         controller: 'ShopDetailCtrl'
 
-      # STORE LISTタブ用の各ページのルーティング
-      .state 'tabs.shop.shopDetail',
-        url: '/app/shop/:id'
-        views:
-          'tab-shop-list':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-      .state 'tabs.shop.postDetail',
-        url: '/app/post/:id'
-        views:
-          'tab-shop-list':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.shop.writerDetail',
-        url: '/app/writer/:id'
-        views:
-          'tab-shop-list':
-            templateUrl: 'views/writer-detail.html'
-            controller: 'WriterDetailCtrl'
+      # 特集詳細
+      .state 'featureDetal',
+        url: '/app/feature/:id'
+        templateUrl: 'views/feature-detail.html'
+        controller: 'FeatureDetailCtrl'
 
-      # STORE DETAILS
-      .state 'tabs.shop.detailMap',
-        url: '/app/map/shop/:id'
-        views:
-          'tab-shop-map':
-            templateUrl: 'views/shop-detail.html'
-            controller: 'ShopDetailCtrl'
-
-      # STORE MAPタブ用の各ページのルーティング
-      .state 'tabs.shop.postDetailMap',
-        url: '/app/post/:id'
-        views:
-          'tab-shop-map':
-            templateUrl: 'views/post-detail.html'
-            controller: 'PostDetailCtrl'
-      .state 'tabs.shop.mapWriter',
-        url: '/app/writer/:id'
-        views:
-          'tab-shop-map':
-            templateUrl: 'views/writer-detail.html'
-            controller: 'WriterDetailCtrl'
-
-      # そのた
+      # 投稿一覧
       .state 'my-post',
         cache: false,
         url: '/app/my-post'
         templateUrl: 'views/post-list.html'
         controller: 'PostListCtrl'
+
+      # ライター一覧
       .state 'writers',
         url: '/app/writers'
         templateUrl: 'views/writers.html'
         controller: 'WritersCtrl'
-      .state 'writer',
+
+      # ライター詳細
+      .state 'writerDetail',
         url: '/app/writer/:id'
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
-      .state 'post',
-        url: '/app/post/:id?preview'
-        templateUrl: 'views/post-detail.html'
-        controller: 'PostDetailCtrl'
-      .state 'shop',
-        url: '/app/shop/:id'
-        templateUrl: 'views/shop-detail.html'
-        controller: 'ShopDetailCtrl'
-
 
       # 旧URL用の暫定パス
       .state 'post-old',

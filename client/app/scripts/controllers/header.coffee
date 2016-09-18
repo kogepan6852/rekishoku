@@ -187,7 +187,7 @@ angular.module "frontApp"
 
     $scope.moveToShops = ->
       $ionicViewSwitcher.nextTransition('none')
-      $state.go('tabs.shop.list')
+      $state.go('tabs.shops')
       $rootScope.currentType = 'shop'
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
       clearForMove(false)

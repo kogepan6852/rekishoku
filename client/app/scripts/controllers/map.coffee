@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService, $state, $ionicNavBarDelegate) ->
+  .controller 'MapCtrl', ($scope, $rootScope, $window, $ionicSideMenuDelegate, $controller, $translate, Api, toaster, BaseService, Const, DataService, $state, $ionicNavBarDelegate, $ionicViewSwitcher) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -18,8 +18,6 @@ angular.module 'frontApp'
     ###
     $scope.$on '$ionicView.enter', (e) ->
       $rootScope.isHideTab = false
-      $rootScope.hideModeBtn = false
-      $ionicNavBarDelegate.showBackButton false
 
     DataService.getShopCategory (data) ->
       $scope.categories = data
@@ -32,6 +30,8 @@ angular.module 'frontApp'
       address: null
     }
     $scope.isDragging = false;
+
+    $ionicNavBarDelegate.showBackButton false
 
     # 初期位置の設定
     latitude = Const.MAP.CENTER.DEFAULT.LAT
@@ -89,11 +89,6 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
-      # mapへ直アクセスかどうかの判定
-      $scope.isDirect = false
-      if $state.is("map")
-        $scope.isDirect = true
-
       if $rootScope.zoom
         targetDistance = BaseService.calMapDistance($rootScope.zoom)
       if $rootScope.targetAddress
@@ -109,11 +104,11 @@ angular.module 'frontApp'
 
       else
         # 現在地の取得
-        $scope.current = null;
+        $rootScope.current = null;
         if navigator.geolocation
           navigator.geolocation.getCurrentPosition ((position) ->
             # 現在地アイコン用
-            $scope.current = {
+            $rootScope.current = {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             };
@@ -169,10 +164,10 @@ angular.module 'frontApp'
           $scope.currentIcon = []
           shops = []
           # 現在地アイコンの設定
-          if $scope.current
+          if $rootScope.current
             now =
-              latitude: $scope.current.latitude,
-              longitude: $scope.current.longitude,
+              latitude: $rootScope.current.latitude,
+              longitude: $rootScope.current.longitude,
               icon:
                 url: '../images/current-pin.png'
                 scaledSize : new google.maps.Size(35, 35)
@@ -254,3 +249,9 @@ angular.module 'frontApp'
       $rootScope.latitude = null
       $rootScope.longitude = null
       $scope.init()
+
+    # Shop一覧への移動
+    $scope.moveToShops = ->
+      $ionicViewSwitcher.nextTransition('none')
+      $ionicNavBarDelegate.showBackButton false
+      $state.go('tabs.shops')

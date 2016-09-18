@@ -6,6 +6,10 @@
    * Common
    **********************/
    .detail {
+     &.has-header  {
+       top: 0;
+     }
+     
      .top-image {
        img {
          margin-top: -5%;

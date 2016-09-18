@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, Api, Const, DataService, $state) ->
+  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, Api, Const, DataService, $state, $ionicViewSwitcher) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -18,7 +18,6 @@ angular.module "frontApp"
     ###
     $scope.$on '$ionicView.enter', (e) ->
       $rootScope.isHideTab = false
-      $rootScope.hideModeBtn = false
       $ionicNavBarDelegate.showBackButton false
 
     DataService.getShopCategory (data) ->
@@ -90,9 +89,13 @@ angular.module "frontApp"
     # 店舗詳細移動時の処理
     $scope.moveToShopDetail = (id) ->
       $rootScope.hideFooter = true
-      $rootScope.hideModeBtn = true
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.shop.shopDetail', {id:id}
+      $state.go 'shopDetail', {id:id}
+
+    $scope.moveToMap = ->
+      $ionicViewSwitcher.nextTransition('none')
+      $ionicNavBarDelegate.showBackButton false
+      $state.go('map')
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

@@ -15,7 +15,6 @@ angular.module "frontApp"
 
     # setting
     $scope.$on '$ionicView.enter', (e) ->
-      $rootScope.hideModeBtn = false
       $ionicNavBarDelegate.showBackButton false
 
     # initialize

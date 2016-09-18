@@ -18,7 +18,6 @@ angular.module "frontApp"
     ###
     $scope.$on '$ionicView.enter', (e) ->
       $rootScope.isHideTab = false
-      $rootScope.hideModeBtn = false
       $ionicNavBarDelegate.showBackButton false
 
     DataService.getPostCategory (data) ->
@@ -109,17 +108,17 @@ angular.module "frontApp"
     # 記事詳細移動時の処理
     $scope.moveToPostDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.postDetal', {id:id}
+      $state.go 'postDetail', {id:id}
 
     # ショップ詳細移動時の処理
     $scope.moveToShopDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.shopDetailPost', {id:id}
+      $state.go 'shopDetail', {id:id}
 
     # ショップ詳細移動時の処理
     $scope.moveToFeatureDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'tabs.featureDetalPost', {id:id}
+      $state.go 'featureDetal', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

@@ -156,13 +156,19 @@ ion-content {
     bottom: 20px;
     height: 60px;
     width: 60px;
-    left: 15px;
     position: fixed;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background-color: $subColor;
     border: none;
     color: #fff;
     @include css3(transition, all 0.2s ease-out);
+
+    &.first-btn {
+      left: 15px;
+    }
+    &.second-btn {
+      left: 90px;
+    }
 
     i {
       font-size: $h1;
@@ -174,9 +180,13 @@ ion-content {
       bottom: -60px!important;
     }
 
+    &.activated {
+      background-color: $subColorLite;
+    }
+
     span {
       line-height: 8px;
-      font-size: $h6;
+      font-size: $h7;
       position: absolute;
       bottom: 10px;
       text-align: center;

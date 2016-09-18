@@ -18,7 +18,6 @@ angular.module 'frontApp'
     ###
     $scope.targetId = $stateParams.id
     $rootScope.hideFooter = true
-    $rootScope.hideModeBtn = true
 
     # Map用パラメータの設定
     $scope.map =
@@ -140,34 +139,13 @@ angular.module 'frontApp'
     # function
     ###
     $scope.moveToPostDetail = (id) ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.postDetal', { id: id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.postDetailMap', { id: id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.postDetail', { id: id })
-      else
-        $state.go('post', { id: id })
+      $state.go('postDetail', { id: id })
 
     $scope.moveToShopDetail = (id) ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.shopDetailPost', { id: id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.postDetailMap', { id: id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.shopDetail', { id: id })
-      else
-        $state.go('shop', { id: id })
+      $state.go('shopDetail', { id: id })
 
     $scope.moveToWriterDetail = ->
-      if $scope.nowTab == 'magazine'
-        $state.go('tabs.writerPost', { id: $scope.user.id })
-      else if $scope.nowTab == 'map'
-        $state.go('tabs.shop.mapWriter', { id: $scope.user.id })
-      else if $scope.nowTab == 'shop'
-        $state.go('tabs.shop.writerDetail', { id: $scope.user.id })
-      else
-        $state.go('writer', { id: $scope.user.id })
+      $state.go('writerDetail', { id: $scope.user.id })
 
     $scope.clickExternalLink = (detail) ->
       if $scope.windowType == 'xs'
