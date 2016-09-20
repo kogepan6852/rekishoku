@@ -85,16 +85,6 @@ angular.module 'frontApp'
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
         $scope.postDetails = res.data
 
-      # 現在タブの判定
-      if $state.is('tabs.postDetal')
-        $scope.nowTab = 'magazine'
-      else if $state.is('tabs.shop.postDetailMap')
-        $scope.nowTab = 'map'
-      else if $state.is('tabs.shop.postDetail')
-        $scope.nowTab = 'shop'
-      else
-        $scope.nowTab = 'other'
-
     ###
     # function
     ###

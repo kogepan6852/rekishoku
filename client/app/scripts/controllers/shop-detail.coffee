@@ -109,16 +109,6 @@ angular.module 'frontApp'
 
         $scope.$broadcast 'scroll.refreshComplete'
 
-      # 現在タブの判定
-      if $state.is('tabs.shopDetailPost')
-        $scope.nowTab = 'magazine'
-      else if $state.is('tabs.shop.detailMap')
-        $scope.nowTab = 'map'
-      else if $state.is('tabs.shop.shopDetail')
-        $scope.nowTab = 'shop'
-      else
-        $scope.nowTab = 'other'
-
     ###
     # function
     ###

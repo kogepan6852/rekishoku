@@ -27,6 +27,18 @@ angular.module "frontApp"
           $sessionStorage['shop-category-obj'] = res.data
           callback res.data
 
+    # shop用categoryの取得
+    getFeatureCategory: (callback) ->
+      categoryObj = $sessionStorage['feature-category-obj']
+      if categoryObj
+        callback categoryObj
+      else
+        featureCategoryObj =
+          type: "FeatureCategory"
+        Api.getJson(featureCategoryObj, Const.API.CATEGORY, false).then (res) ->
+          $sessionStorage['shop-category-obj'] = res.data
+          callback res.data
+
     # people用categoryの取得
     getPeopleCategory: (callback) ->
       categoryObj = $sessionStorage['people-category-obj']

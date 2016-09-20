@@ -50,6 +50,12 @@ angular
         templateUrl: 'views/map.html'
         controller: 'MapCtrl'
 
+      # MAP
+      .state 'features',
+        url: '/app/features'
+        templateUrl: 'views/features.html'
+        controller: 'FeaturesCtrl'
+
       # 記事詳細
       .state 'postDetail',
         url: '/app/post/:id?preview'

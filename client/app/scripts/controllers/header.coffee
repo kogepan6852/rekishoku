@@ -67,9 +67,9 @@ angular.module "frontApp"
     # 現在Pathの取得
     setCurrentType = ->
       currentPath = $location.path();
-      if currentPath.indexOf('/shops/list') != -1
+      if currentPath.indexOf('/shops') != -1
         $rootScope.currentType = 'shop'
-      else if currentPath.indexOf('/shops/map') != -1
+      else if currentPath.indexOf('/map') != -1
         $rootScope.currentType = 'map'
       else
         $rootScope.currentType = 'magazine'
@@ -192,6 +192,13 @@ angular.module "frontApp"
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
       clearForMove(false)
 
+    $scope.moveToFeature = ->
+      $ionicViewSwitcher.nextTransition('none')
+      $state.go('features')
+      $rootScope.currentType = 'feature'
+      $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.FEATURE')
+      clearForMove(false)
+
     $scope.moveToMap = ->
       $ionicViewSwitcher.nextTransition('none')
       $state.go('tabs.map')
@@ -254,15 +261,20 @@ angular.module "frontApp"
       if !$scope.input.keywords
         $scope.input.keywords = null
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shops/list').search('keywords', $scope.input.keywords)
+        $location.path('/app/shops').search('keywords', $scope.input.keywords)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch()
         $ionicScrollDelegate.$getByHandle('shops').scrollTop();
 
       else if $rootScope.currentType == 'map'
-        $location.path('/app/shops/map').search('keywords', $scope.input.keywords)
+        $location.path('/app/map').search('keywords', $scope.input.keywords)
         if $rootScope.mapSearch
           $rootScope.mapSearch()
+
+      else if $rootScope.currentType == 'feature'
+        $location.path('/app/features').search('keywords', $scope.input.keywords)
+        if $rootScope.featuresSearch
+          $rootScope.featuresSearch()
 
       else
         $location.path('/app/magazine').search('keywords', $scope.input.keywords)
@@ -316,14 +328,19 @@ angular.module "frontApp"
       $ionicSlideBoxDelegate.$getByHandle(handle).next()
       $ionicScrollDelegate.$getByHandle('list-slide').scrollTop();
 
-      if $rootScope.currentType == 'magazine'
-        # PostCategoryを取得する
-        DataService.getPostCategory (data) ->
+      if $rootScope.currentType == 'feature'
+        # FeatureCategoryを取得する
+        DataService.getFeatureCategory (data) ->
           $scope.menuItems = data
-      else
+      else if $rootScope.currentType == 'shop'
         # ShopCategoryを取得する
         DataService.getShopCategory (data) ->
           $scope.menuItems = data
+      else
+        # PostCategoryを取得する
+        DataService.getPostCategory (data) ->
+          $scope.menuItems = data
+
 
     # 都道府県エリアの取得
     $scope.openProvincesArea = (handle) ->

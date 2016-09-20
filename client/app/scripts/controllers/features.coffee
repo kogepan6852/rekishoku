@@ -2,13 +2,13 @@
 
 ###*
  # @ngdoc function
- # @name frontApp.controller:ShopsCtrl
+ # @name frontApp.controller:FeaturesCtrl
  # @description
- # # MainCtrl
+ # # FeaturesCtrl
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "ShopsCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $location, $controller, $ionicNavBarDelegate, Api, Const, DataService, $state, $ionicViewSwitcher) ->
+  .controller "FeaturesCtrl", ($scope, $rootScope, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService, $state) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -20,7 +20,7 @@ angular.module "frontApp"
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
 
-    DataService.getShopCategory (data) ->
+    DataService.getFeatureCategory (data) ->
       $scope.categories = data
     DataService.getPeriod (data) ->
       $scope.periods = data
@@ -34,10 +34,10 @@ angular.module "frontApp"
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
+        email: $localStorage['email']
+        token: $localStorage['token']
         per: Const.API.SETTING.PER
         page: 1
-      if $scope.targetCategoryId
-        obj.category = $scope.targetCategoryId
       # 検索ワードの設定
       searchData = $scope.getSearchData()
       obj.keywords = searchData.keywords
@@ -46,7 +46,9 @@ angular.module "frontApp"
       obj.category = searchData.category
       obj.province = searchData.province
 
-      Api.getJson(obj, Const.API.SHOP, true).then (res) ->
+      # 記事一覧取得
+      Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
+        $scope.topItem = res.data[0]
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
@@ -57,7 +59,7 @@ angular.module "frontApp"
     ###
     # Global function
     ###
-    $rootScope.shopsSearch = ->
+    $rootScope.featuresSearch = ->
       $scope.noMoreLoad = false
       $scope.search()
 
@@ -80,23 +82,16 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 検索
-      Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
+      Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
         $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-    # 店舗詳細移動時の処理
-    $scope.moveToShopDetail = (id) ->
-      $rootScope.hideFooter = true
+    # ショップ詳細移動時の処理
+    $scope.moveToFeatureDetail = (id) ->
       $ionicNavBarDelegate.showBackButton true
-      $state.go 'shopDetail', {id:id}
-
-    $scope.moveToMap = ->
-      $rootScope.currentType = 'map'
-      $ionicViewSwitcher.nextTransition('none')
-      $ionicNavBarDelegate.showBackButton false
-      $state.go('map')
+      $state.go 'featureDetal', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
@@ -105,7 +100,6 @@ angular.module "frontApp"
         obj =
           per: Const.API.SETTING.PER
           page: $scope.page
-          category: $scope.targetCategoryId
         # 検索ワードの設定
         obj.keywords = $scope.keywords
         obj.period = $scope.period
@@ -113,7 +107,7 @@ angular.module "frontApp"
         obj.category = $scope.category
         obj.province = $scope.province
 
-        Api.getJson(obj, Const.API.SHOP, true).then (res) ->
+        Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
           else

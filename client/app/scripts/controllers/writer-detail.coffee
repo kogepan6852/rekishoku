@@ -76,16 +76,6 @@ angular.module "frontApp"
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
 
-      # 現在タブの判定
-      if $state.is('tabs.writerPost')
-        $scope.nowTab = 'magazine'
-      else if $state.is('tabs.shop.mapWriter')
-        $scope.nowTab = 'map'
-      else if $state.is('tabs.shop.writerDetail')
-        $scope.nowTab = 'shop'
-      else
-        $scope.nowTab = 'other'
-
     ###
     # function
     ###

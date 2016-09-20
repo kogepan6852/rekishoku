@@ -1,19 +1,17 @@
 "use strict"
 
 angular.module "frontApp"
-  .directive 'listItemExternalLink', ($window) ->
+  .directive 'listItemFeature', ->
     return {
       restrict: 'E'
       scope:
         data: '=data'
+        periods: '=periods'
+        people: '=people'
+        category: '=category'
         windowType: '=windowType'
-        showLink: '=showLink'
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
-        scope.target = "externalLink"
+        scope.target = "feature"
         scope.mainImage = scope.data.image;
-
-        scope.openLink = ->
-          $window.open scope.data.quotation_url
-          return true
     }

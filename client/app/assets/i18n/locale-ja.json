@@ -5,6 +5,7 @@
       "HOME":         "MAGAZINE",
       "MAP":          "MAP",
       "SHOP":         "STORE",
+      "FEATURE":      "FEATURE",
       "WRITERS":      "WRITERS",
       "MY_POST":      "MY POST"
     },
@@ -19,7 +20,7 @@
   "MENU": {
     "TITLE":          "MENU",
     "MAGAZINE":       "MAGAZINE",
-    "STORY":          "STORY",
+    "FEATURE":        "FEATURE",
     "MAP":            "MAP",
     "STORE":          "STORE",
     "WRITERS":        "ライター一覧",

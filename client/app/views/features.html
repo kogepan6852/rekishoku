@@ -1,0 +1,45 @@
+<ion-view title="">
+  <ion-content class="features" ng-init="init()" on-drag-up="onDragUpScroll()" on-drag-down="onDragDownScroll()" delegate-handle="magazine">
+
+    <ion-refresher
+      pulling-text="{{'TEXT.PULLING'|translate}}"
+      on-refresh="init()">
+    </ion-refresher>
+
+    <!-- Search condition -->
+    <div class="row search-condition-bar" ng-if="keywords || period || person || category || province">
+      <div class="col no-padding">
+        <div class="search-condition">
+          <div>
+            <span ng-if="category" ng-bind="category | mapppingId:categories"></span>
+            <span ng-if="keywords" ng-bind="keywords"></span>
+            <span ng-if="period" ng-bind="period | mapppingId:periods"></span>
+            <span ng-if="person" ng-bind="person | mapppingId:people"></span>
+            <span ng-if="province" ng-bind="province"></span>
+            <button class="button clear-button" ng-click="deleteSearchCondition()"><i class="icon ion-close"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div>
+      <list-item-feature
+         ng-repeat="result in results"
+         ng-click="moveToFeatureDetail(result.feature.id)"
+         data="result.feature"
+         periods="result.periods"
+         people="result.people"
+         category="result.feature.category_name"
+         window-type="windowType" >
+       </list-item-feature>
+    </div>
+
+    <ion-infinite-scroll
+      ng-if="!noMoreLoad"
+      on-infinite="loadMoreData()"
+      distance="150px">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

@@ -252,6 +252,7 @@ angular.module 'frontApp'
 
     # Shop一覧への移動
     $scope.moveToShops = ->
+      $rootScope.currentType = 'shop'
       $ionicViewSwitcher.nextTransition('none')
       $ionicNavBarDelegate.showBackButton false
       $state.go('tabs.shops')

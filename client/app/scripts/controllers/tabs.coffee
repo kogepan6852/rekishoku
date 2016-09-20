@@ -15,10 +15,12 @@ angular.module "frontApp"
     ###
     checkPath = ->
       currentPath = $location.path();
-      if currentPath.indexOf('/shops/list') != -1
+      if currentPath.indexOf('/shops') != -1
         $rootScope.currentType = 'shop'
-      else if currentPath.indexOf('/shops/map') != -1
+      else if currentPath.indexOf('/map') != -1
         $rootScope.currentType = 'map'
+      else if currentPath.indexOf('/features') != -1
+        $rootScope.currentType = 'feature'
       else
         $rootScope.currentType = 'magazine'
 

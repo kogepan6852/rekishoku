@@ -1,18 +1,18 @@
 <a class="item">
   <img class="main-img" src="../images/dummy-img.png">
 
-  <!-- POST -->
   <img class="main-img subimage visible-lg visible-md visible-sm"
-      ng-src="{{data.image.image.md.url}}"
-      ng-if="target=='post' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
+      ng-src="{{mainImage.md.url}}"
+      ng-if="(windowType=='lg' || windowType=='md' || windowType=='sm')">
   <img class="main-img subimage visible-xs"
-      ng-src="{{data.image.image.sm.url}}"
-      ng-if="target=='post' && windowType=='xs'">
+      ng-src="{{mainImage.sm.url}}"
+      ng-if="windowType=='xs'">
 
-  <div class="category" ng-if="target=='post'">
+  <!-- POST, FEATURE -->
+  <div class="category" ng-if="target=='post' || target=='feature'">
     <span ng-bind="category"></span>
   </div>
-  <div class="detail" ng-if="target=='post'" ng-class="{'no-tag': periods.length == 0 && people.length == 0}">
+  <div class="detail" ng-if="target=='post' || target=='feature'" ng-class="{'no-tag': periods.length == 0 && people.length == 0}">
     <div>
       <h2 ng-bind="data.title" class="mincho"></h2>
       <p class="description hidden-xs hidden-sm" ng-bind="data.content"></p>
@@ -20,13 +20,6 @@
   </div>
 
   <!-- SHOP -->
-  <img class="main-img subimage visible-lg visible-md visible-sm"
-      ng-src="{{data.subimage.md.url}}"
-      ng-if="target=='shop' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
-  <img class="main-img subimage visible-xs"
-      ng-src="{{data.subimage.sm.url}}"
-      ng-if="target=='shop' && windowType=='xs'">
-
   <div class="detail" ng-if="target=='shop'">
     <h2 ng-bind="data.name" class="mincho"></h2>
     <star count="rating"></star>
@@ -54,13 +47,6 @@
   </div>
 
   <!-- EXTERNAL LINK -->
-  <img class="main-img subimage visible-lg visible-md visible-sm"
-      ng-src="{{data.image.md.url}}"
-      ng-if="target=='externalLink' && (windowType=='lg' || windowType=='md' || windowType=='sm')">
-  <img class="main-img subimage visible-xs"
-      ng-src="{{data.image.sm.url}}"
-      ng-if="target=='externalLink' && windowType=='xs'">
-
   <div class="category" ng-if="target=='externalLink'">
     <span ng-bind="'EXTERNAL_LINK.LABEL'|translate"></span>
   </div>

@@ -7,7 +7,7 @@ angular.module "frontApp"
     searchByConditions: (id, target) ->
       # shop検索
       if $rootScope.currentType == 'shop'
-        $location.path('/app/shops/list').search(target, id)
+        $location.path('/app/shops').search(target, id)
         if $rootScope.shopsSearch
           $rootScope.shopsSearch()
         # TOPへScroll
@@ -15,9 +15,15 @@ angular.module "frontApp"
 
       # map検索
       else if $rootScope.currentType == 'map'
-        $location.path('/app/shops/map').search(target, id)
+        $location.path('/app/map').search(target, id)
         if $rootScope.mapSearch
           $rootScope.mapSearch()
+
+      # feature検索
+      else if $rootScope.currentType == 'feature'
+        $location.path('/app/features').search(target, id)
+        if $rootScope.featuresSearch
+          $rootScope.featuresSearch()
 
       # post検索
       else

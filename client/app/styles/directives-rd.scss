@@ -41,7 +41,7 @@
   /**********************
    * list-item-post, list-item-shop
    **********************/
-   list-item-post, list-item-shop, list-item-external-link {
+   list-item-post, list-item-shop, list-item-feature, list-item-external-link {
      .item {
        .main-img {
          width: 60%;
@@ -93,7 +93,7 @@
      }
    }
 
-   list-item-post {
+   list-item-post, list-item-feature {
      .item {
        .detail {
          >div {
@@ -153,7 +153,7 @@
   /**********************
    * list-item-post, list-item-shop
    **********************/
-  list-item-post, list-item-shop, list-item-external-link {
+  list-item-post, list-item-shop, list-item-feature, list-item-external-link {
     .item {
       .main-img {
         margin-left: 0;
@@ -183,7 +183,7 @@
   /**********************
    * list-item-post, list-item-shop
    **********************/
-  list-item-post, list-item-shop, list-item-external-link {
+  list-item-post, list-item-shop, list-item-feature, list-item-external-link {
     .item {
       .main-img {
         margin-top: -3.5%;
