@@ -36,7 +36,7 @@ angular.module "frontApp"
         featureCategoryObj =
           type: "FeatureCategory"
         Api.getJson(featureCategoryObj, Const.API.CATEGORY, false).then (res) ->
-          $sessionStorage['shop-category-obj'] = res.data
+          $sessionStorage['feature-category-obj'] = res.data
           callback res.data
 
     # people用categoryの取得
