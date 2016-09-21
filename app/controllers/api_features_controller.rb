@@ -7,11 +7,11 @@ class ApiFeaturesController < ApplicationController
   # POST /api/features.json
   def index
 
-    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("features.status = ? and features.published_at <= ?", 1, Date.today).order(published_at: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
-      for kw in keywords.split(" ")
+      for kw in keywords.gsub("　", " ").split(" ")
         # タイトル&本文で検索
         @features = @features
           .joins(:feature_details)
@@ -24,21 +24,44 @@ class ApiFeaturesController < ApplicationController
       @features = @features.where(category_id: params[:category].to_i)
     end
 
+    # 時代、人物、住所で検索する場合にshopsとpostsを外部結合する
+    if params[:period] || params[:person] || params[:province]
+      @features = @features.joins(:feature_details)
+        .joins("LEFT OUTER JOIN shops ON feature_details.related_id = shops.id AND feature_details.related_type = 'Shop'")
+        .joins("LEFT OUTER JOIN people_shops ON shops.id = people_shops.shop_id AND feature_details.related_type = 'Shop'")
+        .joins("LEFT OUTER JOIN posts ON feature_details.related_id = posts.id AND feature_details.related_type = 'Post'")
+        .joins("LEFT OUTER JOIN people_posts ON posts.id = people_posts.post_id AND feature_details.related_type = 'Post'")
+    end
+
+    # 時代、人物で検索する場合にpeopleを内部結合する
+    if params[:period] || params[:person]
+      # peopleを内部結合する
+      @features = @features
+        .joins("INNER JOIN people ON (people_shops.person_id = people.id AND feature_details.related_type = 'Shop')
+                                  OR (people_posts.person_id = people.id AND feature_details.related_type = 'Post')")
+    end
+
     # 時代で検索
     if params[:period]
-      person = Person.select('distinct people.id').joins(:periods).joins(:feature_details)
-        .where('periods.id' => params[:period])
-      @features = @features.joins(:people).where('people.id' => person).uniq
+      # periodsを内部結合する
+      @features = @features
+        .joins("INNER JOIN people_periods ON people.id = people_periods.person_id")
+        .joins("INNER JOIN periods ON people_periods.period_id = periods.id")
+        .where('periods.id = ?', params[:period]).uniq
     end
 
     # 人物で検索
     if params[:person]
-      @features = @features.joins(:people).where('people.id' => params[:person]).uniq
+      @features = @features.joins(:feature_details)
+        .where('people.id = ?', params[:person]).uniq
     end
 
     # 都道府県検索
     if params[:province]
-      @features = @features.joins(:shops).where('shops.province' => params[:province]).uniq
+      @features = @features
+        .joins("LEFT OUTER JOIN posts_shops ON posts.id = posts_shops.post_id")
+        .joins("LEFT OUTER JOIN shops as shops2 ON posts_shops.shop_id = shops2.id")
+        .where('shops.province = ? OR shops2.province = ?', params[:province], params[:province]).uniq
     end
 
     newFeatures = Array.new()
