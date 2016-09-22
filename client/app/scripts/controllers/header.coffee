@@ -15,6 +15,8 @@ angular.module "frontApp"
     ###
     $scope.input =
       keywords: null
+    $scope.search =
+      name: ""
 
     $ionicModal.fromTemplateUrl('views/parts/modal-login.html',
       scope: $scope
@@ -175,7 +177,7 @@ angular.module "frontApp"
     $scope.moveToWriterDetail = ->
       $ionicViewSwitcher.nextTransition('none')
       userId = $localStorage['user_id']
-      $state.go('writer', { id: userId })
+      $state.go('writerDetail', { id: userId })
       clearForMove(false)
 
     $scope.moveToHome = (isReload) ->

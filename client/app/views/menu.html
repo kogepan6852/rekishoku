@@ -1,18 +1,26 @@
 <ion-side-menus>
 
   <!-- Main menu -->
-  <ion-side-menu side="right" ng-controller="HeaderCtrl" ng-init="init()" width="215">
+  <ion-side-menu side="left" ng-controller="HeaderCtrl" ng-init="init()" width="215">
     <div class="bar bar-header top hidden-xs">
       <h1 class="title hidden">歴食</h1>
       <div class="logo" ng-click="moveToHome(true)"></div>
     </div>
 
     <div class="list menu-list">
-      <ion-slide-box ng-init="disableSwipe()" delegate-handle="right-menu">
+      <ion-slide-box ng-init="disableSwipe()" delegate-handle="left-menu">
         <!-- Slide1 -->
         <ion-slide>
           <!-- Search bar -->
-          <ion-header-bar no-tap-scroll="true" class="bar-light item-input-inset visible-xs"></ion-header-bar>
+          <ion-header-bar class="bar-light item-input-inset visible-xs search-bar" no-tap-scroll="true">
+            <form ng-submit="submitSearch()">
+              <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input ng-model="input.keywords" type="search" placeholder="Search">
+              </label>
+            </form>
+          </ion-header-bar>
+
           <ion-header-bar no-tap-scroll="true" class="bar-light item-input-inset search-header hidden-xs">
             <button class="button button-clear icon ion-ios-search" ng-click="submitSearch()"></button>
             <form ng-submit="submitSearch()">
@@ -24,32 +32,123 @@
 
           <ion-scroll direction="y" ng-class="{'login': isLogin}">
             <!-- pages -->
-            <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome(false)" ng-bind="'MENU.MAGAZINE'|translate"></a>
-            <a class="item" ng-class="{'active': currentType == 'feature'}" ng-click="moveToFeature()" ng-bind="'MENU.FEATURE'|translate"></a>
-            <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
-            <a class="item" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()" ng-bind="'MENU.MAP'|translate"></a>
+            <a class="item hidden-xs item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome(false)" ng-bind="'MENU.MAGAZINE'|translate"></a>
+            <a class="item hidden-xs" ng-class="{'active': currentType == 'feature'}" ng-click="moveToFeature()" ng-bind="'MENU.FEATURE'|translate"></a>
+            <a class="item hidden-xs" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
+            <a class="item hidden-xs" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()" ng-bind="'MENU.MAP'|translate"></a>
 
             <!-- by categories -->
-            <a class="item item-icon-right hidden-xs item-top" ng-click="openCategories('right-menu')">
+            <a class="item item-icon-right item-top" ng-click="openCategories('left-menu')">
               by CATEGORIES
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by peridos -->
-            <a class="item item-icon-right hidden-xs" ng-click="openPeriods('right-menu')">
+            <a class="item item-icon-right" ng-click="openPeriods('left-menu')">
               by PERIODS
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right hidden-xs" ng-click="openPeopleCategory('right-menu')">
+            <a class="item item-icon-right" ng-click="openPeopleCategory('left-menu')">
               by PEOPLE
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
             <!-- by people -->
-            <a class="item item-icon-right hidden-xs" ng-click="openProvincesArea('right-menu')">
+            <a class="item item-icon-right" ng-click="openProvincesArea('left-menu')">
               by AREA
               <i class="icon ion-android-arrow-dropright"></i>
             </a>
 
+
+            <!-- other -->
+            <a class="item item-top hidden-xs" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
+            <a class="item hidden-xs" href="http://www.rekishoku.jp/about" target="_blank">ABOUT</a>
+            <!-- <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div> -->
+            <a class="item hidden-xs" ng-click="moveToMyPost()" ng-if="isLogin">
+              {{'MENU.POSTS'|translate}}
+            </a>
+            <a class="item hidden-xs" ng-click="moveToWriterDetail()" ng-show="isLogin">
+              PROFILE
+            </a>
+
+          </ion-scroll>
+
+          <!-- my account -->
+          <div class="menu-footer hidden-xs">
+            <a class="item item-top" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
+            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+            <div class="item sns-icons">
+              <a class="facebook-icon" href="https://www.facebook.com/%E6%AD%B4%E9%A3%9F-292634487527691/" target="_blank"><i class="ion-social-facebook"></i></a>
+              <a class="twitter-icon" href="https://twitter.com/rekishoku" target="_blank"><i class="ion-social-twitter"></i></a>
+              <a class="instagram-icon" href="https://instagram.com/rekishoku" target="_blank"><i class="ion-social-instagram-outline"></i></a>
+            </div>
+          </div>
+
+        </ion-slide>
+
+        <!-- Slide2 -->
+        <ion-slide class="list-slide">
+          <ion-header-bar class="bar-light item-input-inset item-icon-left" ng-click="backSlide('left-menu')" no-tap-scroll="true">
+            <i class="icon ion-android-arrow-dropleft"></i>
+          </ion-header-bar>
+
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuItems"></ion-spinner>
+            <!-- other -->
+            <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
+            <!-- person -->
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu')">
+              ALL
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu', menuItem.id)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+            <!-- provinces -->
+            <a ng-if="showNextSlide && menuTarget=='province'" class="item item-icon-right" ng-click="openProvinces('left-menu', $index)" ng-repeat="menuItem in menuItems">
+              {{menuItem.name}}
+              <i class="icon ion-android-arrow-dropright"></i>
+            </a>
+          </ion-scroll>
+        </ion-slide>
+
+        <!-- Slide3 -->
+        <ion-slide class="list-slide">
+          <ion-header-bar class="bar-light item-input-inset item-icon-left" ng-click="backSlide('left-menu')" no-tap-scroll="true">
+            <i class="icon ion-android-arrow-dropleft"></i>
+          </ion-header-bar>
+          <ion-header-bar class="bar-light item-input-inset" no-tap-scroll="true" ng-if="menuTarget=='person'">
+            <label class="item-input-wrapper">
+              <i class="icon ion-funnel placeholder-icon"></i>
+              <input ng-model="search.name" type="text" placeholder="Filter">
+            </label>
+          </ion-header-bar>
+          <ion-scroll direction="y" delegate-handle="list-slide">
+            <ion-spinner ng-show="!menuSubItems"></ion-spinner>
+            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems | filter:search.name" ng-bind-html="menuItem.name"></a>
+          </ion-scroll>
+        </ion-slide>
+
+      </ion-slide-box>
+    </div>
+
+  </ion-side-menu>
+
+  <!-- Menu List for Mobile -->
+  <ion-side-menu class="visible-xs" side="right" ng-controller="HeaderCtrl" ng-init="init()" width="215">
+    <div class="list menu-list">
+      <ion-slide-box ng-init="disableSwipe()" delegate-handle="right-menu">
+        <!-- Slide1 -->
+        <ion-slide>
+          <!-- Search bar -->
+          <ion-header-bar no-tap-scroll="true" class="bar-light item-input-inset"></ion-header-bar>
+
+          <ion-scroll direction="y" ng-class="{'login': isLogin}">
+            <!-- pages -->
+            <a class="item item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome(false)" ng-bind="'MENU.MAGAZINE'|translate"></a>
+            <a class="item" ng-class="{'active': currentType == 'feature'}" ng-click="moveToFeature()" ng-bind="'MENU.FEATURE'|translate"></a>
+            <a class="item" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
+            <a class="item" ng-class="{'active': currentType == 'map'}" ng-click="moveToMap()" ng-bind="'MENU.MAP'|translate"></a>
 
             <!-- other -->
             <a class="item item-top" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
@@ -75,129 +174,6 @@
             </div>
           </div>
 
-        </ion-slide>
-
-        <!-- Slide2 -->
-        <ion-slide class="list-slide">
-          <div class="item item-icon-left item-top bold" ng-click="backSlide('right-menu')" >
-            <i class="icon ion-android-arrow-dropleft"></i>Back
-          </div>
-          <ion-scroll direction="y" delegate-handle="list-slide">
-            <ion-spinner ng-show="!menuItems"></ion-spinner>
-            <!-- other -->
-            <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
-            <!-- person -->
-            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('right-menu')">
-              ALL
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('right-menu', menuItem.id)" ng-repeat="menuItem in menuItems">
-              {{menuItem.name}}
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <!-- provinces -->
-            <a ng-if="showNextSlide && menuTarget=='province'" class="item item-icon-right" ng-click="openProvinces('right-menu', $index)" ng-repeat="menuItem in menuItems">
-              {{menuItem.name}}
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-          </ion-scroll>
-        </ion-slide>
-
-        <!-- Slide3 -->
-        <ion-slide class="list-slide">
-          <div class="item item-icon-left item-top bold" ng-click="backSlide('right-menu')" >
-            <i class="icon ion-android-arrow-dropleft"></i>Back
-          </div>
-          <ion-scroll direction="y" delegate-handle="list-slide">
-            <ion-spinner ng-show="!menuSubItems"></ion-spinner>
-            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems" ng-bind-html="menuItem.name"></a>
-          </ion-scroll>
-        </ion-slide>
-
-      </ion-slide-box>
-    </div>
-
-  </ion-side-menu>
-
-  <!-- Search Menu for Mobile -->
-  <ion-side-menu class="visible-xs" side="left" ng-controller="HeaderCtrl" ng-init="init()" width="215">
-    <div class="list menu-list">
-      <ion-slide-box ng-init="disableSwipe()" delegate-handle="left-menu">
-        <!-- Slide1 -->
-        <ion-slide>
-          <!-- Search bar -->
-          <ion-header-bar class="bar-light item-input-inset" no-tap-scroll="true">
-            <form ng-submit="submitSearch()">
-              <label class="item-input-wrapper">
-                <i class="icon ion-ios-search placeholder-icon"></i>
-                <input ng-model="input.keywords" type="search" placeholder="Search">
-              </label>
-              <!-- <div class="button button-clear" ng-click="hideModalSearch()">
-                Cancel
-              </div> -->
-            </form>
-          </ion-header-bar>
-
-          <!-- Search condition -->
-          <ion-scroll direction="y">
-            <!-- by categories -->
-            <a class="item item-icon-right" ng-click="openCategories('left-menu')">
-              by CATEGORY
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <!-- by peridos -->
-            <a class="item item-icon-right" ng-click="openPeriods('left-menu')">
-              by PERIOD
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <!-- by people -->
-            <a class="item item-icon-right" ng-click="openPeopleCategory('left-menu')">
-              by PERSON
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <!-- by people -->
-            <a class="item item-icon-right" ng-click="openProvincesArea('left-menu')">
-              by AREA
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-
-          </ion-scroll>
-        </ion-slide>
-
-        <!-- Slide2 -->
-        <ion-slide class="list-slide">
-          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" no-tap-scroll="true">
-            <i class="icon ion-android-arrow-dropleft"></i>
-          </ion-header-bar>
-          <ion-scroll direction="y" delegate-handle="list-slide">
-            <ion-spinner ng-show="!menuItems"></ion-spinner>
-            <a ng-if="!showNextSlide" class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuItems" ng-bind-html="menuItem.name"></a>
-            <!-- person -->
-            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu')">
-              ALL
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <a ng-if="showNextSlide && menuTarget=='person'" class="item item-icon-right" ng-click="openPeople('left-menu', menuItem.id)" ng-repeat="menuItem in menuItems">
-              {{menuItem.name}}
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-            <!-- provinces -->
-            <a ng-if="showNextSlide && menuTarget=='province'" class="item item-icon-right" ng-click="openProvinces('left-menu', $index)" ng-repeat="menuItem in menuItems">
-              {{menuItem.name}}
-              <i class="icon ion-android-arrow-dropright"></i>
-            </a>
-          </ion-scroll>
-        </ion-slide>
-
-        <!-- Slide3 -->
-        <ion-slide class="list-slide">
-          <ion-header-bar class="bar-light item-input-inset item-icon-left visible-xs" ng-click="backSlide('left-menu')" no-tap-scroll="true">
-            <i class="icon ion-android-arrow-dropleft"></i>
-          </ion-header-bar>
-          <ion-scroll direction="y" delegate-handle="list-slide">
-            <ion-spinner ng-show="!menuSubItems"></ion-spinner>
-            <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems" ng-bind-html="menuItem.name"></a>
-          </ion-scroll>
         </ion-slide>
 
       </ion-slide-box>

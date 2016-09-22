@@ -1,5 +1,17 @@
 @import "setting";
 
+// SM以下
+@media screen and (max-width:767px){
+  ion-side-menu {
+    .bar-header {
+      border: none;
+      &.search-bar {
+        display: flex!important;
+      }
+    }
+  }
+}
+
 // SM以上
 @media screen and (min-width:768px){
   html{ font-size: 87.5%; /*14px*/ }
@@ -88,7 +100,6 @@
    ion-side-menu {
      z-index: 100 !important;
      box-shadow: -1px 0 2px rgba(0, 0, 0, 0.2), 1px 0 2px rgba(0, 0, 0, 0.2);
-     left: 0;
      padding-top: 165px;
      width: 215px!important;
 

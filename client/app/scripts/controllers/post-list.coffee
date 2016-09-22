@@ -449,7 +449,7 @@ angular.module "frontApp"
     # 記事詳細への遷移
     $scope.moveToPost = (index) ->
       $scope.popoverPostMenu.hide()
-      $state.go('post', { id: $scope.results[index].id, preview: "true" })
+      $state.go('postDetail', { id: $scope.results[index].id, preview: "true" })
 
     # 公開
     $scope.publish = (status, id) ->
