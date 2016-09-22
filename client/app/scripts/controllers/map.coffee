@@ -249,10 +249,3 @@ angular.module 'frontApp'
       $rootScope.latitude = null
       $rootScope.longitude = null
       $scope.init()
-
-    # Shop一覧への移動
-    $scope.moveToShops = ->
-      $rootScope.currentType = 'shop'
-      $ionicViewSwitcher.nextTransition('none')
-      $ionicNavBarDelegate.showBackButton false
-      $state.go('tabs.shops')

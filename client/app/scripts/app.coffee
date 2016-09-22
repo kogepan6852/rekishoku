@@ -45,13 +45,13 @@ angular
         controller: 'ShopsCtrl'
 
       # MAP
-      .state 'map',
+      .state 'tabs.map',
         url: '/app/map'
         templateUrl: 'views/map.html'
         controller: 'MapCtrl'
 
       # MAP
-      .state 'features',
+      .state 'tabs.features',
         url: '/app/features'
         templateUrl: 'views/features.html'
         controller: 'FeaturesCtrl'

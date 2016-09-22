@@ -42,6 +42,16 @@ angular.module "frontApp"
         $rootScope.currentType = 'magazine'
 
       else if index == 1
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.FEATURE')
+        $location.path('/app/features').search('keywords', null)
+        $rootScope.currentType = 'feature'
+
+      else if index == 2
         $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.SHOP')
         $location.path('/app/shops').search('keywords', null)
         $rootScope.currentType = 'shop'
+
+      else if index == 3
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.MAP')
+        $location.path('/app/map').search('keywords', null)
+        $rootScope.currentType = 'map'

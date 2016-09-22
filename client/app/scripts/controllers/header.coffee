@@ -194,7 +194,7 @@ angular.module "frontApp"
 
     $scope.moveToFeature = ->
       $ionicViewSwitcher.nextTransition('none')
-      $state.go('features')
+      $state.go('tabs.features')
       $rootScope.currentType = 'feature'
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.FEATURE')
       clearForMove(false)

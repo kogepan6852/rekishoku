@@ -92,12 +92,6 @@ angular.module "frontApp"
       $ionicNavBarDelegate.showBackButton true
       $state.go 'shopDetail', {id:id}
 
-    $scope.moveToMap = ->
-      $rootScope.currentType = 'map'
-      $ionicViewSwitcher.nextTransition('none')
-      $ionicNavBarDelegate.showBackButton false
-      $state.go('map')
-
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
       if $scope.results

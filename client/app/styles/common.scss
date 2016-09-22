@@ -223,7 +223,10 @@ ion-content.no-tabs-top {
     height: 44px;
     .tab-item {
       max-width: 100%;
+      font-size: $h6;
+      transition: all ease-in-out 250ms;
       &.tab-item-active, &.active {
+        font-size: $h5;
         background-color: $baseColor !important;
         color: #fff!important;
       }
