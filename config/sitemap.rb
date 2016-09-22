@@ -38,7 +38,8 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
   add '/app/magazine', :changefreq => 'daily', :priority => 0.9
-  add '/app/shops/list', :changefreq => 'daily', :priority => 0.8
+  add '/app/shops', :changefreq => 'daily', :priority => 0.8
+  add '/app/features', :changefreq => 'daily', :priority => 0.8
   add '/about', :changefreq => 'yearly', :priority => 0.5
   Post.find_each do |post|
     if post.status == 1
