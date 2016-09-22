@@ -367,12 +367,13 @@ angular.module "frontApp"
       $scope.menuSubItems = HeaderService.getProvinces(index)
 
     $scope.backSlide = (handle) ->
-      $scope.search.name = ""
       $ionicSlideBoxDelegate.$getByHandle(handle).previous()
       $scope.showNextSlide = true;
+      $scope.search.name = ""
 
     $scope.disableSwipe = ->
       $ionicSlideBoxDelegate.enableSlide(false);
 
     $scope.searchByConditions = (id, target) ->
       HeaderService.searchByConditions(id, target)
+      $scope.search.name = ""
