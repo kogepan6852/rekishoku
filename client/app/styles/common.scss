@@ -239,6 +239,19 @@ ion-content.no-tabs-top {
   bottom: 0;
 }
 
+.button-bar.tab-button {
+  a {
+    box-shadow: none;
+    border: none;
+    background-color: $liteGrayColor;
+
+    &.active {
+      background-color: $baseColor;
+      color: #fff;
+    }
+  }
+}
+
 /**********************
  * Icon
  **********************/

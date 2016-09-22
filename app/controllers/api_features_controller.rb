@@ -7,7 +7,11 @@ class ApiFeaturesController < ApplicationController
   # POST /api/features.json
   def index
 
-    @features = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("features.status = ? and features.published_at <= ?", 1, Date.today).order(published_at: :desc)
+    @features = Feature.joins(:category)
+                .select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+                .where("features.status = ? and features.published_at <= ?", 1, Date.today)
+                .order(published_at: :desc)
+
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -68,36 +72,8 @@ class ApiFeaturesController < ApplicationController
 
     if params[:page] && params[:per]
       @features.page(params[:page]).per(params[:per]).each do |feature|
-        type = Array.new()
-        periods = Array.new()
-        people = Array.new()
-
-        feature.feature_details.each do |feature_detail|
-          type.push(feature_detail[:related_type])
-        end
-
-        if type.include?("Shop")
-          shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          people += get_people_feature(shops)
-        end
-        if type.include?("Post")
-          posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          people += get_people_feature(posts)
-        end
-        if type.include?("ExternalLink")
-          extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-          people += get_people_feature(extrnal_links)
-        end
-        periods += get_periods(people)
-        people = get_check_people(people)
-
-        # 返却用のオブジェクトを作成する
-        fatureData = {
-                "feature" => feature,
-                "people" => people.uniq,
-                "periods" => periods.uniq
-              }
-              newFeatures.push(fatureData);
+        # json形式のデータを取得
+        newFeatures.push(get_feature_json(feature));
       end
       render json: newFeatures
     else
@@ -163,17 +139,6 @@ class ApiFeaturesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def feature_params
       params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :published_at, :category_id, :feature_detail_ids => [])
-    end
-
-    # 対象のお店から紐づく人物を取得する
-    def get_people_feature(articles)
-      people = Array.new()
-      articles.each do |article|
-        article.people.each do |person|
-            people.push(person)
-        end
-      end
-      return people
     end
 
     def get_external_link_json(external_link)

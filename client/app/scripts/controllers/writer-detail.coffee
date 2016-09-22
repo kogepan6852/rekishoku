@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate, $window) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate, $window, $ionicSlideBoxDelegate, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -22,6 +22,7 @@ angular.module "frontApp"
       animation: 'slide-in-up').then (modalProfileEdit) ->
       $scope.modalProfileEdit = modalProfileEdit
     $scope.isLoginUser = false
+    $scope.activeSlideNo = 0
 
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
@@ -69,12 +70,14 @@ angular.module "frontApp"
       Api.getJson(accessKey, path).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
+        $scope.features = res.data.features
 
         # SEO
         setSeo()
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
+
 
     ###
     # function
@@ -136,4 +139,17 @@ angular.module "frontApp"
       reader.readAsDataURL file
 
     $scope.moveToPostDetail = (id) ->
+      $ionicNavBarDelegate.showBackButton true
       $state.go('postDetail', { id: id })
+
+    # ショップ詳細移動時の処理
+    $scope.moveToFeatureDetail = (id) ->
+      $ionicNavBarDelegate.showBackButton true
+      $state.go 'featureDetal', {id:id}
+
+    $scope.clickTab = (targetSlide) ->
+      $scope.activeSlideNo = targetSlide
+      $ionicSlideBoxDelegate.$getByHandle('writer-list').slide(targetSlide)
+
+    $scope.disableSwipe = ->
+      $ionicSlideBoxDelegate.enableSlide(false);

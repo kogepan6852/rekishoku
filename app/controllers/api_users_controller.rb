@@ -14,11 +14,26 @@ class ApiUsersController < ApplicationController
     @user = User.find(params[:id])
 
     # 関連する投稿の取得
-    posts = @user.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    posts = @user.posts.joins(:category)
+                .select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+                .where("status = ? and published_at <= ?", 1, Date.today)
+                .order(published_at: :desc)
     newPosts = Array.new()
 
     posts.each do |post|
       newPosts.push(get_post_json(post));
+    end
+
+    # 関連する特集の取得
+    features = Feature.joins(:category)
+                .select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+                .where("features.status = ? and features.published_at <= ?", 1, Date.today)
+                .where("user_id = ?", params[:id])
+                .order(published_at: :desc)
+    newfeatures = Array.new()
+
+    features.each do |feature|
+      newfeatures.push(get_feature_json(feature));
     end
 
     user = {
@@ -27,7 +42,8 @@ class ApiUsersController < ApplicationController
         "image" => @user.image,
         "username" => @user.username,
         "profile" => @user.profile },
-      "posts" => newPosts}
+      "posts" => newPosts,
+      "features" => newfeatures}
     if current_user
       user["user"]["email"] = @user.email
       user["user"]["description"] = @user.description
