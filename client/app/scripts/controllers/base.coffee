@@ -43,24 +43,29 @@ angular.module "frontApp"
       province = null
 
       # キーワードの設定
-      $scope.keywords = $location.search()['keywords']
-      if $scope.keywords
+      param = $location.search()['keywords']
+      if param
+        $scope.keywords = param
         keywords = $scope.keywords
       # 時代の設定
-      $scope.period = $location.search()['period']
-      if $scope.period
+      param = $location.search()['period']
+      if param
+        $scope.period = Number(param)
         period = $scope.period
       # 人物の設定
-      $scope.person = $location.search()['person']
-      if $scope.person
+      param = $location.search()['person']
+      if param
+        $scope.person = Number(param)
         person = $scope.person
       # カテゴリーの設定
-      $scope.category = $location.search()['category']
-      if $scope.category
+      param = $location.search()['category']
+      if param
+        $scope.category = Number(param)
         category = $scope.category
       # 都道府県の設定
-      $scope.province = $location.search()['province']
-      if $scope.province
+      param = $location.search()['province']
+      if param
+        $scope.province = param
         province = $scope.province
 
       # 戻り値の設定
@@ -87,6 +92,7 @@ angular.module "frontApp"
       $location.search('period', null)
       $location.search('person', null)
       $location.search('province', null)
+      $location.search('reload', null)
       $scope.search()
 
     # Prerender.ioにcache取得の通知をする

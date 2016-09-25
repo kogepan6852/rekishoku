@@ -203,6 +203,27 @@ ion-content {
     }
   }
 }
+
+.tag-footer {
+  background-color: $darkGrayColor;
+  font-weight: 600;
+
+  .title {
+    color: $liteGrayColor;
+    font-weight: 300;
+  }
+
+  .link-tag {
+    min-height: 30px;
+    line-height: 30px;
+
+    &:before {
+      line-height: 30px;
+    }
+
+  }
+}
+
 /**********************
  * Tab
  **********************/

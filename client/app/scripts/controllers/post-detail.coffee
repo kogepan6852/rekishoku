@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window, DataService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -84,6 +84,9 @@ angular.module 'frontApp'
       # 投稿内容詳細取得
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
         $scope.postDetails = res.data
+
+      DataService.getPeriod (data) ->
+        $scope.allPeriods = data
 
     ###
     # function

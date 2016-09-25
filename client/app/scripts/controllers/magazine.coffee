@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "MagazineCtrl", ($scope, $rootScope, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService, $state) ->
+  .controller "MagazineCtrl", ($scope, $rootScope, $controller, $ionicNavBarDelegate, $localStorage, Api, Const, DataService, $state, $location) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -19,6 +19,8 @@ angular.module "frontApp"
     $scope.$on '$ionicView.enter', (e) ->
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
+      if Boolean($location.search()['reload']) == true
+        $rootScope.postsSearch()
 
     DataService.getPostCategory (data) ->
       $scope.categories = data

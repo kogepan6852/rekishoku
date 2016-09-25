@@ -30,6 +30,12 @@
     "LOGIN":          "ログイン",
     "LOGOUT":         "ログアウト"
   },
+  "CONDITION": {
+    "CATEGORIES":     "CATEGORIES",
+    "PERIODS":        "PERIODS",
+    "PEOPLE":         "PEOPLE",
+    "AREA":           "AREA"
+  },
   "BUTTON": {
     "OK":             "OK",
     "CANCEL":         "キャンセル",

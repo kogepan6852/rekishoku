@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window) ->
+  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window, DataService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -124,6 +124,9 @@ angular.module 'frontApp'
         setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
+
+      DataService.getPeriod (data) ->
+        $scope.allPeriods = data
 
     ###
     # function

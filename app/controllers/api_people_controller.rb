@@ -15,7 +15,8 @@ class ApiPeopleController < ApplicationController
         obj = {
           "id" => person.id,
           "name" => person.name,
-          "furigana" => person.furigana
+          "furigana" => person.furigana,
+          "rating" => person.rating
         }
         people.push(obj)
       end

@@ -19,6 +19,8 @@ angular.module "frontApp"
     $scope.$on '$ionicView.enter', (e) ->
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
+      if Boolean($location.search()['reload']) == true
+        $rootScope.shopsSearch()
 
     DataService.getShopCategory (data) ->
       $scope.categories = data

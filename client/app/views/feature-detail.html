@@ -131,5 +131,17 @@
     <!-- ADVERTISEMENT -->
     <advertisment-row seed="1"></advertisment-row>
 
+    <!-- Tag footer -->
+    <div class="row padding-top padding-bottom tag-footer" ng-if="posts.length!=0">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+        <h3 class="title" ng-bind="'CONDITION.PERIODS'|translate"></h3>
+        <a class="link-tag button button-clear icon-right ion-arrow-right-b"
+            ng-repeat="period in allPeriods"
+            href="app/features?period={{period.id}}&reload=true">
+            {{period.name}}
+        </a>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

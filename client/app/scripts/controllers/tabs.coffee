@@ -35,6 +35,8 @@ angular.module "frontApp"
       # historyデータを削除する
       $ionicHistory.clearHistory();
       $rootScope.hideFooter = false
+      # reloadパラメータを削除
+      $location.search('reload', null)
 
       if index == 0
         $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.HOME')

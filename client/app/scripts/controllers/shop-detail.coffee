@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate, DataService) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -34,6 +34,7 @@ angular.module 'frontApp'
       disableDefaultUI: true
       zoomControl: true
       draggable: false
+    $scope.allAreas = ['東京都','京都府','神奈川県','島根県','静岡県','愛知県']
 
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
@@ -108,6 +109,20 @@ angular.module 'frontApp'
         setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
+
+      DataService.getPeriod (data) ->
+        $scope.allPeriods = data
+
+      DataService.getPeople (data) ->
+        allPeople = data
+        allPeople.sort (a, b) ->
+          if a.rating > b.rating
+            return -1
+          if a.rating < b.rating
+            return 1
+          return 0
+
+        $scope.allPeople = allPeople.slice(0, 40)
 
     ###
     # function
