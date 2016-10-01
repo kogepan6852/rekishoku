@@ -60,4 +60,23 @@ SitemapGenerator::Sitemap.create do
     end
   end
 
+  # SEO対応
+  Period.find_each do |period|
+    add '/app/magazine?period=' + period.id.to_s, :changefreq => 'weekly'
+    add '/app/shops?period=' + period.id.to_s, :changefreq => 'weekly'
+    add '/app/features?period=' + period.id.to_s, :changefreq => 'weekly'
+  end
+
+  Person.find_each do |person|
+    add '/app/shops?person=' + period.id.to_s, :changefreq => 'weekly'
+  end
+
+  add '/app/shops?province=東京都', :changefreq => 'weekly'
+  add '/app/shops?province=京都府', :changefreq => 'weekly'
+  add '/app/shops?province=神奈川県', :changefreq => 'weekly'
+  add '/app/shops?province=島根県', :changefreq => 'weekly'
+  add '/app/shops?province=静岡県', :changefreq => 'weekly'
+  add '/app/shops?province=愛知県', :changefreq => 'weekly'
+
+
 end

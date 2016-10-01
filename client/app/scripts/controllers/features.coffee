@@ -17,9 +17,11 @@ angular.module "frontApp"
     # setting
     ###
     $scope.$on '$ionicView.enter', (e) ->
+      $rootScope.currentType = 'feature'
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
-      if Boolean($location.search()['reload']) == true
+      if $rootScope.isReload == true
+        $rootScope.isReload = false
         $rootScope.featuresSearch()
 
     DataService.getFeatureCategory (data) ->

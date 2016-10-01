@@ -142,7 +142,8 @@
         <h3 class="title" ng-bind="'CONDITION.PERIODS'|translate"></h3>
         <a class="link-tag button button-clear icon-right ion-arrow-right-b"
             ng-repeat="period in allPeriods"
-            href="app/magazine?period={{period.id}}&reload=true">
+            href="app/magazine?period={{period.id}}"
+            ng-click="reload()">
             {{period.name}}
         </a>
       </div>

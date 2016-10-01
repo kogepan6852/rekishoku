@@ -17,9 +17,11 @@ angular.module "frontApp"
     # setting
     ###
     $scope.$on '$ionicView.enter', (e) ->
+      $rootScope.currentType = 'shop'
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
-      if Boolean($location.search()['reload']) == true
+      if $rootScope.isReload == true
+        $rootScope.isReload = false
         $rootScope.shopsSearch()
 
     DataService.getShopCategory (data) ->
@@ -101,7 +103,6 @@ angular.module "frontApp"
         obj =
           per: Const.API.SETTING.PER
           page: $scope.page
-          category: $scope.targetCategoryId
         # 検索ワードの設定
         obj.keywords = $scope.keywords
         obj.period = $scope.period

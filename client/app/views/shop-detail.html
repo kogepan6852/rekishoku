@@ -203,7 +203,8 @@
         <h3 class="title" ng-bind="'CONDITION.PERIODS'|translate"></h3>
         <a class="link-tag button button-clear icon-right ion-arrow-right-b"
             ng-repeat="period in allPeriods"
-            href="app/shops?period={{period.id}}&reload=true">
+            href="app/shops?period={{period.id}}"
+            ng-click="reload()">
             {{period.name}}
         </a>
       </div>
@@ -214,7 +215,8 @@
         <a class="link-tag button button-clear icon-right ion-arrow-right-b"
             ng-class="{'hidden-xs': $index >= 15}"
             ng-repeat="person in allPeople"
-            href="app/shops?person={{person.id}}&reload=true">
+            href="app/shops?person={{person.id}}"
+            ng-click="reload()">
             {{person.name}}
         </a>
       </div>
@@ -224,7 +226,8 @@
         <h3 class="title" ng-bind="'CONDITION.AREA'|translate"></h3>
         <a class="link-tag button button-clear icon-right ion-arrow-right-b"
             ng-repeat="area in allAreas"
-            href="app/shops?province={{area}}&reload=true">
+            href="app/shops?province={{area}}"
+            ng-click="reload()">
             {{area}}
         </a>
       </div>

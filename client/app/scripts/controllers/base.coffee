@@ -45,28 +45,30 @@ angular.module "frontApp"
       # キーワードの設定
       param = $location.search()['keywords']
       if param
-        $scope.keywords = param
-        keywords = $scope.keywords
+        keywords = param
       # 時代の設定
       param = $location.search()['period']
       if param
-        $scope.period = Number(param)
-        period = $scope.period
+        period = Number(param)
       # 人物の設定
       param = $location.search()['person']
       if param
-        $scope.person = Number(param)
-        person = $scope.person
+        person = Number(param)
       # カテゴリーの設定
       param = $location.search()['category']
       if param
-        $scope.category = Number(param)
-        category = $scope.category
+        category = Number(param)
       # 都道府県の設定
       param = $location.search()['province']
       if param
-        $scope.province = param
-        province = $scope.province
+        province = param
+
+      # scopeに設定
+      $scope.keywords = keywords
+      $scope.period = period
+      $scope.person = person
+      $scope.category = category
+      $scope.province = province
 
       # 戻り値の設定
       rtn =
@@ -105,3 +107,6 @@ angular.module "frontApp"
     # レイアウトのリサイズを検知
     $scope.$on 'resize::resize', (event, args) ->
       $rootScope.windowType = args.windowType
+
+    $scope.reload = ->
+      $rootScope.isReload = true
