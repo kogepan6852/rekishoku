@@ -56,6 +56,17 @@
       height: 23px;
       min-height: 23px;
     }
+
+    .writer {
+      padding: 5px 0;
+
+      a {
+        color: $grayColor;
+        font-size: $h6;
+        margin: 0 0 10px;
+        display: inline-block;
+      }
+    }
   }
 
   .description {
@@ -114,16 +125,6 @@
         font-size: $h6;
       }
     }
-
-    .writer {
-      padding: 5px 0;
-
-      p {
-        color: $grayColor;
-        font-size: $h6;
-      }
-    }
-
   }
 }
 

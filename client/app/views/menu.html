@@ -123,7 +123,7 @@
               <input ng-model="search.name" type="text" placeholder="Filter">
             </label>
           </ion-header-bar>
-          <ion-scroll direction="y" delegate-handle="list-slide">
+          <ion-scroll direction="y" delegate-handle="list-slide" class="has-filter">
             <ion-spinner ng-show="!menuSubItems"></ion-spinner>
             <a class="item" ng-click="searchByConditions(menuItem.id, menuTarget)" ng-repeat="menuItem in menuSubItems | filter:search.name" ng-bind-html="menuItem.name"></a>
           </ion-scroll>

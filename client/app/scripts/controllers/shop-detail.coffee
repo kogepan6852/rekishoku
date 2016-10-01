@@ -16,9 +16,6 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $scope.$on '$ionicView.enter', (e) ->
-      $ionicNavBarDelegate.showBackButton true
-
     $scope.targetId = $stateParams.id
     $rootScope.hideFooter = true
 
@@ -39,6 +36,7 @@ angular.module 'frontApp'
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
       $window.prerenderReady = false;
+      $ionicNavBarDelegate.showBackButton true
       if $scope.shop
         setSeo()
 

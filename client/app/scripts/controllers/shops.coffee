@@ -20,7 +20,7 @@ angular.module "frontApp"
       $rootScope.currentType = 'shop'
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
-      if $rootScope.isReload == true
+      if $rootScope.isReload == true && $scope.results
         $rootScope.isReload = false
         $rootScope.shopsSearch()
 
@@ -35,6 +35,7 @@ angular.module "frontApp"
     # initialize
     ###
     $scope.init = ->
+      $rootScope.isReload = false
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
@@ -81,17 +82,11 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 検索
-      Api.getJson(obj, Const.API.SHOP + '.json', true).then (res) ->
+      Api.getJson(obj, Const.API.SHOP, true).then (res) ->
         $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
-
-    # 店舗詳細移動時の処理
-    $scope.moveToShopDetail = (id) ->
-      $rootScope.hideFooter = true
-      $ionicNavBarDelegate.showBackButton true
-      $state.go 'shopDetail', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

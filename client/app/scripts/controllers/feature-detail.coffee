@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window, DataService) ->
+  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -36,6 +36,7 @@ angular.module 'frontApp'
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
       $window.prerenderReady = false;
+      $ionicNavBarDelegate.showBackButton true
       if $scope.feature && $scope.featureDetails
         setSeo()
 
@@ -131,15 +132,6 @@ angular.module 'frontApp'
     ###
     # function
     ###
-    $scope.moveToPostDetail = (id) ->
-      $state.go('postDetail', { id: id })
-
-    $scope.moveToShopDetail = (id) ->
-      $state.go('shopDetail', { id: id })
-
-    $scope.moveToWriterDetail = ->
-      $state.go('writerDetail', { id: $scope.user.id })
-
     $scope.clickExternalLink = (detail) ->
       if $scope.windowType == 'xs'
         detail.showLink = !detail.showLink

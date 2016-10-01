@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window, DataService) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -22,6 +22,7 @@ angular.module 'frontApp'
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
       $window.prerenderReady = false;
+      $ionicNavBarDelegate.showBackButton true
       if $scope.post && $scope.people && $scope.eyeCatchImage
         setSeo()
 
@@ -91,11 +92,3 @@ angular.module 'frontApp'
     ###
     # function
     ###
-    $scope.moveToPostDetail = (id) ->
-      $state.go('postDetail', { id: id })
-
-    $scope.moveToShopDetail = (id) ->
-      $state.go('shopDetail', { id: id })
-
-    $scope.moveToWriterDetail = ->
-      $state.go('writerDetail', { id: $scope.user.id })

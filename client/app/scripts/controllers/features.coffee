@@ -20,7 +20,7 @@ angular.module "frontApp"
       $rootScope.currentType = 'feature'
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
-      if $rootScope.isReload == true
+      if $rootScope.isReload == true && $scope.results
         $rootScope.isReload = false
         $rootScope.featuresSearch()
 
@@ -35,6 +35,7 @@ angular.module "frontApp"
     # initialize
     ###
     $scope.init = ->
+      $rootScope.isReload = false
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
@@ -88,11 +89,6 @@ angular.module "frontApp"
         if res.data.length == 0
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
-
-    # ショップ詳細移動時の処理
-    $scope.moveToFeatureDetail = (id) ->
-      $ionicNavBarDelegate.showBackButton true
-      $state.go 'featureDetal', {id:id}
 
     # ListのLazy Load用処理
     $scope.loadMoreData = ->

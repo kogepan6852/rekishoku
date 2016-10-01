@@ -27,7 +27,7 @@
       <!-- Top -->
       <div class="top-area" ng-if="!keywords && !period && !person && !category && !province">
         <!-- POST -->
-        <a class="item feature left-box" ng-click="moveToPostDetail(topItem.post.id)">
+        <a class="item feature left-box" href="/app/post/{{topItem.post.id}}">
           <img class="main-img visible-md visible-lg"
               ng-if="windowType=='md' || windowType=='lg'"
               src="../images/sample.png"
@@ -53,7 +53,7 @@
         </a>
         <div class="right-box hidden-xs hidden-sm" ng-if="windowType!='xs' && windowType!='sm'">
           <!-- SHOP -->
-          <a class="item shop side-area" ng-click="moveToShopDetail(shop.shop.id)">
+          <a class="item shop side-area" href="/app/shop/{{shop.shop.id}}">
             <img class="main-img" ng-src="{{shop.shop.subimage.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="shop">
               <span>STORE</span>
@@ -70,7 +70,7 @@
             </div>
           </a>
           <!-- FEATURE -->
-          <a class="item post side-area" ng-click="moveToFeatureDetail(feature.feature.id)">
+          <a class="item post side-area" href="/app/feature/{{feature.feature.id}}">
             <img class="main-img" ng-src="{{feature.feature.image.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="feature">
               <span ng-bind="feature.feature.category_name"></span>
@@ -90,7 +90,6 @@
       <list-item-post
          ng-repeat="result in results"
          ng-hide="$index==0 && !keywords && !period && !person && !category && !province"
-         ng-click="moveToPostDetail(result.post.id)"
          data="result.post"
          periods="result.periods"
          people="result.people"

@@ -34,11 +34,11 @@
             <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
             <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
           </div>
-          <div class="writer" ng-click="moveToWriterDetail()">
-            <p>
+          <div class="writer">
+            <a href="/app/writer/{{user.id}}">
               <span ng-bind="'POST.TEXT_BY'|translate"></span>
               <span ng-bind="user.username"></span>
-            </p>
+            </a>
           </div>
         </div>
       </div>
@@ -77,7 +77,6 @@
         <!-- POST -->
         <list-item-post
            ng-if="detail.post"
-           ng-click="moveToPostDetail(detail.post.id)"
            data="detail.post"
            periods="detail.periods"
            people="detail.people"
@@ -87,7 +86,6 @@
          <!-- SHOP -->
          <list-item-shop
             ng-if="detail.shop"
-            ng-click="moveToShopDetail(detail.shop.id)"
             data="detail.shop"
             categories="detail.categories"
             periods="detail.periods"
@@ -99,7 +97,6 @@
           <!-- EXTERNAL LINK -->
           <list-item-external-link
              ng-if="detail.external_link"
-             ng-click="clickExternalLink(detail)"
              data="detail.external_link"
              window-type="windowType"
              show-link="detail.showLink">

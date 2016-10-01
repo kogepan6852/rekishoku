@@ -14,4 +14,5 @@ angular.module "frontApp"
       link: (scope, element, attrs) ->
         scope.target = "feature"
         scope.mainImage = scope.data.image;
+        scope.href = "/app/feature/" + scope.data.id
     }

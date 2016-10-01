@@ -335,8 +335,13 @@ ion-side-menu {
       padding-bottom: 164px;
     }
   }
-  .list-slide .scroll {
-    padding-bottom: 44px;
+  .list-slide {
+    .scroll {
+      padding-bottom: 44px;
+    }
+    .has-filter .scroll {
+      padding-bottom: 88px;
+    }
   }
   .item {
     border: none;

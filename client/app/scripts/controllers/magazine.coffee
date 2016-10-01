@@ -20,7 +20,7 @@ angular.module "frontApp"
       $rootScope.currentType = 'magazine'
       $rootScope.isHideTab = false
       $ionicNavBarDelegate.showBackButton false
-      if $rootScope.isReload == true
+      if $rootScope.isReload == true && $scope.results
         $rootScope.isReload = false
         $rootScope.postsSearch()
 
@@ -35,6 +35,7 @@ angular.module "frontApp"
     # initialize
     ###
     $scope.init = ->
+      $rootScope.isReload = false
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
@@ -106,21 +107,6 @@ angular.module "frontApp"
           $scope.noMoreLoad = true
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-    # 記事詳細移動時の処理
-    $scope.moveToPostDetail = (id) ->
-      $ionicNavBarDelegate.showBackButton true
-      $state.go 'postDetail', {id:id}
-
-    # ショップ詳細移動時の処理
-    $scope.moveToShopDetail = (id) ->
-      $ionicNavBarDelegate.showBackButton true
-      $state.go 'shopDetail', {id:id}
-
-    # ショップ詳細移動時の処理
-    $scope.moveToFeatureDetail = (id) ->
-      $ionicNavBarDelegate.showBackButton true
-      $state.go 'featureDetal', {id:id}
-
     # ListのLazy Load用処理
     $scope.loadMoreData = ->
       if $scope.results
@@ -140,7 +126,7 @@ angular.module "frontApp"
             $scope.noMoreLoad = true
             # Prerender.io
             $scope.readyToCache(1000)
-            
+
           else
             angular.forEach res.data, (data, i) ->
               $scope.results.push(data)
