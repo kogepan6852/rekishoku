@@ -57,9 +57,6 @@ angular.module "frontApp"
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-        # Prerender.io
-        $scope.readyToCache(1000)
-
       # TOP用情報取得
       objTop =
         email: $localStorage['email']
@@ -141,6 +138,9 @@ angular.module "frontApp"
         Api.getJson(obj, Const.API.POST, true).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
+            # Prerender.io
+            $scope.readyToCache(1000)
+            
           else
             angular.forEach res.data, (data, i) ->
               $scope.results.push(data)

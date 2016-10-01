@@ -55,9 +55,6 @@ angular.module "frontApp"
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
 
-        # Prerender.io
-        $scope.readyToCache(1000)
-
     ###
     # Global function
     ###
@@ -113,6 +110,9 @@ angular.module "frontApp"
         Api.getJson(obj, Const.API.SHOP, true).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
+            # Prerender.io
+            $scope.readyToCache(1000)
+
           else
             angular.forEach res.data, (data, i) ->
               $scope.results.push(data)
