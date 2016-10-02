@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate, $window, $ionicSlideBoxDelegate, $ionicNavBarDelegate) ->
+  .controller "WriterDetailCtrl", ($scope, $rootScope, $stateParams, $ionicModal, $localStorage, $controller, $state, Api, Const, toaster, $translate, $window, $ionicSlideBoxDelegate, $ionicNavBarDelegate, $ionicScrollDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -74,6 +74,8 @@ angular.module "frontApp"
 
         # SEO
         setSeo()
+
+        $ionicScrollDelegate.$getByHandle('writerDetailScroll').resize()
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true

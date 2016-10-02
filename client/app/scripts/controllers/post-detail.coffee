@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate) ->
+  .controller "PostDetailCtrl", ($scope, $rootScope, $stateParams, $ionicHistory, $controller, $state, $location, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate, $ionicScrollDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -81,10 +81,12 @@ angular.module 'frontApp'
           if res.data.length < num
             num = res.data.length
           $scope.postsRelated = BaseService.getRandomArray(res.data, num)
+          $ionicScrollDelegate.$getByHandle('postDetailScroll').resize()
 
       # 投稿内容詳細取得
       Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
         $scope.postDetails = res.data
+        $ionicScrollDelegate.$getByHandle('postDetailScroll').resize()
 
       DataService.getPeriod (data) ->
         $scope.allPeriods = data

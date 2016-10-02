@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate) ->
+  .controller "FeatureDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, BaseService, $translate, $window, DataService, $ionicNavBarDelegate, $ionicScrollDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -125,6 +125,7 @@ angular.module 'frontApp'
         setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
+        $ionicScrollDelegate.$getByHandle('featureDetailScroll').resize()
 
       DataService.getPeriod (data) ->
         $scope.allPeriods = data

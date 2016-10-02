@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate, DataService) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate, DataService, $ionicScrollDelegate) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -107,6 +107,7 @@ angular.module 'frontApp'
         setSeo()
 
         $scope.$broadcast 'scroll.refreshComplete'
+        $ionicScrollDelegate.$getByHandle('shopDetailScroll').resize()
 
       DataService.getPeriod (data) ->
         $scope.allPeriods = data
@@ -125,8 +126,3 @@ angular.module 'frontApp'
     ###
     # function
     ###
-    $scope.moveToPostDetail = (id) ->
-      $state.go('postDetail', { id: id })
-
-    $scope.moveToShopDetail = (id) ->
-      $state.go('shopDetail', { id: id })
