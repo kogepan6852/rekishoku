@@ -176,8 +176,15 @@ class ApiPostsController < ApplicationController
       end
     # 公開処理の場合
     else
+      # アイキャッチ画像設定
+      eyeCatchImage = @post.image
+      @post.post_details.each do |post_detail|
+        if post_detail.is_eye_catch
+          eyeCatchImage = post_detail.image
+        end
+      end
       cache_url = "http://www.rekishoku.jp/app/post/" + @post[:id].to_s
-      create_page_cache(cache_url, @post[:image], @post[:title], @post[:content])
+      create_page_cache(cache_url, eyeCatchImage, @post[:title], @post[:content])
       result = @post.update(post_params)
     end
     if result
