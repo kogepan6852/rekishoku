@@ -68,7 +68,7 @@ SitemapGenerator::Sitemap.create do
   end
 
   Person.find_each do |person|
-    add '/app/shops?person=' + period.id.to_s, :changefreq => 'weekly'
+    add '/app/shops?person=' + person.id.to_s, :changefreq => 'weekly'
   end
 
   add '/app/shops?province=東京都', :changefreq => 'weekly'
