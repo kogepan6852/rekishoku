@@ -15,10 +15,10 @@
         <img ng-src="{{feature.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
-    <div class="row no-padding no-margin" ng-if="feature.image_quotation_name">
+    <div class="row no-padding no-margin" ng-if="feature.quotation_name">
       <div class="image-quotation">
         <span ng-bind="'POST.PHOTO_BY'|translate"></span>
-        <a href="{{feature.image_quotation_url}}" target="_blank">{{feature.image_quotation_name}}</a>
+        <a href="{{feature.quotation_url}}" target="_blank">{{feature.quotation_name}}</a>
       </div>
     </div>
 
