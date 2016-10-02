@@ -5,6 +5,7 @@ class ShopsController < ApplicationController
   before_action :set_peopleshops, only: [:new, :edit, :show]
 
   include ApiGeocoder
+  include Prerender
 
   # GET /shops
   # GET /shops.json
@@ -46,6 +47,8 @@ class ShopsController < ApplicationController
     # 緯度経度と歴食度を代入する
     @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total, history_level: setShopLevel[0], building_level: setShopLevel[1], menu_level: setShopLevel[2], person_level: setShopLevel[3], episode_level: setShopLevel[4]))
     @shop.save
+    cache_url = "http://www.rekishoku.jp/app/shop/" + @shop[:id].to_s
+    create_page_cache(cache_url, @shop[:subimage], @shop[:name], @shop[:description])
     redirect_to "/admin/shop"
   end
 
