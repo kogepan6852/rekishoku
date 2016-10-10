@@ -98,7 +98,7 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :history_level, :building_level, :phone_no, :daytime_price_id, :nighttime_price_id, :shop_hours, :is_closed_sun, :is_closed_mon, :is_closed_tue, :is_closed_wed, :is_closed_thu, :is_closed_fri, :is_closed_sat, :is_closed_hol, :is_approved, :closed_pattern, :total_level, :menu_level, :episode_level, :person_level, :category_ids => [], :person_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :period, :history_level, :building_level, :phone_no, :daytime_price_id, :nighttime_price_id, :shop_hours, :is_closed_sun, :is_closed_mon, :is_closed_tue, :is_closed_wed, :is_closed_thu, :is_closed_fri, :is_closed_sat, :is_closed_hol, :is_approved, :closed_pattern, :total_level, :menu_level, :episode_level, :person_level, :category_ids => [], :person_ids => [])
     end
 
 end
