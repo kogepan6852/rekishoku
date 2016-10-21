@@ -23,6 +23,7 @@ angular
     'uiGmapgoogle-maps',
     'config',
     'pascalprecht.translate',
+    'angular-google-adsense',
     'angulartics',
     'angulartics.google.analytics'
   ]
