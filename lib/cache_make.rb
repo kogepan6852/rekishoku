@@ -31,7 +31,21 @@ module RailsAdmin
                         elsif request.put?
                           # 通信用
                           cache_url = "http://www.rekishoku.jp/app/"+ params[:model_name] + "/" + params[:page][:name].to_s
-                          create_page_cache(cache_url)
+
+                          ## キャッシュ可能なDBでのキャッシュ作成対応
+                          case params[:model_name]
+                          when "shop"
+                            cache_data = Shop.find(params[:page][:name])
+                            create_page_cache(cache_url, cache_data[:subimage], cache_data[:name], cache_data[:description])
+                          when "post"
+                            cache_data = Post.find(params[:page][:name])
+                            create_page_cache(cache_url, cache_data[:image], cache_data[:title], cache_data[:content])
+                          when "feature"
+                            cache_data = Feature.find(params[:page][:name])
+                            create_page_cache(cache_url, cache_data[:image], cache_data[:title], cache_data[:content])
+                          else
+                            print("キャッシュ実行不可")
+                          end
                         else
                           raise "エラーメッセージ"
                         end

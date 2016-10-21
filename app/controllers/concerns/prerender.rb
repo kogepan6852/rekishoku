@@ -1,7 +1,7 @@
 module Prerender
 
   # API実行用のURLを返却
-  def create_page_cache(cache_url)
+  def create_page_cache(cache_url, image, title, content)
     if Rails.env == 'production'
       # 通信用
       http_client = HTTPClient.new
@@ -20,7 +20,7 @@ module Prerender
 
       # Facebook対応
       endpoint_uri = 'https://graph.facebook.com'
-      request_content = {:scrape => "true", :id => cache_url}
+      request_content = {:scrape => "true", :id => cache_url, :type => "website", :title => title, :image => image, :description => content}
       content_json = request_content.to_json
       begin
         http_client.post_content(endpoint_uri, content_json, 'Content-Type' => 'application/json')

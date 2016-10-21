@@ -2,6 +2,8 @@ class FeaturesController < ApplicationController
   load_and_authorize_resource
   before_action :set_feature, only: [:edit, :update, :destroy]
 
+  include Prerender
+
   # POST /feature
   # POST /feature.json
   def create
@@ -12,6 +14,8 @@ class FeaturesController < ApplicationController
       @feature = Feature.new(feature_params)
     end
     @feature.save
+    cache_url = "http://www.rekishoku.jp/app/feature/" + @feature[:id].to_s
+    create_page_cache(cache_url, @feature[:image], @feature[:title], @feature[:content])
     redirect_to "/admin/feature"
   end
 
