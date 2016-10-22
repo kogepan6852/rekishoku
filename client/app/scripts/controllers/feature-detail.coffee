@@ -134,8 +134,4 @@ angular.module 'frontApp'
     # function
     ###
     $scope.clickExternalLink = (detail) ->
-      if $scope.windowType == 'xs'
-        detail.showLink = !detail.showLink
-      else
-        $window.open detail.external_link.quotation_url
-        return true
+      detail.showLink = !detail.showLink

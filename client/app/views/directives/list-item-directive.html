@@ -1,4 +1,4 @@
-<a class="item" href={{href}}>
+<a class="item" ng-href={{href}}>
   <img class="main-img" src="../images/dummy-img.png">
 
   <img class="main-img subimage visible-lg visible-md visible-sm"
@@ -52,8 +52,7 @@
   </div>
   <div class="detail no-tag"
       ng-class="{'more-info':showLink}"
-      ng-if="target=='externalLink'"
-      ng-click="clickLink()">
+      ng-if="target=='externalLink'">
     <div>
       <h2 ng-bind="data.name" class="mincho"></h2>
       <p class="description" ng-bind="data.content"></p>
