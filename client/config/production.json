@@ -1,7 +1,7 @@
 {
   "env": "production",
   "url": {
-    "api": "https://rekishoku.herokuapp.com",
+    "api": "",
     "home": "http://rekishoku.jp"
   },
   "id": {

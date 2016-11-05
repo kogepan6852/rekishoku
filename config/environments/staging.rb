@@ -77,12 +77,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # rack-cors
-  config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
-    allow do
-      origins 'https://dllek3mjj4aav.cloudfront.net,http://rekishoku-stg.herokuapp.com'
-      resource '*', :headers => :any, :methods => [:get, :post, :patch, :delete]
-    end
-  end
-
 end
