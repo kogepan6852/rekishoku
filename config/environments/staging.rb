@@ -80,7 +80,7 @@ Rails.application.configure do
   # rack-cors
   config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
     allow do
-      origins 'https://rekishoku-stg.herokuapp.com'
+      origins 'https://dllek3mjj4aav.cloudfront.net'
       resource '*', :headers => :any, :methods => [:get, :post, :patch, :delete]
     end
   end
