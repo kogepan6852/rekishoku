@@ -82,4 +82,13 @@ Rails.application.configure do
 
   # prerender.io(SEO for SPA)
   config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+
+  # rack-cors
+  config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+    allow do
+      origins 'https://d1wt7fxt8yc5a0.cloudfront.net,http://www.rekishoku.jp'
+      resource '*', :headers => :any, :methods => [:get, :post, :patch, :delete]
+    end
+  end
+
 end
