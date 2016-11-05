@@ -83,6 +83,11 @@ module.exports = function (grunt) {
           config: grunt.file.readJSON('config/test.json'),
         }
       },
+      staging: {
+        constants: {
+          config: grunt.file.readJSON('config/staging.json'),
+        }
+      },
       production: {
         constants: {
           config: grunt.file.readJSON('config/production.json'),

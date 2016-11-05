@@ -13,7 +13,7 @@ CarrierWave.configure do |config|
       config.fog_public     = true
       config.fog_attributes = {'Cache-Control' => 'public, max-age=86400'}
       config.fog_directory  = 'rekishoku'
-      config.asset_host     = 'https://s3-ap-northeast-1.amazonaws.com/rekishoku'
+      config.asset_host     = 'https://d1wt7fxt8yc5a0.cloudfront.net'
     when 'staging'
       config.storage = :fog
       config.fog_credentials = {

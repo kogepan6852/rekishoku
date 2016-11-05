@@ -1,0 +1,10 @@
+{
+  "env": "staging",
+  "url": {
+    "api": "https://rekishoku-stg.herokuapp.com",
+    "home": "https://rekishoku-stg.herokuapp.com"
+  },
+  "id": {
+    "fb": "944564788957091"
+  }
+}
