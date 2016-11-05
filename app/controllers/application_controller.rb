@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   # Stagingの場合はベーシック認証を設定
-  http_basic_authenticate_with :name => ENV['BASIC_AUTH_USERNAME'], :password => ENV['BASIC_AUTH_PASSWORD'] if Rails.env == "staging"
+  http_basic_authenticate_with :name => ENV['BASIC_AUTH_USERNAME'], :password => ENV['BASIC_AUTH_PASSWORD'] if Rails.env == "staging" && ENV['BASIC_AUTH_USERNAME']
 
   # json でのリクエストの場合CSRFトークンの検証をスキップ
   skip_before_action :verify_authenticity_token,     if: -> {request.format.json?}
   # トークンによる認証
   before_action      :authenticate_user_from_token!, if: -> {params[:email].present?}
-  
+
   # 権限無しのリソースにアクセスしようとした場合
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
