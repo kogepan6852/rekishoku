@@ -1,7 +1,7 @@
 {
   "env": "staging",
   "url": {
-    "api": "",
+    "api": "https://rekishoku-stg.herokuapp.com",
     "home": "https://rekishoku-stg.herokuapp.com"
   },
   "id": {
