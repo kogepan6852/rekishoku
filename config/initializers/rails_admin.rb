@@ -378,6 +378,11 @@ RailsAdmin.config do |config|
         label "その他定休日"
         help "フリーフォーマット"
       end
+      field :period do
+        label "創業時代"
+        help "必須"
+        required true
+      end
       field :history_level, :enum do
       enum do
         Hash[ ['不明','0:戦後', '1:明治以降から昭和戦前','2:江戸時代','3:江戸以前'].zip(['-1','0','1','2','3']) ]
