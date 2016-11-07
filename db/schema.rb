@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20160930045901) do
     t.integer  "person_level",         default: 0
     t.integer  "episode_level",        default: 0
     t.integer  "total_level",          default: 0,     null: false
-    t.integer  "period",               default: 0
+    t.integer  "period_id",            default: 0
   end
 
   create_table "users", force: :cascade do |t|
