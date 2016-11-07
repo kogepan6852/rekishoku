@@ -615,7 +615,10 @@ RailsAdmin.config do |config|
           field :is_map do
             label "マップ表示有無"
           end
-          field :category do
+          field :category_id, :enum do
+          enum do
+            Hash[ ['TOUR','PICKUP'].zip(['1', '2']) ]
+          end
             label "カテゴリ"
             help "必須 対応するカテゴリを選択してください"
             required true
@@ -633,7 +636,10 @@ RailsAdmin.config do |config|
           field :published_at do
             label "公開時間"
           end
-          field :user do
+          field :user_id, :enum do
+            enum do
+              Hash[ ['RYO','Haruka','MIO','戸田江美','小太刀御禄','まさお'].zip(['6','7','11','12','13','16']) ]
+            end
             label "ライター"
             required true
             help "必須"
@@ -679,8 +685,6 @@ RailsAdmin.config do |config|
             end
             field :related do
               label "紐付けする情報"
-              help "必須"
-              required true
             end
         end
        end

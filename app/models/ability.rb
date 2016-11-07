@@ -30,23 +30,6 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     # 管理画面用アクセスコントロール
-    # can :manage, Post, user_id: user.id if user
-    # can :read, Post
-    #
-    # can :manage, PostDetail, user_id: user.id if user
-    # can :read, PostDetail
-    #
-    # can :manage, PostsShop, user_id: user.id if user
-    # can :read, PostsShop
-    #
-    # can :manage, PeoplePost, user_id: user.id if user
-    # can :read, PeoplePost
-    #
-    # can :manage, :Menu
-    # cannot :manage ,Shop
-    # cannot :manage, Person
-    # cannot :manage, Period
-
     if user
       ## Admin権限
       if user.role == 0
@@ -55,6 +38,10 @@ class Ability
     elsif user.role == 2 || user.role == 3
         can :manage, Feature
         can :manage, FeatureDetail
+        can :read, Category
+        can :read, Shop
+        can :read, ExternalLink
+        can :read, Post
         can :access, :rails_admin
         can :dashboard
       end
