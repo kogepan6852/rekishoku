@@ -684,8 +684,6 @@ RailsAdmin.config do |config|
             end
             field :related do
               label "紐付けする情報"
-              help "必須"
-              required true
             end
         end
        end
