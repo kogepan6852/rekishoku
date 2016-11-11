@@ -31,7 +31,7 @@ class ShopsController < ApplicationController
   # POST /shops.json
   def create
     # 住所から緯度経度を求める
-    addressPlace = get_geocoder(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
+    addressPlace = get_geocoder(shop_params[:province]+shop_params[:city]+shop_params[:address1]+shop_params[:address2]);
     #歴食度_合計
     levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
     setShopLevel = [nil, nil, nil, nil, nil]
@@ -56,7 +56,7 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1.json
   def update
     # 住所から緯度経度を求める
-    addressPlace = get_geocoder(shop_params[:province]+shop_params[:city]+shop_params[:address1]);
+    addressPlace = get_geocoder(shop_params[:province]+shop_params[:city]+shop_params[:address1]+shop_params[:address2]);
     #歴食度_合計
     levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
     setShopLevel = [nil, nil, nil, nil, nil]
