@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","Category","Period","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","Period","PostsShop","PeoplePeriod","PeoplePost"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -102,6 +102,35 @@ RailsAdmin.config do |config|
       end
     end
    end
+
+  config.model 'Category' do
+    label "カテゴリ"
+    weight 100
+    list do
+      field :name
+      field :slug
+      field :type
+    end
+    edit do
+      field :name  do
+        label "カテゴリ名"
+        help "必須"
+        required true
+      end
+      field :slug  do
+        label "管理用カテゴリ"
+        help "必須　英語"
+        required true
+      end
+      field :type, :enum do
+      enum do
+        Hash[ ['PersonCategory', 'ShopCategory','PostCategory','FeatureCategory'].zip(['PersonCategory', 'ShopCategory','PostCategory','FeatureCategory']) ]
+      end
+        label "カテゴリType"
+        required true
+      end
+     end
+  end
 
    ## 記事カテゴリ
   config.model 'PostCategory' do
@@ -229,6 +258,11 @@ RailsAdmin.config do |config|
            help "対象カテゴリを右に移動してくだい"
         end
         field :categories  do
+          associated_collection_scope do
+          Proc.new { |scope|
+              scope = scope.where('categories.type = ?', "PersonCategory")
+          }
+          end
           label "対応するカテゴリを選択してください"
         end
       end
@@ -428,6 +462,11 @@ RailsAdmin.config do |config|
         help "対象人物を右に移動してください"
       end
       field :categories do
+        associated_collection_scope do
+        Proc.new { |scope|
+            scope = scope.where('categories.type = ?', "ShopCategory")
+        }
+        end
         label "関連があるカテゴリを選択"
         help "必須 対応するカテゴリを選択してください"
         required true
@@ -493,6 +532,12 @@ RailsAdmin.config do |config|
         label "引用したサイト名"
       end
       field :category  do
+        associated_collection_cache_all false # 事前にモデルを読み込まなくなる
+        associated_collection_scope do
+        Proc.new { |scope|
+            scope = scope.where('categories.type = ?', "PostCategory")
+        }
+        end
         label "対応するカテゴリを選択してください"
         required true
       end
@@ -621,6 +666,12 @@ RailsAdmin.config do |config|
             label "マップ表示有無"
           end
           field :category do
+            associated_collection_cache_all false # 事前にモデルを読み込まなくなる
+            associated_collection_scope do
+            Proc.new { |scope|
+                scope = scope.where('categories.type = ?', "FeatureCategory")
+            }
+            end
             label "カテゴリ"
             help "必須 対応するカテゴリを選択してください"
             required true
