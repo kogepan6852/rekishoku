@@ -7,7 +7,7 @@ class ExternalLinksController < ApplicationController
   # POST /external_links.json
   def create
     # 住所から緯度経度を求める
-    addressPlace = get_geocoder(external_link_params[:province]+external_link_params[:city]+external_link_params[:address1]);
+    addressPlace = get_geocoder(external_link_params[:province]+external_link_params[:city]+external_link_params[:address1]+external_link_params[:address2]);
     # 緯度経度を代入する
     @external_link = ExternalLink.new(external_link_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
     @external_link.save
@@ -18,7 +18,7 @@ class ExternalLinksController < ApplicationController
   # PATCH/PUT /external_links/1.json
   def update
     # 住所から緯度経度を求める
-    addressPlace = get_geocoder(external_link_params[:province]+external_link_params[:city]+external_link_params[:address1]);
+    addressPlace = get_geocoder(external_link_params[:province]+external_link_params[:city]+external_link_params[:address1]+external_link_params[:address2]);
     # 緯度経度を代入する
     @external_link.update(external_link_params.merge(latitude: addressPlace[0], longitude: addressPlace[1]))
     redirect_to "/admin/external_link"
