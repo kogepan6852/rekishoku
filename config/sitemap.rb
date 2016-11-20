@@ -1,7 +1,7 @@
 # Set the host name for URL creation
 case Rails.env
   when 'production'
-    SitemapGenerator::Sitemap.default_host = "http://www.rekishoku.jp"
+    SitemapGenerator::Sitemap.default_host = "https://www.rekishoku.jp"
     SitemapGenerator::Sitemap.sitemaps_host = 'https://s3-ap-northeast-1.amazonaws.com/rekishoku/'
   when 'staging'
     SitemapGenerator::Sitemap.default_host = "http://www.historipfood.com"
