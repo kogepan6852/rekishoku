@@ -2,7 +2,7 @@
 
 if ENV['RACK_ENV'] == 'production'
   use Rack::Rewrite do
-    r301 %r{.*}, 'http://www.rekishoku.jp$&', :if => Proc.new {|rack_env|
+    r301 %r{.*}, 'https://www.rekishoku.jp$&', :if => Proc.new {|rack_env|
       rack_env['SERVER_NAME'] == 'www.xn--kmww28g.jp'
     }
   end

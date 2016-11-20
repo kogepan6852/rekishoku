@@ -7,7 +7,7 @@ class FeaturesController < ApplicationController
   # POST /feature
   # POST /feature.json
   def create
-    
+
     if feature_params[:category_id] == "1"
       category = Category.where(name: 'TOUR').first
     else
@@ -21,7 +21,7 @@ class FeaturesController < ApplicationController
       @feature = Feature.new(feature_params)
     end
     @feature.save
-    cache_url = "http://www.rekishoku.jp/app/feature/" + @feature[:id].to_s
+    cache_url = "https://www.rekishoku.jp/app/feature/" + @feature[:id].to_s
     create_page_cache(cache_url, @feature[:image], @feature[:title], @feature[:content])
     redirect_to "/admin/feature"
   end

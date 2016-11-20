@@ -30,7 +30,7 @@ module RailsAdmin
                           @objects = list_entries(@model_config, :destroy, get_association_scope_from_params, false)
                         elsif request.put?
                           # 通信用
-                          cache_url = "http://www.rekishoku.jp/app/"+ params[:model_name] + "/" + params[:page][:name].to_s
+                          cache_url = "https://www.rekishoku.jp/app/"+ params[:model_name] + "/" + params[:page][:name].to_s
 
                           ## キャッシュ可能なDBでのキャッシュ作成対応
                           case params[:model_name]

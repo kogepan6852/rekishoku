@@ -183,7 +183,7 @@ class ApiPostsController < ApplicationController
           eyeCatchImage = post_detail.image
         end
       end
-      cache_url = "http://www.rekishoku.jp/app/post/" + @post[:id].to_s
+      cache_url = "https://www.rekishoku.jp/app/post/" + @post[:id].to_s
       create_page_cache(cache_url, eyeCatchImage, @post[:title], @post[:content])
       result = @post.update(post_params)
     end
