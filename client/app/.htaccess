@@ -546,7 +546,6 @@ FileETag None
 # rewrite http → https
 
 <IfModule mod_rewrite.c>
-    RewriteEngine on
     RewriteCond %{HTTPS} !=on
     RewriteRule ^(.*)$ https://www.rekishoku.jp/$1 [R=301,L]
 </IfModule>
