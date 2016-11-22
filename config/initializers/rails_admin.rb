@@ -691,7 +691,14 @@ RailsAdmin.config do |config|
           end
           field :user_id, :enum do
             enum do
-              Hash[ ['RYO','Haruka','MIO','戸田江美','小太刀御禄','まさお'].zip(['6','7','11','12','13','16']) ]
+              setData = User.all
+              ids = []
+              names = []
+              setData.each do |set|
+                ids.push(set.id.to_s)
+                names.push(set.username)
+              end
+              Hash[ names.zip(ids) ]
             end
             label "ライター"
             required true
