@@ -82,6 +82,7 @@ Rails.application.configure do
 
   # prerender.io(SEO for SPA)
   config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+  config.middleware.use Rack::Prerender, protocol: 'https'
 
   # rack-cors
   config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
