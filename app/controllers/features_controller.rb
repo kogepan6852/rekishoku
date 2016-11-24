@@ -8,15 +8,9 @@ class FeaturesController < ApplicationController
   # POST /feature.json
   def create
 
-    if feature_params[:category_id] == "1"
-      category = Category.where(name: 'TOUR').first
-    else
-      category = Category.where(name: 'PICKUP').first
-    end
-
     if feature_time_params[:published_at] != ""
       setPublishedAt = feature_time_params[:published_at].split(/\D+/)
-      @feature = Feature.new(feature_params.merge(category_id: category.id, published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+      @feature = Feature.new(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
       @feature = Feature.new(feature_params)
     end
@@ -29,17 +23,10 @@ class FeaturesController < ApplicationController
   # PATCH/PUT /feature/1
   # PATCH/PUT /feature/1.json
   def update
-
-    if feature_params[:category_id] == "1"
-      category = Category.where(name: 'TOUR').first
-    else
-      category = Category.where(name: 'PICKUP').first
-    end
-
     ## 公開日の設定
     if feature_time_params[:published_at] != ""
       setPublishedAt = feature_time_params[:published_at].split(/\D+/)
-      @feature.update(feature_params.merge(category_id: category.id, published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+      @feature.update(feature_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
       @feature.update(feature_params)
     end
