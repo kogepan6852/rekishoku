@@ -41,6 +41,8 @@
     "node": "^0.12.2"
   },
   "scripts": {
+    "serve": "grunt serve",
+    "build": "grunt build:development -f",
     "test": "grunt test"
   }
 }
