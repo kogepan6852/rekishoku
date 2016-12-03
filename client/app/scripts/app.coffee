@@ -128,5 +128,5 @@ angular
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
   .config ($locationProvider) ->
-    $locationProvider.hashPrefix('!')
-    # $locationProvider.html5Mode(true);
+    # $locationProvider.hashPrefix('!')
+    $locationProvider.html5Mode(true);
