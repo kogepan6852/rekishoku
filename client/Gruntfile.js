@@ -441,7 +441,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: 'index.html',
           rename: function(dest) {
-            return dest + '/main.html';
+            return dest + '/index.html';
           }
         }, {
           expand: true,
