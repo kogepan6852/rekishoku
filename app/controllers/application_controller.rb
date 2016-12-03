@@ -27,4 +27,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # デフォルトドメイン設定
+  def default_url_options
+    if Rails.env.production?
+      {:host => "www.rekishoku.jp"}
+    else
+      {}
+    end
+  end
+
 end
