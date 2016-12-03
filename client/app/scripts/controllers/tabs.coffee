@@ -32,8 +32,6 @@ angular.module "frontApp"
       $ionicViewSwitcher.nextTransition('none')
       # backボタンを隠す
       $ionicNavBarDelegate.showBackButton false
-      # historyデータを削除する
-      $ionicHistory.clearHistory();
       $rootScope.hideFooter = false
       # reloadパラメータを削除
       $location.search('reload', null)
