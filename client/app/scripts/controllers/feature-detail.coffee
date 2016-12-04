@@ -27,12 +27,10 @@ angular.module 'frontApp'
       zoom: Const.MAP.ZOOM.DEFAULT
       bounds: {}
     $scope.options =
-      scrollwheel: false
       minZoom: Const.MAP.ZOOM.MIN
-      disableDefaultUI: true
       zoomControl: true
-      draggable: true
       fullscreenControl: true
+      disableDefaultUI: true
 
     # 画面表示ごとの初期処理
     $scope.$on '$ionicView.beforeEnter', (e) ->
