@@ -30,7 +30,8 @@ angular.module 'frontApp'
       minZoom: Const.MAP.ZOOM.MIN
       disableDefaultUI: true
       zoomControl: true
-      draggable: false
+      draggable: true
+      fullscreenControl: true
     $scope.allAreas = ['東京都','京都府','神奈川県','島根県','静岡県','愛知県']
 
     # 画面表示ごとの初期処理
