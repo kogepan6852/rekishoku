@@ -21,6 +21,7 @@ angular.module 'frontApp'
 
     # Map用パラメータの設定
     $scope.map =
+      gestureHandling: 'cooperative'
       center:
         latitude: Const.MAP.CENTER.DEFAULT.LAT
         longitude:  Const.MAP.CENTER.DEFAULT.LNG
