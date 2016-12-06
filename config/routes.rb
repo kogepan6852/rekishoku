@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   # 旧URL対応
   get 'post/*path', to: 'app_route#show'
 
-# API route　
+  # ssl証明書発行用
+  get ".well-known/acme-challenge/:id" => "app_route#letsencrypt"
+
+  ### 
+  # API route　
+  ###
   # POSTS
   get 'api/posts', to: 'api_posts#index'
   get 'api/posts/:id', to: 'api_posts#show'
@@ -72,7 +77,9 @@ Rails.application.routes.draw do
   post 'admin/external_link/new', to: 'external_links#create'
   put 'admin/external_link/:id/edit', to: 'external_links#update'
 
-# site map
+  ### 
+  # Site Map
+  ###
   case Rails.env
     when 'production'
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku/sitemaps/sitemap.xml.gz')
