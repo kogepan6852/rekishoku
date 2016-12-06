@@ -21,13 +21,13 @@ angular.module 'frontApp'
 
     # Map用パラメータの設定
     $scope.map =
-      gestureHandling: 'cooperative'
       center:
         latitude: Const.MAP.CENTER.DEFAULT.LAT
         longitude:  Const.MAP.CENTER.DEFAULT.LNG
       zoom: Const.MAP.ZOOM.DEFAULT
       bounds: {}
     $scope.options =
+      gestureHandling: 'cooperative'
       minZoom: Const.MAP.ZOOM.MIN
       zoomControl: true
       fullscreenControl: true
