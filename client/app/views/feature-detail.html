@@ -57,7 +57,7 @@
     <!-- Rerated Items -->
     <div class="row detail-title" ng-repeat-start="detail in featureDetails" ng-if="detail.feature_detail.title">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <h2 class="number" ng-if="!detail.feature_detail.content">SPOT {{$index+1}}</h2>
+        <h2 class="number" ng-if="!detail.feature_detail.content && detail.feature_detail.related_type">SPOT {{$index+1}}</h2>
         <h2 class="title" ng-bind="detail.feature_detail.title"></h2>
       </div>
     </div>
@@ -66,7 +66,7 @@
     <div class="row no-margin" ng-class="{'no-headline': !detail.feature_detail.title && !detail.feature_detail.content}">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div ng-if="detail.feature_detail.content"><p ng-bind-html="detail.feature_detail.content | newlines"></p></div>
-        <div ng-if="!detail.feature_detail.title || (detail.feature_detail.title && detail.feature_detail.content)">
+        <div ng-if="(!detail.feature_detail.title || (detail.feature_detail.title && detail.feature_detail.content)) && detail.feature_detail.related_type">
           <h2 class="number">SPOT {{$index+1}}</h2>
         </div>
       </div>
