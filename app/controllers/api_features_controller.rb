@@ -112,9 +112,15 @@ class ApiFeaturesController < ApplicationController
           # 対応するExternalLinkの情報を取得する
           obj = get_external_link_json(feature_detail.related)
         end
-        people += get_people(feature_detail.related)
-        obj.store("feature_detail",feature_detail)
-        feature_details.push(obj)
+
+        if feature_detail[:related_type] != ""
+          people += get_people(feature_detail.related)
+          obj.store("feature_detail",feature_detail)
+          feature_details.push(obj)
+        else
+          obj =  { "feature_detail" => feature_detail }
+          feature_details.push(obj)
+        end
       end
 
       periods += get_periods(people)
@@ -127,6 +133,7 @@ class ApiFeaturesController < ApplicationController
         "people" => people.uniq,
         "periods" => periods.uniq,
         "user" => user }
+
       render json: feature
     else
       feature = { "feature" => "" }
