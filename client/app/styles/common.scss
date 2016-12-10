@@ -178,8 +178,9 @@ i {
     }
 
     i {
-      font-size: $h1;
+      font-size: $h2;
       padding-bottom: 5px;
+      color: #fff;
     }
 
     &.hide-btn {
@@ -195,7 +196,7 @@ i {
       line-height: 8px;
       font-size: $h7;
       position: absolute;
-      bottom: 10px;
+      bottom: 12px;
       text-align: center;
       width: 50px;
       left: 50%;

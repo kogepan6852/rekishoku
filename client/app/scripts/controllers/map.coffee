@@ -2,9 +2,9 @@
 
 ###*
  # @ngdoc function
- # @name frontApp.controller:AboutCtrl
+ # @name frontApp.controller:MapCtrl
  # @description
- # # AboutCtrl
+ # MapCtrl
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
@@ -16,8 +16,26 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $scope.$on '$ionicView.enter', (e) ->
+    $scope.$on '$ionicView.enter', (scopes, states) ->
       $rootScope.isHideTab = false
+      navigator.geolocation.clearWatch( $scope.watchId )
+      if navigator.geolocation
+        $scope.watchId = navigator.geolocation.watchPosition ((position) ->
+          # 現在地アイコン用
+          $rootScope.current = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          setCurrentPosition(position.coords.latitude, position.coords.longitude)
+          ), (e) ->
+            # none
+      else
+        alert($translate.instant('MSG.ALERT.NO_POSITION'))
+
+    $scope.$on '$ionicView.leave', (scopes, states) ->
+      if $scope.watchId && navigator.geolocation
+        # 位置情報の追跡を中止する
+        navigator.geolocation.clearWatch( $scope.watchId ) 
 
     DataService.getShopCategory (data) ->
       $scope.categories = data
@@ -161,18 +179,10 @@ angular.module 'frontApp'
         Api.getJson(obj, Const.API.MAP, isLoading).then (resShops) ->
           # mapデータ設定
           $scope.isDragging = false
-          $scope.currentIcon = []
           shops = []
           # 現在地アイコンの設定
           if $rootScope.current
-            now =
-              latitude: $rootScope.current.latitude,
-              longitude: $rootScope.current.longitude,
-              icon:
-                url: '../images/current-pin.png'
-                scaledSize : new google.maps.Size(35, 35)
-            now['id'] = 0
-            $scope.currentIcon.push(now)
+            setCurrentPosition($rootScope.current.latitude, $rootScope.current.longitude)
 
           # map表示用データの作成
           angular.forEach resShops.data.shops, (shop, i) ->
@@ -210,6 +220,18 @@ angular.module 'frontApp'
 
         callback obj
 
+    setCurrentPosition = (latitude, longitude) ->
+      $scope.currentIcon = []
+      now =
+        latitude: latitude,
+        longitude: longitude,
+        icon:
+          url: '../images/current-pin.png'
+          scaledSize : new google.maps.Size(35, 35)
+      now['id'] = 0
+      $scope.currentIcon.push(now)
+
+
     ###
     # Global function
     ###
@@ -245,7 +267,6 @@ angular.module 'frontApp'
 
     # 現在地への移動
     $scope.moveToCurrentPlace = ->
-      $rootScope.targetAddress = null
-      $rootScope.latitude = null
-      $rootScope.longitude = null
-      $scope.init()
+      if $rootScope.current.latitude && $rootScope.current.longitude 
+        $scope.map.center.latitude = $rootScope.current.latitude
+        $scope.map.center.longitude = $rootScope.current.longitude
