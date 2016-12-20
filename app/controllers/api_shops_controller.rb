@@ -76,7 +76,7 @@ class ApiShopsController < ApplicationController
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
-
+    
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
@@ -162,7 +162,7 @@ class ApiShopsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :period_id, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
     end
 
 end
