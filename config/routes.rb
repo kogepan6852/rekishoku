@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # ssl証明書発行用
   get ".well-known/acme-challenge/:id" => "app_route#letsencrypt"
 
-  ### 
+  ###
   # API route　
   ###
   # POSTS
@@ -73,11 +73,15 @@ Rails.application.routes.draw do
   post 'admin/feature/new', to: 'features#create'
   put 'admin/feature/:id/edit', to: 'features#update'
 
+  # ADMIN_FEATURE
+  post 'admin/feature_detail/new', to: 'feature_details#create'
+  put 'admin/feature_detail/:id/edit', to: 'feature_details#update'
+
   # ADMIN_ ExternalLink
   post 'admin/external_link/new', to: 'external_links#create'
   put 'admin/external_link/:id/edit', to: 'external_links#update'
 
-  ### 
+  ###
   # Site Map
   ###
   case Rails.env
