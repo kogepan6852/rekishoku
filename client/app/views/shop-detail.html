@@ -16,9 +16,15 @@
       </div>
     </div>
     <div class="row no-padding no-margin" ng-if="shop.image_quotation_name">
-      <div class="image-quotation">
+      <div class="image-quotation has-mode-btn">
         <span ng-bind="'POST.PHOTO_BY'|translate"></span>
         <a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a>
+        <a class="button mode-btn"
+            href="http://maps.google.com/maps?saddr=現在地&daddr={{shop.province + shop.city + shop.address1 + shop.address2}}&dirflg=w"
+            target="_blank">
+          <i class="ion-android-walk"></i>
+          <span>ROUTE</span>
+        </a>
       </div>
     </div>
 
