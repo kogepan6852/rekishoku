@@ -515,7 +515,7 @@ ion-modal-view .bar-header {
   background-color: $subColor;
   border: none;
   color: #fff;
-  line-height: 52px!important;
+  line-height: 50px!important;
   @include css3(transition, all 0.2s ease-out);
 
   i {
@@ -538,7 +538,6 @@ ion-modal-view .bar-header {
     width: 50px;
     left: 50%;
     margin-left: -25px;
-    padding-bottom: 2px;
   }
 
 }
