@@ -1,0 +1,38 @@
+<ion-modal-view class="info-modal rating-info-modal big-modal">
+  <!-- header -->
+  <ion-header-bar>
+    <div class="buttons" ng-click="closeRatingInfoModal()">
+      <button class="button icon ion-close-round"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="row padding-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="info-title mincho b" ng-bind="'SHOP.RATING.TITLE'|translate"></h2>
+        <p class="decsription" ng-bind-html="'SHOP.RATING.DESCRIPTION'|translate"></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 padding-top padding-bottom" ng-repeat="ratingInfo in ratingInfos">
+        <div>
+          <h2 class="info-title mincho b" ng-bind="ratingInfo.title"></h2>
+          <p class="decsription" ng-bind="ratingInfo.description"></p>
+        </div>
+        <div class="star-info">
+          <div class="star-info-inner" ng-repeat="detail in ratingInfo.details">
+            <div>
+              <i class="ion-android-star" ng-if="$index < 1"></i>
+              <i class="ion-android-star" ng-if="$index < 2"></i>
+              <i class="ion-android-star" ng-if="$index < 3"></i>
+              <span ng-if="$index === 3">-</span>
+            </div>
+            <div>{{detail}}</div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

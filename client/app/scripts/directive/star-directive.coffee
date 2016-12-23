@@ -13,15 +13,15 @@ angular.module "frontApp"
         scope.$watch 'count', ->
           # ラベルの設定
           if scope.type == "history"
-            scope.title = $translate.instant('SHOP.RATING.HISTORY')
+            scope.title = $translate.instant('SHOP.RATING.INFO.HISTORY.TITLE')
           else if scope.type == "building"
-            scope.title = $translate.instant('SHOP.RATING.BUILDING')
+            scope.title = $translate.instant('SHOP.RATING.INFO.BUILDING.TITLE')
           else if scope.type == "menu"
-            scope.title = $translate.instant('SHOP.RATING.MENU')
+            scope.title = $translate.instant('SHOP.RATING.INFO.MENU.TITLE')
           else if scope.type == "person"
-            scope.title = $translate.instant('SHOP.RATING.PERSON')
+            scope.title = $translate.instant('SHOP.RATING.INFO.PERSON.TITLE')
           else if scope.type == "episode"
-            scope.title = $translate.instant('SHOP.RATING.EPISODE')
+            scope.title = $translate.instant('SHOP.RATING.INFO.EPISODE.TITLE')
           else
             scope.title = $translate.instant('SHOP.HF_RATING')
 

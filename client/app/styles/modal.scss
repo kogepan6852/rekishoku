@@ -3,26 +3,47 @@
 /**********************
  * Common
  **********************/
-@media screen and (max-width:768px){
-  .big-modal {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%
+ ion-modal-view .bar-header {
+  background-color: transparent !important;
+}
+
+.scale-in {
+  transform: scale(0.9);
+  opacity: 0;
+  &.ng-enter, > .ng-enter {
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
   }
-  
-  /* form */
-  .item-stacked-label-xs {
-    background-color: transparent;
-    box-shadow: none;
-    display: block;
-    .input-label, .icon {
-      display: inline-block;
-      padding: 4px 0 0;
-      vertical-align: middle;
+  &.ng-enter-active, > .ng-enter-active {
+    transform: scale(1);
+    opacity: 1;
+  }
+  &.ng-leave, > .ng-leave {
+    transition: all ease-in-out 250ms;
+  }
+}
+
+.info-modal {
+  .bar-header {
+    background-image: none;
+
+    .button {
+      border: none;
+      background-color: transparent;
+      color: $baseColor;
     }
   }
+  .scroll-content {
+    top: 0;
+    padding-top: 44px;
+  }
+}
+
+.big-modal {
+  top: 5%;
+  bottom: 5%;
+  right: 15%;
+  left: 15%;
+  width: 70%;
 }
 
 /**********************
@@ -40,5 +61,68 @@
   .search-button {
     max-width: 340px;
     margin: auto;
+  }
+}
+
+
+/**********************
+ * Post Modal & Profile Edit Modal
+ **********************/
+.modal-post, .modal-profile-edit {
+  form, .slider {
+    height: 100%;
+  }
+
+  .item-input-wrapper {
+      background: #eee none repeat scroll 0 0;
+      border: none;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      padding-left: 8px;
+      padding-right: 8px;
+      width: 100%;
+  }
+
+  input[readonly].item-input-wrapper {
+    background-color: transparent !important;
+    color: #808080;
+  }
+}
+
+/**********************
+ * Rating Info Modal
+ **********************/
+.rating-info-modal {
+  .info-title {
+    text-align: center;
+  }
+
+  .decsription {
+    text-align: center;
+  }
+
+  .star-info {
+    .star-info-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: $h3;
+        color: $baseColor;
+      }
+      div{
+        &:first-child {
+          width: 90px;
+          text-align: center;
+        }
+        &:nth-child(2) {
+          flex: 1;
+          font-size: $h7;
+          line-height: $h7;
+        }
+      }
+    }
   }
 }

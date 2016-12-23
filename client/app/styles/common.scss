@@ -38,11 +38,6 @@ p {
   font-weight: 600;
 }
 
-.big-modal {
-  top: 5%;
-  bottom: 5%;
-}
-
 /* link */
 a {
   color: $baseColor;
@@ -421,52 +416,6 @@ ion-slide {
 }
 
 /**********************
- * Modal
- **********************/
-
-ion-modal-view .bar-header {
-  background-color: transparent !important;
-}
-
-.scale-in {
-  transform: scale(0.9);
-  opacity: 0;
-  &.ng-enter, > .ng-enter {
-    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
-  }
-  &.ng-enter-active, > .ng-enter-active {
-    transform: scale(1);
-    opacity: 1;
-  }
-  &.ng-leave, > .ng-leave {
-    transition: all ease-in-out 250ms;
-  }
-}
-
-.modal-post, .modal-profile-edit {
-  form, .slider {
-    height: 100%;
-  }
-
-  .item-input-wrapper {
-      background: #eee none repeat scroll 0 0;
-      border: none;
-      border-radius: 4px;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      padding-left: 8px;
-      padding-right: 8px;
-      width: 100%;
-  }
-
-  input[readonly].item-input-wrapper {
-    background-color: transparent !important;
-    color: #808080;
-  }
-
-}
-
-/**********************
  * Input
  **********************/
 .item-input-inset {
@@ -631,7 +580,7 @@ label {
   max-width: initial;
 }
 
-ion-view {
+body {
   .row {
     margin-left: initial;
     margin-right: initial;
