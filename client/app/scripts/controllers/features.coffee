@@ -52,7 +52,7 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 記事一覧取得
-      Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
+      Api.getJson(obj, Const.API.FEATURE, false).then (res) ->
         $scope.topItem = res.data[0]
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
@@ -84,7 +84,7 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 検索
-      Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
+      Api.getJson(obj, Const.API.FEATURE, false).then (res) ->
         $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
@@ -104,7 +104,7 @@ angular.module "frontApp"
         obj.category = $scope.category
         obj.province = $scope.province
 
-        Api.getJson(obj, Const.API.FEATURE, true).then (res) ->
+        Api.getJson(obj, Const.API.FEATURE, false).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
             # Prerender.io

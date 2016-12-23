@@ -78,7 +78,7 @@ angular.module 'frontApp'
           longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, false, false)
+        setMapData(obj, false)
       zoom_changed: (cluster, clusterModels) ->
         $rootScope.zoom = cluster.zoom
         # GoogleMapの距離計算
@@ -88,7 +88,7 @@ angular.module 'frontApp'
           longitude: cluster.center.lng()
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, true, false)
+        setMapData(obj, false)
 
     $scope.targetMarkers = []
 
@@ -107,7 +107,7 @@ angular.module 'frontApp'
           longitude: $rootScope.longitude
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, true, true)
+        setMapData(obj, true)
 
       else
         # 現在地へ移動
@@ -116,7 +116,7 @@ angular.module 'frontApp'
     ###
     # Common function
     ###
-    setMapData = (obj, isLoading, isMove) ->
+    setMapData = (obj, isMove) ->
       # 検索ワードの設定
       searchData = $scope.getSearchData()
       obj.keywords = searchData.keywords
@@ -136,7 +136,7 @@ angular.module 'frontApp'
         $rootScope.latitude = obj.latitude
         $rootScope.longitude = obj.longitude
 
-        Api.getJson(obj, Const.API.MAP, isLoading).then (resShops) ->
+        Api.getJson(obj, Const.API.MAP, false).then (resShops) ->
           # mapデータ設定
           $scope.isDragging = false
           shops = []
@@ -224,7 +224,7 @@ angular.module 'frontApp'
         shopDistance: targetDistance
 
       # map表示用データの作成と設定
-      setMapData(obj, true, true)
+      setMapData(obj, true)
 
     # 店舗検索
     $scope.searchShops = ->
@@ -237,7 +237,7 @@ angular.module 'frontApp'
           longitude: latLng.lng
           shopDistance: targetDistance
         # map表示用データの作成と設定
-        setMapData(obj, true)
+        setMapData(obj, false)
 
     # 現在地への移動
     $scope.moveToCurrentPlace = ->
@@ -261,7 +261,7 @@ angular.module 'frontApp'
             longitude: position.coords.longitude
             shopDistance: targetDistance
           # map表示用データの作成と設定
-          setMapData(obj, true, true)
+          setMapData(obj, true)
           # watchPositinoの再設定
           setWatchPosition()
 
@@ -271,7 +271,7 @@ angular.module 'frontApp'
               longitude: Const.MAP.CENTER.DEFAULT.LNG
               shopDistance: targetDistance
             # map表示用データの作成と設定
-            setMapData(obj, true, true)
+            setMapData(obj, true)
             # エラー表示
             alert($translate.instant('MSG.ALERT.NO_POSITION'))
       else

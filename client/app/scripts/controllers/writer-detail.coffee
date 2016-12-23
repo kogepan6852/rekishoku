@@ -67,7 +67,7 @@ angular.module "frontApp"
         email: $localStorage['email']
         token: $localStorage['token']
       path = Const.API.USER + '/' + $stateParams.id
-      Api.getJson(accessKey, path).then (res) ->
+      Api.getJson(accessKey, path, false).then (res) ->
         $scope.user = res.data.user
         $scope.posts = res.data.posts
         $scope.features = res.data.features

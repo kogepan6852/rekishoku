@@ -61,7 +61,7 @@ angular.module 'frontApp'
       path = Const.API.POST + '/' + $stateParams.id
       if $stateParams.preview
         path += '?preview=' + $stateParams.preview
-      Api.getJson("", path, true).then (res) ->
+      Api.getJson("", path, false).then (res) ->
         $scope.post = res.data.post
         $scope.shops = res.data.shops
         $scope.user = res.data.user
@@ -76,7 +76,7 @@ angular.module 'frontApp'
         pathRelated = Const.API.POSTS_RELATED + '/' + $stateParams.id
         if $scope.people.length == 0
           pathRelated += '?type=1'
-        Api.getJson("", pathRelated, true).then (res) ->
+        Api.getJson("", pathRelated, false).then (res) ->
           num = 5
           if res.data.length < num
             num = res.data.length
@@ -84,7 +84,7 @@ angular.module 'frontApp'
           $ionicScrollDelegate.$getByHandle('postDetailScroll').resize()
 
       # 投稿内容詳細取得
-      Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, true).then (res) ->
+      Api.getJson("", Const.API.POST_DETSIL + '/' + $stateParams.id, false).then (res) ->
         $scope.postDetails = res.data
         $ionicScrollDelegate.$getByHandle('postDetailScroll').resize()
 

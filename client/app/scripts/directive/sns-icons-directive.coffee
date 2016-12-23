@@ -16,14 +16,13 @@ angular.module "frontApp"
           status: true
           cookie: true
         # URL設定
-        urlFb = config.url.home + $location.url()
-        urlTwitter = config.url.home + $location.url()
+        scope.url = config.url.home + $location.url()
 
         scope.postToFeed = ->
           obj =
             display: 'popup'
             method: 'share'
-            href: urlFb
+            href: scope.url
             picture: scope.imageUrl
             title: scope.title
             caption: '歴食.jp'

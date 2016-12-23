@@ -21,9 +21,7 @@ angular.module "frontApp"
     # data取得(GET)
     getJson: (obj, path, isLoading) ->
       if isLoading
-        $ionicLoading.show(
-          template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
-          delay: 1000)
+        $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'GET'
         url: host + path
@@ -36,9 +34,7 @@ angular.module "frontApp"
 
     # data取得(POST)
     postJson: (obj, path) ->
-      $ionicLoading.show(
-        template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
-        delay: 500)
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'POST'
         url: host + path

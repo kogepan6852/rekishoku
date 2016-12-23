@@ -46,7 +46,7 @@ angular.module "frontApp"
       obj.period = searchSata.period
       obj.person = searchSata.person
 
-      Api.getJson(obj, Const.API.POST, true).then (res) ->
+      Api.getJson(obj, Const.API.POST, false).then (res) ->
         $scope.posts = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
@@ -82,7 +82,7 @@ angular.module "frontApp"
       obj.person = searchSata.person
 
       # 検索
-      Api.getJson(obj, Const.API.POST, true).then (res) ->
+      Api.getJson(obj, Const.API.POST, false).then (res) ->
         $scope.posts = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
@@ -100,7 +100,7 @@ angular.module "frontApp"
         if $scope.keywords
           obj.keywords = $scope.keywords
 
-        Api.getJson(obj, Const.API.POST, true).then (res) ->
+        Api.getJson(obj, Const.API.POST, false).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
           else
