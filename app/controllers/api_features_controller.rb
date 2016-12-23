@@ -113,12 +113,12 @@ class ApiFeaturesController < ApplicationController
           obj = get_external_link_json(feature_detail.related)
         end
 
-        if feature_detail[:related_type] != ""
-          people += get_people(feature_detail.related)
-          obj.store("feature_detail",feature_detail)
+        if feature_detail[:related_type].nil?
+          obj =  { "feature_detail" => feature_detail }
           feature_details.push(obj)
         else
-          obj =  { "feature_detail" => feature_detail }
+          people += get_people(feature_detail.related)
+          obj.store("feature_detail",feature_detail)
           feature_details.push(obj)
         end
       end

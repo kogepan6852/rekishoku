@@ -12,6 +12,7 @@
 !/log/.keep
 /tmp
 .tmp
+npm-debug.log
 
 /vendor/bundle
 /client/.tmp

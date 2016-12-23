@@ -95,6 +95,7 @@ i {
 .main-header {
   background-color: #fff!important;
   border: none;
+  background-image: none;
 
   .button-back {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -156,53 +157,16 @@ i {
   @include css3(transition, all 0.3s ease-out);
 
   .title { color: #fff; }
-  .mode-btn {
-    border-radius: 50%;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    bottom: 20px;
-    height: 60px;
-    width: 60px;
-    position: fixed;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    background-color: $subColor;
-    border: none;
-    color: #fff;
-    @include css3(transition, all 0.2s ease-out);
 
+  .mode-btn {
     &.first-btn {
       left: 15px;
     }
     &.second-btn {
       left: 90px;
     }
-
-    i {
-      font-size: $h1;
-      padding-bottom: 5px;
-    }
-
-    &.hide-btn {
-      // bottom: -22px!important;
-      bottom: -60px!important;
-    }
-
-    &.activated {
-      background-color: $subColorLite;
-    }
-
-    span {
-      line-height: 8px;
-      font-size: $h7;
-      position: absolute;
-      bottom: 10px;
-      text-align: center;
-      width: 50px;
-      left: 50%;
-      margin-left: -25px;
-    }
-
   }
+
   &.hide-footer {
     bottom: -44px;
     .mode-btn {
@@ -523,6 +487,59 @@ ion-modal-view .bar-header {
     color: $darkGrayColor;
     font-size: 20px;;
   }
+}
+
+/**********************
+ * Button
+ **********************/
+.button {
+  &.btn-main {
+    background-color: $subColor;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+  }
+}
+
+.mode-btn {
+  border-radius: 50%!important;
+  -moz-border-radius: 50%!important;
+  -webkit-border-radius: 50%!important;
+  bottom: 20px;
+  height: 62px;
+  width: 62px;
+  position: absolute;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: $subColor;
+  border: none;
+  color: #fff;
+  line-height: 50px!important;
+  @include css3(transition, all 0.2s ease-out);
+
+  i {
+    font-size: $h2;
+    padding-bottom: 5px;
+    color: #fff;
+  }
+
+  &.activated {
+    background-color: $subColorLite;
+  }
+
+  span {
+    color: #fff;
+    line-height: 8px;
+    font-size: $h7;
+    position: absolute;
+    bottom: 14px;
+    text-align: center;
+    width: 50px;
+    left: 50%;
+    margin-left: -25px;
+  }
+
 }
 
 /**********************

@@ -18,9 +18,20 @@
     color: $grayColor;
     font-size: $h6;
     padding: 2px 5px;
+    position: relative;
 
     a, a:hover {
       color: $grayColor;
+    }
+
+    &.has-mode-btn {
+      padding: 2px 75px 2px 5px;
+    }
+
+    .mode-btn {
+      color: #fff;
+      top: -30px;
+      right: 5px;
     }
   }
 

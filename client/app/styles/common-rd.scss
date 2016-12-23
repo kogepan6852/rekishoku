@@ -50,11 +50,7 @@
    **********************/
   .search-footer {
     .mode-btn {
-      position:absolute;
       left: 30px;
-      bottom: 30px;
-      height: 75px;
-      width: 75px;
 
       &.second-btn {
         left: 105px;
@@ -112,6 +108,17 @@
      -webkit-transform: translate3d(215px, 0px, 0px) !important;
      transform: translate3d(215px, 0px, 0px) !important;
      width: calc(100% - 215px) !important;
+   }
+
+
+   /**********************
+    * Button
+   **********************/
+   .mode-btn {
+     position:absolute;
+     bottom: 30px;
+     height: 75px;
+     width: 75px;
    }
 
    /**********************

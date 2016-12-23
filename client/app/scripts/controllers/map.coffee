@@ -2,9 +2,9 @@
 
 ###*
  # @ngdoc function
- # @name frontApp.controller:AboutCtrl
+ # @name frontApp.controller:MapCtrl
  # @description
- # # AboutCtrl
+ # MapCtrl
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
@@ -16,8 +16,15 @@ angular.module 'frontApp'
     ###
     # setting
     ###
-    $scope.$on '$ionicView.enter', (e) ->
+    $scope.$on '$ionicView.enter', (scopes, states) ->
       $rootScope.isHideTab = false
+      # 位置情報の追跡を設定する
+      setWatchPosition()
+
+    $scope.$on '$ionicView.leave', (scopes, states) ->
+      if $scope.watchId && navigator.geolocation
+        # 位置情報の追跡を中止する
+        navigator.geolocation.clearWatch( $scope.watchId ) 
 
     DataService.getShopCategory (data) ->
       $scope.categories = data
@@ -103,37 +110,8 @@ angular.module 'frontApp'
         setMapData(obj, true, true)
 
       else
-        # 現在地の取得
-        $rootScope.current = null;
-        if navigator.geolocation
-          navigator.geolocation.getCurrentPosition ((position) ->
-            # 現在地アイコン用
-            $rootScope.current = {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude
-            };
-            # MAP用
-            $scope.map.center.latitude = position.coords.latitude
-            $scope.map.center.longitude = position.coords.longitude
-
-            obj =
-              latitude: position.coords.latitude
-              longitude: position.coords.longitude
-              shopDistance: targetDistance
-            # map表示用データの作成と設定
-            setMapData(obj, true, true)
-
-            ), (e) ->
-              obj =
-                latitude: Const.MAP.CENTER.DEFAULT.LAT
-                longitude: Const.MAP.CENTER.DEFAULT.LNG
-                shopDistance: targetDistance
-              # map表示用データの作成と設定
-              setMapData(obj, true, true)
-              # エラー表示
-              alert($translate.instant('MSG.ALERT.NO_POSITION'))
-        else
-          alert($translate.instant('MSG.ALERT.NO_POSITION'))
+        # 現在地へ移動
+        $scope.moveToCurrentPlace()
 
     ###
     # Common function
@@ -161,18 +139,10 @@ angular.module 'frontApp'
         Api.getJson(obj, Const.API.MAP, isLoading).then (resShops) ->
           # mapデータ設定
           $scope.isDragging = false
-          $scope.currentIcon = []
           shops = []
           # 現在地アイコンの設定
           if $rootScope.current
-            now =
-              latitude: $rootScope.current.latitude,
-              longitude: $rootScope.current.longitude,
-              icon:
-                url: '../images/current-pin.png'
-                scaledSize : new google.maps.Size(35, 35)
-            now['id'] = 0
-            $scope.currentIcon.push(now)
+            setCurrentPosition($rootScope.current.latitude, $rootScope.current.longitude)
 
           # map表示用データの作成
           angular.forEach resShops.data.shops, (shop, i) ->
@@ -210,6 +180,32 @@ angular.module 'frontApp'
 
         callback obj
 
+    # 現在地アイコンの設定
+    setCurrentPosition = (latitude, longitude) ->
+      $scope.currentIcon = []
+      now =
+        latitude: latitude,
+        longitude: longitude,
+        icon:
+          url: '../images/current-pin.png'
+          scaledSize : new google.maps.Size(35, 35)
+      now['id'] = 0
+      $scope.currentIcon.push(now)
+
+    # 位置情報の追跡
+    setWatchPosition = ->
+      navigator.geolocation.clearWatch( $scope.watchId )
+      if navigator.geolocation
+        $scope.watchId = navigator.geolocation.watchPosition ((position) ->
+          # 現在地アイコン用
+          $rootScope.current = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          setCurrentPosition(position.coords.latitude, position.coords.longitude)
+          ), (e) ->
+            # none
+
     ###
     # Global function
     ###
@@ -245,7 +241,38 @@ angular.module 'frontApp'
 
     # 現在地への移動
     $scope.moveToCurrentPlace = ->
-      $rootScope.targetAddress = null
-      $rootScope.latitude = null
-      $rootScope.longitude = null
-      $scope.init()
+      # watchPositinoの解除
+      navigator.geolocation.clearWatch( $scope.watchId )
+
+      # 現在地の再取得
+      if navigator.geolocation
+        navigator.geolocation.getCurrentPosition ((position) ->
+          # 現在地アイコン用
+          $rootScope.current = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          # MAP用
+          $scope.map.center.latitude = position.coords.latitude
+          $scope.map.center.longitude = position.coords.longitude
+
+          obj =
+            latitude: position.coords.latitude
+            longitude: position.coords.longitude
+            shopDistance: targetDistance
+          # map表示用データの作成と設定
+          setMapData(obj, true, true)
+          # watchPositinoの再設定
+          setWatchPosition()
+
+          ), (e) ->
+            obj =
+              latitude: Const.MAP.CENTER.DEFAULT.LAT
+              longitude: Const.MAP.CENTER.DEFAULT.LNG
+              shopDistance: targetDistance
+            # map表示用データの作成と設定
+            setMapData(obj, true, true)
+            # エラー表示
+            alert($translate.instant('MSG.ALERT.NO_POSITION'))
+      else
+        alert($translate.instant('MSG.ALERT.NO_POSITION'))
