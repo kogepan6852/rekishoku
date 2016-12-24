@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930045901) do
+ActiveRecord::Schema.define(version: 20161223150641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 20160930045901) do
 
   add_index "people_external_links", ["external_link_id"], name: "index_people_external_links_on_external_link_id", using: :btree
   add_index "people_external_links", ["person_id"], name: "index_people_external_links_on_person_id", using: :btree
+
+  create_table "people_features", force: :cascade do |t|
+    t.integer "person_id",  null: false
+    t.integer "feature_id", null: false
+  end
+
+  add_index "people_features", ["feature_id"], name: "index_people_features_on_feature_id", using: :btree
+  add_index "people_features", ["person_id"], name: "index_people_features_on_person_id", using: :btree
 
   create_table "people_periods", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
@@ -250,6 +258,8 @@ ActiveRecord::Schema.define(version: 20160930045901) do
   add_foreign_key "categories_shops", "shops"
   add_foreign_key "people_external_links", "external_links"
   add_foreign_key "people_external_links", "people"
+  add_foreign_key "people_features", "features"
+  add_foreign_key "people_features", "people"
   add_foreign_key "people_periods", "people"
   add_foreign_key "people_periods", "periods"
   add_foreign_key "people_posts", "people"

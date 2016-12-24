@@ -42,7 +42,7 @@ class FeaturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feature_params
-      params.require(:feature).permit(:title, :content, :image, :status, :user_id, :quotation_url, :quotation_name, :is_map, :feature_details_type, :status, :category_id, :feature_detail_ids => [])
+      params.require(:feature).permit(:title, :content, :image, :status, :user_id, :quotation_url, :quotation_name, :is_map, :feature_details_type, :status, :category_id, :feature_detail_ids => [], :person_ids => [])
     end
 
     def feature_time_params

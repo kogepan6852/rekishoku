@@ -101,20 +101,10 @@ module RelatedInfo
       type.push(feature_detail[:related_type])
     end
 
-    if type.include?("Shop")
-      shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(shops)
-    end
-    if type.include?("Post")
-      posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(posts)
-    end
-    if type.include?("ExternalLink")
-      extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(extrnal_links)
-    end
-    periods += get_periods(people)
-    people = get_check_people(people)
+    # featureに紐付いてる人物を取得する
+    people = get_people(feature)
+    # featureに紐付けしている時代を取得をする
+    periods = get_periods(feature.people)
 
     # 返却用のオブジェクトを作成する
     obj = {
