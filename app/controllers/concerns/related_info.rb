@@ -60,7 +60,7 @@ module RelatedInfo
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
     # shopsに紐付けしている時代を取得をする
-    periods = get_periods(shop.people)
+    periods = [Period.find(shop.period_id)]
     # 歴食度の設定
     rating = cal_rating(shop)
     # 価格帯の取得
@@ -69,7 +69,7 @@ module RelatedInfo
     obj = { "shop" => shop,
             "categories" => shop.categories,
             "people" => people.uniq,
-            "periods" => periods.uniq,
+            "periods" => periods,
             "rating" => rating,
             "price" => price
           }

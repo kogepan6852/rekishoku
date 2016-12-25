@@ -50,7 +50,6 @@ class ApiShopsController < ApplicationController
     else
       shops = @shops
     end
-
     render json: shops
   end
 
@@ -62,7 +61,7 @@ class ApiShopsController < ApplicationController
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
     # shopに紐付けしている時代を取得をする
-    periods = get_periods(@shop.people)
+    periods = [Period.find(@shop.period_id)]
 
     # 歴食度の設定
     rating = cal_rating(@shop)
@@ -76,13 +75,13 @@ class ApiShopsController < ApplicationController
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
-    
+
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
              "people" =>  people.uniq,
-             "periods" => periods.uniq,
+             "periods" => periods,
              "rating" => rating,
              "price" => price
            }
