@@ -93,13 +93,8 @@ module RelatedInfo
   end
 
   def get_feature_json(feature)
-    type = Array.new()
     periods = Array.new()
     people = Array.new()
-
-    feature.feature_details.each do |feature_detail|
-      type.push(feature_detail[:related_type])
-    end
 
     # featureに紐付いてる人物を取得する
     people = get_people(feature)
