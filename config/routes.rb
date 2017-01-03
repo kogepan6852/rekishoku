@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   root to: redirect("/app/magazine", status: 301)
-  # get 'app/post/*path', to: 'app_route#post'
-  # get 'app/shop/*path', to: 'app_route#shop'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: redirect("/app/magazine", status: 301)
   # 旧URL対応
