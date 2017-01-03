@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # root
   root to: redirect("/app/magazine", status: 301)
   get 'app/*path', to: 'app_route#show'
   get 'app', to: redirect("/app/magazine", status: 301)
