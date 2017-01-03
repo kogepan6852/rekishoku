@@ -78,6 +78,10 @@ gem 'rails_12factor', group: :production
 # CORS
 gem 'rack-cors'
 
+# ssl
+gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
+gem 'letsencrypt-rails-heroku', group: 'production'
+
 group :development do
   gem 'annotate', '2.6.5'
 end
