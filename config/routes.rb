@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   get 'api/features', to: 'api_features#index'
   get 'api/features/:id', to: 'api_features#show'
 
+  # FAVORITES
+  get 'api/favorites', to: 'api_favorites#index'
+  get 'api/favorites/:id', to: 'api_favorites#show'
+
   # USERS
   get 'api/users', to: 'api_users#index'
   get 'api/users/:id', to: 'api_users#show'
