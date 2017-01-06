@@ -3,4 +3,5 @@ class Feature < ActiveRecord::Base
   belongs_to :category
   has_many :feature_details
   belongs_to :user
+  has_many :favorite_details, :as => :related
 end

@@ -808,4 +808,73 @@ RailsAdmin.config do |config|
         end
        end
 
+       ## お気に入り
+        config.model 'Favorite' do
+          label "お気に入り"
+          weight 5
+          list do
+            field :file_name do
+              label "ファイル名"
+            end
+            field :order do
+              label "順番"
+            end
+          end
+          edit do
+            field :user_id, :enum do
+              enum do
+                setData = User.all
+                ids = []
+                names = []
+                setData.each do |set|
+                  ids.push(set.id.to_s)
+                  names.push(set.username)
+                end
+                Hash[ names.zip(ids) ]
+              end
+              label "ライター"
+              required true
+              help "必須"
+            end
+            field :file_name do
+              label "ファイル名"
+            end
+          end
+         end
+
+         ## お気に入り詳細
+          config.model 'FavoriteDetail' do
+            label "お気に入り詳細"
+            weight 5
+            list do
+              field :related_type , :enum do
+              enum do
+                Hash[ ['お店','記事', '特集'].zip(['Shop','Post','Feature']) ]
+              end
+                label "どのDBか"
+              end
+              field :related_id do
+                label "参照DBのID"
+              end
+            end
+            edit do
+                field :related do
+                  label "紐付けする情報"
+                end
+                field :favorite_id , :enum do
+                  enum do
+                    setData = Favorite.all
+                    ids = []
+                    names = []
+                    setData.each do |set|
+                      ids.push(set.id.to_s)
+                      names.push(set.file_name)
+                    end
+                    Hash[ names.zip(ids) ]
+                  end
+                  label "お気に入り"
+                end
+            end
+           end
+
 end
