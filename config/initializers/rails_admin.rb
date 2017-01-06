@@ -813,6 +813,19 @@ RailsAdmin.config do |config|
           label "お気に入り"
           weight 5
           list do
+            field :user_id, :enum do
+              enum do
+                setData = User.all
+                ids = []
+                names = []
+                setData.each do |set|
+                  ids.push(set.id.to_s)
+                  names.push(set.username)
+                end
+                Hash[ names.zip(ids) ]
+              end
+              label "ライター"
+            end
             field :file_name do
               label "ファイル名"
             end
@@ -847,6 +860,19 @@ RailsAdmin.config do |config|
             label "お気に入り詳細"
             weight 5
             list do
+              field :favorite_id , :enum do
+                enum do
+                  setData = Favorite.all
+                  ids = []
+                  names = []
+                  setData.each do |set|
+                    ids.push(set.id.to_s)
+                    names.push(set.file_name)
+                  end
+                  Hash[ names.zip(ids) ]
+                end
+                label "お気に入り"
+              end
               field :related_type , :enum do
               enum do
                 Hash[ ['お店','記事', '特集'].zip(['Shop','Post','Feature']) ]
