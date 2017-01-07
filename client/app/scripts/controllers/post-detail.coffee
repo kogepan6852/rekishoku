@@ -47,7 +47,7 @@ angular.module 'frontApp'
       # セット
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.post.title
       $rootScope.appDescription = $scope.post.content.substr(0, 150)
-      $rootScope.appImage = $scope.eyeCatchImage.image.md.url
+      $rootScope.appImage = $scope.eyeCatchImage.md.url
       $rootScope.appKeywords = appKeywords.join()
 
       # Prerender.io

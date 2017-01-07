@@ -13,6 +13,6 @@ angular.module "frontApp"
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
         scope.target = "post"
-        scope.mainImage = scope.data.image.image;
+        scope.mainImage = scope.data.image;
         scope.href = "/app/post/" + scope.data.id
     }
