@@ -813,6 +813,7 @@ RailsAdmin.config do |config|
           label "お気に入り"
           weight 5
           list do
+            field :id
             field :user_id, :enum do
               enum do
                 setData = User.all
@@ -860,6 +861,7 @@ RailsAdmin.config do |config|
             label "お気に入り詳細"
             weight 5
             list do
+              field :id
               field :favorite_id , :enum do
                 enum do
                   setData = Favorite.all

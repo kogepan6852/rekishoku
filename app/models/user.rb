@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates:authentication_token, uniqueness: true, allow_nil: true
   has_many :posts
   has_many :features
+  has_many :favorites
 
   # 認証トークンが無い場合は作成
   def ensure_authentication_token

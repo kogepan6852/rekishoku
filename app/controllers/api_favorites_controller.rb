@@ -7,12 +7,8 @@ class ApiFavoritesController < ApplicationController
   # POST /api/favorites.json
   def index
 
-    @favorites = Favorite.order(:order)
+    @favorites = Favorite.where(user_id: current_user.id).order(:order)
     newFavorites = Array.new()
-    # user_idで検索
-    if params[:user_id]
-      @favorites = @favorites.where(user_id: params[:user_id].to_i)
-    end
     if params[:page] && params[:per]
       @favorites.page(params[:page]).per(params[:per]).each do |favorite|
         # json形式のデータを取得
@@ -32,9 +28,7 @@ class ApiFavoritesController < ApplicationController
 
       favorite_details = Array.new()
       favorite_details_order = FavoriteDetail.where(favorite_id: @favorite[:id])
-      p("---------------------------")
-      p(favorite_details_order)
-      p("---------------------------")
+
       # それぞれの詳細対応
       favorite_details_order.each do |favorite_detail|
         if favorite_detail[:related_type] == "Shop"
@@ -45,7 +39,7 @@ class ApiFavoritesController < ApplicationController
           post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
           obj = get_post_json(post)
         elsif favorite_detail[:related_type] == "Feature"
-          # 対応するExternalLinkの情報を取得する
+          # 対応するFeatureの情報を取得する
           obj = get_feature_json(favorite_detail.related)
         end
         obj.store("favorite_detail",favorite_detail)
@@ -62,11 +56,46 @@ class ApiFavoritesController < ApplicationController
       render json: feature
   end
 
+  # POST /api/favorites
+  # 新規作成
+  def create
+    @favorite = Favorite.new(favorite_params)
+    if @favorite.save
+      render json: @favorite, status: :created
+    else
+      render json: @favorite.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /api/favorites/1
+  # 更新
+  def update
+    @favorite = Favorite.find(params[:id])
+    result = @favorite.update(favorite_params)
+    if result
+      render json: @favorite, status: :ok
+    else
+      render json: @favorite.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /api/favorites/1
+  # 削除
+  def destroy
+    @favorite = Favorite.find(params[:id])
+    @favorite.destroy
+
+    @favorite_details = FavoriteDetail.where(favorite_id: params[:id])
+    @favorite_details.each do |favorite_detail|
+      favorite_detail.destroy
+    end
+    head :no_content
+  end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorite_params
-      params.require(:favorite).permit(:file_name, :user_id, :order, :id)
+      params.require(:api_favorite).permit(:file_name, :order, :user_id)
     end
 
 end
