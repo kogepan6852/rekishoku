@@ -19,6 +19,7 @@ angular.module("frontApp")
       PERIOD:       '/api/periods'
       USER:         '/api/users'
       LOGIN:        '/users/sign_in.json'
+      FACEBOOK:     '/api/sns/facebook'
       LOGOUT:       '/authentication_token.json'
       SETTING:
         PER: 10

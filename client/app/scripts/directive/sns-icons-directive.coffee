@@ -10,12 +10,6 @@ angular.module "frontApp"
         description: '=description'
       templateUrl: 'views/directives/sns-icons-directive.html'
       link: (scope, element, attrs) ->
-        # FB設定
-        FB.init
-          appId: config.id.fb
-          status: true
-          cookie: true
-        # URL設定
         scope.url = config.url.home + $location.url()
 
         scope.postToFeed = ->

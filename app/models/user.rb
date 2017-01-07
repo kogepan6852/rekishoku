@@ -28,4 +28,27 @@ class User < ActiveRecord::Base
     self.update(authentication_token: nil)
   end
 
+  # Create or update by sns login
+  def self.find_for_oauth(uid, provider, email)
+    user = User.where(uid: uid, provider: provider).first
+
+    # create new user
+    unless user
+      user = User.find_or_initialize_by(
+        email:    email
+      )
+      # set password
+      password_length = 8
+      password = Devise.friendly_token.first(password_length)
+      user.password = password
+      user.password_confirmation = password
+    end
+
+    user.uid = uid
+    user.provider = provider
+    user.save!
+
+    user
+  end
+
 end

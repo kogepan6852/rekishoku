@@ -391,7 +391,6 @@ ion-slide {
 /**********************
  * Toast
  **********************/
-
 .toast-top-full-width {
   top: 10px;
 }
@@ -400,9 +399,14 @@ ion-slide {
   bottom: 10px;
 }
 
-#toast-container > div {
-  padding: 30px 15px 30px 50px;
-  font-size: 20px;
+#toast-container {
+  max-width: 500px;
+  > div {
+    padding: 15px 15px 15px 50px;
+    font-size: 18px;
+    background-color: $darkGrayColor;
+    opacity: 0.9;
+  }
 }
 
 /**********************
@@ -443,12 +447,33 @@ ion-slide {
  **********************/
 .button {
   &.btn-main {
-    background-color: $subColor;
+    background-color: $baseColor;
     color: #fff;
     border: none;
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+
+    &.activated {
+      background-color: $baseColorDark;
+    }
+  }
+  
+  &.facebook {
+    background-color: $facebook;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+
+    &.activated {
+      background-color: $facebookDark;
+    }
+    i {
+      padding-right: 5px;
+      color: #fff;
+    }
   }
 }
 

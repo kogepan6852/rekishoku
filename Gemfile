@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # User Authorization
 gem 'devise'
 gem 'cancancan'
+gem "koala", "~> 2.2"
 
 # fileupload
 gem 'carrierwave'

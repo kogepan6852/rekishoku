@@ -103,6 +103,27 @@ angular
 
     $urlRouterProvider.otherwise ('/app/magazine')
 
+  .run ($rootScope, $window, config) ->
+    # facebookのjs読み込み
+    ((d, s, id) ->
+      js = undefined
+      fjs = d.getElementsByTagName(s)[0]
+      if d.getElementById(id)
+        return
+      js = d.createElement(s)
+      js.id = id
+      js.src = '//connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore js, fjs
+    ) document, 'script', 'facebook-jssdk'
+
+    $window.fbAsyncInit = ->
+      FB.init
+        appId: config.id.facebook
+        status: true
+        cookie: true
+        xfbml: true
+        version: 'v2.4'
+
   .config(["$httpProvider", ($httpProvider) ->
 
     $httpProvider.defaults.transformRequest = (data) ->

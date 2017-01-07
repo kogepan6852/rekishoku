@@ -90,9 +90,11 @@ Rails.application.routes.draw do
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
 
+  # AUTHENTICATION
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
+  get 'api/sns/facebook', to: 'users/sns_auth#facebook'
 
   # root to: 'menu#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

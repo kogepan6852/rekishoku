@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService, HeaderService) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService, HeaderService, FasebookService, $ionicLoading) ->
 
     ###
     # setting
@@ -85,6 +85,27 @@ angular.module "frontApp"
         $ionicHistory.clearCache();
       $ionicSideMenuDelegate.toggleRight(false);
 
+    loginSetting = (res) ->
+      # cookieの設定
+      expire = new Date
+      expire.setMonth expire.getMonth() + 1
+      $cookies.put 'email', res.data.email, expires: expire
+
+      $ionicSideMenuDelegate.toggleRight();
+      $scope.modalLogin.hide()
+      clearInput()
+
+      $localStorage['email'] = res.data.email
+      $localStorage['token'] = res.data.authentication_token
+      $localStorage['user_id'] = res.data.id
+      $rootScope.isLogin = true
+      # toast表示
+      toaster.pop
+        type: 'success',
+        title: $translate.instant('MSG.INFO.LOGED_IN'),
+        showCloseButton: true
+    
+
     ###
     # Function
     ###
@@ -101,39 +122,22 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleLeft();
 
     $scope.doLogin = ->
-      # cookieの設定
-      expire = new Date
-      expire.setMonth expire.getMonth() + 1
-      $cookies.put 'email', $scope.input.email, expires: expire
-
       obj =
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
 
       Api.postJson(obj, Const.API.LOGIN).then (res) ->
-        $ionicSideMenuDelegate.toggleRight();
-        $scope.modalLogin.hide()
-        clearInput()
-
-        $localStorage['email'] = res.data.email
-        $localStorage['token'] = res.data.authentication_token
-        $localStorage['user_id'] = res.data.id
-        $rootScope.isLogin = true
-        # toast表示
-        toaster.pop
-          type: 'success',
-          title: $translate.instant('MSG.INFO.LOGED_IN'),
-          showCloseButton: true
+        loginSetting(res)
 
     $scope.doLogout = ->
-      $ionicPopup.show(
+      logoutPopup = $ionicPopup.show(
         title: $translate.instant('MSG.COMFIRM.LOGOUT')
         scope: $scope
         buttons: [
           { text: $translate.instant('BUTTON.CANCEL') }
           {
             text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
-            type: 'button-dark'
+            type: 'btn-main'
             onTap: (e) ->
               $rootScope.isLogin = false
               accessKey =
@@ -144,6 +148,10 @@ angular.module "frontApp"
               delete $localStorage['token']
               delete $localStorage['email']
               delete $localStorage['user_id']
+
+              # pupout close
+              logoutPopup.close()
+
               Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
                 $ionicSideMenuDelegate.toggleRight();
                 clearInput()
@@ -170,6 +178,18 @@ angular.module "frontApp"
           type: 'success',
           title: $translate.instant('MSG.INFO.SINGED_UP'),
           showCloseButton: true
+
+    $scope.fbLogin = ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+      FasebookService.login().then (response) ->
+        obj =
+          "uid": response.userID
+          "token": response.accessToken
+          "fbmail": response.email
+        Api.getJson(obj, Const.API.FACEBOOK).then (res) ->
+          loginSetting(res)
+          $ionicLoading.hide()
+        ,(err) -> $ionicLoading.hide()
 
     $scope.closeMenu = ->
       $ionicSideMenuDelegate.toggleRight();
