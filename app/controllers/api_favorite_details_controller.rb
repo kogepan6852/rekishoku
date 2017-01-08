@@ -4,12 +4,7 @@ class ApiFavoriteDetailsController < ApplicationController
   # POST /api/favorites_detail
   # POST /api/favorites_detail.json
   def create
-    if favorite_detail_params[:related_type] == ""
-      @favorite_details = FavoriteDetail.new(favorite_detail_params.merge(related_type: nil))
-    else
-      @favorite_details = FavoriteDetail.new(favorite_detail_params)
-    end
-
+    @favorite_details = FavoriteDetail.new(favorite_detail_params)
     if @favorite_details.save
       render json: @favorite_details, status: :created
     else
@@ -20,14 +15,7 @@ class ApiFavoriteDetailsController < ApplicationController
   # PATCH/PUT /api/favorites_detail/1
   # PATCH/PUT /api/favorites_detail/1.json
   def update
-    
-    if favorite_detail_params[:related_type] == ""
-      result = @favorite_details.update(favorite_detail_params.merge(related_type: nil))
-    else
-      result = @favorite_details.update(favorite_detail_params)
-    end
-
-    if result
+    if @favorite_details.update(favorite_detail_params)
       render json: @favorite_details, status: :ok
     else
       render json: @favorite_details.errors, status: :unprocessable_entity
