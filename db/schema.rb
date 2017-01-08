@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930045901) do
+ActiveRecord::Schema.define(version: 20170106120654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,22 @@ ActiveRecord::Schema.define(version: 20160930045901) do
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
+  end
+
+  create_table "favorite_details", force: :cascade do |t|
+    t.integer  "favorite_id"
+    t.string   "related_type",             null: false
+    t.integer  "related_id",   default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "order",      default: 0,       null: false
+    t.string   "file_name",  default: "ファイル名", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "feature_details", force: :cascade do |t|
