@@ -50,19 +50,19 @@ class Ability
     # API用アクセスコントロール
     can :read, :api_post
     can :relation, :api_post
-    can :manage, :api_post if user
+    can :manage, :api_post if user && user.role != 1
 
     can :read, :api_post_detail
-    can :manage, :api_post_detail if user
+    can :manage, :api_post_detail if user && user.role != 1
 
     can :read, :api_posts_shop
-    can :manage, :api_posts_shop if user
+    can :manage, :api_posts_shop if user && user.role != 1
 
     can :read, :api_people_post
-    can :manage, :api_people_post if user
+    can :manage, :api_people_post if user && user.role != 1
 
     can :read, :api_user
-    can :manage, :api_user if user
+    can :manage, :api_user if user && user.role != 1
 
   end
 end

@@ -39,7 +39,7 @@ angular.module "frontApp"
       appKeywords.push($scope.user.username)
       $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $scope.user.username
       $rootScope.appDescription = $scope.user.profile.substr(0, 150)
-      $rootScope.appImage = $scope.user.image.image.md.url
+      $rootScope.appImage = $scope.user.image.md.url
       $rootScope.appKeywords = appKeywords.join()
 
       # Prerender.io
@@ -68,14 +68,22 @@ angular.module "frontApp"
         token: $localStorage['token']
       path = Const.API.USER + '/' + $stateParams.id
       Api.getJson(accessKey, path, false).then (res) ->
-        $scope.user = res.data.user
-        $scope.posts = res.data.posts
-        $scope.features = res.data.features
+        $scope.user = res.data
 
         # SEO
         setSeo()
 
         $ionicScrollDelegate.$getByHandle('writerDetailScroll').resize()
+
+      obj =
+        writer: $stateParams.id
+      # 記事一覧取得
+      Api.getJson(obj, Const.API.POST, false).then (res) ->
+        $scope.posts = res.data
+      # 特集一覧取得
+      Api.getJson(obj, Const.API.FEATURE, false).then (res) ->
+        $scope.features = res.data
+
 
       if String($stateParams.id) == String($localStorage['user_id'])
         $scope.isLoginUser = true
@@ -92,7 +100,7 @@ angular.module "frontApp"
         last_name: $scope.user.last_name
         profile: $scope.user.profile
         image: $scope.user.image
-      $scope.srcUrl = $scope.user.image.image.thumb.url
+      $scope.srcUrl = $scope.user.image.thumb.url
       $scope.modalProfileEdit.show()
 
     $scope.hideModalProfileEdit = (targetForm) ->

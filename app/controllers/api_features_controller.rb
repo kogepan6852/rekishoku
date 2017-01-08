@@ -68,18 +68,21 @@ class ApiFeaturesController < ApplicationController
         .where('shops.province = ? OR shops2.province = ?', params[:province], params[:province]).uniq
     end
 
-    newFeatures = Array.new()
-
-    if params[:page] && params[:per]
-      @features.page(params[:page]).per(params[:per]).each do |feature|
-        # json形式のデータを取得
-        newFeatures.push(get_feature_json(feature));
-      end
-      render json: newFeatures
-    else
-      render json: @features
+    # ライターで検索
+    if params[:writer]
+      @features = @features.where("user_id = ?", params[:writer])
     end
 
+    if params[:page] && params[:per]
+      @features = @features.page(params[:page]).per(params[:per])
+    end
+
+    newFeatures = Array.new()
+    @features.each do |feature|
+      # json形式のデータを取得
+      newFeatures.push(get_feature_json(feature));
+    end
+    render json: newFeatures
   end
 
   # PATCH/PUT /api/features/1
