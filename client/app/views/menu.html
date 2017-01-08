@@ -189,7 +189,10 @@
       </ion-nav-buttons>
       <div class="logo visible-xs" ng-click="moveToHome(true)"></div>
       <ion-nav-buttons side="right">
-        <div class="button button-clear button-dark visible-xs login-btn" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</div>
+        <div class="button button-clear button-dark visible-xs login-btn" ng-click="clickAccount(isLogin)" ng-show="showLogin">
+          <span ng-show="!isLogin">LOGIN</span>
+          <i ng-show="isLogin" class="icon ion-ios-heart-outline"></i>
+        </div>
         <div class="button button-clear button-dark visible-xs" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
       </ion-nav-buttons>
       <ion-nav-back-button class="button-back" ng-click="goBack()">

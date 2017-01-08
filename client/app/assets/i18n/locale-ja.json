@@ -51,6 +51,9 @@
     "ADDRESS":        "ADDRESS",
     "PULLING":        "Pull to refresh..."
   },
+  "MY_ACCOUNT": {
+    "FAVORITE": "お気に入り"
+  },
   "POST": {
     "PHOTO_BY":       "PHOTO by ",
     "TEXT_BY":        "TEXT by ",

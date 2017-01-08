@@ -94,6 +94,12 @@ angular
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
 
+      # マイアカウント
+      .state 'account',
+        url: '/app/account/:id'
+        templateUrl: 'views/account.html'
+        controller: 'AccountCtrl'
+
       # 旧URL用の暫定パス
       .state 'post-old',
         url: '/post/:id?preview'

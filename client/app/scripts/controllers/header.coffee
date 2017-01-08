@@ -101,6 +101,13 @@ angular.module "frontApp"
     $scope.openModalLogin = ->
       $scope.modalLogin.show()
 
+    $scope.clickAccount = (isLogin) ->
+      if isLogin
+        userId = $localStorage['user_id']
+        $state.go('account', {id: userId});
+      else
+       $scope.modalLogin.show()
+
     $scope.hideModalLogin = ->
       $scope.modalLogin.hide()
 

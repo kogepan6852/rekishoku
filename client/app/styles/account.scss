@@ -1,0 +1,31 @@
+@import "setting";
+
+.account {
+  .account-title{
+    margin-bottom: 10px;
+
+    button {
+      line-height: $h2;
+      color: $darkGrayColor;
+      font-size: $h2;
+      padding: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      padding-right: 2.4rem;
+      text-align: left;
+
+      .icon{
+        right: 0;
+        position: absolute;
+
+        &::before {
+          line-height: $h2;
+          font-size: $h2;
+          color: $baseColor;
+        }
+      }
+    }
+  }
+}

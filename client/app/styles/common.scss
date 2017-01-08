@@ -143,7 +143,11 @@ i {
   .button.login-btn {
     padding-right: 10px;
     font-size: $h6;
-    color: $darkGrayColor
+    color: $darkGrayColor;
+
+    .icon::before {
+      font-size: 28px;
+    }
   }
 }
 
