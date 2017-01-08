@@ -1,6 +1,6 @@
 require 'koala'
 
-class Users::SnsAuthController < ApplicationController
+class ApiSnsAuthController < ApplicationController
   # GET /facebook
   def facebook
     # get facebook info

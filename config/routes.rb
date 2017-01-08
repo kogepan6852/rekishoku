@@ -94,7 +94,7 @@ Rails.application.routes.draw do
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
-  get 'api/sns/facebook', to: 'users/sns_auth#facebook'
+  get 'api/sns/facebook', to: 'api_sns_auth#facebook'
 
   # root to: 'menu#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
