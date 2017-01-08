@@ -16,6 +16,7 @@ class Users::SnsAuthController < ApplicationController
         rtn = {
           "id" => user.id,
           "email" => user.email,
+          "role" => user.role,
           "authentication_token" => user.ensure_authentication_token
         }
       else

@@ -138,6 +138,12 @@ i {
     i {
       font-size: 24px;
     }
+  };
+
+  .button.login-btn {
+    padding-right: 10px;
+    font-size: $h6;
+    color: $darkGrayColor
   }
 }
 

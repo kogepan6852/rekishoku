@@ -103,7 +103,7 @@ angular
 
     $urlRouterProvider.otherwise ('/app/magazine')
 
-  .run ($rootScope, $window, config) ->
+  .run ($rootScope, $window, config, $localStorage, Api, Const, $cookies) ->
     # facebookのjs読み込み
     ((d, s, id) ->
       js = undefined
@@ -123,6 +123,23 @@ angular
         cookie: true
         xfbml: true
         version: 'v2.4'
+
+      $rootScope.isLogin = false
+      $rootScope.isWriter = false
+
+      # check user login status
+      $localStorage['token'] = $cookies.get 'token'
+      if $localStorage['email'] && $localStorage['token'] && $localStorage['user_id']
+        accessKey =
+          email: $localStorage['email']
+          token: $localStorage['token']
+        path = Const.API.USER + '/' + $localStorage['user_id']
+        Api.getJson(accessKey, path, false).then (res) ->
+          if res.data && res.data.role >= 0
+            $rootScope.isLogin = true
+            if res.data.role != 1
+              $rootScope.isWriter = true
+
 
   .config(["$httpProvider", ($httpProvider) ->
 

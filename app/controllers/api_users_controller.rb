@@ -25,6 +25,7 @@ class ApiUsersController < ApplicationController
       user["description"] = @user.description
       user["first_name"] = @user.first_name
       user["last_name"] = @user.last_name
+      user["role"] = @user.role
     end
     render json: user
   end

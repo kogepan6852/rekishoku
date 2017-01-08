@@ -29,24 +29,6 @@ angular.module "frontApp"
       backdropClickToClose: false).then (modalSearch) ->
         $scope.modalSearch = modalSearch
 
-    # cookieより値を取得
-    $localStorage['email'] = $cookies.get 'email'
-    if $localStorage['email']
-      $scope.input.email = $localStorage['email']
-    else
-      # login情報の削除
-      delete $localStorage['token']
-      delete $localStorage['email']
-      delete $localStorage['user_id']
-
-    if !$localStorage['token']
-      $rootScope.isLogin = false
-    else
-      $rootScope.isLogin = true
-    $scope.showLogin = false
-    if $location.search()["showLogin"] || $localStorage['email']
-      $scope.showLogin = true
-
     ###
     # initialize
     ###
@@ -55,6 +37,10 @@ angular.module "frontApp"
       # 現在Pathの取得
       setCurrentType()
       $ionicSlideBoxDelegate.enableSlide(false);
+
+      $rootScope.showLogin = false
+      if $location.search()["showLogin"] || $localStorage['email']
+        $rootScope.showLogin = true
 
     ###
     # Common function
@@ -89,7 +75,7 @@ angular.module "frontApp"
       # cookieの設定
       expire = new Date
       expire.setMonth expire.getMonth() + 1
-      $cookies.put 'email', res.data.email, expires: expire
+      $cookies.put 'token', res.data.authentication_token, expires: expire
 
       $ionicSideMenuDelegate.toggleRight();
       $scope.modalLogin.hide()
@@ -99,6 +85,9 @@ angular.module "frontApp"
       $localStorage['token'] = res.data.authentication_token
       $localStorage['user_id'] = res.data.id
       $rootScope.isLogin = true
+      if res.data.role >= 0 && res.data.role != 1
+        $rootScope.isWriter = true
+
       # toast表示
       toaster.pop
         type: 'success',
@@ -139,24 +128,29 @@ angular.module "frontApp"
             text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
             type: 'btn-main'
             onTap: (e) ->
-              $rootScope.isLogin = false
+            
+              $timeout (->
+                $rootScope.isLogin = false
+                $rootScope.isWriter = false
+
+                # login情報の削除
+                delete $localStorage['token']
+                delete $localStorage['email']
+                delete $localStorage['user_id']
+
+                # pupout close
+                logoutPopup.close()
+              ), 200
+
               accessKey =
                 email: $localStorage['email']
                 token: $localStorage['token']
-
-              # login情報の削除
-              delete $localStorage['token']
-              delete $localStorage['email']
-              delete $localStorage['user_id']
-
-              # pupout close
-              logoutPopup.close()
 
               Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
                 $ionicSideMenuDelegate.toggleRight();
                 clearInput()
                 # cookieの削除
-                $cookies.remove 'email'
+                $cookies.remove 'token'
 
                 clearInput()
                 $location.path('/app');
