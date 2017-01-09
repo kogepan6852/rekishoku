@@ -2,8 +2,6 @@
 
 .account {
   .account-title{
-    margin-bottom: 10px;
-
     button {
       line-height: $h3;
       color: $darkGrayColor;
@@ -54,5 +52,20 @@
         opacity: 0;
       }
     }
+  }
+
+  .no-data {
+    text-align: center;
+    height: $h4;
+    line-height: $h4;
+    font-size: $h4;
+
+    >p {
+      padding: 10px;
+    }
+  }
+  
+  hr {
+    padding-bottom: 10px;
   }
 }

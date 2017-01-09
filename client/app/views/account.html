@@ -10,11 +10,13 @@
       </div>
     </div>
 
+    <hr>
+
     <!-- FAVORITE DETAILS -->
-    <div class="row padding-bottom" ng-if="favoriteDetails && favoriteDetails.length!=0">
+    <div class="row padding-bottom">
       <div class="account-detail col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
-        <!-- Post Item -->
         <div ng-repeat="favoriteDetail in favoriteDetails" ng-class="{'deleted': favoriteDetail.isDeleted}">
+          <!-- Post Item -->
           <list-item-post
               ng-if="favoriteDetail.favorite_detail.related_type == 'Post'"
               data="favoriteDetail.post"
@@ -52,10 +54,12 @@
               favorite-id="{{selectedFavorite.id}}"
               ng-click="remove($index)"></favorite-button>
         </div>
+
+        <div class="no-data" ng-if="!favoriteDetails || favoriteDetails.length == 0">
+          <p>No Data Found</p>
+        </div>
       </div>
     </div>
-
-
 
  </ion-content>
 </ion-view>
