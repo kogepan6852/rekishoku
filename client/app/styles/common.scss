@@ -465,7 +465,11 @@ ion-slide {
     -webkit-border-radius: 0;
 
     &.activated {
-      background-color: $baseColorDark;
+      background-color: $baseColorLite;
+    }
+
+    .icon {
+      color: #fff;
     }
   }
   

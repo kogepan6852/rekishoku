@@ -33,10 +33,25 @@ angular.module "frontApp"
         errorHandring(data)
 
     # data取得(POST)
-    postJson: (obj, path) ->
-      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+    postJson: (obj, path, isLoading) ->
+      if isLoading
+        $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
         method: 'POST'
+        url: host + path
+        data: obj
+      ).success((data, status, headers, config) ->
+        $ionicLoading.hide()
+      ).error (data, status, headers, config) ->
+        $ionicLoading.hide()
+        errorHandring(data)
+
+    # data更新(PATCH)
+    putJson: (obj, path, isLoading) ->
+      if isLoading
+        $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+      $http(
+        method: 'PUT'
         url: host + path
         data: obj
       ).success((data, status, headers, config) ->

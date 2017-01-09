@@ -44,7 +44,8 @@
     "DELETE":         "削除",
     "NEW_POST":       "新規投稿",
     "EDIT":           "編集",
-    "GO":             "GO"
+    "GO":             "GO",
+    "SAVE":           "保存"
   },
   "TEXT": {
     "CURRENT_PLACE":  "現在地",
@@ -52,7 +53,10 @@
     "PULLING":        "Pull to refresh..."
   },
   "MY_ACCOUNT": {
-    "FAVORITE": "お気に入り"
+    "FAVORITE": "お気に入り",
+    "BUTTON": {
+      "NEW_LIST": "新しいリストの追加"
+    }
   },
   "POST": {
     "PHOTO_BY":       "PHOTO by ",

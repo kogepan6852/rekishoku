@@ -3,25 +3,51 @@
   <ion-content class="account no-tabs-top" ng-class="{'padding-top': windowType!='xs'}" delegate-handle="accountScroll" overflow-scroll="true">
     <div class="row">
       <div class="account-title col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <button class="button button-clear" ng-click="openFolderList()">
-          お気に入り
-          <i class="icon ion-arrow-down-b"></i>
+        <button class="button button-clear" ng-click="openFolderList($event)">
+          {{selectedFavorite.name}}
+          <i ng-show="selectedFavorite" class="icon ion-arrow-down-b"></i>
         </button>
       </div>
     </div>
 
-    <!-- FAVORITES -->
-    <div class="row padding-bottom" ng-if="favorites && favorites.length!=0">
+    <!-- FAVORITE DETAILS -->
+    <div class="row padding-bottom" ng-if="favoriteDetails && favoriteDetails.length!=0">
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
-        <!-- Items -->
+        <!-- Post Item -->
         <list-item-post
-            ng-repeat="favorite in favorites"
-            data="favorite.post"
-            periods="favorite.periods"
-            people="favorite.people"
-            category="favorite.post.category_name"
+            ng-repeat="favoriteDetail in favoriteDetails"
+            ng-if="favoriteDetail.favorite_detail.related_type == 'Post'"
+            data="favoriteDetail.post"
+            periods="favoriteDetail.periods"
+            people="favoriteDetail.people"
+            category="favoriteDetail.post.category_name"
             window-type="windowType" >
           </list-item-post>
+
+        <!-- Shop Item -->
+        <list-item-shop
+          ng-repeat="favoriteDetail in favoriteDetails"
+          ng-if="favoriteDetail.favorite_detail.related_type == 'Shop'"
+          data="favoriteDetail.shop"
+          categories="favoriteDetail.categories"
+          periods="favoriteDetail.periods"
+          people="favoriteDetail.people"
+          price="favoriteDetail.price"
+          rating="favoriteDetail.rating.average"
+          window-type="windowType" >
+        </list-item-shop>
+
+        <!-- Feature Item -->
+        <list-item-feature
+          ng-repeat="favoriteDetail in favoriteDetails"
+          ng-if="favoriteDetail.favorite_detail.related_type == 'Feature'"
+          data="favoriteDetail.feature"
+          periods="favoriteDetail.periods"
+          people="favoriteDetail.people"
+          category="favoriteDetail.feature.category_name"
+          window-type="windowType" >
+        </list-item-feature>
+
       </div>
     </div>
 

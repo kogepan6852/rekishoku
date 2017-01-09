@@ -10,10 +10,13 @@
         <img ng-src="{{post.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
-    <div class="row no-padding no-margin" ng-if="post.quotation_name">
-      <div class="image-quotation">
-        <span ng-bind="'POST.PHOTO_BY'|translate"></span>
-        <a href="{{post.quotation_url}}" target="_blank" ng-bind="post.quotation_name"></a>
+    <div class="row no-padding no-margin">
+      <div class="image-quotation has-mode-btn">
+        <span ng-if="post.quotation_name">
+          <span ng-bind="'POST.PHOTO_BY'|translate"></span>
+          <a href="{{post.quotation_url}}" target="_blank" ng-bind="post.quotation_name"></a>
+        </span>
+        <favorite-button type="Post" id="{{targetId}}"></favorite-button>
       </div>
     </div>
 

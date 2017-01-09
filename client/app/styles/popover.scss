@@ -1,0 +1,14 @@
+@import "setting";
+
+/**********************
+ * popover-favorites
+ **********************/
+.popover-favorites {
+  ion-content {
+    &.show {
+      .item-content {
+        padding-right: 16px;
+      }
+    }
+  }
+}

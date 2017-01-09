@@ -1,4 +1,5 @@
 class ApiFavoritesController < ApplicationController
+  authorize_resource :class => false
 
   include ShopInfo
   include RelatedInfo
@@ -21,13 +22,13 @@ class ApiFavoritesController < ApplicationController
 
   end
 
-  # PATCH/PUT /api/features/1
-  # PATCH/PUT /api/features/1.json
+  # GET /api/features/1
+  # GET /api/features/1.json
   def show
-    @favorite = Favorite.order(:order).find(params[:id])
+    @favorite = Favorite.where(user_id: current_user.id).order(:order).find(params[:id])
 
       favorite_details = Array.new()
-      favorite_details_order = FavoriteDetail.where(favorite_id: @favorite[:id])
+      favorite_details_order = FavoriteDetail.where(favorite_id: @favorite[:id], is_delete: false)
 
       # それぞれの詳細対応
       favorite_details_order.each do |favorite_detail|
@@ -40,7 +41,8 @@ class ApiFavoritesController < ApplicationController
           obj = get_post_json(post)
         elsif favorite_detail[:related_type] == "Feature"
           # 対応するFeatureの情報を取得する
-          obj = get_feature_json(favorite_detail.related)
+          feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
+          obj = get_feature_json(feature)
         end
         obj.store("favorite_detail",favorite_detail)
         favorite_details.push(obj)
@@ -95,7 +97,7 @@ class ApiFavoritesController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorite_params
-      params.require(:api_favorite).permit(:file_name, :order, :user_id)
+      params.require(:favorite).permit(:name, :order, :user_id)
     end
 
 end

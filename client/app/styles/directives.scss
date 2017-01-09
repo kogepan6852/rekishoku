@@ -315,3 +315,47 @@ sns-icons {
     }
   }
 }
+
+/**********************
+ * favorite-button
+ **********************/
+favorite-button {
+  .favorite-btn {
+    border-radius: 50%!important;
+    -moz-border-radius: 50%!important;
+    -webkit-border-radius: 50%!important;
+    color: $baseColor;
+    @include css3(transition, all 0.2s ease-out);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: $liteGrayColor;
+    border: none;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+
+    i {
+      color: $grayColor;
+      opacity: 0.6;
+
+      &.icon::before {
+        font-weight: 900;
+        font-size: 24px;
+        padding-top: 2px;
+      }
+    }
+
+    &.activated {
+      color: $baseColorLite;
+    }
+
+    &.on {
+      background-color: $baseColor;
+      border: none;
+
+      i {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+}

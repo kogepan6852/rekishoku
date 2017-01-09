@@ -77,7 +77,7 @@ angular.module "frontApp"
       expire.setMonth expire.getMonth() + 1
       $cookies.put 'token', res.data.authentication_token, expires: expire
 
-      $ionicSideMenuDelegate.toggleRight();
+      $ionicSideMenuDelegate.toggleRight(false);
       $scope.modalLogin.hide()
       clearInput()
 
@@ -122,7 +122,7 @@ angular.module "frontApp"
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
 
-      Api.postJson(obj, Const.API.LOGIN).then (res) ->
+      Api.postJson(obj, Const.API.LOGIN, true).then (res) ->
         loginSetting(res)
 
     $scope.doLogout = ->

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   delete 'api/favorites/:id', to: 'api_favorites#destroy'
 
   # FAVORITES DETAILS
+  get 'api/favorite_details', to: 'api_favorite_details#index'
   post 'api/favorite_details', to: 'api_favorite_details#create'
   patch 'api/favorite_details/:id', to: 'api_favorite_details#update'
   delete 'api/favorite_details/:id', to: 'api_favorite_details#destroy'

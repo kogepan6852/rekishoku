@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "AccountCtrl", ($scope, $rootScope, $ionicSideMenuDelegate, $controller, Api, Const, $translate, $ionicNavBarDelegate) ->
+  .controller "AccountCtrl", ($scope, $controller, Api, Const, $translate, $ionicNavBarDelegate, $localStorage, $ionicPopover, $ionicPopup, toaster) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -16,58 +16,113 @@ angular.module "frontApp"
     # setting
     $scope.$on '$ionicView.enter', (e) ->
       $ionicNavBarDelegate.showBackButton true
+      # get folder list
+      Api.getJson(accessKey, Const.API.FAVORITE, false).then (res) ->
+        $scope.favorites = res.data
+        if $scope.favorites && $scope.favorites.length > 0
+          $scope.selectedFavorite = $scope.favorites[0]
+          # get folder detail
+          $scope.selectFolder 0
+
+
+    $ionicPopover.fromTemplateUrl('views/parts/popover-favorites.html',
+      scope: $scope).then (popoverFavorites) ->
+        $scope.popoverFavorites = popoverFavorites
+
+    accessKey =
+      email: $localStorage['email']
+      token: $localStorage['token']
+    
+    $scope.isEdit = false;
 
     # initialize
     $scope.init = ->
-      # Api.getJson("", Const.API.USER, false).then (res) ->
-      #   $scope.users = res.data
-      #   $scope.$broadcast 'scroll.refreshComplete'
-      $scope.favorites = [
-        {
-          'post':
-            'id': 6
-            'title': 'テスト投稿３'
-            'content': 'ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
-            'image':
-              'url': 'http://localhost:3000/uploads/post/image/6/lg_tokai-top.jpg'
-              'thumb': 'url': 'http://localhost:3000/uploads/post/image/6/thumb_lg_tokai-top.jpg'
-              'sm': 'url': 'http://localhost:3000/uploads/post/image/6/sm_lg_tokai-top.jpg'
-              'md': 'url': 'http://localhost:3000/uploads/post/image/6/md_lg_tokai-top.jpg'
-              'lg': 'url': 'http://localhost:3000/uploads/post/image/6/lg_lg_tokai-top.jpg'
-              'xl': 'url': 'http://localhost:3000/uploads/post/image/6/xl_lg_tokai-top.jpg'
-              'w640': 'url': 'http://localhost:3000/uploads/post/image/6/w640_lg_tokai-top.jpg'
-              'w960': 'url': 'http://localhost:3000/uploads/post/image/6/w960_lg_tokai-top.jpg'
-              'w1200': 'url': 'http://localhost:3000/uploads/post/image/6/w1200_lg_tokai-top.jpg'
-            'published_at': '2017-01-08T00:00:00.000Z'
-            'category_id': 1
-            'category_name': 'EPISODE'
-            'category_slug': 'episode'
-          'people': []
-          'periods': []
-        }
-        {
-          'post':
-            'id': 4
-            'title': 'aaa'
-            'content': 'aaaa'
-            'image':
-              'url': 'http://localhost:3000/uploads/post/image/4/thumb_ougiya.jpg'
-              'thumb': 'url': 'http://localhost:3000/uploads/post/image/4/thumb_thumb_ougiya.jpg'
-              'sm': 'url': 'http://localhost:3000/uploads/post/image/4/sm_thumb_ougiya.jpg'
-              'md': 'url': 'http://localhost:3000/uploads/post/image/4/md_thumb_ougiya.jpg'
-              'lg': 'url': 'http://localhost:3000/uploads/post/image/4/lg_thumb_ougiya.jpg'
-              'xl': 'url': 'http://localhost:3000/uploads/post/image/4/xl_thumb_ougiya.jpg'
-              'w640': 'url': 'http://localhost:3000/uploads/post/image/4/w640_thumb_ougiya.jpg'
-              'w960': 'url': 'http://localhost:3000/uploads/post/image/4/w960_thumb_ougiya.jpg'
-              'w1200': 'url': 'http://localhost:3000/uploads/post/image/4/w1200_thumb_ougiya.jpg'
-            'published_at': '2017-01-07T00:00:00.000Z'
-            'category_id': 1
-            'category_name': 'EPISODE'
-            'category_slug': 'episode'
-          'people': []
-          'periods': []
-        }
-      ]
+      # $scope.favoriteDetails = 
     
-    $scope.openFolderList = ->
-      console.log 'open!!'
+    $scope.openFolderList = ($event) ->
+      $scope.popoverFavorites.show($event)
+
+    $scope.selectFolder = (index) ->
+      $scope.selectedFavorite = $scope.favorites[index]
+      $scope.popoverFavorites.hide()
+
+      path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
+      Api.getJson(accessKey, path, false).then (res) ->
+        $scope.favoriteDetails = res.data.favorite_detail
+
+    $scope.showEdit = ->
+      $scope.isEdit = !$scope.isEdit
+  
+    $scope.$on 'popover.hidden', ->
+      $scope.isEdit = false
+
+    $scope.showAddAlert = ->
+      $scope.data = {}
+      # An elaborate, custom popup
+      addFolderPopup = $ionicPopup.show(
+        template: '<input type="text" ng-model="data.name">'
+        title: '新規リストの追加'
+        subTitle: 'リスト名を入力してください'
+        scope: $scope
+        buttons: [
+          { text: 'Cancel' }
+          {
+            text: '<b>'+$translate.instant('BUTTON.SAVE')+'</b>'
+            type: 'btn-main'
+            onTap: (e) ->
+              if !$scope.data.name
+                e.preventDefault()
+              else
+                return $scope.data.name
+          }
+        ])
+
+      addFolderPopup.then (res) ->
+        if res
+          obj =
+            'email': $localStorage['email']
+            'token': $localStorage['token']
+            'favorite[name]': res
+            'favorite[user_id]': $localStorage['user_id']
+            'favorite[order]': $scope.favorites.length
+
+          Api.postJson(obj, Const.API.FAVORITE, false).then (res) ->
+            # add data to array
+            $scope.favorites.push res.data
+            # show toast
+            toaster.pop
+              type: 'success',
+              title: $translate.instant('MSG.INFO.SAVED'),
+              showCloseButton: true
+
+            $scope.popoverFavorites.hide()
+
+      
+    $scope.showDeleteAlert = (index) ->
+      deleteFolderPopup = $ionicPopup.show(
+        title: 'リストの削除'
+        subTitle: $scope.favorites[index].name + 'を削除してもよろしいですか？'
+        scope: $scope
+        buttons: [
+          { text: 'Cancel' }
+          {
+            text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
+            type: 'btn-main'
+            onTap: (e) ->
+              if $scope.favorites && $scope.favorites.length > 1
+                obj =
+                  'email': $localStorage['email']
+                  'token': $localStorage['token']
+                Api.deleteJson(obj, $scope.favorites[index].id, Const.API.FAVORITE).then (res) ->
+                  # delete data from array
+                  $scope.favorites.splice(index, 1)
+                  # show toast
+                  toaster.pop
+                    type: 'success',
+                    title: $translate.instant('MSG.INFO.DELETED'),
+                    showCloseButton: true
+
+                  $scope.popoverFavorites.hide()
+          }
+        ])
+          

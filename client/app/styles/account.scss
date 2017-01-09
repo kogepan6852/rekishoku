@@ -5,9 +5,9 @@
     margin-bottom: 10px;
 
     button {
-      line-height: $h2;
+      line-height: $h3;
       color: $darkGrayColor;
-      font-size: $h2;
+      font-size: $h3;
       padding: 0;
       white-space: nowrap;
       overflow: hidden;
@@ -21,8 +21,8 @@
         position: absolute;
 
         &::before {
-          line-height: $h2;
-          font-size: $h2;
+          line-height: $h3;
+          font-size: $h3;
           color: $baseColor;
         }
       }

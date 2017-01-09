@@ -58,18 +58,20 @@ ActiveRecord::Schema.define(version: 20170106120654) do
 
   create_table "favorite_details", force: :cascade do |t|
     t.integer  "favorite_id"
-    t.string   "related_type",             null: false
-    t.integer  "related_id",   default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "related_type",                 null: false
+    t.integer  "related_id",                   null: false
+    t.boolean  "is_delete",    default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer  "user_id",                      null: false
-    t.integer  "order",      default: 0,       null: false
-    t.string   "file_name",  default: "ファイル名", null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "name",                       null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "order",      default: 0,     null: false
+    t.boolean  "is_delete",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "feature_details", force: :cascade do |t|

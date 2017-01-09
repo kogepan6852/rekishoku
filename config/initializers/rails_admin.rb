@@ -827,7 +827,7 @@ RailsAdmin.config do |config|
               end
               label "ライター"
             end
-            field :file_name do
+            field :name do
               label "ファイル名"
             end
             field :order do
@@ -850,7 +850,7 @@ RailsAdmin.config do |config|
               required true
               help "必須"
             end
-            field :file_name do
+            field :name do
               label "ファイル名"
             end
           end
@@ -869,7 +869,7 @@ RailsAdmin.config do |config|
                   names = []
                   setData.each do |set|
                     ids.push(set.id.to_s)
-                    names.push(set.file_name)
+                    names.push(set.name)
                   end
                   Hash[ names.zip(ids) ]
                 end
@@ -896,7 +896,7 @@ RailsAdmin.config do |config|
                     names = []
                     setData.each do |set|
                       ids.push(set.id.to_s)
-                      names.push(set.file_name)
+                      names.push(set.name)
                     end
                     Hash[ names.zip(ids) ]
                   end
