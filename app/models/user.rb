@@ -52,4 +52,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  after_create do
+    name = I18n.t('default_value.favorite')
+    favorite = Favorite.new(name: name, user_id: id, order: 0, is_delete: false)
+    favorite.save
+  end
+
 end
