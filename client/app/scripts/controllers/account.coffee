@@ -8,14 +8,17 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "AccountCtrl", ($scope, $controller, Api, Const, $translate, $ionicNavBarDelegate, $localStorage, $ionicPopover, $ionicPopup, toaster) ->
+  .controller "AccountCtrl", ($scope, $rootScope, $controller, Api, Const, $translate, $ionicNavBarDelegate, $localStorage, $ionicPopover, $ionicPopup, toaster, $timeout) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
 
     # setting
+    $ionicNavBarDelegate.showBackButton false
+
     $scope.$on '$ionicView.enter', (e) ->
-      $ionicNavBarDelegate.showBackButton true
+      if $rootScope.currentType != 'account'
+        $ionicNavBarDelegate.showBackButton true
       # get folder list
       $scope.init()
 
@@ -34,9 +37,16 @@ angular.module "frontApp"
       Api.getJson(accessKey, Const.API.FAVORITE, false).then (res) ->
         $scope.favorites = res.data
         if $scope.favorites && $scope.favorites.length > 0
-          $scope.selectedFavorite = $scope.favorites[0]
+          # 選択済みのフォルダが存在しない場合は、先頭のフォルダを表示
+          if $scope.selectedFavorite
+            targetIndex = $scope.favorites.findIndex((element) ->
+              return element.id == $scope.selectedFavorite.id
+            )
+          else
+            $scope.selectedFavorite = $scope.favorites[0]
+            targetIndex = 0
           # get folder detail
-          $scope.selectFolder 0
+          $scope.selectFolder targetIndex
 
     $scope.openFolderList = ($event) ->
       $scope.popoverFavorites.show($event)
@@ -85,6 +95,7 @@ angular.module "frontApp"
             Api.postJson(obj, path, false).then (res) ->
               # add data to array
               $scope.favorites[index] = res.data
+              $scope.selectedFavorite = res.data
               # show toast
               toaster.pop
                 type: 'success',
@@ -169,6 +180,7 @@ angular.module "frontApp"
                   # 表示しているフォルダが削除されているかチェック
                   deleteFlg = false
                   if $scope.selectedFavorite.id == $scope.favorites[index].id
+                    $scope.selectedFavorite = null
                     deleteFlg = true
 
                   # delete data from array
@@ -187,4 +199,9 @@ angular.module "frontApp"
                   $scope.popoverFavorites.hide()
           }
         ])
-          
+
+    $scope.remove = ($index) ->
+      $scope.favoriteDetails[$index].isDeleted = true
+      $timeout (->
+        $scope.favoriteDetails.splice($index, 1)
+      ), 200

@@ -12,42 +12,46 @@
 
     <!-- FAVORITE DETAILS -->
     <div class="row padding-bottom" ng-if="favoriteDetails && favoriteDetails.length!=0">
-      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+      <div class="account-detail col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
         <!-- Post Item -->
-        <list-item-post
-            ng-repeat="favoriteDetail in favoriteDetails"
-            ng-if="favoriteDetail.favorite_detail.related_type == 'Post'"
-            data="favoriteDetail.post"
+        <div ng-repeat="favoriteDetail in favoriteDetails" ng-class="{'deleted': favoriteDetail.isDeleted}">
+          <list-item-post
+              ng-if="favoriteDetail.favorite_detail.related_type == 'Post'"
+              data="favoriteDetail.post"
+              periods="favoriteDetail.periods"
+              people="favoriteDetail.people"
+              category="favoriteDetail.post.category_name"
+              window-type="windowType" >
+            </list-item-post>
+
+          <!-- Shop Item -->
+          <list-item-shop
+            ng-if="favoriteDetail.favorite_detail.related_type == 'Shop'"
+            data="favoriteDetail.shop"
+            categories="favoriteDetail.categories"
             periods="favoriteDetail.periods"
             people="favoriteDetail.people"
-            category="favoriteDetail.post.category_name"
+            price="favoriteDetail.price"
+            rating="favoriteDetail.rating.average"
             window-type="windowType" >
-          </list-item-post>
+          </list-item-shop>
 
-        <!-- Shop Item -->
-        <list-item-shop
-          ng-repeat="favoriteDetail in favoriteDetails"
-          ng-if="favoriteDetail.favorite_detail.related_type == 'Shop'"
-          data="favoriteDetail.shop"
-          categories="favoriteDetail.categories"
-          periods="favoriteDetail.periods"
-          people="favoriteDetail.people"
-          price="favoriteDetail.price"
-          rating="favoriteDetail.rating.average"
-          window-type="windowType" >
-        </list-item-shop>
+          <!-- Feature Item -->
+          <list-item-feature
+            ng-if="favoriteDetail.favorite_detail.related_type == 'Feature'"
+            data="favoriteDetail.feature"
+            periods="favoriteDetail.periods"
+            people="favoriteDetail.people"
+            category="favoriteDetail.feature.category_name"
+            window-type="windowType" >
+          </list-item-feature>
 
-        <!-- Feature Item -->
-        <list-item-feature
-          ng-repeat="favoriteDetail in favoriteDetails"
-          ng-if="favoriteDetail.favorite_detail.related_type == 'Feature'"
-          data="favoriteDetail.feature"
-          periods="favoriteDetail.periods"
-          people="favoriteDetail.people"
-          category="favoriteDetail.feature.category_name"
-          window-type="windowType" >
-        </list-item-feature>
-
+          <favorite-button type="{{favoriteDetail.favorite_detail.related_type}}"
+              id="{{favoriteDetail.post.id || favoriteDetail.shop.id || favoriteDetail.feature.id}}"
+              is-favorite="true"
+              favorite-id="{{selectedFavorite.id}}"
+              ng-click="remove($index)"></favorite-button>
+        </div>
       </div>
     </div>
 

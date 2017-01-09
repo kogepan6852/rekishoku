@@ -72,6 +72,9 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleRight(false);
 
     loginSetting = (res) ->
+      # cacheの削除
+      $ionicHistory.clearHistory();
+      $ionicHistory.clearCache();
       # cookieの設定
       expire = new Date
       expire.setMonth expire.getMonth() + 1
@@ -87,6 +90,8 @@ angular.module "frontApp"
       $rootScope.isLogin = true
       if res.data.role >= 0 && res.data.role != 1
         $rootScope.isWriter = true
+      
+      $location.path('/app');
 
       # toast表示
       toaster.pop
@@ -200,6 +205,17 @@ angular.module "frontApp"
       userId = $localStorage['user_id']
       $state.go('writerDetail', { id: userId })
       clearForMove(false)
+
+    $scope.moveToAccount = (isLogin) ->
+      $ionicViewSwitcher.nextTransition('none')
+      if isLogin
+        userId = $localStorage['user_id']
+        $rootScope.currentType = 'account'
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.MY_ACCOUNT')
+        clearForMove(false)
+        $state.go('account', {id: userId});
+      else
+       $scope.modalLogin.show()
 
     $scope.moveToHome = (isReload) ->
       $ionicViewSwitcher.nextTransition('none')

@@ -89,6 +89,9 @@
        &.active {
          background-color: $baseColor;
          color: #fff;
+         .icon {
+           color: #fff;
+         }
        }
      }
    }

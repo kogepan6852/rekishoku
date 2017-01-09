@@ -1,16 +1,19 @@
 "use strict"
 
 angular.module "frontApp"
-  .directive 'favoriteButton', (Api, Const, $localStorage, $ionicPopover) ->
+  .directive 'favoriteButton', (Api, Const, $localStorage, $ionicPopover, $rootScope, $ionicPopup, $translate) ->
     return {
       restrict: 'E'
       scope:
         type: '@'
         id: '@'
+        isFavorite: '@'
+        favoriteId: '@'
       templateUrl: 'views/directives/favorite-button-directive.html'
       link: (scope, element, attrs) ->
-        scope.isFavorite = false
         scope.hideFavoriteHeader = true
+        scope.showLogin = $rootScope.showLogin
+        scope.isLogin = $rootScope.isLogin
 
         $ionicPopover.fromTemplateUrl('views/parts/popover-favorites.html',
           scope: scope).then (popoverFavorites) ->
@@ -23,10 +26,12 @@ angular.module "frontApp"
           'favorite_detail[related_id]': scope.id
         
         # お気に入りの状態を取得する
-        Api.getJson(getObj, Const.API.FAVORITE_DETAIL, false).then (res) ->
-          if res.data
-            scope.favoriteDetail = res.data
-            scope.isFavorite = true
+        if !scope.isFavorite
+          scope.isFavorite = false
+          Api.getJson(getObj, Const.API.FAVORITE_DETAIL, false).then (res) ->
+            if res.data && res.data.id
+              scope.favoriteDetail = res.data
+              scope.isFavorite = true
         
         # お気に入りフォルダを保存する
         saveFavorite = (id) ->
@@ -41,11 +46,26 @@ angular.module "frontApp"
           Api.postJson(postObj, Const.API.FAVORITE_DETAIL, false).then (res) ->
             scope.isFavorite = !scope.isFavorite
 
-        # popoverのリストチェック時のアクション
+        # お気に入りボタン押下時のアクション
         scope.check = ($event) ->
-          if scope.isFavorite && scope.favoriteDetail
+          # ログインしていない場合
+          if !$rootScope.isLogin
+            editFolderPopup = $ionicPopup.show(
+              title: $translate.instant('MSG.ALERT.LOGIN')
+              buttons: [
+                text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
+                type: 'btn-main'
+              ])
+            return
+
+          # 対象フォルダの設定
+          targetFavoriteId = scope.favoriteId
+          if !targetFavoriteId && scope.favoriteDetail
+            targetFavoriteId = scope.favoriteDetail.favorite_id
+
+          if scope.isFavorite && targetFavoriteId
             # お気に入り解除
-            saveFavorite(scope.favoriteDetail.favorite_id)
+            saveFavorite(targetFavoriteId)
           else
             # お気に入り設定
             accessKey =

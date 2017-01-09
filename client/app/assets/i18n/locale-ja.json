@@ -7,7 +7,8 @@
       "SHOP":         "STORE",
       "FEATURE":      "FEATURE",
       "WRITERS":      "WRITERS",
-      "MY_POST":      "MY POST"
+      "MY_POST":      "MY POST",
+      "MY_ACCOUNT":   "MY ACCOUNT"
     },
     "KEYWORDS": {
       "BASE":         "歴食",
@@ -25,10 +26,10 @@
     "STORE":          "STORE",
     "WRITERS":        "ライター一覧",
     "POSTS":          "投稿一覧",
-    "MY_ACCOUNT":     "My Account",
+    "MY_ACCOUNT":     "MY ACCOUNT",
     "PROFILE":        "プロフィール",
-    "LOGIN":          "ログイン",
-    "LOGOUT":         "ログアウト"
+    "LOGIN":          "LOGIN",
+    "LOGOUT":         "LOGOUT"
   },
   "CONDITION": {
     "CATEGORIES":     "CATEGORIES",
@@ -157,6 +158,7 @@
       "UNPUBLISHE":     "非公開にしてもよろしいですか？"
     },
     "ALERT": {
+      "LOGIN":          "ログインしてください",
       "NO_POSITION":    "位置情報を取得できません",
       "ERROR":          "通信エラー"
     }
