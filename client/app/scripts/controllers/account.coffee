@@ -17,13 +17,7 @@ angular.module "frontApp"
     $scope.$on '$ionicView.enter', (e) ->
       $ionicNavBarDelegate.showBackButton true
       # get folder list
-      Api.getJson(accessKey, Const.API.FAVORITE, false).then (res) ->
-        $scope.favorites = res.data
-        if $scope.favorites && $scope.favorites.length > 0
-          $scope.selectedFavorite = $scope.favorites[0]
-          # get folder detail
-          $scope.selectFolder 0
-
+      $scope.init()
 
     $ionicPopover.fromTemplateUrl('views/parts/popover-favorites.html',
       scope: $scope).then (popoverFavorites) ->
@@ -37,43 +31,98 @@ angular.module "frontApp"
 
     # initialize
     $scope.init = ->
-      # $scope.favoriteDetails = 
-    
+      Api.getJson(accessKey, Const.API.FAVORITE, false).then (res) ->
+        $scope.favorites = res.data
+        if $scope.favorites && $scope.favorites.length > 0
+          $scope.selectedFavorite = $scope.favorites[0]
+          # get folder detail
+          $scope.selectFolder 0
+
     $scope.openFolderList = ($event) ->
       $scope.popoverFavorites.show($event)
 
     $scope.selectFolder = (index) ->
-      $scope.selectedFavorite = $scope.favorites[index]
-      $scope.popoverFavorites.hide()
+      # 編集モードではない場合、表示フォルダを変更
+      if !$scope.isEdit
+        $scope.selectedFavorite = $scope.favorites[index]
+        $scope.popoverFavorites.hide()
 
-      path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
-      Api.getJson(accessKey, path, false).then (res) ->
-        $scope.favoriteDetails = res.data.favorite_detail
+        path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
+        Api.getJson(accessKey, path, false).then (res) ->
+          $scope.favoriteDetails = res.data.favorite_detail
+      
+      # 編集モードの場合、表示名を更新
+      else
+        $scope.editData =
+          name: $scope.favorites[index].name
+        # An elaborate, custom popup
+        editFolderPopup = $ionicPopup.show(
+          template: '<input type="text" ng-model="editData.name" value="editData.name">'
+          title: $translate.instant('MY_ACCOUNT.POPOVER.EDIT.TITLE')
+          subTitle: $translate.instant('MY_ACCOUNT.POPOVER.EDIT.MESSAGE')
+          scope: $scope
+          buttons: [
+            { text: $translate.instant('BUTTON.CANCEL') }
+            {
+              text: '<b>'+$translate.instant('BUTTON.SAVE')+'</b>'
+              type: 'btn-main'
+              onTap: (e) ->
+                if !$scope.editData.name
+                  e.preventDefault()
+                else
+                  return $scope.editData.name
+            }
+          ])
 
-    $scope.showEdit = ->
-      $scope.isEdit = !$scope.isEdit
+        editFolderPopup.then (res) ->
+          if res
+            obj =
+              'email': $localStorage['email']
+              'token': $localStorage['token']
+              'favorite[name]': res
+
+            path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
+            Api.postJson(obj, path, false).then (res) ->
+              # add data to array
+              $scope.favorites[index] = res.data
+              # show toast
+              toaster.pop
+                type: 'success',
+                title: $translate.instant('MSG.INFO.UPDATED'),
+                showCloseButton: true
+
+              $scope.popoverFavorites.hide()
+
+    $scope.showDelete = ->
+      $scope.isDelete = !$scope.isDelete
   
     $scope.$on 'popover.hidden', ->
       $scope.isEdit = false
+      $scope.isDelete = false
+
+    $scope.changeMode = ->
+      $scope.isEdit = !$scope.isEdit
+      if !$scope.isEdit
+        $scope.isDelete = false
 
     $scope.showAddAlert = ->
-      $scope.data = {}
+      $scope.addData = {}
       # An elaborate, custom popup
       addFolderPopup = $ionicPopup.show(
-        template: '<input type="text" ng-model="data.name">'
-        title: '新規リストの追加'
-        subTitle: 'リスト名を入力してください'
+        template: '<input type="text" ng-model="addData.name">'
+        title: $translate.instant('MY_ACCOUNT.POPOVER.ADD.TITLE')
+        subTitle: $translate.instant('MY_ACCOUNT.POPOVER.ADD.MESSAGE')
         scope: $scope
         buttons: [
-          { text: 'Cancel' }
+          { text: $translate.instant('BUTTON.CANCEL') }
           {
             text: '<b>'+$translate.instant('BUTTON.SAVE')+'</b>'
             type: 'btn-main'
             onTap: (e) ->
-              if !$scope.data.name
+              if !$scope.addData.name
                 e.preventDefault()
               else
-                return $scope.data.name
+                return $scope.addData.name
           }
         ])
 
@@ -100,8 +149,8 @@ angular.module "frontApp"
       
     $scope.showDeleteAlert = (index) ->
       deleteFolderPopup = $ionicPopup.show(
-        title: 'リストの削除'
-        subTitle: $scope.favorites[index].name + 'を削除してもよろしいですか？'
+        title: $translate.instant('MY_ACCOUNT.POPOVER.DELETE.TITLE')
+        subTitle: $scope.favorites[index].name + $translate.instant('MY_ACCOUNT.POPOVER.DELETE.MESSAGE')
         scope: $scope
         buttons: [
           { text: 'Cancel' }
@@ -113,9 +162,22 @@ angular.module "frontApp"
                 obj =
                   'email': $localStorage['email']
                   'token': $localStorage['token']
-                Api.deleteJson(obj, $scope.favorites[index].id, Const.API.FAVORITE).then (res) ->
+                  'favorite[is_delete]': true
+                  'favorite[user_id]': $localStorage['user_id']
+                path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
+                Api.postJson(obj, path, false).then (res) ->
+                  # 表示しているフォルダが削除されているかチェック
+                  deleteFlg = false
+                  if $scope.selectedFavorite.id == $scope.favorites[index].id
+                    deleteFlg = true
+
                   # delete data from array
                   $scope.favorites.splice(index, 1)
+
+                  # 表示しているフォルダが削除された場合はinit実行
+                  if deleteFlg
+                    $scope.init()
+
                   # show toast
                   toaster.pop
                     type: 'success',

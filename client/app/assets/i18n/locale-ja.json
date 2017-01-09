@@ -56,6 +56,20 @@
     "FAVORITE": "お気に入り",
     "BUTTON": {
       "NEW_LIST": "新しいリストの追加"
+    },
+    "POPOVER": {
+      "ADD": {
+        "TITLE": "新規リストの追加",
+        "MESSAGE": "リスト名を入力してください"
+      },
+      "EDIT": {
+        "TITLE": "リストの更新",
+        "MESSAGE": "リスト名を更新してください"
+      },
+      "DELETE": {
+        "TITLE": "リストの削除",
+        "MESSAGE": "を削除してもよろしいですか？"
+      }
     }
   },
   "POST": {

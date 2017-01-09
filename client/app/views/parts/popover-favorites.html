@@ -1,17 +1,25 @@
 <ion-popover-view class="popover-favorites" ng-style="{'height': popoverHeight}">
   <ion-header-bar ng-hide="hideFavoriteHeader">
-    <div class="buttons" ng-show="favorites && favorites.length > 1">
-      <button class="button button-clear button-dark icon ion-ios-trash-outline" ng-click="showEdit()"></button>
+    <div class="buttons" ng-show="isEdit">
+      <button class="button button-clear button-dark icon ion-ios-trash-outline" ng-click="showDelete()"ng-show="favorites && favorites.length > 1"></button>
+      <button class="button button-clear button-dark icon ion-ios-plus-empty" ng-click="showAddAlert()"></button>
     </div>
     <h1 class="title">LIST</h1>
     <div class="buttons">
-      <button class="button button-clear button-dark icon ion-ios-plus-empty" ng-click="showAddAlert()"></button>
+      <button class="button button-clear button-dark icon"
+          ng-class="{'ion-ios-gear-outline': !isEdit, 'ion-ios-gear': isEdit}"
+          ng-click="changeMode()"></button>
     </div>
   </ion-header-bar>
-  <ion-content ng-class="{'show': !isEdit}">
-    <ion-list show-delete="isEdit">
+  <ion-content ng-class="{'show': !isDelete}">
+    <ion-list show-delete="isDelete">
       <ion-item ng-click="selectFolder($index);" ng-repeat="favorite in favorites">
-        {{favorite.name}}
+        <div class="item-inner" ng-class="{'item-button-right': isEdit}">
+          {{favorite.name}}
+          <button class="button edit-btn button-clear" ng-class="{'show': isEdit}">
+            Edit
+          </button>
+        </div>
         <ion-delete-button class="ion-minus-circled"
                           ng-click="showDeleteAlert($index)">
         </ion-delete-button>

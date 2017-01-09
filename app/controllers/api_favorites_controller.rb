@@ -8,7 +8,7 @@ class ApiFavoritesController < ApplicationController
   # POST /api/favorites.json
   def index
 
-    @favorites = Favorite.where(user_id: current_user.id).order(:order)
+    @favorites = Favorite.where(user_id: current_user.id, is_delete: false).order(:order)
     newFavorites = Array.new()
     if params[:page] && params[:per]
       @favorites.page(params[:page]).per(params[:per]).each do |favorite|
@@ -27,35 +27,35 @@ class ApiFavoritesController < ApplicationController
   def show
     @favorite = Favorite.where(user_id: current_user.id).order(:order).find(params[:id])
 
-      favorite_details = Array.new()
-      favorite_details_order = FavoriteDetail.where(favorite_id: @favorite[:id], is_delete: false)
+    favorite_details = Array.new()
+    favorite_details_order = FavoriteDetail.where(favorite_id: @favorite[:id], is_delete: false).order(updated_at: :desc, id: :desc)
 
-      # それぞれの詳細対応
-      favorite_details_order.each do |favorite_detail|
-        if favorite_detail[:related_type] == "Shop"
-          # 対応するShopの情報を取得する
-          obj = get_shop_json(favorite_detail.related)
-        elsif favorite_detail[:related_type] == "Post"
-          # 対応するPostの情報を取得する
-          post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
-          obj = get_post_json(post)
-        elsif favorite_detail[:related_type] == "Feature"
-          # 対応するFeatureの情報を取得する
-          feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
-          obj = get_feature_json(feature)
-        end
-        obj.store("favorite_detail",favorite_detail)
-        favorite_details.push(obj)
+    # それぞれの詳細対応
+    favorite_details_order.each do |favorite_detail|
+      if favorite_detail[:related_type] == "Shop"
+        # 対応するShopの情報を取得する
+        obj = get_shop_json(favorite_detail.related)
+      elsif favorite_detail[:related_type] == "Post"
+        # 対応するPostの情報を取得する
+        post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
+        obj = get_post_json(post)
+      elsif favorite_detail[:related_type] == "Feature"
+        # 対応するFeatureの情報を取得する
+        feature = Feature.joins(:category).select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
+        obj = get_feature_json(feature)
       end
+      obj.store("favorite_detail",favorite_detail)
+      favorite_details.push(obj)
+    end
 
 
-      # 返却用のオブジェクトを作成する
-      feature = {
-        "favorite" => @favorite,
-        "favorite_detail" => favorite_details.uniq,
-      }
+    # 返却用のオブジェクトを作成する
+    feature = {
+      "favorite" => @favorite,
+      "favorite_detail" => favorite_details.uniq,
+    }
 
-      render json: feature
+    render json: feature
   end
 
   # POST /api/favorites
@@ -97,7 +97,7 @@ class ApiFavoritesController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorite_params
-      params.require(:favorite).permit(:name, :order, :user_id)
+      params.require(:favorite).permit(:name, :order, :user_id, :is_delete)
     end
 
 end

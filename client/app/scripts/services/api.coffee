@@ -47,11 +47,11 @@ angular.module "frontApp"
         errorHandring(data)
 
     # data更新(PATCH)
-    putJson: (obj, path, isLoading) ->
+    patchJson: (obj, path, isLoading) ->
       if isLoading
         $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
       $http(
-        method: 'PUT'
+        method: 'PATCH'
         url: host + path
         data: obj
       ).success((data, status, headers, config) ->

@@ -42,13 +42,13 @@ Rails.application.routes.draw do
   get 'api/favorites', to: 'api_favorites#index'
   get 'api/favorites/:id', to: 'api_favorites#show'
   post 'api/favorites', to: 'api_favorites#create'
-  patch 'api/favorites/:id', to: 'api_favorites#update'
+  post 'api/favorites/:id', to: 'api_favorites#update'
   delete 'api/favorites/:id', to: 'api_favorites#destroy'
 
   # FAVORITES DETAILS
   get 'api/favorite_details', to: 'api_favorite_details#index'
   post 'api/favorite_details', to: 'api_favorite_details#create'
-  patch 'api/favorite_details/:id', to: 'api_favorite_details#update'
+  post 'api/favorite_details/:id', to: 'api_favorite_details#update'
   delete 'api/favorite_details/:id', to: 'api_favorite_details#destroy'
 
   # USERS
