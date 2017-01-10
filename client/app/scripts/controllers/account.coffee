@@ -58,7 +58,10 @@ angular.module "frontApp"
         $scope.popoverFavorites.hide()
 
         path = Const.API.FAVORITE + '/' + $scope.favorites[index].id
+        $scope.favoriteDetails = null
+        $scope.showLoading = true
         Api.getJson(accessKey, path, false).then (res) ->
+          $scope.showLoading = false
           $scope.favoriteDetails = res.data.favorite_detail
       
       # 編集モードの場合、表示名を更新
