@@ -58,7 +58,6 @@ angular.module "frontApp"
           # but has not authenticated your app
           signup().then(
             (responseSignup) -> 
-              console.log responseSignup
               deferred.resolve responseSignup
             (error) -> deferred.reject error
           )
