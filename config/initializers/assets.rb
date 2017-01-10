@@ -17,5 +17,5 @@ case Rails.env
   when 'staging'
     Rails.application.config.facebook_app_secret = ENV['FB_APP_SECRET']
   when 'development'
-    Rails.application.config.facebook_app_secret = '595c012dd83b4bee4fb0068d388ee8d5'
+    Rails.application.config.facebook_app_secret = ''
   end
