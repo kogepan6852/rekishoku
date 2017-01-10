@@ -62,7 +62,7 @@ angular.module "frontApp"
           targetFavoriteId = scope.favoriteId
           if !targetFavoriteId && scope.favoriteDetail
             targetFavoriteId = scope.favoriteDetail.favorite_id
-
+            
           if scope.isFavorite && targetFavoriteId
             # お気に入り解除
             saveFavorite(targetFavoriteId)
@@ -84,6 +84,7 @@ angular.module "frontApp"
 
         # 選択したお気に入りフォルダにお気に入りを保存する
         scope.selectFolder = ($index) ->
+          scope.favoriteId = scope.favorites[$index].id
           saveFavorite scope.favorites[$index].id
           scope.popoverFavorites.hide()
     }
