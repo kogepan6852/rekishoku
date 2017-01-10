@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
     user = User.find_by(email: params[:email])
     if Devise.secure_compare(user.try(:authentication_token), params[:token])
       sign_in user, store: false
+    else
+      sign_out user
+      render json: { "error" => I18n.t('devise.failure.timeout') }, :status => 401
     end
   end
 

@@ -39,8 +39,6 @@ angular.module "frontApp"
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
-        email: $localStorage['email']
-        token: $localStorage['token']
         per: Const.API.SETTING.PER
         page: 1
       # 検索ワードの設定

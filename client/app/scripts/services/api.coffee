@@ -1,17 +1,31 @@
 "use strict"
 
 angular.module "frontApp"
-  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const, config) ->
+  .factory "Api", ($http, $ionicPopup, $ionicLoading, toaster, Const, config, $rootScope, $localStorage) ->
 
     host = config.url.api
+    
+    successHandring = (data) ->
+      $ionicLoading.hide()
 
     # エラー発生時処理
-    errorHandring = (data) ->
+    errorHandring = (data, status) ->
       if data && data.error
         alertPopup = $ionicPopup.alert(
           title: data.error
           type: 'button-dark')
         alertPopup.then (res) ->
+
+        # 認証エラーの場合
+        if status == 401
+          # login情報の削除
+          delete $localStorage['token']
+          delete $localStorage['email']
+          delete $localStorage['user_id']
+
+          $rootScope.isLogin = false
+          $rootScope.isWriter = false
+
       else
         alertPopup = $ionicPopup.alert(
           title: '通信エラーが発生しました'
@@ -27,10 +41,10 @@ angular.module "frontApp"
         url: host + path
         params: obj
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
     # data取得(POST)
     postJson: (obj, path, isLoading) ->
@@ -41,10 +55,10 @@ angular.module "frontApp"
         url: host + path
         data: obj
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
     # data更新(PATCH)
     patchJson: (obj, path, isLoading) ->
@@ -55,10 +69,10 @@ angular.module "frontApp"
         url: host + path
         data: obj
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
 
     # data登録(POST, JSON)
@@ -69,10 +83,10 @@ angular.module "frontApp"
         url: host + path + ".json"
         data: obj
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
     # data登録(POST, FORM DATA)
     saveFormData:(fd, path, method) ->
@@ -84,10 +98,10 @@ angular.module "frontApp"
         headers: 'Content-type': undefined
         data: fd
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
     # data削除(DELETE)
     deleteJson: (obj, id, path) ->
@@ -97,10 +111,10 @@ angular.module "frontApp"
         url: host + path + "/" + id + ".json"
         params: obj
       ).success((data, status, headers, config) ->
-        $ionicLoading.hide()
+        successHandring data
       ).error (data, status, headers, config) ->
         $ionicLoading.hide()
-        errorHandring(data)
+        errorHandring data, status
 
     # data削除(DELETE)
     logOut: (obj, path) ->
@@ -114,4 +128,4 @@ angular.module "frontApp"
           title: 'ログアウトしました',
           showCloseButton: true
       ).error (data, status, headers, config) ->
-        errorHandring(data)
+        errorHandring data, status
