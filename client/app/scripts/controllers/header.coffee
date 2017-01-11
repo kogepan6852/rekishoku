@@ -196,6 +196,7 @@ angular.module "frontApp"
           loginSetting(res)
           $ionicLoading.hide()
         ,(err) -> $ionicLoading.hide()
+      ,(err) -> $ionicLoading.hide()
 
     $scope.closeMenu = ->
       $ionicSideMenuDelegate.toggleRight();
