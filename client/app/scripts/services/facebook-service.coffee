@@ -22,7 +22,7 @@ angular.module "frontApp"
 
     getInfo = ->
       deferred = $q.defer()
-
+      
       FB.api '/me?fields=name,email', (response) ->
         if !response || response.error
           deferred.reject response.error
@@ -39,6 +39,7 @@ angular.module "frontApp"
     login: ->
       deferred = $q.defer()
       FB.getLoginStatus (response) ->
+        # the user is logged in to Facebook and has authenticated your app
         if response.status == 'connected'
           uid = response.authResponse.userID
           accessToken = response.authResponse.accessToken
@@ -53,16 +54,11 @@ angular.module "frontApp"
             (error) -> deferred.reject error            
           )
 
-        else if response.status == 'not_authorized'
-          # the user is logged in to Facebook, 
-          # but has not authenticated your app
+        else
           signup().then(
             (responseSignup) -> 
               deferred.resolve responseSignup
             (error) -> deferred.reject error
           )
-
-        else
-          deferred.reject()
 
       return deferred.promise
