@@ -13,7 +13,7 @@ angular.module "frontApp"
       if data && data.error
         alertPopup = $ionicPopup.alert(
           title: data.error
-          type: 'button-dark')
+          type: 'btn-main')
         alertPopup.then (res) ->
 
         # 認証エラーの場合
@@ -29,7 +29,7 @@ angular.module "frontApp"
       else
         alertPopup = $ionicPopup.alert(
           title: '通信エラーが発生しました'
-          type: 'button-dark')
+          type: 'btn-main')
         alertPopup.then (res) ->
 
     # data取得(GET)

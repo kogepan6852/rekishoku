@@ -3,10 +3,14 @@
   <ion-content class="account no-tabs-top" ng-class="{'padding-top': windowType!='xs'}" delegate-handle="accountScroll" overflow-scroll="true">
     <div class="row">
       <div class="account-title col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <button class="button button-clear" ng-click="openFolderList($event)">
+        <button class="button button-clear list-btn" ng-click="openFolderList($event)">
           {{selectedFavorite.name}}
           <i ng-show="selectedFavorite" class="icon ion-arrow-down-b"></i>
         </button>
+
+        <button class="button button-clear button-dark icon setting-btn"
+            ng-class="{'ion-ios-gear-outline': !isEditList, 'ion-ios-gear': isEditList}"
+            ng-click="changeModeList()"></button>
       </div>
     </div>
 
@@ -49,10 +53,12 @@
             window-type="windowType" >
           </list-item-feature>
 
+          <!-- Favorite Button -->
           <favorite-button type="{{favoriteDetail.favorite_detail.related_type}}"
               id="{{favoriteDetail.post.id || favoriteDetail.shop.id || favoriteDetail.feature.id}}"
               is-favorite="true"
               favorite-id="{{selectedFavorite.id}}"
+              ng-class="{'show-btn': isEditList}"
               ng-click="remove($index)"></favorite-button>
         </div>
 

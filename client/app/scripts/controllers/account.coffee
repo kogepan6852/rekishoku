@@ -17,6 +17,8 @@ angular.module "frontApp"
     $ionicNavBarDelegate.showBackButton false
 
     $scope.$on '$ionicView.enter', (e) ->
+      $scope.isEditList = false
+      $scope.isEditPopover = false;
       if $rootScope.currentType != 'account'
         $ionicNavBarDelegate.showBackButton true
       # get folder list
@@ -29,8 +31,6 @@ angular.module "frontApp"
     accessKey =
       email: $localStorage['email']
       token: $localStorage['token']
-    
-    $scope.isEdit = false;
 
     # initialize
     $scope.init = ->
@@ -53,7 +53,7 @@ angular.module "frontApp"
 
     $scope.selectFolder = (index) ->
       # 編集モードではない場合、表示フォルダを変更
-      if !$scope.isEdit
+      if !$scope.isEditPopover
         $scope.selectedFavorite = $scope.favorites[index]
         $scope.popoverFavorites.hide()
 
@@ -111,13 +111,16 @@ angular.module "frontApp"
       $scope.isDelete = !$scope.isDelete
   
     $scope.$on 'popover.hidden', ->
-      $scope.isEdit = false
+      $scope.isEditPopover = false
       $scope.isDelete = false
 
-    $scope.changeMode = ->
-      $scope.isEdit = !$scope.isEdit
-      if !$scope.isEdit
+    $scope.changeModePopover = ->
+      $scope.isEditPopover = !$scope.isEditPopover
+      if !$scope.isEditPopover
         $scope.isDelete = false
+
+    $scope.changeModeList = ->
+      $scope.isEditList = !$scope.isEditList
 
     $scope.showAddAlert = ->
       $scope.addData = {}
@@ -167,7 +170,7 @@ angular.module "frontApp"
         subTitle: $scope.favorites[index].name + $translate.instant('MY_ACCOUNT.POPOVER.DELETE.MESSAGE')
         scope: $scope
         buttons: [
-          { text: 'Cancel' }
+          { text: $translate.instant('BUTTON.CANCEL') }
           {
             text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
             type: 'btn-main'

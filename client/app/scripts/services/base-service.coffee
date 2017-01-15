@@ -28,7 +28,7 @@ angular.module "frontApp"
         else
           alertPopup = $ionicPopup.alert(
             title: '通信エラーが発生しました'
-            type: 'button-dark')
+            type: 'btn-main')
           alertPopup.then (res) ->
 
     # 配列をランダムで取得する
