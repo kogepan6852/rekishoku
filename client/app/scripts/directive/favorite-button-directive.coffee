@@ -12,7 +12,6 @@ angular.module "frontApp"
       templateUrl: 'views/directives/favorite-button-directive.html'
       link: (scope, element, attrs) ->
         scope.hideFavoriteHeader = true
-        scope.showLogin = $rootScope.showLogin
         scope.isLogin = $rootScope.isLogin
 
         $ionicPopover.fromTemplateUrl('views/parts/popover-favorites.html',

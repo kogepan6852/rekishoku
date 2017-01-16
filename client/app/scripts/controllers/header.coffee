@@ -38,10 +38,6 @@ angular.module "frontApp"
       setCurrentType()
       $ionicSlideBoxDelegate.enableSlide(false);
 
-      $rootScope.showLogin = false
-      if $location.search()["showLogin"] || $localStorage['email']
-        $rootScope.showLogin = true
-
     ###
     # Common function
     ###
