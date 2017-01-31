@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","Period","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","PostsShop","PeoplePeriod","PeoplePost"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -286,6 +286,9 @@ RailsAdmin.config do |config|
       end
       field :is_approved do
         label "承認確認"
+      end
+      field :period do
+        label "創業時代"
       end
     end
 
@@ -833,6 +836,9 @@ RailsAdmin.config do |config|
             field :order do
               label "順番"
             end
+            field :is_delete do
+              label "削除済み"
+            end
           end
           edit do
             field :user_id, :enum do
@@ -884,6 +890,9 @@ RailsAdmin.config do |config|
               field :related_id do
                 label "参照DBのID"
               end
+              field :is_delete do
+                label "削除済み"
+              end
             end
             edit do
                 field :related do
@@ -904,5 +913,11 @@ RailsAdmin.config do |config|
                 end
             end
            end
+
+           ## 時代表示
+             config.model 'Period' do
+               label "時代"
+               weight 9
+            end
 
 end
