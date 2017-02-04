@@ -111,7 +111,7 @@ class ApiFeaturesController < ApplicationController
       feature_details_order.each do |feature_detail|
         if feature_detail[:related_type] == "Shop"
           # 対応するShopの情報を取得する
-          shop = Shop.eager_load(:period).select('shops.*, periods.name as period_name').find(feature_detail[:related_id])
+          shop = Shop.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name').find(feature_detail[:related_id])
           obj = get_shop_json(shop)
         elsif feature_detail[:related_type] == "Post"
           # 対応するPostの情報を取得する

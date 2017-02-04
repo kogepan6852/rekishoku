@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc).eager_load(:period).select('shops.*, periods.name as period_name')
+    @shops = Shop.order(created_at: :desc, id: :desc).joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -56,7 +56,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.eager_load(:period).select('shops.*, periods.name as period_name').find(params[:id])
+    @shop = Shop.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name').find(params[:id])
 
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
