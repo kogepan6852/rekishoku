@@ -46,7 +46,7 @@
             <h1 ng-bind="shop.name" class="mincho b"></h1>
           </div>
           <div class="tags">
-            <info-tag name="{{period.name}}" ng-repeat="period in periods"></info-tag>
+            <info-tag ng-if="shop.period_name" name="{{shop.period_name}}"></info-tag>
             <info-tag name="{{person.name}}" ng-repeat="person in people"></info-tag>
           </div>
           <div class="tel">
