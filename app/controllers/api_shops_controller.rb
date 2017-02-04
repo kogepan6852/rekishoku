@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc).joins(:period).select('shops.*, periods.name as period_name')
+    @shops = Shop.order(created_at: :desc, id: :desc).eager_load(:period).select('shops.*, periods.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -56,7 +56,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.joins(:period).select('shops.*, periods.name as period_name').find(params[:id])
+    @shop = Shop.eager_load(:period).select('shops.*, periods.name as period_name').find(params[:id])
 
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
@@ -73,7 +73,7 @@ class ApiShopsController < ApplicationController
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
-    # @shop = @shop .joins(:period).select('shops.*, period.name as period_name')
+
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,

@@ -93,7 +93,7 @@ class ApiPostsController < ApplicationController
       postPeriods = get_periods(@post.people)
 
       # shop情報整形
-      shops = @post.shops.joins(:period).select('shops.*, periods.name as period_name') #@shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+      shops = @post.shops.eager_load(:period).select('shops.*, periods.name as period_name') 
       newShops = Array.new()
       shops.each do |shop|
         newShops.push(get_shop_json(shop));
