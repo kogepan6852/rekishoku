@@ -707,6 +707,10 @@ RailsAdmin.config do |config|
             required true
             help "必須"
           end
+          field :people do
+            label "関係がある人物"
+            help "対象人物を右に移動してください"
+          end
       end
      end
 

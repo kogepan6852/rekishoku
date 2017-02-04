@@ -59,8 +59,6 @@ module RelatedInfo
   def get_shop_json(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
-    # shopsに紐付けしている時代を取得をする
-    periods = get_periods(shop.people)
     # 歴食度の設定
     rating = cal_rating(shop)
     # 価格帯の取得
@@ -69,7 +67,6 @@ module RelatedInfo
     obj = { "shop" => shop,
             "categories" => shop.categories,
             "people" => people.uniq,
-            "periods" => periods.uniq,
             "rating" => rating,
             "price" => price
           }
@@ -93,28 +90,13 @@ module RelatedInfo
   end
 
   def get_feature_json(feature)
-    type = Array.new()
     periods = Array.new()
     people = Array.new()
 
-    feature.feature_details.each do |feature_detail|
-      type.push(feature_detail[:related_type])
-    end
-
-    if type.include?("Shop")
-      shops = Shop.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(shops)
-    end
-    if type.include?("Post")
-      posts = Post.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(posts)
-    end
-    if type.include?("ExternalLink")
-      extrnal_links = ExternalLink.joins(:feature_details).where('feature_id = ? ', feature[:id])
-      people += get_people_feature(extrnal_links)
-    end
-    periods += get_periods(people)
-    people = get_check_people(people)
+    # featureに紐付いてる人物を取得する
+    people = get_people(feature)
+    # featureに紐付けしている時代を取得をする
+    periods = get_periods(feature.people)
 
     # 返却用のオブジェクトを作成する
     obj = {

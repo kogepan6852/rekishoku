@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc)
+    @shops = Shop.order(created_at: :desc, id: :desc).joins(:period).select('shops.*, periods.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -50,19 +50,16 @@ class ApiShopsController < ApplicationController
     else
       shops = @shops
     end
-
     render json: shops
   end
 
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.find(params[:id])
+    @shop = Shop.joins(:period).select('shops.*, periods.name as period_name').find(params[:id])
 
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
-    # shopに紐付けしている時代を取得をする
-    periods = get_periods(@shop.people)
 
     # 歴食度の設定
     rating = cal_rating(@shop)
@@ -76,13 +73,12 @@ class ApiShopsController < ApplicationController
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
-
+    # @shop = @shop .joins(:period).select('shops.*, period.name as period_name')
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
              "people" =>  people.uniq,
-             "periods" => periods.uniq,
              "rating" => rating,
              "price" => price
            }
@@ -162,7 +158,7 @@ class ApiShopsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :period_id, :longitude, :menu, :province, :city, :id, :category_ids => [], :person_ids => [])
     end
 
 end

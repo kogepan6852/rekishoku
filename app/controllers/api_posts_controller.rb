@@ -62,6 +62,7 @@ class ApiPostsController < ApplicationController
   # 詳細データ表示
   def show
     @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
+
     if params[:preview] == "true" || @post.status == 1
       # user情報整形
       user = {
@@ -92,14 +93,15 @@ class ApiPostsController < ApplicationController
       postPeriods = get_periods(@post.people)
 
       # shop情報整形
-      shops = Array.new()
-      @post.shops.each do |shop|
-        shops.push(get_shop_json(shop));
+      shops = @post.shops.joins(:period).select('shops.*, periods.name as period_name') #@shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+      newShops = Array.new()
+      shops.each do |shop|
+        newShops.push(get_shop_json(shop));
       end
 
       post = {
         "post" => @post,
-        "shops" => shops,
+        "shops" => newShops,
         "user" => user,
         "people" => people,
         "periods" => postPeriods.uniq,
