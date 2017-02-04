@@ -417,8 +417,6 @@ RailsAdmin.config do |config|
       end
       field :period do
         label "創業時代"
-        help "必須"
-        required true
       end
       field :history_level, :enum do
       enum do

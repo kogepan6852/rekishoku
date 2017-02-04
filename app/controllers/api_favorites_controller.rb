@@ -34,7 +34,8 @@ class ApiFavoritesController < ApplicationController
     favorite_details_order.each do |favorite_detail|
       if favorite_detail[:related_type] == "Shop"
         # 対応するShopの情報を取得する
-        obj = get_shop_json(favorite_detail.related)
+        shop = Shop.eager_load(:period).select('shops.*, periods.name as period_name').find(favorite_detail[:related_id])
+        obj = get_shop_json(shop)
       elsif favorite_detail[:related_type] == "Post"
         # 対応するPostの情報を取得する
         post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(favorite_detail[:related_id])
