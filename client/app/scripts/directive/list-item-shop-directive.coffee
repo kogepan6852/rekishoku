@@ -14,10 +14,11 @@ angular.module "frontApp"
         windowType: '=windowType'
       templateUrl: 'views/directives/list-item-directive.html'
       link: (scope, element, attrs) ->
-        scope.periods = [{
-          id: scope.data.period_id,
-          name: scope.data.period_name
-        }];
+        if (scope.data.period_id && scope.data.period_name)
+          scope.periods = [{
+            id: scope.data.period_id,
+            name: scope.data.period_name
+          }];
         scope.target = "shop"
         scope.mainImage = scope.data.subimage;
         scope.href = "/app/shop/" + scope.data.id
