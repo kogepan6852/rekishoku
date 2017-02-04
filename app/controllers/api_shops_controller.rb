@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc)
+    @shops = Shop.order(created_at: :desc, id: :desc).joins(:period).select('shops.*, periods.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -56,12 +56,10 @@ class ApiShopsController < ApplicationController
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.find(params[:id])
+    @shop = Shop.joins(:period).select('shops.*, periods.name as period_name').find(params[:id])
 
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
-    # shopに紐付けしている時代を取得をする
-    periods = [Period.find(@shop.period_id)]
 
     # 歴食度の設定
     rating = cal_rating(@shop)
@@ -75,16 +73,17 @@ class ApiShopsController < ApplicationController
     posts.each do |post|
       newPosts.push(get_post_json(post));
     end
-
+    # @shop = @shop .joins(:period).select('shops.*, period.name as period_name')
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
              "categories" => @shop.categories,
              "posts" => newPosts,
              "people" =>  people.uniq,
-             "periods" => periods,
              "rating" => rating,
              "price" => price
            }
+           p("テスト")
+           p(rtnObj)
     render json: rtnObj
   end
 
