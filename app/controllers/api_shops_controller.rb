@@ -82,8 +82,6 @@ class ApiShopsController < ApplicationController
              "rating" => rating,
              "price" => price
            }
-           p("テスト")
-           p(rtnObj)
     render json: rtnObj
   end
 
