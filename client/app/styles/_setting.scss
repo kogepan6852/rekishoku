@@ -10,12 +10,16 @@ $h6: 1.2rem;
 $h7: 1.0rem;
 
 $baseColor: #c95757;
+$baseColorDark: #ab4343;
 $baseColorLite: #cd8c89;
 $subColor: #00636F;
+$subColorDark: #004f5b;
 $subColorLite: #288b97;
 $liteGrayColor: #f3f3f2;
 $grayColor: #878677;
 $darkGrayColor: #3E3A39;
+$facebook: #3b5998;
+$facebookDark: #0e1f56;
 
 @mixin css3($property, $value) {
      @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {

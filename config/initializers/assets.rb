@@ -9,3 +9,13 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+# facebook api setting
+case Rails.env
+  when 'production'
+    Rails.application.config.facebook_app_secret = ENV['FB_APP_SECRET']
+  when 'staging'
+    Rails.application.config.facebook_app_secret = ENV['FB_APP_SECRET']
+  when 'development'
+    Rails.application.config.facebook_app_secret = ''
+  end

@@ -2,9 +2,9 @@
   "env": "development",
   "url": {
     "api": "http://localhost:3000",
-    "home": "http://localhost:9000"
+    "home": "http://local.rekishoku.jp"
   },
   "id": {
-    "fb": "944601872286716"
+    "facebook": "1248213225258911"
   }
 }

@@ -51,7 +51,7 @@ angular.module "frontApp"
       obj.category = searchData.category
       obj.province = searchData.province
 
-      Api.getJson(obj, Const.API.SHOP, true).then (res) ->
+      Api.getJson(obj, Const.API.SHOP, false).then (res) ->
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
         $scope.$broadcast('scroll.infiniteScrollComplete')
@@ -82,7 +82,7 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 検索
-      Api.getJson(obj, Const.API.SHOP, true).then (res) ->
+      Api.getJson(obj, Const.API.SHOP, false).then (res) ->
         $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
@@ -102,7 +102,7 @@ angular.module "frontApp"
         obj.category = $scope.category
         obj.province = $scope.province
 
-        Api.getJson(obj, Const.API.SHOP, true).then (res) ->
+        Api.getJson(obj, Const.API.SHOP, false).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
             # Prerender.io

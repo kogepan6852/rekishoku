@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","Period","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","PostsShop","PeoplePeriod","PeoplePost"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -286,6 +286,9 @@ RailsAdmin.config do |config|
       end
       field :is_approved do
         label "承認確認"
+      end
+      field :period do
+        label "創業時代"
       end
     end
 
@@ -811,5 +814,114 @@ RailsAdmin.config do |config|
             end
         end
        end
+
+       ## お気に入り
+        config.model 'Favorite' do
+          label "お気に入り"
+          weight 5
+          list do
+            field :id
+            field :user_id, :enum do
+              enum do
+                setData = User.all
+                ids = []
+                names = []
+                setData.each do |set|
+                  ids.push(set.id.to_s)
+                  names.push(set.username)
+                end
+                Hash[ names.zip(ids) ]
+              end
+              label "ライター"
+            end
+            field :name do
+              label "ファイル名"
+            end
+            field :order do
+              label "順番"
+            end
+            field :is_delete do
+              label "削除済み"
+            end
+          end
+          edit do
+            field :user_id, :enum do
+              enum do
+                setData = User.all
+                ids = []
+                names = []
+                setData.each do |set|
+                  ids.push(set.id.to_s)
+                  names.push(set.username)
+                end
+                Hash[ names.zip(ids) ]
+              end
+              label "ライター"
+              required true
+              help "必須"
+            end
+            field :name do
+              label "ファイル名"
+            end
+          end
+         end
+
+         ## お気に入り詳細
+          config.model 'FavoriteDetail' do
+            label "お気に入り詳細"
+            weight 5
+            list do
+              field :id
+              field :favorite_id , :enum do
+                enum do
+                  setData = Favorite.all
+                  ids = []
+                  names = []
+                  setData.each do |set|
+                    ids.push(set.id.to_s)
+                    names.push(set.name)
+                  end
+                  Hash[ names.zip(ids) ]
+                end
+                label "お気に入り"
+              end
+              field :related_type , :enum do
+              enum do
+                Hash[ ['お店','記事', '特集'].zip(['Shop','Post','Feature']) ]
+              end
+                label "どのDBか"
+              end
+              field :related_id do
+                label "参照DBのID"
+              end
+              field :is_delete do
+                label "削除済み"
+              end
+            end
+            edit do
+                field :related do
+                  label "紐付けする情報"
+                end
+                field :favorite_id , :enum do
+                  enum do
+                    setData = Favorite.all
+                    ids = []
+                    names = []
+                    setData.each do |set|
+                      ids.push(set.id.to_s)
+                      names.push(set.name)
+                    end
+                    Hash[ names.zip(ids) ]
+                  end
+                  label "お気に入り"
+                end
+            end
+           end
+
+           ## 時代表示
+             config.model 'Period' do
+               label "時代"
+               weight 9
+            end
 
 end

@@ -1,0 +1,48 @@
+@media screen and (max-width:768px){
+  /**********************
+   * Common
+   **********************/
+  .big-modal, .thin-modal {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%
+  }
+
+  /* form */
+  .item-stacked-label-xs {
+    background-color: transparent;
+    box-shadow: none;
+    display: block;
+    .input-label, .icon {
+      display: inline-block;
+      padding: 4px 0 0;
+      vertical-align: middle;
+    }
+  }
+}
+
+// SM以上
+@media screen and (min-width:768px){
+  /**********************
+   * Common
+   **********************/
+  .info-modal {
+    .scroll-content {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+  }
+
+  /**********************
+   * Rating Info Modal
+   **********************/
+  .rating-info-modal {
+    .star-info {
+      .star-info-inner {
+        height: 36px;
+      }
+    }
+  }
+}

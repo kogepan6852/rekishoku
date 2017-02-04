@@ -21,6 +21,9 @@
       &.has-mode-btn {
         padding: 2px 125px 2px 5px;
       }
+      &.has-two-mode-btn {
+        padding: 2px 205px 2px 5px;
+      }
 
       .mode-btn {
         right: 30px;
@@ -30,6 +33,14 @@
      .detail-map {
        .angular-google-map-container, .angular-google-map {
          height: 350px;
+       }
+     }
+
+     favorite-button {
+       right: 30px;
+
+       &.shop-favorite-btn {
+         right: 120px;
        }
      }
    }

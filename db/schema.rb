@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223150641) do
+
+ActiveRecord::Schema.define(version: 20170106120654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +55,24 @@ ActiveRecord::Schema.define(version: 20161223150641) do
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
+  end
+
+  create_table "favorite_details", force: :cascade do |t|
+    t.integer  "favorite_id"
+    t.string   "related_type",                 null: false
+    t.integer  "related_id",                   null: false
+    t.boolean  "is_delete",    default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.string   "name",                       null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "order",      default: 0,     null: false
+    t.boolean  "is_delete",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "feature_details", force: :cascade do |t|

@@ -31,11 +31,11 @@
           <img class="main-img visible-md visible-lg"
               ng-if="windowType=='md' || windowType=='lg'"
               src="../images/sample.png"
-              ng-src="{{topItem.post.image.image.lg.url}}">
+              ng-src="{{topItem.post.image.lg.url}}">
           <img class="main-img visible-xs visible-sm"
               ng-if="windowType=='xs' || windowType=='sm' || !windowType"
               src="../images/sample.png"
-              ng-src="{{topItem.post.image.image.md.url}}">
+              ng-src="{{topItem.post.image.md.url}}">
 
           <div class="category" ng-if="topItem">
             <span ng-bind="topItem.post.category_name"></span>

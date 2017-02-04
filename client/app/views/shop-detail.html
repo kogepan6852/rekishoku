@@ -14,13 +14,20 @@
         <img ng-src="{{shop.image.lg.url}}" src="../images/dummy-img.png" class="visible-sm visible-md" ng-if="windowType=='sm' || windowType=='md'">
         <img ng-src="{{shop.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
+      <!--<button class="button button-clear button-positive favorite-btn">
+        <i class="icon ion-ios-heart-outline"></i>
+      </button>-->
     </div>
     <div class="row no-padding no-margin">
-      <div class="image-quotation has-mode-btn">
+      <div class="image-quotation has-two-mode-btn">
         <span ng-if="shop.image_quotation_name">
           <span ng-bind="'POST.PHOTO_BY'|translate"></span>
           <a href="{{shop.image_quotation_url}}" target="_blank">{{shop.image_quotation_name}}</a>
         </span>
+        <!--<button class="button favorite-btn">
+          <i class="icon ion-ios-heart"></i>
+        </button>-->
+        <favorite-button class="shop-favorite-btn" type="Shop" id="{{targetId}}"></favorite-button>
         <a class="button mode-btn"
             href="http://maps.google.com/maps?saddr=現在地&daddr={{shop.province + shop.city + shop.address1 + shop.address2}}&dirflg=w"
             target="_blank">
@@ -67,6 +74,9 @@
               <star label="true" count="rating.detail.episode" type="episode"></star>
               <star label="true" count="rating.detail.menu" type="menu"></star>
             </div>
+          </div>
+          <div class="rating-info">
+            <a ng-click="showRatingInfoModal()">歴食度とは？</a>
           </div>
         </div>
       </div>

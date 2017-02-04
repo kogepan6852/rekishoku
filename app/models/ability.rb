@@ -34,8 +34,8 @@ class Ability
       ## Admin権限
       if user.role == 0
         can :manage, :all
-    ## ライター権限
-    elsif user.role == 2 || user.role == 3
+      ## ライター権限
+      elsif user.role == 2 || user.role == 3
         can :manage, Feature
         can :manage, FeatureDetail
         can :read, Category
@@ -50,19 +50,25 @@ class Ability
     # API用アクセスコントロール
     can :read, :api_post
     can :relation, :api_post
-    can :manage, :api_post if user
+    can :manage, :api_post if user && user.role != 1
 
     can :read, :api_post_detail
-    can :manage, :api_post_detail if user
+    can :manage, :api_post_detail if user && user.role != 1
 
     can :read, :api_posts_shop
-    can :manage, :api_posts_shop if user
+    can :manage, :api_posts_shop if user && user.role != 1
 
     can :read, :api_people_post
-    can :manage, :api_people_post if user
+    can :manage, :api_people_post if user && user.role != 1
 
     can :read, :api_user
-    can :manage, :api_user if user
+    can :manage, :api_user if user && user.role != 1
+
+    can :read, :api_favorite if user
+    can :manage, :api_favorite if user
+
+    can :read, :api_favorite_detail if user
+    can :manage, :api_favorite_detail if user
 
   end
 end

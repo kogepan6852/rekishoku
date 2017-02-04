@@ -39,8 +39,6 @@ angular.module "frontApp"
       $scope.noMoreLoad = false
       $scope.page = 1
       obj =
-        email: $localStorage['email']
-        token: $localStorage['token']
         per: Const.API.SETTING.PER
         page: 1
       # 検索ワードの設定
@@ -52,7 +50,7 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 記事一覧取得
-      Api.getJson(obj, Const.API.POST, true).then (res) ->
+      Api.getJson(obj, Const.API.POST, false).then (res) ->
         $scope.topItem = res.data[0]
         $scope.results = res.data
         $scope.$broadcast 'scroll.refreshComplete'
@@ -60,8 +58,6 @@ angular.module "frontApp"
 
       # TOP用情報取得
       objTop =
-        email: $localStorage['email']
-        token: $localStorage['token']
         per: 1
         page: 1
       # 最新ショップ取得
@@ -101,7 +97,7 @@ angular.module "frontApp"
       obj.province = searchData.province
 
       # 検索
-      Api.getJson(obj, Const.API.POST, true).then (res) ->
+      Api.getJson(obj, Const.API.POST, false).then (res) ->
         $scope.results = res.data
         if res.data.length == 0
           $scope.noMoreLoad = true
@@ -121,7 +117,7 @@ angular.module "frontApp"
         obj.category = $scope.category
         obj.province = $scope.province
 
-        Api.getJson(obj, Const.API.POST, true).then (res) ->
+        Api.getJson(obj, Const.API.POST, false).then (res) ->
           if res.data.length == 0
             $scope.noMoreLoad = true
             # Prerender.io

@@ -1,0 +1,86 @@
+<ion-view title="" class="account-view">
+
+  <ion-content class="account no-tabs-top" ng-class="{'padding-top': windowType!='xs'}" delegate-handle="accountScroll" overflow-scroll="true">
+    <div class="row">
+      <div class="account-title col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <button class="button button-clear list-btn" ng-click="openFolderList($event)">
+          {{selectedFavorite.name}}
+          <i ng-show="selectedFavorite" class="icon ion-arrow-down-b"></i>
+        </button>
+
+        <button class="button button-clear button-dark icon setting-btn"
+            ng-class="{'ion-ios-gear-outline': !isEditList, 'ion-ios-gear': isEditList}"
+            ng-click="changeModeList()"></button>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- FAVORITE DETAILS -->
+    <div class="row padding-bottom">
+      <div class="account-detail col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+        <div ng-repeat="favoriteDetail in favoriteDetails" ng-class="{'deleted': favoriteDetail.isDeleted}">
+          <!-- Post Item -->
+          <list-item-post
+              ng-if="favoriteDetail.favorite_detail.related_type == 'Post'"
+              data="favoriteDetail.post"
+              periods="favoriteDetail.periods"
+              people="favoriteDetail.people"
+              category="favoriteDetail.post.category_name"
+              window-type="windowType" >
+            </list-item-post>
+
+          <!-- Shop Item -->
+          <list-item-shop
+            ng-if="favoriteDetail.favorite_detail.related_type == 'Shop'"
+            data="favoriteDetail.shop"
+            categories="favoriteDetail.categories"
+            periods="favoriteDetail.periods"
+            people="favoriteDetail.people"
+            price="favoriteDetail.price"
+            rating="favoriteDetail.rating.average"
+            hide-info="true"
+            window-type="windowType" >
+          </list-item-shop>
+
+          <!-- Feature Item -->
+          <list-item-feature
+            ng-if="favoriteDetail.favorite_detail.related_type == 'Feature'"
+            data="favoriteDetail.feature"
+            periods="favoriteDetail.periods"
+            people="favoriteDetail.people"
+            category="favoriteDetail.feature.category_name"
+            window-type="windowType" >
+          </list-item-feature>
+
+          <!-- Favorite Button -->
+          <favorite-button type="{{favoriteDetail.favorite_detail.related_type}}"
+              id="{{favoriteDetail.post.id || favoriteDetail.shop.id || favoriteDetail.feature.id}}"
+              is-favorite="true"
+              favorite-id="{{selectedFavorite.id}}"
+              ng-class="{'show-btn': isEditList}"
+              ng-click="remove($index)"></favorite-button>
+        </div>
+
+        <div class="no-data" ng-if="!favoriteDetails || favoriteDetails.length == 0">
+          <p ng-show="!showLoading">No Data Found</p>
+          <ion-spinner ng-show="showLoading"></ion-spinner>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="row padding-bottom">
+      <div class="account-detail col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+        <p class="form-info">
+          お気に入り機能はβ機能です。ご意見、フィードバック等ございましたら、
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeN484u28ycJi7Sc9voGcecEXFt4dzgCKJ_jZgBJ_qxarjR2Q/viewform" target="_blank">お問い合わせフォーム
+          </a>
+          よりご連絡ください。
+        </p>
+      </div>
+    </div>
+
+ </ion-content>
+</ion-view>

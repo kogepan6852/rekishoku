@@ -42,8 +42,17 @@ class ApiPostsController < ApplicationController
       @posts = @posts.joins(:shops).where('shops.province' => params[:province]).uniq
     end
 
+    # ライターで検索
+    if params[:writer]
+      @posts = @posts.where("user_id = ?", params[:writer])
+    end
+
+    if params[:page] && params[:per]
+      @posts = @posts.page(params[:page]).per(params[:per])
+    end
+
     newPosts = Array.new()
-    @posts.page(params[:page]).per(params[:per]).each do |post|
+    @posts.each do |post|
       newPosts.push(get_post_json(post))
     end
     render json: newPosts

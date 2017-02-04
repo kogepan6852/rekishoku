@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module 'frontApp'
-  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate, DataService, $ionicScrollDelegate) ->
+  .controller "ShopDetailCtrl", ($scope, $rootScope, $stateParams, $controller, $state, Api, Const, config, $location, $translate, $window, $ionicNavBarDelegate, DataService, $ionicScrollDelegate, $ionicModal) ->
 
     # Controllerの継承
     $controller 'BaseCtrl', $scope: $scope
@@ -40,6 +40,11 @@ angular.module 'frontApp'
       if $scope.shop
         setSeo()
 
+    $ionicModal.fromTemplateUrl('views/parts/modal-rating-info.html',
+      scope: $scope
+      animation: 'slide-in-up').then (modalRatingInfo) ->
+        $scope.modalRatingInfo = modalRatingInfo
+  
     ###
     # common function
     ###
@@ -75,7 +80,7 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
-      Api.getJson("", Const.API.SHOP + '/' + $stateParams.id, true).then (res) ->
+      Api.getJson("", Const.API.SHOP + '/' + $stateParams.id, false).then (res) ->
         $scope.shop = res.data.shop
         $scope.categories = res.data.categories
         $scope.posts = res.data.posts
@@ -126,3 +131,16 @@ angular.module 'frontApp'
     ###
     # function
     ###
+    $scope.showRatingInfoModal = ->
+      # 歴食度説明文の取得
+      targets = ["HISTORY", "BUILDING", "MENU", "PERSON", "EPISODE"]
+      $scope.ratingInfos = []
+      angular.forEach targets, (target) ->
+        $scope.ratingInfos.push
+          'title': $translate.instant('SHOP.RATING.INFO.' + target + '.TITLE')
+          'description': $translate.instant('SHOP.RATING.INFO.' + target + '.DESCRIPTION')
+          'details': $translate.instant('SHOP.RATING.INFO.' + target + '.DETAIL').split(',')
+      $scope.modalRatingInfo.show()
+
+    $scope.closeRatingInfoModal = ->
+      $scope.modalRatingInfo.hide()

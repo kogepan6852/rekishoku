@@ -15,10 +15,13 @@
         <img ng-src="{{feature.image.md.url}}" src="../images/dummy-img.png" class="visible-xs" ng-if="windowType=='xs'">
       </div>
     </div>
-    <div class="row no-padding no-margin" ng-if="feature.quotation_name">
-      <div class="image-quotation">
-        <span ng-bind="'POST.PHOTO_BY'|translate"></span>
-        <a href="{{feature.quotation_url}}" target="_blank">{{feature.quotation_name}}</a>
+    <div class="row no-padding no-margin">
+      <div class="image-quotation has-mode-btn">
+        <span ng-if="feature.quotation_name">
+          <span ng-bind="'POST.PHOTO_BY'|translate"></span>
+          <a href="{{feature.quotation_url}}" target="_blank">{{feature.quotation_name}}</a>
+        </span>
+        <favorite-button type="Feature" id="{{targetId}}"></favorite-button>
       </div>
     </div>
 

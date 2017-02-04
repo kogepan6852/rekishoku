@@ -7,7 +7,8 @@
       "SHOP":         "STORE",
       "FEATURE":      "FEATURE",
       "WRITERS":      "WRITERS",
-      "MY_POST":      "MY POST"
+      "MY_POST":      "MY POST",
+      "MY_ACCOUNT":   "MY ACCOUNT"
     },
     "KEYWORDS": {
       "BASE":         "歴食",
@@ -25,10 +26,10 @@
     "STORE":          "STORE",
     "WRITERS":        "ライター一覧",
     "POSTS":          "投稿一覧",
-    "MY_ACCOUNT":     "My Account",
+    "MY_ACCOUNT":     "MY ACCOUNT",
     "PROFILE":        "プロフィール",
-    "LOGIN":          "ログイン",
-    "LOGOUT":         "ログアウト"
+    "LOGIN":          "LOGIN",
+    "LOGOUT":         "LOGOUT"
   },
   "CONDITION": {
     "CATEGORIES":     "CATEGORIES",
@@ -44,12 +45,33 @@
     "DELETE":         "削除",
     "NEW_POST":       "新規投稿",
     "EDIT":           "編集",
-    "GO":             "GO"
+    "GO":             "GO",
+    "SAVE":           "保存"
   },
   "TEXT": {
     "CURRENT_PLACE":  "現在地",
     "ADDRESS":        "ADDRESS",
     "PULLING":        "Pull to refresh..."
+  },
+  "MY_ACCOUNT": {
+    "FAVORITE": "お気に入り",
+    "BUTTON": {
+      "NEW_LIST": "新しいリストの追加"
+    },
+    "POPOVER": {
+      "ADD": {
+        "TITLE": "新規リストの追加",
+        "MESSAGE": "リスト名を入力してください"
+      },
+      "EDIT": {
+        "TITLE": "リストの更新",
+        "MESSAGE": "リスト名を更新してください"
+      },
+      "DELETE": {
+        "TITLE": "リストの削除",
+        "MESSAGE": "を削除してもよろしいですか？"
+      }
+    }
   },
   "POST": {
     "PHOTO_BY":       "PHOTO by ",
@@ -71,11 +93,35 @@
     "NIGHTTIME":      "夜：",
     "HF_RATING":      "歴食度",
     "RATING": {
-      "HISTORY":      "創業年",
-      "BUILDING":     "建物",
-      "MENU":         "メニュー",
-      "PERSON":       "人物",
-      "EPISODE":      "エピソード"
+      "TITLE": "歴食度とは？",
+      "DESCRIPTION": "歴食度とは、歴食.jp独自の評価軸です。<br>「味」でなく、「歴史」を5つの観点から3段階で評価し、「歴史体験」の濃度を示します。",
+      "INFO": {
+        "HISTORY": {
+          "TITLE": "創業年",
+          "DESCRIPTION": "歴食店屋号の歴史を表します",
+          "DETAIL": "安土桃山時代以前,江戸時代,明治時代から昭和戦前,戦後"        
+        },
+        "BUILDING": {
+          "TITLE": "建物",
+          "DESCRIPTION": "歴食店の建物の歴史を表します",
+          "DETAIL": "建物が江戸時代以前,建物や縁の品が大正以前/有形文化財などに登録されている,建物や縁の品が昭和戦前,建物と縁の品が戦後"        
+        },
+        "MENU": {
+          "TITLE": "メニュー",
+          "DESCRIPTION": "歴食メニューの希少性を表します",
+          "DETAIL": "元祖メニュー,当時から続くメニュー,復刻（過去のメニューを復活）,創作系メニュー"        
+        },
+        "PERSON": {
+          "TITLE": "人物",
+          "DESCRIPTION": "歴食店への関連人物の有名度（検索数、教科書等掲載数から数値化）を表します",
+          "DETAIL": "歴史上の特に有名な人物が多数関わっている,多数の歴史上の人物/歴史上の特に有名な人物が関わっている,歴史上の人物が関わっている,一般人(有名人エピソードなし),"        
+        },
+        "EPISODE": {
+          "TITLE": "エピソード",
+          "DESCRIPTION": "歴食エピソードの希少性を表します",
+          "DETAIL": "エピソードが起こった場所,移転前（移転前の店でエピソードがあり）,他店(類似店等でエピソードあり),関連なし(エピソードなし)"        
+        }
+      }
     }
   },
   "EXTERNAL_LINK": {
@@ -112,6 +158,7 @@
       "UNPUBLISHE":     "非公開にしてもよろしいですか？"
     },
     "ALERT": {
+      "LOGIN":          "ログインしてください",
       "NO_POSITION":    "位置情報を取得できません",
       "ERROR":          "通信エラー"
     }

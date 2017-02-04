@@ -38,11 +38,6 @@ p {
   font-weight: 600;
 }
 
-.big-modal {
-  top: 5%;
-  bottom: 5%;
-}
-
 /* link */
 a {
   color: $baseColor;
@@ -142,6 +137,16 @@ i {
 
     i {
       font-size: 24px;
+    }
+  };
+
+  .button.login-btn {
+    padding-right: 10px;
+    font-size: $h6;
+    color: $darkGrayColor;
+
+    .icon::before {
+      font-size: 28px;
     }
   }
 }
@@ -272,6 +277,7 @@ ion-side-menu {
   .search-header {
     background-color: rgba(255, 255, 255, 0.95)!important;
     border-bottom: 1px solid #ddd;
+    border: none;
 
     .item-icon-left {
       padding-left: 42px;
@@ -331,7 +337,7 @@ ion-side-menu {
     border-top: 1px solid #d3d3d3;
   }
   .item i {
-    // color: $baseColor;
+    color: #fff;
   }
   .item-divider {
     text-align: center;
@@ -396,7 +402,6 @@ ion-slide {
 /**********************
  * Toast
  **********************/
-
 .toast-top-full-width {
   top: 10px;
 }
@@ -405,9 +410,14 @@ ion-slide {
   bottom: 10px;
 }
 
-#toast-container > div {
-  padding: 30px 15px 30px 50px;
-  font-size: 20px;
+#toast-container {
+  max-width: 500px;
+  > div {
+    padding: 15px 15px 15px 50px;
+    font-size: 18px;
+    background-color: $darkGrayColor;
+    opacity: 0.9;
+  }
 }
 
 /**********************
@@ -418,52 +428,6 @@ ion-slide {
   border-radius: 10px;
   padding: 10px;
   width: 270px;
-}
-
-/**********************
- * Modal
- **********************/
-
-ion-modal-view .bar-header {
-  background-color: transparent !important;
-}
-
-.scale-in {
-  transform: scale(0.9);
-  opacity: 0;
-  &.ng-enter, > .ng-enter {
-    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
-  }
-  &.ng-enter-active, > .ng-enter-active {
-    transform: scale(1);
-    opacity: 1;
-  }
-  &.ng-leave, > .ng-leave {
-    transition: all ease-in-out 250ms;
-  }
-}
-
-.modal-post, .modal-profile-edit {
-  form, .slider {
-    height: 100%;
-  }
-
-  .item-input-wrapper {
-      background: #eee none repeat scroll 0 0;
-      border: none;
-      border-radius: 4px;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      padding-left: 8px;
-      padding-right: 8px;
-      width: 100%;
-  }
-
-  input[readonly].item-input-wrapper {
-    background-color: transparent !important;
-    color: #808080;
-  }
-
 }
 
 /**********************
@@ -494,12 +458,37 @@ ion-modal-view .bar-header {
  **********************/
 .button {
   &.btn-main {
-    background-color: $subColor;
+    background-color: $baseColor;
     color: #fff;
     border: none;
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+
+    &.activated {
+      background-color: $baseColorLite;
+    }
+
+    .icon {
+      color: #fff;
+    }
+  }
+  
+  &.facebook {
+    background-color: $facebook;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+
+    &.activated {
+      background-color: $facebookDark;
+    }
+    i {
+      padding-right: 5px;
+      color: #fff;
+    }
   }
 }
 
@@ -631,7 +620,7 @@ label {
   max-width: initial;
 }
 
-ion-view {
+body {
   .row {
     margin-left: initial;
     margin-right: initial;

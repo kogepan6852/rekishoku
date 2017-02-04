@@ -94,6 +94,12 @@ angular
         templateUrl: 'views/writer-detail.html'
         controller: 'WriterDetailCtrl'
 
+      # マイアカウント
+      .state 'account',
+        url: '/app/account/:id'
+        templateUrl: 'views/account.html'
+        controller: 'AccountCtrl'
+
       # 旧URL用の暫定パス
       .state 'post-old',
         url: '/post/:id?preview'
@@ -102,6 +108,44 @@ angular
 
 
     $urlRouterProvider.otherwise ('/app/magazine')
+
+  .run ($rootScope, $window, config, $localStorage, Api, Const, $cookies) ->
+    # facebookのjs読み込み
+    ((d, s, id) ->
+      js = undefined
+      fjs = d.getElementsByTagName(s)[0]
+      if d.getElementById(id)
+        return
+      js = d.createElement(s)
+      js.id = id
+      js.src = '//connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore js, fjs
+    ) document, 'script', 'facebook-jssdk'
+
+    $window.fbAsyncInit = ->
+      FB.init
+        appId: config.id.facebook
+        status: true
+        cookie: true
+        xfbml: true
+        version: 'v2.4'
+
+      $rootScope.isLogin = false
+      $rootScope.isWriter = false
+
+      # check user login status
+      $localStorage['token'] = $cookies.get 'token'
+      if $localStorage['email'] && $localStorage['token'] && $localStorage['user_id']
+        accessKey =
+          email: $localStorage['email']
+          token: $localStorage['token']
+        path = Const.API.USER + '/' + $localStorage['user_id']
+        Api.getJson(accessKey, path, false).then (res) ->
+          if res.data && res.data.role >= 0
+            $rootScope.isLogin = true
+            if res.data.role != 1
+              $rootScope.isWriter = true
+
 
   .config(["$httpProvider", ($httpProvider) ->
 

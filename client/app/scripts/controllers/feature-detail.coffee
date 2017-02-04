@@ -70,7 +70,7 @@ angular.module 'frontApp'
     # initialize
     ###
     $scope.init = ->
-      Api.getJson("", Const.API.FEATURE + '/' + $stateParams.id + '.json', true).then (res) ->
+      Api.getJson("", Const.API.FEATURE + '/' + $stateParams.id + '.json', false).then (res) ->
         $scope.feature = res.data.feature
         $scope.featureDetails = res.data.feature_details
         $scope.user = res.data.user

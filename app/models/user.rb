@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates:authentication_token, uniqueness: true, allow_nil: true
   has_many :posts
   has_many :features
+  has_many :favorites
 
   # 認証トークンが無い場合は作成
   def ensure_authentication_token
@@ -26,6 +27,35 @@ class User < ActiveRecord::Base
 
   def delete_authentication_token
     self.update(authentication_token: nil)
+  end
+
+  # Create or update by sns login
+  def self.find_for_oauth(uid, provider, email)
+    user = User.where(uid: uid, provider: provider).first
+
+    # create new user
+    unless user
+      user = User.find_or_initialize_by(
+        email:    email
+      )
+      # set password
+      password_length = 8
+      password = Devise.friendly_token.first(password_length)
+      user.password = password
+      user.password_confirmation = password
+    end
+
+    user.uid = uid
+    user.provider = provider
+    user.save!
+
+    user
+  end
+
+  after_create do
+    name = I18n.t('default_value.favorite')
+    favorite = Favorite.new(name: name, user_id: id, order: 0, is_delete: false)
+    favorite.save
   end
 
 end

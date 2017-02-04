@@ -19,12 +19,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # SSL
+  if Rails.env.production?
+    force_ssl if: :force_ssl?
+  end
+
   # トークンによる認証
   def authenticate_user_from_token!
     user = User.find_by(email: params[:email])
     if Devise.secure_compare(user.try(:authentication_token), params[:token])
       sign_in user, store: false
+    else
+      sign_out user
+      render json: { "error" => I18n.t('devise.failure.timeout') }, :status => 401
     end
   end
+
+  private
+    def force_ssl?
+      not request.path =~ /^.well-known\/acme-challenge/
+    end
 
 end

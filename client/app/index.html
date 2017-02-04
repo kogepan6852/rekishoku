@@ -14,7 +14,7 @@
     <title ng-if="appTitle">{{appTitle}}</title>
     <meta name="description"        content="夏目漱石が愛した和菓子、伊達政宗が考えたお餅、江戸っ子に人気の鍋。”ストーリーのある食”を”食べに行ける店”と合わせてご紹介します。新しい食体験と歴史体験、是非合わせて味わってみてください。" ng-if="!appDescription"/>
     <meta name="description"        content="{{appDescription}}" ng-if="appDescription"/>
-    <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku" ng-if="!appKeywords"/>
+    <meta name="keywords"           content="歴食,暦食,郷土料理,rekishoku,rekisyoku,れきしょく" ng-if="!appKeywords"/>
     <meta name="keywords"           content="{{appKeywords}}" ng-if="appKeywords"/>
     <!-- FB -->
     <meta property="og:type"        content="website" />
@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="styles/directives.css">
     <link rel="stylesheet" href="styles/directives-rd.css">
     <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/modal-rd.css">
+    <link rel="stylesheet" href="styles/popover.css">
     <link rel="stylesheet" href="styles/mobile.css">
     <link rel="stylesheet" href="styles/magazine.css">
     <link rel="stylesheet" href="styles/magazine-rd.css">
@@ -55,6 +57,7 @@
     <link rel="stylesheet" href="styles/writer-detail-rd.css">
     <link rel="stylesheet" href="styles/map.css">
     <link rel="stylesheet" href="styles/map-rd.css">
+    <link rel="stylesheet" href="styles/account.css">
     <!-- endbuild -->
     <!-- Facebook Pixel Code -->
     <script>
@@ -70,7 +73,7 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1537447703220535&ev=PageView&noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
   </head>
-  <body>
+  <body class="platform-ios">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -83,7 +86,6 @@
     <!-- Google Maps API -->
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
     <!-- Load Facebook SDK for JavaScript -->
-    <script src='https://connect.facebook.net/ja_JP/all.js'></script>
     <div ng-include="'views/menu.html'"></div>
     <toaster-container toaster-options="{'position-class': 'toast-bottom-full-width'}"></toaster-container>
 
@@ -143,11 +145,13 @@
     <script src="scripts/controllers/feature-detail.js"></script>
     <script src="scripts/controllers/writers.js"></script>
     <script src="scripts/controllers/writer-detail.js"></script>
+    <script src="scripts/controllers/account.js"></script>
     <script src="scripts/services/api.js"></script>
     <script src="scripts/services/const.js"></script>
     <script src="scripts/services/base-service.js"></script>
     <script src="scripts/services/data-service.js"></script>
     <script src="scripts/services/header-service.js"></script>
+    <script src="scripts/services/facebook-service.js"></script>
     <script src="scripts/directive/base-directive.js"></script>
     <script src="scripts/directive/star-directive.js"></script>
     <script src="scripts/directive/info-tag-directive.js"></script>
@@ -158,6 +162,7 @@
     <script src="scripts/directive/advertisment-row-directive.js"></script>
     <script src="scripts/directive/sns-icons-directive.js"></script>
     <script src="scripts/directive/resize-directice.js"></script>
+    <script src="scripts/directive/favorite-button-directive.js"></script>
     <script src="scripts/filter/base-filter.js"></script>
     <!-- endbuild -->
 </body>

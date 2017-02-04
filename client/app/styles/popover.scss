@@ -1,0 +1,40 @@
+@import "setting";
+
+/**********************
+ * popover-favorites
+ **********************/
+.popover-favorites {
+  ion-content {
+    &.show {
+      .item-content {
+        padding-right: 16px;
+      }
+    }
+    .item-inner {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.item-button-right {
+        padding-right: 40px;
+      }
+
+      .edit-btn {
+        top: 10px;
+        position: absolute;
+        right: -30px;
+        padding: 2px 4px 1px;
+        min-width: 28px;
+        min-height: 30px;
+        font-size: 12px;
+        line-height: 26px;
+        color: $baseColor;
+        @include css3(transition, all 0.2s ease-out);
+
+        &.show {
+          right: 16px;
+        }
+      }
+    }
+  }
+}

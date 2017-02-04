@@ -22,11 +22,13 @@ class ApiPostDetailsController < ApplicationController
 
       @post_detail.post_id = post_detail['post_id']
       @post_detail.title = post_detail['title']
-      @post_detail.image = post_detail['image']
       @post_detail.content = post_detail['content']
       @post_detail.quotation_url = post_detail['quotation_url']
       @post_detail.quotation_name = post_detail['quotation_name']
       @post_detail.is_eye_catch = post_detail['is_eye_catch']
+      if post_detail['image']
+        @post_detail.image = post_detail['image']
+      end
       if !@post_detail.save
         isSuccess = false
       end

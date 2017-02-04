@@ -19,6 +19,9 @@ angular.module("frontApp")
       PERIOD:       '/api/periods'
       USER:         '/api/users'
       LOGIN:        '/users/sign_in.json'
+      FAVORITE:     '/api/favorites'
+      FAVORITE_DETAIL:'/api/favorite_details'
+      FACEBOOK:     '/api/sns/facebook'
       LOGOUT:       '/authentication_token.json'
       SETTING:
         PER: 10

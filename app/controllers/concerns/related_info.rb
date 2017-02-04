@@ -107,6 +107,13 @@ module RelatedInfo
     return obj
   end
 
+  def get_favorite_json(favorite)
+    obj = {
+            "favorite" => favorite
+          }
+    return obj
+  end
+
   private
     # 対象のお店から紐づく人物を取得する
     def get_people_feature(articles)

@@ -30,8 +30,13 @@
             </form>
           </ion-header-bar>
 
-          <ion-scroll direction="y" ng-class="{'login': isLogin}">
+          <ion-scroll direction="y" class="login">
             <!-- pages -->
+            <a class="item hidden-xs item-icon-left" ng-class="{'active': currentType == 'account'}" ng-click="moveToAccount(isLogin)">
+              <i class="icon ion-ios-locked-outline"></i>
+              <span ng-bind="'MENU.MY_ACCOUNT'|translate" ng-if="isLogin"></span>
+              <span ng-bind="'MENU.LOGIN'|translate" ng-if="!isLogin"></span>
+            </a>
             <a class="item hidden-xs item-top" ng-class="{'active': currentType == 'magazine'}" ng-click="moveToHome(false)" ng-bind="'MENU.MAGAZINE'|translate"></a>
             <a class="item hidden-xs" ng-class="{'active': currentType == 'feature'}" ng-click="moveToFeature()" ng-bind="'MENU.FEATURE'|translate"></a>
             <a class="item hidden-xs" ng-class="{'active': currentType == 'shop'}" ng-click="moveToShops()" ng-bind="'MENU.STORE'|translate"></a>
@@ -62,11 +67,10 @@
             <!-- other -->
             <a class="item item-top hidden-xs" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
             <a class="item hidden-xs" href="https://www.rekishoku.jp/about" target="_blank">ABOUT</a>
-            <!-- <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div> -->
-            <a class="item hidden-xs" ng-click="moveToMyPost()" ng-if="isLogin">
+            <a class="item hidden-xs" ng-click="moveToMyPost()" ng-if="isLogin && isWriter">
               {{'MENU.POSTS'|translate}}
             </a>
-            <a class="item hidden-xs" ng-click="moveToWriterDetail()" ng-show="isLogin">
+            <a class="item hidden-xs" ng-click="moveToWriterDetail()" ng-show="isLogin && isWriter">
               PROFILE
             </a>
 
@@ -74,8 +78,7 @@
 
           <!-- my account -->
           <div class="menu-footer hidden-xs">
-            <a class="item item-top" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
-            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak  ng-bind="'MENU.LOGOUT'|translate"></a>
             <div class="item sns-icons">
               <a class="facebook-icon" href="https://www.facebook.com/%E6%AD%B4%E9%A3%9F-292634487527691/" target="_blank"><i class="ion-social-facebook"></i></a>
               <a class="twitter-icon" href="https://twitter.com/rekishoku" target="_blank"><i class="ion-social-twitter"></i></a>
@@ -153,11 +156,10 @@
             <!-- other -->
             <a class="item item-top" ng-class="{'active': currentType == 'writers'}" ng-click="moveToWriters()">WRITERS</a>
             <a class="item" href="https://www.rekishoku.jp/about" target="_blank">ABOUT</a>
-            <!-- <div class="item item-divider" ng-show="isLogin || showLogin">MY ACCOUNT</div> -->
-            <a class="item" ng-click="moveToMyPost()" ng-if="isLogin">
+            <a class="item" ng-click="moveToMyPost()" ng-if="isLogin && isWriter">
               {{'MENU.POSTS'|translate}}
             </a>
-            <a class="item" ng-click="moveToWriterDetail()" ng-show="isLogin">
+            <a class="item" ng-click="moveToWriterDetail()" ng-show="isLogin && isWriter">
               PROFILE
             </a>
 
@@ -165,8 +167,8 @@
 
           <!-- my account -->
           <div class="menu-footer">
-            <a class="item item-top" ng-click="openModalLogin()" ng-show="!isLogin && showLogin">LOGIN</a>
-            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak>LOGOUT</a>
+            <a class="item item-top" ng-click="openModalLogin()" ng-show="!isLogin" ng-bind="'MENU.LOGIN'|translate"></a>
+            <a class="item item-top" ng-click="doLogout()" ng-show="isLogin" ng-cloak ng-bind="'MENU.LOGOUT'|translate"></a>
             <div class="item sns-icons">
               <a class="facebook-icon" href="https://www.facebook.com/%E6%AD%B4%E9%A3%9F-292634487527691/" target="_blank"><i class="ion-social-facebook"></i></a>
               <a class="twitter-icon" href="https://twitter.com/rekishoku" target="_blank"><i class="ion-social-twitter"></i></a>
@@ -189,6 +191,10 @@
       </ion-nav-buttons>
       <div class="logo visible-xs" ng-click="moveToHome(true)"></div>
       <ion-nav-buttons side="right">
+        <div class="button button-clear button-dark visible-xs login-btn" ng-click="clickAccount(isLogin)">
+          <span ng-show="!isLogin" ng-bind="'MENU.LOGIN'|translate"></span>
+          <i ng-show="isLogin" class="icon ion-ios-heart-outline"></i>
+        </div>
         <div class="button button-clear button-dark visible-xs" ng-click="toggleRight()" ><i class="icon ion-navicon"></i></div>
       </ion-nav-buttons>
       <ion-nav-back-button class="button-back" ng-click="goBack()">

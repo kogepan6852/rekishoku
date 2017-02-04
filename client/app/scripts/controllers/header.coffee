@@ -8,7 +8,7 @@
  # Controller of the frontApp
 ###
 angular.module "frontApp"
-  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService, HeaderService) ->
+  .controller "HeaderCtrl", ($scope, $rootScope, $timeout, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicModal, $ionicPopup, $localStorage, $location, $state, $ionicHistory, $ionicNavBarDelegate, $ionicViewSwitcher, $translate, $cookies, Api, toaster, Const, DataService, HeaderService, FasebookService, $ionicLoading) ->
 
     ###
     # setting
@@ -28,24 +28,6 @@ angular.module "frontApp"
       animation: 'scale-in'
       backdropClickToClose: false).then (modalSearch) ->
         $scope.modalSearch = modalSearch
-
-    # cookieより値を取得
-    $localStorage['email'] = $cookies.get 'email'
-    if $localStorage['email']
-      $scope.input.email = $localStorage['email']
-    else
-      # login情報の削除
-      delete $localStorage['token']
-      delete $localStorage['email']
-      delete $localStorage['user_id']
-
-    if !$localStorage['token']
-      $rootScope.isLogin = false
-    else
-      $rootScope.isLogin = true
-    $scope.showLogin = false
-    if $location.search()["showLogin"] || $localStorage['email']
-      $scope.showLogin = true
 
     ###
     # initialize
@@ -85,11 +67,47 @@ angular.module "frontApp"
         $ionicHistory.clearCache();
       $ionicSideMenuDelegate.toggleRight(false);
 
+    loginSetting = (res) ->
+      # cacheの削除
+      $ionicHistory.clearHistory();
+      $ionicHistory.clearCache();
+      # cookieの設定
+      expire = new Date
+      expire.setMonth expire.getMonth() + 1
+      $cookies.put 'token', res.data.authentication_token, expires: expire
+
+      $ionicSideMenuDelegate.toggleRight(false);
+      $scope.modalLogin.hide()
+      clearInput()
+
+      $localStorage['email'] = res.data.email
+      $localStorage['token'] = res.data.authentication_token
+      $localStorage['user_id'] = res.data.id
+      $rootScope.isLogin = true
+      if res.data.role >= 0 && res.data.role != 1
+        $rootScope.isWriter = true
+      
+      $location.path('/app');
+
+      # toast表示
+      toaster.pop
+        type: 'success',
+        title: $translate.instant('MSG.INFO.LOGED_IN'),
+        showCloseButton: true
+    
+
     ###
     # Function
     ###
     $scope.openModalLogin = ->
       $scope.modalLogin.show()
+
+    $scope.clickAccount = (isLogin) ->
+      if isLogin
+        userId = $localStorage['user_id']
+        $state.go('account', {id: userId});
+      else
+       $scope.modalLogin.show()
 
     $scope.hideModalLogin = ->
       $scope.modalLogin.hide()
@@ -101,54 +119,46 @@ angular.module "frontApp"
       $ionicSideMenuDelegate.toggleLeft();
 
     $scope.doLogin = ->
-      # cookieの設定
-      expire = new Date
-      expire.setMonth expire.getMonth() + 1
-      $cookies.put 'email', $scope.input.email, expires: expire
-
       obj =
         "user[email]": $scope.input.email
         "user[password]": $scope.input.password
 
-      Api.postJson(obj, Const.API.LOGIN).then (res) ->
-        $ionicSideMenuDelegate.toggleRight();
-        $scope.modalLogin.hide()
-        clearInput()
-
-        $localStorage['email'] = res.data.email
-        $localStorage['token'] = res.data.authentication_token
-        $localStorage['user_id'] = res.data.id
-        $rootScope.isLogin = true
-        # toast表示
-        toaster.pop
-          type: 'success',
-          title: $translate.instant('MSG.INFO.LOGED_IN'),
-          showCloseButton: true
+      Api.postJson(obj, Const.API.LOGIN, true).then (res) ->
+        loginSetting(res)
 
     $scope.doLogout = ->
-      $ionicPopup.show(
+      logoutPopup = $ionicPopup.show(
         title: $translate.instant('MSG.COMFIRM.LOGOUT')
         scope: $scope
         buttons: [
           { text: $translate.instant('BUTTON.CANCEL') }
           {
             text: '<b>'+$translate.instant('BUTTON.OK')+'</b>'
-            type: 'button-dark'
+            type: 'btn-main'
             onTap: (e) ->
-              $rootScope.isLogin = false
+            
+              $timeout (->
+                $rootScope.isLogin = false
+                $rootScope.isWriter = false
+
+                # login情報の削除
+                delete $localStorage['token']
+                delete $localStorage['email']
+                delete $localStorage['user_id']
+
+                # pupout close
+                logoutPopup.close()
+              ), 200
+
               accessKey =
                 email: $localStorage['email']
                 token: $localStorage['token']
 
-              # login情報の削除
-              delete $localStorage['token']
-              delete $localStorage['email']
-              delete $localStorage['user_id']
               Api.logOut(accessKey, Const.API.LOGOUT).then (res) ->
                 $ionicSideMenuDelegate.toggleRight();
                 clearInput()
                 # cookieの削除
-                $cookies.remove 'email'
+                $cookies.remove 'token'
 
                 clearInput()
                 $location.path('/app');
@@ -171,6 +181,19 @@ angular.module "frontApp"
           title: $translate.instant('MSG.INFO.SINGED_UP'),
           showCloseButton: true
 
+    $scope.fbLogin = ->
+      $ionicLoading.show template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+      FasebookService.login().then (response) ->
+        obj =
+          "uid": response.userID
+          "token": response.accessToken
+          "fbmail": response.email
+        Api.getJson(obj, Const.API.FACEBOOK).then (res) ->
+          loginSetting(res)
+          $ionicLoading.hide()
+        ,(err) -> $ionicLoading.hide()
+      ,(err) -> $ionicLoading.hide()
+
     $scope.closeMenu = ->
       $ionicSideMenuDelegate.toggleRight();
 
@@ -179,6 +202,17 @@ angular.module "frontApp"
       userId = $localStorage['user_id']
       $state.go('writerDetail', { id: userId })
       clearForMove(false)
+
+    $scope.moveToAccount = (isLogin) ->
+      $ionicViewSwitcher.nextTransition('none')
+      if isLogin
+        userId = $localStorage['user_id']
+        $rootScope.currentType = 'account'
+        $rootScope.appTitle = $translate.instant('SEO.TITLE.BASE') + $translate.instant('SEO.TITLE.MY_ACCOUNT')
+        clearForMove(false)
+        $state.go('account', {id: userId});
+      else
+       $scope.modalLogin.show()
 
     $scope.moveToHome = (isReload) ->
       $ionicViewSwitcher.nextTransition('none')

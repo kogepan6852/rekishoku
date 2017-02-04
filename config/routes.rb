@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
+  # root
   root to: redirect("/app/magazine", status: 301)
-  # get 'app/post/*path', to: 'app_route#post'
-  # get 'app/shop/*path', to: 'app_route#shop'
   get 'app/*path', to: 'app_route#show'
   get 'app', to: redirect("/app/magazine", status: 301)
   # 旧URL対応
@@ -38,6 +37,19 @@ Rails.application.routes.draw do
   # FEATURES
   get 'api/features', to: 'api_features#index'
   get 'api/features/:id', to: 'api_features#show'
+
+  # FAVORITES
+  get 'api/favorites', to: 'api_favorites#index'
+  get 'api/favorites/:id', to: 'api_favorites#show'
+  post 'api/favorites', to: 'api_favorites#create'
+  post 'api/favorites/:id', to: 'api_favorites#update'
+  delete 'api/favorites/:id', to: 'api_favorites#destroy'
+
+  # FAVORITES DETAILS
+  get 'api/favorite_details', to: 'api_favorite_details#index'
+  post 'api/favorite_details', to: 'api_favorite_details#create'
+  post 'api/favorite_details/:id', to: 'api_favorite_details#update'
+  delete 'api/favorite_details/:id', to: 'api_favorite_details#destroy'
 
   # USERS
   get 'api/users', to: 'api_users#index'
@@ -91,9 +103,11 @@ Rails.application.routes.draw do
       get 'sitemap', to: redirect('https://s3-ap-northeast-1.amazonaws.com/rekishoku-stg/sitemaps/sitemap.xml.gz')
   end
 
+  # AUTHENTICATION
   resource :authentication_token, only: [:update, :destroy]
   devise_for :users, controllers: { sessions: "sessions", registrations: "registrations" }
   resources :users, :only => [:index, :show, :update]
+  get 'api/sns/facebook', to: 'api_sns_auth#facebook'
 
   # root to: 'menu#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

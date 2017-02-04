@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # User Authorization
 gem 'devise'
 gem 'cancancan'
+gem "koala", "~> 2.2"
 
 # fileupload
 gem 'carrierwave'
@@ -77,6 +78,10 @@ gem 'rails_12factor', group: :production
 
 # CORS
 gem 'rack-cors'
+
+# ssl
+gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
+gem 'letsencrypt-rails-heroku', group: 'production'
 
 group :development do
   gem 'annotate', '2.6.5'
