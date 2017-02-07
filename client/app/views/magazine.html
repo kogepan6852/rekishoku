@@ -52,36 +52,37 @@
           </div>
         </a>
         <div class="right-box hidden-xs hidden-sm" ng-if="windowType!='xs' && windowType!='sm'">
-          <!-- SHOP -->
-          <a class="item shop side-area" href="/app/shop/{{shop.shop.id}}">
-            <img class="main-img" ng-src="{{shop.shop.subimage.md.url}}" src="../images/dummy-img.png">
-            <div class="category" ng-if="shop">
+          <!-- SHOP1 -->
+          <a class="item shop side-area" href="/app/shop/{{shop1.shop.id}}">
+            <img class="main-img" ng-src="{{shop1.shop.subimage.md.url}}" src="../images/dummy-img.png">
+            <div class="category" ng-if="shop1">
               <span>STORE</span>
             </div>
             <div class="description">
-              <h4 ng-bind="shop.shop.name" class="mincho"></h4>
-              <star count="shop.rating.average"></star>
+              <h4 ng-bind="shop1.shop.name" class="mincho"></h4>
+              <star count="shop1.rating.average"></star>
             </div>
             <div class="tags">
               <div>
-                <info-tag name="{{period.name}}" ng-repeat="period in shop.periods"></info-tag>
-                <info-tag name="{{person.name}}" ng-repeat="person in shop.people"></info-tag>
+                <info-tag name="{{period.name}}" ng-repeat="period in shop1.periods"></info-tag>
+                <info-tag name="{{person.name}}" ng-repeat="person in shop1.people"></info-tag>
               </div>
             </div>
           </a>
-          <!-- FEATURE -->
-          <a class="item post side-area" href="/app/feature/{{feature.feature.id}}">
-            <img class="main-img" ng-src="{{feature.feature.image.md.url}}" src="../images/dummy-img.png">
-            <div class="category" ng-if="feature">
-              <span ng-bind="feature.feature.category_name"></span>
+          <!-- SHOP2 -->
+          <a class="item shop side-area" href="/app/shop/{{shop2.shop.id}}">
+            <img class="main-img" ng-src="{{shop2.shop.subimage.md.url}}" src="../images/dummy-img.png">
+            <div class="category" ng-if="shop2">
+              <span>STORE</span>
             </div>
             <div class="description">
-              <h4 ng-bind="feature.feature.title" class="mincho"></h4>
+              <h4 ng-bind="shop2.shop.name" class="mincho"></h4>
+              <star count="shop2.rating.average"></star>
             </div>
             <div class="tags">
               <div>
-                <info-tag name="{{period.name}}" ng-repeat="period in feature.periods"></info-tag>
-                <info-tag name="{{person.name}}" ng-repeat="person in feature.people"></info-tag>
+                <info-tag name="{{period.name}}" ng-repeat="period in shop2.periods"></info-tag>
+                <info-tag name="{{person.name}}" ng-repeat="person in shop2.people"></info-tag>
               </div>
             </div>
           </a>

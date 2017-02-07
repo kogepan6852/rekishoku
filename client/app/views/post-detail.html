@@ -57,7 +57,7 @@
 
     <!-- DETAILS TITLE -->
     <div class="row" ng-repeat-start="postDetail in postDetails">
-      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ng-if="postDetail.title">
         <h2 ng-bind="postDetail.title"></h2>
       </div>
     </div>
@@ -70,7 +70,8 @@
       </div>
     </div>
     <!-- DETAILS DESCRIPTION -->
-    <div class="row padding-bottom no-margin">
+    <div class="row padding-bottom no-margin"
+         ng-class="{'no-headline': !postDetail.title && !postDetail.content && isFeature(post)}">
       <div class="image-quotation col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2"
           ng-if="postDetail.image.url && !isFeature(post)">
         <span ng-bind="'POST.PHOTO_BY'|translate"></span>

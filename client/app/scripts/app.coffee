@@ -52,10 +52,10 @@ angular
         controller: 'MapCtrl'
 
       # MAP
-      .state 'tabs.features',
-        url: '/app/features'
-        templateUrl: 'views/features.html'
-        controller: 'FeaturesCtrl'
+      # .state 'tabs.features',
+      #   url: '/app/features'
+      #   templateUrl: 'views/features.html'
+      #   controller: 'FeaturesCtrl'
 
       # 記事詳細
       .state 'postDetail',

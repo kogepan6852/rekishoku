@@ -58,18 +58,13 @@ angular.module "frontApp"
 
       # TOP用情報取得
       objTop =
-        per: 1
+        per: 2
         page: 1
       # 最新ショップ取得
       Api.getJson(objTop, Const.API.SHOP, false).then (res) ->
         if res.data.length > 0
-          $scope.shop = res.data[0]
-
-      # 最新特集取得
-      Api.getJson(objTop, Const.API.FEATURE, false).then (res) ->
-        if res.data.length > 0
-          $scope.feature = res.data[0]
-
+          $scope.shop1 = res.data[0]
+          $scope.shop2 = res.data[1]
 
     ###
     # Global function

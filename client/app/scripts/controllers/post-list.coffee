@@ -214,7 +214,7 @@ angular.module "frontApp"
           detailCount = 0
 
           angular.forEach $scope.input.details, (detail, i) ->
-            if detail.subFile || detail.subContent
+            if detail.subFile || detail.subContent || (detail.relatedType && detail.relatedId)
               # formdata作成
               fdDetail = new FormData
               fdDetails.append 'token', $localStorage['token']
