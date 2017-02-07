@@ -154,7 +154,7 @@ angular.module 'frontApp'
     ###
     $scope.isFeature = (post) ->
       isFeature = false
-      if post && (post.category_slug == 'tour' || post.category_slug == 'event')
+      if post && (post.category_slug == 'tour' || post.category_slug == 'pickup')
         isFeature = true
       return isFeature
 

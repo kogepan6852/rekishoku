@@ -167,7 +167,7 @@ angular.module "frontApp"
       $scope.targetPostId = $scope.results[$index].id
       $scope.targetStatus = $scope.results[$index].status
       $scope.showShopRegistration = true
-      if $scope.results[$index].category_slug == 'tour' || $scope.results[$index].category_slug == 'event'
+      if $scope.results[$index].category_slug == 'tour' || $scope.results[$index].category_slug == 'pickup'
         $scope.showShopRegistration = false
       $scope.popoverPostMenu.show $event
 
@@ -565,7 +565,7 @@ angular.module "frontApp"
 
     $scope.isFeature = (slag) ->
       isFeature = false
-      if slag == 'tour' || slag == 'event'
+      if slag == 'tour' || slag == 'pickup'
         isFeature = true
       return isFeature
     
