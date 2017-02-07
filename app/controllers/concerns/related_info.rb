@@ -107,6 +107,19 @@ module RelatedInfo
     return obj
   end
 
+  def get_external_link_json(external_link)
+    # external_linkに紐付いてる人物を取得する
+    people = get_people(external_link)
+    # external_linkに紐付けしている時代を取得をする
+    periods = get_periods(external_link.people)
+    # 返却用のオブジェクトを作成する
+    obj = { "external_link" => external_link,
+            "people" => people.uniq,
+            "periods" => periods.uniq
+          }
+    return obj
+  end
+
   def get_favorite_json(favorite)
     obj = {
             "favorite" => favorite
