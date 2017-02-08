@@ -58,8 +58,7 @@ angular.module 'frontApp'
       angular.forEach $scope.people, (person) ->
         appKeywords.push(person.name)
       # 時代
-      angular.forEach $scope.periods, (period) ->
-        appKeywords.push(period.name)
+      appKeywords.push($scope.shop.period_name)
       # 代表料理
       menus = $scope.shop.menu.split('\r\n')
       angular.forEach menus, (menu) ->
@@ -85,7 +84,6 @@ angular.module 'frontApp'
         $scope.categories = res.data.categories
         $scope.posts = res.data.posts
         $scope.people = res.data.people
-        $scope.periods = res.data.periods
         $scope.rating = res.data.rating
         $scope.price = res.data.price
         $scope.eyeCatchImage = res.data.shop.subimage.md.url

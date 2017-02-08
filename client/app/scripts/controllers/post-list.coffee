@@ -32,6 +32,12 @@ angular.module "frontApp"
       backdropClickToClose: false).then (modalPeople) ->
         $scope.modalPeople = modalPeople
 
+    $ionicModal.fromTemplateUrl('views/parts/modal-list-items.html',
+      scope: $scope
+      animation: 'slide-in-up'
+      backdropClickToClose: false).then (modalListItems) ->
+        $scope.modalListItems = modalListItems
+
     $ionicPopover.fromTemplateUrl('views/parts/popover-post-menu.html',
       scope: $scope).then (popoverPostMenu) ->
         $scope.popoverPostMenu = popoverPostMenu
@@ -45,7 +51,7 @@ angular.module "frontApp"
 
     $scope.isShowBackSlide = false
     $scope.isShowAddPostDetail = true;
-    $scope.slideLists = [1, 2, 3, 4, 5, 6]
+    $scope.slideLists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     $scope.showDeleteButton = false
     $scope.isEditing = false
 
@@ -60,6 +66,8 @@ angular.module "frontApp"
           subQuotationUrl: null
           subQuotationName: null
           id: null
+          relatedType: null
+          relatedId: null
         details.push(detail)
       # postの初期化
       input =
@@ -76,6 +84,7 @@ angular.module "frontApp"
       angular.forEach $scope.categories, (category, i) ->
         category.checked = false
       $scope.categories[0].checked = true
+      $scope.targetCategorySlug = $scope.categories[0].slug
 
       # 画像を削除する
       angular.forEach angular.element("input[type='file']"), (inputElem) ->
@@ -157,6 +166,9 @@ angular.module "frontApp"
       $scope.targetIndex = $index
       $scope.targetPostId = $scope.results[$index].id
       $scope.targetStatus = $scope.results[$index].status
+      $scope.showShopRegistration = true
+      if $scope.results[$index].category_slug == 'tour' || $scope.results[$index].category_slug == 'pickup'
+        $scope.showShopRegistration = false
       $scope.popoverPostMenu.show $event
 
     # 編集メニューポップオーバー非表示
@@ -178,6 +190,7 @@ angular.module "frontApp"
         fd.append 'token', $localStorage['token']
         fd.append 'email', $localStorage['email']
         fd.append 'post[is_eye_catch]', $scope.input.isEyeCatch
+        fd.append 'post[is_map]', $scope.input.isMap
         if targetSlug then fd.append 'slug', targetSlug
         if $scope.input.title then fd.append 'post[title]', $scope.input.title.trim()
         if $scope.input.file then fd.append 'post[image]', $scope.input.file
@@ -201,12 +214,12 @@ angular.module "frontApp"
           detailCount = 0
 
           angular.forEach $scope.input.details, (detail, i) ->
-            if detail.subTitle || detail.subFile || detail.subContent
+            if detail.subFile || detail.subContent || (detail.relatedType && detail.relatedId)
               # formdata作成
               fdDetail = new FormData
               fdDetails.append 'token', $localStorage['token']
               fdDetails.append 'email', $localStorage['email']
-              fdDetails.append 'post_details[][post_id]', res.data.id
+              fdDetails.append 'post_details[][post_id]', res.data.id || detail.id
               fdDetails.append 'post_details[][is_eye_catch]', detail.isEyeCatch
               if detail.subTitle then fdDetails.append 'post_details[][title]', detail.subTitle.trim()
               if detail.subFile then fdDetails.append 'post_details[][image]', detail.subFile
@@ -214,6 +227,8 @@ angular.module "frontApp"
               if detail.subQuotationUrl then fdDetails.append 'post_details[][quotation_url]', detail.subQuotationUrl
               if detail.subQuotationName then fdDetails.append 'post_details[][quotation_name]', detail.subQuotationName
               if detail.id then fdDetails.append 'post_details[][id]', detail.id
+              if detail.relatedType then fdDetails.append 'post_details[][related_type]', detail.relatedType
+              if detail.relatedId then fdDetails.append 'post_details[][related_id]', detail.relatedId
 
               detailCount += 1
 
@@ -299,6 +314,8 @@ angular.module "frontApp"
             subQuotationName: if res.data[i] then res.data[i].quotation_name else null
             isEyeCatch: if res.data[i] then res.data[i].is_eye_catch else null
             srcSubUrl: if res.data[i] then res.data[i].image.thumb.url else null
+            relatedType: if res.data[i] && res.data[i].related_type then res.data[i].related_type else null
+            relatedId: if res.data[i] then res.data[i].related_id else null
             id: if res.data[i] then res.data[i].id else null
           details.push(detail)
         # postの作成
@@ -308,6 +325,7 @@ angular.module "frontApp"
           quotationUrl: $scope.results[index].quotation_url
           quotationName: $scope.results[index].quotation_name
           isEyeCatch: $scope.results[index].is_eye_catch
+          isMap: $scope.results[index].is_map
           details: details
           category:
             name: $scope.results[index].category_name
@@ -354,6 +372,22 @@ angular.module "frontApp"
     # 変化を監視してサブ画像6を読み込み＋表示を実行
     $scope.$watch 'input.details[5].subFile', (file) ->
       watchSubFile(5, file)
+
+    # 変化を監視してサブ画像7を読み込み＋表示を実行
+    $scope.$watch 'input.details[6].subFile', (file) ->
+      watchSubFile(6, file)
+
+    # 変化を監視してサブ画像8を読み込み＋表示を実行
+    $scope.$watch 'input.details[7].subFile', (file) ->
+      watchSubFile(7, file)
+
+    # 変化を監視してサブ画像9を読み込み＋表示を実行
+    $scope.$watch 'input.details[8].subFile', (file) ->
+      watchSubFile(8, file)
+
+    # 変化を監視してサブ画像10を読み込み＋表示を実行
+    $scope.$watch 'input.details[9].subFile', (file) ->
+      watchSubFile(9, file)
 
     # 画像監視共通処理
     watchSubFile = (index, file) ->
@@ -528,3 +562,45 @@ angular.module "frontApp"
           detail.isEyeCatch = true
         else
           detail.isEyeCatch = false
+
+    $scope.isFeature = (slag) ->
+      isFeature = false
+      if slag == 'tour' || slag == 'pickup'
+        isFeature = true
+      return isFeature
+    
+    $scope.openListModal = (type, index) ->
+      $scope.selectedDetailIndex = index
+      $scope.modalItems = []
+      $scope.listItemTitle = type.toUpperCase() + '一覧'
+
+      if type == 'Shop'
+        targetPath = Const.API.SHOP
+      else if type == 'Post'
+        targetPath = Const.API.POST
+      else if type == 'ExternalLink'
+        targetPath = Const.API.EXTERNAL_LINKS
+      else
+        return
+
+      # 一覧を取得する
+      Api.getJson(null, targetPath , true).then (res) ->
+        angular.forEach res.data, (item) ->
+          modalItem =
+            'id': item.id || item.post.id,
+            'name': item.name || item.post.title
+          $scope.modalItems.push modalItem
+
+      # モーダルを開く
+      $scope.modalListItems.show()
+
+    # 投稿用モーダル非表示
+    $scope.closeListModal = (targetForm) ->
+      $scope.modalListItems.hide()
+
+    # 関連アイテム選択時
+    $scope.selectModalItem = (item) ->
+      item.checked = true
+      $scope.input.details[$scope.selectedDetailIndex].relatedId = item.id
+
+      $scope.modalListItems.hide()

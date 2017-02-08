@@ -153,17 +153,4 @@ class ApiFeaturesController < ApplicationController
       params.require(:feature).permit(:title, :content, :image, :status, :user_id, :category_id, :quotation_url, :quotation_name, :published_at, :category_id, :feature_detail_ids => [])
     end
 
-    def get_external_link_json(external_link)
-      # external_linkに紐付いてる人物を取得する
-      people = get_people(external_link)
-      # external_linkに紐付けしている時代を取得をする
-      periods = get_periods(external_link.people)
-      # 返却用のオブジェクトを作成する
-      obj = { "external_link" => external_link,
-              "people" => people.uniq,
-              "periods" => periods.uniq
-            }
-      return obj
-    end
-
 end

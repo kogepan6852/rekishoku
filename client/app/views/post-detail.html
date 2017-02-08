@@ -56,13 +56,13 @@
 
 
     <!-- DETAILS TITLE -->
-    <div class="row" ng-repeat-start="postDetail in postDetails" ng-if="postDetail.title">
-      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <div class="row" ng-repeat-start="postDetail in postDetails">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ng-if="postDetail.title">
         <h2 ng-bind="postDetail.title"></h2>
       </div>
     </div>
     <!-- DETAILS IMAGE -->
-    <div class="row no-padding" ng-if="postDetail.image.url">
+    <div class="row no-padding" ng-if="postDetail.image.url && !isFeature(post)">
       <div class="detail-image col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <img src="../images/dummy-img.png" ng-if="!windowType">
         <img ng-src="{{postDetail.image.w960.url}}" src="../images/dummy-img.png" class="hidden-xs" ng-if="windowType!='xs' && windowType">
@@ -70,16 +70,68 @@
       </div>
     </div>
     <!-- DETAILS DESCRIPTION -->
-    <div class="row padding-bottom no-margin" ng-repeat-end>
-      <div class="image-quotation col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ng-if="postDetail.image.url">
+    <div class="row padding-bottom no-margin"
+         ng-class="{'no-headline': !postDetail.title && !postDetail.content && isFeature(post)}">
+      <div class="image-quotation col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2"
+          ng-if="postDetail.image.url && !isFeature(post)">
         <span ng-bind="'POST.PHOTO_BY'|translate"></span>
         <a href="{{postDetail.quotation_url}}" target="_blank" ng-if="postDetail.quotation_name" ng-bind="postDetail.quotation_name"></a>
         <span ng-if="!postDetail.quotation_name" ng-bind="user.username"></span>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div><p ng-bind-html="postDetail.content | newlines"></p></div>
+        <!-- SPOT (FEATURE) -->
+        <div ng-if="postDetail.related_type && isFeature(post)">
+          <h2 class="number">SPOT {{$index+1}}</h2>
+        </div>
       </div>
     </div>
+
+    <!-- DETAILS LINK (FEATURE) -->
+    <div class="row padding-bottom no-title" ng-if="isFeature(post)" ng-repeat-end>
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 no-padding">
+        <!-- POST -->
+        <list-item-post
+           ng-if="postDetail.post"
+           data="postDetail.post"
+           periods="postDetail.periods"
+           people="postDetail.people"
+           category="postDetail.post.category_name"
+           window-type="windowType" >
+         </list-item-post>
+         <!-- SHOP -->
+         <list-item-shop
+            ng-if="postDetail.shop"
+            data="postDetail.shop"
+            categories="postDetail.categories"
+            people="postDetail.people"
+            rating="postDetail.rating.average"
+            hide-info="true"
+            window-type="windowType" >
+          </list-item-shop>
+          <!-- EXTERNAL LINK -->
+          <list-item-external-link
+             ng-if="postDetail.external_link"
+             data="postDetail.external_link"
+             window-type="windowType"
+             show-link="post.showLink"
+             ng-click="clickExternalLink(post)">
+           </list-item-external-link>
+      </div>
+    </div>
+
+    <!-- MAP (FEATURE) -->
+    <div class="row padding-bottom" ng-if="post.is_map && map && isFeature(post)">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="detail-map">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+              <ui-gmap-markers models="targetMarkers" coords="'self'" icon="'icon'">
+              </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
+      </div>
+    </div>
+
 
     <hr ng-if="shops.length!=0">
 

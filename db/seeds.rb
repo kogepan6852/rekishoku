@@ -25,6 +25,9 @@ Category.create(:name => '貴族', :slug =>'aristocracy', :type =>'PersonCategor
 Category.create(:name => 'TOUR', :slug =>'tour', :type =>'FeatureCategory')
 Category.create(:name => 'PICKUP', :slug =>'event', :type =>'FeatureCategory')
 
+Category.create(:name => 'TOUR', :slug =>'tour', :type =>'PostCategory')
+Category.create(:name => 'PICKUP', :slug =>'pickup', :type =>'PostCategory')
+
 Period.create(:name => '古墳以前')
 Period.create(:name => '飛鳥')
 Period.create(:name => '奈良')

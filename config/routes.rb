@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   post 'api/posts_shops', to: 'api_posts_shops#create'
   # PERIODS
   get 'api/periods', to: 'api_periods#index'
+  # EXTERNAL LINKS
+  get 'api/external_links', to: 'api_external_links#index'
   # LOGIN
   get 'users/index'
   get 'users/show'

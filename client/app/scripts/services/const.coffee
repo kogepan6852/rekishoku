@@ -17,10 +17,11 @@ angular.module("frontApp")
       PERSON:       '/api/people'
       CATEGORY:     '/api/categories'
       PERIOD:       '/api/periods'
+      EXTERNAL_LINKS: '/api/external_links'
       USER:         '/api/users'
       LOGIN:        '/users/sign_in.json'
       FAVORITE:     '/api/favorites'
-      FAVORITE_DETAIL:'/api/favorite_details'
+      FAVORITE_DETAIL: '/api/favorite_details'
       FACEBOOK:     '/api/sns/facebook'
       LOGOUT:       '/authentication_token.json'
       SETTING:

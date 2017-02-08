@@ -54,6 +54,11 @@
                 <input class="item-input-wrapper" type="text" ng-model="input.quotationUrl">
               </label>
 
+              <ion-checkbox ng-model="input.isMap"
+                  ng-if="isFeature(targetCategorySlug)">
+                マップ表示
+              </ion-checkbox>
+
             </div>
           </ion-content>
         </ion-slide>
@@ -66,7 +71,8 @@
                 <input class="item-input-wrapper" type="text" ng-model="detail.subTitle">
               </label>
 
-              <div class="item item-input item-thumbnail-right" href="#">
+              <div class="item item-input item-thumbnail-right" href="#"
+                  ng-if="!isFeature(targetCategorySlug)">
                 <img class="uploaded-img" ng-class="{'eye-catch': detail.isEyeCatch}" ng-if="detail.srcSubUrl" ng-src="{{detail.srcSubUrl}}" ng-click="setEyeCatch($index)">
                 <span class="input-label">サブ画像{{detail.index}}</span>
                 <div class="file">
@@ -80,15 +86,37 @@
                 <textarea class="item-input-wrapper" rows="8" ng-model="detail.subContent"></textarea>
               </label>
 
-              <label class="item item-input-inset item-stacked-label-xs">
+              <label class="item item-input-inset item-stacked-label-xs"
+                  ng-if="!isFeature(targetCategorySlug)">
                 <span class="input-label">引用元名</span>
                 <input class="item-input-wrapper" type="text" ng-model="detail.subQuotationName">
               </label>
 
-              <label class="item item-input-inset item-stacked-label-xs">
+              <label class="item item-input-inset item-stacked-label-xs"
+                  ng-if="!isFeature(targetCategorySlug)">
                 <span class="input-label">引用元URL</span>
                 <input class="item-input-wrapper" type="text" ng-model="detail.subQuotationUrl">
               </label>
+
+              <label class="item item-input item-select"
+                  ng-if="isFeature(targetCategorySlug)">
+                <div class="input-label">
+                  関連データタイプ
+                </div>
+                <select ng-model="detail.relatedType" ng-change="detail.relatedId = null">
+                  <option selected value="">なし</option>
+                  <option value="Shop">SHOP</option>
+                  <option value="Post">POST</option>
+                  <option value="ExternalLink">LINK</option>
+                </select>
+              </label>
+
+              <a class="item" ng-class="{'item-icon-right': !detail.relatedId}" ng-if="detail.relatedType" ng-click="openListModal(detail.relatedType, $index)">
+                関連{{detail.relatedType.toUpperCase()}}
+                <span ng-if="detail.relatedId" class="item-note">ID{{detail.relatedId}}</span>
+                <i ng-if="!detail.relatedId" class="icon ion-plus-circled"></i>
+              </a>
+
 
             </div>
           </ion-content>
