@@ -1,7 +1,7 @@
 module ShopInfo
   # 価格帯の取得
   def get_price(shop)
-    price = {}
+    price = Array.new()
     daytime = nil
     nighttime = nil
 
@@ -19,10 +19,7 @@ module ShopInfo
       }
     end
 
-    price = {
-      "daytime" => daytime,
-      "nighttime" => nighttime
-    }
+    price = [daytime,nighttime]
     return price
   end
 
@@ -44,13 +41,11 @@ module ShopInfo
 
     rating = {
       "average" => average_level,
-      "detail" => {
-        "history" => history,
-        "building" => building,
-        "menu" => menu,
-        "person" => person,
-        "episode" => episode
-      },
+      "history" => history,
+      "building" => building,
+      "menu" => menu,
+      "person" => person,
+      "episode" => episode
     }
     return rating
   end
