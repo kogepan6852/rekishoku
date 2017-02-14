@@ -71,7 +71,7 @@ class ApiPostsController < ApplicationController
         "image" => @post.user.image.thumb }
       # people情報整形
       people = Array.new()
-      @post.people.each do |person|
+      @post.people.order(rating: :desc).each do |person|
         if person[:rating] != 0.0
           obj = {
             "id" => person.id,
