@@ -64,7 +64,7 @@
             </div>
             <div class="tags">
               <div>
-                <info-tag name="{{period.name}}" ng-repeat="period in shop1.periods"></info-tag>
+                <info-tag ng-if="shop1.shop.period_name" name="{{shop1.shop.period_name}}"></info-tag>
                 <info-tag name="{{person.name}}" ng-repeat="person in shop1.people"></info-tag>
               </div>
             </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="tags">
               <div>
-                <info-tag name="{{shop2.shop.period_name}}"></info-tag>
+                <info-tag ng-if="shop2.shop.period_name" name="{{shop2.shop.period_name}}"></info-tag>
                 <info-tag name="{{person.name}}" ng-repeat="person in shop2.people"></info-tag>
               </div>
             </div>
