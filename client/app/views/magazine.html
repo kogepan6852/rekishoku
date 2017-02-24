@@ -53,35 +53,35 @@
         </a>
         <div class="right-box hidden-xs hidden-sm" ng-if="windowType!='xs' && windowType!='sm'">
           <!-- SHOP1 -->
-          <a class="item shop side-area" href="/app/shop/{{shop1.shop.id}}">
-            <img class="main-img" ng-src="{{shop1.shop.subimage.md.url}}" src="../images/dummy-img.png">
+          <a class="item shop side-area" href="/app/shop/{{shop1.id}}">
+            <img class="main-img" ng-src="{{shop1.subimage.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="shop1">
               <span>STORE</span>
             </div>
             <div class="description">
-              <h4 ng-bind="shop1.shop.name" class="mincho"></h4>
+              <h4 ng-bind="shop1.name" class="mincho"></h4>
               <star count="shop1.rating.average"></star>
             </div>
             <div class="tags">
               <div>
-                <info-tag ng-if="shop1.shop.period_name" name="{{shop1.shop.period_name}}"></info-tag>
+                <info-tag ng-if="shop1.period_name" name="{{shop1.period_name}}"></info-tag>
                 <info-tag name="{{person.name}}" ng-repeat="person in shop1.people"></info-tag>
               </div>
             </div>
           </a>
           <!-- SHOP2 -->
-          <a class="item shop side-area" href="/app/shop/{{shop2.shop.id}}">
-            <img class="main-img" ng-src="{{shop2.shop.subimage.md.url}}" src="../images/dummy-img.png">
+          <a class="item shop side-area" href="/app/shop/{{shop2.id}}">
+            <img class="main-img" ng-src="{{shop2.subimage.md.url}}" src="../images/dummy-img.png">
             <div class="category" ng-if="shop2">
               <span>STORE</span>
             </div>
             <div class="description">
-              <h4 ng-bind="shop2.shop.name" class="mincho"></h4>
+              <h4 ng-bind="shop2.name" class="mincho"></h4>
               <star count="shop2.rating.average"></star>
             </div>
             <div class="tags">
               <div>
-                <info-tag ng-if="shop2.shop.period_name" name="{{shop2.shop.period_name}}"></info-tag>
+                <info-tag ng-if="shop2.period_name" name="{{shop2.period_name}}"></info-tag>
                 <info-tag name="{{person.name}}" ng-repeat="person in shop2.people"></info-tag>
               </div>
             </div>
