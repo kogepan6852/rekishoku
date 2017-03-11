@@ -2,7 +2,7 @@
   "env": "production",
   "url": {
     "api": "https://rekishoku.herokuapp.com",
-    "home": "https://rekishoku.jp"
+    "home": "https://www.rekishoku.jp"
   },
   "id": {
     "facebook": "944564788957091"
