@@ -227,8 +227,8 @@ angular.module "frontApp"
               if detail.subQuotationUrl then fdDetails.append 'post_details[][quotation_url]', detail.subQuotationUrl
               if detail.subQuotationName then fdDetails.append 'post_details[][quotation_name]', detail.subQuotationName
               if detail.id then fdDetails.append 'post_details[][id]', detail.id
-              if detail.relatedType then fdDetails.append 'post_details[][related_type]', detail.relatedType
-              if detail.relatedId then fdDetails.append 'post_details[][related_id]', detail.relatedId
+              if detail.relatedType && detail.relatedId then fdDetails.append 'post_details[][related_type]', detail.relatedType
+              if detail.relatedType && detail.relatedId then fdDetails.append 'post_details[][related_id]', detail.relatedId
 
               detailCount += 1
 
