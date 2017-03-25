@@ -8,7 +8,7 @@ class ApiPostsController < ApplicationController
   # GET /api/posts
   # 一覧表示
   def index
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc, id: :desc)
+    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -93,7 +93,7 @@ class ApiPostsController < ApplicationController
       postPeriods = get_periods(@post.people)
 
       # shop情報整形
-      shops = @post.shops.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name') 
+      shops = @post.shops.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name')
       newShops = Array.new()
       shops.each do |shop|
         newShops.push(get_shop_json(shop));
@@ -135,7 +135,7 @@ class ApiPostsController < ApplicationController
         .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where('people.id' => person)
         .where('posts.id != ?', params[:id])
-        .where("status = ? and published_at <= ?", 1, Date.today)
+        .where("status = ? and published_at <= ?", 1, Time.zone.now)
         .order('posts.created_at desc')
         .limit(10)
     else
@@ -146,7 +146,7 @@ class ApiPostsController < ApplicationController
         .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where(category_id: category_id)
         .where('posts.id != ?', params[:id])
-        .where("status = ? and published_at <= ?", 1, Date.today)
+        .where("status = ? and published_at <= ?", 1, Time.zone.now)
         .order('posts.created_at desc')
         .limit(10)
     end

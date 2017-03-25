@@ -9,7 +9,7 @@ class ApiFeaturesController < ApplicationController
 
     @features = Feature.joins(:category)
                 .select('features.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
-                .where("features.status = ? and features.published_at <= ?", 1, Date.today)
+                .where("features.status = ? and features.published_at <= ?", 1, Time.zone.now)
                 .order(published_at: :desc)
 
     # フリーワードで検索
