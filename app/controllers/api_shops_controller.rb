@@ -67,7 +67,7 @@ class ApiShopsController < ApplicationController
     price = get_price(@shop)
 
     # 関連する投稿の取得
-    posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Date.today).order(published_at: :desc)
+    posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc)
     newPosts = Array.new()
 
     posts.each do |post|
