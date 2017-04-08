@@ -60,8 +60,6 @@ module RelatedInfo
 
   end
 
-
-
   def get_shop_json(shop)
     # shopsに紐付いてる人物を取得する
     people = get_people(shop)
