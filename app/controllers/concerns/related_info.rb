@@ -81,8 +81,7 @@ module RelatedInfo
             "city" => shop.city,
             "period_id" => shop.period_id,
             "period_name" => shop.period_name,
-            "daytime" => price[0],
-            "nighttime" => price[1],
+            "price" => price,
             "categories" => categories,
             "people" => people.uniq,
             "rating" => rating

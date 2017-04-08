@@ -19,7 +19,11 @@ module ShopInfo
       }
     end
 
-    price = [daytime,nighttime]
+    price = {
+      "daytime" => daytime,
+      "nighttime" => nighttime
+    }
+
     return price
   end
 
