@@ -110,7 +110,7 @@ angular.module 'frontApp'
         # Map用アイコンの設定
         angular.forEach $scope.postDetails, (postDetail, i) ->
           if postDetail.shop
-            target = postDetail.shop
+            target = postDetail
             idType = "shop"
           else if postDetail.external_link
             target = postDetail.external_link
