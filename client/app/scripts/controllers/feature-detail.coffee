@@ -84,8 +84,8 @@ angular.module 'frontApp'
 
         # Map用アイコンの設定
         angular.forEach $scope.featureDetails, (featureDetail, i) ->
-          if featureDetail.shop
-            target = featureDetail.shop
+        　if postDetail.related_type == "Shop"
+            target = featureDetail
             idType = "shop"
           else if featureDetail.external_link
             target = featureDetail.external_link

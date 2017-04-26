@@ -74,6 +74,7 @@ module RelatedInfo
     obj = { "id" => shop.id,
             "name" => shop.name,
             "menu" => shop.menu,
+            "image" => shop.image,
             "subimage" => shop.subimage,
             "province" => shop.province,
             "city" => shop.city,
@@ -82,7 +83,9 @@ module RelatedInfo
             "price" => price,
             "categories" => categories,
             "people" => people.uniq,
-            "rating" => rating
+            "rating" => rating,
+            "latitude" => shop.latitude,
+            "longitude" => shop.longitude
           }
     return obj
   end
