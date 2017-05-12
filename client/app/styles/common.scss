@@ -537,6 +537,17 @@ ion-slide {
   text-align: center;
 }
 
+.af-main {
+  margin: auto;
+  text-align: center;
+  padding: 15px;
+  background-image: url(../images/bg-gray.png); 
+
+  .link-title {
+    color: #00636F;
+  }
+}
+
 /**********************
  * Search
  **********************/
