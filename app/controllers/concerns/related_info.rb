@@ -34,26 +34,30 @@ module RelatedInfo
     people = Array.new()
     article.people.order(rating: :desc).each do |person|
       if person[:rating] != 0.0
-         people.push(person)
+         personApi = {
+           "id" => person.id,
+           "name" => person.name
+         }
+         people.push(personApi)
       end
     end
     return people
   end
 
-  def get_check_people(check_people)
-    people = Array.new()
-    check_people.each do |person|
-      if person[:rating] != 0.0
-         people.push(person)
-      end
-    end
 
-    ## 連想配列のキーでの降順処理
-    people.sort! do |a, b|
-      b[:rating] <=> a[:rating]
-    end
+  # 対象の情報から紐づくカテゴリを整理する
+  def get_categories(check_categories)
 
-    return people
+    categories = Array.new()
+    check_categories.each do |category|
+      categoryApi = {
+        "id" => category.id,
+        "name" => category.name
+      }
+      categories.push(categoryApi)
+    end
+    return categories
+
   end
 
   def get_shop_json(shop)
@@ -63,12 +67,25 @@ module RelatedInfo
     rating = cal_rating(shop)
     # 価格帯の取得
     price = get_price(shop)
+    # カテゴリ設定
+    categories = get_categories(shop.categories)
+
     # 返却用のオブジェクトを作成する
-    obj = { "shop" => shop,
-            "categories" => shop.categories,
+    obj = { "id" => shop.id,
+            "name" => shop.name,
+            "menu" => shop.menu,
+            "image" => shop.image,
+            "subimage" => shop.subimage,
+            "province" => shop.province,
+            "city" => shop.city,
+            "period_id" => shop.period_id,
+            "period_name" => shop.period_name,
+            "price" => price,
+            "categories" => categories,
             "people" => people.uniq,
             "rating" => rating,
-            "price" => price
+            "latitude" => shop.latitude,
+            "longitude" => shop.longitude
           }
     return obj
   end
@@ -138,5 +155,4 @@ module RelatedInfo
       end
       return people
     end
-
 end
