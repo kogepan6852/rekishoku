@@ -44,5 +44,9 @@
     "serve": "grunt serve",
     "build": "grunt build:development -f",
     "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "^0.6.1",
+    "jshint-stylish": "^1.0.2"
   }
 }

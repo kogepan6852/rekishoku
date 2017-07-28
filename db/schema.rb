@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -27,18 +26,16 @@ ActiveRecord::Schema.define(version: 20170205023854) do
   create_table "categories_people", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "person_id",   null: false
+    t.index ["category_id"], name: "index_categories_people_on_category_id", using: :btree
+    t.index ["person_id"], name: "index_categories_people_on_person_id", using: :btree
   end
-
-  add_index "categories_people", ["category_id"], name: "index_categories_people_on_category_id", using: :btree
-  add_index "categories_people", ["person_id"], name: "index_categories_people_on_person_id", using: :btree
 
   create_table "categories_shops", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "shop_id",     null: false
+    t.index ["category_id"], name: "index_categories_shops_on_category_id", using: :btree
+    t.index ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
   end
-
-  add_index "categories_shops", ["category_id"], name: "index_categories_shops_on_category_id", using: :btree
-  add_index "categories_shops", ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
 
   create_table "external_links", force: :cascade do |t|
     t.string   "name",           null: false
@@ -111,42 +108,37 @@ ActiveRecord::Schema.define(version: 20170205023854) do
   create_table "people_external_links", id: false, force: :cascade do |t|
     t.integer "person_id",        null: false
     t.integer "external_link_id", null: false
+    t.index ["external_link_id"], name: "index_people_external_links_on_external_link_id", using: :btree
+    t.index ["person_id"], name: "index_people_external_links_on_person_id", using: :btree
   end
-
-  add_index "people_external_links", ["external_link_id"], name: "index_people_external_links_on_external_link_id", using: :btree
-  add_index "people_external_links", ["person_id"], name: "index_people_external_links_on_person_id", using: :btree
 
   create_table "people_features", force: :cascade do |t|
     t.integer "person_id",  null: false
     t.integer "feature_id", null: false
+    t.index ["feature_id"], name: "index_people_features_on_feature_id", using: :btree
+    t.index ["person_id"], name: "index_people_features_on_person_id", using: :btree
   end
-
-  add_index "people_features", ["feature_id"], name: "index_people_features_on_feature_id", using: :btree
-  add_index "people_features", ["person_id"], name: "index_people_features_on_person_id", using: :btree
 
   create_table "people_periods", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "period_id", null: false
+    t.index ["period_id"], name: "index_people_periods_on_period_id", using: :btree
+    t.index ["person_id"], name: "index_people_periods_on_person_id", using: :btree
   end
-
-  add_index "people_periods", ["period_id"], name: "index_people_periods_on_period_id", using: :btree
-  add_index "people_periods", ["person_id"], name: "index_people_periods_on_person_id", using: :btree
 
   create_table "people_posts", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "post_id",   null: false
+    t.index ["person_id"], name: "index_people_posts_on_person_id", using: :btree
+    t.index ["post_id"], name: "index_people_posts_on_post_id", using: :btree
   end
-
-  add_index "people_posts", ["person_id"], name: "index_people_posts_on_person_id", using: :btree
-  add_index "people_posts", ["post_id"], name: "index_people_posts_on_post_id", using: :btree
 
   create_table "people_shops", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "shop_id",   null: false
+    t.index ["person_id"], name: "index_people_shops_on_person_id", using: :btree
+    t.index ["shop_id"], name: "index_people_shops_on_shop_id", using: :btree
   end
-
-  add_index "people_shops", ["person_id"], name: "index_people_shops_on_person_id", using: :btree
-  add_index "people_shops", ["shop_id"], name: "index_people_shops_on_shop_id", using: :btree
 
   create_table "periods", force: :cascade do |t|
     t.string   "name",       null: false
@@ -190,10 +182,9 @@ ActiveRecord::Schema.define(version: 20170205023854) do
   create_table "posts_shops", id: false, force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "shop_id", null: false
+    t.index ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
+    t.index ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
   end
-
-  add_index "posts_shops", ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
-  add_index "posts_shops", ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
 
   create_table "prices", force: :cascade do |t|
     t.integer  "min"
@@ -269,10 +260,9 @@ ActiveRecord::Schema.define(version: 20170205023854) do
     t.integer  "posts_count",            default: 0,  null: false
     t.string   "uid"
     t.string   "provider"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "categories_people", "categories"
   add_foreign_key "categories_people", "people"

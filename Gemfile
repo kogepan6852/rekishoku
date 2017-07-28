@@ -4,7 +4,7 @@ ruby '2.4.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.2'
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '0.20.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -80,8 +80,9 @@ gem 'rails_12factor', group: :production
 gem 'rack-cors'
 
 # ssl
-gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
+gem 'platform-api', github: 'heroku/platform-api', branch: 'master'
 gem 'letsencrypt-rails-heroku', group: 'production'
+gem 'therubyracer'
 
 group :development do
   gem 'annotate', '2.6.5'
