@@ -67,6 +67,9 @@ gem 'google-analytics-rails'
 # url redirect
 gem 'rack-rewrite'
 
+# front
+gem 'foundation-rails'
+
 # post
 gem 'httpclient', '~> 2.7', '>= 2.7.1'
 

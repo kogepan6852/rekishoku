@@ -240,6 +240,9 @@ GEM
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     formatador (0.2.5)
+    foundation-rails (5.4.5.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     geocoder (1.4.4)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -441,6 +444,7 @@ DEPENDENCIES
   devise
   fog
   font-awesome-rails
+  foundation-rails
   geocoder
   google-analytics-rails
   httpclient (~> 2.7, >= 2.7.1)

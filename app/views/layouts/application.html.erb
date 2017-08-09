@@ -1,103 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <%= display_meta_tags({
-    :site => '歴食',
-    :title => '歴食'
-  })%>
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta name="fragment" content="!">
-  <%= analytics_init if Rails.env.production? %>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-<!-- FB -->
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.5&appId=944564788957091";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
- <!-- Fixed navbar -->
-  <nav class="navbar navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <% if user_signed_in? %>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <% end %>
-        <div class="logo">
-          <% if user_signed_in? %>
-            <%= link_to image_tag('logo.png') ,'/menu' ,:class => "hidden-xs" %>
-            <%= link_to image_tag('logo-sm.png') ,'/menu' ,:class => "visible-xs" %>
-          <% else %>
-            <%= link_to image_tag('logo.png') ,'/app/home' ,:class => "hidden-xs" %>
-            <%= link_to image_tag('logo-sm.png') ,'/app/home' ,:class => "visible-xs" %>
-          <% end %>
-        </div>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <% if user_signed_in? %>
-        <div class="header-list">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SHOP管理画面<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to "SHOPトップ", shops_path %></li>
-                <li><%= link_to 'SHOP登録', new_shop_path %></li>
-              </ul>
-            </li>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PEOPLE管理画面<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to "PEOPLEトップ", people_path %></li>
-                <li><%= link_to 'PEOPLE登録', new_person_path %></li>
-              </ul>
-            </li>
+  <body>
 
-            <li><%= link_to "新規アカウント作成", "/users/sign_up" %></li>
-          </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-              <li><%= link_to "ログアウト", "/users/sign_out" %></li>
-            <% else %>
-              <li><%= link_to "ログイン", "/users/sign_in" %></li>
-            <% end %>
-          <li class="active"><%= link_to "WEBサイト", "/#/home" %></li>
-        </ul>
-        <% end %>
-      </div>
-      <% if !user_signed_in? %>
-      <div class="sns-icons">
-        <a class="facebook-icon" target="_blank" href="https://www.facebook.com/rekishoku">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a class="twitter-icon" target="_blank" href="https://twitter.com/rekishoku">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a class="instagram-icon" target="_blank" href="https://instagram.com/rekishoku">
-          <i class="fa fa-instagram"></i>
-        </a>
-      </div>
-      <% end %>
-    </div>
-  </nav>
-
-  <div class="main-content">
     <%= yield %>
-  </div>
-
-</body>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>
