@@ -71,7 +71,7 @@ module RelatedInfo
     categories = get_categories(shop.categories)
 
     # 返却用のオブジェクトを作成する
-    obj = { "id" => shop.id,
+    obj = { "shop_id" => shop.id,
             "name" => shop.name,
             "menu" => shop.menu,
             "image" => shop.image,
