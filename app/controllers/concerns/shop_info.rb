@@ -44,13 +44,11 @@ module ShopInfo
 
     rating = {
       "average" => average_level,
-      "detail" => {
-        "history" => history,
-        "building" => building,
-        "menu" => menu,
-        "person" => person,
-        "episode" => episode
-      },
+      "history" => history,
+      "building" => building,
+      "menu" => menu,
+      "person" => person,
+      "episode" => episode
     }
     return rating
   end

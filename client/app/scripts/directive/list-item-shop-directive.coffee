@@ -21,5 +21,5 @@ angular.module "frontApp"
           }];
         scope.target = "shop"
         scope.mainImage = scope.data.subimage;
-        scope.href = "/app/shop/" + scope.data.id
+        scope.href = "/app/shop/" + scope.data.shop_id
     }

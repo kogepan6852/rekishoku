@@ -65,6 +65,8 @@ class ApiShopsController < ApplicationController
     rating = cal_rating(@shop)
     # 価格帯の取得
     price = get_price(@shop)
+    # カテゴリ設定
+    categories = get_categories(@shop.categories)
 
     # 関連する投稿の取得
     posts = @shop.posts.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc)
@@ -76,7 +78,7 @@ class ApiShopsController < ApplicationController
 
     # 返却用のオブジェクトを作成する
     rtnObj = { "shop" => @shop,
-             "categories" => @shop.categories,
+             "categories" => categories,
              "posts" => newPosts,
              "people" =>  people.uniq,
              "rating" => rating,
