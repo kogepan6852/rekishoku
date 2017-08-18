@@ -240,6 +240,9 @@ GEM
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     formatador (0.2.5)
+    foundation-icons-sass-rails (3.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     foundation-rails (5.4.5.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -391,6 +394,9 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.5.0)
+      actionpack (> 4, < 5.2)
+      activemodel (> 4, < 5.2)
     sitemap_generator (5.3.1)
       builder (~> 3.0)
     spring (2.0.2)
@@ -444,6 +450,7 @@ DEPENDENCIES
   devise
   fog
   font-awesome-rails
+  foundation-icons-sass-rails
   foundation-rails
   geocoder
   google-analytics-rails
@@ -465,6 +472,7 @@ DEPENDENCIES
   rmagick
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   sitemap_generator
   spring
   therubyracer

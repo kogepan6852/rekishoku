@@ -69,6 +69,8 @@ gem 'rack-rewrite'
 
 # front
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
+gem 'simple_form'
 
 # post
 gem 'httpclient', '~> 2.7', '>= 2.7.1'

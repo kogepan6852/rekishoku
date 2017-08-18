@@ -19,3 +19,5 @@ case Rails.env
   when 'development'
     Rails.application.config.facebook_app_secret = ''
   end
+
+  Rails.application.config.assets.precompile += %w[application.css application.js]
