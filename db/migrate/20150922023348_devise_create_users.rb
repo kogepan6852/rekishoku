@@ -43,12 +43,13 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## 認証トークン
       t.string :authentication_token
 
-
-      t.timestamps null: false
-      t.integer :posts_count, null: false, default: 0
       ## mobile info
       t.string   :uid
       t.string   :provider
+
+      t.timestamps null: false
+      t.integer :posts_count, null: false, default: 0
+
     end
   end
 end

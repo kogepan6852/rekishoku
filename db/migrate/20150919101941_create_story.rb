@@ -13,8 +13,8 @@ class CreatePosts < ActiveRecord::Migration
       t.text :memo
       t.boolean :is_eye_catch, default: false
       t.boolean :is_map, default: false
-      t.timestamps :published_at
       t.timestamps null: false
+      t.timestamps :published_at
     end
   end
 end

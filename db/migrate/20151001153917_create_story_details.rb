@@ -2,7 +2,6 @@ class CreatePostDetails < ActiveRecord::Migration
   def change
     create_table :story_details do |t|
       t.integer :story_id
-      t.integer :order
       t.string :title
       t.string :image
       t.text :content
