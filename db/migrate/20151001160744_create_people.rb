@@ -4,7 +4,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :name, null: false
       t.string :furigana
       t.float :rating
-      t.text :content
+      t.text :description
       t.string :image
       t.string :image_quotation_url
       t.string :image_quotation_name
