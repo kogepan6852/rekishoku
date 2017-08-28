@@ -1,8 +1,8 @@
-class CreatePeoplePosts < ActiveRecord::Migration
+class CreatePeopleStories < ActiveRecord::Migration
   def change
     create_table :people_stories, id: false do |t|
       t.references :person, index: true, null: false
-      t.references :stories, index: true, null: false
+      t.references :story, index: true, null: false
 
     end
     add_foreign_key :people_stories, :people

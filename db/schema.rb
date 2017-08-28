@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809222617) do
+ActiveRecord::Schema.define(version: 20170827230334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categories_items", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "item_id",     null: false
+    t.index ["category_id"], name: "index_categories_items_on_category_id", using: :btree
+    t.index ["item_id"], name: "index_categories_items_on_item_id", using: :btree
+  end
+
   create_table "categories_people", id: false, force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "person_id",   null: false
@@ -44,20 +51,34 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.index ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "events_items", id: false, force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "item_id",  null: false
+    t.index ["event_id"], name: "index_events_items_on_event_id", using: :btree
+    t.index ["item_id"], name: "index_events_items_on_item_id", using: :btree
+  end
+
   create_table "external_links", force: :cascade do |t|
-    t.string   "name",           null: false
+    t.string   "name"
     t.text     "content"
     t.string   "image"
     t.string   "quotation_url"
     t.string   "quotation_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "province"
     t.string   "city"
     t.string   "address1"
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "favorite_details", force: :cascade do |t|
@@ -78,38 +99,28 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "feature_details", force: :cascade do |t|
-    t.integer  "feature_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "related_type"
-    t.integer  "related_id",   default: 0
-    t.integer  "order",        default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "features", force: :cascade do |t|
-    t.string   "title",                          null: false
-    t.text     "content"
-    t.string   "image",                          null: false
-    t.string   "quotation_url"
-    t.string   "quotation_name"
-    t.boolean  "is_map",         default: false
-    t.integer  "category_id",    default: 0,     null: false
-    t.integer  "status",         default: 0,     null: false
-    t.integer  "user_id",                        null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.datetime "published_at"
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "shop_id",     null: false
+    t.integer  "price"
+    t.integer  "pid"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",                     null: false
+    t.string   "name",                             null: false
     t.string   "furigana"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.float    "rating",     default: 0.0, null: false
+    t.float    "rating"
+    t.text     "description"
+    t.string   "image"
+    t.string   "image_quotation_url"
+    t.string   "image_quotation_name"
+    t.integer  "birth_year",           default: 0
+    t.integer  "death_year",           default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "people_external_links", id: false, force: :cascade do |t|
@@ -119,25 +130,11 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.index ["person_id"], name: "index_people_external_links_on_person_id", using: :btree
   end
 
-  create_table "people_features", force: :cascade do |t|
-    t.integer "person_id",  null: false
-    t.integer "feature_id", null: false
-    t.index ["feature_id"], name: "index_people_features_on_feature_id", using: :btree
-    t.index ["person_id"], name: "index_people_features_on_person_id", using: :btree
-  end
-
   create_table "people_periods", id: false, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "period_id", null: false
     t.index ["period_id"], name: "index_people_periods_on_period_id", using: :btree
     t.index ["person_id"], name: "index_people_periods_on_person_id", using: :btree
-  end
-
-  create_table "people_posts", id: false, force: :cascade do |t|
-    t.integer "person_id", null: false
-    t.integer "post_id",   null: false
-    t.index ["person_id"], name: "index_people_posts_on_person_id", using: :btree
-    t.index ["post_id"], name: "index_people_posts_on_post_id", using: :btree
   end
 
   create_table "people_shops", id: false, force: :cascade do |t|
@@ -147,55 +144,23 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.index ["shop_id"], name: "index_people_shops_on_shop_id", using: :btree
   end
 
+  create_table "people_stories", id: false, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "story_id",  null: false
+    t.index ["person_id"], name: "index_people_stories_on_person_id", using: :btree
+    t.index ["story_id"], name: "index_people_stories_on_story_id", using: :btree
+  end
+
   create_table "periods", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_details", force: :cascade do |t|
-    t.integer  "post_id"
-    t.string   "title"
-    t.string   "image"
-    t.text     "content"
-    t.string   "quotation_url"
-    t.string   "quotation_name"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.boolean  "is_eye_catch",   default: false
-    t.string   "related_type"
-    t.integer  "related_id"
-    t.integer  "order",          default: 0,     null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string   "title",                          null: false
-    t.text     "content"
-    t.string   "image",                          null: false
-    t.integer  "favorite_count", default: 0,     null: false
-    t.integer  "status",         default: 0,     null: false
-    t.integer  "user_id",                        null: false
-    t.string   "quotation_url"
-    t.string   "quotation_name"
-    t.integer  "category_id",    default: 0,     null: false
-    t.text     "memo"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.datetime "published_at"
-    t.boolean  "is_eye_catch",   default: false
-    t.boolean  "is_map",         default: false
-  end
-
-  create_table "posts_shops", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "shop_id", null: false
-    t.index ["post_id"], name: "index_posts_shops_on_post_id", using: :btree
-    t.index ["shop_id"], name: "index_posts_shops_on_shop_id", using: :btree
-  end
-
   create_table "prices", force: :cascade do |t|
     t.integer  "min"
     t.integer  "max"
+    t.integer  "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -217,9 +182,6 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.string   "address2"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "posts_shops_count",    default: 0,     null: false
     t.string   "phone_no"
     t.integer  "daytime_price_id"
     t.integer  "nighttime_price_id"
@@ -233,14 +195,62 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.boolean  "is_closed_sat",        default: false, null: false
     t.boolean  "is_closed_hol",        default: false, null: false
     t.string   "closed_pattern"
-    t.boolean  "is_approved",          default: false, null: false
+    t.integer  "period_id",            default: 0,     null: false
     t.integer  "history_level",        default: 0
     t.integer  "building_level",       default: 0
-    t.integer  "menu_level",           default: 0
     t.integer  "person_level",         default: 0
     t.integer  "episode_level",        default: 0
     t.integer  "total_level",          default: 0,     null: false
-    t.integer  "period_id",            default: 0
+    t.boolean  "is_approved",          default: false, null: false
+    t.integer  "stories_shops_count"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string   "title",                          null: false
+    t.text     "content"
+    t.string   "image",                          null: false
+    t.integer  "favorite_count", default: 0,     null: false
+    t.integer  "status",         default: 0,     null: false
+    t.integer  "user_id",                        null: false
+    t.string   "quotation_url"
+    t.string   "quotation_name"
+    t.integer  "category_id",    default: 0,     null: false
+    t.text     "memo"
+    t.boolean  "is_eye_catch",   default: false
+    t.boolean  "is_map",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stories_shops", id: false, force: :cascade do |t|
+    t.integer "story_id", null: false
+    t.integer "shop_id",  null: false
+    t.index ["shop_id"], name: "index_stories_shops_on_shop_id", using: :btree
+    t.index ["story_id"], name: "index_stories_shops_on_story_id", using: :btree
+  end
+
+  create_table "story_details", force: :cascade do |t|
+    t.integer  "story_id"
+    t.string   "title"
+    t.string   "image"
+    t.text     "content"
+    t.string   "quotation_url"
+    t.string   "quotation_name"
+    t.boolean  "is_eye_catch",   default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "story_relations", force: :cascade do |t|
+    t.integer  "story_id",                    null: false
+    t.integer  "story_detail_id"
+    t.string   "related_type",                null: false
+    t.integer  "related_id",                  null: false
+    t.integer  "order",           default: 1
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -262,29 +272,29 @@ ActiveRecord::Schema.define(version: 20170809222617) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "authentication_token"
+    t.string   "uid"
+    t.string   "provider"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "posts_count",            default: 0,  null: false
-    t.string   "uid"
-    t.string   "provider"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "categories_items", "categories"
+  add_foreign_key "categories_items", "items"
   add_foreign_key "categories_people", "categories"
   add_foreign_key "categories_people", "people"
   add_foreign_key "categories_shops", "categories"
   add_foreign_key "categories_shops", "shops"
+  add_foreign_key "events_items", "events"
+  add_foreign_key "events_items", "items"
   add_foreign_key "people_external_links", "external_links"
   add_foreign_key "people_external_links", "people"
-  add_foreign_key "people_features", "features"
-  add_foreign_key "people_features", "people"
   add_foreign_key "people_periods", "people"
   add_foreign_key "people_periods", "periods"
-  add_foreign_key "people_posts", "people"
-  add_foreign_key "people_posts", "posts"
   add_foreign_key "people_shops", "people"
   add_foreign_key "people_shops", "shops"
-  add_foreign_key "posts_shops", "posts"
-  add_foreign_key "posts_shops", "shops"
+  add_foreign_key "people_stories", "people"
+  add_foreign_key "people_stories", "stories"
+  add_foreign_key "stories_shops", "shops"
+  add_foreign_key "stories_shops", "stories"
 end

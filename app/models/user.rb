@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   # 認証トークンはユニークに。ただしnilは許可
   validates:authentication_token, uniqueness: true, allow_nil: true
   has_many :posts
-  has_many :features
   has_many :favorites
 
   # 認証トークンが無い場合は作成

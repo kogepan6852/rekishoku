@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesShop","CategoriesPerson","CategoriesFeature","PostsShop","PeoplePeriod","PeoplePost"]
+  config.excluded_models = ["Price","PeopleShop","CategoriesPerson","PeoplePeriod"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -124,35 +124,12 @@ RailsAdmin.config do |config|
       end
       field :type, :enum do
       enum do
-        Hash[ ['PersonCategory', 'ShopCategory','PostCategory','FeatureCategory'].zip(['PersonCategory', 'ShopCategory','PostCategory','FeatureCategory']) ]
+        Hash[ ['PersonCategory', 'ShopCategory'].zip(['PersonCategory', 'ShopCategory']) ]
       end
         label "カテゴリType"
         required true
       end
      end
-  end
-
-   ## 記事カテゴリ
-  config.model 'PostCategory' do
-     label "記事カテゴリ"
-     weight 3
-     list do
-       field :name
-       field :slug
-       field :updated_at
-     end
-    edit do
-      field :name  do
-        label "記事カテゴリ名"
-        help "必須　例)歴食ニュース"
-        required true
-      end
-      field :slug  do
-        label "管理用記事カテゴリ"
-        help "必須　英語　例)information"
-        required true
-      end
-    end
   end
 
    ## 人物カテゴリ
@@ -200,29 +177,6 @@ RailsAdmin.config do |config|
       end
     end
    end
-
-   ## お店カテゴリ
-   config.model 'FeatureCategory' do
-     label "特集カテゴリ"
-     weight 3
-     list do
-       field :name
-       field :slug
-       field :updated_at
-     end
-     edit do
-       field :name  do
-         label "特集カテゴリ名"
-         help "必須　例)菓子"
-         required true
-       end
-       field :slug  do
-         label "管理用カテゴリ名"
-         help "必須　英語　例)tea"
-         required true
-       end
-     end
-    end
 
    ## 人物
    config.model 'Person' do
@@ -480,7 +434,7 @@ RailsAdmin.config do |config|
   end
 
   ## 投稿カテゴリ
-  config.model 'Post' do
+  config.model 'Story' do
     label "記事"
     weight 0
     list do
@@ -536,13 +490,13 @@ RailsAdmin.config do |config|
         associated_collection_cache_all false # 事前にモデルを読み込まなくなる
         associated_collection_scope do
         Proc.new { |scope|
-            scope = scope.where('categories.type = ?', "PostCategory")
+            scope = scope.where('categories.type = ?', "StoryCategory")
         }
         end
         label "対応するカテゴリを選択してください"
         required true
       end
-      field :post_details do
+      field :story_details do
         label "記事セクション"
         help "対応しているセクションは右にあるので、ダブルクリックで修正可能です"
       end
@@ -573,7 +527,7 @@ RailsAdmin.config do |config|
    end
 
    ## 記事詳細
-   config.model 'PostDetail' do
+   config.model 'StoryDetail' do
      label "投稿記事各セクション"
      weight 5
      list do
@@ -621,138 +575,6 @@ RailsAdmin.config do |config|
      end
     end
 
-
-    ####  特集
-    config.model 'Feature' do
-      label "特集"
-      weight 0
-      list do
-        field :id
-        field :title do
-          label "タイトル"
-        end
-        field :image do
-          label "メイン写真"
-        end
-        field :is_map do
-          label "マップ表示有無"
-        end
-        field :category do
-          label "カテゴリ"
-        end
-      end
-      edit do
-          field :title do
-            label "タイトル"
-            help "必須"
-            required true
-          end
-          field :content do
-            label "内容"
-            help "必須"
-            required true
-          end
-          field :image  do
-            label "画像"
-            help "必須"
-            required true
-          end
-          field :quotation_url do
-            label "引用したURL"
-          end
-          field :quotation_name do
-            label "引用したサイト名"
-          end
-          field :is_map do
-            label "マップ表示有無"
-          end
-          field :category do
-            associated_collection_cache_all false # 事前にモデルを読み込まなくなる
-            associated_collection_scope do
-            Proc.new { |scope|
-                scope = scope.where('categories.type = ?', "FeatureCategory")
-            }
-            end
-            label "カテゴリ"
-            help "必須 対応するカテゴリを選択してください"
-            required true
-          end
-          field :feature_details do
-            label "特集詳細"
-          end
-          field :status, :enum do
-          enum do
-            Hash[ ['公開','非公開'].zip([ 1, 0]) ]
-          end
-            label "公開状態"
-            required true
-          end
-          field :published_at do
-            label "公開時間"
-          end
-          field :user_id, :enum do
-            enum do
-              setData = User.all
-              ids = []
-              names = []
-              setData.each do |set|
-                ids.push(set.id.to_s)
-                names.push(set.username)
-              end
-              Hash[ names.zip(ids) ]
-            end
-            label "ライター"
-            required true
-            help "必須"
-          end
-          field :people do
-            label "関係がある人物"
-            help "対象人物を右に移動してください"
-          end
-      end
-     end
-
-     ## 特集詳細
-      config.model 'FeatureDetail' do
-        label "特集詳細"
-        weight 0
-        list do
-          field :title do
-            label "タイトル"
-          end
-          field :order do
-            label "順番"
-          end
-          field :related_type , :enum do
-          enum do
-            Hash[ ['お店','記事', '外部リンク'].zip(['Shop','Post','ExternalLink']) ]
-          end
-            label "どのDBか"
-          end
-          field :related_id do
-            label "参照DBのID"
-          end
-        end
-        edit do
-            field :title do
-              label "タイトル"
-            end
-            field :content do
-              label "コメント"
-            end
-            field :order , :enum do
-            enum do
-              Hash[ ['1','2','3','4','5','6','7','8','9','10'].zip(['1','2','3','4','5','6','7','8','9','10']) ]
-            end
-              label "順番"
-              required true
-              help "必須"
-            end
-            field :related do
-              label "紐付けする情報"
-            end
-        end
-       end
       ##  外部リング
       config.model 'ExternalLink' do
         label "外部リンク"
@@ -885,7 +707,7 @@ RailsAdmin.config do |config|
               end
               field :related_type , :enum do
               enum do
-                Hash[ ['お店','記事', '特集'].zip(['Shop','Post','Feature']) ]
+                Hash[ ['お店','記事', '特集'].zip(['Shop','Post']) ]
               end
                 label "どのDBか"
               end

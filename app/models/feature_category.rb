@@ -1,2 +1,0 @@
-class FeatureCategory < Category
-end

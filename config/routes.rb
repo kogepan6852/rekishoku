@@ -35,10 +35,6 @@ Rails.application.routes.draw do
   get 'api/shop_list', to: 'api_shops#list'
   get 'api/map', to: 'api_shops#map'
 
-  # FEATURES
-  get 'api/features', to: 'api_features#index'
-  get 'api/features/:id', to: 'api_features#show'
-
   # FAVORITES
   get 'api/favorites', to: 'api_favorites#index'
   get 'api/favorites/:id', to: 'api_favorites#show'
@@ -61,8 +57,6 @@ Rails.application.routes.draw do
   get 'api/person_list', to: 'api_people#list'
   # CATEGORY
   get 'api/categories', to: 'api_categories#index'
-  # PEOPLE POSTS
-  post 'api/people_posts', to: 'api_people_posts#create'
   # POSTS SHOPS
   post 'api/posts_shops', to: 'api_posts_shops#create'
   # PERIODS
@@ -83,14 +77,6 @@ Rails.application.routes.draw do
 
   # ADMIN_POST_DETAIL
   put 'admin/post_detail/:id/edit', to: 'post_details#update'
-
-  # ADMIN_FEATURE
-  post 'admin/feature/new', to: 'features#create'
-  put 'admin/feature/:id/edit', to: 'features#update'
-
-  # ADMIN_FEATURE
-  post 'admin/feature_detail/new', to: 'feature_details#create'
-  put 'admin/feature_detail/:id/edit', to: 'feature_details#update'
 
   # ADMIN_ ExternalLink
   post 'admin/external_link/new', to: 'external_links#create'

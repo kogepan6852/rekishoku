@@ -1,4 +1,4 @@
-class CreatePostsShops < ActiveRecord::Migration
+class CreateStoriesShops < ActiveRecord::Migration
   def change
     create_table :stories_shops, id: false do |t|
       t.references :story, index: true, null: false

@@ -58,9 +58,6 @@ class Ability
     can :read, :api_posts_shop
     can :manage, :api_posts_shop if user && user.role != 1
 
-    can :read, :api_people_post
-    can :manage, :api_people_post if user && user.role != 1
-
     can :read, :api_user
     can :manage, :api_user if user && user.role != 1
 
