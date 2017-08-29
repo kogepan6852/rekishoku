@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Story < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   belongs_to :user, :counter_cache => true
   has_many :post_details

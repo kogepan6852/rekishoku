@@ -433,147 +433,110 @@ RailsAdmin.config do |config|
     end
   end
 
-  ## 投稿カテゴリ
-  config.model 'Story' do
-    label "記事"
-    weight 0
-    list do
-      field :id
-      field :title do
-        label "題名"
-      end
-      field :image do
-        label "トップ画像"
-      end
-      field :content  do
-        label "内容"
-      end
-      field :user_id  do
-        label "投稿者"
-      end
-      field :status, :enum do
-      enum do
-        Hash[ ['公開','非公開'].zip(['1','0']) ]
-      end
-        label "投稿状態"
-      end
-      field :shops do
-        label "関連店舗"
-      end
-      field :people do
-        label "関連人物"
-      end
-    end
-    edit do
-      field :title  do
-        label "題名"
-        help "必須"
-        required true
-      end
-      field :content  do
-        label "内容"
-        help "必須"
-        required true
-      end
-      field :image  do
-        label "トップ画像"
-        help "必須"
-        required true
-      end
-      field :quotation_url  do
-        label "引用したURL"
-      end
-      field :quotation_name  do
-        label "引用したサイト名"
-      end
-      field :category  do
-        associated_collection_cache_all false # 事前にモデルを読み込まなくなる
-        associated_collection_scope do
-        Proc.new { |scope|
-            scope = scope.where('categories.type = ?', "StoryCategory")
-        }
-        end
-        label "対応するカテゴリを選択してください"
-        required true
-      end
-      field :story_details do
-        label "記事セクション"
-        help "対応しているセクションは右にあるので、ダブルクリックで修正可能です"
-      end
-      field :status, :enum do
-      enum do
-        Hash[ ['公開','非公開'].zip(['1','0']) ]
-      end
-        label "公開状態"
-        required true
-      end
-      field :published_at do
-        label "公開時間"
-      end
-      field :shops  do
-        label "関連店舗"
-        help "関連する店舗は右にしてください"
-      end
-      field :people  do
-        label "関連人物"
-        help "関連する人は右にしてください"
-      end
-      field :user do
-        label "ライター"
-        required true
-        help "必須"
-      end
-    end
-   end
-
-   ## 記事詳細
-   config.model 'StoryDetail' do
-     label "投稿記事各セクション"
-     weight 5
-     list do
-       field :post do
-         label "記事名"
-       end
-       field :title do
-         label "サブタイトル"
-       end
-       field :image do
-         label "サブ画像"
-       end
-       field :content do
-         label "内容"
-       end
-     end
-     edit do
-       field :title do
-         label "サブタイトル"
-         help "必須"
-         required true
-       end
-       field :content do
-         label "内容"
-         help "必須"
-         required true
-       end
-       field :image  do
-         label "画像"
-         help "必須"
-         required true
-       end
-       field :quotation_url do
-         label "引用したURL"
-       end
-       field :quotation_name do
-         label "引用したサイト名"
-       end
-       field :is_eye_catch, :enum do
-       enum do
-         Hash[ ['設定しない','設定する'].zip([false, true]) ]
-       end
-         label "アイキャッチ画像"
-       end
-     end
-    end
+  # ## 投稿カテゴリ
+  # config.model 'Story' do
+  #   label "記事"
+  #   weight 0
+  #   list do
+  #     field :id
+  #     field :title do
+  #       label "題名"
+  #     end
+  #     field :image do
+  #       label "トップ画像"
+  #     end
+  #     field :content  do
+  #       label "内容"
+  #     end
+  #     field :user_id  do
+  #       label "投稿者"
+  #     end
+  #     field :status, :enum do
+  #     enum do
+  #       Hash[ ['公開','非公開'].zip(['1','0']) ]
+  #     end
+  #       label "投稿状態"
+  #     end
+  #     field :shops do
+  #       label "関連店舗"
+  #     end
+  #     field :people do
+  #       label "関連人物"
+  #     end
+  #   end
+  #   edit do
+  #     field :title  do
+  #       label "題名"
+  #       help "必須"
+  #       required true
+  #     end
+  #     field :content  do
+  #       label "内容"
+  #       help "必須"
+  #       required true
+  #     end
+  #     field :image  do
+  #       label "トップ画像"
+  #       help "必須"
+  #       required true
+  #     end
+  #     field :quotation_url  do
+  #       label "引用したURL"
+  #     end
+  #     field :quotation_name  do
+  #       label "引用したサイト名"
+  #     end
+  #   end
+  #  end
+   #
+  #  ## 記事詳細
+  #  config.model 'StoryDetail' do
+  #    label "投稿記事各セクション"
+  #    weight 5
+  #    list do
+  #      field :post do
+  #        label "記事名"
+  #      end
+  #      field :title do
+  #        label "サブタイトル"
+  #      end
+  #      field :image do
+  #        label "サブ画像"
+  #      end
+  #      field :content do
+  #        label "内容"
+  #      end
+  #    end
+  #    edit do
+  #      field :title do
+  #        label "サブタイトル"
+  #        help "必須"
+  #        required true
+  #      end
+  #      field :content do
+  #        label "内容"
+  #        help "必須"
+  #        required true
+  #      end
+  #      field :image  do
+  #        label "画像"
+  #        help "必須"
+  #        required true
+  #      end
+  #      field :quotation_url do
+  #        label "引用したURL"
+  #      end
+  #      field :quotation_name do
+  #        label "引用したサイト名"
+  #      end
+  #      field :is_eye_catch, :enum do
+  #      enum do
+  #        Hash[ ['設定しない','設定する'].zip([false, true]) ]
+  #      end
+  #        label "アイキャッチ画像"
+  #      end
+  #    end
+  #   end
 
       ##  外部リング
       config.model 'ExternalLink' do

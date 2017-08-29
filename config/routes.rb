@@ -67,20 +67,20 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
-  # ADMIN_SHOP
-  post 'admin/shop/new', to: 'shops#create'
-  put 'admin/shop/:id/edit', to: 'shops#update'
-
-  # ADMIN_POST
-  post 'admin/post/new', to: 'posts#create'
-  put 'admin/post/:id/edit', to: 'posts#update'
-
-  # ADMIN_POST_DETAIL
-  put 'admin/post_detail/:id/edit', to: 'post_details#update'
-
-  # ADMIN_ ExternalLink
-  post 'admin/external_link/new', to: 'external_links#create'
-  put 'admin/external_link/:id/edit', to: 'external_links#update'
+  # # ADMIN_SHOP
+  # post 'admin/shop/new', to: 'shops#create'
+  # put 'admin/shop/:id/edit', to: 'shops#update'
+  #
+  # # ADMIN_POST
+  # post 'admin/post/new', to: 'posts#create'
+  # put 'admin/post/:id/edit', to: 'posts#update'
+  #
+  # # ADMIN_POST_DETAIL
+  # put 'admin/post_detail/:id/edit', to: 'post_details#update'
+  #
+  # # ADMIN_ ExternalLink
+  # post 'admin/external_link/new', to: 'external_links#create'
+  # put 'admin/external_link/:id/edit', to: 'external_links#update'
 
   ###
   # Site Map
