@@ -89,6 +89,10 @@ gem 'platform-api', github: 'heroku/platform-api', branch: 'master'
 gem 'letsencrypt-rails-heroku', group: 'production'
 gem 'therubyracer'
 
+# 多言語化
+gem 'globalize', git: 'https://github.com/globalize/globalize'
+gem 'activemodel-serializers-xml'
+
 group :development do
   gem 'annotate', '2.6.5'
 end
