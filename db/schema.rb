@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20170827230334) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
     t.string   "slug"
     t.string   "type"
     t.datetime "created_at", null: false
@@ -49,6 +48,16 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.integer "shop_id",     null: false
     t.index ["category_id"], name: "index_categories_shops_on_category_id", using: :btree
     t.index ["shop_id"], name: "index_categories_shops_on_shop_id", using: :btree
+  end
+
+  create_table "category_translations", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.index ["category_id"], name: "index_category_translations_on_category_id", using: :btree
+    t.index ["locale"], name: "index_category_translations_on_locale", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -165,57 +174,65 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "shops", force: :cascade do |t|
-    t.string   "name",                                 null: false
+  create_table "shop_translations", force: :cascade do |t|
+    t.integer  "shop_id",              null: false
+    t.string   "locale",               null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "name",                 null: false
     t.text     "description"
-    t.string   "url"
     t.text     "menu"
-    t.string   "image",                                null: false
-    t.string   "subimage"
-    t.string   "image_quotation_url"
+    t.text     "shop_hours"
     t.string   "image_quotation_name"
-    t.string   "post_quotation_url"
     t.string   "post_quotation_name"
+    t.string   "closed_pattern"
     t.string   "province"
     t.string   "city"
     t.string   "address1"
     t.string   "address2"
+    t.index ["locale"], name: "index_shop_translations_on_locale", using: :btree
+    t.index ["shop_id"], name: "index_shop_translations_on_shop_id", using: :btree
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string   "url"
+    t.text     "menu"
+    t.string   "image",                               null: false
+    t.string   "subimage"
+    t.string   "image_quotation_url"
+    t.string   "post_quotation_url"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "phone_no"
     t.integer  "daytime_price_id"
     t.integer  "nighttime_price_id"
-    t.text     "shop_hours"
-    t.boolean  "is_closed_sun",        default: false, null: false
-    t.boolean  "is_closed_mon",        default: false, null: false
-    t.boolean  "is_closed_tue",        default: false, null: false
-    t.boolean  "is_closed_wed",        default: false, null: false
-    t.boolean  "is_closed_thu",        default: false, null: false
-    t.boolean  "is_closed_fri",        default: false, null: false
-    t.boolean  "is_closed_sat",        default: false, null: false
-    t.boolean  "is_closed_hol",        default: false, null: false
-    t.string   "closed_pattern"
-    t.integer  "period_id",            default: 0,     null: false
-    t.integer  "history_level",        default: 0
-    t.integer  "building_level",       default: 0
-    t.integer  "person_level",         default: 0
-    t.integer  "episode_level",        default: 0
-    t.integer  "total_level",          default: 0,     null: false
-    t.boolean  "is_approved",          default: false, null: false
+    t.boolean  "is_closed_sun",       default: false, null: false
+    t.boolean  "is_closed_mon",       default: false, null: false
+    t.boolean  "is_closed_tue",       default: false, null: false
+    t.boolean  "is_closed_wed",       default: false, null: false
+    t.boolean  "is_closed_thu",       default: false, null: false
+    t.boolean  "is_closed_fri",       default: false, null: false
+    t.boolean  "is_closed_sat",       default: false, null: false
+    t.boolean  "is_closed_hol",       default: false, null: false
+    t.integer  "period_id",           default: 0,     null: false
+    t.integer  "history_level",       default: 0
+    t.integer  "building_level",      default: 0
+    t.integer  "menu_level",          default: 0
+    t.integer  "person_level",        default: 0
+    t.integer  "episode_level",       default: 0
+    t.integer  "total_level",         default: 0,     null: false
+    t.boolean  "is_approved",         default: false, null: false
     t.integer  "stories_shops_count"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string   "title",                          null: false
-    t.text     "content"
     t.string   "image",                          null: false
     t.integer  "favorite_count", default: 0,     null: false
     t.integer  "status",         default: 0,     null: false
     t.integer  "user_id",                        null: false
     t.string   "quotation_url"
-    t.string   "quotation_name"
     t.integer  "category_id",    default: 0,     null: false
     t.text     "memo"
     t.boolean  "is_eye_catch",   default: false
@@ -231,16 +248,25 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.index ["story_id"], name: "index_stories_shops_on_story_id", using: :btree
   end
 
+  create_table "story_detail_translations", force: :cascade do |t|
+    t.integer  "story_detail_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "content"
+    t.string   "quotation_name"
+    t.string   "title",           null: false
+    t.index ["locale"], name: "index_story_detail_translations_on_locale", using: :btree
+    t.index ["story_detail_id"], name: "index_story_detail_translations_on_story_detail_id", using: :btree
+  end
+
   create_table "story_details", force: :cascade do |t|
     t.integer  "story_id"
-    t.string   "title"
     t.string   "image"
-    t.text     "content"
     t.string   "quotation_url"
-    t.string   "quotation_name"
-    t.boolean  "is_eye_catch",   default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "is_eye_catch",  default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "story_relations", force: :cascade do |t|
@@ -251,6 +277,19 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.integer  "order",           default: 1
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "story_translations", force: :cascade do |t|
+    t.integer  "story_id",       null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.text     "content"
+    t.text     "memo"
+    t.string   "quotation_name"
+    t.string   "title",          null: false
+    t.index ["locale"], name: "index_story_translations_on_locale", using: :btree
+    t.index ["story_id"], name: "index_story_translations_on_story_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
