@@ -60,6 +60,17 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.index ["locale"], name: "index_category_translations_on_locale", using: :btree
   end
 
+  create_table "event_translations", force: :cascade do |t|
+    t.integer  "event_id",    null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.index ["event_id"], name: "index_event_translations_on_event_id", using: :btree
+    t.index ["locale"], name: "index_event_translations_on_locale", using: :btree
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -74,16 +85,25 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.index ["item_id"], name: "index_events_items_on_item_id", using: :btree
   end
 
-  create_table "external_links", force: :cascade do |t|
-    t.string   "name"
+  create_table "external_link_translations", force: :cascade do |t|
+    t.integer  "external_link_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "name",             null: false
     t.text     "content"
-    t.string   "image"
-    t.string   "quotation_url"
     t.string   "quotation_name"
     t.string   "province"
     t.string   "city"
     t.string   "address1"
     t.string   "address2"
+    t.index ["external_link_id"], name: "index_external_link_translations_on_external_link_id", using: :btree
+    t.index ["locale"], name: "index_external_link_translations_on_locale", using: :btree
+  end
+
+  create_table "external_links", force: :cascade do |t|
+    t.string   "image"
+    t.string   "quotation_url"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"
@@ -108,28 +128,34 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "shop_id",     null: false
-    t.integer  "price"
-    t.integer  "pid"
+  create_table "item_translations", force: :cascade do |t|
+    t.integer  "item_id",     null: false
+    t.string   "locale",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.index ["item_id"], name: "index_item_translations_on_item_id", using: :btree
+    t.index ["locale"], name: "index_item_translations_on_locale", using: :btree
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "shop_id",    null: false
+    t.integer  "price"
+    t.integer  "pid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",                             null: false
-    t.string   "furigana"
+    t.string   "name",                            null: false
     t.float    "rating"
-    t.text     "description"
     t.string   "image"
     t.string   "image_quotation_url"
-    t.string   "image_quotation_name"
-    t.integer  "birth_year",           default: 0
-    t.integer  "death_year",           default: 0
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "birth_year",          default: 0
+    t.integer  "death_year",          default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "people_external_links", id: false, force: :cascade do |t|
@@ -160,10 +186,32 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.index ["story_id"], name: "index_people_stories_on_story_id", using: :btree
   end
 
-  create_table "periods", force: :cascade do |t|
-    t.string   "name",       null: false
+  create_table "period_translations", force: :cascade do |t|
+    t.integer  "period_id",  null: false
+    t.string   "locale",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name",       null: false
+    t.index ["locale"], name: "index_period_translations_on_locale", using: :btree
+    t.index ["period_id"], name: "index_period_translations_on_period_id", using: :btree
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.integer  "order",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "person_translations", force: :cascade do |t|
+    t.integer  "person_id",            null: false
+    t.string   "locale",               null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "furigana"
+    t.text     "description"
+    t.string   "image_quotation_name"
+    t.index ["locale"], name: "index_person_translations_on_locale", using: :btree
+    t.index ["person_id"], name: "index_person_translations_on_person_id", using: :btree
   end
 
   create_table "prices", force: :cascade do |t|

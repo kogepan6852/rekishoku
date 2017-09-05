@@ -7,5 +7,15 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.timestamps :finish_at
       t.timestamps null: false
     end
+
+    reversible do |dir|
+      dir.up do
+        Event.create_translation_table! :name => {:type => :string, :null => false},
+        :description => :text
+      end
+      dir.down do
+        Event.drop_translation_table!
+      end
+    end
   end
 end
