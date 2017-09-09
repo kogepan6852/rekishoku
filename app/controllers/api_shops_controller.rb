@@ -6,7 +6,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc).joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.id").select('shops.*, period_translations.name as period_name')
+    @shops = Shop.order(created_at: :desc, id: :desc).joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.period_id").select('shops.*, period_translations.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -64,7 +64,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.id").select('shops.*, period_translations.name as period_name').find(params[:id])
+    @shop = Shop.joins("LEFT OUTER JOIN shop_translations ON shops.id = shop_translations.shop_id").select('shops.*, shop_translations.name as name').find(params[:id])
 
     # shopに紐付いてる人物を取得する
     people = get_people(@shop)
@@ -90,7 +90,7 @@ class ApiShopsController < ApplicationController
   # GET /api/shop-list.json
   # post-list用一覧表示
   def list
-    @shops = Shop.joins("LEFT OUTER JOIN shop_translations ON shops.period_id = shop_translations.id").select('shops.*, shop_translations.name as name')
+    @shops = Shop.joins("LEFT OUTER JOIN shop_translations ON shops.id = shop_translations.shop_id").select('shops.*, shop_translations.name as name')
     shops = Array.new()
     @shops.each do |shop|
       # 対象のpostが紐付いているかチェック

@@ -3,7 +3,9 @@ class ApiPeopleController < ApplicationController
   # GET /api/people
   # 一覧表示
   def index
-    @people = Person.all.order("furigana COLLATE \"C\"")
+    @people = Person.joins("LEFT OUTER JOIN person_translations ON people.id = person_translations.person_id")
+    .select('people.*, person_translations.furigana as furigana,person_translations.description as description,person_translations.image_quotation_name as image_quotation_name')
+    .order("furigana COLLATE \"C\"")
     # カテゴリーで検索
     if params[:category]
       @people = @people.joins(:categories).where('categories_people.category_id = ?', params[:category].to_i)
@@ -12,13 +14,7 @@ class ApiPeopleController < ApplicationController
     people = Array.new()
     @people.each do |person|
       if person[:rating] != 0.0
-        obj = {
-          "id" => person.id,
-          "name" => person.name,
-          "furigana" => person.furigana,
-          "rating" => person.rating
-        }
-        people.push(obj)
+        people.push(person)
       end
     end
     render json: people
