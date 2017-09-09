@@ -702,9 +702,26 @@ RailsAdmin.config do |config|
            end
 
            ## 時代表示
-             config.model 'Period' do
+           config.model 'Period' do
                label "時代"
                weight 9
+               list do
+                 field :id
+                 field :name do
+                   label "時代名"
+                 end
+                 field :order do
+                   label "順番"
+                 end
+               end
+               edit do
+                   field :name do
+                     label "時代名"
+                   end
+                   field :order do
+                     label "順番"
+                   end
+               end
             end
 
 end
