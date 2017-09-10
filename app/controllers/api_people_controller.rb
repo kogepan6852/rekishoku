@@ -3,9 +3,7 @@ class ApiPeopleController < ApplicationController
   # GET /api/people
   # 一覧表示
   def index
-    @people = Person.joins("LEFT OUTER JOIN person_translations ON people.id = person_translations.person_id")
-    .select('people.*, person_translations.furigana as furigana,person_translations.description as description,person_translations.image_quotation_name as image_quotation_name')
-    .order("furigana COLLATE \"C\"")
+    @people = Person.all
     # カテゴリーで検索
     if params[:category]
       @people = @people.joins(:categories).where('categories_people.category_id = ?', params[:category].to_i)
@@ -28,7 +26,7 @@ class ApiPeopleController < ApplicationController
     @people.each do |person|
       # 対象のpostが紐付いているかチェック
       hasPost = false
-      person.posts.each do |post|
+      person.stories.each do |post|
         if post.id == params[:post_id].to_i
           hasPost = true
         end

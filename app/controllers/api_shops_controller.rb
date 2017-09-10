@@ -6,7 +6,9 @@ class ApiShopsController < ApplicationController
   # GET /api/shops
   # 一覧表示
   def index
-    @shops = Shop.order(created_at: :desc, id: :desc).joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.period_id").select('shops.*, period_translations.name as period_name')
+    @shops = Shop.order(created_at: :desc, id: :desc).
+    joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.period_id")
+    .select('shops.*, period_translations.name as period_name')
 
     # フリーワードで検索
     if params[:keywords]
@@ -25,9 +27,7 @@ class ApiShopsController < ApplicationController
 
     # 時代で検索
     if params[:period]
-      person = Person.select('distinct people.id').joins(:periods)
-        .where('periods.id' => params[:period])
-      @shops = @shops.joins(:people).where('people.id' => person).uniq
+      @shops = @shops.joins(:period).where('periods.order = ?', params[:period].to_i)
     end
 
     # 人物で検索
