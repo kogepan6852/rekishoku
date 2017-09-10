@@ -207,6 +207,22 @@ RailsAdmin.config do |config|
          label "ランク"
          required true
        end
+       field :description do
+         label "内容"
+         required true
+       end
+       field :image do
+         label "画像"
+         required true
+       end
+       field :image_quotation_url do
+         label "画像掲載元URL"
+         required true
+       end
+       field :image_quotation_name do
+         label "画像掲載元名"
+         required true
+       end
        field :periods do
            label "関係がある時代"
            help "対象カテゴリを右に移動してくだい"

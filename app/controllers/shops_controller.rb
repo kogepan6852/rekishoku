@@ -44,6 +44,7 @@ class ShopsController < ApplicationController
       end
       count += 1
     end
+    print("更新")
     # 緯度経度と歴食度を代入する
     @shop = Shop.new(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total, history_level: setShopLevel[0], building_level: setShopLevel[1], menu_level: setShopLevel[2], person_level: setShopLevel[3], episode_level: setShopLevel[4]))
     @shop.save
@@ -69,7 +70,7 @@ class ShopsController < ApplicationController
       end
       count += 1
     end
-
+    print("更新")
     # 緯度経度と歴食度を代入する
     @shop.update(shop_params.merge(latitude: addressPlace[0], longitude: addressPlace[1], total_level: total, history_level: setShopLevel[0], building_level: setShopLevel[1], menu_level: setShopLevel[2], person_level: setShopLevel[3], episode_level: setShopLevel[4]))
     redirect_to "/admin/shop"
