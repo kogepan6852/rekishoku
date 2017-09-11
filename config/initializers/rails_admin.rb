@@ -450,60 +450,106 @@ RailsAdmin.config do |config|
   end
 
   # ## 投稿カテゴリ
-  # config.model 'Story' do
-  #   label "記事"
-  #   weight 0
-  #   list do
-  #     field :id
-  #     field :title do
-  #       label "題名"
-  #     end
-  #     field :image do
-  #       label "トップ画像"
-  #     end
-  #     field :content  do
-  #       label "内容"
-  #     end
-  #     field :user_id  do
-  #       label "投稿者"
-  #     end
-  #     field :status, :enum do
-  #     enum do
-  #       Hash[ ['公開','非公開'].zip(['1','0']) ]
-  #     end
-  #       label "投稿状態"
-  #     end
-  #     field :shops do
-  #       label "関連店舗"
-  #     end
-  #     field :people do
-  #       label "関連人物"
-  #     end
-  #   end
-  #   edit do
-  #     field :title  do
-  #       label "題名"
-  #       help "必須"
-  #       required true
-  #     end
-  #     field :content  do
-  #       label "内容"
-  #       help "必須"
-  #       required true
-  #     end
-  #     field :image  do
-  #       label "トップ画像"
-  #       help "必須"
-  #       required true
-  #     end
-  #     field :quotation_url  do
-  #       label "引用したURL"
-  #     end
-  #     field :quotation_name  do
-  #       label "引用したサイト名"
-  #     end
-  #   end
-  #  end
+  config.model 'Story' do
+    label "記事"
+    weight 0
+    list do
+      field :id
+      field :title do
+        label "題名"
+      end
+      field :image do
+        label "トップ画像"
+      end
+      field :content  do
+        label "内容"
+      end
+      field :user_id  do
+        label "投稿者"
+      end
+      field :status, :enum do
+      enum do
+        Hash[ ['公開','非公開'].zip(['1','0']) ]
+      end
+        label "投稿状態"
+      end
+      field :shops do
+        label "関連店舗"
+      end
+      field :people do
+        label "関連人物"
+      end
+      field :category do
+        label "カテゴリー"
+      end
+    end
+    edit do
+      field :title  do
+        label "題名"
+        help "必須"
+        required true
+      end
+      field :content  do
+        label "内容"
+        help "必須"
+        required true
+      end
+      field :image  do
+        label "トップ画像"
+        help "必須"
+        required true
+      end
+      field :quotation_url  do
+        label "引用したURL"
+      end
+      field :quotation_name  do
+        label "引用したサイト名"
+      end
+      field :memo  do
+        label "メモ"
+      end
+      field :user_id, :enum do
+        enum do
+          setData = User.all
+          ids = []
+          names = []
+          setData.each do |set|
+            ids.push(set.id.to_s)
+            names.push(set.username)
+          end
+          Hash[ names.zip(ids) ]
+        end
+        label "ライター"
+        required true
+        help "必須"
+      end
+      field :period do
+        label "創業時代"
+      end
+      field :is_eye_catch do
+        label "Top画像洗濯"
+        help "この画像をTopに選択する場合は、こちらにCheckを入れてください"
+      end
+      field :is_map do
+        label "Map表示"
+        help "Mapを表示する場合は、こちらにCheckを入れてください"
+      end
+      field :status, :enum do
+        enum do
+          Hash[ ['公開','非公開'].zip(['1','0']) ]
+        end
+      end
+      field :shops do
+        label "関連店舗"
+      end
+      field :people do
+        label "関連人物"
+      end
+      field :category do
+        label "カテゴリー"
+      end
+    end
+   end
    #
   #  ## 記事詳細
   #  config.model 'StoryDetail' do
