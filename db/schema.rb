@@ -285,8 +285,9 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.text     "memo"
     t.boolean  "is_eye_catch",   default: false
     t.boolean  "is_map",         default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "published_at",                   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "stories_shops", id: false, force: :cascade do |t|

@@ -534,6 +534,9 @@ RailsAdmin.config do |config|
         label "Map表示"
         help "Mapを表示する場合は、こちらにCheckを入れてください"
       end
+      field :published_at do
+        label "公開時間"
+      end
       field :status, :enum do
         enum do
           Hash[ ['公開','非公開'].zip(['1','0']) ]

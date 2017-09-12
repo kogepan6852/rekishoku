@@ -10,8 +10,8 @@ class CreateStories < ActiveRecord::Migration
       t.text :memo
       t.boolean :is_eye_catch, default: false
       t.boolean :is_map, default: false
+      t.datetime :published_at, null: false
       t.timestamps null: false
-      t.timestamps :published_at
     end
 
     reversible do |dir|
