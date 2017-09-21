@@ -60,31 +60,6 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.index ["locale"], name: "index_category_translations_on_locale", using: :btree
   end
 
-  create_table "event_translations", force: :cascade do |t|
-    t.integer  "event_id",    null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "name",        null: false
-    t.text     "description"
-    t.index ["event_id"], name: "index_event_translations_on_event_id", using: :btree
-    t.index ["locale"], name: "index_event_translations_on_locale", using: :btree
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "events_items", id: false, force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "item_id",  null: false
-    t.index ["event_id"], name: "index_events_items_on_event_id", using: :btree
-    t.index ["item_id"], name: "index_events_items_on_item_id", using: :btree
-  end
-
   create_table "external_link_translations", force: :cascade do |t|
     t.integer  "external_link_id", null: false
     t.string   "locale",           null: false
@@ -220,6 +195,29 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.integer  "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scene_translations", force: :cascade do |t|
+    t.integer  "scene_id",    null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.index ["locale"], name: "index_scene_translations_on_locale", using: :btree
+    t.index ["scene_id"], name: "index_scene_translations_on_scene_id", using: :btree
+  end
+
+  create_table "scenes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scenes_items", id: false, force: :cascade do |t|
+    t.integer "scene_id", null: false
+    t.integer "item_id",  null: false
+    t.index ["item_id"], name: "index_scenes_items_on_item_id", using: :btree
+    t.index ["scene_id"], name: "index_scenes_items_on_scene_id", using: :btree
   end
 
   create_table "shop_translations", force: :cascade do |t|
@@ -373,8 +371,6 @@ ActiveRecord::Schema.define(version: 20170827230334) do
   add_foreign_key "categories_people", "people"
   add_foreign_key "categories_shops", "categories"
   add_foreign_key "categories_shops", "shops"
-  add_foreign_key "events_items", "events"
-  add_foreign_key "events_items", "items"
   add_foreign_key "people_external_links", "external_links"
   add_foreign_key "people_external_links", "people"
   add_foreign_key "people_periods", "people"
@@ -383,6 +379,8 @@ ActiveRecord::Schema.define(version: 20170827230334) do
   add_foreign_key "people_shops", "shops"
   add_foreign_key "people_stories", "people"
   add_foreign_key "people_stories", "stories"
+  add_foreign_key "scenes_items", "items"
+  add_foreign_key "scenes_items", "scenes"
   add_foreign_key "stories_shops", "shops"
   add_foreign_key "stories_shops", "stories"
 end
