@@ -1,7 +1,6 @@
 class CreatePeople < ActiveRecord::Migration
   def change
     create_table :people do |t|
-      t.string :name, null: false
       t.float :rating
       t.string :image
       t.string :image_quotation_url
@@ -12,7 +11,8 @@ class CreatePeople < ActiveRecord::Migration
 
     reversible do |dir|
       dir.up do
-        Person.create_translation_table! :furigana => :string,
+        Person.create_translation_table! :name => {:type => :string, :null => false},
+        :furigana => :string,
         :description => :text,
         :image_quotation_name => :string
       end

@@ -1,6 +1,6 @@
 class CreateEvents < ActiveRecord::Migration[5.0]
   def change
-    create_table :events do |t|
+    create_table :scenes do |t|
       t.string :name
       t.text   :description
       t.timestamps :start_at,                   null: false
