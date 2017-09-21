@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Scene < ActiveRecord::Base
 
   translates :name
   translates :description

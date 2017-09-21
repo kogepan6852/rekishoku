@@ -1,6 +1,6 @@
-class CreateEvents < ActiveRecord::Migration[5.0]
+class CreateScenes < ActiveRecord::Migration[5.0]
   def change
-    create_table :scenes do |t|
+    create_table :scene do |t|
       t.string :name
       t.text   :description
       t.timestamps :start_at,                   null: false
@@ -10,11 +10,11 @@ class CreateEvents < ActiveRecord::Migration[5.0]
 
     reversible do |dir|
       dir.up do
-        Event.create_translation_table! :name => {:type => :string, :null => false},
+        Scene.create_translation_table! :name => {:type => :string, :null => false},
         :description => :text
       end
       dir.down do
-        Event.drop_translation_table!
+        Scene.drop_translation_table!
       end
     end
   end
