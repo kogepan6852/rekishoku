@@ -48,7 +48,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :provider
 
       t.timestamps null: false
-      t.integer :posts_count, null: false, default: 0
+      t.integer :stories_count, null: false, default: 0
 
     end
   end

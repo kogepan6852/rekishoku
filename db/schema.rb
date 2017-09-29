@@ -361,7 +361,7 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.string   "provider"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "posts_count",            default: 0,  null: false
+    t.integer  "stories_count",          default: 0,  null: false
   end
 
   add_foreign_key "categories_items", "categories"
