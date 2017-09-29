@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   # API route　
   ###
   # POSTS
-  get 'api/posts', to: 'api_posts#index'
-  get 'api/posts/:id', to: 'api_posts#show'
-  get 'api/post_list', to: 'api_posts#list'
-  get 'api/posts_related/:id', to: 'api_posts#relation'
-  post 'api/posts', to: 'api_posts#create'
-  patch 'api/posts/:id', to: 'api_posts#update'
-  delete 'api/posts/:id', to: 'api_posts#destroy'
+  get 'api/stories', to: 'api_stories#index'
+  get 'api/stories/:id', to: 'api_stories#show'
+  get 'api/stories_list', to: 'api_stories#list'
+  get 'api/stories_related/:id', to: 'api_stories#relation'
+  post 'api/stories', to: 'api_posts#create'
+  patch 'api/stories/:id', to: 'api_stories#update'
+  delete 'api/stories/:id', to: 'api_stories#destroy'
 
   # POST DETAILS
   get 'api/post_details/:id', to: 'api_post_details#index'
@@ -72,8 +72,8 @@ Rails.application.routes.draw do
   put 'admin/shop/:id/edit', to: 'shops#update'
 
   # ADMIN_POST
-  post 'admin/post/new', to: 'posts#create'
-  put 'admin/post/:id/edit', to: 'posts#update'
+  post 'admin/story/new', to: 'stories#create'
+  put 'admin/story/:id/edit', to: 'stories#update'
 
   # ADMIN_POST_DETAIL
   put 'admin/post_detail/:id/edit', to: 'post_details#update'

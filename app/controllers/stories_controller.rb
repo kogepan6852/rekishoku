@@ -1,11 +1,11 @@
-class PostsController < ApplicationController
+class StoriesController < ApplicationController
   load_and_authorize_resource
   before_action :set_post, only: [:edit, :update, :destroy]
 
-  # GET /posts
-  # GET /posts.json
+  # GET /stories
+  # GET /stories.json
   def index
-    @posts = Post.all
+    @posts = Story.all
   end
 
   # GET /posts/1
@@ -23,22 +23,22 @@ class PostsController < ApplicationController
   # def edit
   # end
 
-  # POST /posts
-  # POST /posts.json
+  # POST /stories
+  # POST /stories.json
   def create
     if post_time_params[:published_at] != ""
       setPublishedAt = post_time_params[:published_at].split(/\D+/)
-      @post = Post.new(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
+      @post = Story.new(post_params.merge(published_at: Time.zone.local(setPublishedAt[0],setPublishedAt[1],setPublishedAt[2],setPublishedAt[3],setPublishedAt[4])))
     else
-      @post = Post.new(post_params)
+      @post = Story.new(post_params)
     end
 
     @post.save
-    redirect_to "/admin/post"
+    redirect_to "/admin/story"
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+  # PATCH/PUT /stories/1
+  # PATCH/PUT /stories/1.json
   def update
     if post_time_params[:published_at] != ""
       setPublishedAt = post_time_params[:published_at].split(/\D+/)
@@ -46,11 +46,11 @@ class PostsController < ApplicationController
     else
       @post.update(post_params)
     end
-    redirect_to "/admin/post"
+    redirect_to "/admin/story"
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+  # DELETE /stories/1
+  # DELETE /stories/1.json
   def destroy
     @post.destroy
     respond_to do |format|
@@ -62,15 +62,15 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Story.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :shop_ids => [], :person_ids => [])
+      params.require(:story).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :shop_ids => [], :person_ids => [])
     end
 
     def post_time_params
-      params.require(:post).permit(:published_at)
+      params.require(:story).permit(:published_at)
     end
 end

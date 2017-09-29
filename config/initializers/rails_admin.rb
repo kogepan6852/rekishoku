@@ -124,7 +124,7 @@ RailsAdmin.config do |config|
       end
       field :type, :enum do
       enum do
-        Hash[ ['PersonCategory', 'ShopCategory'].zip(['PersonCategory', 'ShopCategory']) ]
+        Hash[ ['PersonCategory', 'ShopCategory','StoryCategory'].zip(['PersonCategory', 'ShopCategory','StoryCategory']) ]
       end
         label "カテゴリType"
         required true
@@ -527,7 +527,7 @@ RailsAdmin.config do |config|
         label "創業時代"
       end
       field :is_eye_catch do
-        label "Top画像洗濯"
+        label "Top画像選択"
         help "この画像をTopに選択する場合は、こちらにCheckを入れてください"
       end
       field :is_map do

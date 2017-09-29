@@ -8,9 +8,9 @@
 
 # coding: utf-8
 
-Category.create(:name => 'EPISODE', :slug =>'episode', :type =>'PostCategory')
-Category.create(:name => 'COOKING', :slug =>'cooking', :type =>'PostCategory')
-Category.create(:name => 'NEWS', :slug =>'information', :type =>'PostCategory')
+Category.create(:name => 'EPISODE', :slug =>'episode', :type =>'StoryCategory')
+Category.create(:name => 'COOKING', :slug =>'cooking', :type =>'StoryCategory')
+Category.create(:name => 'NEWS', :slug =>'information', :type =>'StoryCategory')
 
 Category.create(:name => 'お土産処', :slug =>'takeout', :type =>'ShopCategory')
 Category.create(:name => 'お茶処', :slug =>'tea', :type =>'ShopCategory')
@@ -22,11 +22,11 @@ Category.create(:name => '文豪', :slug =>'literary_master', :type =>'PersonCat
 Category.create(:name => '武将', :slug =>'military_commander', :type =>'PersonCategory')
 Category.create(:name => '貴族', :slug =>'aristocracy', :type =>'PersonCategory')
 
-Category.create(:name => 'TOUR', :slug =>'tour', :type =>'FeatureCategory')
-Category.create(:name => 'PICKUP', :slug =>'event', :type =>'FeatureCategory')
+Category.create(:name => 'TOUR', :slug =>'tour', :type =>'StoryCategory')
+Category.create(:name => 'PICKUP', :slug =>'event', :type =>'StoryCategory')
 
-Category.create(:name => 'TOUR', :slug =>'tour', :type =>'PostCategory')
-Category.create(:name => 'PICKUP', :slug =>'pickup', :type =>'PostCategory')
+Category.create(:name => 'TOUR', :slug =>'tour', :type =>'StoryCategory')
+Category.create(:name => 'PICKUP', :slug =>'pickup', :type =>'StoryCategory')
 
 Period.create(:name => '古墳以前')
 Period.create(:name => '飛鳥')

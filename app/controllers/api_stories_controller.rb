@@ -5,10 +5,10 @@ class ApiPostsController < ApplicationController
   include ShopInfo
   include RelatedInfo
 
-  # GET /api/posts
+  # GET /api/stories
   # 一覧表示
   def index
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
+    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -16,7 +16,7 @@ class ApiPostsController < ApplicationController
         # タイトル&本文で検索
         @posts = @posts
           .joins(:post_details)
-          .where('posts.title LIKE ? or posts.content LIKE ? or post_details.title LIKE ? or post_details.content LIKE ?', "%#{kw}%", "%#{kw}%" , "%#{kw}%", "%#{kw}%").uniq
+          .where('stories.title LIKE ? or stories.content LIKE ? or post_details.title LIKE ? or post_details.content LIKE ?', "%#{kw}%", "%#{kw}%" , "%#{kw}%", "%#{kw}%").uniq
       end
     end
 
@@ -58,10 +58,10 @@ class ApiPostsController < ApplicationController
     render json: newPosts
   end
 
-  # GET /api/posts/1
+  # GET /api/stories/1
   # 詳細データ表示
   def show
-    @post = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
+    @post = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
 
     if params[:preview] == "true" || @post.status == 1
       # user情報整形
@@ -73,11 +73,7 @@ class ApiPostsController < ApplicationController
       people = Array.new()
       @post.people.order(rating: :desc).each do |person|
         if person[:rating] != 0.0
-          obj = {
-            "id" => person.id,
-            "name" => person.name,
-            "furigana" => person.furigana}
-          people.push(obj);
+          people.push(person);
         end
       end
 
@@ -100,7 +96,7 @@ class ApiPostsController < ApplicationController
       end
 
       post = {
-        "post" => @post,
+        "stories" => @post,
         "shops" => newShops,
         "user" => user,
         "people" => people,
@@ -113,15 +109,15 @@ class ApiPostsController < ApplicationController
     end
   end
 
-  # GET /api/posts_list
+  # GET /api/stories_list
   # post-list用一覧表示
   def list
-    @posts = Post.joins(:category).select('posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
+    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
     @posts = @posts.where(user_id: current_user.id)
     render json: @posts.page(params[:page]).per(params[:per])
   end
 
-  # GET /api/posts_related
+  # GET /api/stories_related
   # 関連post
   def relation
     if params[:type] != "1"
@@ -131,8 +127,8 @@ class ApiPostsController < ApplicationController
       # 対象のperiodに紐づくpostを取得する
       person = Person.select('people.id').joins(:periods)
         .where('periods.id' => period)
-      posts = Post.joins(:category).joins(:people)
-        .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+      posts = Story.joins(:category).joins(:people)
+        .select('distinct stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where('people.id' => person)
         .where('posts.id != ?', params[:id])
         .where("status = ? and published_at <= ?", 1, Time.zone.now)
@@ -140,10 +136,10 @@ class ApiPostsController < ApplicationController
         .limit(10)
     else
       # 対象postに紐付くcategoryを取得する
-      category_id = Post.select("category_id").where(id: params[:id])
+      category_id = Story.select("category_id").where(id: params[:id])
       # 対象のcategoryに紐づくpostを取得する
-      posts = Post.joins(:category)
-        .select('distinct posts.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
+      posts = Story.joins(:category)
+        .select('distinct stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug')
         .where(category_id: category_id)
         .where('posts.id != ?', params[:id])
         .where("status = ? and published_at <= ?", 1, Time.zone.now)
@@ -160,11 +156,11 @@ class ApiPostsController < ApplicationController
     render json: newPosts
   end
 
-  # POST /posts
+  # POST /stories
   # 新規作成
   def create
-    category = PostCategory.find_by(slug: params[:slug])
-    @post = Post.new(post_params.merge(user_id: current_user.id, category_id: category.id))
+    category = StoryCategory.find_by(slug: params[:slug])
+    @post = Story.new(post_params.merge(user_id: current_user.id, category_id: category.id))
     if @post.save
       render json: @post, status: :created
     else
@@ -172,13 +168,13 @@ class ApiPostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
+  # PATCH/PUT /stories/1
   # 更新
   def update
-    @post = Post.where(user_id: current_user.id).find(params[:id])
+    @post = Story.where(user_id: current_user.id).find(params[:id])
     # 公開処理(ステータス更新)でない場合
     if post_params[:status].blank?
-      category = PostCategory.find_by(slug: params[:slug])
+      category = StoryCategory.find_by(slug: params[:slug])
       # 記事の掲載元のパラメータ判定
       if post_params[:quotation_url] && post_params[:quotation_name]
         result = @post.update(post_params.merge(category_id: category.id))
@@ -205,10 +201,10 @@ class ApiPostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
+  # DELETE /stories/1
   # 削除
   def destroy
-    @post = Post.where(user_id: current_user.id).find(params[:id])
+    @post = Story.where(user_id: current_user.id).find(params[:id])
     @post.destroy
     head :no_content
   end
