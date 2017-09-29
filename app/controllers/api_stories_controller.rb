@@ -1,4 +1,4 @@
-class ApiPostsController < ApplicationController
+class ApiStoriesController < ApplicationController
   authorize_resource :class => false
 
   include Prerender
@@ -8,7 +8,8 @@ class ApiPostsController < ApplicationController
   # GET /api/stories
   # 一覧表示
   def index
-    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
+    print("1234567890")
+    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
@@ -160,7 +161,7 @@ class ApiPostsController < ApplicationController
   # 新規作成
   def create
     category = StoryCategory.find_by(slug: params[:slug])
-    @post = Story.new(post_params.merge(user_id: current_user.id, category_id: category.id))
+    @post = Story.new(story_params.merge(user_id: current_user.id, category_id: category.id))
     if @post.save
       render json: @post, status: :created
     else
@@ -173,13 +174,13 @@ class ApiPostsController < ApplicationController
   def update
     @post = Story.where(user_id: current_user.id).find(params[:id])
     # 公開処理(ステータス更新)でない場合
-    if post_params[:status].blank?
+    if story_params[:status].blank?
       category = StoryCategory.find_by(slug: params[:slug])
       # 記事の掲載元のパラメータ判定
       if post_params[:quotation_url] && post_params[:quotation_name]
-        result = @post.update(post_params.merge(category_id: category.id))
+        result = @post.update(story_params.merge(category_id: category.id))
       else
-        result = @post.update(post_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
+        result = @post.update(story_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
       end
     # 公開処理の場合
     else
@@ -212,7 +213,7 @@ class ApiPostsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:stories).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map)
+      params.require(:story).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map)
     end
 
 end

@@ -7,13 +7,12 @@ module RelatedInfo
             "image" => post.image,
             "published_at" => post.published_at,
             "category_id" => post.category_id,
-            "category_name" => post.category_name,
             "category_slug" => post.category_slug }
-    post.post_details.each do |post_detail|
-      if post_detail.is_eye_catch
-        postObj["image"] = post_detail.image
-      end
-    end
+    # post.post_details.each do |post_detail|
+    #   if post_detail.is_eye_catch
+    #     postObj["image"] = post_detail.image
+    #   end
+    # end
 
     return postObj
   end
