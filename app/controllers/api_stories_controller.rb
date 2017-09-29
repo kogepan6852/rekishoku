@@ -211,8 +211,8 @@ class ApiPostsController < ApplicationController
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map)
+    def story_params
+      params.require(:stories).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map)
     end
 
 end
