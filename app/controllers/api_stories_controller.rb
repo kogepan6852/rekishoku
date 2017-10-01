@@ -9,7 +9,8 @@ class ApiStoriesController < ApplicationController
   # 一覧表示
   def index
     print("1234567890")
-    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
+    @posts = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
+    .select('stories.*, categories.id as category_id, category_translations.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
