@@ -55,7 +55,7 @@ class ApiStoriesController < ApplicationController
 
     newPosts = Array.new()
     @posts.each do |post|
-      newPosts.push(get_post_json(post))
+      newPosts.push(get_story_json(post))
     end
     render json: newPosts
   end
@@ -152,7 +152,7 @@ class ApiStoriesController < ApplicationController
     # 返却用オブジェクト作成
     newPosts = Array.new()
     posts.each do |post|
-      newPosts.push(get_post_json(post))
+      newPosts.push(get_story_json(post))
     end
 
     render json: newPosts

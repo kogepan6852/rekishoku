@@ -758,7 +758,7 @@ RailsAdmin.config do |config|
               end
               field :related_type , :enum do
               enum do
-                Hash[ ['お店','記事', '特集'].zip(['Shop','Post']) ]
+                Hash[ ['お店','記事', '特集'].zip(['Shop','Story','Story']) ]
               end
                 label "どのDBか"
               end

@@ -1,21 +1,21 @@
 module RelatedInfo
-  def get_post(post)
+  def get_story(story)
     # アイキャッチ画像の設定
-    postObj = { "id" => post.id,
-            "title" => post.title,
-            "content" => post.content,
-            "image" => post.image,
-            "published_at" => post.published_at,
-            "category_id" => post.category_id,
-            "category_name" => post.category_name,
-            "category_slug" => post.category_slug }
+    storyObj = { "id" => story.id,
+            "title" => story.title,
+            "content" => story.content,
+            "image" => story.image,
+            "published_at" => story.published_at,
+            "category_id" => story.category_id,
+            "category_name" => story.category_name,
+            "category_slug" => story.category_slug }
     # post.post_details.each do |post_detail|
     #   if post_detail.is_eye_catch
     #     postObj["image"] = post_detail.image
     #   end
     # end
 
-    return postObj
+    return storyObj
   end
 
   # 対象の人物から紐づく時代を取得する
@@ -90,9 +90,9 @@ module RelatedInfo
     return obj
   end
 
-  def get_post_json(post)
+  def get_story_json(post)
     # アイキャッチ画像の設定
-    postObj = get_post(post)
+    postObj = get_story(post)
     # postsに紐付いてる人物を取得する
     people = get_people(post)
     # postsに紐付けしている時代を取得をする
