@@ -97,6 +97,7 @@ class ApiStoriesController < ApplicationController
       #   newShops.push(get_shop_json(shop));
       # end
       story = @story.attributes
+      story["image"] = @story.image
       story["user"] = user
       story["people"] = people
       story["periods"] = postPeriods.uniq

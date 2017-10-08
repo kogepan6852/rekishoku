@@ -71,32 +71,24 @@ module RelatedInfo
     categories = get_categories(shop.categories)
 
     # 返却用のオブジェクトを作成する
-    obj = { "shop_id" => shop.id,
-            "name" => shop.name,
-            "menu" => shop.menu,
-            "image" => shop.image,
-            "subimage" => shop.subimage,
-            "province" => shop.province,
-            "city" => shop.city,
-            "period_id" => shop.period_id,
-            "period_name" => shop.period_name,
-            "price" => price,
-            "categories" => categories,
-            "people" => people.uniq,
-            "rating" => rating,
-            "latitude" => shop.latitude,
-            "longitude" => shop.longitude
-          }
+    obj = shop.attributes
+    obj["image"] = shop.image
+    obj["subimage"] = shop.subimage
+    obj["price"] = price
+    obj["categories"] = categories
+    obj["people"] = people.uniq
+    obj["rating"] = rating
     return obj
   end
 
-  def get_story_json(post)
+  def get_story_json(story)
     # アイキャッチ画像の設定
-    storyObj = get_story(post)
+    storyObj = story.attributes
+    storyObj["image"] = story.image
     # postsに紐付いてる人物を取得する
-    storyObj["people"] = get_people(post).uniq
+    storyObj["people"] = get_people(story).uniq
     # postsに紐付けしている時代を取得をする
-    storyObj["periods"] = get_periods(post.people).uniq
+    storyObj["periods"] = get_periods(story.people).uniq
 
     # 返却用のオブジェクトを作成する
     return storyObj

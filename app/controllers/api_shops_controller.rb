@@ -49,14 +49,17 @@ class ApiShopsController < ApplicationController
     end
 
     # shopにカテゴリーを紐付ける
+    newShops = Array.new()
     if params[:page] && params[:per]
-      newShops = Array.new()
       @shops.page(params[:page]).per(params[:per]).each do |shop|
         newShops.push(get_shop_json(shop))
       end
       shops = newShops
     else
-      shops = @shops
+      @shops.each do |shop|
+        newShops.push(get_shop_json(shop))
+      end
+      shops = newShops
     end
     render json: shops
   end
@@ -66,24 +69,7 @@ class ApiShopsController < ApplicationController
   def show
     @shop = Shop.joins("LEFT OUTER JOIN shop_translations ON shops.id = shop_translations.shop_id").select('shops.*, shop_translations.name as name').find(params[:id])
 
-    # shopに紐付いてる人物を取得する
-    people = get_people(@shop)
-
-    # 歴食度の設定
-    rating = cal_rating(@shop)
-    # 価格帯の取得
-    price = get_price(@shop)
-    # カテゴリ設定
-    categories = get_categories(@shop.categories)
-
-    # 返却用のオブジェクトを作成する
-    rtnObj = { "shop" => @shop,
-             "categories" => categories,
-             "people" =>  people.uniq,
-             "rating" => rating,
-             "price" => price
-           }
-    render json: rtnObj
+    render json: get_shop_json(@shop)
   end
 
 
