@@ -92,18 +92,14 @@ module RelatedInfo
 
   def get_story_json(post)
     # アイキャッチ画像の設定
-    postObj = get_story(post)
+    storyObj = get_story(post)
     # postsに紐付いてる人物を取得する
-    people = get_people(post)
+    storyObj["people"] = get_people(post).uniq
     # postsに紐付けしている時代を取得をする
-    periods = get_periods(post.people)
+    storyObj["periods"] = get_periods(post.people).uniq
 
     # 返却用のオブジェクトを作成する
-    obj = { "post" => postObj,
-            "people" => people.uniq,
-            "periods" => periods.uniq
-          }
-    return obj
+    return storyObj
   end
 
   def get_feature_json(feature)

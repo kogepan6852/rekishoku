@@ -8,15 +8,14 @@ class ApiStoriesController < ApplicationController
   # GET /api/stories
   # 一覧表示
   def index
-    print("1234567890")
-    @posts = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
+    @storys = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
     .select('stories.*, categories.id as category_id, category_translations.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
       for kw in keywords.gsub("　", " ").split(" ")
         # タイトル&本文で検索
-        @posts = @posts
+        @storys = @storys
           .joins(:post_details)
           .where('stories.title LIKE ? or stories.content LIKE ? or post_details.title LIKE ? or post_details.content LIKE ?', "%#{kw}%", "%#{kw}%" , "%#{kw}%", "%#{kw}%").uniq
       end
@@ -24,37 +23,37 @@ class ApiStoriesController < ApplicationController
 
     # カテゴリーで検索
     if params[:category]
-      @posts = @posts.where(category_id: params[:category].to_i)
+      @storys = @storys.where(category_id: params[:category].to_i)
     end
 
     # 時代で検索
     if params[:period]
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
-      @posts = @posts.joins(:people).where('people.id' => person).uniq
+      @storys = @storys.joins(:people).where('people.id' => person).uniq
     end
 
     # 人物で検索
     if params[:person]
-      @posts = @posts.joins(:people).where('people.id' => params[:person]).uniq
+      @storys = @storys.joins(:people).where('people.id' => params[:person]).uniq
     end
 
     # 人物で検索
     if params[:province]
-      @posts = @posts.joins(:shops).where('shops.province' => params[:province]).uniq
+      @storys = @storys.joins(:shops).where('shops.province' => params[:province]).uniq
     end
 
     # ライターで検索
     if params[:writer]
-      @posts = @posts.where("user_id = ?", params[:writer])
+      @storys = @storys.where("user_id = ?", params[:writer])
     end
 
     if params[:page] && params[:per]
-      @posts = @posts.page(params[:page]).per(params[:per])
+      @storys = @storys.page(params[:page]).per(params[:per])
     end
 
     newPosts = Array.new()
-    @posts.each do |post|
+    @storys.each do |post|
       newPosts.push(get_story_json(post))
     end
     render json: newPosts
@@ -63,60 +62,58 @@ class ApiStoriesController < ApplicationController
   # GET /api/stories/1
   # 詳細データ表示
   def show
-    @post = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').find(params[:id])
+    @story = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
+    .select('stories.*, categories.id as category_id, category_translations.name as category_name, categories.slug as category_slug').find(params[:id])
 
-    if params[:preview] == "true" || @post.status == 1
+    if params[:preview] == "true" || @story.status == 1
       # user情報整形
       user = {
-        "id" => @post.user.id,
-        "username" => @post.user.username,
-        "image" => @post.user.image.thumb }
+        "id" => @story.user.id,
+        "username" => @story.user.username,
+        "image" => @story.user.image.thumb }
       # people情報整形
       people = Array.new()
-      @post.people.order(rating: :desc).each do |person|
+      @story.people.order(rating: :desc).each do |person|
         if person[:rating] != 0.0
           people.push(person);
         end
       end
 
       # アイキャッチ画像設定
-      eyeCatchImage = @post.image
-      @post.post_details.each do |post_detail|
-        if post_detail.is_eye_catch
+      eyeCatchImage = @story.image
+      @story.story_details.each do |story_detail|
+        if story_detail.is_eye_catch
           eyeCatchImage = post_detail.image
         end
       end
 
       # 人に紐付く時代を全て抽出する
-      postPeriods = get_periods(@post.people)
+      postPeriods = get_periods(@story.people)
 
-      # shop情報整形
-      shops = @post.shops.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name')
-      newShops = Array.new()
-      shops.each do |shop|
-        newShops.push(get_shop_json(shop));
-      end
-
-      post = {
-        "stories" => @post,
-        "shops" => newShops,
-        "user" => user,
-        "people" => people,
-        "periods" => postPeriods.uniq,
-        "eye_catch_image" => eyeCatchImage }
-      render json: post
+      # # shop情報整形
+      # shops = @story.shops.joins("LEFT OUTER JOIN periods ON shops.period_id = periods.id").select('shops.*, periods.name as period_name')
+      # newShops = Array.new()
+      # shops.each do |shop|
+      #   newShops.push(get_shop_json(shop));
+      # end
+      story = @story.attributes
+      story["user"] = user
+      story["people"] = people
+      story["periods"] = postPeriods.uniq
+      story["eye_catch_image"] = eyeCatchImage
+      render json: story
     else
-      post = { "post" => "" }
-      render json: post
+      story = {}
+      render json: story
     end
   end
 
   # GET /api/stories_list
   # post-list用一覧表示
   def list
-    @posts = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
-    @posts = @posts.where(user_id: current_user.id)
-    render json: @posts.page(params[:page]).per(params[:per])
+    @storys = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
+    @storys = @storys.where(user_id: current_user.id)
+    render json: @storys.page(params[:page]).per(params[:per])
   end
 
   # GET /api/stories_related
@@ -162,52 +159,52 @@ class ApiStoriesController < ApplicationController
   # 新規作成
   def create
     category = StoryCategory.find_by(slug: params[:slug])
-    @post = Story.new(story_params.merge(user_id: current_user.id, category_id: category.id))
-    if @post.save
-      render json: @post, status: :created
+    @story = Story.new(story_params.merge(user_id: current_user.id, category_id: category.id))
+    if @story.save
+      render json: @story, status: :created
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: @story.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /stories/1
   # 更新
   def update
-    @post = Story.where(user_id: current_user.id).find(params[:id])
+    @story = Story.where(user_id: current_user.id).find(params[:id])
     # 公開処理(ステータス更新)でない場合
     if story_params[:status].blank?
       category = StoryCategory.find_by(slug: params[:slug])
       # 記事の掲載元のパラメータ判定
       if post_params[:quotation_url] && post_params[:quotation_name]
-        result = @post.update(story_params.merge(category_id: category.id))
+        result = @story.update(story_params.merge(category_id: category.id))
       else
-        result = @post.update(story_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
+        result = @story.update(story_params.merge(category_id: category.id, quotation_url: nil, quotation_name: nil))
       end
     # 公開処理の場合
     else
       # アイキャッチ画像設定
-      eyeCatchImage = @post.image
-      @post.post_details.each do |post_detail|
+      eyeCatchImage = @story.image
+      @story.post_details.each do |post_detail|
         if post_detail.is_eye_catch
           eyeCatchImage = post_detail.image
         end
       end
-      cache_url = "https://www.rekishoku.jp/app/post/" + @post[:id].to_s
-      create_page_cache(cache_url, eyeCatchImage, @post[:title], @post[:content])
-      result = @post.update(post_params)
+      cache_url = "https://www.rekishoku.jp/app/post/" + @story[:id].to_s
+      create_page_cache(cache_url, eyeCatchImage, @story[:title], @story[:content])
+      result = @story.update(post_params)
     end
     if result
-      render json: @post, status: :ok
+      render json: @story, status: :ok
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: @story.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /stories/1
   # 削除
   def destroy
-    @post = Story.where(user_id: current_user.id).find(params[:id])
-    @post.destroy
+    @story = Story.where(user_id: current_user.id).find(params[:id])
+    @story.destroy
     head :no_content
   end
 

@@ -574,6 +574,9 @@ RailsAdmin.config do |config|
       field :category do
         label "カテゴリー"
       end
+      field :story_details do
+        label "記事詳細"
+      end
     end
    end
    #
