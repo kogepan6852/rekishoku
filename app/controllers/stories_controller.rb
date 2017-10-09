@@ -17,7 +17,6 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
-    print("ここまできてる？")
     if story_time_params[:published_at] != ""
       setPublishedAt = story_time_params[:published_at].split(/\D+/)
       print(setPublishedAt)
@@ -60,7 +59,7 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map)
+      params.require(:story).permit(:title, :content, :image, :favorite_count, :status, :user_id, :quotation_url, :quotation_name, :category_id, :memo, :published_at, :is_eye_catch, :is_map, :person_ids => [], :shop_ids => [])
     end
 
     def story_time_params

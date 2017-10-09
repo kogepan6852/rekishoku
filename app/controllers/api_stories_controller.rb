@@ -52,6 +52,20 @@ class ApiStoriesController < ApplicationController
       @storys = @storys.page(params[:page]).per(params[:per])
     end
 
+    # shop_id対応
+    if params[:shop_id]
+      storiesShop = StoriesShop.where(shop_id: params[:shop_id].to_i)
+      if storiesShop.count != 0
+        newStoryId = Array.new()
+        storiesShop.each do |storiesshop|
+          newStoryId.push(storiesshop.story_id)
+        end
+        @storys = @storys.where('id' =>  newStoryId).uniq
+      else
+        @storys = {}
+      end
+    end
+
     newPosts = Array.new()
     @storys.each do |post|
       newPosts.push(get_story_json(post))

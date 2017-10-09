@@ -40,6 +40,20 @@ class ApiShopsController < ApplicationController
       @shops = @shops.where(province: params[:province])
     end
 
+    # story_id対応
+    if params[:story_id]
+      storiesShop = StoriesShop.where(story_id: params[:story_id].to_i)
+      if storiesShop.count != 0
+        newShopId = Array.new()
+        storiesShop.each do |storiesshop|
+          newShopId.push(storiesshop.shop_id)
+        end
+        @shops = @shops.where('id' =>  newShopId).uniq
+      else
+        @shops = {}
+      end
+    end
+
     if params[:latitude] && params[:longitude]
       minLatitude = params[:latitude].to_f - params[:shopDistance].to_f*latitudeRange
       minLongitude = params[:longitude].to_f - params[:shopDistance].to_f*longitudeRange

@@ -3,7 +3,7 @@ class Shop < ActiveRecord::Base
   mount_uploader :subimage, ImageUploader
   belongs_to :period
   has_and_belongs_to_many :categories
-  has_and_belongs_to_many :stories
+  has_and_belongs_to_many :stories, :join_table => "stories_shops"
   has_and_belongs_to_many :people
   has_many :favorite_details, :as => :related
   belongs_to :daytime_price, :class_name => 'Price', :foreign_key => 'daytime_price_id'

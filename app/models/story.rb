@@ -3,7 +3,7 @@ class Story < ActiveRecord::Base
   belongs_to :period
   belongs_to :category
   belongs_to :user, :counter_cache => true
-  has_and_belongs_to_many :shops
+  has_and_belongs_to_many :shops, :join_table => "stories_shops"
   has_and_belongs_to_many :people
   has_many :story_details
 

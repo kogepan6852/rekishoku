@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   # 宣言したDBを表示させないようにする
-  config.excluded_models = ["Price","PeopleShop","CategoriesPerson","PeoplePeriod","StoriesShop","CategoriesShop","AddressBook"]
+  config.excluded_models = ["Price","PeopleShop","StoriesShop","CategoriesPerson","PeoplePeriod","CategoriesShop","AddressBook"]
 
   ## == Cancan ==
   config.authorize_with :cancan
@@ -450,6 +450,10 @@ RailsAdmin.config do |config|
         label "エピソード"
         help "必須"
         required true
+      end
+      field :stories do
+        label "関係があるお話"
+        help "対象人物を右に移動してください"
       end
       field :people do
         label "関係がある人物"
