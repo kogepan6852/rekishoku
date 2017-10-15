@@ -7,14 +7,14 @@ class ApiStoriesController < ApplicationController
   # GET /api/stories
   # 一覧表示
   def index
-    @storys = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
+    @stories = Story.joins(:category).joins("LEFT OUTER JOIN category_translations ON stories.category_id = category_translations.category_id")
     .select('stories.*, categories.id as category_id, category_translations.name as category_name, categories.slug as category_slug').where("status = ? and published_at <= ?", 1, Time.zone.now).order(published_at: :desc, id: :desc)
     # フリーワードで検索
     if params[:keywords]
       keywords = params[:keywords]
       for kw in keywords.gsub("　", " ").split(" ")
         # タイトル&本文で検索
-        @storys = @storys
+        @stories = @stories
           .joins(:post_details)
           .where('stories.title LIKE ? or stories.content LIKE ? or post_details.title LIKE ? or post_details.content LIKE ?', "%#{kw}%", "%#{kw}%" , "%#{kw}%", "%#{kw}%").uniq
       end
@@ -22,33 +22,33 @@ class ApiStoriesController < ApplicationController
 
     # カテゴリーで検索
     if params[:category]
-      @storys = @storys.where(category_id: params[:category].to_i)
+      @stories = @stories.where(category_id: params[:category].to_i)
     end
 
     # 時代で検索
     if params[:period]
       person = Person.select('distinct people.id').joins(:periods)
         .where('periods.id' => params[:period])
-      @storys = @storys.joins(:people).where('people.id' => person).uniq
+      @stories = @stories.joins(:people).where('people.id' => person).uniq
     end
 
     # 人物で検索
     if params[:person]
-      @storys = @storys.joins(:people).where('people.id' => params[:person]).uniq
+      @stories = @stories.joins(:people).where('people.id' => params[:person]).uniq
     end
 
     # 人物で検索
     if params[:province]
-      @storys = @storys.joins(:shops).where('shops.province' => params[:province]).uniq
+      @stories = @stories.joins(:shops).where('shops.province' => params[:province]).uniq
     end
 
     # ライターで検索
     if params[:writer]
-      @storys = @storys.where("user_id = ?", params[:writer])
+      @stories = @stories.where("user_id = ?", params[:writer])
     end
 
     if params[:page] && params[:per]
-      @storys = @storys.page(params[:page]).per(params[:per])
+      @stories = @stories.page(params[:page]).per(params[:per])
     end
 
     # shop_id対応
@@ -59,15 +59,15 @@ class ApiStoriesController < ApplicationController
         storiesShop.each do |storiesshop|
           newStoryId.push(storiesshop.story_id)
         end
-        @storys = @storys.where('id' =>  newStoryId).uniq
+        @stories = @stories.where('id' =>  newStoryId).uniq
       else
-        @storys = {}
+        @stories = {}
       end
     end
 
     newPosts = Array.new()
-    @storys.each do |post|
-      newPosts.push(get_story_json(post))
+    @stories.each do |story|
+      newPosts.push(get_story_json(story))
     end
     render json: newPosts
   end
@@ -79,12 +79,6 @@ class ApiStoriesController < ApplicationController
     .select('stories.*, categories.id as category_id, category_translations.name as category_name, categories.slug as category_slug').find(params[:id])
 
     if params[:preview] == "true" || @story.status == 1
-      # user情報整形
-      user = {
-        "id" => @story.user.id,
-        "username" => @story.user.username,
-        "image" => @story.user.image.thumb }
-      # people情報整形
       people = Array.new()
       @story.people.order(rating: :desc).each do |person|
         if person[:rating] != 0.0
@@ -111,7 +105,7 @@ class ApiStoriesController < ApplicationController
       # end
       story = @story.attributes
       story["image"] = @story.image
-      story["user"] = user
+      story["username"] = @story.user.username
       story["people"] = people
       story["periods"] = postPeriods.uniq
       story["eye_catch_image"] = eyeCatchImage
@@ -125,9 +119,9 @@ class ApiStoriesController < ApplicationController
   # GET /api/stories_list
   # post-list用一覧表示
   def list
-    @storys = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
-    @storys = @storys.where(user_id: current_user.id)
-    render json: @storys.page(params[:page]).per(params[:per])
+    @stories = Story.joins(:category).select('stories.*, categories.id as category_id, categories.name as category_name, categories.slug as category_slug').order(created_at: :desc)
+    @stories = @stories.where(user_id: current_user.id)
+    render json: @stories.page(params[:page]).per(params[:per])
   end
 
   # GET /api/stories_related

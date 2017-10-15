@@ -85,6 +85,7 @@ module RelatedInfo
     # アイキャッチ画像の設定
     storyObj = story.attributes
     storyObj["image"] = story.image
+    storyObj["username"] =  story.user.username
     # postsに紐付いてる人物を取得する
     storyObj["people"] = get_people(story).uniq
     # postsに紐付けしている時代を取得をする
