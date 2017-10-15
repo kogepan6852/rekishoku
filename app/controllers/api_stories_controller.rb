@@ -1,5 +1,4 @@
 class ApiStoriesController < ApplicationController
-  authorize_resource :class => false
 
   include Prerender
   include ShopInfo
