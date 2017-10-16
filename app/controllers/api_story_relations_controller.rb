@@ -1,5 +1,4 @@
-class ApiStoryDetailsController < ApplicationController
-  authorize_resource :class => false
+class ApiStoryRelationsController < ApplicationController
 
   include ShopInfo
   include RelatedInfo

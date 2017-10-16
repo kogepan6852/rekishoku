@@ -123,14 +123,12 @@ ActiveRecord::Schema.define(version: 20170827230334) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "name",                            null: false
+    t.string   "name",                   null: false
     t.float    "rating"
-    t.string   "image"
-    t.string   "image_quotation_url"
-    t.integer  "birth_year",          default: 0
-    t.integer  "death_year",          default: 0
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "birth_year", default: 0
+    t.integer  "death_year", default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "people_external_links", id: false, force: :cascade do |t|
@@ -178,13 +176,11 @@ ActiveRecord::Schema.define(version: 20170827230334) do
   end
 
   create_table "person_translations", force: :cascade do |t|
-    t.integer  "person_id",            null: false
-    t.string   "locale",               null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "person_id",  null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "furigana"
-    t.text     "description"
-    t.string   "image_quotation_name"
     t.index ["locale"], name: "index_person_translations_on_locale", using: :btree
     t.index ["person_id"], name: "index_person_translations_on_person_id", using: :btree
   end
@@ -311,12 +307,12 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.string   "image"
     t.string   "quotation_url"
     t.boolean  "is_eye_catch",  default: false
+    t.integer  "order"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
   create_table "story_relations", force: :cascade do |t|
-    t.integer  "story_id",                    null: false
     t.integer  "story_detail_id"
     t.string   "related_type",                null: false
     t.integer  "related_id",                  null: false

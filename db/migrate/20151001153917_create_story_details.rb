@@ -5,6 +5,7 @@ class CreateStoryDetails < ActiveRecord::Migration
       t.string :image
       t.string :quotation_url
       t.boolean :is_eye_catch, default: false
+      t.integer :order
       t.timestamps null: false
     end
 

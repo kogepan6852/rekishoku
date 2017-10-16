@@ -230,22 +230,6 @@ RailsAdmin.config do |config|
          label "ランク"
          required true
        end
-       field :description do
-         label "内容"
-         required true
-       end
-       field :image do
-         label "画像"
-         required true
-       end
-       field :image_quotation_url do
-         label "画像掲載元URL"
-         required true
-       end
-       field :image_quotation_name do
-         label "画像掲載元名"
-         required true
-       end
        field :periods do
            label "関係がある時代"
            help "対象カテゴリを右に移動してくだい"
@@ -583,55 +567,61 @@ RailsAdmin.config do |config|
       end
     end
    end
-   #
-  #  ## 記事詳細
-  #  config.model 'StoryDetail' do
-  #    label "投稿記事各セクション"
-  #    weight 5
-  #    list do
-  #      field :post do
-  #        label "記事名"
-  #      end
-  #      field :title do
-  #        label "サブタイトル"
-  #      end
-  #      field :image do
-  #        label "サブ画像"
-  #      end
-  #      field :content do
-  #        label "内容"
-  #      end
-  #    end
-  #    edit do
-  #      field :title do
-  #        label "サブタイトル"
-  #        help "必須"
-  #        required true
-  #      end
-  #      field :content do
-  #        label "内容"
-  #        help "必須"
-  #        required true
-  #      end
-  #      field :image  do
-  #        label "画像"
-  #        help "必須"
-  #        required true
-  #      end
-  #      field :quotation_url do
-  #        label "引用したURL"
-  #      end
-  #      field :quotation_name do
-  #        label "引用したサイト名"
-  #      end
-  #      field :is_eye_catch, :enum do
-  #      enum do
-  #        Hash[ ['設定しない','設定する'].zip([false, true]) ]
-  #      end
-  #        label "アイキャッチ画像"
-  #      end
-  #    end
-  #   end
+
+   ## 記事詳細
+   config.model 'StoryDetail' do
+     label "投稿記事各セクション"
+     weight 5
+     list do
+       field :story do
+         label "記事名"
+       end
+       field :title do
+         label "サブタイトル"
+       end
+       field :image do
+         label "サブ画像"
+       end
+       field :content do
+         label "内容"
+       end
+     end
+     edit do
+       field :story do
+         label "記事名"
+       end
+       field :title do
+         label "サブタイトル"
+         help "必須"
+         required true
+       end
+       field :content do
+         label "内容"
+         help "必須"
+         required true
+       end
+       field :image  do
+         label "画像"
+         help "必須"
+         required true
+       end
+       field :quotation_url do
+         label "引用したURL"
+       end
+       field :quotation_name do
+         label "引用したサイト名"
+       end
+       field :order do
+         label "順番"
+       end
+       field :is_eye_catch, :enum do
+       enum do
+         Hash[ ['設定しない','設定する'].zip([false, true]) ]
+       end
+         label "アイキャッチ画像"
+       end
+     end
+    end
 
       ##  外部リング
       config.model 'ExternalLink' do
@@ -818,5 +808,18 @@ RailsAdmin.config do |config|
                    end
                end
             end
+
+            ## 記事詳細の紐付
+            config.model 'StoryRelation' do
+                label "記事詳細の紐付"
+                weight 1
+                edit do
+                  field :story_detail
+                  field :order
+                  field :related do
+                    label "紐付けする情報"
+                  end
+                end
+             end
 
 end

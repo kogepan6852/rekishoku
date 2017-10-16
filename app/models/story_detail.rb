@@ -1,8 +1,7 @@
 class StoryDetail < ActiveRecord::Base
   mount_uploader :image, ImageUploader
-  belongs_to :related, polymorphic: true
-  belongs_to :category
   belongs_to :story
+  has_many :story_relations
 
 
   translates :title
