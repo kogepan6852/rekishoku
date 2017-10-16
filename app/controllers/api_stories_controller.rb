@@ -105,7 +105,7 @@ class ApiStoriesController < ApplicationController
       # end
       story = @story.attributes
       story["image"] = @story.image
-      story["username"] = @story.user.username
+      story["user_name"] = @story.user.username
       story["people"] = people
       story["periods"] = postPeriods.uniq
       story["eye_catch_image"] = eyeCatchImage
