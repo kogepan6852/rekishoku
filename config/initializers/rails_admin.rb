@@ -534,9 +534,6 @@ RailsAdmin.config do |config|
         required true
         help "必須"
       end
-      field :period do
-        label "創業時代"
-      end
       field :is_eye_catch do
         label "Top画像選択"
         help "この画像をTopに選択する場合は、こちらにCheckを入れてください"
