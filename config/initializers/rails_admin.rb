@@ -814,6 +814,7 @@ RailsAdmin.config do |config|
                 label "記事詳細の紐付"
                 weight 1
                 edit do
+                  field :story
                   field :story_detail
                   field :order
                   field :related do

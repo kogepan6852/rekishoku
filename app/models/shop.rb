@@ -6,7 +6,7 @@ class Shop < ActiveRecord::Base
   has_and_belongs_to_many :stories, :join_table => "stories_shops"
   has_and_belongs_to_many :people
   has_many :favorite_details, :as => :related
-  #has_many :story_relations, :as => :story_related
+  has_many :story_relations, :as => :related
   belongs_to :daytime_price, :class_name => 'Price', :foreign_key => 'daytime_price_id'
   belongs_to :nighttime_price, :class_name => 'Price', :foreign_key => 'nighttime_price_id'
 
