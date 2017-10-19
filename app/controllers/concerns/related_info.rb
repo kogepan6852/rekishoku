@@ -9,11 +9,11 @@ module RelatedInfo
             "category_id" => story.category_id,
             "category_name" => story.category_name,
             "category_slug" => story.category_slug }
-    # post.post_details.each do |post_detail|
-    #   if post_detail.is_eye_catch
-    #     postObj["image"] = post_detail.image
-    #   end
-    # end
+    story.story_details.each do |story_detail|
+      if story_detail.is_eye_catch
+        postObj["image"] = story_detail.image
+      end
+    end
 
     return storyObj
   end
@@ -114,15 +114,12 @@ module RelatedInfo
   end
 
   def get_external_link_json(external_link)
-    # external_linkに紐付いてる人物を取得する
-    people = get_people(external_link)
-    # external_linkに紐付けしている時代を取得をする
-    periods = get_periods(external_link.people)
-    # 返却用のオブジェクトを作成する
-    obj = { "external_link" => external_link,
-            "people" => people.uniq,
-            "periods" => periods.uniq
-          }
+    obj = external_link.attributes
+    obj["image"] = external_link.image
+    # postsに紐付いてる人物を取得する
+    obj["people"] = get_people(external_link).uniq
+    # postsに紐付けしている時代を取得をする
+    obj["periods"] = get_periods(external_link.people).uniq
     return obj
   end
 

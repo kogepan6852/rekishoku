@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   patch 'api/story_details/:id', to: 'api_story_details#update'
   delete 'api/story_details/:id', to: 'api_story_details#destroy'
 
+  # Stories Relation
+  get 'api/story_relations/:id', to: 'api_story_relations#index'
+  post 'api/story_relations', to: 'api_story_relations#show'
+
   # SHOPS
   get 'api/shops', to: 'api_shops#index'
   get 'api/shops/:id', to: 'api_shops#show'
