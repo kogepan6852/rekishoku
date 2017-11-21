@@ -17,4 +17,5 @@ class Story < ActiveRecord::Base
   translates :content
   translates :quotation_name
   translates :memo
+  accepts_nested_attributes_for :translations, allow_destroy: true
 end

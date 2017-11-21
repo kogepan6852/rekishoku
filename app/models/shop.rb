@@ -21,4 +21,5 @@ class Shop < ActiveRecord::Base
   translates :city
   translates :address1
   translates :address2
+  accepts_nested_attributes_for :translations, allow_destroy: true
 end

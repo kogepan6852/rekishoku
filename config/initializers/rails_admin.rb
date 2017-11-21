@@ -12,7 +12,7 @@ RailsAdmin.config do |config|
 
   # 宣言したDBを表示させないようにする
   config.excluded_models = ["Price","PeopleShop","StoriesShop","CategoriesPerson","PeoplePeriod","CategoriesShop","AddressBook"]
-
+  config.included_models = ['Story','Story::Translation', 'Shop','Shop::Translation']
   ## == Cancan ==
   config.authorize_with :cancan
 
@@ -247,6 +247,7 @@ RailsAdmin.config do |config|
 
   ## 店舗
   config.model 'Shop' do
+    configure :translations, :globalize_tabs
     label "お店"
     weight 1
 
@@ -270,24 +271,9 @@ RailsAdmin.config do |config|
     end
 
     edit do
-      field :name do
-        label "店舗名"
-        help "必須"
-        required true
-      end
-      field :description do
-        label "店舗説明"
-        help "必須　フリーフォーマット"
-        required true
-      end
       field :url do
         label "店舗URL"
         help "必須"
-        required true
-      end
-      field :menu do
-        label "メニュー名"
-        help "必須 例) うなぎ料理 3000円　フリーフォーマット"
         required true
       end
       field :image do
@@ -303,32 +289,8 @@ RailsAdmin.config do |config|
       field :image_quotation_url do
         label "画像掲載元URL"
       end
-      field :image_quotation_name do
-        label "画像掲載元名称"
-      end
       field :post_quotation_url do
         label "記事参照元URL"
-      end
-      field :post_quotation_name do
-        label "記事参照元名称"
-      end
-      field :province do
-        label "都道府県"
-        help "必須"
-        required true
-      end
-      field :city do
-        label "市町村"
-        help "必須"
-        required true
-      end
-      field :address1 do
-        label "その他住所"
-        help "必須 例) 銀座8-14-7"
-        required true
-      end
-      field :address2 do
-        label "建物名"
       end
       field :phone_no do
         label "電話番号"
@@ -383,10 +345,6 @@ RailsAdmin.config do |config|
       field :is_closed_hol do
         label "祝日定休"
         help "定休の場合はチェック"
-      end
-      field :closed_pattern do
-        label "その他定休日"
-        help "フリーフォーマット"
       end
       field :closed_pattern do
         label "その他定休日"
@@ -457,11 +415,22 @@ RailsAdmin.config do |config|
         label "承認確認"
         help "承認を取得した場合は、チェックを追加してください"
       end
+      field :translations do
+        label "多言語"
+      end
     end
   end
 
+  config.model 'Shop::Translation' do
+   visible false
+   configure :locale, :hidden do
+   end
+   include_fields :locale, :name, :description, :menu, :shop_hours, :image_quotation_name, :post_quotation_name, :closed_pattern, :province, :city, :address1, :address2
+ end
+
   # ## 投稿カテゴリ
   config.model 'Story' do
+    configure :translations, :globalize_tabs
     label "記事"
     weight 0
     list do
@@ -495,11 +464,6 @@ RailsAdmin.config do |config|
       end
     end
     edit do
-      field :title  do
-        label "題名"
-        help "必須"
-        required true
-      end
       field :content  do
         label "内容"
         help "必須"
@@ -562,8 +526,18 @@ RailsAdmin.config do |config|
       field :story_details do
         label "記事詳細"
       end
+      field :translations do
+        label "多言語"
+      end
     end
    end
+
+   config.model 'Story::Translation' do
+    visible false
+    configure :locale, :hidden do
+    end
+    include_fields :locale, :title, :content, :quotation_name, :memo
+  end
 
    ## 記事詳細
    config.model 'StoryDetail' do
