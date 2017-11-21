@@ -68,7 +68,7 @@ gem 'google-analytics-rails'
 gem 'rack-rewrite'
 
 # front
-gem 'foundation-rails'
+gem 'foundation-rails', '5.5.2.1'
 gem 'foundation-icons-sass-rails'
 gem 'simple_form'
 

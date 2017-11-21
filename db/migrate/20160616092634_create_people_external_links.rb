@@ -1,4 +1,4 @@
-class CreatePeopleExternalLinks < ActiveRecord::Migration
+class CreatePeopleExternalLinks < ActiveRecord::Migration[4.2]
   def change
     create_table :people_external_links, id: false do |t|
       t.references :person, index: true, null: false

@@ -1,4 +1,4 @@
-class CreateScenesItems < ActiveRecord::Migration[5.0]
+class CreateScenesItems < ActiveRecord::Migration[4.2][5.0]
   def change
     create_table :scenes_items , id: false do |t|
       t.references :scene, index: true, null: false

@@ -1,4 +1,4 @@
-class CreateAddressBooks < ActiveRecord::Migration[5.0]
+class CreateAddressBooks < ActiveRecord::Migration[4.2][5.0]
   def change
     create_table :address_books do |t|
       t.string :name
