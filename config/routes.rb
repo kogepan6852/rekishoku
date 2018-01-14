@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   ###
   # API route　
   ###
-  # POSTS
+  # Stories
   get 'api/stories', to: 'api_stories#index'
   get 'api/stories/:id', to: 'api_stories#show'
   get 'api/stories_list', to: 'api_stories#list'
@@ -23,11 +23,15 @@ Rails.application.routes.draw do
   patch 'api/stories/:id', to: 'api_stories#update'
   delete 'api/stories/:id', to: 'api_stories#destroy'
 
-  # POST DETAILS
-  get 'api/post_details/:id', to: 'api_post_details#index'
-  post 'api/post_details', to: 'api_post_details#create'
-  patch 'api/post_details/:id', to: 'api_post_details#update'
-  delete 'api/post_details/:id', to: 'api_post_details#destroy'
+  # Stories DETAILS
+  get 'api/story_details/:id', to: 'api_story_details#index'
+  post 'api/story_details', to: 'api_story_details#create'
+  patch 'api/story_details/:id', to: 'api_story_details#update'
+  delete 'api/story_details/:id', to: 'api_story_details#destroy'
+
+  # Stories Relation
+  get 'api/story_relations/:id', to: 'api_story_relations#index'
+  post 'api/story_relations', to: 'api_story_relations#show'
 
   # SHOPS
   get 'api/shops', to: 'api_shops#index'

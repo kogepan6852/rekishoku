@@ -1,4 +1,4 @@
-class CreateCategoriesShops < ActiveRecord::Migration
+class CreateCategoriesShops < ActiveRecord::Migration[4.2]
   def change
     create_table :categories_shops, id: false do |t|
       t.references :category, index: true, null: false

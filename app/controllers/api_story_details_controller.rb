@@ -6,11 +6,11 @@ class ApiStoryDetailsController < ApplicationController
 
   # GET /api/story_details/1
   def index
-    story_details = StoryDetail.where(story_id: params[:id]).order(:order, id: :asc)
+    @story_details = StoryDetail.where(story_id: params[:id]).order(:order, id: :asc)
 
     # それぞれの詳細対応
     rtnstoryDetails = Array.new()
-    story_details.each do |story_detail|
+    @story_details.each do |story_detail|
       obj = {}
 
       if story_detail[:related_type] == "Shop"
@@ -42,8 +42,6 @@ class ApiStoryDetailsController < ApplicationController
       obj["quotation_url"] = story_detail.quotation_url
       obj["quotation_name"] = story_detail.quotation_name
       obj["is_eye_catch"] = story_detail.is_eye_catch
-      obj["related_type"] = story_detail.related_type
-      obj["related_id"] = story_detail.related_id
 
       rtnstoryDetails.push(obj)
     end

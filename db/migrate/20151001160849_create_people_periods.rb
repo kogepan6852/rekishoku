@@ -1,4 +1,4 @@
-class CreatePeoplePeriods < ActiveRecord::Migration
+class CreatePeoplePeriods < ActiveRecord::Migration[4.2]
   def change
     create_table :people_periods, id: false do |t|
       t.references :person, index: true, null: false

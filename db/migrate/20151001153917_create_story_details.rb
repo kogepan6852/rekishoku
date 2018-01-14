@@ -1,10 +1,11 @@
-class CreateStoryDetails < ActiveRecord::Migration
+class CreateStoryDetails < ActiveRecord::Migration[4.2]
   def change
     create_table :story_details do |t|
       t.integer :story_id
       t.string :image
       t.string :quotation_url
       t.boolean :is_eye_catch, default: false
+      t.integer :order
       t.timestamps null: false
     end
 
