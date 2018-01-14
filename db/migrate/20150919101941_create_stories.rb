@@ -5,7 +5,8 @@ class CreateStories < ActiveRecord::Migration[4.2]
       t.integer :favorite_count, null: false, default: 0
       t.integer :status, null: false, default: 0
       t.integer :user_id, null: false
-      t.string :quotation_url
+      t.string :image_quotation_url
+      t.string :post_quotation_url
       t.integer :category_id, null: false, default: 0
       t.integer :period_id, null: false, default: 0
       t.boolean :is_eye_catch, default: false
@@ -18,7 +19,8 @@ class CreateStories < ActiveRecord::Migration[4.2]
       dir.up do
         Story.create_translation_table! :content => :text,
         :memo => :text,
-        :quotation_name => :string,
+        :image_quotation_name => :string,
+        :post_quotation_name => :string,
         :title => {:type => :string, :null => false}
       end
 

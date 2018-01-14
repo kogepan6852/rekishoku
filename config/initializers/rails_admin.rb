@@ -505,24 +505,16 @@ RailsAdmin.config do |config|
       end
     end
     edit do
-      field :content  do
-        label "内容"
-        help "必須"
-        required true
-      end
       field :image  do
         label "トップ画像"
         help "必須"
         required true
       end
-      field :quotation_url  do
-        label "引用したURL"
+      field :image_quotation_url  do
+        label "画像引用したURL"
       end
-      field :quotation_name  do
-        label "引用したサイト名"
-      end
-      field :memo  do
-        label "メモ"
+      field :post_quotation_url do
+        label "記事参照元URL"
       end
       field :user_id, :enum do
         enum do
@@ -556,7 +548,7 @@ RailsAdmin.config do |config|
         end
       end
       field :period do
-        label "創業時代"
+        label "記事の時代"
       end
       field :shops do
         label "関連店舗"
@@ -580,7 +572,7 @@ RailsAdmin.config do |config|
     visible false
     configure :locale, :hidden do
     end
-    include_fields :locale, :title, :content, :quotation_name, :memo
+    include_fields :locale, :title, :content, :image_quotation_name, :post_quotation_name, :memo
     field :title  do
       label "題名"
       help "必須"
@@ -589,8 +581,11 @@ RailsAdmin.config do |config|
       label "内容"
       help "必須"
     end
-    field :quotation_name  do
-      label "引用したサイト名"
+    field :image_quotation_name  do
+      label "画像引用したサイト名"
+    end
+    field :post_quotation_name do
+      label "記事参照元名称"
     end
     field :memo  do
       label "メモ"

@@ -276,7 +276,8 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.integer "favorite_count", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.integer "user_id", null: false
-    t.string "quotation_url"
+    t.string "image_quotation_url"
+    t.string "post_quotation_url"
     t.integer "category_id", default: 0, null: false
     t.integer "period_id", default: 0, null: false
     t.boolean "is_eye_catch", default: false
@@ -332,7 +333,8 @@ ActiveRecord::Schema.define(version: 20170827230334) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.text "memo"
-    t.string "quotation_name"
+    t.string "image_quotation_name"
+    t.string "post_quotation_name"
     t.string "title", null: false
     t.index ["locale"], name: "index_story_translations_on_locale"
     t.index ["story_id"], name: "index_story_translations_on_story_id"
