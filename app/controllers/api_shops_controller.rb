@@ -81,10 +81,12 @@ class ApiShopsController < ApplicationController
   # GET /api/shops/1
   # 詳細データ表示
   def show
-    @shop = Shop.joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.period_id")
-    .select('shops.*, period_translations.name as period_name').find(params[:id])
+    @shops = Shop.joins("LEFT OUTER JOIN period_translations ON shops.period_id = period_translations.period_id")
+    .select('shops.*, period_translations.name as period_name').where("shops.id = ?", params[:id])
 
-    render json: get_shop_json(@shop)
+    @shops.each do |shop|
+      render json:get_shop_json(shop)
+    end
   end
 
 

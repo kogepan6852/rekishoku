@@ -1,4 +1,4 @@
-class CreateStoryDetails < ActiveRecord::Migration
+class CreateStoryDetails < ActiveRecord::Migration[4.2]
   def change
     create_table :story_details do |t|
       t.integer :story_id

@@ -7,4 +7,5 @@ class StoryDetail < ActiveRecord::Base
   translates :title
   translates :content
   translates :quotation_name
+  accepts_nested_attributes_for :translations, allow_destroy: true
 end
