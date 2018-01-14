@@ -32,11 +32,8 @@ class ShopsController < ApplicationController
   def create
     # 住所から緯度経度を求める
     setmap_array = shop_params[:translations_attributes]
-    print("テスト")
-    print(setmap_array)
-    print("テスト終了")
     setmap_jp = setmap_array["1"]
-    addressPlace = get_geocoder(setmap[:province]+setmap[:city]+setmap[:address1]+setmap[:address2]);
+    addressPlace = get_geocoder(setmap_jp[:province]+setmap_jp[:city]+setmap_jp[:address1]+setmap_jp[:address2]);
     #歴食度_合計
     levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
     setShopLevel = [nil, nil, nil, nil, nil]
@@ -61,7 +58,9 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1.json
   def update
     # 住所から緯度経度を求める
-    addressPlace = get_geocoder(shop_params["translations_attributes"]["1"][:province]+shop_params[:city]+shop_params[:address1]+shop_params[:address2]);
+    setmap_array = shop_params[:translations_attributes]
+    setmap_jp = setmap_array["1"]
+    addressPlace = get_geocoder(setmap_jp[:province]+setmap_jp[:city]+setmap_jp[:address1]+setmap_jp[:address2]);
     #歴食度_合計
     levelArray  = ["history_level", "building_level", "menu_level", "person_level", "episode_level"]
     setShopLevel = [nil, nil, nil, nil, nil]
@@ -105,7 +104,13 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name, :post_quotation_url, :post_quotation_name, :province, :city, :address1, :address2, :latitude, :longitude, :menu, :province, :city, :id, :period_id, :history_level, :building_level, :phone_no, :daytime_price_id, :nighttime_price_id, :shop_hours, :is_closed_sun, :is_closed_mon, :is_closed_tue, :is_closed_wed, :is_closed_thu, :is_closed_fri, :is_closed_sat, :is_closed_hol, :is_approved, :closed_pattern, :total_level, :menu_level, :episode_level, :person_level, :translations_attributes, :category_ids => [], :person_ids => [], :story_ids => [])
+      params.require(:shop).permit(:name, :description, :url, :image, :subimage, :image_quotation_url, :image_quotation_name,
+       :post_quotation_url, :post_quotation_name,
+        :latitude, :longitude, :menu, :province, :city, :id, :period_id, :history_level,
+         :building_level, :phone_no, :daytime_price_id, :nighttime_price_id, :shop_hours,
+          :is_closed_sun, :is_closed_mon, :is_closed_tue, :is_closed_wed, :is_closed_thu,
+           :is_closed_fri, :is_closed_sat, :is_closed_hol, :is_approved, :closed_pattern,
+            :total_level, :menu_level, :episode_level, :person_level, :translations_attributes => {}, :category_ids => [], :person_ids => [], :story_ids => [])
     end
 
 end

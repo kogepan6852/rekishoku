@@ -12,7 +12,7 @@ RailsAdmin.config do |config|
 
   # 宣言したDBを表示させないようにする
   config.excluded_models = ["Price","PeopleShop","StoriesShop","CategoriesPerson","PeoplePeriod","CategoriesShop","AddressBook"]
-  config.included_models = ['Story','Story::Translation', 'Shop','Shop::Translation']
+  config.included_models = ['Story','Story::Translation', 'Shop','Shop::Translation', 'StoryDetail','StoryDetail::Translation']
   ## == Cancan ==
   config.authorize_with :cancan
 
