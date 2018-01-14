@@ -426,6 +426,47 @@ RailsAdmin.config do |config|
    configure :locale, :hidden do
    end
    include_fields :locale, :name, :description, :menu, :shop_hours, :image_quotation_name, :post_quotation_name, :closed_pattern, :province, :city, :address1, :address2
+   field :name do
+    label "店舗名"
+    help "必須"
+  end
+  field :description do
+    label "店舗説明"
+    help "必須　フリーフォーマット"
+  end
+  field :menu do
+    label "メニュー名"
+    help "必須 例) うなぎ料理 3000円　フリーフォーマット"
+  end
+  field :image_quotation_name do
+    label "画像掲載元名称"
+  end
+  field :post_quotation_name do
+    label "記事参照元名称"
+  end
+  field :shop_hours do
+    label "営業時間"
+    help "必須　例) 9:00〜21:00　フリーフォーマット"
+  end
+  field :closed_pattern do
+    label "その他定休日"
+    help "フリーフォーマット"
+  end
+  field :province do
+    label "都道府県"
+    help "必須"
+  end
+  field :city do
+    label "市町村"
+    help "必須"
+  end
+  field :address1 do
+    label "その他住所"
+    help "必須 例) 銀座8-14-7"
+  end
+  field :address2 do
+    label "建物名"
+  end
  end
 
   # ## 投稿カテゴリ
@@ -537,10 +578,25 @@ RailsAdmin.config do |config|
     configure :locale, :hidden do
     end
     include_fields :locale, :title, :content, :quotation_name, :memo
+    field :title  do
+      label "題名"
+      help "必須"
+    end
+    field :content  do
+      label "内容"
+      help "必須"
+    end
+    field :quotation_name  do
+      label "引用したサイト名"
+    end
+    field :memo  do
+      label "メモ"
+    end
   end
 
    ## 記事詳細
    config.model 'StoryDetail' do
+    configure :translations, :globalize_tabs
      label "投稿記事各セクション"
      weight 5
      list do
@@ -561,23 +617,10 @@ RailsAdmin.config do |config|
        field :story do
          label "記事名"
        end
-       field :title do
-         label "サブタイトル"
-         help "必須"
-         required true
-       end
-       field :content do
-         label "内容"
-         help "必須"
-         required true
-       end
        field :image  do
          label "画像"
          help "必須"
          required true
-       end
-       field :quotation_url do
-         label "引用したURL"
        end
        field :quotation_name do
          label "引用したサイト名"
@@ -591,7 +634,29 @@ RailsAdmin.config do |config|
        end
          label "アイキャッチ画像"
        end
+       field :translations do
+        label "多言語"
+      end
+       
      end
+    end
+
+    config.model 'StoryDetail::Translation' do
+      visible false
+      configure :locale, :hidden do
+      end
+      include_fields :locale, :title, :content, :quotation_name
+      field :title  do
+        label "サブタイトル"
+        help "必須"
+      end
+      field :content  do
+        label "内容"
+        help "必須"
+      end
+      field :quotation_name  do
+        label "引用したサイト名"
+      end
     end
 
       ##  外部リング
